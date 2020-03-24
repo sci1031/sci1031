@@ -1,0 +1,84 @@
+# (PART) Apprentissage {-}
+# Introduction {#intro}
+
+
+```{r module1, echo = FALSE, results='hide', warning = FALSE, message = FALSE, eval = TRUE}
+source("root_path.R")
+root = root_path()
+module<- paste(root, "/Module1", sep = "")
+```
+
+
+```{r setup, echo=FALSE,results='hide', warning = FALSE, message = FALSE, eval = TRUE}
+path=paste(root, "/Structure_test/Cours_SpatialR", sep = "")
+chunkoptions=paste(path,"/bin/chunk-options.R", sep = "")
+source(chunkoptions)
+```
+L'objectif principal de ce module est
+
+À la fin de ce module vous saurez:
+
+-
+-
+-
+
+Vous utiliserez les librairies suivantes:
+
+- 
+-
+
+Vous apprendrez à utiliser les fonctions suivantes:
+
+- 
+-
+
+Dans la section Leçon, vous utiliserez des données XYXYX
+
+Dans la section Exercice, vous utiliserez XXXXX
+
+```{r load-libraries, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+#library(raster)
+library(rgdal)
+library(ggplot2)
+library(dplyr)
+library(sf)
+library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
+library(ggpubr)
+```
+
+
+
+
+## Leçon
+### Les données spatiales
+Les données spatiales d'hier à aujourd'hui    
+
+-	La cartographie, la géomatique, la science des données  
+-	Exemples de données spatiales et d'applications
+
+### Les outils
+Les outils et logiciels de visualisation et d'analyse géospatiale    
+
+- Logiciels commerciaux  
+- Logiciels ouverts (open-source)  
+- Services d'infonuagique  
+
+### L'utilisation de R
+L'utilisation de R pour l'analyse spatiale...  
+
+Les libraries essentielles:
+
+-	dply  
+-	ggplot2  
+-	raster   
+-	rgdal  
+-	rasterVis  
+-	remotes  
+-	sf  
+-	sp  
+-	GISTools  
+
+## Exercice
+### Mon premier R-Markdown
+
+

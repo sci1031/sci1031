@@ -1,0 +1,72 @@
+# La représentation spatiale {#base}
+
+
+```{r module2, echo = FALSE, results='hide', warning = FALSE, message = FALSE, eval = TRUE}
+source("root_path.R")
+root = root_path()
+module<- paste(root, "/Module2", sep = "")
+```
+
+
+```{r setup, echo=FALSE,results='hide', warning = FALSE, message = FALSE, eval = TRUE}
+path=paste(root, "/Structure_test/Cours_SpatialR", sep = "")
+chunkoptions=paste(path,"/bin/chunk-options.R", sep = "")
+source(chunkoptions)
+```
+L'objectif principal de ce module est
+
+À la fin de ce module vous saurez:
+
+-
+-
+-
+
+Vous utiliserez les librairies suivantes:
+
+- 
+-
+
+Vous apprendrez à utiliser les fonctions suivantes:
+
+- 
+-
+
+Dans la section Leçon, vous utiliserez des données XYXYX
+
+Dans la section Exercice, vous utiliserez XXXXX
+
+```{r load-libraries, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+#library(raster)
+library(rgdal)
+library(ggplot2)
+library(dplyr)
+library(sf)
+library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
+library(ggpubr)
+```
+
+
+## Leçon
+
+### Les concepts de base 
+
+-	Les échelles spatiales (résolution et étendue), la position, la distance, l’interaction, la contiguïté, le voisinage, l’effet de bordure, l’hétérogénéité spatiale, l’organisation spatiale, les gradients, l’anisotropie, l’agrégation, la dépendance spatiale, l’autocorrélation spatiale.  
+
+-	Les objets spatiaux, la géométrie, la stationnarité, la bordure   
+- Le problème d’agrégation spatiale   
+
+
+### La représentation de données spatiales
+
+-	Les données vectorielles (définition, attributs principaux et exemples)
+
+```{r fig.align='left', echo=FALSE,fig.cap="A caption", out.width = '50%'} 
+knitr::include_graphics('Module2/2_RegionsAdminQC.png')
+```
+
+-	Les données matricielles (définition, attributs principaux et exemples)
+
+### Les systèmes de coordonnées de référence
+-	Coordonnées angulaires, projections, notations.  
+
+## Exercice

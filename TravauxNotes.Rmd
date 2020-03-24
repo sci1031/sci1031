@@ -1,0 +1,10 @@
+# Travaux notés {-}
+
+Le cours comprends 5 travaux notés et 1 examen à réaliser à la maison.  
+La feuille de route vous fourni les moments auxquels les travaux doivent être entrepris et remis.
+
+## Travail noté 1 {-}
+## Travail noté 2 {-}
+## Travail noté 3 {-}
+## Travail noté 4 {-}
+## Examen {-}
