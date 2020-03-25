@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 # Les données vectorielles {#vec}
 
 
@@ -9,7 +12,7 @@ module<- paste(root, "/Module3", sep = "")
 
 
 ```{r setup, echo=FALSE,results='hide', warning = FALSE, message = FALSE, eval = TRUE}
-path=paste(root, "/Structure_test/Cours_SpatialR", sep = "")
+path=paste(root, "/Structure_test/sci1031", sep = "")
 chunkoptions=paste(path,"/bin/chunk-options.R", sep = "")
 source(chunkoptions)
 ```
