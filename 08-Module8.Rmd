@@ -1,18 +1,6 @@
 # Les données spatiotemporelles {#spatiotemp}
 
 
-```{r module8, echo = FALSE, results='hide', warning = FALSE, message = FALSE, eval = TRUE}
-source("root_path.R")
-root = root_path()
-module<- paste(root, "/Module8", sep = "")
-```
-
-
-```{r setup, echo=FALSE,results='hide', warning = FALSE, message = FALSE, eval = TRUE}
-path=paste(root, "/Structure_test/sci1031", sep = "")
-chunkoptions=paste(path,"/bin/chunk-options.R", sep = "")
-source(chunkoptions)
-```
 L'objectif principal de ce module est
 
 À la fin de ce module vous saurez:
@@ -23,19 +11,19 @@ L'objectif principal de ce module est
 
 Vous utiliserez les librairies suivantes:
 
-- 
+-
 -
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
-- 
+-
 -
 
 Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries8, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
 library(ggplot2)
@@ -59,7 +47,7 @@ library(ggpubr)
 ### Visualisation
 
 -	Figure à panneaux multiples
--	Figure espace-temps 
+-	Figure espace-temps
 -	Figure animée
 
 

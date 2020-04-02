@@ -1,0 +1,20 @@
+Package: placeholder
+Type: Book
+Title: TheoryClub
+Version: 0.0.1
+Imports:
+  bookdown,
+  dplyr,
+  ggplot2,
+  ggpubr,
+  GISTools,
+  latex2ex,
+  mapview,
+  rasterVis,
+  remotes,
+  raster,
+  rgdal,
+  sf,
+  sp,
+  spdep,
+  svglite

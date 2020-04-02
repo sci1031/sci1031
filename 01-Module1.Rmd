@@ -2,41 +2,36 @@
 # Introduction {#intro}
 
 
-```{r module1, echo = FALSE, results='hide', warning = FALSE, message = FALSE, eval = TRUE}
-source("root_path.R")
-root = root_path()
-module<- paste(root, "/Module1", sep = "")
+
+```{r setup1, include = FALSE}
+source("bin/chunk-options.R")
 ```
 
 
-```{r setup, echo=FALSE,results='hide', warning = FALSE, message = FALSE, eval = TRUE}
-path=paste(root, "/Structure_test/sci1031", sep = "")
-chunkoptions=paste(path,"/bin/chunk-options.R", sep = "")
-source(chunkoptions)
-```
+
 L'objectif principal de ce module est
 
 À la fin de ce module vous saurez:
 
--abc
+- abc
 -
 -
 
 Vous utiliserez les librairies suivantes:
 
-- 
+-
 -
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
-- 
+-
 -
 
 Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries1, include = FALSE}
 #library(raster)
 library(rgdal)
 library(ggplot2)
@@ -51,34 +46,38 @@ library(ggpubr)
 
 ## Leçon
 ### Les données spatiales
-Les données spatiales d'hier à aujourd'hui    
 
--	La cartographie, la géomatique, la science des données  
+Les données spatiales d'hier à aujourd'hui
+
+-	La cartographie, la géomatique, la science des données
 -	Exemples de données spatiales et d'applications
 
 ### Les outils
-Les outils et logiciels de visualisation et d'analyse géospatiale    
+Les outils et logiciels de visualisation et d'analyse géospatiale
 
-- Logiciels commerciaux  
-- Logiciels ouverts (open-source)  
-- Services d'infonuagique  
+- Logiciels commerciaux
+- Logiciels ouverts (open-source)
+- Services d'infonuagique
 
 ### L'utilisation de R
-L'utilisation de R pour l'analyse spatiale...  
+
+L'utilisation de R pour l'analyse spatiale...
 
 Les libraries essentielles:
 
--	dply  
--	ggplot2  
--	raster   
--	rgdal  
--	rasterVis  
--	remotes  
--	sf  
--	sp  
--	GISTools  
+-	dplyr
+-	ggplot2
+-	raster
+-	rgdal
+-	rasterVis
+-	remotes
+-	sf
+-	sp
+-	GISTools
+
 
 ## Exercice
+
 ### Mon premier R-Markdown
 
-
+<!-- KC -->

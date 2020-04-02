@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+_publish.R
+_book
+_bookdown_files
+gh-pages*
