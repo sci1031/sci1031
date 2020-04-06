@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
+      - name: Install apt-get package(s)
+        run: sudo apt-get install libudunits2-dev
       - name: Install Dependencies
         run: |-
           Rscript -e "install.packages(c('remotes', 'bookdown'), repos = 'https://muug.ca/mirror/cran/')"
