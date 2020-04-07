@@ -9,6 +9,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
+      - name: Install apt-get package(s)
+        run: |-
+          sudo apt-get update
+          sudo apt-get install -y libudunits2-0 libudunits2-dev libgeos-dev
+          sudo apt-get install -y libgeos++-dev libgdal-dev r-cran-ncdf4
       - name: Install Dependencies
         run: |-
           Rscript -e "install.packages(c('remotes', 'bookdown'), repos = 'https://muug.ca/mirror/cran/')"
@@ -17,7 +22,7 @@ jobs:
         run: |-
           Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
       - name: Deploy GitBook to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v2
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           PUBLISH_BRANCH: gh-pages
