@@ -24,7 +24,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2020-04-06" />
+<meta name="date" content="2020-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -260,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="leçon-2" class="section level2">
 <h2><span class="header-section-number">3.1</span> Leçon</h2>
-<p>L’ensemble du matériel disponible dans ce module est adapté du cours <em>Introduction to Geospatial Raster and Vector Data with R</em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> de l’organisme <a href="https://datacarpentry.org/">Data Carpentry</a>. Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.</p>
+<p>L’ensemble du MATERIEL disponible dans ce module est adapté du cours <em>Introduction to Geospatial Raster and Vector Data with R</em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> de l’organisme <a href="https://datacarpentry.org/">Data Carpentry</a>. Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.</p>
 <p>Dans le cadre de cette leçon, nous allons explorer des données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes.
 Téléchargez les données en cliquant sur ce <a href="https://github.com/elisefilotas/Donnees_spatiales/blob/master/Montreal_Velo.zip">lien</a>. Sauvegardez le dossier compressé (<code>zip</code>) dans votre répertoire de travail ‘Donnees’ pour ce module, et dézippez-le. Le dossier Montreal_Velo comprend trois sous-dossiers:</p>
 <ul>
@@ -284,36 +284,34 @@ Téléchargez les données en cliquant sur ce <a href="https://github.com/elisef
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">chemin&lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module3/Donnees/&quot;</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">nom_du_fichier &lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;/Montreal_Velo/terre/terre_shp.shp&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">limites_terrestres &lt;-<span class="st"> </span><span class="kw">st_read</span>(nom_du_fichier)</a></code></pre></div>
-<pre><code>Reading layer `LIMADMIN&#39; from data source `/__w/sci1031/sci1031/Module3/data/LIMADMIN.shp&#39; using driver `ESRI Shapefile&#39;
-Simple feature collection with 34 features and 9 fields
-geometry type:  MULTIPOLYGON
+<pre><code>Reading layer `terre_shp&#39; from data source `/__w/sci1031/sci1031/Module3/data/Montreal_Velo/terre/terre_shp.shp&#39; using driver `ESRI Shapefile&#39;
+Simple feature collection with 72 features and 1 field
+geometry type:  POLYGON
 dimension:      XY
-bbox:           xmin: -74 ymin: 45.39 xmax: -73.47 ymax: 45.71
-CRS:            4326</code></pre>
+bbox:           xmin: 267500 ymin: 5029000 xmax: 306700 ymax: 5063000
+CRS:            32188</code></pre>
 <p>La fonction <code>st_read()</code> vous permet d’ores et déjà d’obtenir certaines informations sur la structure des données vectorielles que vous venez de lire: le type de géométrie (<code>geometry type</code>), la dimension des données (<code>dimension</code>), l’étendue spatiale des données (<code>bbox</code>), et les informations relatives au système de coordonnées de référence, le SPSG (<code>epsg (SRID)</code>) et la projection (<code>proj4string</code>). Nous explorerons ces propriétés en détails plus bas.</p>
 <p>Nous allons maintenant lire les données vectorielles de type ligne, en utilisant encore la fonction <code>st_read()</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">chemin &lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module3/Donnees/&quot;</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">nom_du_fichier&lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;/Montreal_Velo/pistes/pistes_cyclables_type.shp&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">pistes_cyclables &lt;-<span class="st"> </span><span class="kw">st_read</span>(nom_du_fichier)</a></code></pre></div>
-<pre><code>Reading layer `LIMADMIN&#39; from data source `/__w/sci1031/sci1031/Module3/data/LIMADMIN.shp&#39; using driver `ESRI Shapefile&#39;
-Simple feature collection with 34 features and 9 fields
-geometry type:  MULTIPOLYGON
+<pre><code>Reading layer `pistes_cyclables_type&#39; from data source `/__w/sci1031/sci1031/Module3/data/Montreal_Velo/pistes/pistes_cyclables_type.shp&#39; using driver `ESRI Shapefile&#39;
+Simple feature collection with 6395 features and 1 field
+geometry type:  MULTILINESTRING
 dimension:      XY
-bbox:           xmin: -74 ymin: 45.39 xmax: -73.47 ymax: 45.71
-CRS:            4326</code></pre>
+bbox:           xmin: 268000 ymin: 5029000 xmax: 306300 ymax: 5063000
+CRS:            32188</code></pre>
 <p>Finalement, nous allons lire les données vectorielles de type point, en utilisant toujours la fonction <code>st_read()</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">chemin&lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module3/Donnees/&quot;</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">nom_du_fichier&lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">pistes_cyclables &lt;-<span class="st"> </span><span class="kw">st_read</span>(nom_du_fichier)</a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># nom_du_fichier&lt;- paste(module, &quot;/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp&quot;, sep = &quot;&quot;)</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co"># accidents_velo &lt;- st_read(nom_du_fichier)</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">accidents_velo &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;Module3/data/LIMADMIN.shp&quot;</span>)</a></code></pre></div>
-<pre><code>Reading layer `LIMADMIN&#39; from data source `/__w/sci1031/sci1031/Module3/data/LIMADMIN.shp&#39; using driver `ESRI Shapefile&#39;
-Simple feature collection with 34 features and 9 fields
-geometry type:  MULTIPOLYGON
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">accidents_velo &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;Module3/data/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp&quot;</span>)</a></code></pre></div>
+<pre><code>Reading layer `accidents2018_Mtl_velo&#39; from data source `/__w/sci1031/sci1031/Module3/data/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp&#39; using driver `ESRI Shapefile&#39;
+Simple feature collection with 796 features and 1 field
+geometry type:  POINT
 dimension:      XY
-bbox:           xmin: -74 ymin: 45.39 xmax: -73.47 ymax: 45.71
-CRS:            4326</code></pre>
+bbox:           xmin: 269500 ymin: 5030000 xmax: 305400 ymax: 5059000
+CRS:            32188</code></pre>
 <p>Remarquez que le type de géométrie (<code>geometry type</code>) diffère pour les trois classes de données lues.</p>
 <p>####Explorer les métadonnées d’un shapefile {-}
 Les informations contenues dans un shapefile sont appelées des métadonnées. Nous sommes particulièrement intéressées aux métadonnées géospatiales.</p>
@@ -325,245 +323,196 @@ Les informations contenues dans un shapefile sont appelées des métadonnées. N
 </ol>
 <p>Nous pouvons explorer chacune de ces métadonnées en utilisant des fonctions de la librairie <code>sf</code>. Le type de géométrie est obtenu par la fonction <code>st_geometry_type()</code>. Par exemple, pour les limites terrestres de la ville de Montréal, nous avons :</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">st_geometry_type</span>(limites_terrestres)</a></code></pre></div>
-<pre><code> [1] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
- [4] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
- [7] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[10] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[13] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[16] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[19] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[22] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[25] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[28] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[31] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
-[34] MULTIPOLYGON
+<pre><code> [1] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+ [7] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[13] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[19] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[25] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[31] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[37] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[43] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[49] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[55] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[61] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
+[67] POLYGON POLYGON POLYGON POLYGON POLYGON POLYGON
 18 Levels: GEOMETRY POINT LINESTRING ... TRIANGLE</code></pre>
 <p>Nous avons ainsi la confirmation que ces données vectorielles correspondent des polygones (plus exactement, 72 polygones). Les 18 niveaux donnés en dessous constituent une liste des classes possibles de géométrie.</p>
 <p>En comparaison, pour les données de type ligne et de type point nous obtenons plutôt :</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">st_geometry_type</span>(pistes_cyclables)</a></code></pre></div>
-<pre><code> [1] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
- [4] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
+<pre><code>   [1] MULTILINESTRING MULTILINESTRING MULTILINESTRING
+   [4] MULTILINESTRING MULTILINESTRING MULTILINESTRING
 ...
-[34] MULTIPOLYGON
+[6394] MULTILINESTRING MULTILINESTRING
 18 Levels: GEOMETRY POINT LINESTRING ... TRIANGLE</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">st_geometry_type</span>(accidents_velo)</a></code></pre></div>
-<pre><code> [1] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
- [4] MULTIPOLYGON MULTIPOLYGON MULTIPOLYGON
+<pre><code>  [1] POINT POINT POINT POINT POINT POINT POINT POINT
+  [9] POINT POINT POINT POINT POINT POINT POINT POINT
 ...
-[34] MULTIPOLYGON
+[793] POINT POINT POINT POINT
 18 Levels: GEOMETRY POINT LINESTRING ... TRIANGLE</code></pre>
 <p>Vous remarquez alors que les pistes cyclables sont composées de nombreuses multilignes. Une multiligne étant elle-même un ensemble de lignes.
 Quant aux accidents de vélo, on en compte 796 en 2018.</p>
 <p>Vérifions maintenant la projection des shapefiles en utilisant la fonction <code>st_crs()</code> de la librarie <code>sf</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">st_crs</span>(limites_terrestres)</a></code></pre></div>
 <pre><code>Coordinate Reference System:
-  User input: 4326 
+  User input: 32188 
   wkt:
-GEOGCS[&quot;WGS 84&quot;,
-    DATUM[&quot;WGS_1984&quot;,
-        SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,
-            AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],
-        AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],
-    PRIMEM[&quot;Greenwich&quot;,0,
-        AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-    UNIT[&quot;degree&quot;,0.0174532925199433,
-        AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
-    AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</code></pre>
+PROJCS[&quot;NAD83 / MTM zone 8&quot;,
+    GEOGCS[&quot;NAD83&quot;,
+        DATUM[&quot;North_American_Datum_1983&quot;,
+            SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],
+            TOWGS84[0,0,0,0,0,0,0],
+            AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],
+        PRIMEM[&quot;Greenwich&quot;,0,
+            AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
+        UNIT[&quot;degree&quot;,0.0174532925199433,
+            AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
+        AUTHORITY[&quot;EPSG&quot;,&quot;4269&quot;]],
+    PROJECTION[&quot;Transverse_Mercator&quot;],
+    PARAMETER[&quot;latitude_of_origin&quot;,0],
+    PARAMETER[&quot;central_meridian&quot;,-73.5],
+    PARAMETER[&quot;scale_factor&quot;,0.9999],
+    PARAMETER[&quot;false_easting&quot;,304800],
+    PARAMETER[&quot;false_northing&quot;,0],
+    UNIT[&quot;metre&quot;,1,
+        AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],
+    AXIS[&quot;E(X)&quot;,EAST],
+    AXIS[&quot;N(Y)&quot;,NORTH],
+    AUTHORITY[&quot;EPSG&quot;,&quot;32188&quot;]]</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">st_crs</span>(pistes_cyclables)</a></code></pre></div>
 <pre><code>Coordinate Reference System:
-  User input: 4326 
+  User input: 32188 
   wkt:
-GEOGCS[&quot;WGS 84&quot;,
-    DATUM[&quot;WGS_1984&quot;,
-        SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,
-            AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],
-        AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],
-    PRIMEM[&quot;Greenwich&quot;,0,
-        AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-    UNIT[&quot;degree&quot;,0.0174532925199433,
-        AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
-    AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</code></pre>
+PROJCS[&quot;NAD83 / MTM zone 8&quot;,
+    GEOGCS[&quot;NAD83&quot;,
+        DATUM[&quot;North_American_Datum_1983&quot;,
+            SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],
+            TOWGS84[0,0,0,0,0,0,0],
+            AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],
+        PRIMEM[&quot;Greenwich&quot;,0,
+            AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
+        UNIT[&quot;degree&quot;,0.0174532925199433,
+            AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
+        AUTHORITY[&quot;EPSG&quot;,&quot;4269&quot;]],
+    PROJECTION[&quot;Transverse_Mercator&quot;],
+    PARAMETER[&quot;latitude_of_origin&quot;,0],
+    PARAMETER[&quot;central_meridian&quot;,-73.5],
+    PARAMETER[&quot;scale_factor&quot;,0.9999],
+    PARAMETER[&quot;false_easting&quot;,304800],
+    PARAMETER[&quot;false_northing&quot;,0],
+    UNIT[&quot;metre&quot;,1,
+        AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],
+    AXIS[&quot;E(X)&quot;,EAST],
+    AXIS[&quot;N(Y)&quot;,NORTH],
+    AUTHORITY[&quot;EPSG&quot;,&quot;32188&quot;]]</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">st_crs</span>(accidents_velo)</a></code></pre></div>
 <pre><code>Coordinate Reference System:
-  User input: 4326 
+  User input: 32188 
   wkt:
-GEOGCS[&quot;WGS 84&quot;,
-    DATUM[&quot;WGS_1984&quot;,
-        SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,
-            AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],
-        AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],
-    PRIMEM[&quot;Greenwich&quot;,0,
-        AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-    UNIT[&quot;degree&quot;,0.0174532925199433,
-        AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
-    AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</code></pre>
+PROJCS[&quot;NAD83 / MTM zone 8&quot;,
+    GEOGCS[&quot;NAD83&quot;,
+        DATUM[&quot;North_American_Datum_1983&quot;,
+            SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],
+            TOWGS84[0,0,0,0,0,0,0],
+            AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],
+        PRIMEM[&quot;Greenwich&quot;,0,
+            AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
+        UNIT[&quot;degree&quot;,0.0174532925199433,
+            AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
+        AUTHORITY[&quot;EPSG&quot;,&quot;4269&quot;]],
+    PROJECTION[&quot;Transverse_Mercator&quot;],
+    PARAMETER[&quot;latitude_of_origin&quot;,0],
+    PARAMETER[&quot;central_meridian&quot;,-73.5],
+    PARAMETER[&quot;scale_factor&quot;,0.9999],
+    PARAMETER[&quot;false_easting&quot;,304800],
+    PARAMETER[&quot;false_northing&quot;,0],
+    UNIT[&quot;metre&quot;,1,
+        AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],
+    AXIS[&quot;E(X)&quot;,EAST],
+    AXIS[&quot;N(Y)&quot;,NORTH],
+    AUTHORITY[&quot;EPSG&quot;,&quot;32188&quot;]]</code></pre>
 <p>Les données de tous les shapefiles sont dans la projection de Mercator transverse (<code>tmerc</code>) et utilisent le Système de référence géodésique nord-américan de 1983 (<code>NAD83</code>). Il n’y a pas de EPSG assigné à ces données. Connaitre le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.</p>
 <p>Pour connaître l’étendue spatiale des shapefiles, nous utilisons la fonction <code>st_bbox()</code> de la librairie <code>sf</code> :</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">st_bbox</span>(limites_terrestres)</a></code></pre></div>
-<pre><code>  xmin   ymin   xmax   ymax 
--74.00  45.39 -73.47  45.71 </code></pre>
+<pre><code>   xmin    ymin    xmax    ymax 
+ 267517 5029232  306669 5062642 </code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">st_bbox</span>(pistes_cyclables)</a></code></pre></div>
-<pre><code>  xmin   ymin   xmax   ymax 
--74.00  45.39 -73.47  45.71 </code></pre>
+<pre><code>   xmin    ymin    xmax    ymax 
+ 267984 5029291  306349 5062582 </code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">st_bbox</span>(accidents_velo)</a></code></pre></div>
-<pre><code>  xmin   ymin   xmax   ymax 
--74.00  45.39 -73.47  45.71 </code></pre>
+<pre><code>   xmin    ymin    xmax    ymax 
+ 269489 5029752  305368 5059058 </code></pre>
 <p>L’étendue spatiale d’un shapefile ou d’un objet spatial dans <code>R</code> représente les limites géographiques des données, ou la localisation des données les plus au sud, nord, est et ouest.</p>
 <p>ICI BESOIN D’UNE FIGURE COMME CELLE DE NEON</p>
 <p>Finalement, nous pouvons visualiser toutes les métadonnées et les attributs d’un shapefile simplement en écrivant son nom dans la console <code>R</code>:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">limites_terrestres</a></code></pre></div>
-<pre><code>Simple feature collection with 34 features and 9 fields
-geometry type:  MULTIPOLYGON
+<pre><code>Simple feature collection with 72 features and 1 field
+geometry type:  POLYGON
 dimension:      XY
-bbox:           xmin: -74 ymin: 45.39 xmax: -73.47 ymax: 45.71
-CRS:            4326
+bbox:           xmin: 267500 ymin: 5029000 xmax: 306700 ymax: 5063000
+CRS:            32188
 First 10 features:
-   MUNID CODEID CODEMAMROT
-1  66023     11      REM05
-2  66023     22      REM17
-3  66023     62      66072
-4  66023      9      REM19
-5  66023      5      REM21
-6  66023     54      66062
-7  66023     63      REM20
-8  66023     57      REM33
-9  66023     28      REM27
-10 66023     51      66087
-                                        NOM
-1                                 Outremont
-2                                   LaSalle
-3                                Mont-Royal
-4                               Ville-Marie
-5                     Le Plateau-Mont-Royal
-6                                 Hampstead
-7                              Le Sud-Ouest
-8  Rivière-des-Prairies-Pointe-aux-Trembles
-9                                   Lachine
-10                                   Dorval
-             TYPE ABREV NUM     AIRE PERIM
-1  Arrondissement    OM   5  3813356 10837
-2  Arrondissement    LS  18 25197268 25260
-3      Ville liée    MR   2  7445560 18314
-4  Arrondissement    VM  20 21500632 26586
-5  Arrondissement    PM  22  8151665 13158
-6      Ville liée    HS  10  1768055  5876
-7  Arrondissement    SO  21 18144269 29633
-8  Arrondissement    RP  19 50047004 38573
-9  Arrondissement    LC  17 23127786 25400
-10     Ville liée    DV   1 28156150 32358
-                         geometry
-1  MULTIPOLYGON (((-73.62 45.5...
-2  MULTIPOLYGON (((-73.67 45.4...
-3  MULTIPOLYGON (((-73.65 45.5...
-4  MULTIPOLYGON (((-73.53 45.5...
-5  MULTIPOLYGON (((-73.56 45.5...
-6  MULTIPOLYGON (((-73.66 45.4...
-7  MULTIPOLYGON (((-73.63 45.4...
-8  MULTIPOLYGON (((-73.62 45.6...
-9  MULTIPOLYGON (((-73.72 45.4...
-10 MULTIPOLYGON (((-73.79 45.4...</code></pre>
+   DefaultAtt                       geometry
+1        &lt;NA&gt; POLYGON ((299608 5038364, 2...
+2        &lt;NA&gt; POLYGON ((301350 5036978, 3...
+3        &lt;NA&gt; POLYGON ((300403 5038997, 3...
+4        &lt;NA&gt; POLYGON ((300744 5039496, 3...
+5        &lt;NA&gt; POLYGON ((302032 5043372, 3...
+6        &lt;NA&gt; POLYGON ((302299 5043145, 3...
+7        &lt;NA&gt; POLYGON ((302508 5040978, 3...
+8        &lt;NA&gt; POLYGON ((304719 5062024, 3...
+9        &lt;NA&gt; POLYGON ((304927 5062499, 3...
+10       &lt;NA&gt; POLYGON ((305396 5062622, 3...</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">pistes_cyclables</a></code></pre></div>
-<pre><code>Simple feature collection with 34 features and 10 fields
-geometry type:  MULTIPOLYGON
+<pre><code>Simple feature collection with 6395 features and 1 field
+geometry type:  MULTILINESTRING
 dimension:      XY
-bbox:           xmin: -74 ymin: 45.39 xmax: -73.47 ymax: 45.71
-CRS:            4326
+bbox:           xmin: 268000 ymin: 5029000 xmax: 306300 ymax: 5063000
+CRS:            32188
 First 10 features:
-   MUNID CODEID CODEMAMROT
-1  66023     11      REM05
-2  66023     22      REM17
-3  66023     62      66072
-4  66023      9      REM19
-5  66023      5      REM21
-6  66023     54      66062
-7  66023     63      REM20
-8  66023     57      REM33
-9  66023     28      REM27
-10 66023     51      66087
-                                        NOM
-1                                 Outremont
-2                                   LaSalle
-3                                Mont-Royal
-4                               Ville-Marie
-5                     Le Plateau-Mont-Royal
-6                                 Hampstead
-7                              Le Sud-Ouest
-8  Rivière-des-Prairies-Pointe-aux-Trembles
-9                                   Lachine
-10                                   Dorval
-             TYPE ABREV NUM     AIRE PERIM
-1  Arrondissement    OM   5  3813356 10837
-2  Arrondissement    LS  18 25197268 25260
-3      Ville liée    MR   2  7445560 18314
-4  Arrondissement    VM  20 21500632 26586
-5  Arrondissement    PM  22  8151665 13158
-6      Ville liée    HS  10  1768055  5876
-7  Arrondissement    SO  21 18144269 29633
-8  Arrondissement    RP  19 50047004 38573
-9  Arrondissement    LC  17 23127786 25400
-10     Ville liée    DV   1 28156150 32358
-                         geometry TYPE_VOIE
-1  MULTIPOLYGON (((-73.62 45.5...         1
-2  MULTIPOLYGON (((-73.67 45.4...         2
-3  MULTIPOLYGON (((-73.65 45.5...         3
-4  MULTIPOLYGON (((-73.53 45.5...         4
-5  MULTIPOLYGON (((-73.56 45.5...         5
-6  MULTIPOLYGON (((-73.66 45.4...         1
-7  MULTIPOLYGON (((-73.63 45.4...         2
-8  MULTIPOLYGON (((-73.62 45.6...         3
-9  MULTIPOLYGON (((-73.72 45.4...         4
-10 MULTIPOLYGON (((-73.79 45.4...         5</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">accidents_velo</a></code></pre></div>
-<pre><code>Simple feature collection with 34 features and 9 fields
-geometry type:  MULTIPOLYGON
-dimension:      XY
-bbox:           xmin: -74 ymin: 45.39 xmax: -73.47 ymax: 45.71
-CRS:            4326
-First 10 features:
-   MUNID CODEID CODEMAMROT
-1  66023     11      REM05
-2  66023     22      REM17
-3  66023     62      66072
-4  66023      9      REM19
-5  66023      5      REM21
-6  66023     54      66062
-7  66023     63      REM20
-8  66023     57      REM33
-9  66023     28      REM27
-10 66023     51      66087
-                                        NOM
-1                                 Outremont
-2                                   LaSalle
-3                                Mont-Royal
-4                               Ville-Marie
-5                     Le Plateau-Mont-Royal
-6                                 Hampstead
-7                              Le Sud-Ouest
-8  Rivière-des-Prairies-Pointe-aux-Trembles
-9                                   Lachine
-10                                   Dorval
-             TYPE ABREV NUM     AIRE PERIM
-1  Arrondissement    OM   5  3813356 10837
-2  Arrondissement    LS  18 25197268 25260
-3      Ville liée    MR   2  7445560 18314
-4  Arrondissement    VM  20 21500632 26586
-5  Arrondissement    PM  22  8151665 13158
-6      Ville liée    HS  10  1768055  5876
-7  Arrondissement    SO  21 18144269 29633
-8  Arrondissement    RP  19 50047004 38573
-9  Arrondissement    LC  17 23127786 25400
-10     Ville liée    DV   1 28156150 32358
+                       TYPE_VOIE
+1         Piste cyclable sur rue
+2  Piste cyclable en site propre
+3              Chaussée désignée
+4                 Bande cyclable
+5  Piste cyclable en site propre
+6  Piste cyclable en site propre
+7  Piste cyclable en site propre
+8              Chaussée désignée
+9  Piste cyclable en site propre
+10 Piste cyclable en site propre
                          geometry
-1  MULTIPOLYGON (((-73.62 45.5...
-2  MULTIPOLYGON (((-73.67 45.4...
-3  MULTIPOLYGON (((-73.65 45.5...
-4  MULTIPOLYGON (((-73.53 45.5...
-5  MULTIPOLYGON (((-73.56 45.5...
-6  MULTIPOLYGON (((-73.66 45.4...
-7  MULTIPOLYGON (((-73.63 45.4...
-8  MULTIPOLYGON (((-73.62 45.6...
-9  MULTIPOLYGON (((-73.72 45.4...
-10 MULTIPOLYGON (((-73.79 45.4...</code></pre>
+1  MULTILINESTRING ((297752 50...
+2  MULTILINESTRING ((305050 50...
+3  MULTILINESTRING ((299076 50...
+4  MULTILINESTRING ((287779 50...
+5  MULTILINESTRING ((300752 50...
+6  MULTILINESTRING ((300953 50...
+7  MULTILINESTRING ((299010 50...
+8  MULTILINESTRING ((276415 50...
+9  MULTILINESTRING ((293077 50...
+10 MULTILINESTRING ((304787 50...</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">accidents_velo</a></code></pre></div>
+<pre><code>Simple feature collection with 796 features and 1 field
+geometry type:  POINT
+dimension:      XY
+bbox:           xmin: 269500 ymin: 5030000 xmax: 305400 ymax: 5059000
+CRS:            32188
+First 10 features:
+   FID               geometry
+1    0 POINT (279673 5041015)
+2    1 POINT (277292 5039169)
+3    2 POINT (275581 5036314)
+4    3 POINT (274728 5035946)
+5    4 POINT (283935 5040875)
+6    5 POINT (280442 5039871)
+7    6 POINT (279626 5040700)
+8    7 POINT (277734 5038853)
+9    8 POINT (276487 5038090)
+10   9 POINT (278357 5040125)</code></pre>
 </div>
 </div>
 <div id="visualisation-de-shapefiles-sous-r" class="section level3">
@@ -633,59 +582,42 @@ Figure 3.5: Symbole et couleur différents pour illustrer les accidents de la ro
 <h4>Visualiser des données vectorielles par attribut</h4>
 <p>Lorsque nous avons affiché les métadonnées du shapefile <code>pistes_cyclables</code>, vous avez peut-être observé que ce dernier comprenait l’attribut <code>TYPE_VOIE</code> qui caractérise le type de pistes cyclables de chaque multiligne. Affichez les métadonnées à nouveau:</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">pistes_cyclables</a></code></pre></div>
-<pre><code>Simple feature collection with 34 features and 10 fields
-geometry type:  MULTIPOLYGON
+<pre><code>Simple feature collection with 6395 features and 1 field
+geometry type:  MULTILINESTRING
 dimension:      XY
-bbox:           xmin: -74 ymin: 45.39 xmax: -73.47 ymax: 45.71
-CRS:            4326
+bbox:           xmin: 268000 ymin: 5029000 xmax: 306300 ymax: 5063000
+CRS:            32188
 First 10 features:
-   MUNID CODEID CODEMAMROT
-1  66023     11      REM05
-2  66023     22      REM17
-3  66023     62      66072
-4  66023      9      REM19
-5  66023      5      REM21
-6  66023     54      66062
-7  66023     63      REM20
-8  66023     57      REM33
-9  66023     28      REM27
-10 66023     51      66087
-                                        NOM
-1                                 Outremont
-2                                   LaSalle
-3                                Mont-Royal
-4                               Ville-Marie
-5                     Le Plateau-Mont-Royal
-6                                 Hampstead
-7                              Le Sud-Ouest
-8  Rivière-des-Prairies-Pointe-aux-Trembles
-9                                   Lachine
-10                                   Dorval
-             TYPE ABREV NUM     AIRE PERIM
-1  Arrondissement    OM   5  3813356 10837
-2  Arrondissement    LS  18 25197268 25260
-3      Ville liée    MR   2  7445560 18314
-4  Arrondissement    VM  20 21500632 26586
-5  Arrondissement    PM  22  8151665 13158
-6      Ville liée    HS  10  1768055  5876
-7  Arrondissement    SO  21 18144269 29633
-8  Arrondissement    RP  19 50047004 38573
-9  Arrondissement    LC  17 23127786 25400
-10     Ville liée    DV   1 28156150 32358
-                         geometry TYPE_VOIE
-1  MULTIPOLYGON (((-73.62 45.5...         1
-2  MULTIPOLYGON (((-73.67 45.4...         2
-3  MULTIPOLYGON (((-73.65 45.5...         3
-4  MULTIPOLYGON (((-73.53 45.5...         4
-5  MULTIPOLYGON (((-73.56 45.5...         5
-6  MULTIPOLYGON (((-73.66 45.4...         1
-7  MULTIPOLYGON (((-73.63 45.4...         2
-8  MULTIPOLYGON (((-73.62 45.6...         3
-9  MULTIPOLYGON (((-73.72 45.4...         4
-10 MULTIPOLYGON (((-73.79 45.4...         5</code></pre>
+                       TYPE_VOIE
+1         Piste cyclable sur rue
+2  Piste cyclable en site propre
+3              Chaussée désignée
+4                 Bande cyclable
+5  Piste cyclable en site propre
+6  Piste cyclable en site propre
+7  Piste cyclable en site propre
+8              Chaussée désignée
+9  Piste cyclable en site propre
+10 Piste cyclable en site propre
+                         geometry
+1  MULTILINESTRING ((297752 50...
+2  MULTILINESTRING ((305050 50...
+3  MULTILINESTRING ((299076 50...
+4  MULTILINESTRING ((287779 50...
+5  MULTILINESTRING ((300752 50...
+6  MULTILINESTRING ((300953 50...
+7  MULTILINESTRING ((299010 50...
+8  MULTILINESTRING ((276415 50...
+9  MULTILINESTRING ((293077 50...
+10 MULTILINESTRING ((304787 50...</code></pre>
 <p>Utilisons la fonction <code>levels</code> pour connaître ces types de voie cyclables. La fonction <code>levels</code> donne les différentes valeurs que peuvent prendre un attribut.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">levels</span>(pistes_cyclables<span class="op">$</span>TYPE_VOIE)</a></code></pre></div>
-<pre><code>NULL</code></pre>
+<pre><code>[1] &quot;Bande cyclable&quot;                      
+[2] &quot;Chaussée désignée&quot;                   
+[3] &quot;Piste cyclable au niveau du trottoir&quot;
+[4] &quot;Piste cyclable en site propre&quot;       
+[5] &quot;Piste cyclable sur rue&quot;              
+[6] &quot;Sentier polyvalent&quot;                  </code></pre>
 <p>Si vous ne connaissez pas la distinction entre ces types d’aménagement cyclable, consulter ce <a href="Module3/3_Amenagement3Cyclable3Mtl.pdf">document sommaire</a> de la <em>Ville de Montréal</em><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>Nous voulons maintenant représenter les données vectorielles associées aux pistes cyclables de type <code>&quot;Bande cyclable&quot;</code>. Pour représenter une valeur précise d’un attribut, nous utiliserons la fonction <code>filter</code> de la librarie <code>dplyr</code>. Commençons par charger cette librairie.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a></code></pre></div>
@@ -706,7 +638,7 @@ Figure 3.6: Bandes cyclables sur l’île de Montréal
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">couleurs_voie&lt;-<span class="kw">c</span>(<span class="st">&quot;darkgreen&quot;</span>, <span class="st">&quot;turquoise&quot;</span>, <span class="st">&quot;yellow&quot;</span>,<span class="st">&quot;darkblue&quot;</span>,<span class="st">&quot;violet&quot;</span>,<span class="st">&quot;orange&quot;</span>)</a></code></pre></div>
 <p>Nous pouvons demander à <code>ggplot</code> d’utiliser ces couleurs pour illustrer les différents types de voie cyclable (Fig <a href="leçon-2.html#fig:plot-voie5">3.7</a>).</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">ggplot</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span><span class="co"># geom_sf(data = pistes_cyclables,  aes(color = TYPE_VOIE))+</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> pistes_cyclables,  <span class="kw">aes</span>(<span class="dt">color =</span> TYPE_VOIE))<span class="op">+</span></a>
 <a class="sourceLine" id="cb46-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> couleurs_voie)<span class="op">+</span></a>
 <a class="sourceLine" id="cb46-4" data-line-number="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">color =</span> <span class="st">&#39;Types de voie&#39;</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb46-5" data-line-number="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Pistes cyclables sur l&#39;île de Montréal&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Types de voie&quot;</span>)</a></code></pre></div>
@@ -724,7 +656,7 @@ caractéristiques visuelles<a href="#fn4" class="footnote-ref" id="fnref4"><sup>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">tailles_voie&lt;-<span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">1.2</span>,<span class="fl">1.5</span>,<span class="fl">1.7</span>,<span class="dv">2</span>,<span class="fl">2.2</span>)</a></code></pre></div>
 <p>Puis représentatons les types de voie cyclable (Fig <a href="leçon-2.html#fig:plot-voie7">3.8</a>).</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">ggplot</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="st">  </span><span class="co"># geom_sf(data = pistes_cyclables,  aes(color = TYPE_VOIE, size = TYPE_VOIE))+</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> pistes_cyclables,  <span class="kw">aes</span>(<span class="dt">color =</span> TYPE_VOIE, <span class="dt">size =</span> TYPE_VOIE))<span class="op">+</span></a>
 <a class="sourceLine" id="cb48-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> couleurs_voie)<span class="op">+</span></a>
 <a class="sourceLine" id="cb48-4" data-line-number="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">color =</span> <span class="st">&#39;Types de voie&#39;</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb48-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_size_manual</span>(<span class="dt">values =</span> tailles_voie)<span class="op">+</span></a>
@@ -756,7 +688,7 @@ Figure 3.9: Pistes cyclables et position des accidents routiers impliquant des b
 <p>Nous pouvons créer une carte plus précise qui spécifie les types de voie cyclable et ajouter une légende.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">ggplot</span>()<span class="op">+</span></a>
 <a class="sourceLine" id="cb50-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> limites_terrestres, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="st">  </span><span class="co"># geom_sf(data = pistes_cyclables, size = 1.5, aes(color = TYPE_VOIE),  show.legend = &quot;line&quot;)+</span></a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> pistes_cyclables, <span class="dt">size =</span> <span class="fl">1.5</span>, <span class="kw">aes</span>(<span class="dt">color =</span> TYPE_VOIE),  <span class="dt">show.legend =</span> <span class="st">&quot;line&quot;</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb50-4" data-line-number="4"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> couleurs_voie,<span class="dt">name =</span> <span class="st">&quot;Types de voie&quot;</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb50-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> accidents_velo, <span class="dt">pch =</span> <span class="dv">24</span>, <span class="dt">cex =</span> <span class="dv">2</span>, <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb50-6" data-line-number="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Types de voie cyclable et Accidents routiers impliquant des vélos&quot;</span>)<span class="op">+</span></a>
@@ -790,18 +722,31 @@ Figure 3.10: Types de voie cyclable et position des accidents routiers impliquan
 <p>Dans cette section nous apprendrons à manipuler le système de coordonnées de référence de données vectorielles. Nous avons vu en début de leçon que les données utilisées sont dans la projection de Mercator transverse (<code>tmerc</code>) et utilisent le Système de référence géodésique nord-américan de 1983 (<code>NAD83</code>). Par exemple, pour connaître le SCR des données <code>limites_terrestres</code> nous avions fait.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">st_crs</span>(limites_terrestres)</a></code></pre></div>
 <pre><code>Coordinate Reference System:
-  User input: 4326 
+  User input: 32188 
   wkt:
-GEOGCS[&quot;WGS 84&quot;,
-    DATUM[&quot;WGS_1984&quot;,
-        SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,
-            AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],
-        AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],
-    PRIMEM[&quot;Greenwich&quot;,0,
-        AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-    UNIT[&quot;degree&quot;,0.0174532925199433,
-        AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
-    AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</code></pre>
+PROJCS[&quot;NAD83 / MTM zone 8&quot;,
+    GEOGCS[&quot;NAD83&quot;,
+        DATUM[&quot;North_American_Datum_1983&quot;,
+            SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],
+            TOWGS84[0,0,0,0,0,0,0],
+            AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],
+        PRIMEM[&quot;Greenwich&quot;,0,
+            AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
+        UNIT[&quot;degree&quot;,0.0174532925199433,
+            AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
+        AUTHORITY[&quot;EPSG&quot;,&quot;4269&quot;]],
+    PROJECTION[&quot;Transverse_Mercator&quot;],
+    PARAMETER[&quot;latitude_of_origin&quot;,0],
+    PARAMETER[&quot;central_meridian&quot;,-73.5],
+    PARAMETER[&quot;scale_factor&quot;,0.9999],
+    PARAMETER[&quot;false_easting&quot;,304800],
+    PARAMETER[&quot;false_northing&quot;,0],
+    UNIT[&quot;metre&quot;,1,
+        AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],
+    AXIS[&quot;E(X)&quot;,EAST],
+    AXIS[&quot;N(Y)&quot;,NORTH],
+    AUTHORITY[&quot;EPSG&quot;,&quot;32188&quot;]]</code></pre>
 <p>Nous allons maintenant transformer le SCR vers la projection de Robinson (<code>robin</code>) et le Système géodésique mondial de 1984 (<code>WGS84</code>). Pour se faire nous utilisons la fonction <code>st_transform</code> de la librarie <code>st</code>.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">limites_terrestres_rob &lt;-<span class="st"> </span><span class="kw">st_transform</span>(limites_terrestres,</a>
 <a class="sourceLine" id="cb53-2" data-line-number="2">    <span class="kw">CRS</span>(<span class="st">&quot;+proj=robin +datum=WGS84&quot;</span>))</a></code></pre></div>
