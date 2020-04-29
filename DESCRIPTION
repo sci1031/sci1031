@@ -8,7 +8,7 @@ Imports:
   ggplot2,
   ggpubr,
   GISTools,
-  latex2ex,
+  latex2exp,
   mapview,
   rasterVis,
   remotes,
