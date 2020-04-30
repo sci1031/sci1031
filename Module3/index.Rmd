@@ -2,15 +2,15 @@
 # Les données vectorielles {#vec}
 
 
-L'objectif principal de ce module est d'apprendre à lire, interpréter et visualiser des données vectorielles.
+L'objectif principal de ce module est d'apprendre à lire, interpréter et visualiser des données vectorielles^[L’ensemble du matériel disponible dans ce module est adapté du cours *Introduction to Geospatial Raster and Vector Data with R* [@Data_Carpentry_IntroGeospatial] de l’organisme [Data Carpentry](https://datacarpentry.org/).  Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.]
 
 À la fin de ce module vous saurez:
 
-- Lire un shapefile, explorer ses métadonnées et interpréter sa géométrie
-- Visualiser des données vectorielles de type point, ligne et polygone
-- Visualiser des données vectorielles par attribut
-- Visualiser plusieurs données vectorielles au sein d'une même figure
-- Transformer le système de coordonnées de référence de données vectorielles
+- Lire un *shapefile*, explorer ses métadonnées et interpréter sa géométrie.
+- Visualiser des données vectorielles de type point, ligne et polygone.
+- Visualiser des données vectorielles par attribut.
+- Visualiser plusieurs données vectorielles au sein d'une même figure.
+- Transformer le système de coordonnées de référence de données vectorielles.
 
 Vous utiliserez les librairies suivantes:
 
@@ -31,7 +31,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `st_transform()`
 - `ggarrange()`
 
-Dans la section Leçon, vous utiliserez des données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes. Ces données sont disponibles [ici](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Montreal_Velo.zip).
+Dans la section Leçon, vous utiliserez des données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes. 
 
 Dans la section Exercice, vous utiliserez XXXXX
 
@@ -48,35 +48,35 @@ library(ggpubr)
 
 ## Leçon
 
-L’ensemble du MATERIEL disponible dans ce module est adapté du cours *Introduction to Geospatial Raster and Vector Data with R*^[Wasser, L. A., Jones, M. A., Brum, Z., Riemer, K., Williams, J., Hollister, J., . . . Stachelek, J. Introduction to Geospatial Raster and Vector Data with R. Repéré le 1er mars 2020 à https://datacarpentry.org/r-raster-vector-geospatial/]  de l’organisme [Data Carpentry](https://datacarpentry.org/).  Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.
+
 
 Dans le cadre de cette leçon, nous allons explorer des données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes.
-Téléchargez les données en cliquant sur ce [lien](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Montreal_Velo.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail 'Donnees' pour ce module, et dézippez-le. Le dossier Montreal_Velo comprend trois sous-dossiers:
+Téléchargez les [données sur le réseau de pistes cyclables](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Montreal_Velo.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier Montreal_Velo comprend trois sous-dossiers:
 
-- accidents,
-- pistes, et
-- terre.
+- `accidents`
+- `pistes`
+- `terre`.
 
 
 
 ### Introduction aux données vectorielles sous R
 
-#### Lire un shapefile et interpréter sa géométrie {-}
+#### Lire un *shapefile* et interpréter sa géométrie {-}
 
-Pour lire des données vectorielles contenues dans un fichier shapefile, nous allons utiliser la librairie `sf`. Notez que la librairie `rgdal` se charge automatiquement lorsque `sf` se charge.
+Pour lire des données vectorielles contenues dans un fichier *shapefile*, nous allons utiliser la librairie `sf`. Notez que la librairie `rgdal` se charge automatiquement lorsque `sf` se charge.
 
 ```{r load-sf, eval = FALSE}
 library(sf)
 ```
 
-Les shapefiles que nous allons lire sont les suivants :
+Nous allons lire les trois *shapefiles* suivants :
 
 - Des données vectorielles de type polygone représentant la frontière de notre zone d’étude, ici, l'île de Montréal.
 - Des données vectorielles de type ligne représentant les pistes cyclables sur l'île de Montréal, et
 - Des données vectorielles de type point représentant la position d'accidents impliquant des bicyclettes.
 
 
-Les premières données vectorielles que nous allons ouvrir contiennent les limites terrestres de l'île de Montréal. Pour lire ces données nous utiliserons la fonction `st_read()` de la librarie `sf`. Pour utiliser `st_read()` nous devons spécifier le chemin menant au fichier shapefile à lire.
+Dans un premier temps, nous allons ouvrir les données vectorielles de type polygone qui contiennent les limites terrestres de l'île de Montréal. Pour lire ces données nous utiliserons la fonction `st_read()` de la librarie `sf`. Pour utiliser `st_read()` nous devons spécifier le chemin menant au fichier *shapefile* à lire.
 
 ```{r fake-terre, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module3/Donnees/"
@@ -115,23 +115,24 @@ pistes_cyclables <- st_read(nom_du_fichier)
 accidents_velo <- st_read("Module3/data/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp")
 ```
 
-Remarquez que le type de géométrie (`geometry type`) diffère pour les trois classes de données lues.
+Remarquez que le type de géométrie (`geometry type`) diffère pour les trois classes de données lues comme nous nous y attendions.
 
-####Explorer les métadonnées d’un shapefile {-}
-Les informations contenues dans un shapefile sont appelées des métadonnées. Nous sommes particulièrement intéressées aux métadonnées géospatiales.
+####Explorer les métadonnées d’un *shapefile* {-}
 
-Les métadonnées fondamentales d’un shapefile sont :
+Les informations contenues dans un *shapefile* sont appelées des métadonnées. Nous sommes particulièrement intéressées aux métadonnées géospatiales.
 
-1.	Type de géométrie : le type de classes des données vectorielles téléchargées.
+Les métadonnées fondamentales d’un *shapefile* sont :
+
+1.	Le type de géométrie : le type de classes des données vectorielles téléchargées.
 2.	La projection : le système de coordonnées de référence utilisé pour représenter les données.
 3.	L’étendue spatiale : la superficie géographique couvrant les données vectorielles.
 
-Nous pouvons explorer chacune de ces métadonnées en utilisant des fonctions de la librairie `sf`. Le type de géométrie est obtenu par la fonction `st_geometry_type()`. Par exemple, pour les limites terrestres de la ville de Montréal, nous avons :
+Nous pouvons explorer chacune de ces métadonnées en utilisant des fonctions de la librairie `sf`. Le type de géométrie est obtenu par la fonction `st_geometry_type()`. Par exemple, pour les limites terrestres de la ville de Montréal, cette fonction nous donne:
 
 ```{r type-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_geometry_type(limites_terrestres)
 ```
-Nous avons ainsi la confirmation que ces données vectorielles correspondent des polygones (plus exactement, 72 polygones). Les 18 niveaux donnés en dessous constituent une liste des classes possibles de géométrie.
+Nous avons ainsi la confirmation que ces données vectorielles correspondent à des polygones (plus exactement, 72 polygones). Les 18 niveaux donnés en dessous constituent une liste des classes possibles de géométrie.
 
 En comparaison, pour les données de type ligne et de type point nous obtenons plutôt :
 
@@ -144,9 +145,9 @@ st_geometry_type(accidents_velo)
 ```
 
 Vous remarquez alors que les pistes cyclables sont composées de nombreuses multilignes. Une multiligne étant elle-même un ensemble de lignes.
-Quant aux accidents de vélo, on en compte 796 en 2018.
+Quant aux accidents de vélo, ce sont des points qui désignent la position précise des accidents. On en compte 796 en 2018.
 
-Vérifions maintenant la projection des shapefiles en utilisant la fonction `st_crs()` de la librarie `sf`:
+Vérifions maintenant la projection des *shapefiles* en utilisant la fonction `st_crs()` de la librarie `sf`:
 
 ```{r proj-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_crs(limites_terrestres)
@@ -159,9 +160,9 @@ st_crs(pistes_cyclables)
 ```{r proj-accidents, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_crs(accidents_velo)
 ```
-Les données de tous les shapefiles sont dans la projection de Mercator transverse (`tmerc`) et utilisent le Système de référence géodésique nord-américan de 1983 (`NAD83`). Il n'y a pas de EPSG assigné à ces données. Connaitre le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.
+Les données de tous les *shapefiles* sont dans la projection de Mercator transverse (`+proj=tmerc`) et utilisent le Système de référence géodésique nord-américan de 1983 (`+datum=NAD83`). Il n'y a pas de EPSG assigné à ces données. Connaitre le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.
 
-Pour connaître l’étendue spatiale des shapefiles, nous utilisons la fonction `st_bbox()` de la librairie `sf` :
+Pour connaître l’étendue spatiale des *shapefiles*, nous utilisons la fonction `st_bbox()` de la librairie `sf` :
 ```{r bbox-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_bbox(limites_terrestres)
 ```
@@ -174,11 +175,11 @@ st_bbox(pistes_cyclables)
 st_bbox(accidents_velo)
 ```
 
-L’étendue spatiale d’un shapefile ou d’un objet spatial dans `R` représente les limites géographiques des données, ou la localisation des données les plus au sud, nord, est et ouest.
+L’étendue spatiale d’un *shapefile* ou d’un objet spatial dans `R` représente les limites géographiques des données, ou la localisation des données les plus au sud, nord, est et ouest.
 
 ICI BESOIN D'UNE FIGURE COMME CELLE DE NEON
 
-Finalement, nous pouvons visualiser toutes les métadonnées et les attributs d'un shapefile simplement en écrivant son nom dans la console `R`:
+Finalement, nous pouvons visualiser toutes les métadonnées et les attributs d'un *shapefile* simplement en écrivant son nom dans la console `R`:
 ```{r tout-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 limites_terrestres
 ```
@@ -192,10 +193,10 @@ accidents_velo
 ```
 
 
-### Visualisation de shapefiles sous R
+### Visualisation de *shapefiles* sous R
 
 #### Visualiser des données vectorielles {-}
-Nous allons maintenant apprendre à visualer des données shapefile en utilisant la fonction `ggplot()` de la librairie `ggplot2`.
+Vous allez maintenant apprendre à visualer des données *shapefile* en utilisant la fonction `ggplot()` de la librairie `ggplot2`.
 
 ```{r load-ggplot2}
 library(ggplot2)
@@ -207,8 +208,15 @@ ggplot() +
 geom_sf(data = limites_terrestres, size = 1, color = "black", fill = "white") +
 ggtitle("Limites terrestres de l'île de Montréal")
 ```
-La fonction `geom_sf()` permet de faire des représentations simples d'objets vectoriels de différentes géométries (points, lignes ou polygones).
-Cette fonction peut prendre plusieurs arguments^[Pour plus d'information sur la fonction `geom_sf`, consultez le chapitre [Visualise sf objects](https://ggplot2.tidyverse.org/reference/ggsf.html) [@Wickham_ggplot2_2016]]. Les arguments utilisés ici sont les données, la taille du trait avec laquelle on illustre l'objet, la couleur du trait, et la couleur de la surface délimitée par le trait. La fonction ggtitle permet d'ajouter un titre à la figure générée.
+La fonction `geom_sf()` permet de faire des représentations simples d'objets vectoriels de géométrie de type point, ligne et polygone.
+Cette fonction peut prendre plusieurs arguments^[Pour plus d'information sur la fonction `geom_sf`, consultez le chapitre [Visualise sf objects](https://ggplot2.tidyverse.org/reference/ggsf.html) [@Wickham_ggplot2_2016]]. Les arguments utilisés ici sont:
+
+- les données (`data`) 
+- la taille du trait avec laquelle on illustre l'objet (`size`)
+- la couleur du trait, et la couleur de la surface délimitée par le trait (`color`).
+
+La fonction ggtitle permet d'ajouter un titre à la figure générée.
+
 Remarquez que chaque fonction est écrite sur sa propre ligne, pour faciliter la lecture des lignes de commande, et que chaque fonction qui s'ajoute à `ggplot()` est précédée par le signe plus `+`.
 
 Dans un deuxième temps, visualisons les pistes cyclables (Fig \@ref(fig:plot-velo)).
@@ -218,12 +226,12 @@ geom_sf(data = pistes_cyclables, size = 1, color = "darkgreen") +
 ggtitle("Pistes cyclables sur l'île de Montréal")
 ```
 
-Pour visualiser des lignes, nous n'avons pas besoin de définir l'argument `fill`. Vous remarquerez que les lignes, cette fois, sont vertes foncées (`darkgreen`).
+Pour visualiser des lignes, nous n'avons évidemment pas besoin de définir l'argument `fill` car nous visualisons des lignes plutôt qu'une surface. Vous remarquerez que les lignes, cette fois, sont vertes foncées (`darkgreen`).
 
 Il existe 657 couleurs prédéfinies dans `R`. Taper la commande `colors()` dans votre console `R` pour voir afficher le nom des couleurs. Celles-sont sont listées par ordre alphabétique sauf pour la première couleur, qui est le blanc (`white`). Ainsi, vous pouvez utiliser une couleur en assignant son nom ou son numéro. Pour produire la figure précédente, `color = "darkgreen"` aurait pu être remplacé par
 `color = colors()[81]`. Essayez pour voir.
 
-Les couleurs peuvent aussi être définies selon leur composition en rouge, vert et bleu sur un intervalle allant de 0 à 255 - ce qu'on nomme le vecteur RGB (red, green, blue). Par exemple, la couleur jaune est représentée par le vecteur RGB (255, 255, 0). La couleur verte foncée, utilisée précédemment, est, quant à elle, représentée par le vecteur RGB (0, 100, 0). Les couleurs peuvent aussi être exprimée selon le système de notation [hexadécimal](https://fr.wikipedia.org/wiki/Syst%C3%A8me_hexad%C3%A9cimal). La fonction 'rgb' permet de traduire un vecteur de couleur RGB en notation hexadécimal. Ainsi, pour produire la figure précédente, nous aurions définir le vecteur  `vert_fonce = rgb(0, 100, 0, maxColorValue=255)`, et remplacé `color = "darkgreen"` par `color = vert_fonce`. Essayez pour voir.
+Les couleurs peuvent aussi être définies selon leur composition en rouge, vert et bleu sur un intervalle allant de 0 à 255 - ce qu'on nomme le vecteur RGB (red, green, blue). Par exemple, la couleur jaune est représentée par le vecteur RGB (255, 255, 0). La couleur verte foncée, utilisée précédemment, est, quant à elle, représentée par le vecteur RGB (0, 100, 0). Les couleurs peuvent aussi être exprimées selon le système de notation [hexadécimal](https://fr.wikipedia.org/wiki/Syst%C3%A8me_hexad%C3%A9cimal). La fonction `rgb` permet de traduire un vecteur de couleur RGB en notation hexadécimal. Ainsi, pour produire la figure précédente, nous aurions pu définir le vecteur  `vert_fonce = rgb(0, 100, 0, maxColorValue=255)`, et remplacer `color = "darkgreen"` par `color = vert_fonce`. Essayez pour voir.
 
 Pour en apprendre davantage sur les couleurs dans `R`, vous êtes invité à consulter le site [Earl Glynn](https://github.com/EarlGlynn/colorchart/wiki/Color-Chart-in-R) et à conserver dans vos notes son [tableau synthèse des couleurs](Module3/3_TableauCouleurs.pdf) dans `R`.
 
@@ -251,7 +259,7 @@ ggtitle("Accidents de la route avec cyclistes sur l'île de Montréal")
 
 #### Visualiser des données vectorielles par attribut {-}
 
-Lorsque nous avons affiché les métadonnées du shapefile `pistes_cyclables`, vous avez peut-être observé que ce dernier comprenait l'attribut `TYPE_VOIE` qui caractérise le type de pistes cyclables de chaque multiligne. Affichez les métadonnées à nouveau:
+Lorsque nous avons affiché les métadonnées du *shapefile* `pistes_cyclables`, vous avez peut-être observé que ce dernier comprenait l'attribut `TYPE_VOIE` qui caractérise le type de pistes cyclables de chaque multiligne. Affichons les métadonnées à nouveau:
 ```{r plot-voie0, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 pistes_cyclables
 ```
@@ -281,7 +289,7 @@ ggplot()+
   ggtitle("Pistes cyclables sur l'île de Montréal", subtitle = "Bande cyclable")
 ```
 
-Nous voulons maintenant représenter les six types de voie cyclable par six couleurs différentes. Créons d'abord un vecteur de six couleurs, qu'on appelle une palette de couleurs.
+Nous voulons maintenant représenter les six types de voie cyclable par six couleurs différentes. Créons d'abord un vecteur de six couleurs, ce qu'on appelle une palette de couleurs.
 ```{r plot-voie4, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 couleurs_voie<-c("darkgreen", "turquoise", "yellow","darkblue","violet","orange")
 ```
@@ -321,7 +329,8 @@ ggplot()+
 ```
 La légende tient compte à la fois de la couleur, et de la taille des traits. De plus, nous l'avons affichée au bas de la figure.
 
-#### Visualiser plusieurs shapefiles {-}
+#### Visualiser plusieurs *shapefiles* {-}
+
 Nous allons maintenant représenter les données vectorielles `limites terrestres`, `pistes_cyclables` et `accidents_velo` au sein d'une même figure. Il s'agit d'utiliser la fonction `geom_sf` pour chaque couche de données et de les combiner en utilisant le `+`.
 
 ```{r plot-all1, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Pistes cyclables et position des accidents routiers impliquant des bicyclettes sur l'île de Montréal"}
@@ -334,7 +343,7 @@ ggplot()+
 
 Nous pouvons créer une carte plus précise qui spécifie les types de voie cyclable et ajouter une légende.
 
-```{r plot-all2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Types de voie cyclable et position des accidents routiers impliquant des bicyclettes sur l'île de Montréal"}
+```{r plot-all2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Types de voie cyclable et position des accidents routiers impliquant des bicyclettes sur l'île de Montréal."}
 ggplot()+
   geom_sf(data = limites_terrestres, size = 1, color = "black", fill = "white")+
   geom_sf(data = pistes_cyclables, size = 1.5, aes(color = TYPE_VOIE),  show.legend = "line")+
@@ -359,11 +368,11 @@ theme(
 )
 
 ```
-La fonction `theme()` permet de d'ajuster l'apparence de la carte (couleur du fond, couleur, taille et position du titre, format de la légende, etc.). Le chapitre [Modify components of theme](https://ggplot2.tidyverse.org/reference/theme.html) [@Wickham_ggplot2_2016] énumère l'ensemble des paramètres pouvant être modifiés pour changer l'apparence d'une carte.
+La fonction `theme()` permet d'ajuster l'apparence de la carte (couleur du fond, couleur, taille et position du titre, format de la légende, etc.). Le chapitre [Modify components of theme](https://ggplot2.tidyverse.org/reference/theme.html) [@Wickham_ggplot2_2016] énumère l'ensemble des paramètres pouvant être modifiés pour changer l'apparence d'une carte.
 
 
 ### Reprojection de données vectorielles sous R
-Dans cette section nous apprendrons à manipuler le système de coordonnées de référence de données vectorielles. Nous avons vu en début de leçon que les données utilisées sont dans la projection de Mercator transverse (`tmerc`) et utilisent le Système de référence géodésique nord-américan de 1983 (`NAD83`). Par exemple, pour connaître le SCR des données `limites_terrestres` nous avions fait.
+Dans cette section vous apprendrez à manipuler le système de coordonnées de référence de données vectorielles. Nous avons vu en début de leçon que les données utilisées sont dans la projection de Mercator transverse (`tmerc`) et utilisent le Système de référence géodésique nord-américan de 1983 (`NAD83`). Par exemple, pour connaître le SCR des données `limites_terrestres`, nous avions fait:
 
 ```{r proj-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_crs(limites_terrestres)
