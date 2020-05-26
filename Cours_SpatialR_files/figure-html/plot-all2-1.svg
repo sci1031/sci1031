@@ -7318,7 +7318,7 @@
   </clipPath>
 </defs>
 <rect x='20.05' y='26.16' width='502.64' height='45.52' style='stroke-width: 2.13; stroke: #FF0000; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)' />
-<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='25.53' y='52.93' style='font-size: 11.00px; font-weight: bold; fill: #0000FF; font-family: TeX Gyre Heros;' textLength='72.75px' lengthAdjust='spacingAndGlyphs'>Types de voie</text></g>
+<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='25.53' y='52.93' style='font-size: 11.00px; font-weight: bold; fill: #0000FF; font-family: Nimbus Sans;' textLength='72.75px' lengthAdjust='spacingAndGlyphs'>Types de voie</text></g>
 <rect x='102.77' y='31.64' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)' />
 <line x1='104.50' y1='40.28' x2='118.32' y2='40.28' style='stroke-width: 3.20; stroke: #006400; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)' />
 <rect x='102.77' y='48.92' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)' />
@@ -7331,11 +7331,11 @@
 <line x1='401.20' y1='40.28' x2='415.02' y2='40.28' style='stroke-width: 3.20; stroke: #EE82EE; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)' />
 <rect x='399.47' y='48.92' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)' />
 <line x1='401.20' y1='57.56' x2='415.02' y2='57.56' style='stroke-width: 3.20; stroke: #FFA500; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)' />
-<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='125.53' y='43.93' style='font-size: 10.00px; font-style: italic; font-family: TeX Gyre Heros;' textLength='67.81px' lengthAdjust='spacingAndGlyphs'>Bande cyclable</text></g>
-<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='125.53' y='61.21' style='font-size: 10.00px; font-style: italic; font-family: TeX Gyre Heros;' textLength='88.38px' lengthAdjust='spacingAndGlyphs'>Chaussée désignée</text></g>
-<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='242.15' y='43.93' style='font-size: 10.00px; font-style: italic; font-family: TeX Gyre Heros;' textLength='152.29px' lengthAdjust='spacingAndGlyphs'>Piste cyclable au niveau du trottoir</text></g>
-<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='242.15' y='61.21' style='font-size: 10.00px; font-style: italic; font-family: TeX Gyre Heros;' textLength='125.05px' lengthAdjust='spacingAndGlyphs'>Piste cyclable en site propre</text></g>
-<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='422.23' y='43.93' style='font-size: 10.00px; font-style: italic; font-family: TeX Gyre Heros;' textLength='95.03px' lengthAdjust='spacingAndGlyphs'>Piste cyclable sur rue</text></g>
-<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='422.23' y='61.21' style='font-size: 10.00px; font-style: italic; font-family: TeX Gyre Heros;' textLength='79.48px' lengthAdjust='spacingAndGlyphs'>Sentier polyvalent</text></g>
-<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='41.06' y='17.16' style='font-size: 16.00px; fill: #FFFFFF; font-family: TeX Gyre Heros;' textLength='460.62px' lengthAdjust='spacingAndGlyphs'>Types de voie cyclable et Accidents routiers impliquant des vélos</text></g>
+<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='125.53' y='43.93' style='font-size: 10.00px; font-style: italic; font-family: Nimbus Sans;' textLength='67.81px' lengthAdjust='spacingAndGlyphs'>Bande cyclable</text></g>
+<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='125.53' y='61.21' style='font-size: 10.00px; font-style: italic; font-family: Nimbus Sans;' textLength='88.38px' lengthAdjust='spacingAndGlyphs'>Chaussée désignée</text></g>
+<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='242.15' y='43.93' style='font-size: 10.00px; font-style: italic; font-family: Nimbus Sans;' textLength='152.29px' lengthAdjust='spacingAndGlyphs'>Piste cyclable au niveau du trottoir</text></g>
+<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='242.15' y='61.21' style='font-size: 10.00px; font-style: italic; font-family: Nimbus Sans;' textLength='125.05px' lengthAdjust='spacingAndGlyphs'>Piste cyclable en site propre</text></g>
+<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='422.23' y='43.93' style='font-size: 10.00px; font-style: italic; font-family: Nimbus Sans;' textLength='95.03px' lengthAdjust='spacingAndGlyphs'>Piste cyclable sur rue</text></g>
+<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='422.23' y='61.21' style='font-size: 10.00px; font-style: italic; font-family: Nimbus Sans;' textLength='79.48px' lengthAdjust='spacingAndGlyphs'>Sentier polyvalent</text></g>
+<g clip-path='url(#cpMC4wMHw1NDAuMDB8NTQwLjAwfDAuMDA=)'><text x='41.06' y='17.16' style='font-size: 16.00px; fill: #FFFFFF; font-family: Nimbus Sans;' textLength='460.62px' lengthAdjust='spacingAndGlyphs'>Types de voie cyclable et Accidents routiers impliquant des vélos</text></g>
 </svg>

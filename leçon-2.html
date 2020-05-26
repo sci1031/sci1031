@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ceci est une première ébauche de la conception du cours SCI 1031." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2020-04-30" />
+<meta name="date" content="2020-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -288,7 +288,7 @@ Simple feature collection with 72 features and 1 field
 geometry type:  POLYGON
 dimension:      XY
 bbox:           xmin: 267500 ymin: 5029000 xmax: 306700 ymax: 5063000
-CRS:            32188</code></pre>
+projected CRS:  NAD83 / MTM zone 8</code></pre>
 <p>La fonction <code>st_read()</code> vous permet d’ores et déjà d’obtenir certaines informations sur la structure des données vectorielles que vous venez de lire: le type de géométrie (<code>geometry type</code>), la dimension des données (<code>dimension</code>), l’étendue spatiale des données (<code>bbox</code>), et les informations relatives au système de coordonnées de référence, le SPSG (<code>epsg (SRID)</code>) et la projection (<code>proj4string</code>). Nous explorerons ces propriétés en détails plus bas.</p>
 <p>Nous allons maintenant lire les données vectorielles de type ligne, en utilisant encore la fonction <code>st_read()</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">chemin &lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module3/Donnees/&quot;</span></a>
@@ -299,7 +299,7 @@ Simple feature collection with 6395 features and 1 field
 geometry type:  MULTILINESTRING
 dimension:      XY
 bbox:           xmin: 268000 ymin: 5029000 xmax: 306300 ymax: 5063000
-CRS:            32188</code></pre>
+projected CRS:  Transverse_Mercator</code></pre>
 <p>Finalement, nous allons lire les données vectorielles de type point, en utilisant toujours la fonction <code>st_read()</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">chemin&lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module3/Donnees/&quot;</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">nom_du_fichier&lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
@@ -310,7 +310,7 @@ Simple feature collection with 796 features and 1 field
 geometry type:  POINT
 dimension:      XY
 bbox:           xmin: 269500 ymin: 5030000 xmax: 305400 ymax: 5059000
-CRS:            32188</code></pre>
+projected CRS:  Transverse_Mercator</code></pre>
 <p>Remarquez que le type de géométrie (<code>geometry type</code>) diffère pour les trois classes de données lues comme nous nous y attendions.</p>
 <p>####Explorer les métadonnées d’un <em>shapefile</em> {-}</p>
 <p>Les informations contenues dans un <em>shapefile</em> sont appelées des métadonnées. Nous sommes particulièrement intéressées aux métadonnées géospatiales.</p>
@@ -354,85 +354,124 @@ Quant aux accidents de vélo, ce sont des points qui désignent la position pré
 <p>Vérifions maintenant la projection des <em>shapefiles</em> en utilisant la fonction <code>st_crs()</code> de la librarie <code>sf</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">st_crs</span>(limites_terrestres)</a></code></pre></div>
 <pre><code>Coordinate Reference System:
-  User input: 32188 
+  User input: NAD83 / MTM zone 8 
   wkt:
-PROJCS[&quot;NAD83 / MTM zone 8&quot;,
-    GEOGCS[&quot;NAD83&quot;,
-        DATUM[&quot;North_American_Datum_1983&quot;,
-            SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,
-                AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],
-            TOWGS84[0,0,0,0,0,0,0],
-            AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],
+PROJCRS[&quot;NAD83 / MTM zone 8&quot;,
+    BASEGEOGCRS[&quot;NAD83&quot;,
+        DATUM[&quot;North American Datum 1983&quot;,
+            ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                LENGTHUNIT[&quot;metre&quot;,1]]],
         PRIMEM[&quot;Greenwich&quot;,0,
-            AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-        UNIT[&quot;degree&quot;,0.0174532925199433,
-            AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
-        AUTHORITY[&quot;EPSG&quot;,&quot;4269&quot;]],
-    PROJECTION[&quot;Transverse_Mercator&quot;],
-    PARAMETER[&quot;latitude_of_origin&quot;,0],
-    PARAMETER[&quot;central_meridian&quot;,-73.5],
-    PARAMETER[&quot;scale_factor&quot;,0.9999],
-    PARAMETER[&quot;false_easting&quot;,304800],
-    PARAMETER[&quot;false_northing&quot;,0],
-    UNIT[&quot;metre&quot;,1,
-        AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],
-    AXIS[&quot;E(X)&quot;,EAST],
-    AXIS[&quot;N(Y)&quot;,NORTH],
-    AUTHORITY[&quot;EPSG&quot;,&quot;32188&quot;]]</code></pre>
+            ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+        ID[&quot;EPSG&quot;,4269]],
+    CONVERSION[&quot;MTM zone 8&quot;,
+        METHOD[&quot;Transverse Mercator&quot;,
+            ID[&quot;EPSG&quot;,9807]],
+        PARAMETER[&quot;Latitude of natural origin&quot;,0,
+            ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+            ID[&quot;EPSG&quot;,8801]],
+        PARAMETER[&quot;Longitude of natural origin&quot;,-73.5,
+            ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+            ID[&quot;EPSG&quot;,8802]],
+        PARAMETER[&quot;Scale factor at natural origin&quot;,0.9999,
+            SCALEUNIT[&quot;unity&quot;,1],
+            ID[&quot;EPSG&quot;,8805]],
+        PARAMETER[&quot;False easting&quot;,304800,
+            LENGTHUNIT[&quot;metre&quot;,1],
+            ID[&quot;EPSG&quot;,8806]],
+        PARAMETER[&quot;False northing&quot;,0,
+            LENGTHUNIT[&quot;metre&quot;,1],
+            ID[&quot;EPSG&quot;,8807]]],
+    CS[Cartesian,2],
+        AXIS[&quot;easting (E(X))&quot;,east,
+            ORDER[1],
+            LENGTHUNIT[&quot;metre&quot;,1]],
+        AXIS[&quot;northing (N(Y))&quot;,north,
+            ORDER[2],
+            LENGTHUNIT[&quot;metre&quot;,1]],
+    USAGE[
+        SCOPE[&quot;unknown&quot;],
+        AREA[&quot;Canada - Quebec and Ontario - 75°W to 72°W&quot;],
+        BBOX[44.98,-75,62.53,-72]],
+    ID[&quot;EPSG&quot;,32188]]</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">st_crs</span>(pistes_cyclables)</a></code></pre></div>
 <pre><code>Coordinate Reference System:
-  User input: 32188 
+  User input: Transverse_Mercator 
   wkt:
-PROJCS[&quot;NAD83 / MTM zone 8&quot;,
-    GEOGCS[&quot;NAD83&quot;,
-        DATUM[&quot;North_American_Datum_1983&quot;,
-            SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,
-                AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],
-            TOWGS84[0,0,0,0,0,0,0],
-            AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],
+PROJCRS[&quot;Transverse_Mercator&quot;,
+    BASEGEOGCRS[&quot;NAD83&quot;,
+        DATUM[&quot;North American Datum 1983&quot;,
+            ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                LENGTHUNIT[&quot;metre&quot;,1]],
+            ID[&quot;EPSG&quot;,6269]],
         PRIMEM[&quot;Greenwich&quot;,0,
-            AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-        UNIT[&quot;degree&quot;,0.0174532925199433,
-            AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
-        AUTHORITY[&quot;EPSG&quot;,&quot;4269&quot;]],
-    PROJECTION[&quot;Transverse_Mercator&quot;],
-    PARAMETER[&quot;latitude_of_origin&quot;,0],
-    PARAMETER[&quot;central_meridian&quot;,-73.5],
-    PARAMETER[&quot;scale_factor&quot;,0.9999],
-    PARAMETER[&quot;false_easting&quot;,304800],
-    PARAMETER[&quot;false_northing&quot;,0],
-    UNIT[&quot;metre&quot;,1,
-        AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],
-    AXIS[&quot;E(X)&quot;,EAST],
-    AXIS[&quot;N(Y)&quot;,NORTH],
-    AUTHORITY[&quot;EPSG&quot;,&quot;32188&quot;]]</code></pre>
+            ANGLEUNIT[&quot;Degree&quot;,0.0174532925199433]]],
+    CONVERSION[&quot;unnamed&quot;,
+        METHOD[&quot;Transverse Mercator&quot;,
+            ID[&quot;EPSG&quot;,9807]],
+        PARAMETER[&quot;Latitude of natural origin&quot;,0,
+            ANGLEUNIT[&quot;Degree&quot;,0.0174532925199433],
+            ID[&quot;EPSG&quot;,8801]],
+        PARAMETER[&quot;Longitude of natural origin&quot;,-73.5,
+            ANGLEUNIT[&quot;Degree&quot;,0.0174532925199433],
+            ID[&quot;EPSG&quot;,8802]],
+        PARAMETER[&quot;Scale factor at natural origin&quot;,0.9999,
+            SCALEUNIT[&quot;unity&quot;,1],
+            ID[&quot;EPSG&quot;,8805]],
+        PARAMETER[&quot;False easting&quot;,304800,
+            LENGTHUNIT[&quot;metre&quot;,1],
+            ID[&quot;EPSG&quot;,8806]],
+        PARAMETER[&quot;False northing&quot;,0,
+            LENGTHUNIT[&quot;metre&quot;,1],
+            ID[&quot;EPSG&quot;,8807]]],
+    CS[Cartesian,2],
+        AXIS[&quot;(E)&quot;,east,
+            ORDER[1],
+            LENGTHUNIT[&quot;metre&quot;,1,
+                ID[&quot;EPSG&quot;,9001]]],
+        AXIS[&quot;(N)&quot;,north,
+            ORDER[2],
+            LENGTHUNIT[&quot;metre&quot;,1,
+                ID[&quot;EPSG&quot;,9001]]]]</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">st_crs</span>(accidents_velo)</a></code></pre></div>
 <pre><code>Coordinate Reference System:
-  User input: 32188 
+  User input: Transverse_Mercator 
   wkt:
-PROJCS[&quot;NAD83 / MTM zone 8&quot;,
-    GEOGCS[&quot;NAD83&quot;,
-        DATUM[&quot;North_American_Datum_1983&quot;,
-            SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,
-                AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],
-            TOWGS84[0,0,0,0,0,0,0],
-            AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],
+PROJCRS[&quot;Transverse_Mercator&quot;,
+    BASEGEOGCRS[&quot;NAD83&quot;,
+        DATUM[&quot;North American Datum 1983&quot;,
+            ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                LENGTHUNIT[&quot;metre&quot;,1]],
+            ID[&quot;EPSG&quot;,6269]],
         PRIMEM[&quot;Greenwich&quot;,0,
-            AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-        UNIT[&quot;degree&quot;,0.0174532925199433,
-            AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
-        AUTHORITY[&quot;EPSG&quot;,&quot;4269&quot;]],
-    PROJECTION[&quot;Transverse_Mercator&quot;],
-    PARAMETER[&quot;latitude_of_origin&quot;,0],
-    PARAMETER[&quot;central_meridian&quot;,-73.5],
-    PARAMETER[&quot;scale_factor&quot;,0.9999],
-    PARAMETER[&quot;false_easting&quot;,304800],
-    PARAMETER[&quot;false_northing&quot;,0],
-    UNIT[&quot;metre&quot;,1,
-        AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],
-    AXIS[&quot;E(X)&quot;,EAST],
-    AXIS[&quot;N(Y)&quot;,NORTH],
-    AUTHORITY[&quot;EPSG&quot;,&quot;32188&quot;]]</code></pre>
+            ANGLEUNIT[&quot;Degree&quot;,0.0174532925199433]]],
+    CONVERSION[&quot;unnamed&quot;,
+        METHOD[&quot;Transverse Mercator&quot;,
+            ID[&quot;EPSG&quot;,9807]],
+        PARAMETER[&quot;Latitude of natural origin&quot;,0,
+            ANGLEUNIT[&quot;Degree&quot;,0.0174532925199433],
+            ID[&quot;EPSG&quot;,8801]],
+        PARAMETER[&quot;Longitude of natural origin&quot;,-73.5,
+            ANGLEUNIT[&quot;Degree&quot;,0.0174532925199433],
+            ID[&quot;EPSG&quot;,8802]],
+        PARAMETER[&quot;Scale factor at natural origin&quot;,0.9999,
+            SCALEUNIT[&quot;unity&quot;,1],
+            ID[&quot;EPSG&quot;,8805]],
+        PARAMETER[&quot;False easting&quot;,304800,
+            LENGTHUNIT[&quot;metre&quot;,1],
+            ID[&quot;EPSG&quot;,8806]],
+        PARAMETER[&quot;False northing&quot;,0,
+            LENGTHUNIT[&quot;metre&quot;,1],
+            ID[&quot;EPSG&quot;,8807]]],
+    CS[Cartesian,2],
+        AXIS[&quot;(E)&quot;,east,
+            ORDER[1],
+            LENGTHUNIT[&quot;metre&quot;,1,
+                ID[&quot;EPSG&quot;,9001]]],
+        AXIS[&quot;(N)&quot;,north,
+            ORDER[2],
+            LENGTHUNIT[&quot;metre&quot;,1,
+                ID[&quot;EPSG&quot;,9001]]]]</code></pre>
 <p>Les données de tous les <em>shapefiles</em> sont dans la projection de Mercator transverse (<code>+proj=tmerc</code>) et utilisent le Système de référence géodésique nord-américan de 1983 (<code>+datum=NAD83</code>). Il n’y a pas de EPSG assigné à ces données. Connaitre le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.</p>
 <p>Pour connaître l’étendue spatiale des <em>shapefiles</em>, nous utilisons la fonction <code>st_bbox()</code> de la librairie <code>sf</code> :</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">st_bbox</span>(limites_terrestres)</a></code></pre></div>
@@ -452,7 +491,7 @@ PROJCS[&quot;NAD83 / MTM zone 8&quot;,
 geometry type:  POLYGON
 dimension:      XY
 bbox:           xmin: 267500 ymin: 5029000 xmax: 306700 ymax: 5063000
-CRS:            32188
+projected CRS:  NAD83 / MTM zone 8
 First 10 features:
    DefaultAtt                       geometry
 1        &lt;NA&gt; POLYGON ((299608 5038364, 2...
@@ -470,7 +509,7 @@ First 10 features:
 geometry type:  MULTILINESTRING
 dimension:      XY
 bbox:           xmin: 268000 ymin: 5029000 xmax: 306300 ymax: 5063000
-CRS:            32188
+projected CRS:  Transverse_Mercator
 First 10 features:
                        TYPE_VOIE
 1         Piste cyclable sur rue
@@ -499,7 +538,7 @@ First 10 features:
 geometry type:  POINT
 dimension:      XY
 bbox:           xmin: 269500 ymin: 5030000 xmax: 305400 ymax: 5059000
-CRS:            32188
+projected CRS:  Transverse_Mercator
 First 10 features:
    FID               geometry
 1    0 POINT (279673 5041015)
@@ -591,7 +630,7 @@ Figure 3.5: Symbole et couleur différents pour illustrer les accidents de la ro
 geometry type:  MULTILINESTRING
 dimension:      XY
 bbox:           xmin: 268000 ymin: 5029000 xmax: 306300 ymax: 5063000
-CRS:            32188
+projected CRS:  Transverse_Mercator
 First 10 features:
                        TYPE_VOIE
 1         Piste cyclable sur rue
@@ -617,12 +656,7 @@ First 10 features:
 10 MULTILINESTRING ((304787 50...</code></pre>
 <p>Utilisons la fonction <code>levels</code> pour connaître ces types de voie cyclables. La fonction <code>levels</code> donne les différentes valeurs que peuvent prendre un attribut.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">levels</span>(pistes_cyclables<span class="op">$</span>TYPE_VOIE)</a></code></pre></div>
-<pre><code>[1] &quot;Bande cyclable&quot;                      
-[2] &quot;Chaussée désignée&quot;                   
-[3] &quot;Piste cyclable au niveau du trottoir&quot;
-[4] &quot;Piste cyclable en site propre&quot;       
-[5] &quot;Piste cyclable sur rue&quot;              
-[6] &quot;Sentier polyvalent&quot;                  </code></pre>
+<pre><code>NULL</code></pre>
 <p>Si vous ne connaissez pas la distinction entre ces types d’aménagement cyclable, consulter ce <a href="Module3/3_Amenagement3Cyclable3Mtl.pdf">document sommaire</a> de la <em>Ville de Montréal</em><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>Nous voulons maintenant représenter les données vectorielles associées aux pistes cyclables de type <code>&quot;Bande cyclable&quot;</code>. Pour représenter une valeur précise d’un attribut, nous utiliserons la fonction <code>filter</code> de la librarie <code>dplyr</code>. Commençons par charger cette librairie.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a></code></pre></div>
@@ -727,31 +761,46 @@ Figure 3.10: Types de voie cyclable et position des accidents routiers impliquan
 <p>Dans cette section vous apprendrez à manipuler le système de coordonnées de référence de données vectorielles. Nous avons vu en début de leçon que les données utilisées sont dans la projection de Mercator transverse (<code>tmerc</code>) et utilisent le Système de référence géodésique nord-américan de 1983 (<code>NAD83</code>). Par exemple, pour connaître le SCR des données <code>limites_terrestres</code>, nous avions fait:</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">st_crs</span>(limites_terrestres)</a></code></pre></div>
 <pre><code>Coordinate Reference System:
-  User input: 32188 
+  User input: NAD83 / MTM zone 8 
   wkt:
-PROJCS[&quot;NAD83 / MTM zone 8&quot;,
-    GEOGCS[&quot;NAD83&quot;,
-        DATUM[&quot;North_American_Datum_1983&quot;,
-            SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,
-                AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],
-            TOWGS84[0,0,0,0,0,0,0],
-            AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],
+PROJCRS[&quot;NAD83 / MTM zone 8&quot;,
+    BASEGEOGCRS[&quot;NAD83&quot;,
+        DATUM[&quot;North American Datum 1983&quot;,
+            ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                LENGTHUNIT[&quot;metre&quot;,1]]],
         PRIMEM[&quot;Greenwich&quot;,0,
-            AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-        UNIT[&quot;degree&quot;,0.0174532925199433,
-            AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],
-        AUTHORITY[&quot;EPSG&quot;,&quot;4269&quot;]],
-    PROJECTION[&quot;Transverse_Mercator&quot;],
-    PARAMETER[&quot;latitude_of_origin&quot;,0],
-    PARAMETER[&quot;central_meridian&quot;,-73.5],
-    PARAMETER[&quot;scale_factor&quot;,0.9999],
-    PARAMETER[&quot;false_easting&quot;,304800],
-    PARAMETER[&quot;false_northing&quot;,0],
-    UNIT[&quot;metre&quot;,1,
-        AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],
-    AXIS[&quot;E(X)&quot;,EAST],
-    AXIS[&quot;N(Y)&quot;,NORTH],
-    AUTHORITY[&quot;EPSG&quot;,&quot;32188&quot;]]</code></pre>
+            ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+        ID[&quot;EPSG&quot;,4269]],
+    CONVERSION[&quot;MTM zone 8&quot;,
+        METHOD[&quot;Transverse Mercator&quot;,
+            ID[&quot;EPSG&quot;,9807]],
+        PARAMETER[&quot;Latitude of natural origin&quot;,0,
+            ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+            ID[&quot;EPSG&quot;,8801]],
+        PARAMETER[&quot;Longitude of natural origin&quot;,-73.5,
+            ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+            ID[&quot;EPSG&quot;,8802]],
+        PARAMETER[&quot;Scale factor at natural origin&quot;,0.9999,
+            SCALEUNIT[&quot;unity&quot;,1],
+            ID[&quot;EPSG&quot;,8805]],
+        PARAMETER[&quot;False easting&quot;,304800,
+            LENGTHUNIT[&quot;metre&quot;,1],
+            ID[&quot;EPSG&quot;,8806]],
+        PARAMETER[&quot;False northing&quot;,0,
+            LENGTHUNIT[&quot;metre&quot;,1],
+            ID[&quot;EPSG&quot;,8807]]],
+    CS[Cartesian,2],
+        AXIS[&quot;easting (E(X))&quot;,east,
+            ORDER[1],
+            LENGTHUNIT[&quot;metre&quot;,1]],
+        AXIS[&quot;northing (N(Y))&quot;,north,
+            ORDER[2],
+            LENGTHUNIT[&quot;metre&quot;,1]],
+    USAGE[
+        SCOPE[&quot;unknown&quot;],
+        AREA[&quot;Canada - Quebec and Ontario - 75°W to 72°W&quot;],
+        BBOX[44.98,-75,62.53,-72]],
+    ID[&quot;EPSG&quot;,32188]]</code></pre>
 <p>Nous allons maintenant transformer le SCR vers la projection de Robinson (<code>robin</code>) et le Système géodésique mondial de 1984 (<code>WGS84</code>). Pour se faire nous utilisons la fonction <code>st_transform</code> de la librarie <code>st</code>.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">limites_terrestres_rob &lt;-<span class="st"> </span><span class="kw">st_transform</span>(limites_terrestres,</a>
 <a class="sourceLine" id="cb53-2" data-line-number="2">    <span class="kw">CRS</span>(<span class="st">&quot;+proj=robin +datum=WGS84&quot;</span>))</a></code></pre></div>
