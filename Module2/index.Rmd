@@ -55,7 +55,7 @@ Les données vectorielles comprennent également des variables additionnelles ap
 Les **points** sont les données vectorielles les plus simples. Par exemple, un point pourrait représenter l’emplacement d’un restaurant dans une ville. Les attributs associés à ce point pourraient inclure les heures d’ouverture, sa spécialité culinaire, l’échelle de prix de son menu ou d’autres informations. 
 
 ```{r multipoints, fig.align='left', echo=FALSE,fig.cap="L’emplacement des stations de vélo en libre partage, *Bixi*, dans un quartier de Montréal correspond à une géométrie multipoints. Source : https://secure.bixi.com/map/", out.width = '60%'}
-knitr::include_graphics('Module2/images/2_multipoints.png')
+knitr::include_graphics('Module2/images/2_multipoints.PNG')
 ```
 
 Il est aussi possible de combiner plusieurs points ensemble dans une structure multipoints définie par un attribut unique (Figure \@ref(fig:multipoints)). Par exemple, l’ensemble des restaurants de cuisine vietnamienne dans une ville pourrait être considéré comme une géométrie unique. 
@@ -119,7 +119,7 @@ Voici une liste non-exhaustive de formats de données vectorielles.
   La géodatabase est le nouveau format propriétaire d’ESRI conçu pour ArcGIS. Il est de plus en plus adopté car il présente de nombreux avantages par rapport au *shapefile*. Une géodatabase est une façon de rassembler et d’organiser des données propres à un sujet ou à un projet dans une unique base de données. Elle peut contenir des données géographiques dans une large gamme de fichiers et de formats (Figure \@ref(fig:geodatabase)).
  
 ```{r geodatabase, fig.align='left', echo=FALSE,fig.cap="Illustration d’une géodatabase telle que représentée sur le site web d’ArcGIS. Image récupérée à : https://desktop.arcgis.com/fr/arcmap/10.3/manage-data/geodatabases/a-quick-tour-of-the-geodatabase.htm", out.width = '50%'}
-knitr::include_graphics('Module2/images/2_geodatabase.png')
+knitr::include_graphics('Module2/images/2_geodatabase.PNG')
 ```
 
   Par exemple, un projet sur le réseau de transport d’électricité au Québec pourrait nécessiter l’utilisation de plusieurs *shapefiles* (position des centrales, position des pylônes, parcours des câbles, etc.) et aussi plusieurs données matricielles (topographie, végétation, etc.). Ainsi, il s’avère beaucoup plus efficace d’avoir l’ensemble de ces données au sein d’une même base.
