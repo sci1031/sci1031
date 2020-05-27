@@ -2,58 +2,36 @@
 
 
 
-L'objectif principal de ce module est
+Ce module s’intéresse à la façon dont nous représentons les phénomènes spatiaux se déroulant à la surface de la Terre par des données spatiales. Les objectifs principaux sont de connaître les propriétés des deux types de données spatiales, les données vectorielles et les données matricielles, et de savoir interpréter le système de coordonnées de référence de données spatiales.  
 
 À la fin de ce module vous saurez:
 
--
--
--
+-	Définir les propriétés principales des données vectorielles.
+-	Reconnaître des formats de fichier de données vectorielles.
+-	Définir les propriétés principales des données matricielles.
+-	Reconnaître des formats de fichier de données matricielles.
+-	Expliquer ce qu’est un référentiel géographique.
 
-Vous utiliserez les librairies suivantes:
 
--
--
 
-Vous apprendrez à utiliser les fonctions suivantes:
-
--
--
-
-Dans la section Leçon, vous utiliserez des données XYXYX
-
-Dans la section Exercice, vous utiliserez XXXXX
-
-```{r load-libraries2, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
-#library(raster)
-library(rgdal)
-library(ggplot2)
-library(dplyr)
-library(sf)
-library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
-library(ggpubr)
-```
+Dans la section Exercice, vous réaliserez une auto-évaluation pour vérifier votre acquisition des connaissances enseignées dans ce module. 
 
 
 ## Leçon
 
-### Les concepts de base
-
--	Les échelles spatiales (résolution et étendue), la position, la distance, l’interaction, la contiguïté, le voisinage, l’effet de bordure, l’hétérogénéité spatiale, l’organisation spatiale, les gradients, l’anisotropie, l’agrégation, la dépendance spatiale, l’autocorrélation spatiale.
-
--	Les objets spatiaux, la géométrie, la stationnarité, la bordure
-- Le problème d’agrégation spatiale
-
 
 ### La représentation de données spatiales
 
--	Les données vectorielles (définition, attributs principaux et exemples)
-
-```{r fig.align='left', echo=FALSE,fig.cap="A caption", out.width = '50%'}
-knitr::include_graphics('Module2/2_RegionsAdminQC.png')
+Les  phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout mais qui ne possèdent pas de frontières naturelles^[Repris de l'introduction aux données spatiales du site [Spatial Data Science](https://rspatial.org/raster/spatial/2-spatialdata.html).]. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes (\@ref(fig:vecto_vs_mat)a). D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux (\@ref(fig:vecto_vs_mat)b). 
+ 
+```{r vecto_vs_mat, fig.align='left', echo=FALSE,fig.cap="Exemples de données vectorielles et matricielles : a) La carte délimitant les régions administratives du Québec est formée à partir de données vectorielles; b) La carte topographique du Québec (source : [https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/)](https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/))", out.width = '50%'}
+knitr::include_graphics('Module2/images/2_vecto_vs_mat.png')
 ```
 
--	Les données matricielles (définition, attributs principaux et exemples)
+#### Les données vectorielles 
+
+
+####Les données matricielles 
 
 ### Les systèmes de coordonnées de référence
 -	Coordonnées angulaires, projections, notations.
