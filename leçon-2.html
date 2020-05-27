@@ -24,7 +24,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2020-05-26" />
+<meta name="date" content="2020-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,9 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="base.html"><a href="base.html"><i class="fa fa-check"></i><b>2</b> La représentation spatiale</a><ul>
 <li class="chapter" data-level="2.1" data-path="leçon-1.html"><a href="leçon-1.html"><i class="fa fa-check"></i><b>2.1</b> Leçon</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="leçon-1.html"><a href="leçon-1.html#les-concepts-de-base"><i class="fa fa-check"></i><b>2.1.1</b> Les concepts de base</a></li>
-<li class="chapter" data-level="2.1.2" data-path="leçon-1.html"><a href="leçon-1.html#la-représentation-de-données-spatiales"><i class="fa fa-check"></i><b>2.1.2</b> La représentation de données spatiales</a></li>
-<li class="chapter" data-level="2.1.3" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-de-coordonnées-de-référence"><i class="fa fa-check"></i><b>2.1.3</b> Les systèmes de coordonnées de référence</a></li>
+<li class="chapter" data-level="2.1.1" data-path="leçon-1.html"><a href="leçon-1.html#la-représentation-de-données-spatiales"><i class="fa fa-check"></i><b>2.1.1</b> La représentation de données spatiales</a></li>
+<li class="chapter" data-level="2.1.2" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-de-coordonnées-de-référence"><i class="fa fa-check"></i><b>2.1.2</b> Les systèmes de coordonnées de référence</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="exercice-1.html"><a href="exercice-1.html"><i class="fa fa-check"></i><b>2.2</b> Exercice</a></li>
 </ul></li>
@@ -570,7 +569,7 @@ Figure 3.1: Limites terrestres de l’île de Montréal
 </p>
 </div>
 <p>La fonction <code>geom_sf()</code> permet de faire des représentations simples d’objets vectoriels de géométrie de type point, ligne et polygone.
-Cette fonction peut prendre plusieurs arguments<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Les arguments utilisés ici sont:</p>
+Cette fonction peut prendre plusieurs arguments<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. Les arguments utilisés ici sont:</p>
 <ul>
 <li>les données (<code>data</code>)</li>
 <li>la taille du trait avec laquelle on illustre l’objet (<code>size</code>)</li>
@@ -657,7 +656,7 @@ First 10 features:
 <p>Utilisons la fonction <code>levels</code> pour connaître ces types de voie cyclables. La fonction <code>levels</code> donne les différentes valeurs que peuvent prendre un attribut.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">levels</span>(pistes_cyclables<span class="op">$</span>TYPE_VOIE)</a></code></pre></div>
 <pre><code>NULL</code></pre>
-<p>Si vous ne connaissez pas la distinction entre ces types d’aménagement cyclable, consulter ce <a href="Module3/3_Amenagement3Cyclable3Mtl.pdf">document sommaire</a> de la <em>Ville de Montréal</em><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>Si vous ne connaissez pas la distinction entre ces types d’aménagement cyclable, consulter ce <a href="Module3/3_Amenagement3Cyclable3Mtl.pdf">document sommaire</a> de la <em>Ville de Montréal</em><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <p>Nous voulons maintenant représenter les données vectorielles associées aux pistes cyclables de type <code>&quot;Bande cyclable&quot;</code>. Pour représenter une valeur précise d’un attribut, nous utiliserons la fonction <code>filter</code> de la librarie <code>dplyr</code>. Commençons par charger cette librairie.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a></code></pre></div>
 <p>Utilisons la fonction <code>filter</code> qui permet de filtrer l’ensemble des valeurs de l’attribut <code>TYPE_VOIE</code>, pour ne retenir que les données dont la valeur est identique (ce qui s’exprime par l’opération <code>==</code>) à ‘“Bande cyclable”’. Nous nommerons ce sous-ensemble de données <code>Bande</code>.</p>
@@ -688,8 +687,8 @@ Figure 3.7: Types de voie cyclable sur l’île de Montréal
 </p>
 </div>
 <p>La fonction <code>aes</code> décrit quelles variables dans les données (<code>data</code>) sont illustrées (dans notre exemple, ce sont <code>TYPE_VOIE</code>) et par quelles
-caractéristiques visuelles<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. On nomme ces caractéristiques visuelles les “esthétiques” (<code>aes</code> pour “aesthetic” en anglais). Dans le présent exemple, nous nous préoccupons seulement de la couleur des données vectorielles, mais nous aurions pu aussi changer leur taille, le type de lignes, ou la forme des symboles (si la géométrie des données étaient de type point).</p>
-<p>La fonction <code>scale_color_manual</code> permet de spécifier nos propres couleurs, sans quoi ce seront les couleurs par défaut qui seront utilisées<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
+caractéristiques visuelles<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. On nomme ces caractéristiques visuelles les “esthétiques” (<code>aes</code> pour “aesthetic” en anglais). Dans le présent exemple, nous nous préoccupons seulement de la couleur des données vectorielles, mais nous aurions pu aussi changer leur taille, le type de lignes, ou la forme des symboles (si la géométrie des données étaient de type point).</p>
+<p>La fonction <code>scale_color_manual</code> permet de spécifier nos propres couleurs, sans quoi ce seront les couleurs par défaut qui seront utilisées<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
 <p>Finalement, la fonction <code>labs</code> permet d’assigner un titre à la légende, sans quoi c’est le nom de la variable, telle que nous l’avons définie dans <code>R</code> qui sera affichée, ici, <code>TYPE_VOIE</code>.</p>
 <p>Nous pouvons aussi demander à <code>ggplot</code> de représenter les types de voie cyclable en utilisant différentes tailles de trait. De la même façon que précédemment, nous créons un vecteur de six tailles.</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">tailles_voie&lt;-<span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">1.2</span>,<span class="fl">1.5</span>,<span class="fl">1.7</span>,<span class="dv">2</span>,<span class="fl">2.2</span>)</a></code></pre></div>
@@ -834,11 +833,11 @@ Figure 3.11: Limites terrestres de l’île de Montréal selon les projections M
 </div>
 <div class="footnotes">
 <hr />
-<ol start="2">
-<li id="fn2"><p>Pour plus d’information sur la fonction <code>geom_sf</code>, consultez le chapitre <a href="https://ggplot2.tidyverse.org/reference/ggsf.html">Visualise sf objects</a> <span class="citation">(Wickham <a href="#ref-Wickham_ggplot2_2016">2016</a>)</span><a href="leçon-2.html#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p>Ville de Montréal. Aménagements cyclables. Repéré le 19 mars 2020<a href="leçon-2.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>Pour plus d’information sur la fonction <code>aes</code>, consultez le chapitre <a href="https://ggplot2.tidyverse.org/reference/aes.html">Construct aesthetic mappings</a> <span class="citation">(Wickham <a href="#ref-Wickham_ggplot2_2016">2016</a>)</span><a href="leçon-2.html#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>Pour plus d’information sur la fonction <code>scale_colour_manual</code>, consultez le chapitre <a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">Create your own discrete scale</a> <span class="citation">(Wickham <a href="#ref-Wickham_ggplot2_2016">2016</a>)</span><a href="leçon-2.html#fnref5" class="footnote-back">↩</a></p></li>
+<ol start="3">
+<li id="fn3"><p>Pour plus d’information sur la fonction <code>geom_sf</code>, consultez le chapitre <a href="https://ggplot2.tidyverse.org/reference/ggsf.html">Visualise sf objects</a> <span class="citation">(Wickham <a href="#ref-Wickham_ggplot2_2016">2016</a>)</span><a href="leçon-2.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Ville de Montréal. Aménagements cyclables. Repéré le 19 mars 2020<a href="leçon-2.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Pour plus d’information sur la fonction <code>aes</code>, consultez le chapitre <a href="https://ggplot2.tidyverse.org/reference/aes.html">Construct aesthetic mappings</a> <span class="citation">(Wickham <a href="#ref-Wickham_ggplot2_2016">2016</a>)</span><a href="leçon-2.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Pour plus d’information sur la fonction <code>scale_colour_manual</code>, consultez le chapitre <a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">Create your own discrete scale</a> <span class="citation">(Wickham <a href="#ref-Wickham_ggplot2_2016">2016</a>)</span><a href="leçon-2.html#fnref6" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

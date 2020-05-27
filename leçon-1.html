@@ -24,7 +24,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2020-05-26" />
+<meta name="date" content="2020-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,9 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="base.html"><a href="base.html"><i class="fa fa-check"></i><b>2</b> La représentation spatiale</a><ul>
 <li class="chapter" data-level="2.1" data-path="leçon-1.html"><a href="leçon-1.html"><i class="fa fa-check"></i><b>2.1</b> Leçon</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="leçon-1.html"><a href="leçon-1.html#les-concepts-de-base"><i class="fa fa-check"></i><b>2.1.1</b> Les concepts de base</a></li>
-<li class="chapter" data-level="2.1.2" data-path="leçon-1.html"><a href="leçon-1.html#la-représentation-de-données-spatiales"><i class="fa fa-check"></i><b>2.1.2</b> La représentation de données spatiales</a></li>
-<li class="chapter" data-level="2.1.3" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-de-coordonnées-de-référence"><i class="fa fa-check"></i><b>2.1.3</b> Les systèmes de coordonnées de référence</a></li>
+<li class="chapter" data-level="2.1.1" data-path="leçon-1.html"><a href="leçon-1.html#la-représentation-de-données-spatiales"><i class="fa fa-check"></i><b>2.1.1</b> La représentation de données spatiales</a></li>
+<li class="chapter" data-level="2.1.2" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-de-coordonnées-de-référence"><i class="fa fa-check"></i><b>2.1.2</b> Les systèmes de coordonnées de référence</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="exercice-1.html"><a href="exercice-1.html"><i class="fa fa-check"></i><b>2.2</b> Exercice</a></li>
 </ul></li>
@@ -260,35 +259,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="leçon-1" class="section level2">
 <h2><span class="header-section-number">2.1</span> Leçon</h2>
-<div id="les-concepts-de-base" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> Les concepts de base</h3>
-<ul>
-<li><p>Les échelles spatiales (résolution et étendue), la position, la distance, l’interaction, la contiguïté, le voisinage, l’effet de bordure, l’hétérogénéité spatiale, l’organisation spatiale, les gradients, l’anisotropie, l’agrégation, la dépendance spatiale, l’autocorrélation spatiale.</p></li>
-<li>Les objets spatiaux, la géométrie, la stationnarité, la bordure</li>
-<li><p>Le problème d’agrégation spatiale</p></li>
-</ul>
-</div>
 <div id="la-représentation-de-données-spatiales" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> La représentation de données spatiales</h3>
-<ul>
-<li>Les données vectorielles (définition, attributs principaux et exemples)</li>
-</ul>
-<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-2"></span>
-<img src="Module2/2_RegionsAdminQC.png" alt="A caption" width="50%" />
+<h3><span class="header-section-number">2.1.1</span> La représentation de données spatiales</h3>
+<p>Les phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout mais qui ne possèdent pas de frontières naturelles<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes (@ref(fig:vecto_vs_mat)a). D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux (@ref(fig:vecto_vs_mat)b).</p>
+<div class="figure" style="text-align: left">
+<img src="Module2/images/2_vecto_vs_mat.png" alt="Exemples de données vectorielles et matricielles : a) La carte délimitant les régions administratives du Québec est formée à partir de données vectorielles; b) La carte topographique du Québec (source : [https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/)](https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/))" width="50%" />
 <p class="caption">
-Figure 2.1: A caption
+(#fig:vecto_vs_mat)Exemples de données vectorielles et matricielles : a) La carte délimitant les régions administratives du Québec est formée à partir de données vectorielles; b) La carte topographique du Québec (source : <a href="https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/">https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/)</a>)
 </p>
 </div>
-<ul>
-<li>Les données matricielles (définition, attributs principaux et exemples)</li>
-</ul>
+<div id="les-données-vectorielles" class="section level4">
+<h4><span class="header-section-number">2.1.1.1</span> Les données vectorielles</h4>
+<p>####Les données matricielles</p>
+</div>
 </div>
 <div id="les-systèmes-de-coordonnées-de-référence" class="section level3">
-<h3><span class="header-section-number">2.1.3</span> Les systèmes de coordonnées de référence</h3>
+<h3><span class="header-section-number">2.1.2</span> Les systèmes de coordonnées de référence</h3>
 <ul>
 <li>Coordonnées angulaires, projections, notations.</li>
 </ul>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Repris de l’introduction aux données spatiales du site <a href="https://rspatial.org/raster/spatial/2-spatialdata.html">Spatial Data Science</a>.<a href="leçon-1.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
