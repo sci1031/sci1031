@@ -41,7 +41,7 @@ lapply(c('DT', 'citr', 'formatR', 'svglite'), function(pkg) {
 
 Bienvenue dans le cours SCI 1031 Visualisation et analyse de données spatiales avec R. 
 
-
+LE COURS EST PRÉSENTEMENT EN CONSTUCTION: REVENEZ PLUS TARD!
 
 
 
