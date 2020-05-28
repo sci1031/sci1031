@@ -114,49 +114,49 @@ Voici une liste non-exhaustive de formats de données vectorielles.
   Le fichier d’index sert à lier entre elles les informations contenues dans les autres fichiers. Il existe parfois d’autres types de fichier d’index (.sbx, .sbn). Pour visualiser un *shapefile*, il est nécessaire d’avoir tous les fichiers associés (et pas seulement le fichier .shp). Le fichier .prj peut être absent. En son absence, le shapefile peut être lu mais les données ne seront pas projetées adéquatement. Nous reviendrons sur le concept de projection plus tard dans ce module.
 
 
-###### GEODATABASE {-}
+###### GEODATABASE (.GDB) {-}
 
-> La géodatabase est le nouveau format propriétaire d’ESRI conçu pour ArcGIS. Il est de plus en plus adopté car il présente de nombreux avantages par rapport au *shapefile*. Une géodatabase est une façon de rassembler et d’organiser des données propres à un sujet ou à un projet dans une unique base de données. Elle peut contenir des données géographiques dans une large gamme de fichiers et de formats (Figure \@ref(fig:geodatabase)).
+ La géodatabase est le nouveau format propriétaire d’ESRI conçu pour ArcGIS. Il est de plus en plus adopté car il présente de nombreux avantages par rapport au *shapefile*. Une géodatabase est une façon de rassembler et d’organiser des données propres à un sujet ou à un projet dans une unique base de données. Elle peut contenir des données géographiques dans une large gamme de fichiers et de formats (Figure \@ref(fig:geodatabase)).
 
 ```{r geodatabase, fig.align='left', echo=FALSE,fig.cap="Illustration d’une géodatabase telle que représentée sur le site web d’ArcGIS. Image récupérée à : https://desktop.arcgis.com/fr/arcmap/10.3/manage-data/geodatabases/a-quick-tour-of-the-geodatabase.htm", out.width = '50%'}
 knitr::include_graphics('Module2/images/2_geodatabase.PNG')
 ```
 
-> Par exemple, un projet sur le réseau de transport d’électricité au Québec pourrait nécessiter l’utilisation de plusieurs *shapefiles* (position des centrales, position des pylônes, parcours des câbles, etc.) et aussi plusieurs données matricielles (topographie, végétation, etc.). Ainsi, il s’avère beaucoup plus efficace d’avoir l’ensemble de ces données au sein d’une même base.
+ Par exemple, un projet sur le réseau de transport d’électricité au Québec pourrait nécessiter l’utilisation de plusieurs *shapefiles* (position des centrales, position des pylônes, parcours des câbles, etc.) et aussi plusieurs données matricielles (topographie, végétation, etc.). Ainsi, il s’avère beaucoup plus efficace d’avoir l’ensemble de ces données au sein d’une même base.
 
-> De plus, une géodatabase peut être utilisée par de multiples utilisateurs, ce qui est fort utile pour assurer le partage efficace, la mise à jour, et la cohérence des données géographiques au sein de grandes organisations, comme des entreprises ou des ministères.
+ De plus, une géodatabase peut être utilisée par de multiples utilisateurs, ce qui est fort utile pour assurer le partage efficace, la mise à jour, et la cohérence des données géographiques au sein de grandes organisations, comme des entreprises ou des ministères.
 
-> Malheureusement, bien que les géodatabases peuvent être lues avec `R`, elles peuvent seulement être modifiées dans ArcGIS.
+ Malheureusement, bien que les géodatabases peuvent être lues avec `R`, elles peuvent seulement être modifiées dans ArcGIS.
 
 
 ###### GEOGRAPHIC JAVASCRIPT OBJECT NOTATION (.GEOJSON, .JSON) {-}
 
-- Le format geoJSON est un format standard ouvert très utilisé en cartographie web. geoJSON est une extension du format JSON pour les données géographiques. Un fichier geoJSON contient les coordonnées des données géospatiales ainsi que d’autres informations sur les attributs. Un seul fichier est nécessaire pour stocker l’ensemble de l’information.
+ Le format geoJSON est un format standard ouvert très utilisé en cartographie web. geoJSON est une extension du format JSON pour les données géographiques. Un fichier geoJSON contient les coordonnées des données géospatiales ainsi que d’autres informations sur les attributs. Un seul fichier est nécessaire pour stocker l’ensemble de l’information.
 
 
 ###### GOOGLE KEYHOLE MARKUP LANGUAGE (.KML, .KMZ) {-}
 
-- Ce format est basé sur le langage XML et est optimisé pour les navigateurs de cartographie web comme Google Maps et Google Earth. KMZ est une version compressée d’un fichier KML (KML-Zipped).
+ Ce format est basé sur le langage XML et est optimisé pour les navigateurs de cartographie web comme Google Maps et Google Earth. KMZ est une version compressée d’un fichier KML (KML-Zipped).
 
 
 ###### COVERAGE {-}
 
-> COVERAGE est le format propriétaire d’ESRI, développé pour le logiciel ArcInfo, qui a précédé le format *shapefile*. C’est une autre façon de stockée les données vectorielles qui nécessite plusieurs fichiers. Bien que ce format ne soit plus utilisé lorsque de nouvelles données vectorielles sont conçues, vous pourriez être amenés à rencontrer ce format si vous devez travailler avec des données qui précédent 1990.
+ COVERAGE est le format propriétaire d’ESRI, développé pour le logiciel ArcInfo, qui a précédé le format *shapefile*. C’est une autre façon de stockée les données vectorielles qui nécessite plusieurs fichiers. Bien que ce format ne soit plus utilisé lorsque de nouvelles données vectorielles sont conçues, vous pourriez être amenés à rencontrer ce format si vous devez travailler avec des données qui précédent 1990.
 
 
 ###### ARCINFO INTERCHANGE FILE (.EOO) {-}
 
-> C'est le format utilisé pour importer ou exporter des données d’ArcInfo. Il fonctionne comme un fichier zip et permet de partager facilement en un seul fichier les multiples fichiers et dossiers associés au format Coverage. Il permet aussi de transférer des données matricielles de format GRID.
+ C'est le format utilisé pour importer ou exporter des données d’ArcInfo. Il fonctionne comme un fichier zip et permet de partager facilement en un seul fichier les multiples fichiers et dossiers associés au format Coverage. Il permet aussi de transférer des données matricielles de format GRID.
 
 
 ###### MAPINFO INTERCHANGE FILE (.MID, .MIF) {-}
 
->  C'est le format propriétaire de MapInfo, le compétiteur d’Esri. Le format *shapefile* a supplanté le format interchange qui est de moins en moins utilisé. Le fichier MIF contient la localisation géographique et la topologie, et le fichier MID contient les attributs.
+ C'est le format propriétaire de MapInfo, le compétiteur d’Esri. Le format *shapefile* a supplanté le format interchange qui est de moins en moins utilisé. Le fichier MIF contient la localisation géographique et la topologie, et le fichier MID contient les attributs.
 
 
 ###### WEB MAP SERVICE (WMS) {-}
 
-> N’est pas un format de données mais plutôt un protocole de communication qui permet de visualiser des données spatiales qui sont logées sur un serveur. Les organisations gouvernementales ont souvent recours à cette méthode de partage de l’information spatiale car elle permet de s’assurer que les données diffusées sont toujours à jour. L’utilisateur peut jouer avec les paramètres de visualisation mais ne peut pas importer et modifier les données. Notez que ce protocole est utilisé à la fois pour les données vectorielles et les données matricielles.
+ N’est pas un format de données mais plutôt un protocole de communication qui permet de visualiser des données spatiales qui sont logées sur un serveur. Les organisations gouvernementales ont souvent recours à cette méthode de partage de l’information spatiale car elle permet de s’assurer que les données diffusées sont toujours à jour. L’utilisateur peut jouer avec les paramètres de visualisation mais ne peut pas importer et modifier les données. Notez que ce protocole est utilisé à la fois pour les données vectorielles et les données matricielles.
 
 
 
@@ -231,25 +231,25 @@ Tout comme les données vectorielles, les données matricielles peuvent être st
 
 Voici une liste non-exhaustive de formats de données matricielles.
 
-> GRID (.GRD)
+###### GRID (.GRD)
 
   GRID est le format propriétaire d’ESRI pour stocker des données matricielles.
 
 
-> TIFF AND GEOTIFF (.TIF)
+###### TIFF AND GEOTIFF (.TIF)
 
   Le Tag Image File format (TIFF) est utilisé pour le stockage d’images numériques. Il a la particularité d’être comme un contenant dans lequel plusieurs informations additionnelles sur les données peuvent être stockées (par ex. les attributs, et autres métadonnées).
 Le format GeoTIFF est un fichier .tif standard dans lequel on intègre des informations additionnelles sur la localisation spatiale des données (p. ex. la résolution, l’étendue ou le système de coordonnées géographiques).
 
 
-> COMMA SEPERATED VALUE FORTMAT (.CSV)
+###### COMMA SEPERATED VALUE FORTMAT (.CSV)
 
   Le format .csv contient du texte séparé par des virgules, et correspond à une façon simple et très répandue de représenter des données matricielles. Par exemple, un fichier .csv pourrait être constitué de trois colonnes : la première pour la coordonnée x de la cellule, la deuxième pour sa coordonnée y, et la troisième pour la valeur de l’attribut.
 
   Une autre façon d’utiliser le format .csv est d’y stocker la matrice de données sous forme d’un tableau de dimension égale à cette dernière. Chaque entrée du tableau donne la valeur d’attribut pour la cellule correspondante. Les informations sur la localisation spatiale doivent alors être fournies en en-tête du fichier.
 
 
-> BITMAP (.BMP)
+###### BITMAP (.BMP)
 
   BITMAP est le format d’images utilisé dans les applications de Microsoft Windows.
 
