@@ -114,7 +114,7 @@ Voici une liste non-exhaustive de formats de données vectorielles.
   Le fichier d’index sert à lier entre elles les informations contenues dans les autres fichiers. Il existe parfois d’autres types de fichier d’index (.sbx, .sbn). Pour visualiser un *shapefile*, il est nécessaire d’avoir tous les fichiers associés (et pas seulement le fichier .shp). Le fichier .prj peut être absent. En son absence, le shapefile peut être lu mais les données ne seront pas projetées adéquatement. Nous reviendrons sur le concept de projection plus tard dans ce module. 
   
 
-> GEODATABASE
+> GEODATABASE (.GDB)
 
   La géodatabase est le nouveau format propriétaire d’ESRI conçu pour ArcGIS. Il est de plus en plus adopté car il présente de nombreux avantages par rapport au *shapefile*. Une géodatabase est une façon de rassembler et d’organiser des données propres à un sujet ou à un projet dans une unique base de données. Elle peut contenir des données géographiques dans une large gamme de fichiers et de formats (Figure \@ref(fig:geodatabase)).
  
