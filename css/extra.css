@@ -7,3 +7,8 @@ p.caption {
 .book h5 {
   font-size: 1.25em !important;
 }
+
+.book .alert {
+  font-size: 2em;
+  color: #e31257;
+}
