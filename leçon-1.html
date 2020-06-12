@@ -116,6 +116,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+<link rel="stylesheet" href="css/extra.css" type="text/css" />
 </head>
 
 <body>
@@ -175,15 +177,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="base.html"><a href="base.html"><i class="fa fa-check"></i><b>2</b> La représentation spatiale</a><ul>
 <li class="chapter" data-level="2.1" data-path="leçon-1.html"><a href="leçon-1.html"><i class="fa fa-check"></i><b>2.1</b> Leçon</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="leçon-1.html"><a href="leçon-1.html#la-représentation-de-données-spatiales"><i class="fa fa-check"></i><b>2.1.1</b> La représentation de données spatiales</a></li>
+<li class="chapter" data-level="2.1.1" data-path="leçon-1.html"><a href="leçon-1.html#la-représentation-de-données-spatiales"><i class="fa fa-check"></i><b>2.1.1</b> La représentation de données spatiales</a><ul>
+<li class="chapter" data-level="2.1.1.1" data-path="leçon-1.html"><a href="leçon-1.html#les-données-vectorielles"><i class="fa fa-check"></i><b>2.1.1.1</b> Les données vectorielles</a></li>
+<li class="chapter" data-level="2.1.1.2" data-path="leçon-1.html"><a href="leçon-1.html#les-données-matricielles"><i class="fa fa-check"></i><b>2.1.1.2</b> Les données matricielles</a></li>
+</ul></li>
 <li class="chapter" data-level="2.1.2" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-de-coordonnées-de-référence"><i class="fa fa-check"></i><b>2.1.2</b> Les systèmes de coordonnées de référence</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="exercice-1.html"><a href="exercice-1.html"><i class="fa fa-check"></i><b>2.2</b> Exercice</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="vec.html"><a href="vec.html"><i class="fa fa-check"></i><b>3</b> Les données vectorielles</a><ul>
 <li class="chapter" data-level="3.1" data-path="leçon-2.html"><a href="leçon-2.html"><i class="fa fa-check"></i><b>3.1</b> Leçon</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="leçon-2.html"><a href="leçon-2.html#introduction-aux-données-vectorielles-sous-r"><i class="fa fa-check"></i><b>3.1.1</b> Introduction aux données vectorielles sous R</a></li>
-<li class="chapter" data-level="3.1.2" data-path="leçon-2.html"><a href="leçon-2.html#visualisation-de-shapefiles-sous-r"><i class="fa fa-check"></i><b>3.1.2</b> Visualisation de <em>shapefiles</em> sous R</a></li>
+<li class="chapter" data-level="3.1.1" data-path="leçon-2.html"><a href="leçon-2.html#introduction-aux-données-vectorielles-sous-r"><i class="fa fa-check"></i><b>3.1.1</b> Introduction aux données vectorielles sous R</a><ul>
+<li><a href="leçon-2.html#lire-un-shapefile-et-interpréter-sa-géométrie">Lire un <em>shapefile</em> et interpréter sa géométrie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1.2" data-path="leçon-2.html"><a href="leçon-2.html#visualisation-de-shapefiles-sous-r"><i class="fa fa-check"></i><b>3.1.2</b> Visualisation de <em>shapefiles</em> sous R</a><ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#visualiser-des-données-vectorielles"><i class="fa fa-check"></i>Visualiser des données vectorielles</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#visualiser-des-données-vectorielles-par-attribut"><i class="fa fa-check"></i>Visualiser des données vectorielles par attribut</a></li>
+<li><a href="leçon-2.html#visualiser-plusieurs-shapefiles">Visualiser plusieurs <em>shapefiles</em></a></li>
+</ul></li>
 <li class="chapter" data-level="3.1.3" data-path="leçon-2.html"><a href="leçon-2.html#reprojection-de-données-vectorielles-sous-r"><i class="fa fa-check"></i><b>3.1.3</b> Reprojection de données vectorielles sous R</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="exercice-2.html"><a href="exercice-2.html"><i class="fa fa-check"></i><b>3.2</b> Exercice</a></li>
@@ -325,15 +336,14 @@ Figure 2.6: Exemples de relations spatiales entre deux entités spatiales : a) a
 <p>Les données vectorielles peuvent être stockées dans une grande variété de formats différents. Ces formats ont évolué et continuent d’évoluer en fonction des besoins et des avancées technologiques. Plusieurs formats ont été développés pour être utilisés avec des logiciels commerciaux mais peuvent être lus et parfois édités par d’autres logiciels.</p>
 <p>Peu importe leur format, les données vectorielles sont toujours organisées selon une <em>base de données relationnelle</em>. Un identifiant désigne chaque objet spatial et l’associe à une géométrie et à un ou plusieurs attributs (Tableau <a href="leçon-1.html#fig:baserelationnelle">2.7</a>).</p>
 <div class="figure" style="text-align: left"><span id="fig:baserelationnelle"></span>
-<img src="Module2/images/2_baserelationnelle.png" alt="Exemple d’une base de données relationnelle pour la carte des régions administratives du Québec (Figure ref(fig:vectomat)a). Chaque objet vectoriel dans la carte correspond à une ligne dans la base de données où figurent les attributs qui lui sont associés" width="100%" />
+<img src="Module2/images/2_baserelationnelle.png" alt="Exemple d’une base de données relationnelle pour la carte des régions administratives du Québec (Figure \@ref(fig:vectomat)a). Chaque objet vectoriel dans la carte correspond à une ligne dans la base de données où figurent les attributs qui lui sont associés" width="100%" />
 <p class="caption">
-Figure 2.7: Exemple d’une base de données relationnelle pour la carte des régions administratives du Québec (Figure ref(fig:vectomat)a). Chaque objet vectoriel dans la carte correspond à une ligne dans la base de données où figurent les attributs qui lui sont associés
+Figure 2.7: Exemple d’une base de données relationnelle pour la carte des régions administratives du Québec (Figure <a href="leçon-1.html#fig:vectomat">2.1</a>a). Chaque objet vectoriel dans la carte correspond à une ligne dans la base de données où figurent les attributs qui lui sont associés
 </p>
 </div>
 <p>Voici une liste non-exhaustive de formats de données vectorielles.</p>
-<blockquote>
-<p>SHAPEFILE (.SHP, .DBF, .PRJ, .SHX)</p>
-</blockquote>
+<div id="shapefile-.shp-.dbf-.prj-.shx" class="section level6 unnumbered">
+<h6>SHAPEFILE (.SHP, .DBF, .PRJ, .SHX)</h6>
 <p>Le <em>shapefile</em> est un format propriétaire d’ESRI créé pour les logiciels ArcView et ArcGIS. En français, on le nomme aussi un fichier de forme. À ce jour, il est le format le plus couramment utilisé pour les données vectorielles. Il est devenu un standard tant pour les plateformes commerciales qu’opensource.</p>
 <p>Un <em>shapefile</em> comprend entre quatre types de fichiers qui contiennent des informations différentes et toutes essentielles à sa représentation.</p>
 <ul>
@@ -343,9 +353,9 @@ Figure 2.7: Exemple d’une base de données relationnelle pour la carte des ré
 <li>.shx : fichier d’index</li>
 </ul>
 <p>Le fichier d’index sert à lier entre elles les informations contenues dans les autres fichiers. Il existe parfois d’autres types de fichier d’index (.sbx, .sbn). Pour visualiser un <em>shapefile</em>, il est nécessaire d’avoir tous les fichiers associés (et pas seulement le fichier .shp). Le fichier .prj peut être absent. En son absence, le shapefile peut être lu mais les données ne seront pas projetées adéquatement. Nous reviendrons sur le concept de projection plus tard dans ce module.</p>
-<blockquote>
-<p>GEODATABASE (.GDB)</p>
-</blockquote>
+</div>
+<div id="geodatabase-.gdb" class="section level6 unnumbered">
+<h6>GEODATABASE (.GDB)</h6>
 <p>La géodatabase est le nouveau format propriétaire d’ESRI conçu pour ArcGIS. Il est de plus en plus adopté car il présente de nombreux avantages par rapport au <em>shapefile</em>. Une géodatabase est une façon de rassembler et d’organiser des données propres à un sujet ou à un projet dans une unique base de données. Elle peut contenir des données géographiques dans une large gamme de fichiers et de formats (Figure <a href="leçon-1.html#fig:geodatabase">2.8</a>).</p>
 <div class="figure" style="text-align: left"><span id="fig:geodatabase"></span>
 <img src="Module2/images/2_geodatabase.PNG" alt="Illustration d’une géodatabase telle que représentée sur le site web d’ArcGIS. Image récupérée à : https://desktop.arcgis.com/fr/arcmap/10.3/manage-data/geodatabases/a-quick-tour-of-the-geodatabase.htm" width="50%" />
@@ -356,30 +366,31 @@ Figure 2.8: Illustration d’une géodatabase telle que représentée sur le sit
 <p>Par exemple, un projet sur le réseau de transport d’électricité au Québec pourrait nécessiter l’utilisation de plusieurs <em>shapefiles</em> (position des centrales, position des pylônes, parcours des câbles, etc.) et aussi plusieurs données matricielles (topographie, végétation, etc.). Ainsi, il s’avère beaucoup plus efficace d’avoir l’ensemble de ces données au sein d’une même base.</p>
 <p>De plus, une géodatabase peut être utilisée par de multiples utilisateurs, ce qui est fort utile pour assurer le partage efficace, la mise à jour, et la cohérence des données géographiques au sein de grandes organisations, comme des entreprises ou des ministères.</p>
 <p>Malheureusement, bien que les géodatabases peuvent être lues avec <code>R</code>, elles peuvent seulement être modifiées dans ArcGIS.</p>
-<blockquote>
-<p>GEOGRAPHIC JAVASCRIPT OBJECT NOTATION (.GEOJSON, .JSON)</p>
-</blockquote>
+</div>
+<div id="geographic-javascript-object-notation-.geojson-.json" class="section level6 unnumbered">
+<h6>GEOGRAPHIC JAVASCRIPT OBJECT NOTATION (.GEOJSON, .JSON)</h6>
 <p>Le format geoJSON est un format standard ouvert très utilisé en cartographie web. geoJSON est une extension du format JSON pour les données géographiques. Un fichier geoJSON contient les coordonnées des données géospatiales ainsi que d’autres informations sur les attributs. Un seul fichier est nécessaire pour stocker l’ensemble de l’information.</p>
-<blockquote>
-<p>GOOGLE KEYHOLE MARKUP LANGUAGE (.KML, .KMZ)</p>
-</blockquote>
+</div>
+<div id="google-keyhole-markup-language-.kml-.kmz" class="section level6 unnumbered">
+<h6>GOOGLE KEYHOLE MARKUP LANGUAGE (.KML, .KMZ)</h6>
 <p>Ce format est basé sur le langage XML et est optimisé pour les navigateurs de cartographie web comme Google Maps et Google Earth. KMZ est une version compressée d’un fichier KML (KML-Zipped).</p>
-<blockquote>
-<p>COVERAGE</p>
-</blockquote>
+</div>
+<div id="coverage" class="section level6 unnumbered">
+<h6>COVERAGE</h6>
 <p>COVERAGE est le format propriétaire d’ESRI, développé pour le logiciel ArcInfo, qui a précédé le format <em>shapefile</em>. C’est une autre façon de stockée les données vectorielles qui nécessite plusieurs fichiers. Bien que ce format ne soit plus utilisé lorsque de nouvelles données vectorielles sont conçues, vous pourriez être amenés à rencontrer ce format si vous devez travailler avec des données qui précédent 1990.</p>
-<blockquote>
-<p>ARCINFO INTERCHANGE FILE (.EOO)</p>
-</blockquote>
+</div>
+<div id="arcinfo-interchange-file-.eoo" class="section level6 unnumbered">
+<h6>ARCINFO INTERCHANGE FILE (.EOO)</h6>
 <p>C’est le format utilisé pour importer ou exporter des données d’ArcInfo. Il fonctionne comme un fichier zip et permet de partager facilement en un seul fichier les multiples fichiers et dossiers associés au format Coverage. Il permet aussi de transférer des données matricielles de format GRID.</p>
-<blockquote>
-<p>MAPINFO INTERCHANGE FILE (.MID, .MIF)</p>
-</blockquote>
+</div>
+<div id="mapinfo-interchange-file-.mid-.mif" class="section level6 unnumbered">
+<h6>MAPINFO INTERCHANGE FILE (.MID, .MIF)</h6>
 <p>C’est le format propriétaire de MapInfo, le compétiteur d’Esri. Le format <em>shapefile</em> a supplanté le format interchange qui est de moins en moins utilisé. Le fichier MIF contient la localisation géographique et la topologie, et le fichier MID contient les attributs.</p>
-<blockquote>
-<p>WEB MAP SERVICE (WMS)</p>
-</blockquote>
+</div>
+<div id="web-map-service-wms" class="section level6 unnumbered">
+<h6>WEB MAP SERVICE (WMS)</h6>
 <p>N’est pas un format de données mais plutôt un protocole de communication qui permet de visualiser des données spatiales qui sont logées sur un serveur. Les organisations gouvernementales ont souvent recours à cette méthode de partage de l’information spatiale car elle permet de s’assurer que les données diffusées sont toujours à jour. L’utilisateur peut jouer avec les paramètres de visualisation mais ne peut pas importer et modifier les données. Notez que ce protocole est utilisé à la fois pour les données vectorielles et les données matricielles.</p>
+</div>
 </div>
 </div>
 <div id="les-données-matricielles" class="section level4">
@@ -452,26 +463,26 @@ Figure 2.15: Image satellitaire de région de l’Estrie. Le raster multi-bande 
 <h5>Format des données matricielles</h5>
 <p>Tout comme les données vectorielles, les données matricielles peuvent être stockées dans une grande variété de formats différents. Les images possèdent des structures matricielles, ainsi les formats bien connus pour la transmission d’images sur le Web, .jpg (Joint Photographic Experts Group), .gif (Graphics Interchange Format), et .png (Portable Network Graphics), sont des exemples de format de données matricielles.</p>
 <p>Voici une liste non-exhaustive de formats de données matricielles.</p>
-<blockquote>
-<p>GRID (.GRD)</p>
-</blockquote>
+<div id="grid-.grd" class="section level6">
+<h6><span class="header-section-number">2.1.1.2.0.1</span> GRID (.GRD)</h6>
 <p>GRID est le format propriétaire d’ESRI pour stocker des données matricielles.</p>
-<blockquote>
-<p>TIFF AND GEOTIFF (.TIF)</p>
-</blockquote>
+</div>
+<div id="tiff-and-geotiff-.tif" class="section level6">
+<h6><span class="header-section-number">2.1.1.2.0.2</span> TIFF AND GEOTIFF (.TIF)</h6>
 <p>Le Tag Image File format (TIFF) est utilisé pour le stockage d’images numériques. Il a la particularité d’être comme un contenant dans lequel plusieurs informations additionnelles sur les données peuvent être stockées (par ex. les attributs, et autres métadonnées).
 Le format GeoTIFF est un fichier .tif standard dans lequel on intègre des informations additionnelles sur la localisation spatiale des données (p. ex. la résolution, l’étendue ou le système de coordonnées géographiques).</p>
-<blockquote>
-<p>COMMA SEPERATED VALUE FORTMAT (.CSV)</p>
-</blockquote>
+</div>
+<div id="comma-seperated-value-fortmat-.csv" class="section level6">
+<h6><span class="header-section-number">2.1.1.2.0.3</span> COMMA SEPERATED VALUE FORTMAT (.CSV)</h6>
 <p>Le format .csv contient du texte séparé par des virgules, et correspond à une façon simple et très répandue de représenter des données matricielles. Par exemple, un fichier .csv pourrait être constitué de trois colonnes : la première pour la coordonnée x de la cellule, la deuxième pour sa coordonnée y, et la troisième pour la valeur de l’attribut.</p>
 <p>Une autre façon d’utiliser le format .csv est d’y stocker la matrice de données sous forme d’un tableau de dimension égale à cette dernière. Chaque entrée du tableau donne la valeur d’attribut pour la cellule correspondante. Les informations sur la localisation spatiale doivent alors être fournies en en-tête du fichier.</p>
-<blockquote>
-<p>BITMAP (.BMP)</p>
-</blockquote>
+</div>
+<div id="bitmap-.bmp" class="section level6">
+<h6><span class="header-section-number">2.1.1.2.0.4</span> BITMAP (.BMP)</h6>
 <p>BITMAP est le format d’images utilisé dans les applications de Microsoft Windows.</p>
 <p>De plus, comme expliqué plus haut, la géodatabase et Web Map Service sont aussi utilisés pour les données matricielles.</p>
 <p>Peu importe le type de données spatiales et le format utilisé pour les stocker, les données spatiales sont souvent accompagnées de <strong>métadonnées</strong>. Les métadonnées sont les données sur les données. C’est-à-dire qu’elles viennent donner des informations supplémentaires pour faciliter la compréhension et l’utilisation des données spatiales (p. ex. l’origine des données, l’auteur.e, les détails sur la structure, le lexique, les abréviations, la légende, etc.). Idéalement, tout ensemble de données devrait être accompagné de métadonnées.</p>
+</div>
 </div>
 </div>
 </div>
