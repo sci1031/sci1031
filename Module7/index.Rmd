@@ -1,4 +1,4 @@
-# La manipulation de données matricielles {#map_mat}
+# La manipulation de données vectorielles {#map_vec}
 
 
 L'objectif principal de ce module est
@@ -23,7 +23,7 @@ Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries7, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries6, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
 library(ggplot2)
@@ -38,14 +38,17 @@ library(ggpubr)
 
 ### Opérations de base
 
--	Création d’un raster, création d’un raster multi-couches, opérations mathématiques et statistiques élémentaires.
+-	Supprimer des champs, ajouter des champs, modifier des valeurs de champs, trier la table des attributs.
 
-### Opération sur un raster
+### Opération sur une couche vectorielle
 
--	Extraction d’un sous-ensemble de données, suppression de données, modification de données, changement de position
+-	Jointure par identifiant, suppression de données, extraction par attributs, dissolution de polygones.
 
-### Opération sur plusieurs rasters
+### Opération sur plusieurs couches vectorielles
 
--	Combinaison de rasters, jointure spatiale, intersection de couches, découpage d’une couche.
+-	Combinaison de couches, jointure spatiale, intersection de couches, découpage d’une couche.
+
 
 ## Exercice
+
+

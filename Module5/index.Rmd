@@ -1,4 +1,4 @@
-# La cartographie {#carto}
+# Les données matricielles {#mat}
 
 
 L'objectif principal de ce module est
@@ -23,7 +23,7 @@ Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries5, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries4, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
 library(ggplot2)
@@ -33,20 +33,32 @@ library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour le
 library(ggpubr)
 ```
 
+
 ## Leçon
 
-### Cartographie d’objets vectoriels
+### Introduction aux données matricielles sous R
 
-- Carte de base (graticules, échelle, rose des vents, légende, titre).
+- Lire et explorer les attributs d’un raster
+-	Comprendre le SCR
+-	Gérer les données manquantes et les mauvaises données
+-	Raster mono-bande et multi-bande
+-	Écrire des données matricielles
 
-### Cartographie d’objets matriciels
+### Visualisation de rasters sous R
 
--	Carte de base, rampe de couleurs.
+-	Utiliser ggplot pour visualiser les rasters
+-	Visualiser plusieurs couches matricielles
+- Visualiser des données matricielles et vectorielles au sein d’une même figure
 
-### Cartographie en ligne
+### Reprojection de données matricielles sous R
 
--	GoogleMap
--	Leaflet
--	OpenStreetMap
+-	Manipuler le SCR
+-	Manipuler la résolution
+
+### Manipulation de rasters multi-bande sous R
+
+-	Visualiser des rasters multi-bande
+-	Manipuler des objets RasterStack
+-	Manipuler des objets RasterBrick
 
 ## Exercice
