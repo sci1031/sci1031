@@ -1,4 +1,4 @@
-# La manipulation de données vectorielles {#map_vec}
+# La cartographie {#carto}
 
 
 L'objectif principal de ce module est
@@ -23,7 +23,7 @@ Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries6, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries5, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
 library(ggplot2)
@@ -33,22 +33,20 @@ library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour le
 library(ggpubr)
 ```
 
-
 ## Leçon
 
-### Opérations de base
+### Cartographie d’objets vectoriels
 
--	Supprimer des champs, ajouter des champs, modifier des valeurs de champs, trier la table des attributs.
+- Carte de base (graticules, échelle, rose des vents, légende, titre).
 
-### Opération sur une couche vectorielle
+### Cartographie d’objets matriciels
 
--	Jointure par identifiant, suppression de données, extraction par attributs, dissolution de polygones.
+-	Carte de base, rampe de couleurs.
 
-### Opération sur plusieurs couches vectorielles
+### Cartographie en ligne
 
--	Combinaison de couches, jointure spatiale, intersection de couches, découpage d’une couche.
-
+-	GoogleMap
+-	Leaflet
+-	OpenStreetMap
 
 ## Exercice
-
-

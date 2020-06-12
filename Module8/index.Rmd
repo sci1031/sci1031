@@ -1,4 +1,4 @@
-# Les données spatiotemporelles {#spatiotemp}
+# La manipulation de données matricielles {#map_mat}
 
 
 L'objectif principal de ce module est
@@ -23,7 +23,7 @@ Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries8, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries7, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
 library(ggplot2)
@@ -36,21 +36,16 @@ library(ggpubr)
 
 ## Leçon
 
-### Propriétés des données spatiotemporelles
+### Opérations de base
 
-### Introduction à la librairie R spacetime
+-	Création d’un raster, création d’un raster multi-couches, opérations mathématiques et statistiques élémentaires.
 
--	Classes de données spatiotemporelles
--	Création d’objet ST
--	Manipulation de bases de données spatiotemporelles
+### Opération sur un raster
 
-### Visualisation
+-	Extraction d’un sous-ensemble de données, suppression de données, modification de données, changement de position
 
--	Figure à panneaux multiples
--	Figure espace-temps
--	Figure animée
+### Opération sur plusieurs rasters
 
-
+-	Combinaison de rasters, jointure spatiale, intersection de couches, découpage d’une couche.
 
 ## Exercice
-

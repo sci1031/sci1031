@@ -1,4 +1,4 @@
-# L'analyse de données spatiales {#analyse}
+# Les données spatiotemporelles {#spatiotemp}
 
 
 L'objectif principal de ce module est
@@ -23,7 +23,7 @@ Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries9, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries8, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
 library(ggplot2)
@@ -36,18 +36,19 @@ library(ggpubr)
 
 ## Leçon
 
-### Distance
+### Propriétés des données spatiotemporelles
 
--	Distance entre des points, distance entre des cellules, matrice de distance, distance pour les coordonnées angulaires.
+### Introduction à la librairie R spacetime
 
-### Configuration spatiale
+-	Classes de données spatiotemporelles
+-	Création d’objet ST
+-	Manipulation de bases de données spatiotemporelles
 
--	Proximité, plus proche voisin, frontière, superficie, connectivité, inclusion, zones tampons, matrice de résistance.
+### Visualisation
 
-### Autocorrélation spatiale
-
--	Covariance et correlation, autocorrelation temporelle et spatiale, indice de Moran.
-
+-	Figure à panneaux multiples
+-	Figure espace-temps
+-	Figure animée
 
 
 
