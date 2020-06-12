@@ -31,7 +31,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `st_transform()`
 - `ggarrange()`
 
-Dans la section Leçon, vous utiliserez des données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes. 
+Dans la section Leçon, vous utiliserez des données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes.
 
 Dans la section Exercice, vous utiliserez XXXXX
 
@@ -211,7 +211,7 @@ ggtitle("Limites terrestres de l'île de Montréal")
 La fonction `geom_sf()` permet de faire des représentations simples d'objets vectoriels de géométrie de type point, ligne et polygone.
 Cette fonction peut prendre plusieurs arguments^[Pour plus d'information sur la fonction `geom_sf`, consultez le chapitre [Visualise sf objects](https://ggplot2.tidyverse.org/reference/ggsf.html) [@Wickham_ggplot2_2016]]. Les arguments utilisés ici sont:
 
-- les données (`data`) 
+- les données (`data`)
 - la taille du trait avec laquelle on illustre l'objet (`size`)
 - la couleur du trait, et la couleur de la surface délimitée par le trait (`color`).
 
@@ -244,9 +244,10 @@ ggtitle("Accidents de la route avec cyclistes sur l'île de Montréal")
 
 Le symbole utilisé pour illustrer la position des accidents est défini par l'argument `pch = 19`. Il existe 25 formats de points différents prédéfinis dans `R`. Les voici:
 
-```{r plot-symbols, echo=FALSE,fig.cap="Symboles disponibles", out.width = '50%'}
+```{r plot-symbols, echo=FALSE, fig.cap="Symboles disponibles", out.width = '50%'}
 knitr::include_graphics('Module3/3_symbolesR.png')
 ```
+
 
 L'argument `cex`, quant à lui, indique le facteur par lequel la taille du symbole sera augmentée ou réduite par rapport à 1, la valeur par défaut. Par exemple, 'cex = 1.5' indique que le symbole sera 50% plus grand, alors que 0.5 indique que le symbole sera 50% plus petit.
 
