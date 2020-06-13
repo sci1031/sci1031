@@ -1,4 +1,4 @@
-# Les données matricielles {#mat}
+# Données matricielles {#mat}
 
 
 L'objectif principal de ce module est

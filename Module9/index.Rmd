@@ -1,4 +1,4 @@
-# Les données spatiotemporelles {#spatiotemp}
+# Données spatiotemporelles {#spatiotemp}
 
 
 L'objectif principal de ce module est
