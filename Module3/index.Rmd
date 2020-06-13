@@ -1,4 +1,4 @@
-# Les systèmes de coordonnées de référence {#SRC}
+# Systèmes de coordonnées de référence {#SRC}
 
 
 

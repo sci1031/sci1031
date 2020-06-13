@@ -1,26 +1,28 @@
-# La représentation spatiale {#base}
+# Modèles de données spatiales {#base}
 
 
 
-Ce module s’intéresse à la façon dont nous représentons les phénomènes spatiaux se déroulant à la surface de la Terre par des données spatiales. Les objectifs principaux sont de connaître les propriétés des deux types de données spatiales, les données vectorielles et les données matricielles, et de savoir interpréter le système de coordonnées de référence de données spatiales.
+Ce module s’intéresse à la façon dont nous représentons les phénomènes spatiaux se déroulant à la surface de la Terre par des données spatiales. Les objectifs principaux sont de connaître les propriétés des deux types de modèle de données spatiales, les données vectorielles et les données matricielles. 
 
-À la fin de ce module vous saurez:
+À la fin de ce module vous saurez :
 
 -	Définir les propriétés principales des données vectorielles.
 -	Reconnaître des formats de fichier de données vectorielles.
 -	Définir les propriétés principales des données matricielles.
 -	Reconnaître des formats de fichier de données matricielles.
--	Expliquer ce qu’est un référentiel géographique.
+-	Comprendre ce qu’est une structure en couches.
 
+ 
 
+La section [Exercice](#ex_base) est divisée en deux parties. 
+Dans un premier temps, vous réaliserez une auto-évaluation pour vérifier votre acquisition des connaissances enseignées dans ce module. 
 
-Dans la section Exercice, vous réaliserez une auto-évaluation pour vérifier votre acquisition des connaissances enseignées dans ce module.
+Dans un second temps, vous apprendrez à utiliser R Markdown.
+
 
 
 ## Leçon
 
-
-### La représentation de données spatiales
 
 Les phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout mais qui ne possèdent pas de frontières naturelles^[Repris de l'introduction aux données spatiales du site [Spatial Data Science](https://rspatial.org/raster/spatial/2-spatialdata.html).]. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes (\@ref(fig:vectomat)a). D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux (\@ref(fig:vectomat)b).
 
@@ -32,13 +34,13 @@ knitr::include_graphics('Module2/images/2_vecto_vs_mat.png')
 Les entités spatiales (ou objets) sont habituellement représentés par ce qu’on appelle des données vectorielles (« vector data », en anglais), alors que les phénomènes continues sont habituellement représentés par des données matricielles (« raster data », en anglais).  Ces deux modèles sont des façons bien différentes de percevoir et de représenter les phénomènes spatiaux. Nous les décrivons dans les deux sous-sections suivantes.
 
 
-#### Les données vectorielles
+### Les données vectorielles
 
 ##### Définition {-}
 
 Les données vectorielles sont utilisées pour représenter des entités spatiales dont les frontières sont explicites et qui possède une localisation précise et unique. Les données vectorielles sont définies par leur localisation géographique, leur géométrie, et un ou plusieurs attributs.
 
-La **localisation géographique** désigne l’emplacement de l’entité selon un système de coordonnées géographiques  ou un système de coordonnées projetées. Un système de coordonnées géographiques utilise un système en trois dimensions pour donner la position (x,y,z) ou longitude et latitude d’une entité spatiale sur la surface sphérique de la Terre. Un système de coordonnées projetées, donne la position d’une entité spatiale sur une surface plane à deux dimensions. Nous reviendrons sur les systèmes de coordonnées de référence à la section 2.1.3.
+La **localisation géographique** désigne l’emplacement de l’entité selon un système de coordonnées géographique ou un système de coordonnées projeté. Un système de coordonnées géographique utilise un système en trois dimensions pour donner la position (x,y,z) ou longitude et latitude d’une entité spatiale sur la surface sphérique de la Terre. Un système de coordonnées projeté, donne la position d’une entité spatiale sur une surface plane à deux dimensions. Nous reviendrons sur les systèmes de coordonnées de référence à la section 2.1.3.
 
 La **géométrie** d’une entité spatiale correspond à sa forme (« shape », en anglais). Il existe trois principaux types de géométrie, aussi appelées des classes : les points, les lignes, et les polygones  (Tableau \@ref(fig:geometriesimple)). Ces classes peuvent être combinées pour créer des géométries plus complexes; des multipoints, des multilignes, des multipolygones, etc.
 
@@ -162,7 +164,7 @@ knitr::include_graphics('Module2/images/2_geodatabase.PNG')
 
 
 
-#### Les données matricielles
+### Les données matricielles
 
 ##### Définition {-}
 
@@ -183,7 +185,7 @@ knitr::include_graphics('Module2/images/2_raster_table.png')
 
 Dans leur format le plus simple, les données matricielles prennent la forme d’une image digitale. Cependant, pour associer les données matricielles à une location particulière sur la surface de la Terre, des informations spatiales doivent être ajoutées. Ainsi, un fichier de données matricielles géospatiales débute toujours par une section, appelée le «header» en anglais, qui procure la localisation.
 
-La localisation pour des données matricielles est définie par **l’étendue spatiale** (« extent » en anglais) couverte par la matrice, la **dimension** des cellules, le **nombre de rangées et de colonnes** qui divisent la superficie (respectivement « rows » et « columns » en anglais), et le **système de coordonnées géographiques  ou projetées**.  La dimension des cellules correspond à la résolution spatiale et peut être calculée à partir de l’étendue et du nombre de rangées et de colonnes.
+La localisation pour des données matricielles est définie par **l’étendue spatiale** (« extent » en anglais) couverte par la matrice, la **dimension** des cellules, le **nombre de rangées et de colonnes** qui divisent la superficie (respectivement « rows » et « columns » en anglais), et le **système de coordonnées géographique  ou projeté**.  La dimension des cellules correspond à la résolution spatiale et peut être calculée à partir de l’étendue et du nombre de rangées et de colonnes.
 
 ##### Résolution et géométrie {-}
 
@@ -216,7 +218,7 @@ knitr::include_graphics('Module2/images/2_binaire.png')
 
 D’autres rasters peuvent contenir plusieurs couches, appelées aussi des bandes (ou canaux). Par exemple, les images de couleurs contiennent souvent trois bandes: une bande de rouge, une bande de vert et une bande de bleu. C’est ce qu’on nomme le format RGB (pour « red », « green », et « blue »). Ces bandes font références à des sections du spectre électromagnétique captées lors de la prise de l’image (Figure \@ref(fig:electro)).
 
-```{r electro, fig.align='left', echo=FALSE,fig.cap="*Raster* multibande. Les bandes blues, vertes et rouges correspondent à des sections du spectre électromagnétique. Image récupérée à https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/raster-bands.htm.", out.width = '50%'}
+```{r electro, fig.align='left', echo=FALSE,fig.cap="*Raster* multibande. Les bandes blues, vertes et rouges correspondent à des sections du spectre électromagnétique. Source: Esri. Image récupérée à https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/raster-bands.htm.", out.width = '50%'}
 knitr::include_graphics('Module2/images/2_electromagnetic_spectrum.png')
 ```
 
@@ -233,25 +235,25 @@ Tout comme les données vectorielles, les données matricielles peuvent être st
 
 Voici une liste non-exhaustive de formats de données matricielles.
 
-###### GRID (.GRD)
+###### GRID (.GRD) {-}
 
   GRID est le format propriétaire d’ESRI pour stocker des données matricielles.
 
 
-###### TIFF AND GEOTIFF (.TIF)
+###### TIFF AND GEOTIFF (.TIF) {-}
 
   Le Tag Image File format (TIFF) est utilisé pour le stockage d’images numériques. Il a la particularité d’être comme un contenant dans lequel plusieurs informations additionnelles sur les données peuvent être stockées (par ex. les attributs, et autres métadonnées).
-Le format GeoTIFF est un fichier .tif standard dans lequel on intègre des informations additionnelles sur la localisation spatiale des données (p. ex. la résolution, l’étendue ou le système de coordonnées géographiques).
+Le format GeoTIFF est un fichier .tif standard dans lequel on intègre des informations additionnelles sur la localisation spatiale des données (p. ex. la résolution, l’étendue ou le système de coordonnées).
 
 
-###### COMMA SEPERATED VALUE FORTMAT (.CSV)
+###### COMMA SEPERATED VALUE FORTMAT (.CSV) {-}
 
   Le format .csv contient du texte séparé par des virgules, et correspond à une façon simple et très répandue de représenter des données matricielles. Par exemple, un fichier .csv pourrait être constitué de trois colonnes : la première pour la coordonnée x de la cellule, la deuxième pour sa coordonnée y, et la troisième pour la valeur de l’attribut.
 
   Une autre façon d’utiliser le format .csv est d’y stocker la matrice de données sous forme d’un tableau de dimension égale à cette dernière. Chaque entrée du tableau donne la valeur d’attribut pour la cellule correspondante. Les informations sur la localisation spatiale doivent alors être fournies en en-tête du fichier.
 
 
-###### BITMAP (.BMP)
+###### BITMAP (.BMP) {-}
 
   BITMAP est le format d’images utilisé dans les applications de Microsoft Windows.
 
@@ -262,7 +264,15 @@ De plus, comme expliqué plus haut, la géodatabase et Web Map Service sont auss
 Peu importe le type de données spatiales et le format utilisé pour les stocker, les données spatiales sont souvent accompagnées de **métadonnées**. Les métadonnées sont les données sur les données. C’est-à-dire qu’elles viennent donner des informations supplémentaires pour faciliter la compréhension et l’utilisation des données spatiales (p. ex. l’origine des données, l’auteur.e, les détails sur la structure, le lexique, les abréviations, la légende, etc.). Idéalement, tout ensemble de données devrait être accompagné de métadonnées.
 
 
-### Les systèmes de coordonnées de référence
--	Coordonnées angulaires, projections, notations.
+### Structure en couches
 
-## Exercice
+Lorsque nous travaillons avec des données spatiales, il est fréquent de devoir combiner des données représentant des phénomènes spatiaux distincts. Nous devons alors utiliser une structure en couches. Une **couche** de donnée réfère à un thème spécifique (par ex. topographie, végétation, ou réseau routier) et contient un seul modèle de données (matricielles ou vectorielles) (Figure \@ref(fig:couches)). 
+
+
+```{r couches, fig.align='left', echo=FALSE,fig.cap="Représentation de données spatiales par la superposition de couches thématiques. Source: Esri. Image récupérée à https://desktop.arcgis.com/fr/arcmap/10.3/guide-books/map-projections/what-are-map-projections.htm", out.width = '80%'}
+knitr::include_graphics('Module2/images/2_couches.png')
+```
+
+La superposition de couches permet de visualiser les relations spatiales entre les données de différentes thématiques (Auda, 2018). Il est primordial que chaque couche de données utilise le même système de coordonnées de référence lorsqu’elles sont superposées. Le [module 3](#SRC) portera spécifiquement sur cette notion.
+
+## Exercice {#ex_base}

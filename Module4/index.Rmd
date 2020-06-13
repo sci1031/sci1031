@@ -1,5 +1,5 @@
 
-# Les données vectorielles {#vec}
+# Données vectorielles {#vec}
 
 
 L'objectif principal de ce module est d'apprendre à lire, interpréter et visualiser des données vectorielles^[L’ensemble du matériel disponible dans ce module est adapté du cours *Introduction to Geospatial Raster and Vector Data with R* [@Data_Carpentry_IntroGeospatial] de l’organisme [Data Carpentry](https://datacarpentry.org/).  Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.]

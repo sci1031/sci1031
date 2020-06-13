@@ -1,4 +1,4 @@
-# La manipulation de données vectorielles {#map_vec}
+# Manipulation de données vectorielles {#map_vec}
 
 
 L'objectif principal de ce module est
