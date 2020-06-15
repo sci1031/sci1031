@@ -1,4 +1,4 @@
-# Manipulation de données matricielles {#map_mat}
+# Manipulation de données matricielles {#manip_mat}
 
 
 L'objectif principal de ce module est
