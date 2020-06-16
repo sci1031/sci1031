@@ -262,7 +262,7 @@ knitr::include_graphics('Module3/images/3_UTM_Quebec.png')
 ```
 
 
-Pour réduire les problèmes liés aux déformations associées au système UTM, le Québec s’est doté de son propre système : la **projection modifiée transverse de Mercator** (MTM). Le système MTM est identique au système UTM à la différence que chaque zone couvre une longitude de 3o. Les zones étant plus petites, les distorsions sont réduites. Les zones sont numérotées de 1 à 8 débutant aux Iles-de-la-Madeleine et se terminant en Abitibi (Figure \@ref(fig:MTMQuebec). On associe au méridien central des zones MTM la longitude de 304800 m. 
+Pour réduire les problèmes liés aux déformations associées au système UTM, le Québec s’est doté de son propre système : la **projection modifiée transverse de Mercator** (MTM). Le système MTM est identique au système UTM à la différence que chaque zone couvre une longitude de 3o. Les zones étant plus petites, les distorsions sont réduites. Les zones sont numérotées de 1 à 8 débutant aux Iles-de-la-Madeleine et se terminant en Abitibi (Figure \@ref(fig:MTMQuebec)). On associe au méridien central des zones MTM la longitude de 304800 m. 
  
 ```{r MTMQuebec, fig.align='left', echo=FALSE,fig.cap="Projection Mercator Transverse Modifiée au Québec. Source:[@Lapointe2005]", out.width = '50%'}
 knitr::include_graphics('Module3/images/3_MTM_Quebec.png')
@@ -277,7 +277,7 @@ La **projection conique conforme de Lambert** (LCC) conserve, comme son nom l’
 knitr::include_graphics('Module3/images/3_LCC.png')
 ```
 
-La position des parallèles standards varie selon la région du globe représentée. Au Canada, elles sont généralement situées à 49 N et 77 N. La carte ci-dessous (Figure \@ref(fig:LCCCanada))du Canada utilise une projection LCC pour présenter les résultats des élections fédérales 2019.
+La position des parallèles standards varie selon la région du globe représentée. Au Canada, elles sont généralement situées à 49 N et 77 N. La carte ci-dessous du Canada (Figure \@ref(fig:LCCCanada)) utilise une projection LCC pour présenter les résultats des élections fédérales 2019.
 
 ```{r LCCCanada, fig.align='left', echo=FALSE,fig.cap="Un exemple de projection conique de Lambert. La carte des résultats des élections fédérales canadiennes de 2019. Source : Élections Canada.", out.width = '60%'}
 knitr::include_graphics('Module3/images/3_LCC_Canada.png')
@@ -307,7 +307,7 @@ Ou encore:
 La figure ci-dessous (Figure \@ref(fig:Resume)) résume les étapes du processus utilisé pour définir un système de coordonnées géographique et un système de coordonnées projeté.
 
 ```{r Resume, fig.align='left', echo=FALSE,fig.cap="Résumé. Les étapes du processus pour définir un système de coordonnées géographique et un système de coordonnées projeté. Source : la figure utilise des pictogrammes créés par T. Grajecta (Noun Project)", out.width = '80%'}
-knitr::include_graphics('Module3/images/3_Resume.png')
+knitr::include_graphics('Module3/images/3_resume.png')
 ```
 
 
