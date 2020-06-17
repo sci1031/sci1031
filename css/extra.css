@@ -1,13 +1,9 @@
-.book h5 {
-  font-size: 1.25em !important;
-}
-
-.book p {
-  margin-bottom: 18px !important;
-}
-
 p.caption {
   font-size: .9em;
    margin-top: 8px !important;
-   margin-bottom: 22px !important;
+   margin-bottom: 8px !important;
+}
+
+.book h5 {
+  font-size: 1.25em !important;
 }
