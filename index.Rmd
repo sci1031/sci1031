@@ -1,6 +1,6 @@
---- 
+---
 title: "SCI 1031 Visualisation et analyse de données spatiales sous R"
-author: 
+author:
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
 documentclass: krantz
@@ -27,7 +27,7 @@ options(
 local({
   r = getOption('repos')
   if (!length(r) || identical(unname(r['CRAN']), '@CRAN@'))
-    r['CRAN'] = 'https://cran.rstudio.com' 
+    r['CRAN'] = 'https://cran.rstudio.com'
   options(repos = r)
 })
 
@@ -40,9 +40,36 @@ lapply(c('DT', 'citr', 'formatR', 'svglite'), function(pkg) {
 #  Bienvenue! {-}
 
 
->> LE COURS EST PRÉSENTEMENT EN CONSTUCTION: REVENEZ PLUS TARD!
+>> LE COURS EST PRÉSENTEMENT EN CONSTRUCTION: REVENEZ PLUS TARD!
 
 
+*Commentaires de KC*
+
+Pour les maths:
+
+
+$(x,y,z)$
+
+$(x,y,z)$
+
+Pour degree: utilise `$^{\circ}$` $^{\circ}$, 12$^{\circ}$,
+
+
+Pour les choix multiples, tu peux faire des box, par exemple:
+
+**Quelle est la meilleur projection?**
+
+1. [ ] projection A
+2. [ ] projection B
+3. [ ] projection C
+
+
+Pour les references
+
+- une sans parenthèse @Knippers2009
+- une avec parenthèses [@Knippers2009]
+- une avec parenthèses [comme montré dans @Knippers2009]
+- deux entre parenthèses [@Knippers2009; @Theriault2010]
 
 
 ```{r include=FALSE}
