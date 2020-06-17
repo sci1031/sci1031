@@ -45,31 +45,35 @@ lapply(c('DT', 'citr', 'formatR', 'svglite'), function(pkg) {
 
 *Commentaires de KC*
 
-Pour les maths:
+
+- Pour degree, utilise `$^{\circ}$` $^{\circ}$, 12$^{\circ}$,
 
 
-$(x,y,z)$
-
-$(x,y,z)$
-
-Pour degree: utilise `$^{\circ}$` $^{\circ}$, 12$^{\circ}$,
-
-
-Pour les choix multiples, tu peux faire des box, par exemple:
+- Pour les choix multiples, tu peux faire des box, par exemple:
 
 **Quelle est la meilleur projection?**
 
-1. [ ] projection A
-2. [ ] projection B
-3. [ ] projection C
+1. [ ] A
+2. [ ] B
+3. [ ] C
+
+puis avoir la réponse cachée (il faut cliquer sur Réponse ci dessous)
+
+<details>
+<summary> Réponse </summary>
+B
+</details>
 
 
-Pour les references
+<br>
 
-- une sans parenthèse @Knippers2009
-- une avec parenthèses [@Knippers2009]
-- une avec parenthèses [comme montré dans @Knippers2009]
-- deux entre parenthèses [@Knippers2009; @Theriault2010]
+- Pour les references:
+  - une sans parenthèse `@Knippers2009` => @Knippers2009
+  - une avec parenthèses `[@Knippers2009]` => [@Knippers2009]
+  - une avec parenthèses `[comme montré dans @Knippers2009]` => [comme montré dans @Knippers2009]
+  - deux entre parenthèses `[@Knippers2009; @Theriault2010]` => [@Knippers2009; @Theriault2010]
+
+
 
 
 ```{r include=FALSE}

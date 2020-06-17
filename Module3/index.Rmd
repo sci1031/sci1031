@@ -27,7 +27,7 @@ La **géodésie** est l’étude de la forme et des dimensions de la Terre. Au c
 
 Nous référons couramment à la Terre comme un objet rond et nous la représentons comme telle (le globe terrestre!). En vérité, la Terre n’est pas sphérique mais légèrement aplatie aux pôles.
 
-```{r evolution, fig.align='left', echo=FALSE, fig.cap="Évolution des modèles de la forme de la Terre : un corps plat, une sphère, une ellipsoïde et un géoïde. $(x, y, z)$ [*Voir image taille réelle*.](./Module3/images/3_evolution.png)", out.width = '80%'}
+```{r evolution, fig.align='left', echo=FALSE, fig.cap="Évolution des modèles de la forme de la Terre : un corps plat, une sphère, une ellipsoïde et un géoïde. [*Voir image taille réelle*.](./Module3/images/3_evolution.png)", out.width = '80%'}
 knitr::include_graphics('Module3/images/3_evolution.png')
 ```
 
@@ -111,7 +111,7 @@ La localisation géographique se fait à partir d’un système de coordonnées.
 Le **système de coordonnées géographique** représente la Terre comme une sphère et donne des coordonnées en trois dimensions pour se situer sur sa surface. Le système géographique est défini par le datum choisi (qui peut être local ou global), une unité angulaire de mesure et un méridien principal [@Esri_mapproj] (Figure \@ref(fig:philambda)).
 
 
-```{r philambda, fig.align='left', echo=FALSE,fig.cap="Le système de coordonnées géographique. Les points à la surface de la Terre sont définis par les coordonnées sphériques ($phi$,$lambda$) associées à la longitude (ligne mauve) et à la latitude (ligne bleue foncée) respectivement. Le point rouge possède les coordonnées ($phi$,$lambda$) = (50 deg E, 40 deg N). La ligne jaune représente le méridien principal. Source : Esri, image récupérée à https://desktop.arcgis.com/fr/arcmap/10.3/guide-books/map-projections/geographic-coordinate-system.htm", out.width = '60%'}
+```{r philambda, fig.align='left', echo=FALSE,fig.cap="Le système de coordonnées géographique. Les points à la surface de la Terre sont définis par les coordonnées sphériques ($\\phi$,$\\lambda$) associées à la longitude (ligne mauve) et à la latitude (ligne bleue foncée) respectivement. Le point rouge possède les coordonnées ($\\phi$,$\\lambda$) = (50 deg E, 40 deg N). La ligne jaune représente le méridien principal. Source : Esri, image récupérée à https://desktop.arcgis.com/fr/arcmap/10.3/guide-books/map-projections/geographic-coordinate-system.htm", out.width = '60%'}
 knitr::include_graphics('Module3/images/3_philambda.png')
 ```
 
@@ -131,7 +131,7 @@ knitr::include_graphics('Module3/images/3_graticule.png')
 Le **système de coordonnées projeté**, quant à lui, réfère à une transformation mathématique permettant de représenter sous forme de carte plane la réalité tridimensionnelle de la Terre (Figure \@ref(fig:planprojection)).
 
 
-```{r planprojection, fig.align='left', echo=FALSE,fig.cap="Le système de coordonnées projeté. Il permet de représenter sur une surface plane bidimensionnelle la surface tridimensionnelle de la carte à l’aide d’une transformation mathématique (x,y) = f(phi, lambda)", out.width = '90%'}
+```{r planprojection, fig.align='left', echo=FALSE, fig.cap="Le système de coordonnées projeté. Il permet de représenter sur une surface plane bidimensionnelle la surface tridimensionnelle de la carte à l’aide d’une transformation mathématique $(x, y) = f(\\phi, \\lambda)$.", out.width = '90%'}
 knitr::include_graphics('Module3/images/3_planprojection.png')
 ```
 
