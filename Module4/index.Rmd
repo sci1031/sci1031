@@ -69,7 +69,7 @@ Dans cette section, nous allons explorer des données vectorielles relatives au 
 
 #### Importer les données {-}
 
-Téléchargez les [données sur le réseau de pistes cyclables](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Montreal_Velo.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier Montreal_Velo comprend trois sous-dossiers:
+Téléchargez les [données sur le réseau de pistes cyclables](https://github.com/sci1031/sci1031/tree/master/Module4/data/Montreal_Velo.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier Montreal_Velo comprend trois sous-dossiers:
 
 - `accidents`
 - `pistes`
@@ -441,17 +441,61 @@ nom_du_fichier<- paste(chemin, "/Montreal_Velo/terre/terre_rob_shp.shp", sep = "
 st_read(limites_terrestres_rob,nom_du_fichier)
 ```
 
-### Lire une *geodatabase* et explorer ses couches
+### Lire une géodatabase et explorer ses couches
 
 Dans cette section, nous allons explorer les données vectorielles d'une géodatabase du Ministère de l'Éducation et de l'Enseignement supérieur du Québec (MEES).
 
 
 #### Importer les données {-}
-Téléchargez les [données du MEES](https://github.com/sci1031/sci1031/tree/master/Module4/data/Donnees_Ouvertes_MEES.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier Donnees_Ouvertes_MEES comprend un seul sous-dossier, Donnees_Ouvertes_MEES.gdb, c'est la géodatabase qui elle contient de multiples fichiers de formats différents.
 
+Téléchargez les [données du MEES](https://github.com/sci1031/sci1031/tree/master/Module4/data/Donnees_Ouvertes_MEES.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier Donnees_Ouvertes_MEES comprend un seul sous-dossier, Donnees_Ouvertes_MEES.gdb, c'est la geodatabase qui elle contient de multiples fichiers de formats différents.
 
 #### Lire les données {-}
+
+Dans la section portant sur le [format des données vectorielles](##### Format de données vectorielles) du [Module 2](#base), nous avons expliqué qu'une géodatabase est une façon de rassembler et d’organiser des données propres à un sujet dans une unique base de données.
+
+La géodatabase Donnees_Ouvertes_MEES.gdb que vous venez de télécharger contient plusieurs couches de données vectorielles (*layers*) sur les établissements d'enseignement au Québec.
+
+Pour lire et explorer une géodatabase, on continue à utiliser la libraries `sf`. Chaque couche peut être lue individuellement en utilisant la fonction `st_read()`: `st_read("nom_de_la_geodatabase.gdb", layer = "nom_de_la_couche")`. Il est donc nécessaire de connaître d'abord les noms donnés aux couches composants la géodatabase - information qui nous est, pour l'instant, inconnue.
+
+Pour connaître les couches d'une géodatabase, nous utilisons la fonction `st_layers()`
+
+```{r fake-mees-layers, eval = FALSE}
+chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
+nom_du_fichier <- paste(chemin, "/Donnees_Ouvertes_MEES/Donnees_Ouvertes_MEES.gdb", sep = "")
+couches_mees <- st_layers(nom_du_fichier)
+couches_mees
+```
+
+```{r mees-layers, eval = TRUE, echo = FALSE}
+couches_mees <- st_layers("Module4/data/Donnees_Ouvertes_MEES/Donnees_Ouvertes_MEES.gdb")
+couches_mees
+```
+
+Nous observons que la géodatabase contient 18 couches différentes. Nous pouvons connaître le nom donné à chaque couche (`layer_name`), leur géométrie (`geometry_type`), le nombre d'objets vectoriels qu'elles contiennent (`features`), et le nombre d'attributs qu'elles décrivent (`fields`).
+
+Les couches dont le nom commence par `CS_` contiennent des données vectorielles relatives aux centres de services scolaires^[Les centres de services scolaires (qui remplacent les commissions scolaires depuis 2020) ont pour rôle d'épauler les établissements d'enseignement situés sur leur territoire. Pour plus d'informations, consultez le site web du [MEES]^(https://www.quebec.ca/education/prescolaire-primaire-et-secondaire/gouvernance-scolaire/#c42437)]. Puisque chacun de ces centres couvre un territoire qui leur est propre, ces données sont des multi-polygones.
+
+Les couches dont le nom commence par `PPS_` et `ES_` contiennent des données vectorielles relatives aux établissements d'enseignement primaire, secondaire et supérieure. Puisque chacun de ces établissements est identifié par une paire de coordonnées, ces données sont des points. 
+
+Lisons les données vectorielles de la couche `PPS_Public_Ecole` en utilisant la fonction `st_read()`. 
+```{r fake_ecoles_pub, eval = FALSE}
+chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
+nom_du_fichier <- paste(chemin, "/Donnees_Ouvertes_MEES/Donnees_Ouvertes_MEES.gdb", sep = "")
+ecoles_public <- st_read(nom_du_fichier, layer = "PPS_Public_Ecole")
+```
+
+```{r ecoles_pub, eval = TRUE, echo = FALSE}
+ecoles_pub <- st_read("Module4/data/Donnees_Ouvertes_MEES/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Public_Ecole")
+```
+Cette couche donne la localisation des 5202 écoles primaires et secondaires publiques de la province ainsi que 28 autres attributs associés à ces établissements. 
+
+Notez le système de coordonnées de référence: le datum WGS84 et la projection Pseudo-Mercator (ou Mercator Web) sont utilisés.
+
 #### Explorer les métadonnées d'une couche {-}
+
+Explorons les attributs associés
+
 
 #### Sélection d'un sous-ensemble de données 
 

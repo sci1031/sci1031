@@ -97,7 +97,7 @@ knitr::include_graphics('Module2/images/2_relationsspatiales.png')
 ```
 <br>
 
-##### Format de données vectorielles {-}
+##### Format de données vectorielles {-}  
 
 Les données vectorielles peuvent être stockées dans une grande variété de formats différents. Ces formats ont évolué et continuent d’évoluer en fonction des besoins et des avancées technologiques. Plusieurs formats ont été développés pour être utilisés avec des logiciels commerciaux mais peuvent être lus et parfois édités par d’autres logiciels.
 
