@@ -23,7 +23,7 @@ Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries6, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries7, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
 library(ggplot2)
