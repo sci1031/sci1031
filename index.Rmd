@@ -1,6 +1,6 @@
---- 
+---
 title: "SCI 1031 Visualisation et analyse de données spatiales sous R"
-author: 
+author:
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
 documentclass: krantz
@@ -20,14 +20,15 @@ description: "Ceci est une première ébauche de la conception du cours SCI 1031
 ```{r setup, include=FALSE}
 options(
   htmltools.dir.version = FALSE, formatR.indent = 2,
-  width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE
+  width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE,
+  render.file_scope = FALSE
 )
 
 
 local({
   r = getOption('repos')
   if (!length(r) || identical(unname(r['CRAN']), '@CRAN@'))
-    r['CRAN'] = 'https://cran.rstudio.com' 
+    r['CRAN'] = 'https://cran.rstudio.com'
   options(repos = r)
 })
 
