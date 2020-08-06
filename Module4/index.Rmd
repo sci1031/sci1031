@@ -482,7 +482,7 @@ Lisons les données vectorielles de la couche `PPS_Public_Ecole` en utilisant la
 ```{r fake_ecoles_pub, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
 nom_du_fichier <- paste(chemin, "Donnees_Ouvertes_MEES.gdb", sep = "")
-ecoles_public <- st_read(nom_du_fichier, layer = "PPS_Public_Ecole")
+ecoles_pub <- st_read(nom_du_fichier, layer = "PPS_Public_Ecole")
 ```
 
 ```{r ecoles_pub, eval = TRUE, echo = FALSE}
@@ -492,9 +492,11 @@ Cette couche donne la localisation des 5202 écoles primaires et secondaires pub
 
 Notez le système de coordonnées de référence: le datum WGS84 et la projection Pseudo-Mercator (ou Mercator Web) sont utilisés.
 
+Notez aussi que cette couche de la géodatabase possède la même structure que celle d'un *shapefile*.
+
 #### Explorer les métadonnées d'une couche {-}
 
-Explorons les attributs associés
+Explorons les attributs associés à la couche `ecoles_pub`
 
 
 #### Sélection d'un sous-ensemble de données 
