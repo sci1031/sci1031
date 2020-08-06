@@ -1,4 +1,3 @@
-options(bookdown.render.file_scope = FALSE);
 quiet = "--quiet" %in% commandArgs(FALSE)
 formats = commandArgs(TRUE)
 travis = !is.na(Sys.getenv('CI', NA))

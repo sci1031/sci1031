@@ -8,6 +8,7 @@ bibliography: [refs.bib]
 biblio-style: apalike
 link-citations: yes
 colorlinks: yes
+file_scope: false
 lot: yes
 lof: yes
 fontsize: 12pt
