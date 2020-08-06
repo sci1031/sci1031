@@ -448,7 +448,7 @@ Dans cette section, nous allons explorer les données vectorielles d'une géodat
 
 #### Importer les données {-}
 
-Téléchargez les [données du MEES](https://github.com/sci1031/sci1031/tree/master/Module4/data/Donnees_Ouvertes_MEES.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier Donnees_Ouvertes_MEES comprend un seul sous-dossier, Donnees_Ouvertes_MEES.gdb, c'est la geodatabase qui elle contient de multiples fichiers de formats différents.
+Téléchargez les [données du MEES](https://github.com/sci1031/sci1031/tree/master/Module4/data/Donnees_Ouvertes_MEES.gbd.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier Donnees_Ouvertes_MEES.gdb est la geodatabase contenant de multiples fichiers de formats différents.
 
 #### Lire les données {-}
 
@@ -462,13 +462,13 @@ Pour connaître les couches d'une géodatabase, nous utilisons la fonction `st_l
 
 ```{r fake-mees-layers, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
-nom_du_fichier <- paste(chemin, "/Donnees_Ouvertes_MEES/Donnees_Ouvertes_MEES.gdb", sep = "")
+nom_du_fichier <- paste(chemin, "/Donnees_Ouvertes_MEES.gdb", sep = "")
 couches_mees <- st_layers(nom_du_fichier)
 couches_mees
 ```
 
 ```{r mees-layers, eval = TRUE, echo = FALSE}
-couches_mees <- st_layers("Module4/data/Donnees_Ouvertes_MEES/Donnees_Ouvertes_MEES.gdb")
+couches_mees <- st_layers("Module4/data/Donnees_Ouvertes_MEES.gdb")
 couches_mees
 ```
 
@@ -481,12 +481,12 @@ Les couches dont le nom commence par `PPS_` et `ES_` contiennent des données ve
 Lisons les données vectorielles de la couche `PPS_Public_Ecole` en utilisant la fonction `st_read()`. 
 ```{r fake_ecoles_pub, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
-nom_du_fichier <- paste(chemin, "/Donnees_Ouvertes_MEES/Donnees_Ouvertes_MEES.gdb", sep = "")
+nom_du_fichier <- paste(chemin, "/Donnees_Ouvertes_MEES.gdb", sep = "")
 ecoles_public <- st_read(nom_du_fichier, layer = "PPS_Public_Ecole")
 ```
 
 ```{r ecoles_pub, eval = TRUE, echo = FALSE}
-ecoles_pub <- st_read("Module4/data/Donnees_Ouvertes_MEES/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Public_Ecole")
+ecoles_pub <- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Public_Ecole")
 ```
 Cette couche donne la localisation des 5202 écoles primaires et secondaires publiques de la province ainsi que 28 autres attributs associés à ces établissements. 
 
