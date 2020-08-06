@@ -20,7 +20,7 @@ jobs:
           Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://muug.ca/mirror/cran/')"
       - name: Build GitBook
         run: |-
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
+          Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
       - name: Deploy GitBook to gh-pages
         uses: peaceiris/actions-gh-pages@v2
         env:
