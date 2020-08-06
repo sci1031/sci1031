@@ -17,13 +17,13 @@ site: bookdown::bookdown_site
 description: "Ceci est une première ébauche de la conception du cours SCI 1031."
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 options(
   htmltools.dir.version = FALSE, formatR.indent = 2,
-  width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE,
-  render.file_scope = FALSE
+  width = 55, digits = 4, warnPartialMatchAttr = FALSE,
+  warnPartialMatchDollar = FALSE,
+  bookdown.render.file_scope = FALSE
 )
-
 
 local({
   r = getOption('repos')
@@ -41,12 +41,12 @@ lapply(c('DT', 'citr', 'formatR', 'svglite'), function(pkg) {
 #  Bienvenue! {-}
 
 
->> LE COURS EST PRÉSENTEMENT EN CONSTUCTION: REVENEZ PLUS TARD!
+>> LE COURS EST PRÉSENTEMENT EN CONSTRUCTION: REVENEZ PLUS TARD!
 
 
 
 
-```{r include=FALSE}
+```{r include = FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
