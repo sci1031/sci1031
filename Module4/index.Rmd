@@ -95,7 +95,7 @@ Dans un premier temps, nous allons ouvrir les données vectorielles de type poly
 
 ```{r fake-terre, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
-nom_du_fichier <- paste(chemin, "/Montreal_Velo/terre/terre_shp.shp", sep = "")
+nom_du_fichier <- paste(chemin, "Montreal_Velo/terre/terre_shp.shp", sep = "")
 limites_terrestres <- st_read(nom_du_fichier)
 ```
 
@@ -109,7 +109,7 @@ Nous allons maintenant lire les données vectorielles de type ligne, en utilisan
 
 ```{r fake-pistes, eval = FALSE}
 chemin <-"D:/votrechemin/SCI1031/Module4/Donnees/"
-nom_du_fichier<- paste(chemin, "/Montreal_Velo/pistes/pistes_cyclables_type.shp", sep = "")
+nom_du_fichier<- paste(chemin, "Montreal_Velo/pistes/pistes_cyclables_type.shp", sep = "")
 pistes_cyclables <- st_read(nom_du_fichier)
 ```
 
@@ -122,7 +122,7 @@ Finalement, nous allons lire les données vectorielles de type point, en utilisa
 
 ```{r fake-accidents, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
-nom_du_fichier<- paste(chemin, "/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp", sep = "")
+nom_du_fichier<- paste(chemin, "Montreal_Velo/accidents/accidents2018_Mtl_velo.shp", sep = "")
 pistes_cyclables <- st_read(nom_du_fichier)
 ```
 
@@ -437,7 +437,7 @@ limites_terrestres <- st_write(limites_terrestres_rob,nom_du_fichier)
 
 ```{r fake-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
-nom_du_fichier<- paste(chemin, "/Montreal_Velo/terre/terre_rob_shp.shp", sep = "")
+nom_du_fichier<- paste(chemin, "Montreal_Velo/terre/terre_rob_shp.shp", sep = "")
 st_read(limites_terrestres_rob,nom_du_fichier)
 ```
 
@@ -462,7 +462,7 @@ Pour connaître les couches d'une géodatabase, nous utilisons la fonction `st_l
 
 ```{r fake-mees-layers, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
-nom_du_fichier <- paste(chemin, "/Donnees_Ouvertes_MEES.gdb", sep = "")
+nom_du_fichier <- paste(chemin, "Donnees_Ouvertes_MEES.gdb", sep = "")
 couches_mees <- st_layers(nom_du_fichier)
 couches_mees
 ```
@@ -481,7 +481,7 @@ Les couches dont le nom commence par `PPS_` et `ES_` contiennent des données ve
 Lisons les données vectorielles de la couche `PPS_Public_Ecole` en utilisant la fonction `st_read()`. 
 ```{r fake_ecoles_pub, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
-nom_du_fichier <- paste(chemin, "/Donnees_Ouvertes_MEES.gdb", sep = "")
+nom_du_fichier <- paste(chemin, "Donnees_Ouvertes_MEES.gdb", sep = "")
 ecoles_public <- st_read(nom_du_fichier, layer = "PPS_Public_Ecole")
 ```
 
