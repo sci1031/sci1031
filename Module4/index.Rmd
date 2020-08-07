@@ -49,6 +49,7 @@ library(dplyr)
 library(sf)
 library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
 library(ggpubr)
+library(mapview)
 ```
 
 
@@ -482,7 +483,7 @@ Lisons les données vectorielles de la couche `PPS_Public_Ecole` en utilisant la
 ```{r fake_ecoles_pub, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
 nom_du_fichier <- paste(chemin, "Donnees_Ouvertes_MEES.gdb", sep = "")
-ecoles_public <- st_read(nom_du_fichier, layer = "PPS_Public_Ecole")
+ecoles_pub <- st_read(nom_du_fichier, layer = "PPS_Public_Ecole")
 ```
 
 ```{r ecoles_pub, eval = TRUE, echo = FALSE}
@@ -492,23 +493,115 @@ Cette couche donne la localisation des 5202 écoles primaires et secondaires pub
 
 Notez le système de coordonnées de référence: le datum WGS84 et la projection Pseudo-Mercator (ou Mercator Web) sont utilisés.
 
-#### Explorer les métadonnées d'une couche {-}
+Notez aussi que cette couche de la géodatabase possède la même structure que celle d'un *shapefile*.
 
-Explorons les attributs associés
+Nous pouvons visualiser la position des écoles publiques du Québec en utilisant la librarie `mapview`.
+```{r plot-ecoles-pub, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques du Québec"}
+mapview(ecoles_pub)
+```
+Nous remarquons qu'il est difficile de visualiser la position des écoles dans la région Sud du Québec car il y a énormément de points.
 
+#### Explorer les attributs d'une couche {-}
+
+Pour explorer les attributs associés à la couche `ecoles_pub`, commençons d'abord par utiliser la fonction `names` qui retourne le nom associé à chaque attribut de la couche.
+
+
+```{r names-ecoles-pub, eval = TRUE, echo = TRUE}
+names(ecoles_pub)
+```
+
+Notre première réaction à la lecture de ces noms est qu'ils ne sont pas tous intuitifs!
+Examinons les quatre attributs suivants: "NOM_OFFCL_ORGNS", "NOM_MUNCP_GDUNO_IMM", "TYPE_CS", et "SHAPE".
+
+L'attribut "NOM_OFFCL_ORGNS" correspond au nom de chaque école publique. On peut lire les premières entrées de cette liste de noms en utilisant la fonction `head`:
+```{r head-noms-ecoles-pub, eval = TRUE, echo = TRUE}
+head(ecoles_pub$NOM_OFFCL_ORGNS)
+```
+La fonction `head` indique aussi le nombre de `levels`, c'est-à-dire le nombre de valeurs différentes que peut prendre l'attribut. Dans le cas présent, chaque école possède un nom unique. Il y a donc autant de valeurs d'attribut qu'il y a d'écoles.
+
+L'attribut "NOM_MUNCP_GDUNO_IMM" correspond au nom de la municipalité dans laquelle se trouve une école publique. Pour avoir un aperçu des valeurs données, on utilise encore la fonction `head`:
+```{r head-villes-ecoles-pub, eval = TRUE, echo = TRUE}
+head(ecoles_pub$NOM_MUNCP_GDUNO_IMM)
+```
+
+L'attribut "TYPE_CS" identifie les écoles selon leur appartenance à une commision scolaire francophone, anglophone ou à statut linguistique particulier. 
+
+```{r head-type-ecoles-pub, eval = TRUE, echo = TRUE}
+head(ecoles_pub$TYPE_CS)
+```
+
+Dans ce cas, on remarque qu'il y a trois niveaux ("levels") possibles: Anglo, Franco, et Statut. Il est aussi possible d'obtenir cette information en utilisant la fonction `levels`:
+```{r levels-type-ecoles-pub, eval = TRUE, echo = TRUE}
+levels(ecoles_pub$TYPE_CS)
+```
+
+Finalement, l'attribut "SHAPE" donne la position géographique de chaque école publique et les métadonnées spatiales associées à cette couche:
+information en utilisant la fonction `levels`:
+```{r head-shape-ecoles-pub, eval = TRUE, echo = TRUE}
+head(ecoles_pub$SHAPE)
+```
 
 #### Sélection d'un sous-ensemble de données 
+Pour simplifier la visualisation de cette couche, nous allons nous concentrer sur les écoles de la municipalité de Montréal.
+Pour ce faire, nous créons un nouveau *shapefile* en sélectionnant les données propres à la municipalité de Montréal:
+```{r ecoles-pub-Mtl, eval = TRUE, echo = TRUE}
+ecoles_pub_Mtl<- ecoles_pub[ecoles_pub$NOM_MUNCP_GDUNO_IMM == "Montréal",]
+```
+Interprétons cette ligne de commande: elle utilise l'opérateur logique `==` pour sélectionner les écoles publiques de la municipalité de Montréal, ainsi que tous les autres attributs au sein de la couche `ecoles_pub`.
 
-* peut sauver chaque sous-ensemble sous forme de shapefile, mais ne peut pas combiner sous forme de geodatabase.
+Visualisons maintenant ce nouveau *shapefile* en utilisant la fonction `mapview`.
+```{r plot-ecoles-pub-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques de la ville de Montréal"}
+map_pub_mtl<-mapview(ecoles_pub_Mtl, cex = 2)
+map_pub_mtl
+```
 
-#### Visualisation
-visualisation de toutes les couches
+Ici, nous avons utilisé l'argument `cex` pour diminuer la taille des points sur la carte (la taille par défaut est 6).
+En cliquant sur l'un ou l'autre des points vous obtiendrez l'ensemble des attributs propres à l'école sélectionnée.
 
-ajout de la carte de Montréal.
+#### Visualisation de plusieurs couches d'une géodatabse
+Nous voulons visualiser d'autres types d'établissement d'enseignement donnés dans la géodatabase du Ministère de l'Éducation et de l'Enseignement supérieur du Québec. Choisissons les écoles privées, les établissements de niveau collégial (e.g. CÉGEP) et les universités. Pour se faire nous utilisons encore la fonction `st_read` en spécifiant le nom de la couche (`layer`) désirée.
 
-Transformer le CRS
+```{r fake_autres_institutions, eval = FALSE}
+chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
+nom_du_fichier <- paste(chemin, "Donnees_Ouvertes_MEES.gdb", sep = "")
+ecoles_priv <- st_read(nom_du_fichier, layer = "PPS_Prive_Etablissement")
+college<- st_read(nom_du_fichier, layer = "ES_Collegial")
+univ <- st_read(nom_du_fichier, layer = "ES_Universitaire")
+```
+
+```{r autres-institutions, eval = TRUE, echo = FALSE, message = FALSE,}
+ecoles_priv <- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Prive_Etablissement")
+college<- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "ES_Collegial")
+univ <- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "ES_Universitaire")
+```
+
+
+Toujours dans le but de simplifier la visualisation, sélectionnons au sein des couches `ecoles_priv`, `college` et `univ` les établissements situés à Montréal. Attention, pour ces couches le nom de l'attribut associé à la municipalié où se situe les établissements listés est "NOM_MUNCP" et non "NOM_MUNCP_GDUNO_IMM".
+
+```{r autres-institutions-Mtl, eval = TRUE, echo = TRUE}
+ecoles_priv_Mtl <- ecoles_priv[ecoles_priv$NOM_MUNCP == "Montréal",] 
+college_Mtl<-college[college$NOM_MUNCP == "Montréal",]
+univ_Mtl<-univ[univ$NOM_MUNCP == "Montréal",]
+```
+
+Nous pouvons visualiser chacun de ces nouveaux *shapefile* individuellement en utilisant la fonction `mapview`, mais plus intéressant encore est de les visualiser ensemble au sein d'une même carte. Pour se faire nous créons d'abord des cartes individuelles.
+
+```{r plot-ecoles-each-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
+map_priv_mtl<-mapview(ecoles_priv_Mtl, color = "red", col.regions = "red", cex = 2)
+map_college_mtl<-mapview(college_Mtl, color = "green", col.regions = "green", cex = 4)
+map_univ_mtl<-mapview(univ_Mtl, color = "orange", col.regions = "orange", cex = 6)
+```
+
+Remarquez que nous utilisons différentes tailles de points et différentes couleurs pour bien différencier le type d'institution dans la carte qui les combinera. La couleur du contour du point est donnée par l'argument `color` et celle de l'intérieur du point par l'argument `col.regions`. Nous combinons toutes les couches par une simple addition des cartes individuelles
+```{r plot-ecoles-all-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Institutions d'enseignement à Montréal"}
+map_pub_mtl+map_priv_mtl+map_college_mtl+map_univ_mtl
+```
+Dans le menu dans le coin supérieur gauche de la carte, remarquez que vous pouvez sélectionner/désélectionner chaque couche selon l'information que vous désirez explorer.
+
+Il serait intéressant de créer une nouvelle géodatabase pour sauvegarder les quatre nouveaux *shapefiles* des institutions d'enseignement à Montréal au sein d'une même structure. Malheureusement `R` peut seulement lire des géodatabases mais ne peut pas sauvegarder ce format qui est propriétaire de ESRI. Ainsi, il faudrait utiliser la fonction `st_write` pour sauvegarder chacun des *shapefiles* individuellement. 
 
 Nouvelle visualisation
+* peut sauver chaque sous-ensemble sous forme de shapefile, mais ne peut pas combiner sous forme de geodatabase.
 
 
 ## Exercice {#ex_vec}
