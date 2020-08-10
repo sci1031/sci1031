@@ -17,9 +17,9 @@ Vous utiliserez les librairies suivantes:
 
 - `sf`
 - `rgdal`
-- `dplyr`
-- `ggplot2`
-- `ggpubr`
+- `mapview`
+- `leafsync`
+
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
@@ -27,11 +27,9 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `st_geometry_type()`
 - `st_crs()`
 - `st_bbox()`
-- `geom_sf`
-- `filter()`
-- `select()`
+- `mapview()`
 - `st_transform()`
-- `ggarrange()`
+- `latticeView()`
 
 Dans la section [leçon](#lecon_vec), vous utiliserez deux ensembles de données vectorielles. 
 
@@ -44,11 +42,7 @@ Dans la section [exercice](#ex_vec), vous utiliserez XXXXX
 ```{r load-libraries4, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
-library(ggplot2)
-library(dplyr)
 library(sf)
-library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
-library(ggpubr)
 library(mapview)
 ```
 
@@ -56,7 +50,7 @@ library(mapview)
 ## Leçon {#lecon_vec}
 
 
-Cette leçon est une introduction aux données spatiales sous `R`. 
+Cette leçon est une introduction aux données spatiales vectorielles sous `R`. 
 Les trois premières sections porteront sur des données vectorielles en format *shapefile* puisque celles-ci sont couramment utilisées.
 La quatrième section vous familiarisera avec les données vectorielles en format *geodatabase* puisque celles-ci sont de plus en plus utilisées au sein de grandes organisations comme des ministères. 
 
@@ -170,27 +164,29 @@ Quant aux accidents de vélo, ce sont des points qui désignent la position pré
 ##### La projection {-}
 
 
-Vérifions maintenant la projection des *shapefiles* en utilisant la fonction `st_crs()` de la librarie `sf`:
+Vérifions maintenant la projection des *shapefiles* en utilisant la fonction `st_crs()` de la librarie `sf`. Pour le *shapefile* `limites_terrestres` nous obtenons:
 
 ```{r proj-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_crs(limites_terrestres)
 ```
 
-La fonction `st_crs` donne beaucoup d'informations. Pour connaitre la projection utilisée, le datum, ou le code ESPG, nous pouvons préciser la sortie désirée de la fonction, de la manière suivante:
+La fonction `st_crs()` donne beaucoup d'informations. Pour connaitre la projection utilisée, le datum, ou le code ESPG, nous pouvons préciser la sortie désirée de la fonction, de la manière suivante:
 ```{r proj-terre-details, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_crs(limites_terrestres)$Name
 st_crs(limites_terrestres)$proj4string
 st_crs(limites_terrestres)$epsg
 ```
 
-
+Ainsi, la projection du *shapefile* `pistes_cyclables` est:
 ```{r proj-pistes, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_crs(pistes_cyclables)$proj4string
 ```
 
+Et la projection du *shapefile* `accidents_velo` est:
 ```{r proj-accidents, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
 st_crs(accidents_velo)$proj4string
 ```
+
 Les données de tous les *shapefiles* sont dans la projection de Mercator transverse (`+proj=tmerc`) et utilisent le Système de référence géodésique nord-américan de 1983 (`+datum=NAD83`). Connaitre le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.
 
 ##### L'étendue spatiale {-}
@@ -230,9 +226,9 @@ accidents_velo
 
 ### Visualisation de *shapefiles* sous R
 
-#### Visualisation avec la fonction `R` `mapview` {-}
+#### Visualisation avec la librairie Mapview {-}
 
-Vous allez maintenant apprendre à visualer des données *shapefile* en utilisant la fonction `mapview()` de la librairie `mapview`. Cette librarie est une des plus simples à utiliser pour visualiser rapidement des données spatiales.
+Vous allez maintenant apprendre à visualer des données *shapefile* en utilisant la fonction `mapview()` de la librairie `mapview`. Cette librarie est une des plus simples à utiliser pour visualiser rapidement des données spatiales. Commençons par charger cette librarie dans la console `R`:
 
 ```{r load-mapview}
 library(mapview)
@@ -242,6 +238,7 @@ Dans un premier temps, visualisons les limites terrestres de la ville de Montré
 ```{r plot-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Limites terrestres de l'île de Montréal"}
 mapview(limites_terrestres, col.regions = "white")
 ```
+<br>
 
 Remarquez que nous avons choisi la couleur blanche pour représenter l'intérieur des polygones délimitant la ville de Montréal. La couleur par défaut (c-à-d si on ne précise pas de couleur) est bleue.
 
@@ -250,12 +247,12 @@ Passez votre curseur sur la carte ainsi créée et remarquez que vous pouvez cli
 Remarquez aussi la légende dans le coin supérieur gauche de la carte créée et approchez-y votre curseur. Vous pouvez alors sélectionner une ou l'autre des arrières-plans disponibles. L'option  "OpenStreetMap" affichera la carte produite pas ce gratuitiel de cartographie pour la région entourant le polygone illustré. L'option "ESRI.WorldImagery", quant à elle, affichera une image satellitaire de la région.
 
 
-Dans un deuxième temps, visualisons les pistes cyclables (Fig \@ref(fig:plot-velo)). Utilisons toujours la fonction `mapview` et demandons que la couleur du trait des lignes soit verte foncée. Pour définir la couleur des lignes, nous utilisons l'argument `color` et non l'argument `col.regions`.
+Dans un deuxième temps, visualisons les pistes cyclables (Fig \@ref(fig:plot-velo)). Utilisons toujours la fonction `mapview()` et demandons que la couleur du trait des lignes soit verte foncée. Pour définir la couleur des lignes, nous utilisons l'argument `color` et non l'argument `col.regions`.
 ```{r plot-velo, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Pistes cyclables sur l'île de Montréal"}
 mapview(pistes_cyclables, color = "darkgreen")
 ```
 
-
+<br>
 
 Il existe 657 couleurs prédéfinies dans `R`. Taper la commande `colors()` dans votre console `R` pour voir afficher le nom des couleurs. Celles-sont sont listées par ordre alphabétique sauf pour la première couleur, qui est le blanc (`white`). Ainsi, vous pouvez utiliser une couleur en assignant son nom ou son numéro. Pour produire la figure précédente, `color = "darkgreen"` aurait pu être remplacé par
 `color = colors()[81]`. Essayez pour voir.
@@ -272,7 +269,9 @@ Finalement, visualisons les accidents de la route impliquant des bicyclettes (Fi
 mapview(accidents_velo, color = "red", col.regions = "red", cex = 1, legend = NULL)
 ```
 
-La position des accidents est représentée par des points dont le contour et l'intérieur, dénotés par les arguements `color` et `col.regions` respectivement, sont de couleur rouge. 
+<br>
+
+La position des accidents est représentée par des points dont le contour et l'intérieur, dénotés par les arguments `color` et `col.regions` respectivement, sont de couleur rouge. 
 
 L'argument `cex`, quant à lui, indique la taille des cercles, la taille par défaut utilisée dans `mapview` est 2. Ici, nous avons demandé une taille plus petite afin de mieux différencier chacun des points.
 
@@ -292,20 +291,25 @@ levels(pistes_cyclables$TYPE_VOIE)
 ```
 Si vous ne connaissez pas la distinction entre ces types d'aménagement cyclable, consulter ce [document sommaire](Module4/4_Amenagement3Cyclable3Mtl.pdf) de la *Ville de Montréal*^[Ville de Montréal. Aménagements cyclables. Repéré le 19 mars 2020]
 
-Dans la figure \@ref(fig:plot-velo) réalisée plus haut, toutes les pistes cyclables étaient illustrées en vert. Nous voulons maintenant représenter les six types de voie cyclable par six couleurs différentes. L'avantage de la fonction `mapview` est qu'elle est capable d'emblée de distinguer les différentes valeurs que peuvent prendre un attribut. Ainsi, nous pouvons simplement demander (Fig \@ref(fig:plot-voie2)):
+Dans la figure \@ref(fig:plot-velo) réalisée plus haut, toutes les pistes cyclables étaient illustrées en vert. Nous voulons maintenant représenter les six types de voie cyclable par six couleurs différentes. L'avantage de la fonction `mapview()` est qu'elle est capable d'emblée de distinguer les différentes valeurs que peuvent prendre un attribut. Ainsi, nous pouvons simplement demander (Fig \@ref(fig:plot-voie2)):
 
 ```{r plot-voie2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Bandes cyclables sur l'île de Montréal"}
 mapview(pistes_cyclables)
 ```
-Le *shapefile* `pistes_cyclables` contient un seul attribut, "TYPE_VOIE". Si un *shapefile* contient plus d'un attribut, il faut spécifier celui qu'on veut représenter en argument à la fonction `mapview`. Dans le cas présent, nous aurions plutôt demandé: `mapview(pistes_cyclables, z = "TYPE_VOIE").
 
-Par défaut, la fonction `mapview` pour les données vectorielles utilise la palette de couleur *viridis*. Une palette de couleur est un ensemble de plusieurs couleurs prédéfinies et stocké dans un vecteur. Il existe plusieurs palettes de couleur prédéfinies et nous y reviendrons au [Module 6](#carto) portant sur la cartographie. La palette *viridis* forme un gradient allant du mauve au jaune en passant pas le bleu et le vert (Fig \@ref(fig:plot-viridis)):
+<br>
+
+Le *shapefile* `pistes_cyclables` contient un seul attribut, "TYPE_VOIE". Si un *shapefile* contient plus d'un attribut, il faut spécifier celui qu'on veut représenter en argument à la fonction `mapview()`. Dans le cas présent, nous aurions plutôt demandé: `mapview(pistes_cyclables, z = "TYPE_VOIE").
+
+Par défaut, la fonction `mapview()` pour les données vectorielles utilise la palette de couleur *viridis*. Une palette de couleur est un ensemble de plusieurs couleurs prédéfinies et stocké dans un vecteur. Il existe plusieurs palettes de couleur prédéfinies et nous y reviendrons au [Module 6](#carto) portant sur la cartographie. La palette *viridis* forme un gradient allant du mauve au jaune en passant pas le bleu et le vert (Fig \@ref(fig:plot-viridis)):
 
 ```{r plot-viridis, echo = FALSE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Palette viridis contenant 200 couleurs différentes"}
 library(viridis)
 n = 200
-image(1:n, 1, as.matrix(1:n), col=viridis(n), axes= FALSE, xlab = "", ylab = "")
+image(1:n, 1, as.matrix(1:n), col=viridis(n), axes= FALSE, xlab = "", ylab = "", ylim = c(0.1,0.15), asp  = 1)
 ```
+
+<br>
 
 Un utilisateur de `R` peut utiliser des palettes prédéfinies, ou encore définir les siennes. Par exemple, si nous trouvons que les couleurs de la palette *viridis* ne permettent pas de bien différencier les différents types de piste cyclable, nous pouvons nous-même créer une palette contenant six couleurs (car il y a six valeurs possibles pour cet attribut).
 
@@ -313,19 +317,21 @@ Un utilisateur de `R` peut utiliser des palettes prédéfinies, ou encore défin
 couleurs_voie<-c("royalblue", "purple", "turquoise","darkgreen","limegreen","pink")
 ```
 
-Nous pouvons ajouter cet argument à la fonction `mapview`(Fig \@ref(fig:plot-voie4)):
+Nous pouvons ajouter cet argument à la fonction `mapview()`(Fig \@ref(fig:plot-voie4)):
 
 ```{r plot-voie4, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Types de voie cyclable sur l'île de Montréal"}
 mapview(pistes_cyclables, color=couleurs_voie, layer.name = "Types de pistes cyclables")
 ```
 
+<br>
 
 Remarquez que nous avons changé le titre de la légende en utilisant l'argument `layer.name`.
 
+<br>
 
 #### Visualiser plusieurs *shapefiles* {-}
 
-Nous allons maintenant représenter les données vectorielles `limites terrestres`, `pistes_cyclables` et `accidents_velo` au sein d'une même figure (Fig \@ref(fig:plot-all1)). Il s'agit de définir individuellement chacune des cartes comme un objet `` et de les additionner en utilisant l'opérateur `+`.
+Nous allons maintenant représenter les données vectorielles `limites terrestres`, `pistes_cyclables` et `accidents_velo` au sein d'une même figure (Fig \@ref(fig:plot-all1)). Il s'agit de définir individuellement chacune des cartes comme un objet `mapview` et de les additionner en utilisant l'opérateur `+`.
 
 ```{r plot-all1, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Pistes cyclables et position des accidents routiers impliquant des bicyclettes sur l'île de Montréal"}
 map_limites_terrestres <- mapview(limites_terrestres, col.regions = "white", legend = NULL)
@@ -335,9 +341,11 @@ map_accidents <- mapview(accidents_velo, color = "red", col.regions = "red", cex
 map_limites_terrestres + map_pistes_cyclables + map_accidents
 ```
 
-
+<br>
+<br>
 
 ### Reprojection de données vectorielles sous R
+
 Dans cette section vous apprendrez à manipuler le système de coordonnées de référence de données vectorielles. Nous avons vu en début de leçon que les données utilisées sont dans la projection de Mercator transverse (`tmerc`) et utilisent le Système de référence géodésique nord-américan de 1983 (`NAD83`). Par exemple, pour connaître la projection des données `limites_terrestres`, nous avions fait:
 
 ```{r proj-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
@@ -355,14 +363,16 @@ Comparons les données transformées avec les données initiales. Pour se faire,
 library(leafsync)
 ```
 
-Puis représentons les deux projections différentes en utilisant la fonction `latticeView` de la librarie `leafsync` (Fig \@ref(fig:plot-terre2))
+Représentons mainteant les deux projections différentes en utilisant la fonction `latticeView()` de la librarie `leafsync` (Fig \@ref(fig:plot-terre2)). Puisque cette fonction existe à la fois dans la librarie `leafsync` et dans la librarie `mapview` mais qu'elle est obsolète dans cette dernière, nous devons préciser que nous voulons la fonction latticeView()` de la librarie `leafsync` en utilisant la notation suivante: `leafsync::latticeView`
 ```{r plot-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Limites terrestres de l'île de Montréal selon les projections Mercartor (gauche) et Robinson (droit)"}
 map_mercator <- mapview(limites_terrestres, col.regions = "white")
 map_robinson <- mapview(limites_terrestres_rob)
-latticeView(map_mercator,map_robinson, ncol = 2)
+leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
 ```
 
-Nous remarquons que les deux cartes sont identiques (outre la couleur)! Comment cela est-ce possible sachant que nous venons de transformer la projection ? Ceci s'explique par le fait que la fonction `mapview` représente par défaut toutes données spatiales dans la projection Pseudo-Mercator (ou Mercator Web), qui est la projection utilisée par l'application *OpenStreetMap*. Ainsi, la fonction `mapview` calcule elle-même le changement de projection avant de représenter des données spatiales. Pour conserver la projection originale il faut utiliser l'argument `native.crs=TRUE`.
+<br>
+
+Nous remarquons que les deux cartes sont identiques (outre la couleur)! Comment cela est-ce possible sachant que nous venons de transformer la projection ? Ceci s'explique par le fait que la fonction `mapview()` représente par défaut toutes données spatiales dans la projection Pseudo-Mercator (ou Mercator Web), qui est la projection utilisée par l'application *OpenStreetMap*. Ainsi, la fonction `mapview` calcule elle-même le changement de projection avant de représenter des données spatiales. Pour conserver la projection originale il faut utiliser l'argument `native.crs=TRUE`.
 
 Représentons à nouveau les cartes des limites terrestres de la région de Montréal, cette fois en précisant que nous voulons conserver le CRS d'orgine.
 ```{r plot-terre3, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Limites terrestres de l'île de Montréal selon les projections Web Mercartor (gauche), Mercator (centre) et Robinson (droit)"}
@@ -370,12 +380,14 @@ map_web <- mapview(limites_terrestres, col.regions = "white")
 map_mercator <- mapview(limites_terrestres, col.regions = "yellow", native.crs=TRUE)
 map_robinson <- mapview(limites_terrestres_rob, native.crs=TRUE)
 
-latticeView(map_web,map_mercator,map_robinson, ncol = 3)
+leafsync::latticeView(map_web,map_mercator,map_robinson, ncol = 3)
 ```
+
+<br>
 
 Remarquez que nous avons utilisé l'argument `ncol` dans la fonction `latticeview` pour spécifier le nombre de colonnes - c-à-d le nombre de panneaux verticaux qu'aura cette image. 
 
-Finalement, pour sauvegarder des données vectorielles, nous utilisons la fonction `st_write` de la librarie `st`, de la même façon que nous avons utilisé la fonction `st_read` en début de leçon. Par exemple, sauvons les données `limites_terrestres_rob` que nous venons de créer.
+Finalement, pour sauvegarder des données vectorielles, nous utilisons la fonction `st_write()` de la librarie `st`, de la même façon que nous avons utilisé la fonction `st_read()` en début de leçon. Par exemple, sauvons les données `limites_terrestres_rob` que nous venons de créer.
 
 ```{r save-terre2, echo = FALSE,  warning = FALSE, message = FALSE, eval = FALSE}
 nom_du_fichier<- paste(module, "/Montreal_Velo/terre/terre_rob_shp.shp", sep = "")
@@ -394,10 +406,13 @@ st_read(limites_terrestres_rob,nom_du_fichier)
 
 Dans cette section, nous allons explorer les données vectorielles d'une géodatabase du Ministère de l'Éducation et de l'Enseignement supérieur du Québec (MEES).
 
+<br>
 
 #### Importer les données {-}
 
 Téléchargez les [données du MEES](https://github.com/sci1031/sci1031/tree/master/Module4/data/Donnees_Ouvertes_MEES.gbd.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier Donnees_Ouvertes_MEES.gdb est la geodatabase contenant de multiples fichiers de formats différents.
+
+<br>
 
 #### Lire les données {-}
 
@@ -423,7 +438,7 @@ couches_mees
 
 Nous observons que la géodatabase contient 18 couches différentes. Nous pouvons connaître le nom donné à chaque couche (`layer_name`), leur géométrie (`geometry_type`), le nombre d'objets vectoriels qu'elles contiennent (`features`), et le nombre d'attributs qu'elles décrivent (`fields`).
 
-Les couches dont le nom commence par `CS_` contiennent des données vectorielles relatives aux centres de services scolaires^[Les centres de services scolaires (qui remplacent les commissions scolaires depuis 2020) ont pour rôle d'épauler les établissements d'enseignement situés sur leur territoire. Pour plus d'informations, consultez le site web du [MEES]^(https://www.quebec.ca/education/prescolaire-primaire-et-secondaire/gouvernance-scolaire/#c42437)]. Puisque chacun de ces centres couvre un territoire qui leur est propre, ces données sont des multi-polygones.
+Les couches dont le nom commence par `CS_` contiennent des données vectorielles relatives aux centres de services scolaires^[Les centres de services scolaires (qui remplacent les commissions scolaires depuis 2020) ont pour rôle d'épauler les établissements d'enseignement situés sur leur territoire. Pour plus d'informations, consultez le site web du MEES^[https://www.quebec.ca/education/prescolaire-primaire-et-secondaire/gouvernance-scolaire/#c42437]]. Puisque chacun de ces centres couvre un territoire qui leur est propre, ces données sont des multi-polygones.
 
 Les couches dont le nom commence par `PPS_` et `ES_` contiennent des données vectorielles relatives aux établissements d'enseignement primaire, secondaire et supérieure. Puisque chacun de ces établissements est identifié par une paire de coordonnées, ces données sont des points. 
 
@@ -443,15 +458,17 @@ Notez le système de coordonnées de référence: le datum WGS84 et la projectio
 
 Notez aussi que cette couche de la géodatabase possède la même structure que celle d'un *shapefile*.
 
-Nous pouvons visualiser la position des écoles publiques du Québec en utilisant la librarie `mapview`.
+Nous pouvons visualiser la position des écoles publiques du Québec en utilisant la fonction `mapview()` de la librarie `mapview`.
 ```{r plot-ecoles-pub, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques du Québec"}
 mapview(ecoles_pub)
 ```
+<br>
 Nous remarquons qu'il est difficile de visualiser la position des écoles dans la région Sud du Québec car il y a énormément de points.
+<br>
 
 #### Explorer les attributs d'une couche {-}
 
-Pour explorer les attributs associés à la couche `ecoles_pub`, commençons d'abord par utiliser la fonction `names` qui retourne le nom associé à chaque attribut de la couche.
+Pour explorer les attributs associés à la couche `ecoles_pub`, commençons d'abord par utiliser la fonction `names()` qui retourne le nom associé à chaque attribut de la couche.
 
 
 ```{r names-ecoles-pub, eval = TRUE, echo = TRUE}
@@ -461,11 +478,11 @@ names(ecoles_pub)
 Notre première réaction à la lecture de ces noms est qu'ils ne sont pas tous intuitifs!
 Examinons les quatre attributs suivants: "NOM_OFFCL_ORGNS", "NOM_MUNCP_GDUNO_IMM", "TYPE_CS", et "SHAPE".
 
-L'attribut "NOM_OFFCL_ORGNS" correspond au nom de chaque école publique. On peut lire les premières entrées de cette liste de noms en utilisant la fonction `head`:
+L'attribut "NOM_OFFCL_ORGNS" correspond au nom de chaque école publique. On peut lire les premières entrées de cette liste de noms en utilisant la fonction `head()`:
 ```{r head-noms-ecoles-pub, eval = TRUE, echo = TRUE}
 head(ecoles_pub$NOM_OFFCL_ORGNS)
 ```
-La fonction `head` indique aussi le nombre de `levels`, c'est-à-dire le nombre de valeurs différentes que peut prendre l'attribut. Dans le cas présent, chaque école possède un nom unique. Il y a donc autant de valeurs d'attribut qu'il y a d'écoles.
+La fonction `head()` indique aussi le nombre de "levels", c'est-à-dire le nombre de valeurs différentes que peut prendre l'attribut. Dans le cas présent, chaque école possède un nom unique. Il y a donc autant de valeurs d'attribut qu'il y a d'écoles.
 
 L'attribut "NOM_MUNCP_GDUNO_IMM" correspond au nom de la municipalité dans laquelle se trouve une école publique. Pour avoir un aperçu des valeurs données, on utilise encore la fonction `head`:
 ```{r head-villes-ecoles-pub, eval = TRUE, echo = TRUE}
@@ -478,18 +495,19 @@ L'attribut "TYPE_CS" identifie les écoles selon leur appartenance à une commis
 head(ecoles_pub$TYPE_CS)
 ```
 
-Dans ce cas, on remarque qu'il y a trois niveaux ("levels") possibles: Anglo, Franco, et Statut. Il est aussi possible d'obtenir cette information en utilisant la fonction `levels`:
+Dans ce cas, on remarque qu'il y a trois niveaux ("levels") possibles: Anglo, Franco, et Statut. Il est aussi possible d'obtenir cette information en utilisant la fonction `levels()`:
 ```{r levels-type-ecoles-pub, eval = TRUE, echo = TRUE}
 levels(ecoles_pub$TYPE_CS)
 ```
 
 Finalement, l'attribut "SHAPE" donne la position géographique de chaque école publique et les métadonnées spatiales associées à cette couche:
-information en utilisant la fonction `levels`:
 ```{r head-shape-ecoles-pub, eval = TRUE, echo = TRUE}
 head(ecoles_pub$SHAPE)
 ```
+<br>
 
-#### Sélection d'un sous-ensemble de données 
+#### Sélection d'un sous-ensemble de données {-}
+
 Pour simplifier la visualisation de cette couche, nous allons nous concentrer sur les écoles de la municipalité de Montréal.
 Pour ce faire, nous créons un nouveau *shapefile* en sélectionnant les données propres à la municipalité de Montréal:
 ```{r ecoles-pub-Mtl, eval = TRUE, echo = TRUE}
@@ -497,16 +515,20 @@ ecoles_pub_Mtl<- ecoles_pub[ecoles_pub$NOM_MUNCP_GDUNO_IMM == "Montréal",]
 ```
 Interprétons cette ligne de commande: elle utilise l'opérateur logique `==` pour sélectionner les écoles publiques de la municipalité de Montréal, ainsi que tous les autres attributs au sein de la couche `ecoles_pub`.
 
-Visualisons maintenant ce nouveau *shapefile* en utilisant la fonction `mapview`.
+Visualisons maintenant ce nouveau *shapefile* en utilisant la fonction `mapview()`.
 ```{r plot-ecoles-pub-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques de la ville de Montréal"}
 map_pub_mtl<-mapview(ecoles_pub_Mtl, cex = 2)
 map_pub_mtl
 ```
 
+<br>
 Ici, nous avons utilisé l'argument `cex` pour diminuer la taille des points sur la carte (la taille par défaut est 6).
 En cliquant sur l'un ou l'autre des points vous obtiendrez l'ensemble des attributs propres à l'école sélectionnée.
 
-#### Visualisation de plusieurs couches d'une géodatabse
+<br>
+
+#### Visualisation de plusieurs couches d'une géodatabse {-}
+
 Nous voulons visualiser d'autres types d'établissement d'enseignement donnés dans la géodatabase du Ministère de l'Éducation et de l'Enseignement supérieur du Québec. Choisissons les écoles privées, les établissements de niveau collégial (e.g. CÉGEP) et les universités. Pour se faire nous utilisons encore la fonction `st_read` en spécifiant le nom de la couche (`layer`) désirée.
 
 ```{r fake_autres_institutions, eval = FALSE}
@@ -546,10 +568,9 @@ map_pub_mtl+map_priv_mtl+map_college_mtl+map_univ_mtl
 ```
 Dans le menu dans le coin supérieur gauche de la carte, remarquez que vous pouvez sélectionner/désélectionner chaque couche selon l'information que vous désirez explorer.
 
-Il serait intéressant de créer une nouvelle géodatabase pour sauvegarder les quatre nouveaux *shapefiles* des institutions d'enseignement à Montréal au sein d'une même structure. Malheureusement `R` peut seulement lire des géodatabases mais ne peut pas sauvegarder ce format qui est propriétaire de ESRI. Ainsi, il faudrait utiliser la fonction `st_write` pour sauvegarder chacun des *shapefiles* individuellement. 
+Il serait intéressant de créer une nouvelle géodatabase pour sauvegarder les quatre nouveaux *shapefiles* des institutions d'enseignement à Montréal au sein d'une même structure. Malheureusement `R` peut seulement lire des géodatabases mais ne peut pas sauvegarder ce format qui est propriétaire de ESRI. Ainsi, il faudrait utiliser la fonction `st_write()` pour sauvegarder chacun des *shapefiles* individuellement. 
 
-Nouvelle visualisation
-* peut sauver chaque sous-ensemble sous forme de shapefile, mais ne peut pas combiner sous forme de geodatabase.
+
 
 
 ## Exercice {#ex_vec}
