@@ -71,7 +71,7 @@ Téléchargez les [données sur le réseau de pistes cyclables](https://github.c
 - `terre`.
 
 
-#### Lire les données {-}
+#### Lire les données {#lire-shp}
 
 Pour lire des données vectorielles contenues dans un fichier *shapefile*, nous allons utiliser la librairie `sf`. Notez que la librairie `rgdal` se charge automatiquement lorsque `sf` se charge.
 
@@ -103,8 +103,13 @@ La fonction `st_read()` vous permet d'ores et déjà d'obtenir certaines informa
 Nous allons maintenant lire les données vectorielles de type ligne, en utilisant encore la fonction `st_read()`.
 
 ```{r fake-pistes, eval = FALSE}
+<<<<<<< Updated upstream
 chemin <-"D:/votrechemin/SCI1031/Module4/Donnees/"
 nom_du_fichier<- paste(chemin, "Montreal_Velo/pistes/pistes_cyclables_type.shp", sep = "")
+=======
+chemin <-"D:/votrechemin/SCI1031/Moattributsdule4/Donnees/"
+nom_du_fichier<- paste(chemin, "/Montreal_Velo/pistes/pistes_cyclables_type.shp", sep = "")
+>>>>>>> Stashed changes
 pistes_cyclables <- st_read(nom_du_fichier)
 ```
 
