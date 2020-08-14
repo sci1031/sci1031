@@ -220,6 +220,15 @@ On vérifie que le nouveau filtre fonctionne et que nous avons les villes seulem
 mapview(villes_qc) + mapview(subset(provinces, NAME_1 == "Québec"))
 ```
 
+Certains polygones comme le Québec sont particulièrement échancré et possèdent de nombreuses îles. Ce type de polygon ralentissent parfois considérablement l'affichage à l'écran. Il peut être intéressant d'utiliser la fonction `st_simplify` afin d'attinuer le niveau de détails des polygones. il faut s'assurer que l'unité de projection est en système métrique.
+
+```{r, eval = FALSE}
+provs_simplifie <- st_simplify(st_transform(provinces, crs = 32198))
+mapview(provs_simplifie, dTolerance = 50000)
+```
+
+Attention si vous appliquez cette transformation, prendre note que vous perdez de la résolution spatiale. Cela pourrait avoir des impacts sur le résultat de vos analyses.
+
 Nous avons maintenant convenablement isolé les villes du Québec. La prochaine étape consiste à ajouter pour chacune des villes, sa taille de population. 
 
 #### Joindre des sources d'informations externes (CSV) {-}
