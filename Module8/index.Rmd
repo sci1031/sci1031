@@ -24,21 +24,37 @@ Dans la section Leçon, vous utiliserez des données XYXYX
 Dans la section Exercice, vous utiliserez XXXXX
 
 ```{r load-libraries8, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
-#library(raster)
-library(rgdal)
-library(ggplot2)
-library(dplyr)
+library(raster)
 library(sf)
-library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
-library(ggpubr)
 ```
 
+### Importation du raster
 
-## Leçon
+### Accéder au valeur
 
-### Opérations de base
+- raster[1:100]
+- accéder au coordonnées
+- cellFromXY(elev, xy = c(0.1, 0.1))
 
--	Création d’un raster, création d’un raster multi-couches, opérations mathématiques et statistiques élémentaires.
+Exemple avec les NAs
+- remplacer les valeurs
+
+### Modifier le contenu
+
+- reclassify les valeurs (faible, modéré, élevé)
+
+Décontextualisation par la perte des coordonnées X-Y, On privilégie l'approche:
+
+- as.data.frame(xy = TRUE)
+
+### Interaction avec un objet vectorielle
+
+- crop et mask
+
+### Extraire les valeurs
+
+- extract
+
 
 ### Opération sur un raster
 

@@ -22,6 +22,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `class`
 - `merge`
 - `st_join`
+- `st_simplify`
 - `st_area`
 - `set_units`
 - `st_buffer`
