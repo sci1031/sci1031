@@ -28,16 +28,134 @@ library(raster)
 library(sf)
 ```
 
-### Importation du raster
+## Leçon
 
-### Accéder au valeur
+Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présent dans le secteur de la ville de Sherbrooke. Nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l'élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d'élévation des parcs de la région de Sherbrooke. Pour chacun des parcs, nous allons identifier son point culminant. Enfin, nous dresserons le profil d'élévation des sentiers de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) pour l'un des parcs de notre choix.
 
-- raster[1:100]
-- accéder au coordonnées
-- cellFromXY(elev, xy = c(0.1, 0.1))
+
+Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur l'élévation et les parcs de la région de Sherbrooke](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Elevation_Parcs_Sherbrooke.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Elevation_Parcs_Sherbrooke` comprend deux sous-dossiers et un fichier:
+
+- buffer_sherbrooke
+- parcs_sherbrooke
+- DEM.tif
+
+
+### Opérations de base {-}
+
+Afin de se familiariser avec la manipulation de données vectorielles, nous allons exporer le région de Sherbrooke en se posant les questions suivantes: 
+
+> Parmis les 4 parcs nationaux de la région de sherbrooke, lequel dispose du plus haut sommet?
+
+En deuxième partie, on s'interrogera sur:
+
+> Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
+
+Pour répondre à cette question, il faut réaliser un ensemble d'opérations spatiales:
+
+- TODO: Étayer le pseudo code ici
+
+Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
+
+### Parmis les 4 parcs nationaux de la région de sherbrooke, lequel dispose du plus haut sommet? { - }
+
+Afin de répondre à cette question, nous désirons dans un premier temps charger dans l'environnement R, les différentes couches d'informations spatiales.
+
+On charge les librairies requises.
+
+```{r}
+library(sf)
+library(raster)
+```
+
+#### Importation des données {-}
+
+On charge le *shapefile* des 4 parcs de la régions de Sherbrooke que nous avons isolé à l'intérieur du module 7. 
+
+```{r, eval = FALSE}
+chemin <-"D:/votrechemin/SCI1031/Module8/Donnees/"
+chemin_parcs <- paste(chemin, "/parcs_sherbrooke/parcs_sherbrooke.shp", sep = "")
+parcs <- st_read(chemin_parcs)
+```
+
+
+```{r, echo = FALSE}
+parcs <- st_read("Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
+```
+
+Et enfin, on importe la couche d'élévation pour la région d'intérêt.
+
+```{r, eval = FALSE}
+chemin_dem <- paste(chemin, "/DEM.tif", sep = "")
+dem <- raster(chemin_dem)
+```
+
+```{r, echo = FALSE}
+dem <- raster("Module8/data/DEM.tif")
+```
+
+On visualise par la suite les deux objets spatiaux afin de valider l'importation.
+
+```{r}
+mapview(dem) + mapview(parcs, zcol = "TRQ_NM_", legend = FALSE)
+```
+
+On peut à présent vérifier les projections respectives des objets spatiaux importés. Certaines opérations spatiales vont nécessiter que les deux objets soient placés dans le même système de projection.
+
+```{r}
+proj4string(dem) 
+st_crs(parcs)$proj4string
+```
+
+Les deux projections sont divergentes, nous allons reprojeter le DEM dans le système de projection des parcs de la région de Sherbrooke à l'aide de la fonction `projectRaster()` du package `raster`.
+
+```{r}
+dem <- projectRaster(dem, crs = st_crs(parcs)$proj4string)
+proj4string(dem) 
+```
+
+#### Accéder et manipuler les valeurs d'un `raster` (données matricielles)
+
+Avant d'aller plus loin, nous allons prendre un moment pour nous familiariser avec la manipulation de raster.
+Les objet de type raster dispose d'une structure d'objet particulière (communément appelé classe S4). Si l'on veut accéder aux valeurs stockées, on doit procéder d'une certaine manière. 
+
+Pour des valeurs spécifiques, on réfère le numéro/l'index du pixel.
+
+```{r}
+# Accéder à la première valeur
+dem[1]
+# Accéder au valeurs de 300 à 430
+dem[300:430]
+# Pour des valeurs spécifiques
+dem[c(14, 30, 33:44)]
+```
+
+Il est souvent dangereux d'extraire des valeurs à des positions spécifiques en utilisant les index de pixels. En effet, on perd une information précieuse: la localisation dans l'espace du pixel (coordonnées X et Y). C'est pourquoi, il est souvent privilégié de convertir le raster en `data.frame`. La fonction `as.data.frame(..., xy = TRUE)`, appliqué sur un objet de class `raster`, présente l'avantage de retourner les coordonnées associées à la valeur.
+
+```{r}
+df_dem <- as.data.frame(dem, xy = TRUE)
+head(subset(df_dem, !is.na(DEM)))
+```
+
+En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des valeurs du raster. Cette approche permet de calculer la moyenne, la médiane etc. La fonction `summary()` permet d'en savoir davantage sur la distribution des valeurs.
+
+```{r}
+max(getValues(dem))
+summary(getValues(dem))
+```
+Si l'on veut en savoir davantage sur la taille du raster, on peut se référer aux fonctions suivantes:
+
+```{r}
+# Nombre de lignes
+nrow(dem)
+# Nombre de colonne
+ncol(dem)
+# Nombre total de pixels
+ncell(dem)
+```
 
 Exemple avec les NAs
 - remplacer les valeurs
+
 
 ### Modifier le contenu
 
@@ -47,18 +165,17 @@ Décontextualisation par la perte des coordonnées X-Y, On privilégie l'approch
 
 - as.data.frame(xy = TRUE)
 
+## Changer sa résolution
+
+
+
+
+
 ### Interaction avec un objet vectorielle
 
 - crop et mask
-
-### Extraire les valeurs
-
 - extract
 
-
-### Opération sur un raster
-
--	Extraction d’un sous-ensemble de données, suppression de données, modification de données, changement de position
 
 ### Opération sur plusieurs rasters
 

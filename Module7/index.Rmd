@@ -43,13 +43,13 @@ library(units)
 
 ## Leçon
 
-Dans le cadre de cette leçon, nous allons préparer notre saison estivale de vacances en explorant les données vectorielles relatives aux municipalités du Québec (POINTS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives)), au réseau de la SÉPAQ (POLYGONS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000)) et enfin aux sentiers de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)).
+Dans le cadre de cette leçon, nous allons préparer notre saison estivale de vacances en explorant les données vectorielles relatives aux municipalités et aux limites administrative du Québec (POINTS & POLYGONS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives)) et au réseau de parcs nationaux de la SÉPAQ (POLYGONS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000)).
 
-Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur les parcs et les villes du Québec](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Quebec_Parcs.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Quebec_Parcs` comprend trois sous-dossiers:
+Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur les parcs et les villes du Québec](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Quebec_Parcs.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Quebec_Parcs` comprend deux sous-dossiers:
 
 - `villes`
-- `parcs`
-- `sentiers`
+- `parcs.gdb`
+- `provinces`
 
 ### Opérations de base {-}
 
@@ -169,12 +169,12 @@ On veut filtrer ces villes pour obtenir seulement celles présentes au Québec (
 La première étape de cette jointure consiste à importer le fichier des limites administratives des provinces ([source](https://gadm.org/)). 
 
 ```{r, eval = FALSE}
-chemin_provinces <- paste(chemin, "/provinces_CA/provinces_CA.shp", sep = "")
+chemin_provinces <- paste(chemin, "/provinces/provinces.shp", sep = "")
 provinces <- st_read(chemin_provinces)
 ```
 
 ```{r, include = FALSE}
-provinces <- st_read("Module7/data/provinces_CA/provinces_CA.shp")
+provinces <- st_read("Module7/data/provinces/provinces.shp")
 ```
 
 On peut maintenant vérifier visuellement l'importation. En examinant la table d'attributs de l'objet `provinces` (en cliquant sur un des polygons de la carte interactive ci-dessous), on remarque que l'attribut `NAME_1` contient le nom des provinces. 
@@ -333,19 +333,19 @@ Nous allons par la suite nous servir de cette couche contenant les polygons afin
 Pour réaliser cette étape, nous devons dans un premier temps charger la couche d'informations spatiales contenant les différentes aires récréatives du Québec. Cette information se retrouve à l'intérieur d'une géodatabase téléchargeable depuis le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000). Comme vu dans le module 2, les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et lister les différentes couches afin de déterminer laquelle est pertinente pour continuer notre analyse.
 
 ```{r}
-st_layers("Module7/data/TRQ_100k.gdb/") 
+st_layers("Module7/data/parcs.gdb") 
 ```
 
 Comme on peut le remarquer, les intitulés des différentes couches ne sont pas explicites. Il faut donc prendre le temps de regarder la documentation [accessible sur le site de données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000/resource/229322ef-eca2-4ae9-a511-ba599bc2745e). En s'intéressant à la structure de données et à la nomenclature utilisée et décrite, on peut identifier que la couche `terpnq_s` correspond aux territoires des parc nationaux du Québec. On peut maintenant faire la lecture de cette couche à l'aide de la fonction `st_read()`.
 
 ```{r, eval = FALSE}
-chemin_provinces <- paste(chemin, "/TRQ_100k.gdb", sep = "")
+chemin_provinces <- paste(chemin, "/parcs.gdb", sep = "")
 provinces <- st_read(chemin_provinces)
 mapview(parcs_nationaux, zcol = "TRQ_NM_TER")
 ```
 
 ```{r, echo = FALSE}
-parcs_nationaux <- st_read("Module7/data/TRQ_100k.gdb/", layer = "terpnq_s") 
+parcs_nationaux <- st_read("Module7/data/parcs.gdb", layer = "terpnq_s") 
 mapview(parcs_nationaux, zcol = "TRQ_NM_TER", legend = FALSE)
 ```
 

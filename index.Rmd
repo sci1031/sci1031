@@ -31,7 +31,7 @@ local({
   options(repos = r)
 })
 
-lapply(c('DT', 'citr', 'formatR', 'svglite', 'units', 'leafsync'), function(pkg) {
+lapply(c('DT', 'citr', 'formatR', 'svglite', 'units', 'leafsync', 'lwgeom'), function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
 
