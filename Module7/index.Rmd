@@ -1,6 +1,5 @@
 # Manipulation de données vectorielles {#manip_vec}
 
-
 L'objectif principal de ce module est d'apprendre à manipuler des données vectorielles. 
 
 À la fin de ce module vous saurez:
@@ -13,24 +12,31 @@ L'objectif principal de ce module est d'apprendre à manipuler des données vect
 Vous utiliserez les librairies suivantes:
 
 - `sf`
+- `mapview`
+- `units`
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
-- TODO
+- `subset`
+- `st_coordinates`
+- `class`
+- `merge`
+- `st_join`
+- `st_area`
+- `set_units`
+- `st_buffer`
+- `st_intercepts`
+- `rowSums`
+- `lengths`
 
 Dans la section Leçon, vous utiliserez les données portant sur les municipalités du Québec,
 
 Dans la section Exercice, vous utiliserez XXXXX
 
 ```{r load-libraries7, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
-#library(raster)
-library(rgdal)
-library(ggplot2)
-library(dplyr)
 library(sf)
-library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
-library(ggpubr)
 library(mapview)
+library(units)
 ```
 
 
@@ -350,7 +356,7 @@ sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) 
 Le pourcentage de couverture spatial des parcs nationaux (SÉPAQ) pour la province de Québec est de `r round(sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) * 100, 2) `%. Noter également qu'il est possible à tout moment de changer l'unité de mesure en utilisant la fonction `set_units()` dans le package `units`. 
 
 ```{r}
-units::set_units(st_area(parcs_nationaux), km^2)
+set_units(st_area(parcs_nationaux), km^2)
 ```
 
 Retournons à présent à notre question originale, nous avons toutes les couches d'informations spatiales pour répondre à la question: _Pour chacune des 10 plus grandes villes du Québec, combien de parcs nationaux se retrouvent dans un rayon de 70 kms?_. La fonction `st_intersects` permet de tester qu'elles sont les parcs se retouvant partiellement ou non à l'intérieur de chacun des buffers. Avant de réaliser ce type d'opération spatiale, il faut toujours s'assurer que les deux objets spatiaux (`top10_villes_buffer` et `parcs_nationaux`) disposent de la même projection.
