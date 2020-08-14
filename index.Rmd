@@ -24,9 +24,6 @@ options(
   warnPartialMatchDollar = FALSE
 )
 
-# Set knitr cache by default = TRUE
-opts_chunk$set(cache=TRUE)
-
 local({
   r = getOption('repos')
   if (!length(r) || identical(unname(r['CRAN']), '@CRAN@'))
@@ -34,7 +31,7 @@ local({
   options(repos = r)
 })
 
-lapply(c('DT', 'citr', 'formatR', 'svglite'), function(pkg) {
+lapply(c('DT', 'citr', 'formatR', 'svglite', 'units'), function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
 

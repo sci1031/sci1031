@@ -350,8 +350,7 @@ sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) 
 Le pourcentage de couverture spatial des parcs nationaux (SÉPAQ) pour la province de Québec est de `r round(sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) * 100, 2) `%. Noter également qu'il est possible à tout moment de changer l'unité de mesure en utilisant la fonction `set_units()` dans le package `units`. 
 
 ```{r}
-# Calcul de la superficie de chaque parcs nationaux.
-set_units(st_area(parcs_nationaux), km^2)
+units::set_units(st_area(parcs_nationaux), km^2)
 ```
 
 Retournons à présent à notre question originale, nous avons toutes les couches d'informations spatiales pour répondre à la question: _Pour chacune des 10 plus grandes villes du Québec, combien de parcs nationaux se retrouvent dans un rayon de 70 kms?_. La fonction `st_intersects` permet de tester qu'elles sont les parcs se retouvant partiellement ou non à l'intérieur de chacun des buffers. Avant de réaliser ce type d'opération spatiale, il faut toujours s'assurer que les deux objets spatiaux (`top10_villes_buffer` et `parcs_nationaux`) disposent de la même projection.
@@ -436,7 +435,7 @@ On constate que Sherbrooke et Saint-Jean-sur-Richelieu dispose tout deux du plus
 NOTE: ICI on pourrait introduire la notion de cropping pour tenter de départager mais je pense qu'il y a déjà pas de stock alors 
 -->
 
-Pour le module 8, nous nous attarderons aux 4 parcs de la région de Sherbooke afin de dresser un portrait des sentiers hivernaux et trouver les meilleurs panoramas de la région.
+Pour le module 8, nous nous allons caractériser le profil d'élévation des 4 parcs de la région de Sherbooke afin de trouver les meilleurs panoramas de la région.
 
 ## Exercice
 
