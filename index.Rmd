@@ -24,6 +24,9 @@ options(
   warnPartialMatchDollar = FALSE
 )
 
+# Set knitr cache by default = TRUE
+opts_chunk$set(cache=TRUE)
+
 local({
   r = getOption('repos')
   if (!length(r) || identical(unname(r['CRAN']), '@CRAN@'))
