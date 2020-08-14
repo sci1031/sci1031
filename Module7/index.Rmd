@@ -62,7 +62,7 @@ Pour répondre à cette question, il faut réaliser un ensemble d'opérations sp
 
 Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
 
-### Quelles sont les 10 plus grandes villes du Québec?
+### Quelles sont les 10 plus grandes villes du Québec? {-}
 
 #### Importation des données {-}
 
@@ -278,11 +278,11 @@ On peut visualisé avec `mapview` ce nouvel objet.
 mapview(top10_villes, zcol= "population")
 ```
 
-### Pour chacune de ces villes, combien de parcs nationaux se retrouvent dans un rayon de 70 kms?
+### Pour chacune de ces villes, combien de parcs nationaux se retrouvent dans un rayon de 70 kms? {-}
 
 La prochaine étape pour répondre à notre question consiste à tracer une zone tampon (`POLYGON`) de 70 kms de rayon autours des villes (`POINT`) afin de dénombre le nombre de parcs nationaux se trouvant dans cette zone. 
 
-#### Créer des polygones (buffer) autours de points
+#### Créer des polygones (buffer) autours de points {-}
 
 La première étape consiste à tracer un polygon autours des villes. Pour cela, nous allons utiliser la fonction `st_buffer(top10_villes, dist = 70)`. Le premier argument détermine l'objet spatial et le second la distance (en mètre) autours de la ville. Avant de réaliser cette opération, nous devons vérifier que la couche spatiale des 10 plus grandes villes disposent d'un systèmes de coordonnées projetés en unité métrique pour être sûr que les 70 kms ne soit pas interprété comme 70 degree, puisque l'unité est déterminer en fonction de la projection de l'objet spatial. Cette erreur est très courante. Lorsque l'on veut calculer des distances euclidiennes, il faut toujours s'assurer que l'unité du système de projection est en mètre et non en degrée.
 
@@ -312,7 +312,7 @@ knitr::include_graphics('Module7/images/geoOps.png')
 
 Nous allons par la suite nous servir de cette couche contenant les polygons afin de dénombrer le nombre de parcs nationaux se retrouvant à l'intérieur. On appelle cette famille d'opérations spatiales, des interceptions.
 
-#### Relations topologiques entre deux couches vectorielles
+#### Relations topologiques entre deux couches vectorielles {-}
 
 Pour réaliser cette étape, nous devons dans un premier temps charger la couche d'informations spatiales contenant les différentes aires récréatives du Québec. Cette information se retrouve à l'intérieur d'une géodatabase téléchargeable depuis le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000). Comme vu dans le module 2, les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et lister les différentes couches afin de déterminer laquelle est pertinente pour continuer notre analyse.
 
@@ -376,7 +376,7 @@ which(top10_villes_buffer$toponyme == 'Sherbrooke')
 La fonction which permet de retourner le numéro de ligne dans la table d'attributs) de l'objet `top10_villes_buffer` satisfant la condition `toponyme == 'Sherbrooke'`. On consigne ensuite la sortie de la fonction dans un objet `id_buffer_sherbrooke`.
 
 ```{r}
-id_buffer_sherbrooke <- which(top10_villes_buffer$toponyme == 'Saint-Jean-sur-Richelieu')
+id_buffer_sherbrooke <- which(top10_villes_buffer$toponyme == 'Sherbrooke')
 ```
 À présent, on récupère le niveau de la liste comprenant les identifiants des parcs nationaux qui chevauchent la zone tampon de la ville de Sherbrooke.
 
@@ -405,9 +405,8 @@ rowSums(st_intersects(x = top10_villes_buffer, y = parcs_nationaux, sparse = FAL
 
 # Si l'on travaille avec l'argument sparse = FALSE:
 lengths(st_intersects(x = top10_villes_buffer, y = parcs_nationaux))
-# La fonction lengths retourne la dimension des vecteurs (c.a.d le nombre de
-# parcs) pour chacune des niveaux de la liste (chaque niveau étant une zone tampon).
 ```
+La fonction lengths retourne la dimension des vecteurs (c.a.d le nombre de parcs) pour chacune des niveaux de la liste (chaque niveau étant une zone tampon).
 
 On consigne à présent ces valeurs dans une nouvelle colonne de la table d'attributs de l'objet `top10_villes`.
 
