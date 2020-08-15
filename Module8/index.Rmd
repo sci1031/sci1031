@@ -16,8 +16,10 @@ Vous utiliserez les librairies suivantes:
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
--
--
+- `getValues`
+- `nrow`, `ncol` et `ncell`
+- `as.data.frame`
+
 
 Dans la section Leçon, vous utiliserez des données XYXYX
 
@@ -50,9 +52,14 @@ En deuxième partie, on s'interrogera sur:
 
 > Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
 
-Pour répondre à cette question, il faut réaliser un ensemble d'opérations spatiales:
+Enfin, nous étudierons la climatologie du parcs national de répondre à la question suivantes:
 
-- TODO: Étayer le pseudo code ici
+> Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+
+Pour répondre à ces questions, il faut réaliser un ensemble d'opérations spatiales. 
+Pour la première question:
+
+- TODO: Étayer le pseudo code ici, chaque étapes pour chacune des trois questions
 
 Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
 
@@ -153,32 +160,56 @@ ncol(dem)
 ncell(dem)
 ```
 
-Exemple avec les NAs
-- remplacer les valeurs
-
-
-### Modifier le contenu
+#### Modifier le contenu
 
 - reclassify les valeurs (faible, modéré, élevé)
+- remplacer des valeurs (exemple avec le NA)
 
 Décontextualisation par la perte des coordonnées X-Y, On privilégie l'approche:
 
 - as.data.frame(xy = TRUE)
 
-## Changer sa résolution
+#### Changer la résolution d'un raster
 
+- aggregate
 
+### Parmis les 4 parcs nationaux de la région de sherbrooke, lequel dispose du plus haut sommet?
 
-
-
-### Interaction avec un objet vectorielle
-
+On crop le raster avec le parc ciblé dans la question 1. Crop et Mask sont des notions plus utile lorsque l'on veut faire de la visualisation. Crop = Zoom in sur la BBOX, Mask = Zoom in + mask les pixels tombant à l'extérieur du parcs.
 - crop et mask
-- extract
 
+On extrait les valeurs ce retrouvant dans le parc.
+- extract values
 
-### Opération sur plusieurs rasters
+Trouver le pixel avec la plus forte valeur d'élévation et représenter le ou les points sur la carte
 
--	Combinaison de rasters, jointure spatiale, intersection de couches, découpage d’une couche.
+- vmax = maxValue(r): trouver la valeur max
+- rasterToPoints(r, function(x) all.equal(x, vmax), spatial = FALSE): Créer le point 
+- Pas le choix ici: parler un tout petit de `sp` pour expliquer pourquoi spatial = FALSE
+- Jouer avec spatial = TRUE (fonction rasterToPoints) et conversion vers sf
+- st_point si (spatial = FALSE)
+- Dans quelle parcs tombent ce point: st_within avec sf
+
+Première question répondu: On a trouver notre plus haut sommet à l'intérieur des 4 parcs.
+
+### Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
+
+- Isoler le sentier le plus proche du sommet (st_nearest)
+- Puis, extraire les pixels du rasters se retrouvant sous la ligne du sentier (extract)
+- mapview des pixels passant sous la ligne du sentier
+- On montre habituellement les figures (distance parcourue vs élévation) présenté par la SEPAQ, on veut améliorer le rendu visuelle.
+- Utiliser la resolution du raster pour déterminer la distance inter-pixels - Ici ca va prendre de l'illustration pour être sûr que la notion est saisie
+- Faire la figure de distance cumulée versus élévation 
+- On vient de répondre à notre question
+
+### Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+
+- Dans ce chapitre, on veut jouer avec les rasterStack. Préparation d'un rasterStack avec la précipitation totale par mois pour le même bonding box que le raster de DEM. Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
+- On extract les valeurs de précipitation (par mois) du rasterStack pour le parc que l'on a ciblé
+- On montre comment on peut réaliser une moyenne entre deux mois rasterStack[[1]] + rasterStack[[2]] / 2 ou alors mean rasterStack[[1:2]]. 
+- Crop un raster rasterStack
+- which.min pour déterminer le raster du stack disposant de la plus petite valeur
+- Compléter avec d'autre chose, ca me parait léger... à voir quand au dessus ce sera écrit..
+
 
 ## Exercice
