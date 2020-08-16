@@ -175,7 +175,7 @@ Décontextualisation par la perte des coordonnées X-Y, On privilégie l'approch
 
 ### Parmis les 4 parcs nationaux de la région de sherbrooke, lequel dispose du plus haut sommet?
 
-On crop le raster avec le parc ciblé dans la question 1. Crop et Mask sont des notions plus utile lorsque l'on veut faire de la visualisation. Crop = Zoom in sur la BBOX, Mask = Zoom in + mask les pixels tombant à l'extérieur du parcs.
+On crop le raster avec les parcs du module 7 (Sherbrooke). Crop et Mask sont des notions plus utile lorsque l'on veut faire de la visualisation. Crop = Zoom in sur la BBOX, Mask = Zoom in + mask les pixels tombant à l'extérieur du parcs.
 - crop et mask
 
 On extrait les valeurs ce retrouvant dans le parc.
