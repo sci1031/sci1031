@@ -17,18 +17,18 @@ Vous utiliserez les librairies suivantes:
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
-- `subset`
-- `st_coordinates`
-- `class`
-- `merge`
-- `st_join`
-- `st_simplify`
-- `st_area`
-- `set_units`
-- `st_buffer`
-- `st_intercepts`
-- `rowSums`
-- `lengths`
+- `subset()`
+- `st_coordinates()`
+- `class()`
+- `merge()`
+- `st_join()`
+- `st_simplify()`
+- `st_area()`
+- `set_units()`
+- `st_buffer()`
+- `st_intercepts()`
+- `rowSums()`
+- `lengths()`
 
 Dans la section Leçon, vous utiliserez les données portant sur les municipalités du Québec,
 
@@ -93,7 +93,7 @@ mapview(villes, legend = FALSE)
 ```
 
 En cliquant sur chacun des marqueurs géographiques (dans la carte interactive), vous pouvez accéder à la table d'attributs. 
-Pour en savoir davantage sur les attributs, voici le lien vers la [la documentation](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326).  Cette table d'attribut contient une diversité d'informations plus ou moins importante pour répondre à notre question. On veut donc nettoyer la table d'attribut en sélectionnant la ou les colonnes pertinentes pour notre besoin. 
+Pour en savoir davantage sur les attributs, voici le lien vers la [documentation](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326).  Cette table d'attribut contient une diversité d'informations plus ou moins importante pour répondre à notre question. On veut donc nettoyer la table d'attribut en sélectionnant la ou les colonnes pertinentes pour notre besoin. 
 
 #### Sélectionner des attributs (colonnes) ou des localisations (lignes) spécifiques {-}
 
@@ -117,9 +117,9 @@ Les colonnes disposent toujours d'un nom unique dans un `data.frame`. On peut af
 
 ```{r}
 names(villes)
-villes[,"HAP_NM_TOP"]
+villes[, "HAP_NM_TOP"]
 # Ce qui revient également au même que la syntaxe suivante 
-villes[,13] 
+villes[, 13] 
 # Puisque cette colonne est en treizième position.
 ```
 
@@ -221,7 +221,7 @@ On vérifie que le nouveau filtre fonctionne et que nous avons les villes seulem
 mapview(villes_qc) + mapview(subset(provinces, NAME_1 == "Québec"))
 ```
 
-Certains polygones comme le Québec sont particulièrement échancré et possèdent de nombreuses îles. Ce type de polygon ralentissent parfois considérablement l'affichage à l'écran. Il peut être intéressant d'utiliser la fonction `st_simplify` afin d’atténuer le niveau de détails des polygones. il faut s'assurer que l'unité de projection est en système métrique.
+Certains polygones comme le Québec sont particulièrement échancré et possèdent de nombreuses îles. Ce type de polygon ralentissent parfois considérablement l'affichage à l'écran. Il peut être intéressant d'utiliser la fonction `st_simplify` afin d’atténuer le niveau de détails des polygones, il faut s'assurer que l'unité de projection est en système métrique.
 
 ```{r, eval = FALSE}
 provs_simplifie <- st_simplify(st_transform(provinces, crs = 32198))
@@ -278,7 +278,7 @@ Nous avons à présent assembler les deux pièces d'informations nécessaires po
 Nous allons sélectionner les 10 villes présentant la population la plus grande. La première consiste à ordonner l'attribut `population` contenu dans l'objet `villes`.
 
 ```{r}
-villes <- villes[order(villes$population, decreasing = TRUE),]
+villes <- villes[order(villes$population, decreasing = TRUE), ]
 ```
 
 L'objet `villes` est maintenant ordonné de manière décroissante en fonction de la taille de population des villes. Les 10 premières lignes de cet objet corresponds donc au 10 villes présentant la population la plus importante au Québec. On peut donc assigner les 10 premières lignes à un nouvelle objet intitulé `top10_villes`:
@@ -296,11 +296,11 @@ mapview(top10_villes, zcol= "population")
 
 ### Pour chacune de ces villes, combien de parcs nationaux se retrouvent dans un rayon de 70 kms? {-}
 
-La prochaine étape pour répondre à notre question consiste à tracer une zone tampon (`POLYGON`) de 70 kms de rayon autours des villes (`POINT`) afin de dénombre le nombre de parcs nationaux se trouvant dans cette zone. 
+La prochaine étape pour répondre à notre question consiste à tracer une zone tampon (`POLYGON`) de 70&nbsp;kms de rayon autours des villes (`POINT`) afin de dénombre le nombre de parcs nationaux se trouvant dans cette zone. 
 
 #### Créer des polygones (buffer) autours de points {-}
 
-La première étape consiste à tracer un polygon autours des villes. Pour cela, nous allons utiliser la fonction `st_buffer(top10_villes, dist = 70)`. Le premier argument détermine l'objet spatial et le second la distance (en mètre) autours de la ville. Avant de réaliser cette opération, nous devons vérifier que la couche spatiale des 10 plus grandes villes disposent d'un systèmes de coordonnées projetés en unité métrique pour être sûr que les 70&nbsp;kms ne soit pas interprété comme 70 degree, puisque l'unité est déterminer en fonction de la projection de l'objet spatial. Cette erreur est très courante. Lorsque l'on veut calculer des distances euclidiennes, il faut toujours s'assurer que l'unité du système de projection est en mètre et non en degrés.
+La première étape consiste à tracer un polygon autours des villes. Pour cela, nous allons utiliser la fonction `st_buffer(top10_villes, dist = 70)`. Le premier argument détermine l'objet spatial et le second la distance (en mètre) autours de la ville. Avant de réaliser cette opération, nous devons vérifier que la couche spatiale des 10 plus grandes villes disposent d'un systèmes de coordonnées projetés en unité métrique pour être sûr que les 70&nbsp;kms ne soit pas interprété comme 70&nbsp;°, puisque l'unité est déterminer en fonction de la projection de l'objet spatial. Cette erreur est très courante. Lorsque l'on veut calculer des distances euclidiennes, il faut toujours s'assurer que l'unité du système de projection est en mètre et non en degrés.
 
 ```{r}
 st_crs(top10_villes)  
@@ -349,7 +349,7 @@ parcs_nationaux <- st_read("Module7/data/parcs.gdb", layer = "terpnq_s")
 mapview(parcs_nationaux, zcol = "TRQ_NM_TER", legend = FALSE)
 ```
 
-Par curiosité, on peut se demander qu'elle est le pourcentage de couverture des parcs nationaux sur le territoire québcois. Pour cela, il faut obtenir la superficie de chacun des polygones grâce à la fonction `st_area()`. On doit d'abord s'assurer que la projection est en système métrique et reprojeter la couche si ce n'est pas le cas dans un autre système de coordonnées métriques.
+Par curiosité, on peut se demander qu'elle est le pourcentage de couverture des parcs nationaux sur le territoire québécois. Pour cela, il faut obtenir la superficie de chacun des polygones grâce à la fonction `st_area()`. On doit d'abord s'assurer que la projection est en système métrique et reprojeter la couche si ce n'est pas le cas dans un autre système de coordonnées métriques.
 
 ```{r}
 # Validation de l'unité du système de projection (unité métrique)
@@ -369,7 +369,7 @@ Le pourcentage de couverture spatial des parcs nationaux (SÉPAQ) pour la provin
 set_units(st_area(parcs_nationaux), km^2)
 ```
 
-Retournons à présent à notre question originale, nous avons toutes les couches d'informations spatiales pour répondre à la question: _Pour chacune des 10 plus grandes villes du Québec, combien de parcs nationaux se retrouvent dans un rayon de 70 kms?_. La fonction `st_intersects` permet de tester qu'elles sont les parcs se retouvant partiellement ou non à l'intérieur de chacun des buffers. Avant de réaliser ce type d'opération spatiale, il faut toujours s'assurer que les deux objets spatiaux (`top10_villes_buffer` et `parcs_nationaux`) disposent de la même projection.
+Retournons à présent à notre question originale, nous avons toutes les couches d'informations spatiales pour répondre à la question: _Pour chacune des 10 plus grandes villes du Québec, combien de parcs nationaux se retrouvent dans un rayon de 70&nbsp;kms?_. La fonction `st_intersects` permet de tester qu'elles sont les parcs se retrouvant partiellement ou non à l'intérieur de chacun des buffers. Avant de réaliser ce type d'opération spatiale, il faut toujours s'assurer que les deux objets spatiaux (`top10_villes_buffer` et `parcs_nationaux`) disposent de la même projection.
 
 ```{r}
 st_crs(top10_villes_buffer) == st_crs(parcs_nationaux)
@@ -451,6 +451,7 @@ NOTE: ICI on pourrait introduire la notion de cropping pour tenter de départage
 -->
 
 Pour le module 8, nous nous allons caractériser le profil d'élévation des 4 parcs de la région de Sherbrooke afin de trouver les meilleurs panoramas de la région.
+
 
 ## Exercice
 
