@@ -25,3 +25,5 @@ Imports:
   spdep,
   stars,
   svglite
+Remotes: 
+  r-spatial/mapview
