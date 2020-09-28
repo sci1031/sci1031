@@ -44,9 +44,9 @@ Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'inf
 
 ### Opérations de base {-}
 
-Afin de se familiariser avec la manipulation de données vectorielles, nous allons exporer le région de Sherbrooke en se posant les questions suivantes: 
+Afin de se familiariser avec la manipulation de données vectorielles, nous allons explorer le région de Sherbrooke en se posant les questions suivantes: 
 
-> Parmis les 4 parcs nationaux de la région de sherbrooke, lequel dispose du plus haut sommet?
+> Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
 
 En deuxième partie, on s'interrogera sur:
 
@@ -63,7 +63,7 @@ Pour la première question:
 
 Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
 
-### Parmis les 4 parcs nationaux de la région de sherbrooke, lequel dispose du plus haut sommet? { - }
+### Parmis les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet? { - }
 
 Afin de répondre à cette question, nous désirons dans un premier temps charger dans l'environnement R, les différentes couches d'informations spatiales.
 
@@ -149,6 +149,7 @@ En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des va
 max(getValues(dem))
 summary(getValues(dem))
 ```
+
 Si l'on veut en savoir davantage sur la taille du raster, on peut se référer aux fonctions suivantes:
 
 ```{r}
@@ -173,7 +174,7 @@ Décontextualisation par la perte des coordonnées X-Y, On privilégie l'approch
 
 - aggregate
 
-### Parmis les 4 parcs nationaux de la région de sherbrooke, lequel dispose du plus haut sommet?
+### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
 
 On crop le raster avec les parcs du module 7 (Sherbrooke). Crop et Mask sont des notions plus utile lorsque l'on veut faire de la visualisation. Crop = Zoom in sur la BBOX, Mask = Zoom in + mask les pixels tombant à l'extérieur du parcs.
 - crop et mask
@@ -186,7 +187,7 @@ Trouver le pixel avec la plus forte valeur d'élévation et représenter le ou l
 - vmax = maxValue(r): trouver la valeur max
 - rasterToPoints(r, function(x) all.equal(x, vmax), spatial = FALSE): Créer le point 
 - Pas le choix ici: parler un tout petit de `sp` pour expliquer pourquoi spatial = FALSE
-- Jouer avec spatial = TRUE (fonction rasterToPoints) et conversion vers sf
+- Jouer avec spatial = TRUE (fonction `rasterToPoints()`) et conversion vers sf
 - st_point si (spatial = FALSE)
 - Dans quelle parcs tombent ce point: st_within avec sf
 
@@ -204,7 +205,7 @@ Première question répondu: On a trouver notre plus haut sommet à l'intérieur
 
 ### Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
 
-- Dans ce chapitre, on veut jouer avec les rasterStack. Préparation d'un rasterStack avec la précipitation totale par mois pour le même bonding box que le raster de DEM. Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
+- Dans ce chapitre, on veut jouer avec les `rasterStack`. Préparation d'un rasterStack avec la précipitation totale par mois pour le même bonding box que le raster de DEM. Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
 - On extract les valeurs de précipitation (par mois) du rasterStack pour le parc que l'on a ciblé
 - On montre comment on peut réaliser une moyenne entre deux mois rasterStack[[1]] + rasterStack[[2]] / 2 ou alors mean rasterStack[[1:2]]. 
 - Crop un raster rasterStack
