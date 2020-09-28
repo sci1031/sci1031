@@ -16,36 +16,201 @@ Vous utiliserez les librairies suivantes:
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
--
--
+- `getValues()`
+- `nrow()`, `ncol()` et `ncell()`
+- `as.data.frame()`
+
 
 Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
 ```{r load-libraries8, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
-#library(raster)
-library(rgdal)
-library(ggplot2)
-library(dplyr)
+library(raster)
 library(sf)
-library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
-library(ggpubr)
 ```
-
 
 ## Leçon
 
-### Opérations de base
+Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présent dans le secteur de la ville de Sherbrooke. Nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l'élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d'élévation des parcs de la région de Sherbrooke. Pour chacun des parcs, nous allons identifier son point culminant. Enfin, nous dresserons le profil d'élévation des sentiers de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) pour l'un des parcs de notre choix.
 
--	Création d’un raster, création d’un raster multi-couches, opérations mathématiques et statistiques élémentaires.
 
-### Opération sur un raster
+Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur l'élévation et les parcs de la région de Sherbrooke](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Elevation_Parcs_Sherbrooke.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Elevation_Parcs_Sherbrooke` comprend deux sous-dossiers et un fichier:
 
--	Extraction d’un sous-ensemble de données, suppression de données, modification de données, changement de position
+- buffer_sherbrooke
+- parcs_sherbrooke
+- DEM.tif
 
-### Opération sur plusieurs rasters
 
--	Combinaison de rasters, jointure spatiale, intersection de couches, découpage d’une couche.
+### Opérations de base {-}
+
+Afin de se familiariser avec la manipulation de données vectorielles, nous allons explorer le région de Sherbrooke en se posant les questions suivantes: 
+
+> Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
+
+En deuxième partie, on s'interrogera sur:
+
+> Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
+
+Enfin, nous étudierons la climatologie du parcs national de répondre à la question suivantes:
+
+> Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+
+Pour répondre à ces questions, il faut réaliser un ensemble d'opérations spatiales. 
+Pour la première question:
+
+- TODO: Étayer le pseudo code ici, chaque étapes pour chacune des trois questions
+
+Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
+
+### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet? { - }
+
+Afin de répondre à cette question, nous désirons dans un premier temps charger dans l'environnement R, les différentes couches d'informations spatiales.
+
+On charge les librairies requises.
+
+```{r}
+library(sf)
+library(raster)
+```
+
+#### Importation des données {-}
+
+On charge le *shapefile* des 4 parcs de la régions de Sherbrooke que nous avons isolé à l'intérieur du module 7. 
+
+```{r, eval = FALSE}
+chemin <-"D:/votrechemin/SCI1031/Module8/Donnees/"
+chemin_parcs <- paste(chemin, "/parcs_sherbrooke/parcs_sherbrooke.shp", sep = "")
+parcs <- st_read(chemin_parcs)
+```
+
+
+```{r, echo = FALSE}
+parcs <- st_read("Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
+```
+
+Et enfin, on importe la couche d'élévation pour la région d'intérêt.
+
+```{r, eval = FALSE}
+chemin_dem <- paste(chemin, "/DEM.tif", sep = "")
+dem <- raster(chemin_dem)
+```
+
+```{r, echo = FALSE}
+dem <- raster("Module8/data/DEM.tif")
+```
+
+On visualise par la suite les deux objets spatiaux afin de valider l'importation.
+
+```{r}
+mapview(dem) + mapview(parcs, zcol = "TRQ_NM_", legend = FALSE)
+```
+
+On peut à présent vérifier les projections respectives des objets spatiaux importés. Certaines opérations spatiales vont nécessiter que les deux objets soient placés dans le même système de projection.
+
+```{r}
+proj4string(dem) 
+st_crs(parcs)$proj4string
+```
+
+Les deux projections sont divergentes, nous allons reprojeter le DEM dans le système de projection des parcs de la région de Sherbrooke à l'aide de la fonction `projectRaster()` du package `raster`.
+
+```{r}
+dem <- projectRaster(dem, crs = st_crs(parcs)$proj4string)
+proj4string(dem) 
+```
+
+#### Accéder et manipuler les valeurs d'un `raster` (données matricielles)
+
+Avant d'aller plus loin, nous allons prendre un moment pour nous familiariser avec la manipulation de raster.
+Les objet de type raster dispose d'une structure d'objet particulière (communément appelé classe S4). Si l'on veut accéder aux valeurs stockées, on doit procéder d'une certaine manière. 
+
+Pour des valeurs spécifiques, on réfère le numéro/l'index du pixel.
+
+```{r}
+# Accéder à la première valeur
+dem[1]
+# Accéder au valeurs de 300 à 430
+dem[300:430]
+# Pour des valeurs spécifiques
+dem[c(14, 30, 33:44)]
+```
+
+Il est souvent dangereux d'extraire des valeurs à des positions spécifiques en utilisant les index de pixels. En effet, on perd une information précieuse: la localisation dans l'espace du pixel (coordonnées X et Y). C'est pourquoi, il est souvent privilégié de convertir le raster en `data.frame`. La fonction `as.data.frame(..., xy = TRUE)`, appliqué sur un objet de class `raster`, présente l'avantage de retourner les coordonnées associées à la valeur.
+
+```{r}
+df_dem <- as.data.frame(dem, xy = TRUE)
+head(subset(df_dem, !is.na(DEM)))
+```
+
+En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des valeurs du raster. Cette approche permet de calculer la moyenne, la médiane etc. La fonction `summary()` permet d'en savoir davantage sur la distribution des valeurs.
+
+```{r}
+max(getValues(dem))
+summary(getValues(dem))
+```
+
+Si l'on veut en savoir davantage sur la taille du raster, on peut se référer aux fonctions suivantes:
+
+```{r}
+# Nombre de lignes
+nrow(dem)
+# Nombre de colonne
+ncol(dem)
+# Nombre total de pixels
+ncell(dem)
+```
+
+#### Modifier le contenu
+
+- reclassify les valeurs (faible, modéré, élevé)
+- remplacer des valeurs (exemple avec le `NA`)
+
+Décontextualisation par la perte des coordonnées X-Y, On privilégie l'approche:
+
+- `as.data.frame(xy = TRUE)`
+
+#### Changer la résolution d'un raster
+
+- aggregate
+
+### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
+
+On crop le raster avec les parcs du module 7 (Sherbrooke). Crop et Mask sont des notions plus utile lorsque l'on veut faire de la visualisation. Crop = Zoom in sur la BBOX, Mask = Zoom in + mask les pixels tombant à l'extérieur du parcs.
+- `crop()` et `mask()`
+
+On extrait les valeurs ce retrouvant dans le parc.
+- extract values
+
+Trouver le pixel avec la plus forte valeur d'élévation et représenter le ou les points sur la carte
+
+- `vmax = maxValue(r)`: trouver la valeur max
+- `rasterToPoints(r, function(x) all.equal(x, vmax), spatial = FALSE)`: Créer le point 
+- Pas le choix ici: parler un tout petit de `sp` pour expliquer pourquoi spatial = FALSE
+- Jouer avec spatial = TRUE (fonction `rasterToPoints()`) et conversion vers sf
+- st_point si (spatial = FALSE)
+- Dans quelle parcs tombent ce point: st_within avec sf
+
+Première question répondu: On a trouver notre plus haut sommet à l'intérieur des 4 parcs.
+
+### Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
+
+- Isoler le sentier le plus proche du sommet (st_nearest)
+- Puis, extraire les pixels du rasters se retrouvant sous la ligne du sentier (extract)
+- mapview des pixels passant sous la ligne du sentier
+- On montre habituellement les figures (distance parcourue vs élévation) présenté par la SEPAQ, on veut améliorer le rendu visuelle.
+- Utiliser la resolution du raster pour déterminer la distance inter-pixels - Ici ca va prendre de l'illustration pour être sûr que la notion est saisie
+- Faire la figure de distance cumulée versus élévation 
+- On vient de répondre à notre question
+
+### Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+
+- Dans ce chapitre, on veut jouer avec les `rasterStack`. Préparation d'un `rasterStack` avec la précipitation totale par mois pour le même bonding box que le raster de DEM. Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
+- On extract les valeurs de précipitation (par mois) du rasterStack pour le parc que l'on a ciblé
+- On montre comment on peut réaliser une moyenne entre deux mois rasterStack[[1]] + rasterStack[[2]] / 2 ou alors mean rasterStack[[1:2]]. 
+- Crop un raster rasterStack
+- which.min pour déterminer le raster du stack disposant de la plus petite valeur
+- Compléter avec d'autre chose, ca me parait léger... à voir quand au dessus ce sera écrit..
+
 
 ## Exercice

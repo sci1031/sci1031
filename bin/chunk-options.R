@@ -6,7 +6,7 @@ library("knitr")
 opts_chunk$set(tidy = FALSE, results = "markup", comment = NA,
                fig.align = "center",
                fig.width = 7.5, fig.height = 7.5,
-               fig.retina = 2)
+               fig.retina = 2, cache = FALSE)
               
 
 # Add this
@@ -23,15 +23,13 @@ knit_hooks$set(output = function(x, options) {
   }
   x <- unlist(strsplit(x, "\n"))
   more <- "..."
-  if (length(lines)==1) {        # first n lines
+  if (length(lines) == 1) {        # first n lines
     if (length(x) > lines) {
       # truncate the output, but add ....
       #x <- c(head(x, lines), more)
       x <- c(head(x, lines),'...', tail(x,lines))
     }
-  } else {
-    x <- c(more, x[lines], more)
-  }
+  } else x <- c(more, x[lines], more)
   # paste these lines together
   x <- paste(c(x, ""), collapse = "\n")
   hook_output(x, options)
