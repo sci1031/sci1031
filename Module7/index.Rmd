@@ -284,7 +284,7 @@ villes <- villes[order(villes$population, decreasing = TRUE), ]
 L'objet `villes` est maintenant ordonné de manière décroissante en fonction de la taille de population des villes. Les 10 premières lignes de cet objet corresponds donc au 10 villes présentant la population la plus importante au Québec. On peut donc assigner les 10 premières lignes à un nouvelle objet intitulé `top10_villes`:
 
 ```{r}
-top10_villes <- villes[1:10,]
+top10_villes <- villes[1:10, ]
 top10_villes
 ```
 
@@ -363,7 +363,7 @@ st_area(parcs_nationaux)
 sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) * 100
 ```
 
-Le pourcentage de couverture spatial des parcs nationaux (SÉPAQ) pour la province de Québec est de `r round(sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) * 100, 2) `%. Noter également qu'il est possible à tout moment de changer l'unité de mesure en utilisant la fonction `set_units()` dans le package `units`. 
+Le pourcentage de couverture spatial des parcs nationaux (SÉPAQ) pour la province de Québec est de `r round(sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) * 100, 2)`%. Noter également qu'il est possible à tout moment de changer l'unité de mesure en utilisant la fonction `set_units()` dans le package `units`. 
 
 ```{r}
 set_units(st_area(parcs_nationaux), km^2)
@@ -402,8 +402,8 @@ ids_parcs_sherbrooke <- st_intersects(top10_villes_buffer, parcs_nationaux)[[id_
 On peut maintenant sélectionner les polygones (zones tampon et parcs nationaux) se retrouvant dans le secteur de la ville de Sherbrooke en se basant sur les identifiants isolés précédemment (`id_buffer_sherbrooke` et `ids_parcs_sherbrooke`). On se sert de ces identifiants afin de visualiser le résultat de l'opération spatiale d'intersection.
 
 ```{r}
-mapview(parcs_nationaux[ids_parcs_sherbrooke,], legend = FALSE) + 
-mapview(top10_villes_buffer[id_buffer_sherbrooke,], legend = FALSE, lwd = 2, color = "red")
+mapview(parcs_nationaux[ids_parcs_sherbrooke, ], legend = FALSE) + 
+mapview(top10_villes_buffer[id_buffer_sherbrooke, ], legend = FALSE, lwd = 2, color = "red")
 ```
 
 Dans le cadre de se module, nous avons seulement utilisé la fonction `st_intersect` mais il existe une multitude d'autres opérateur permettant de tester les relations topologiques entre deux couches spatiales. 
@@ -412,7 +412,7 @@ Dans le cadre de se module, nous avons seulement utilisé la fonction `st_inters
 knitr::include_graphics('Module7/images/geoConf.png')
 ```
 
-Chacun de ses opérateurs utilisent la même approche. Ils retournent une liste (`sparse = TRUE`, l'argument par défault) avec les identifiants des polygones satisfaisant la conditions du test ou alors une matrice (`sparse = FALSE`) remplie de valeurs booléennes (`TRUE`/`FALSE`): le résultat du test pour chacune des combinaisons de polygones.
+Chacun de ses opérateurs utilisent la même approche. Ils retournent une liste (`sparse = TRUE`, l'argument par défaut) avec les identifiants des polygones satisfaisant la conditions du test ou alors une matrice (`sparse = FALSE`) remplie de valeurs booléennes (`TRUE`/`FALSE`): le résultat du test pour chacune des combinaisons de polygones.
 
 L'une des propriétés intéressante des valeurs booléennes (`TRUE` ou `FALSE`), renvoyé par la fonction `st_intersects`, est que la valeur `TRUE` peut être interprété par R comme une valeur de 1 et `FALSE` comme 0. Il est donc possible de réaliser des opérations mathématiques sur des valeurs booléennes. On peut ainsi effectuer une sommation sur les lignes (zones tampons des grandes villes) afin de déterminer combien de parcs nationaux (en colonne dans la matrice) possèdent la valuer `TRUE` se retrouvent ainsi à l'intérieur des zones tampons.
 
@@ -433,12 +433,12 @@ top10_villes$nbr_parcs <- rowSums(st_intersects(x = top10_villes_buffer, y = par
 Enfin, on ordonne la table d'attributs en se basant sur la nouvelle colonne `nbr_parcs`. 
 
 ```{r}
-top10_villes <- top10_villes[order(top10_villes$nbr_parcs, decreasing = TRUE),]
+top10_villes <- top10_villes[order(top10_villes$nbr_parcs, decreasing = TRUE), ]
 ```
 
 On affiche maintenant la table d'attributs afin d'obtenir la réponse tant attendu à notre question:
 
-> Parmis les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux (dans un rayon de 70km)? 
+> Parmi les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux (dans un rayon de 70km)? 
 
 ```{r}
 top10_villes
