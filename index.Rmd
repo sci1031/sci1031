@@ -7,6 +7,7 @@ documentclass: krantz
 bibliography: [refs.bib]
 biblio-style: apalike
 link-citations: yes
+self_contained: false
 colorlinks: yes
 lot: yes
 lof: yes

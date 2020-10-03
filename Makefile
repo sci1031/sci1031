@@ -8,4 +8,4 @@ all:
 	Rscript --quiet _render.R
 
 clean:
-	sudo rm -rf _book _bookdown_files
+	rm -rf _book _bookdown_files
