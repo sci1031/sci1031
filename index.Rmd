@@ -35,7 +35,6 @@ lapply(c('DT', 'citr', 'formatR', 'svglite', 'units', 'leafsync', 'lwgeom'), fun
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
 
-knitr::clean_cache() 
 ```
 
 #  Bienvenue! {-}
