@@ -140,7 +140,7 @@ Il est souvent dangereux d'extraire des valeurs à des positions spécifiques en
 
 ```{r}
 df_dem <- as.data.frame(dem, xy = TRUE)
-head(subset(df_dem, !is.na(DEM)))
+head(subset(df_dem, !is.na(dem)))
 ```
 
 En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des valeurs du raster. Cette approche permet de calculer la moyenne, la médiane etc. La fonction `summary()` permet d'en savoir davantage sur la distribution des valeurs.
