@@ -11,23 +11,23 @@ L'objectif principal de ce module est d'apprendre à manipuler des données vect
 
 Vous utiliserez les librairies suivantes:
 
-- `sf`
-- `mapview`
+- `sf`,
+- `mapview`,
 - `units`
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
-- `subset()`
-- `st_coordinates()`
-- `class()`
-- `merge()`
-- `st_join()`
-- `st_simplify()`
-- `st_area()`
-- `set_units()`
-- `st_buffer()`
-- `st_intercepts()`
-- `rowSums()`
+- `subset()`,
+- `st_coordinates()`,
+- `class()`,
+- `merge()`,
+- `st_join()`,
+- `st_simplify()`,
+- `st_area()`,
+- `set_units()`,
+- `st_buffer()`,
+- `st_intercepts()`,
+- `rowSums()`,
 - `lengths()`
 
 Dans la section Leçon, vous utiliserez les données portant sur les municipalités du Québec,
@@ -45,11 +45,12 @@ library(units)
 
 Dans le cadre de cette leçon, nous allons préparer notre saison estivale de vacances en explorant les données vectorielles relatives aux municipalités et aux limites administrative du Québec (POINTS & POLYGONS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives)) et au réseau de parcs nationaux de la SÉPAQ (POLYGONS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000)).
 
-Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur les parcs et les villes du Québec](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Quebec_Parcs.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Quebec_Parcs` comprend deux sous-dossiers:
+Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur les parcs et les villes du Québec](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Quebec_Parcs.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Quebec_Parcs` comprend trois sous-dossiers:
 
-- `villes`
-- `parcs.gdb`
-- `provinces`
+- `villes`,
+- `parcs.gdb`,
+- `provinces`.
+
 
 ### Opérations de base {-}
 
@@ -64,10 +65,10 @@ Pour répondre à cette question, il faut réaliser un ensemble d'opérations sp
 - Filtrer ces municipalités pour isoler les 10 municipalités ayant la taille de population la plus importante.
 - Importer le fichier spatial du réseau récréatif du Québec.
 - Filter les aires récréatives pour obtenir seulement les parcs nationaux.
-- Tracer un polygon en forme de cercle (une zone tampon) avec 70&nbsp;kms de rayon autours des dix plus grandes villes.
-- Pour chacun des polygons, compter le nombre de parcs présent dans la zone tampon de 70&nbsp;kms.
+- Tracer un polygon en forme de cercle (une zone tampon) avec 70&nbsp;km de rayon autours des dix plus grandes villes.
+- Pour chacun des polygons, compter le nombre de parcs présent dans la zone tampon de 70&nbsp;km.
 
-Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
+Dans ce chapitre, nous allons détailler chacune de ces étapes.
 
 ### Quelles sont les 10 plus grandes villes du Québec? {-}
 
@@ -85,30 +86,30 @@ villes <- st_read(chemin_villes)
 villes <- st_read("Module7/data/villes/villes.shp")
 ```
 
-Le *Shapefile* a maintenant été importé dans un objet R de classe `sf` avec 
-On peut maintenant visuellement valider que l'importation a bien été réussi:
+Le *Shapefile* a maintenant été importé dans un objet R de classe `sf` et nous pouvons visuellement valider que l'importation a bien été réussie avec la fonction `mapview`:
 
 ```{r viz-load-villes}
 mapview(villes, legend = FALSE)
 ```
 
 En cliquant sur chacun des marqueurs géographiques (dans la carte interactive), vous pouvez accéder à la table d'attributs. 
-Pour en savoir davantage sur les attributs, voici le lien vers la [documentation](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326).  Cette table d'attribut contient une diversité d'informations plus ou moins importante pour répondre à notre question. On veut donc nettoyer la table d'attribut en sélectionnant la ou les colonnes pertinentes pour notre besoin. 
+Pour en savoir davantage sur les attributs, voici le lien vers la [documentation](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326).  Cette table d'attribut contient une diversité d'informations plus ou moins importantes pour répondre à notre question. Nous allons donc commencer par nettoyer la table d'attribut en sélectionnant la ou les colonnes pertinentes pour notre besoin. 
+
 
 #### Sélectionner des attributs (colonnes) ou des localisations (lignes) spécifiques {-}
 
-L'objet spatial `villes` contient `r nrow(villes)` points correspondant chacun à une ville. La table d'attributs contient quant à elle `r ncol(villes)` colonnes / attributs décrivant les villes. L'attribut qui nous intéresse ici est la colonne `HAP_NM_TOP` contenant le nom de la ville. L’abréviation `TOP` signifie [toponymie](https://fr.wikipedia.org/wiki/Toponymie) qui sert à référencer les noms propres désignant un lieu. On veut donc extraire la colonne `HAP_NM_TOP` contenant le nom (toponyme) des villes du Québec. 
+L'objet spatial `villes` contient `r nrow(villes)` points correspondant chacun à une ville. La table d'attributs contient quant à elle `r ncol(villes)` colonnes / attributs décrivant les villes. L'attribut qui nous intéresse ici est la colonne `HAP_NM_TOP` contenant le nom de la ville. L’abréviation `TOP` signifie [toponymie](https://fr.wikipedia.org/wiki/Toponymie) qui sert à référencer les noms propres désignant un lieu. Nous allons donc extraire la colonne `HAP_NM_TOP` contenant le nom (toponyme) des villes du Québec. 
 
-Les objets `sf` sont manipulables de la même façon qu'un `data.frame` (étant eux-même des `data.frame`). Pour accéder à une colonne ou à une ligne spécifique dans la table d'attributs, il faut utiliser la syntaxe suivante:
+Les objets `sf` sont manipulables de la même façon qu'un `data.frame` (étant eux-même des `data.frame` particuliers). Pour accéder à une colonne ou à une ligne spécifique dans la table d'attributs, il faut utiliser la syntaxe suivante:
 
 ```{r ville1}
-villes[1,] # Pour accéder à la première ligne. 
+villes[1, ] # Pour accéder à la première ligne. 
 ```
 
 Vous pouvez remarquer que le nombre de *features* (points) à diminuer à 1. Maintenant, regardons comment sélectionner une seule colonne:
 
 ```{r ville2}
-villes[,2] # Pour accéder à la deuxième colonne. 
+villes[, 2] # Pour accéder à la deuxième colonne. 
 ```
 
 Vous pouvez remarquer que le nombre de *fields* (colonnes) à diminuer à 1. 
@@ -123,21 +124,21 @@ villes[, 13]
 # Puisque cette colonne est en treizième position.
 ```
 
-On souhaite à présent sélectionner le nom de la ville/municipalité car les autres attributs ne sont pas pertinent pour répondre à notre question.
+On souhaite à présent sélectionner le nom de la ville/municipalité, les autres attributs n'étant pas pertinents pour répondre à notre question.
 
 ```{r villes-topo-col2}
 villes <- villes[,"HAP_NM_TOP"]
 villes
 ```
 
-On veut maintenant renommer la colonne afin d'avoir un intitulé de colonne plus explicite. 
+Nous souhaitons maintenant renommer la colonne afin d'avoir un intitulé de colonne plus explicite. 
 
 ```{r col-villes}
 names(villes)
 names(villes) <- c("toponyme", "geometry")
 ```
 
-Si l'on veut vérifier qu'une ville se retrouve bel et bien présente dans le jeu de données, on peut utiliser la fonction `subset()` afin de filtrer les points basé sur la valeur d'un attribut:
+Pour vérifier qu'une ville se retrouve bel et bien présente dans le jeu de données, il est possible d'utiliser la fonction `subset()` afin de filtrer les points basé sur la valeur d'un attribut:
 
 ```{r viz-villes}
 la_poc <- subset(villes, toponyme == "La Pocatière")
@@ -150,7 +151,7 @@ On peut également récupérer les coordonnées géographiques de la ville de La
 st_coordinates(la_poc)
 ```
 
-Le `X` correspond à la longitude et le `Y`, à la latitude. Cette fonction peut être appliqué sur l'ensemble des données spatiales de type vectorielles (`POLYGON`, `POINT`, `LINE`) et appartenant à la classe d'objet `sf` (c.a.d généré/importé par le package `sf`). On peut valider la classe d'un objet dans R avec la fonction `class()`. 
+Le `X` correspond à la longitude et le `Y`, à la latitude. Cette fonction peut être appliquée sur l'ensemble des données spatiales vectorielles (`POLYGON`, `POINT`, `LINE`) et appartenant à la classe d'objet `sf` (c.a.d générée/importée par le package `sf`). Il est possible de vérifier la classe d'un objet dans R avec la fonction `class()`. 
 
 ```{r ex-class}
 class(la_poc)
@@ -158,13 +159,13 @@ class(la_poc)
 
 #### Joindre l'information d'une autre couche spatiale: `st_join()` {-}
 
-On vérifiant visuellement la position des villes, on peut s'apercevoir que certaines villes se retrouvent à l'extérieur des limites administratives du Québec. 
+En inspectant visuellement la position des villes, on peut s'apercevoir que certaines villes se retrouvent à l'extérieur des limites administratives du Québec. 
 
 ```{r viz-villes2}
 mapview(villes, legend = FALSE)
 ```
 
-On veut filtrer ces villes pour obtenir seulement celles présentes au Québec (puisque notre question porte seulement sur le Québec). Pour accomplir cette étape, on va croiser deux sources d'informations spatiales: les villes et les limites administratives des provinces. Pour chacune des villes, on veut connaître la province d'attache. Ce type d'opération s'appelle une jointure spatiale.
+Maintenant, nous cherchons à nous limiter aux villes du Québec (puisque notre question porte seulement sur cette province). Pour accomplir cette étape, nous allons croiser deux sources d'informations spatiales: les villes et les limites administratives des provinces. Pour chacune des villes, on veut connaître la province d'attache. Ce type d'opération s'appelle une **jointure spatiale**.
 
 La première étape de cette jointure consiste à importer le fichier des limites administratives des provinces ([source](https://gadm.org/)). 
 
@@ -177,64 +178,64 @@ provinces <- st_read(chemin_provinces)
 provinces <- st_read("Module7/data/provinces/provinces_low_res.shp")
 ```
 
-On peut maintenant vérifier visuellement l'importation. En examinant la table d'attributs de l'objet `provinces` (en cliquant sur un des polygons de la carte interactive ci-dessous), on remarque que l'attribut `NAME_1` contient le nom des provinces. 
+Nous allons visuellement inspecter cette nouvelle importation. En examinant la table d'attributs de l'objet `provinces` (en cliquant sur un des polygons de la carte interactive ci-dessous), on remarque que l'attribut `NAME_1` contient le nom des provinces du Canada. 
 
 ```{r viz-provinces}
 mapview(provinces, zcol = "NAME_1")
 ```
 
-La deuxième étape consiste à vérifier que les deux objets possèdent le même système de projection. Les deux objets doivent se retrouver dans le même système de coordonnées afin que la jointure spatiale puisse être réalisé. En utilisant la fonction `st_crs()`, on peut effectuer un test logique en comparant les deux projections.
+La deuxième étape consiste à vérifier que les deux objets possèdent le même système de projection. Les deux objets doivent se retrouver dans le même système de coordonnées afin que la jointure spatiale puisse être réalisée. La fonction `st_crs()` nous permet d'effectuer un test logique en comparant les deux projections.
 
 ```{r check-proj-provinces}
 st_crs(villes) == st_crs(provinces)
 ```
 
-Le test logique d'égalité (`==`) nous renvoie la réponse `r st_crs(villes) == st_crs(provinces)` qui signifie que les deux objets ne disposent pas du même système de coordonnées. On doit donc reprojeter (`st_transform()`) l'objet `provinces` dans le système de coordonnées de `villes` (voir [chapitre 3](#SRC) pour davantage d'information sur les projections et système de coordonnées).
+Le test logique d'égalité (`==`) nous renvoie la réponse `r st_crs(villes) == st_crs(provinces)` qui signifie que les deux objets ne disposent pas du même système de coordonnées, nous devons donc reprojeter (`st_transform()`) l'objet `provinces` dans le système de coordonnées de `villes` (voir [chapitre 3](#SRC) pour davantage d'information sur les projections et système de coordonnées).
 
 ```{r transform-provinces}
 provinces <- st_transform(provinces, st_crs(villes))
 ```
 
-Enfin, la dernière étape consiste à effectuer la jointure entre les deux couches avec comme objectif d'ajouter une colonne contenant le nom de la province à la table d'attributs de l'objet `villes`. La fonction `st_join()` permet de déterminer dans quelle province (`POLYGON`) se retrouve chacun des villes (`POINT`).
+Enfin, la dernière étape consiste à effectuer la jointure entre les deux couches avec comme objectif d'ajouter une colonne contenant le nom de la province à la table d'attributs de l'objet `villes`. La fonction `st_join()` permet de déterminer dans quelle province (`POLYGON`) se retrouvent chacune des villes sélectionnées (`POINT`).
 
 ```{r join-villes-provinces}
 villes <- st_join(villes, provinces[,"NAME_1"])
 head(villes)
 ```
 
-Pour chacune des villes, nous avons donc ajouté la province d'attache 
-On peut renommer la colonne `NAME_1` (en position 2) par `province` pour être davantage explicit sur son contenu.
+Pour ces dernières, nous avons donc ajouté la province d'attache 
+On peut renommer la colonne `NAME_1` (en position 2) par `province` pour être davantage explicite sur son contenu.
 
 ```{r name-provinces-col}
 names(villes)[2] <- "province"
 ```
 
-On peut maintenant filtrer l'objet `villes` en utilisant se nouvelle attribut.
+Avec ce nouvel attribut, nous sommes en mesure de facilement filtrer l'objet `villes`.
 
 ```{r subset-villes}
 villes_qc <- subset(villes, province == "Québec")
 ```
 
-On vérifie que le nouveau filtre fonctionne et que nous avons les villes seulement présentes au Québec.
+Et nous pouvons facilement les visualiser.
 
 ```{r viz-subset-villes}
 mapview(villes_qc) + mapview(subset(provinces, NAME_1 == "Québec"))
 ```
 
-Certains polygones comme le Québec sont particulièrement échancré et possèdent de nombreuses îles. Ce type de polygon ralentissent parfois considérablement l'affichage à l'écran. Il peut être intéressant d'utiliser la fonction `st_simplify` afin d’atténuer le niveau de détails des polygones, il faut s'assurer que l'unité de projection est en système métrique.
+Certains polygones, comme celui du Québec, sont particulièrement échancrés et possèdent de nombreuses îles. Ces polygones ralentissent parfois considérablement l'affichage à l'écran. Il peut être intéressant d'utiliser la fonction `st_simplify()` afin d’atténuer le niveau de détails des polygones. Pour utiliser convenablement l'argument `dTolerance`, il faut s'assurer que l'unité de projection est en système métrique.
 
 ```{r provs-simplifie, eval = FALSE}
 provs_simplifie <- st_simplify(st_transform(provinces, crs = 32198))
 mapview(provs_simplifie, dTolerance = 50000)
 ```
 
-Attention si vous appliquez cette transformation, prendre note que vous perdez de la résolution spatiale. Cela pourrait avoir des impacts sur le résultat de vos analyses.
+Attention, si vous appliquez cette transformation, vous perdez de la résolution spatiale. Cela pourrait avoir des impacts sur le résultat de vos analyses.
 
-Nous avons maintenant convenablement isolé les villes du Québec. La prochaine étape consiste à ajouter pour chacune des villes, sa taille de population. 
+Nous avons maintenant convenablement isolé les villes du Québec. La prochaine étape consiste à ajouter la taille de population pour chacune des villes. 
 
 #### Joindre des sources d'informations externes (CSV) {-}
 
-Nous avons à présent l'emplacement géographiques de l'ensemble des villes du Québec contenu dans un objet `villes` avec un seul attribut `toponyme` (le nom de la ville). Nous voulons maintenant ajouter pour chacune des villes, sa taille de population. Cette information est contenu dans un fichier `csv` (`Donnees/ville/population.csv`) et provient du [répertoire des municipalités du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/repertoire-des-municipalites-du-quebec/resource/19385b4e-5503-4330-9e59-f998f5918363). Nous allons d'abord importer ce fichier CSV, sélectionner les colonnes pertinentes, puis ensuite fusionner ces informations avec l'emplacement des villes (objet `villes` dans l'environnement de R).
+Nous avons à présent les coordonnées géographiques de l'ensemble des villes du Québec contenu dans un objet `villes` avec un seul attribut `toponyme` (le nom de la ville). Nous voulons maintenant ajouter pour chacune des villes, sa taille de population. Cette information est contenue dans un fichier `csv` (`Donnees/ville/population.csv`) et provient du [répertoire des municipalités du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/repertoire-des-municipalites-du-quebec/resource/19385b4e-5503-4330-9e59-f998f5918363). Nous allons d'abord importer ce fichier CSV, sélectionner les colonnes pertinentes, puis ensuite fusionner ces informations avec l'emplacement des villes (objet `villes` dans l'environnement de R).
 
 ```{r load-pop, eval = FALSE}
 # On importe le fichier dans l'environnement de R
@@ -245,20 +246,20 @@ pop <- read.csv(chemin_pop)
 pop <- read.csv("Module7/data/villes/population.csv")
 ```
 
-Cet objet `pop` (`data.frame`) contient `r ncol(pop)` colonnes décrivant jusqu'à la composition du conseil municipal. Toutes ces informations ne sont pas pertinentes pour répondre à notre question. On veut sélectionne les colonnes suivantes:
+Cet objet `pop` (`data.frame`) contient `r ncol(pop)` colonnes décrivant jusqu'à la composition du conseil municipal. Toutes ces informations ne sont pas pertinentes pour répondre à notre question, en l'occurrence, les colonnes qui nous intéressent sont les suivantes:
 
-- `munnom`: Nom de la ville. Cette colonne servira à faire la joiture entre l'objet spatial `villes` et le fichier `csv` (`Donnees/ville/population.csv`) contenant les tailles de populations.
-- `msuperf`: Superficie de la municipalité
-- `mpopul`: Taille de la population résidente de la municipalité
+- `munnom`: Nom de la ville. Cette colonne servira à faire la jointure entre l'objet spatial `villes` et le fichier `csv` (`Donnees/ville/population.csv`) contenant les tailles de populations;
+- `msuperf`: Superficie de la municipalité;
+- `mpopul`: Taille de la population résidente de la municipalité.
 
 ```{r select-pop-cols}
-pop <- pop[,c("munnom","msuperf","mpopul")]
+pop <- pop[, c("munnom", "msuperf", "mpopul")]
 ```
 
-On peut à présent fusionner l'objet `pop` (taille de population) avec l'objet spatial `villes` en utilisant la fonction `merge()`. La jointure entre les deux objets `villes` et `pop` sera réalisé sur les colonnes `toponyme` et `munnom` respectivement. Ces deux colonnes agissent comme dénominateur communs entre les deux jeux de données et contient le nom de la municipalité. L'argument `all.x = TRUE` spécifie que toutes les entrées (POINT) de l'objet `ville` doivent être conservées. 
+On peut à présent fusionner l'objet `pop` (taille de population) avec l'objet spatial `villes` en utilisant la fonction `merge()`. La jointure entre les deux objets `villes` et `pop` sera réalisé sur les colonnes `toponyme` et `munnom`,  respectivement. Ces deux colonnes agissent comme dénominateur communs entre les deux jeux de données et contient le nom de la municipalité. L'argument `all.x = TRUE` spécifie que toutes les entrées (POINT) de l'objet `ville` doivent être conservées. 
 
 ```{r merge-villes-pop}
-villes <- merge(x = villes, y = pop, by.x="toponyme", by.y="munnom",  all.x = TRUE)
+villes <- merge(x = villes, y = pop, by.x = "toponyme", by.y = "munnom",  all.x = TRUE)
 ``` 
 
 On renomme encore une fois les colonnes pour être explicite sur leurs contenus.
@@ -281,26 +282,26 @@ Nous allons sélectionner les 10 villes présentant la population la plus grande
 villes <- villes[order(villes$population, decreasing = TRUE), ]
 ```
 
-L'objet `villes` est maintenant ordonné de manière décroissante en fonction de la taille de population des villes. Les 10 premières lignes de cet objet corresponds donc au 10 villes présentant la population la plus importante au Québec. On peut donc assigner les 10 premières lignes à un nouvelle objet intitulé `top10_villes`:
+L'objet `villes` est maintenant ordonné de manière décroissante en fonction de la taille de population des villes. Les 10 premières lignes de cet objet correspondent aux 10 villes présentant la population la plus importante au Québec. Nous pouvons alors assigner les 10 premières lignes à un nouvel objet: `top10_villes`:
 
 ```{r top10-villes}
 top10_villes <- villes[1:10, ]
 top10_villes
 ```
 
-On peut visualisé avec `mapview` ce nouvel objet.
+Utilisons `mapview()` pour visualiser ce nouvel objet.
 
 ```{r viz-top10-villes}
 mapview(top10_villes, zcol= "population")
 ```
 
-### Pour chacune de ces villes, combien de parcs nationaux se retrouvent dans un rayon de 70 kms? {-}
+### Pour chacune de ces villes, combien de parcs nationaux se retrouvent dans un rayon de 70&nbsp;km? {-}
 
-La prochaine étape pour répondre à notre question consiste à tracer une zone tampon (`POLYGON`) de 70&nbsp;kms de rayon autours des villes (`POINT`) afin de dénombre le nombre de parcs nationaux se trouvant dans cette zone. 
+La prochaine étape pour répondre à notre question consiste à tracer une zone tampon (`POLYGON`) de 70&nbsp;km de rayon autours des villes (`POINT`) afin de dénombrer les parcs nationaux se trouvant dans cette zone. 
 
 #### Créer des polygones (buffer) autours de points {-}
 
-La première étape consiste à tracer un polygon autours des villes. Pour cela, nous allons utiliser la fonction `st_buffer(top10_villes, dist = 70)`. Le premier argument détermine l'objet spatial et le second la distance (en mètre) autours de la ville. Avant de réaliser cette opération, nous devons vérifier que la couche spatiale des 10 plus grandes villes disposent d'un systèmes de coordonnées projetés en unité métrique pour être sûr que les 70&nbsp;kms ne soit pas interprété comme 70&nbsp;°, puisque l'unité est déterminer en fonction de la projection de l'objet spatial. Cette erreur est très courante. Lorsque l'on veut calculer des distances euclidiennes, il faut toujours s'assurer que l'unité du système de projection est en mètre et non en degrés.
+La première étape consiste à tracer un polygon autours des villes. Pour cela, nous allons utiliser la fonction `st_buffer(top10_villes, dist = 70)`. Le premier argument détermine l'objet spatial et le second la distance (en mètre) autours de la ville. Avant de réaliser cette opération, nous devons vérifier que la couche spatiale des 10 plus grandes villes disposent d'un système de coordonnées projetés en unité métrique pour être sûr que les 70&nbsp;km ne soient pas interprétés comme 70&nbsp;°, puisque l'unité est déterminée en fonction de la projection de l'objet spatial. Il est important d'insister sur le fait que pour calculer des distances euclidiennes, il faut toujours s'assurer que l'unité du système de projection est en mètre et non en degrés, c'est là une source d'erreurs fréquentes. 
 
 ```{r crs-top-villes}
 st_crs(top10_villes)  
@@ -314,7 +315,7 @@ top10_villes_lcc <- st_transform(top10_villes, crs = 32198)
 st_crs(top10_villes_lcc) == st_crs(32198)
 ```
 
-On peut à présent tracer les zones tampons (*buffer*) autours des points à l'aide de la fonction `st_buffer()` expliqué précédemment.
+Nous traçons alors les zones tampons (*buffer*) autours des points à l'aide de la fonction `st_buffer()` (détaillée ci-dessus).
 
 ```{r buffer-top-villes}
 top10_villes_buffer <- st_buffer(top10_villes_lcc, dist = 70e3) # 70 kms en mètres = 70e3
@@ -322,15 +323,15 @@ mapview(top10_villes_buffer, zcol = "toponyme", legend = FALSE)
 ```
 Il existe une multitude de fonctions dans le package `sf` permettant de créer une couche vectorielle à partir d'une autre couche en utilisant sa configuration spatiale. 
 
-```{r include-figs-ops-sf, fig.align='center', echo=FALSE, fig.cap="Illustration des opérations réalisables à partir du package `sf`. Extrait de l'aide mémoire de `sf` produit par Rstudio: https://github.com/rstudio/cheatsheets/raw/master/sf.pdf", out.width = '50%'}
+```{r include-figs-ops-sf, fig.align = 'center', echo = FALSE, fig.cap = "Illustration des opérations réalisables à partir du package `sf`. Extrait de l'aide mémoire de `sf` produit par Rstudio: https://github.com/rstudio/cheatsheets/raw/master/sf.pdf", out.width = '50%'}
 knitr::include_graphics('Module7/images/geoOps.png')
 ```
 
-Nous allons par la suite nous servir de cette couche contenant les polygons afin de dénombrer le nombre de parcs nationaux se retrouvant à l'intérieur. On appelle cette famille d'opérations spatiales, des interceptions.
+Nous allons par la suite nous servir de cette couche contenant les polygons afin de dénombrer les parcs nationaux se retrouvant à l'intérieur. Ces opérations spatiales sont des **interceptions**.
 
 #### Relations topologiques entre deux couches vectorielles {-}
 
-Pour réaliser cette étape, nous devons dans un premier temps charger la couche d'informations spatiales contenant les différentes aires récréatives du Québec. Cette information se retrouve à l'intérieur d'une géodatabase téléchargeable depuis le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000). Comme vu dans le module 2, les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et lister les différentes couches afin de déterminer laquelle est pertinente pour continuer notre analyse.
+Pour réaliser cette étape, nous devons, dans un premier temps, charger la couche d'informations spatiales contenant les différentes aires récréatives du Québec. Cette information se retrouve à l'intérieur d'une géodatabase téléchargeable depuis le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000). Comme vu dans le [module 2][Modèles de données spatiales], les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et lister les différentes couches afin de déterminer laquelle est pertinente pour continuer notre analyse.
 
 ```{r list-layers}
 st_layers("Module7/data/parcs.gdb") 
@@ -354,7 +355,7 @@ Par curiosité, on peut se demander qu'elle est le pourcentage de couverture des
 ```{r calcul-perc-parcs}
 # Validation de l'unité du système de projection (unité métrique)
 st_crs(parcs_nationaux)
-# Puisque le système de coordonnées est en degrée, on reprojecte le système en projection
+# Puisque le système de coordonnées est en degré, on reprojete le système en projection
 # Conique conforme de Lambert du Québec (NAD83, EPSG: 32198) tel que vu précédemment.
 parcs_nationaux <- st_transform(parcs_nationaux, crs = 32198)
 # Calcul de la superficie de chaque parcs nationaux.
@@ -363,33 +364,33 @@ st_area(parcs_nationaux)
 sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) * 100
 ```
 
-Le pourcentage de couverture spatial des parcs nationaux (SÉPAQ) pour la province de Québec est de `r round(sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) * 100, 2)`%. Noter également qu'il est possible à tout moment de changer l'unité de mesure en utilisant la fonction `set_units()` dans le package `units`. 
+Le pourcentage de couverture spatiale des parcs nationaux (SÉPAQ) pour la province de Québec est de `r round(sum(st_area(parcs_nationaux)) / st_area(subset(provinces, NAME_1 == 'Québec')) * 100, 2)`%. Noter également qu'il est possible à tout moment de changer l'unité de mesure en utilisant la fonction `set_units()` du package `units`. 
 
 ```{r set-unit-parcs}
 set_units(st_area(parcs_nationaux), km^2)
 ```
 
-Retournons à présent à notre question originale, nous avons toutes les couches d'informations spatiales pour répondre à la question: _Pour chacune des 10 plus grandes villes du Québec, combien de parcs nationaux se retrouvent dans un rayon de 70&nbsp;kms?_. La fonction `st_intersects` permet de tester qu'elles sont les parcs se retrouvant partiellement ou non à l'intérieur de chacun des buffers. Avant de réaliser ce type d'opération spatiale, il faut toujours s'assurer que les deux objets spatiaux (`top10_villes_buffer` et `parcs_nationaux`) disposent de la même projection.
+Retournons à présent à notre question originale, nous avons toutes les couches d'informations spatiales pour répondre à la question: _Pour chacune des 10 plus grandes villes du Québec, combien de parcs nationaux se retrouvent dans un rayon de 70&nbsp;km?_. La fonction `st_intersects()` permet de tester qu'elles sont les parcs se retrouvant partiellement ou non à l'intérieur de chacun des buffers. Avant de réaliser ce type d'opération spatiale, il faut toujours s'assurer que les deux objets spatiaux (`top10_villes_buffer` et `parcs_nationaux`) disposent de la même projection.
 
 ```{r interceptions-buffer-parcs}
 st_crs(top10_villes_buffer) == st_crs(parcs_nationaux)
 st_intersects(x = top10_villes_buffer, y = parcs_nationaux, sparse = FALSE) 
 ```
 
-La fonction `st_intersects` avec l'argument `sparse = FALSE` retourne une matrice avec en ligne les zones tampons des 10 plus grandes villes (argument `x` ci-dessus) et en colonne, les 27 parcs nationaux du Québec (argument `y` ci-dessus). Pour chacune des combinaisons, la valeur booléenne renvoyée (`TRUE` ou `FALSE`) détermine si les deux polygones se chevauchent (partiellement ou non). En utilisant l'argument `sparse = TRUE` (valeur par défaut), il est possible d'obtenir un affichage plus minimaliste et lisible de la sortie de la fonction.
+La fonction `st_intersects()` avec l'argument `sparse = FALSE` retourne une matrice avec en ligne les zones tampons des 10 plus grandes villes (argument `x` ci-dessus) et en colonne, les 27 parcs nationaux du Québec (argument `y` ci-dessus). Pour chacune des combinaisons, la valeur booléenne renvoyée (`TRUE` ou `FALSE`) détermine si les deux polygones se chevauchent (partiellement ou non). En utilisant l'argument `sparse = TRUE` (valeur par défaut), il est possible d'obtenir un affichage plus minimaliste et lisible de la sortie de la fonction.
 
 ```{r interceptions-buffer-parcs2}
 st_intersects(top10_villes_buffer, parcs_nationaux)
 ```
 
 La fonction retourne cependant un objet de type `list` avec le numéro des polygones
-spatiaux (ici les parcs nationaux) satisfaisant la condition d'intersection. Pour bien comprendre l'opération spatiale réaliser, il est possible de visualiser cette intersection spatiale. Prenons l'exemple de la ville de Sherbrooke:
+spatiaux (ici les parcs nationaux) satisfaisant la condition d'intersection. Pour bien comprendre l'opération spatiale réalisée, il est possible de visualiser cette intersection spatiale. Prenons l'exemple de la ville de Sherbrooke:
 
 ```{r interceptions-buffer-parcs3}
 which(top10_villes_buffer$toponyme == 'Sherbrooke')
 ```
 
-La fonction which permet de retourner le numéro de ligne dans la table d'attributs) de l'objet `top10_villes_buffer` satisfaisant la condition `toponyme == 'Sherbrooke'`. On consigne ensuite la sortie de la fonction dans un objet `id_buffer_sherbrooke`.
+La fonction `which()` permet de retourner le numéro de ligne dans la table d'attributs) de l'objet `top10_villes_buffer` satisfaisant la condition `toponyme == 'Sherbrooke'`. On consigne ensuite la sortie de la fonction dans un objet `id_buffer_sherbrooke`.
 
 ```{r interceptions-buffer-parcs4}
 id_buffer_sherbrooke <- which(top10_villes_buffer$toponyme == 'Sherbrooke')
@@ -406,15 +407,15 @@ mapview(parcs_nationaux[ids_parcs_sherbrooke, ], legend = FALSE) +
 mapview(top10_villes_buffer[id_buffer_sherbrooke, ], legend = FALSE, lwd = 2, color = "red")
 ```
 
-Dans le cadre de se module, nous avons seulement utilisé la fonction `st_intersect` mais il existe une multitude d'autres opérateur permettant de tester les relations topologiques entre deux couches spatiales. 
+Dans le cadre de ce module, nous avons seulement utilisé la fonction `st_intersect()`, il existe cependant une multitude d'autres opérateurs permettant de tester les relations topologiques entre deux couches spatiales. 
 
-```{r include-figs-ops-sf2,fig.align='center', echo=FALSE, fig.cap="Illustration des opérations réalisables à partir du package `sf`. Extrait de l'aide mémoire de `sf` produit par Rstudio: https://github.com/rstudio/cheatsheets/raw/master/sf.pdf", out.width = '50%'}
+```{r include-figs-ops-sf2, fig.align = 'center', echo=FALSE, fig.cap = "Illustration des opérations réalisables à partir du package `sf`. Extrait de l'aide mémoire de `sf` produit par Rstudio: https://github.com/rstudio/cheatsheets/raw/master/sf.pdf", out.width = '50%'}
 knitr::include_graphics('Module7/images/geoConf.png')
 ```
 
-Chacun de ses opérateurs utilisent la même approche. Ils retournent une liste (`sparse = TRUE`, l'argument par défaut) avec les identifiants des polygones satisfaisant la conditions du test ou alors une matrice (`sparse = FALSE`) remplie de valeurs booléennes (`TRUE`/`FALSE`): le résultat du test pour chacune des combinaisons de polygones.
+Chacun de ces opérateurs utilisent la même approche: ils retournent une liste (`sparse = TRUE`, l'argument par défaut) avec les identifiants des polygones satisfaisant la conditions du test ou alors une matrice (`sparse = FALSE`) remplie de valeurs booléennes (`TRUE`/`FALSE`): le résultat du test pour chacune des combinaisons de polygones.
 
-L'une des propriétés intéressante des valeurs booléennes (`TRUE` ou `FALSE`), renvoyé par la fonction `st_intersects`, est que la valeur `TRUE` peut être interprété par R comme une valeur de 1 et `FALSE` comme 0. Il est donc possible de réaliser des opérations mathématiques sur des valeurs booléennes. On peut ainsi effectuer une sommation sur les lignes (zones tampons des grandes villes) afin de déterminer combien de parcs nationaux (en colonne dans la matrice) possèdent la valuer `TRUE` se retrouvent ainsi à l'intérieur des zones tampons.
+L'une des propriétés intéressantes des valeurs booléennes (`TRUE` ou `FALSE`), renvoyé par la fonction `st_intersects()`, est que la valeur `TRUE` peut être interprété par R comme une valeur de 1 et `FALSE` comme 0. Il est donc possible de réaliser des opérations mathématiques sur des valeurs booléennes. On peut ainsi effectuer une sommation sur les lignes (zones tampons des grandes villes) afin de déterminer combien de parcs nationaux (en colonne dans la matrice) possèdent la valeur `TRUE` se retrouvent ainsi à l'intérieur des zones tampons.
 
 ```{r top-villes-parcs}
 rowSums(st_intersects(x = top10_villes_buffer, y = parcs_nationaux, sparse = FALSE))
@@ -422,7 +423,7 @@ rowSums(st_intersects(x = top10_villes_buffer, y = parcs_nationaux, sparse = FAL
 # Si l'on travaille avec l'argument sparse = FALSE:
 lengths(st_intersects(x = top10_villes_buffer, y = parcs_nationaux))
 ```
-La fonction lengths retourne la dimension des vecteurs (c.a.d le nombre de parcs) pour chacune des niveaux de la liste (chaque niveau étant une zone tampon).
+La fonction `lengths()` retourne la dimension des vecteurs (c.a.d le nombre de parcs) pour chacune des niveaux de la liste (chaque niveau étant une zone tampon).
 
 On consigne à présent ces valeurs dans une nouvelle colonne de la table d'attributs de l'objet `top10_villes`.
 
@@ -436,25 +437,25 @@ Enfin, on ordonne la table d'attributs en se basant sur la nouvelle colonne `nbr
 top10_villes <- top10_villes[order(top10_villes$nbr_parcs, decreasing = TRUE), ]
 ```
 
-On affiche maintenant la table d'attributs afin d'obtenir la réponse tant attendu à notre question:
+On affiche maintenant la table d'attributs afin d'obtenir la réponse à notre question:
 
-> Parmi les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux (dans un rayon de 70km)? 
+> Parmi les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux (dans un rayon de 70&nbsp;km)? 
 
 ```{r top-villes-parcs4}
 top10_villes
 ```
 
-On constate que Sherbrooke et Saint-Jean-sur-Richelieu dispose tout deux du plus grand nombre (4) de parcs nationaux dans un rayon de 70&nbsp;kms. 
+On constate que Sherbrooke et Saint-Jean-sur-Richelieu disposent tout deux du plus grand nombre (4) de parcs nationaux dans un rayon de 70&nbsp;km. 
 
 <!---
 NOTE: ICI on pourrait introduire la notion de cropping pour tenter de départager mais je pense qu'il y a déjà pas de stock alors 
 -->
 
-Pour le module 8, nous nous allons caractériser le profil d'élévation des 4 parcs de la région de Sherbrooke afin de trouver les meilleurs panoramas de la région.
+Dans le module 8, nous allons caractériser le profil d'élévation des 4 parcs de la région de Sherbrooke afin de trouver les meilleurs panoramas de la région.
 
 
 ## Exercice
 
 - Pour chaque ville, qu'elle est le plus proche parc? (st_nearest_feature) *
-- En utilisant les données des sentiers hivernaux de la SEPAQ (XXXX), parmi les 4 parcs de la région de Sherbrooke, lequel dispose de la plus longue distance de sentier de raquette? (Exercice plus intégrateur mais **)
-- Départager les deux villes gagnantes en calculant le pourcentage de couverture des parcs nationaux dans la zone tampon de 70 km. L'un des parcs de la région de Sherbrooke chevauche partiellement la zone tampon. Pour répondre à cette question, il faudra découpé (`st_crop`) ce polygone afin d'obtenir seulement la portion se retrouvant dans la zone tampon (**) 
+- En utilisant les données des sentiers hivernaux de la SEPAQ (XXXX), parmi les 4 parcs de la région de Sherbrooke, lequel dispose de la plus longue distance de sentier de raquette? (Exercice plus intégrateur mais XXX)
+- Départager les deux villes gagnantes en calculant le pourcentage de couverture des parcs nationaux dans la zone tampon de 70&nbsp;km. L'un des parcs de la région de Sherbrooke chevauche partiellement la zone tampon. Pour répondre à cette question, il faudra découper (`st_crop()`) ce polygone afin d'obtenir seulement la portion se retrouvant dans la zone tampon (XXX) 

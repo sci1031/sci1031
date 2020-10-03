@@ -138,9 +138,9 @@ dem[c(14, 30, 33:44)]
 
 Il est souvent dangereux d'extraire des valeurs à des positions spécifiques en utilisant les index de pixels. En effet, on perd une information précieuse: la localisation dans l'espace du pixel (coordonnées X et Y). C'est pourquoi, il est souvent privilégié de convertir le raster en `data.frame`. La fonction `as.data.frame(..., xy = TRUE)`, appliqué sur un objet de class `raster`, présente l'avantage de retourner les coordonnées associées à la valeur.
 
-```{r}
+```{r, eval = FALSE}
 df_dem <- as.data.frame(dem, xy = TRUE)
-head(subset(df_dem, !is.na(DEM)))
+head(subset(df_dem, !is.na(dem)))
 ```
 
 En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des valeurs du raster. Cette approche permet de calculer la moyenne, la médiane etc. La fonction `summary()` permet d'en savoir davantage sur la distribution des valeurs.
