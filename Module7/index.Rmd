@@ -174,7 +174,7 @@ provinces <- st_read(chemin_provinces)
 ```
 
 ```{r load-provinces2, include = FALSE}
-provinces <- st_read("Module7/data/provinces/provinces.shp")
+provinces <- st_read("Module7/data/provinces/provinces_low_res.shp")
 ```
 
 On peut maintenant vérifier visuellement l'importation. En examinant la table d'attributs de l'objet `provinces` (en cliquant sur un des polygons de la carte interactive ci-dessous), on remarque que l'attribut `NAME_1` contient le nom des provinces. 
