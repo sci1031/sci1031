@@ -32,8 +32,7 @@ library(sf)
 
 ## Leçon
 
-Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présent dans le secteur de la ville de Sherbrooke. Nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l'élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d'élévation des parcs de la région de Sherbrooke. Pour chacun des parcs, nous allons identifier son point culminant. Enfin, nous dresserons le profil d'élévation des sentiers de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) pour l'un des parcs de notre choix.
-
+Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présent dans le secteur de la ville de Sherbrooke. Nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l'élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d'élévation des parcs de la région de Sherbrooke. Nous allons isoler le parc disposant du plus haut point culminant. Enfin, nous dresserons le profil d'élévation du sentier de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) se rendant au plus proche de se point culminant. 
 
 Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur l'élévation et les parcs de la région de Sherbrooke](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Elevation_Parcs_Sherbrooke.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Elevation_Parcs_Sherbrooke` comprend deux sous-dossiers et un fichier:
 
@@ -52,10 +51,6 @@ En deuxième partie, on s'interrogera sur:
 
 > Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
 
-Enfin, nous étudierons la climatologie du parcs national de répondre à la question suivantes:
-
-> Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
-
 Pour répondre à ces questions, il faut réaliser un ensemble d'opérations spatiales. 
 Pour la première question:
 
@@ -65,25 +60,30 @@ Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
 
 ### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet? { - }
 
+#### Importation des données {-}
+
 Afin de répondre à cette question, nous désirons dans un premier temps charger dans l'environnement R, les différentes couches d'informations spatiales.
 
-On charge les librairies requises.
+On charge les librairies requises pour importer les données spatiales vectorielles (`sf`), et les données spatiales matricielles (`raster`).
 
 ```{r}
 library(sf)
 library(raster)
 ```
 
-#### Importation des données {-}
+On charge également la librairie `mapview` permettant de visualiser les données spatiales.
 
-On charge le *shapefile* des 4 parcs de la régions de Sherbrooke que nous avons isolé à l'intérieur du module 7. 
+```{r}
+library(mapview)
+```
+
+Maintenant, on peut importer le *shapefile* des 4 parcs de la régions de Sherbrooke que nous avons isolé à l'intérieur du module 7. 
 
 ```{r, eval = FALSE}
 chemin <-"D:/votrechemin/SCI1031/Module8/Donnees/"
 chemin_parcs <- paste(chemin, "/parcs_sherbrooke/parcs_sherbrooke.shp", sep = "")
 parcs <- st_read(chemin_parcs)
 ```
-
 
 ```{r, echo = FALSE}
 parcs <- st_read("Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
@@ -106,47 +106,62 @@ On visualise par la suite les deux objets spatiaux afin de valider l'importation
 mapview(dem) + mapview(parcs, zcol = "TRQ_NM_", legend = FALSE)
 ```
 
-On peut à présent vérifier les projections respectives des objets spatiaux importés. Certaines opérations spatiales vont nécessiter que les deux objets soient placés dans le même système de projection.
 
-```{r}
-proj4string(dem) 
-st_crs(parcs)$proj4string
-```
+#### Accéder aux valeurs d'un `raster` (données matricielles) {-}
 
-Les deux projections sont divergentes, nous allons reprojeter le DEM dans le système de projection des parcs de la région de Sherbrooke à l'aide de la fonction `projectRaster()` du package `raster`.
-
-```{r}
-dem <- projectRaster(dem, crs = st_crs(parcs)$proj4string)
-proj4string(dem) 
-```
-
-#### Accéder et manipuler les valeurs d'un `raster` (données matricielles)
-
-Avant d'aller plus loin, nous allons prendre un moment pour nous familiariser avec la manipulation de raster.
-Les objet de type raster dispose d'une structure d'objet particulière (communément appelé classe S4). Si l'on veut accéder aux valeurs stockées, on doit procéder d'une certaine manière. 
-
-Pour des valeurs spécifiques, on réfère le numéro/l'index du pixel.
+Avant d'aller plus loin, nous allons prendre un moment pour nous familiariser avec la manipulation de raster. Les objet de type `raster` dispose d'une structure d'objet particulière (communément appelé classe S4). Les rasters spatiaux peuvent être vu comme une image composée d'une multitude de pixels. La seule différence réside dans le fait que cette image inclut un contexte géospatial, c'est à dire, elle est référencée dans l'espace. Pour accéder à des valeurs spécifiques, on utilise des numéros ou index référant à un ou plusieurs pixels.
 
 ```{r}
 # Accéder à la première valeur
 dem[1]
-# Accéder au valeurs de 300 à 430
-dem[300:430]
+# Accéder au valeurs des pixels 1 à 100
+dem[1:100]
 # Pour des valeurs spécifiques
 dem[c(14, 30, 33:44)]
 ```
 
-Il est souvent dangereux d'extraire des valeurs à des positions spécifiques en utilisant les index de pixels. En effet, on perd une information précieuse: la localisation dans l'espace du pixel (coordonnées X et Y). C'est pourquoi, il est souvent privilégié de convertir le raster en `data.frame`. La fonction `as.data.frame(..., xy = TRUE)`, appliqué sur un objet de class `raster`, présente l'avantage de retourner les coordonnées associées à la valeur.
+Il est souvent dangereux d'extraire des valeurs à des positions spécifiques en utilisant les index de pixels. En effet, on perd une information précieuse: la localisation dans l'espace du pixel (coordonnées X et Y). C'est pourquoi, il est souvent privilégié de convertir le raster en `data.frame`. La fonction `as.data.frame(..., xy = TRUE)`, appliqué sur un objet de class `raster`, présente l'avantage de retourner les coordonnées associées à la valeur. Par défault, la coordonnée renvoyée par la fonction `as.data.frame` correspond au coin inférieur gauche de chaque pixel. Il est possible de renvoyer le centroid du pixel en utilisant l'argument  `as.data.frame(..., xy = TRUE, centroids = TRUE)`.
 
-```{r, eval = FALSE}
-df_dem <- as.data.frame(dem, xy = TRUE)
-head(subset(df_dem, !is.na(dem)))
+```{r include-figs-raster-centroids, fig.align = 'center', echo = FALSE, fig.cap = "(A) Coordonées renvoyées par défault par la fonction `as.data.frame`; (B) Coordonnées des centroides des pixels renvoyées lorque l'argument `centroids = TRUE` est utilisé dans la fonction `as.data.frame`", out.width = '50%'}
+knitr::include_graphics('Module8/images/coordsPixel.png')
 ```
 
-En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des valeurs du raster. Cette approche permet de calculer la moyenne, la médiane etc. La fonction `summary()` permet d'en savoir davantage sur la distribution des valeurs.
+```{r}
+df_dem <- as.data.frame(dem, xy = TRUE)
+head(df_dem)
+
+# On renomme la colonne DEM
+names(df_dem)[3] <- "elevation"
+```
+
+On peut maintenant accéder à des valeurs spécifiques tout en aillant un regard sur les coordonées associées aux pixels.
+
+```{r}
+# Accéder à la première valeur
+df_dem[1,]
+# Accéder au valeurs des pixels 1 à 20
+df_dem[1:20,]
+# Pour des valeurs spécifiques
+df_dem[c(14, 30, 33:44),]
+```
+
+#### Décrire un `raster` (données matricielles) par ses valeurs ou sa composition {-}
+
+En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des valeurs du raster. Cette approche permet de calculer la moyenne, la médiane etc. 
 
 ```{r}
 max(getValues(dem))
+```
+
+Certains pixels peuvent disposer d'une valeur non-définie (`NA`). Lorsqu'on applique des opérateurs mathématiques sur les valeurs des pixels (`mean()`, `sum()`, `median()` etc.), il est important de spécifier l'argument `na.rm = TRUE` afin d'ignorer ces valeurs non-définies sinon la valeur renvoyée par l'opérateur sera `NA` telle que constaté ci-dessus lors de l'appelle de la fonction `max(getValues(dem))`.
+
+```{r}
+max(getValues(dem), na.rm = TRUE)
+```
+
+La fonction `summary()` peut s'avérer utile pour en savoir davantage sur la distribution des valeurs à l'intérieur du raster.
+
+```{r}
 summary(getValues(dem))
 ```
 
@@ -161,18 +176,39 @@ ncol(dem)
 ncell(dem)
 ```
 
+Enfin, on peut également obtenir la résolution spatial d'un raster en utilisant la fonction `res()`.
+
+```{r}
+res(dem)
+```
+
+L'unité de la résolution (taille du pixel en X et en Y) affiché ici est en degré, telle que correspondant à la projection du raster. Ce type d'unité est plus difficilement interprétable. On peut reprojeté le raster dans le système *Conique conforme de Lambert du Québec* (NAD83, EPSG: 32198) afin d'obtenir la résolution en système métrique et non en degré. 
+
+```{r}
+proj4string(dem) 
+dem_lcc <- projectRaster(dem, crs = "+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ")
+res(dem_lcc)
+```
+
+La largeur (x) d'un pixel est de `r res(dem_lcc)[1]`&nbsp;m de largeur et `r res(dem_lcc)[2]`&nbsp;m de hauteur.
+
+#### Changer la résolution d'un raster
+
+Parfois, il peut être utile d'ajuster la résolution d'un raster afin de conduire des analyses sur des tailles de pixels de références. Par exemple, nous voudrions que chaque pixel est une taille prédéfinis de 100 par 100 mètres.
+
+
+TODO: 
+    - aggregate
+    - resample
+
+
 #### Modifier le contenu
 
 - reclassify les valeurs (faible, modéré, élevé)
 - remplacer des valeurs (exemple avec le `NA`)
 
-Décontextualisation par la perte des coordonnées X-Y, On privilégie l'approche:
-
-- `as.data.frame(xy = TRUE)`
-
 #### Changer la résolution d'un raster
 
-- aggregate
 
 ### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
 
