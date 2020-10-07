@@ -187,7 +187,7 @@ Et la projection du *shapefile* `accidents_velo` est:
 st_crs(accidents_velo)$proj4string
 ```
 
-Les données de tous les *shapefiles* sont dans la projection de Mercator transverse (`+proj=tmerc`) et utilisent le Système de référence géodésique nord-américan de 1983 (`+datum=NAD83`). Connaitre le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.
+Les données de tous les *shapefiles* sont dans la projection de Mercator transverse (`+proj=tmerc`) et utilisent le Système de référence géodésique nord-américain de 1983 (`+datum=NAD83`). Connaître le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.
 
 ##### L'étendue spatiale {-}
 
@@ -228,13 +228,14 @@ accidents_velo
 
 #### Visualisation avec la librairie Mapview {-}
 
-Vous allez maintenant apprendre à visualer des données *shapefile* en utilisant la fonction `mapview()` de la librairie `mapview`. Cette librarie est une des plus simples à utiliser pour visualiser rapidement des données spatiales. Commençons par charger cette librarie dans la console `R`:
+Vous allez maintenant apprendre à visualiser des données *shapefile* en utilisant la fonction `mapview()` de la librairie `mapview`. Cette librarie est une des plus simples à utiliser pour visualiser rapidement des données spatiales. Commençons par charger cette librarie dans la console `R`:
 
 ```{r load-mapview}
 library(mapview)
 ```
 
 Dans un premier temps, visualisons les limites terrestres de la ville de Montréal (Fig \@ref(fig:plot-terre)).
+
 ```{r plot-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Limites terrestres de l'île de Montréal"}
 mapview(limites_terrestres, col.regions = "white")
 ```
@@ -244,12 +245,13 @@ Remarquez que nous avons choisi la couleur blanche pour représenter l'intérieu
 
 Passez votre curseur sur la carte ainsi créée et remarquez que vous pouvez cliquer sur chacun des polygones contenus dans cette couche de données.
 
-Remarquez aussi la légende dans le coin supérieur gauche de la carte créée et approchez-y votre curseur. Vous pouvez alors sélectionner une ou l'autre des arrières-plans disponibles. L'option  "OpenStreetMap" affichera la carte produite pas ce gratuitiel de cartographie pour la région entourant le polygone illustré. L'option "ESRI.WorldImagery", quant à elle, affichera une image satellitaire de la région.
+Remarquez aussi la légende dans le coin supérieur gauche de la carte créée et approchez-y votre curseur. Vous pouvez alors sélectionner une ou l'autre des arrières-plans disponibles. L'option  "OpenStreetMap" affichera la carte produite par ce gratuitiel de cartographie pour la région entourant le polygone illustré. L'option "ESRI.WorldImagery", quant à elle, affichera une image satellitaire de la région.
 
 
 Dans un deuxième temps, visualisons les pistes cyclables (Fig \@ref(fig:plot-velo)). Utilisons toujours la fonction `mapview()` et demandons que la couleur du trait des lignes soit verte foncée. Pour définir la couleur des lignes, nous utilisons l'argument `color` et non l'argument `col.regions`.
+
 ```{r plot-velo, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Pistes cyclables sur l'île de Montréal"}
-mapview(pistes_cyclables, color = "darkgreen")
+# mapview(pistes_cyclables, color = "darkgreen")
 ```
 
 <br>
