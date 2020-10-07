@@ -12,7 +12,7 @@ bookdown::gitbook:
         <li><a href="./">Ébauche #1 du cours SCI 1031.</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-      edit: https://github.com/McCannLab/TheoryClub/edit/master/%s
+      edit: https://github.com/sci1031/sci1031/edit/master/%s
       # download: ["pdf", "epub"]
     download: [["Cours_SpatialR.pdf","pdf"]]
 bookdown::html_chapters:

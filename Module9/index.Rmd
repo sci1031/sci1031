@@ -5,8 +5,8 @@ L'objectif principal de ce module est
 
 À la fin de ce module vous saurez:
 
--
--
+- 
+- 
 -
 
 Vous utiliserez les librairies suivantes:
@@ -36,7 +36,13 @@ library(ggpubr)
 
 ## Leçon
 
-### Propriétés des données spatiotemporelles
+### Propriétés des données spatio-temporelles
+
+Les données spatio-temporelles représente une collection d'objets spatiaux ordonnées dans le temps: la même information spatiales pour différents dans le temps. 
+
+
+
+
 
 ### Introduction à la librairie R spacetime
 
