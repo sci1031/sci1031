@@ -121,7 +121,7 @@ nom_du_fichier<- paste(chemin, "Montreal_Velo/accidents/accidents2018_Mtl_velo.s
 pistes_cyclables <- st_read(nom_du_fichier)
 ```
 
-```{r accidents, eval = TRUE}
+```{r accidents}
 accidents_velo <- st_read("Module4/data/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp")
 ```
 
@@ -138,7 +138,7 @@ Les métadonnées fondamentales d’un *shapefile* sont :
 2.	La projection : le système de coordonnées de référence utilisé pour représenter les données.
 3.	L’étendue spatiale : la superficie géographique couvrant les données vectorielles.
 
-##### Le type de géogmétrie {-}
+##### Le type de géométrie {-}
 
 Nous pouvons explorer chacune de ces métadonnées en utilisant des fonctions de la librairie `sf`. Le type de géométrie est obtenu par la fonction `st_geometry_type()`. Par exemple, pour les limites terrestres de la ville de Montréal, cette fonction nous donne:
 
@@ -250,8 +250,8 @@ Remarquez aussi la légende dans le coin supérieur gauche de la carte créée e
 
 Dans un deuxième temps, visualisons les pistes cyclables (Fig \@ref(fig:plot-velo)). Utilisons toujours la fonction `mapview()` et demandons que la couleur du trait des lignes soit verte foncée. Pour définir la couleur des lignes, nous utilisons l'argument `color` et non l'argument `col.regions`.
 
-```{r plot-velo, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Pistes cyclables sur l'île de Montréal"}
-# mapview(pistes_cyclables, color = "darkgreen")
+```{r plot-velo, warning = FALSE, message = FALSE}
+mapview(pistes_cyclables, color = "darkgreen")
 ```
 
 <br>
@@ -295,7 +295,7 @@ Si vous ne connaissez pas la distinction entre ces types d'aménagement cyclable
 
 Dans la figure \@ref(fig:plot-velo) réalisée plus haut, toutes les pistes cyclables étaient illustrées en vert. Nous voulons maintenant représenter les six types de voie cyclable par six couleurs différentes. L'avantage de la fonction `mapview()` est qu'elle est capable d'emblée de distinguer les différentes valeurs que peuvent prendre un attribut. Ainsi, nous pouvons simplement demander (Fig \@ref(fig:plot-voie2)):
 
-```{r plot-voie2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Bandes cyclables sur l'île de Montréal"}
+```{r plot-voie2, warning = FALSE, message = FALSE, fig.cap="Bandes cyclables sur l'île de Montréal"}
 mapview(pistes_cyclables)
 ```
 
