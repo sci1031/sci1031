@@ -26,4 +26,4 @@ Imports:
   stars,
   svglite
 Remotes: 
-  r-spatial/mapview
+  r-spatial/mapview@7555cbfcc6d4e8d804d36215bb8ba7dd050ec626

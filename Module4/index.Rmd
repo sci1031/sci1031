@@ -295,7 +295,7 @@ Si vous ne connaissez pas la distinction entre ces types d'aménagement cyclable
 
 Dans la figure \@ref(fig:plot-velo) réalisée plus haut, toutes les pistes cyclables étaient illustrées en vert. Nous voulons maintenant représenter les six types de voie cyclable par six couleurs différentes. L'avantage de la fonction `mapview()` est qu'elle est capable d'emblée de distinguer les différentes valeurs que peuvent prendre un attribut. Ainsi, nous pouvons simplement demander (Fig \@ref(fig:plot-voie2)):
 
-```{r plot-voie2, warning = FALSE, message = FALSE, eval = FALSE, fig.cap="Bandes cyclables sur l'île de Montréal"}
+```{r plot-voie2, warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Bandes cyclables sur l'île de Montréal"}
 mapview(pistes_cyclables)
 ```
 
@@ -367,7 +367,7 @@ library(leafsync)
 
 Représentons mainteant les deux projections différentes en utilisant la fonction `latticeView()` de la librarie `leafsync` (Fig \@ref(fig:plot-terre2)). Puisque cette fonction existe à la fois dans la librarie `leafsync` et dans la librarie `mapview` mais qu'elle est obsolète dans cette dernière, nous devons préciser que nous voulons la fonction latticeView()` de la librarie `leafsync` en utilisant la notation suivante: `leafsync::latticeView`
 ```{r plot-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Limites terrestres de l'île de Montréal selon les projections Mercartor (gauche) et Robinson (droit)"}
-map_mercator <- mapview(limites_terrestres, col.regions = "ùwhite")
+map_mercator <- mapview(limites_terrestres, col.regions = "white")
 map_robinson <- mapview(limites_terrestres_rob)
 leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
 ```
