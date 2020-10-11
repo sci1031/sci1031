@@ -736,11 +736,10 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "mapview",
       "RemoteUsername": "r-spatial",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "7555cbfcc6d4e8d804d36215bb8ba7dd050ec626",
-      "Hash": "d3d7fb0b550ec7446cdd3b68fd9f3bc3"
+      "RemoteRepo": "mapview",
+      "RemoteRef": "7555cbfcc6d4e8d804d36215bb8ba7dd050ec626",
+      "RemoteSha": "7555cbfcc6d4e8d804d36215bb8ba7dd050ec626"
     },
     "markdown": {
       "Package": "markdown",
