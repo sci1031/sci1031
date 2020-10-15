@@ -8,3 +8,4 @@ _book/
 _bookdown_files/
 gh-pages*
 *.log
+.Rprofile

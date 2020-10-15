@@ -1,14 +1,19 @@
 Package: placeholder
 Type: Book
-Title: TheoryClub
+Title: sci1031 
 Version: 0.0.1
 Imports:
   bookdown,
+  citr,
   dplyr,
+  DT,
+  formatR,
   ggplot2,
   ggpubr,
   GISTools,
   latex2exp,
+  leafsync,
+  lwgeom,
   mapview,
   rasterVis,
   remotes,
@@ -16,5 +21,9 @@ Imports:
   rgdal,
   sf,
   sp,
+  spacetime,
   spdep,
+  stars,
   svglite
+Remotes: 
+  r-spatial/mapview@7555cbfcc6d4e8d804d36215bb8ba7dd050ec626

@@ -121,7 +121,7 @@ nom_du_fichier<- paste(chemin, "Montreal_Velo/accidents/accidents2018_Mtl_velo.s
 pistes_cyclables <- st_read(nom_du_fichier)
 ```
 
-```{r accidents, eval = TRUE}
+```{r accidents}
 accidents_velo <- st_read("Module4/data/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp")
 ```
 
@@ -138,7 +138,7 @@ Les métadonnées fondamentales d’un *shapefile* sont :
 2.	La projection : le système de coordonnées de référence utilisé pour représenter les données.
 3.	L’étendue spatiale : la superficie géographique couvrant les données vectorielles.
 
-##### Le type de géogmétrie {-}
+##### Le type de géométrie {-}
 
 Nous pouvons explorer chacune de ces métadonnées en utilisant des fonctions de la librairie `sf`. Le type de géométrie est obtenu par la fonction `st_geometry_type()`. Par exemple, pour les limites terrestres de la ville de Montréal, cette fonction nous donne:
 
@@ -187,7 +187,7 @@ Et la projection du *shapefile* `accidents_velo` est:
 st_crs(accidents_velo)$proj4string
 ```
 
-Les données de tous les *shapefiles* sont dans la projection de Mercator transverse (`+proj=tmerc`) et utilisent le Système de référence géodésique nord-américan de 1983 (`+datum=NAD83`). Connaitre le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.
+Les données de tous les *shapefiles* sont dans la projection de Mercator transverse (`+proj=tmerc`) et utilisent le Système de référence géodésique nord-américain de 1983 (`+datum=NAD83`). Connaître le SCR est essentiel pour interpréter l’étendue spatiale des objets spatiaux puisque celui-ci précise, en quelque sorte, les unités de mesure.
 
 ##### L'étendue spatiale {-}
 
@@ -228,13 +228,14 @@ accidents_velo
 
 #### Visualisation avec la librairie Mapview {-}
 
-Vous allez maintenant apprendre à visualer des données *shapefile* en utilisant la fonction `mapview()` de la librairie `mapview`. Cette librarie est une des plus simples à utiliser pour visualiser rapidement des données spatiales. Commençons par charger cette librarie dans la console `R`:
+Vous allez maintenant apprendre à visualiser des données *shapefile* en utilisant la fonction `mapview()` de la librairie `mapview`. Cette librarie est une des plus simples à utiliser pour visualiser rapidement des données spatiales. Commençons par charger cette librarie dans la console `R`:
 
 ```{r load-mapview}
 library(mapview)
 ```
 
 Dans un premier temps, visualisons les limites terrestres de la ville de Montréal (Fig \@ref(fig:plot-terre)).
+
 ```{r plot-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Limites terrestres de l'île de Montréal"}
 mapview(limites_terrestres, col.regions = "white")
 ```
@@ -244,11 +245,12 @@ Remarquez que nous avons choisi la couleur blanche pour représenter l'intérieu
 
 Passez votre curseur sur la carte ainsi créée et remarquez que vous pouvez cliquer sur chacun des polygones contenus dans cette couche de données.
 
-Remarquez aussi la légende dans le coin supérieur gauche de la carte créée et approchez-y votre curseur. Vous pouvez alors sélectionner une ou l'autre des arrières-plans disponibles. L'option  "OpenStreetMap" affichera la carte produite pas ce gratuitiel de cartographie pour la région entourant le polygone illustré. L'option "ESRI.WorldImagery", quant à elle, affichera une image satellitaire de la région.
+Remarquez aussi la légende dans le coin supérieur gauche de la carte créée et approchez-y votre curseur. Vous pouvez alors sélectionner une ou l'autre des arrières-plans disponibles. L'option "OpenStreetMap" affichera la carte produite par ce gratuitiel de cartographie pour la région entourant le polygone illustré. L'option "ESRI.WorldImagery", quant à elle, affichera une image satellitaire de la région.
 
 
 Dans un deuxième temps, visualisons les pistes cyclables (Fig \@ref(fig:plot-velo)). Utilisons toujours la fonction `mapview()` et demandons que la couleur du trait des lignes soit verte foncée. Pour définir la couleur des lignes, nous utilisons l'argument `color` et non l'argument `col.regions`.
-```{r plot-velo, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Pistes cyclables sur l'île de Montréal"}
+
+```{r plot-velo, warning = FALSE, message = TRUE, eval = FALSE, fig.cap = "Pistes cyclables sur l'île de Montréal"}
 mapview(pistes_cyclables, color = "darkgreen")
 ```
 
@@ -265,7 +267,7 @@ Dans la carte des pistes cyclables, remarquez la légende apparue dans le coin s
 
 
 Finalement, visualisons les accidents de la route impliquant des bicyclettes (Fig \@ref(fig:plot-accidents)).
-```{r plot-accidents, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Accidents de la route avec cyclistes sur l'île de Montréal"}
+```{r plot-accidents, warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Accidents de la route avec cyclistes sur l'île de Montréal"}
 mapview(accidents_velo, color = "red", col.regions = "red", cex = 1, legend = NULL)
 ```
 
@@ -293,7 +295,7 @@ Si vous ne connaissez pas la distinction entre ces types d'aménagement cyclable
 
 Dans la figure \@ref(fig:plot-velo) réalisée plus haut, toutes les pistes cyclables étaient illustrées en vert. Nous voulons maintenant représenter les six types de voie cyclable par six couleurs différentes. L'avantage de la fonction `mapview()` est qu'elle est capable d'emblée de distinguer les différentes valeurs que peuvent prendre un attribut. Ainsi, nous pouvons simplement demander (Fig \@ref(fig:plot-voie2)):
 
-```{r plot-voie2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Bandes cyclables sur l'île de Montréal"}
+```{r plot-voie2, warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Bandes cyclables sur l'île de Montréal"}
 mapview(pistes_cyclables)
 ```
 
@@ -314,12 +316,12 @@ image(1:n, 1, as.matrix(1:n), col=viridis(n), axes= FALSE, xlab = "", ylab = "",
 Un utilisateur de `R` peut utiliser des palettes prédéfinies, ou encore définir les siennes. Par exemple, si nous trouvons que les couleurs de la palette *viridis* ne permettent pas de bien différencier les différents types de piste cyclable, nous pouvons nous-même créer une palette contenant six couleurs (car il y a six valeurs possibles pour cet attribut).
 
 ```{r plot-voie3, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
-couleurs_voie<-c("royalblue", "purple", "turquoise","darkgreen","limegreen","pink")
+couleurs_voie <- c("royalblue", "purple", "turquoise", "darkgreen", "limegreen", "pink")
 ```
 
 Nous pouvons ajouter cet argument à la fonction `mapview()`(Fig \@ref(fig:plot-voie4)):
 
-```{r plot-voie4, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Types de voie cyclable sur l'île de Montréal"}
+```{r plot-voie4, echo = TRUE, warning = FALSE, message = FALSE, eval = FALSE, fig.cap="Types de voie cyclable sur l'île de Montréal"}
 mapview(pistes_cyclables, color=couleurs_voie, layer.name = "Types de pistes cyclables")
 ```
 
