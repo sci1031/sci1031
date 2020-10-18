@@ -41,20 +41,28 @@ Dans la section Exercice, vous utiliserez XXXXX
 Les données spatio-temporelles représente une collection d'objets spatiaux ordonnées dans le temps: la même information spatiales pour différents dans le temps. 
 
 
+- Trajets en vélo (vitesse, distance) - POINT + LINES
+    - GeoJSON
+    - https://donnees.montreal.ca/ville-de-montreal/pistes-cyclables
+- Étendue spatial du réseau de pistes cyclabes à travers le temps.
+- Expansion des aires protégées au Québec
+    -  https://www.donneesquebec.ca/recherche/fr/dataset/aires-protegees-au-quebec
 
 
+### Visualisation spatiotemporelle
 
-### Introduction à la librairie R spacetime
+-	Figure à panneaux multiples
+-	Figure espace-temps
+    - Hovmoller plot
+-	Figure animée
+
+
+### Introduction à la librairie R stars
 
 -	Classes de données spatiotemporelles
 -	Création d’objet ST
 -	Manipulation de bases de données spatiotemporelles
 
-### Visualisation
-
--	Figure à panneaux multiples
--	Figure espace-temps
--	Figure animée
 
 
 
