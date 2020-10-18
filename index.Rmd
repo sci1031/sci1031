@@ -20,7 +20,7 @@ description: "Ceci est une première ébauche de la conception du cours SCI 1031
 
 ```{r setup, include = FALSE}
 options(
-  htmltools.dir.version = FALSE, formatR.indent = 2,
+  formatR.indent = 2,
   width = 55, digits = 4, warnPartialMatchAttr = FALSE,
   warnPartialMatchDollar = FALSE
 )

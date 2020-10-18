@@ -153,7 +153,7 @@ En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des va
 max(getValues(dem))
 ```
 
-Certains pixels peuvent disposer d'une valeur non-définie (`NA`). Lorsqu'on applique des opérateurs mathématiques sur les valeurs des pixels (`mean()`, `sum()`, `median()` etc.), il est important de spécifier l'argument `na.rm = TRUE` afin d'ignorer ces valeurs non-définies sinon la valeur renvoyée par l'opérateur sera `NA` telle que constaté ci-dessus lors de l'appelle de la fonction `max(getValues(dem))`.
+Certains pixels peuvent disposer d'une valeur non-définie (`NA`). Lorsqu'on applique des opérateurs mathématiques sur les valeurs des pixels (`mean()`, `sum()`, `median()` etc.), il est important de spécifier l'argument `na.rm = TRUE` afin d'ignorer ces valeurs non-définies sinon la valeur renvoyée par l'opérateur sera `NA` telle que constaté ci-dessus lors de l'appel de la fonction `max(getValues(dem))`.
 
 ```{r}
 max(getValues(dem), na.rm = TRUE)
@@ -165,7 +165,7 @@ La fonction `summary()` peut s'avérer utile pour en savoir davantage sur la dis
 summary(getValues(dem))
 ```
 
-Si l'on veut en savoir davantage sur la taille du raster, on peut se référer aux fonctions suivantes:
+Si l'on s'intéresse maintenant à la structure du raster, c'est à dire à en savoir davantage sur la dimension du raster, on peut se référer aux fonctions suivantes:
 
 ```{r}
 # Nombre de lignes
@@ -182,35 +182,140 @@ Enfin, on peut également obtenir la résolution spatial d'un raster en utilisan
 res(dem)
 ```
 
-L'unité de la résolution (taille du pixel en X et en Y) affiché ici est en degré, telle que correspondant à la projection du raster. Ce type d'unité est plus difficilement interprétable. On peut reprojeté le raster dans le système *Conique conforme de Lambert du Québec* (NAD83, EPSG: 32198) afin d'obtenir la résolution en système métrique et non en degré. 
+L'unité de la résolution (taille du pixel en X et en Y) affiché ici est en degré, telle que correspondant à la projection du raster. Ce type d'unité est plus difficilement interprétable. On peut reprojeté le raster dans le système *Conique conforme de Lambert du Québec* (NAD83, EPSG: 32198) afin d'obtenir la résolution en système métrique et non en degré. Cette projection est identique à l'objet spatial `parcs`.
 
 ```{r}
-proj4string(dem) 
-dem_lcc <- projectRaster(dem, crs = "+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ")
+st_crs(parcs) 
+dem_lcc <- projectRaster(dem, crs = crs(parcs))
 res(dem_lcc)
 ```
 
 La largeur (x) d'un pixel est de `r res(dem_lcc)[1]`&nbsp;m de largeur et `r res(dem_lcc)[2]`&nbsp;m de hauteur.
 
-#### Changer la résolution d'un raster
 
-Parfois, il peut être utile d'ajuster la résolution d'un raster afin de conduire des analyses sur des tailles de pixels de références. Par exemple, nous voudrions que chaque pixel est une taille prédéfinis de 100 par 100 mètres.
+#### Modifier les valeurs contenus dans le raster {-}
 
+Après avoir explorer la distribution des valeurs avec `summary(getValues(dem))`, on a pu s'apercevoir que certains pixels contenaient des valeurs négatives. Ces valeurs ne sont pas abberantes et signifient que ces pixels se retrouvent en dessous du niveau de la mer. 
 
-TODO: 
-    - aggregate
-    - resample
+TODO
 
-
-#### Modifier le contenu
+`-9999` peut être une valeur 
 
 - reclassify les valeurs (faible, modéré, élevé)
-- remplacer des valeurs (exemple avec le `NA`)
+- remplacer des valeurs (exemple avec les valeurs inférieurs à 0)
 
-#### Changer la résolution d'un raster
+
+#### Changer la résolution d'un raster {-}
+
+Parfois, il peut être utile d'ajuster la résolution d'un raster afin de conduire des analyses sur des tailles de pixels de références. Par exemple, nous voudrions que chaque pixel du modèle d'élévation numérique (DEM) est une taille prédéfinis de 500 par 500 mètres. La première étape consiste à créer un raster de référence disposant de cette résolution.
+
+```{r}
+dem100 <- raster(extent(dem_lcc), res = 100, crs = crs(dem_lcc))
+```
+On utilise `extent()` pour créer un nouveau raster de référence (`dem100`) dont l'étendu spatiale est identique à celle du raster d'élévation `dem_lcc`. On définit la résolution à 100 mètres à l'aide de l'argument `res`. Enfin, on définit la projection comme identique au raster d'élévation avec la fonction (`crs()`). 
+
+```{r}
+head(getValues(dem100)) 
+```
+
+Par défault, les pixels du nouveau raster possédent tous une valeur `NA`. La dernière étape consiste à échantillonner le raster d'élévation afin de remplir le raster de référence avec les valeurs du raster d'élévation. La fonction `resample()` permet d'aller échantillonner les valeurs selon deux méthodes.
+
+```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="caption",fig.show='hold',fig.align='center', fig.cap = "Méthodes de rééchantillonnage d'un raster de référence vide à partir d'un autre raster contenant des valeurs. Figures adaptés de [Arcgis Pro](https://pro.arcgis.com/fr/pro-app/help/analysis/spatial-analyst/performing-analysis/cell-size-and-resampling-in-analysis.htm)"}
+knitr::include_graphics("Module8/images/resampling.png")
+``` 
+
+- Méthode A: L'affectation par le voisin le plus proche est la technique de rééchantillonnage la plus adaptée aux données discrètes (catégoriques) car elle ne modifie pas la valeur des pixels en entrée. L'affectation par le voisin le plus proche détermine l'emplacement du centre du pixel la plus proche (bleu) sur le raster en entrée et attribue la valeur de ce pixel au pixel du raster en sortie. Cette méthode présente l'avantage qu'elle ne modifie en rien les valeurs.
+
+- Méthode B: L'interpolation bilinéaire utilise les centroides des quatres pixels (en bleu) les plus proches pour déterminer la valeur sur du pixel en sortie (rouge). La nouvelle valeur pour le pixel (rouge) correspond à la moyenne pondérée de ces quatre valeurs (bleu), ajustée pour tenir compte de la distance les séparant du centre de la cellule en sortie. Cette méthode d'interpolation crée une surface à l'aspect plus lisse qu'avec l'affectation par le voisin le plus proche.
+
+Afin d'obtenir des valeurs de pixels contenus dans `dem_lcc`, nous allons utiliser la méthode A.
+
+```{r}
+dem100 <- resample(dem_lcc, dem100, method = "ngb")
+dem100
+```
+
+On a présent un nouveau raster d'élévation dont la résolution d'un pixel est de 100 mètres par 100 mètres.
+On peut également facilement changer la résolution de ce raster à l'aide des fonctions `disaggregate()` et `aggregate()`. Par exemple, il est possible de diminuer la résolution du raster par 10 (1 pixel = 1000 mètres par 1000 mètres) à l'aide de la fonction suivante:
+
+```{r}
+dem1000 <- aggregate(dem100, fact = 10, fun = max, na.rm = TRUE)
+```
+
+L'argument `fact` permet de spécifier le facteur d'aggégation et l'argument `fun` précise quelle fonction sera utilisé pour réaliser l'aggrégation des 100 pixels ensemble. Si l'on veut augmenter la résolution d'un raster on utilisera la fonction `disaggregate()`. 
 
 
 ### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
+
+Nous avons à présent couvert les opérations sur un raster permettant de vérifier sa composition et la distribution de ses valeurs. On peut maintenant passer à notre question qui vise à déterminer parmis les 4 parcs nationaux à 70kms de Sherbrooke lequel dispose du plus haut sommet. 
+
+La première étape consiste à isoler les pixels se retrouvant dans les 4 parcs nationaux. Pour cela, on utilise la fonction `mask()`. 
+
+```{r}
+dem_parcs <- mask(dem_lcc, parcs)
+mapview(dem_parcs)
+```
+
+La fonction `mask()` attribue une valeur `NA` aux pixels se retrouvant à l'extérieur des 4 parcs (polygones contenus dans l'objet `parcs`). On a ainsi isoler les valeurs d'élévation se retrouvant à l'intérieur des parcs.
+On peut maintenant retourner la valeur d'élévation la plus élevé en utilisant la fonction `max()`. On désire conserver cette valeur maximale afin d'isoler les pixels du raster `dem_parcs` disposant de cette valeur.
+
+```{r}
+max(getValues(dem_parcs), na.rm = TRUE)
+vmax <- max(getValues(dem_parcs), na.rm = TRUE)
+```
+
+L'étape suivante consiste à isoler le pixel disposant de cette valeur et d'obtenir sa coordonnée. Pour cela, on transforme le raster en `data.frame` avec la fonction `as.data.frame()` tel que vue précédemment. 
+
+```{r}
+df_dem_parcs <- as.data.frame(dem_parcs, xy = TRUE, centroid = TRUE, na.rm = TRUE)
+head(df_dem_parcs)
+```
+
+On retire les valeurs masquées (`NA`) en utilisant l'argument `na.rm=FALSE` puisque ces dernières ne nous intéressent pas. On s'assure également d'obtenir la coordonnées au centre du pixel avec `centroid = TRUE`. On peut à présent d'isoler la ligne du `data.frame` (1 ligne = 1 pixel) contenant la valeur maximale d'élévation (contenu dans `vmax`). Pour cela, on utilise la fonction `subset()`.
+
+```{r}
+df_max_elev <- subset(df_dem_parcs, DEM == vmax) 
+df_max_elev
+```
+
+Une fois isolé, les coordonnées du pixel (x et y) peuvent être utilisé pour un créer un objet spatial (POINT) contenant le centroide de ce pixel grâce à la fonction `st_as_sf()`. On n'oublie pas de spécifier que le système de projection est identique à celui du raster d'élévation (`dem_parcs`) pour les 4 parcs autours de la ville de Sherbrooke. Nous nous servirons par la suite de ce point pour vérifier dans lequel des 4 parc nationaux il se retrouve. 
+
+```{r}
+sf_point_max_elev <- st_as_sf(df_max_elev, coords = c("x", "y"), crs = 32198)
+sf_point_max_elev
+```
+
+Une autre facon d'obtenir le point d'élévation maximal est d'utiliser la fonction `rasterToPoints()` de la manière suivante:
+
+```{r}
+sp_max_elev <- rasterToPoints(dem_parcs, fun = function(x) x == vmax, spatial = TRUE)
+st_as_sf(sp_max_elev)
+```
+
+L'objet renvoyé par la fonction `rasterToPoints(... , spatial = TRUE)` permet de renvoyer un objet spatial contenant également le point d'élévation maximale. Cependant, la classe d'objet retourné ne provient pas de la librairie `sf` mais de la librairie `sp`. Cette librairie spatiale est plus ancienne et ne sera pas abordé dans ce cours, puisque elle est amené à être remplacé par la librairie `sf`. Si jamais vous devez l'utiliser ailleurs que dans ce cours, sachez qu'il est possible de convertir un objet de classe `sf` à tout moment vers la classe `sp` grâce à la fonction `as(... , "Spatial")`. En voici un exemple. Cette conversion est possible pour l'ensemble des couches spatiales vectorielles mais ne s'applique par aux rasters.
+
+
+```{r}
+as(sf_point_max_elev, "Spatial")
+```
+
+En supperposant les couches d'informations spatiales avec mapview, on peut observer dans quel parc se retrouve à présent ce point d'élévation maximal. 
+
+```{r, fig.cap = "En cliquant sur le polygon du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-mégantic"}
+mapview(dem_parcs) + mapview(parcs, alpha = 0.01) + mapview(sf_point_max_elev,  col.regions = "red")
+```
+
+Ce point se retrouve dans le **Parc national du Mont-Mégantic**. On réalise à présent une opération sur la topologie permettant d'isoler le polygon du parc dans lequel se retrouve ce point. 
+
+
+```{r}
+parcs[which(st_intersects(parcs, sf_point_max_elev, sparse = FALSE) == TRUE), ]
+```
+
+st_crs(parcs) 
+st_crs(sf_point_max_elev)
+
+
 
 On crop le raster avec les parcs du module 7 (Sherbrooke). Crop et Mask sont des notions plus utile lorsque l'on veut faire de la visualisation. Crop = Zoom in sur la BBOX, Mask = Zoom in + mask les pixels tombant à l'extérieur du parcs.
 - `crop()` et `mask()`
