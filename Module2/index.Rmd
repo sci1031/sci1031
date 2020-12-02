@@ -178,7 +178,7 @@ knitr::include_graphics('Module2/images/2_geodatabase.PNG')
 
 ##### Définition {-}
 
-Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un raster, formée de rectangles de même forme et de même dimension appelés cellules ou pixels (Figure \@ref(fig:raster)). À chaque cellule de la matrice est associée une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.
+Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un *raster*, formée de rectangles de même forme et de même dimension appelés cellules ou pixels (Figure \@ref(fig:raster)). À chaque cellule de la matrice correspond une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.
 
 La valeur d’une cellule peut être continue (p. ex. l’élévation - voir Figure \@ref(fig:vectomat)b) ou catégorique (p. ex. le zonage attribué à différents secteurs d’une ville tel que résidentiel, commercial ou industriel). Normalement, la valeur d’une cellule représente la valeur moyenne (ou la valeur prédominante) pour la superficie qu’elle couvre. Cependant, les valeurs sont parfois estimées pour le centre de la cellule.
 
