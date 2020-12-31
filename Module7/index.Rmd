@@ -44,7 +44,7 @@ library(units)
 ## Leçon {#lecon_manip_vec}
 
 
-Au module (#vec), vous avez appris les fonctions essentielles pour lire et visualiser des données spatiales vectorielles sous `R`. Le présent module vous amènera maintenant à manipuler des données vectorielles. 
+Au [module 4](#vec), vous avez appris les fonctions essentielles pour lire et visualiser des données spatiales vectorielles sous `R`. Le présent module vous amènera maintenant à manipuler des données vectorielles. 
 
 Cette leçon est articulée autour d'une problématique qui nécessite de manipuler des données spatiales. Au cours des différentes étapes permettant d'explorer la problématique, vous apprendrez à utiliser diverses fonctions `R`. 
 

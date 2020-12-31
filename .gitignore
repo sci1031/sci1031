@@ -9,3 +9,4 @@ _bookdown_files/
 gh-pages*
 *.log
 .Rprofile
+Module9/data/bike_trips.json

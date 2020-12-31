@@ -35,7 +35,7 @@ Dans la section [leçon](#lecon_vec), vous utiliserez deux ensembles de données
 
 Le premier ensemble contient des données *shapefile* relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes.
 
-Le second ensemble consitutie une *géodatabase* contenant des données du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec relatives aux établissements d'enseignement sur le territoire québécois.
+Le second ensemble constitue une *géodatabase* contenant des données du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec relatives aux établissements d'enseignement sur le territoire québécois.
 
 Dans la section [exercice](#ex_vec), vous utiliserez XXXXX
 
@@ -393,13 +393,13 @@ Finalement, pour sauvegarder des données vectorielles, nous utilisons la foncti
 
 ```{r save-terre2, echo = FALSE,  warning = FALSE, message = FALSE, eval = FALSE}
 nom_du_fichier<- paste(module, "/Montreal_Velo/terre/terre_rob_shp.shp", sep = "")
-limites_terrestres <- st_write(limites_terrestres_rob,nom_du_fichier)
+st_write(limites_terrestres_rob,nom_du_fichier)
 ```
 
 ```{r fake-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Donnees/"
 nom_du_fichier<- paste(chemin, "Montreal_Velo/terre/terre_rob_shp.shp", sep = "")
-st_read(limites_terrestres_rob,nom_du_fichier)
+st_write(limites_terrestres_rob,nom_du_fichier)
 ```
 
 <br>

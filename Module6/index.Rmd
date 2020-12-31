@@ -25,12 +25,12 @@ Dans la section Exercice, vous utiliserez XXXXX
 
 ```{r load-libraries6, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
-library(rgdal)
-library(ggplot2)
-library(dplyr)
-library(sf)
-library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
-library(ggpubr)
+# library(rgdal)
+# library(ggplot2)
+# library(dplyr)
+# library(sf)
+# library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
+# library(ggpubr)
 ```
 
 ## Leçon
