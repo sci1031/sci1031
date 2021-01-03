@@ -1,0 +1,114 @@
+# Données spatiotemporelles {#spatiotwemp}
+
+L'objectif principal de ce module est d'apprendre à manipuler des données vectorielles et des données matricielles à travers le temps. 
+
+À la fin de ce module vous saurez:
+
+- Filtrer des objets spatiaux (vecteurs ou matrices) sur des intervalles de temps spécifiques
+- Caractériser des déplacements (vitesse, angle, durée).
+- Comparer et visualiser des objets spatiaux entre deux pas de temps.
+
+Vous utiliserez les librairies suivantes:
+
+- `sf`,
+- `sftracks`
+- `raster`,
+- `stars`
+
+Vous apprendrez à utiliser les fonctions suivantes:
+
+- TODO
+
+## Plan de match
+
+1. Ou son stocke les dates dans des objets spatiaux (sf = colonne, raster = z)
+2. Transformer des colonnes en champ de type date (lubridate)
+3. Manipuler des dates (filter, interval)
+4. Effectuer une différence entre deux pas de temps
+5. Visualiser / quantifier le changement entre deux pas de temps
+
+## Leçon
+
+### Propriétés des données spatio-temporelles
+
+Les données spatio-temporelles représente une collection d'objets spatiaux ordonnées dans le temps. Ce type de données est très souvent récolté par:
+
+ - Des GPS embarqués permettant de monitorer le déplacement d'un individu ou d'un objet.
+ - Des satellites en orbite autour de notre planète afin de surveiller des changements dans le temps (paysage, climat etc.)
+
+![Source https://r-spatial.github.io/stars/index.html](https://raw.githubusercontent.com/r-spatial/stars/master/images/cube3.png)
+
+![Source https://mablab.org/sftrack/](https://mablab.org/sftrack/Figures/definitions-512.png)
+
+Nous allons nous intéressé à ces deux grandes sources de données. 
+
+### Mouvement (GPS)
+
+Afin de nous familiariser avec la manipulation de vecteurs spatiaux à travers le temps, nous allons travailler sur des données acquises par une application GPS pour vélos dans la ville de Montréal (https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo). Les GPS permettent d'acquérir une succession de positions géographiques en fonction du temps. Ce genre de données est souvent appelé *tracklog* ou trajet en francais. De nombreuses municipalités peuvent utiliser ce type de données afin de mieux comprendre le comportement d'usagers telle que les cyclistes sur le réseau de pistes cyclabes de la ville de Montréal. Cela permet ainsi d'optimiser / prioriser les futurs aménagements à réaliser sur le réseau. Nous allons tout d'abord étudier la structure de ces données. Nous allons comparer 
+
+```{r}
+bikes <- read_sf("data/bike_trips.json")
+head(bikes)
+```
+
+Les métadonnées peuvent être décrites de la manière suivante:
+
+- id (entier) : identifiant unique du trip
+- purpose (texte): but du trajet tel qu’enregistré par l’utilisateur
+- start (date) : heure de départ du trajet
+- stop (date): heure d'arrivée du trajet
+- length (entier): longueur du trajet en mètres
+- id_origine (entier): identifiant d'origine du trajet (si différent du champ id, le trajet original a été sectionné pour supprimer des sauts pendant l'enregistrement)
+- n_coord: nombre de points constituant le trajet.
+- liste_segments (json) : liste ordonnées des identifiants de segment de réseau utilisé avec l’attribut source (RES_CYCL_2015 pour les pistes cyclables, GEOBASE pour la géobase et QA pour Adresse Québec Réseau) et l’identifiant du segment de réseau à l’intérieur de la source.
+- geometry (structure): donnée géospatiale du trajet sous forme d’un ligne (linestring), structuré au format Geojson.
+
+
+```{r}
+bikes$year <- year(bikes$start)
+mapview(bikes, zcol = "year")
+
+table(year(bikes$start))
+bikes2013 <- filter(bikes, year(bikes$start) == 2013)
+bikes2013 <- st_transform(bikes2013, crs = 32198)
+bikes2013$dist <- as.numeric(st_length(bikes2013) / 1000)
+bikes2013$duration <- time_length(interval(bikes2013$start, bikes2013$stop), unit = "hour")
+bikes2013$speed <- bikes2013$dist / bikes2013$duration
+
+mapview(filter(bikes2013, speed > 300))
+
+bikes_longest_2013 <- filter(bikes2013, dist == max(dist))
+hist(bikes2013$dist, breaks = 100) 
+```
+
+
+```{r}
+library(stars)
+bikes_to_stars <- bikes %>% select(-liste_segments_jsonb) %>% mutate(
+    time = interval(start, stop)
+) %>% filter(!is.na(time))
+
+d <- st_dimensions(time = bikes_to_stars$start)
+test <- st_as_stars(list(bikes_to_stars), dimensions = d)
+
+d = st_dimensions(trajet = st_as_sfc(bikes), time = dates)
+(aq = st_as_stars(list(PM10 = air), dimensions = d))
+```
+
+
+
+
+### Visualisation
+
+-	Figure à panneaux multiples
+-	Figure espace-temps
+-	Figure animée
+
+### Basic analysis 
+
+- une tendance 
+- isolé une donnée dand le temps dans le temps 
+
+
+## Exercice
+

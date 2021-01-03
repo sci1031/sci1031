@@ -10,3 +10,4 @@ gh-pages*
 *.log
 .Rprofile
 Module9/data/bike_trips.json
+Cours_SpatialR.Rmd
