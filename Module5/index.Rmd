@@ -80,7 +80,7 @@ library(raster)
 
 Au [module 2](#base), nous avons expliqué qu'un *raster* est formé de rectangles de même forme et de même dimension appelés cellules ou pixels. À chaque cellule de cette matrice correspond une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.
 
-#### Créer un *raster* simple et le visualiser
+#### Créer un *raster* simple et le visualiser {-}
 
 La fonction `raster()` de la librairie `raster` permet de créer un *raster*. Par exemple:
 ```{r}
@@ -128,7 +128,7 @@ plot(M)
 
 Nous pouvons aussi utiliser la fonction `mapview()` de la librarie `mapview`:
 
-```{r}
+```{r,  warning = FALSE, message = FALSE}
 library(mapview)
 mapview(M)
 ```
@@ -140,15 +140,15 @@ Peu importe la fonction choisie, celle-ci transforme la valeur de chaque cellule
 Remarquez que le premier pixel, qui porte la valeur 1 dans le cas présent, se trouve en haut à gauche. Le dernier pixel, quant à lui, se trouve dans le coin inférieur droit. L'identité des pixels suit donc les lignes d'un *raster*.
 
 
-#### *Raster* de différents types de données
+#### *Raster* de différents types de données {-}
 
 Les *rasters* peuvent prendre des valeurs de type discrètes (`integer`) et des nombres réelles (`numeric`).
 Ils peuvent également prendre des valeurs logiques (`logical`). Par exemple, remplaçons les valeurs discrètes du *raster* `M` défini plus haut par des valeurs logiques.
 
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 z<-1:64
-class(z)
+class(z) #la fonction class() renvoie le type de données de l'objet z
 
 # Créons un nombre logique qui est vrai lorsque z est un multiple de trois, et faux autrement
 z_mult3<-(z%%3==0)
@@ -156,7 +156,7 @@ z_mult3<-(z%%3==0)
 # La fonction modulo, s'exprime par le symbole %%, 
 # L'expression x %% y vaut 0 si y est un multiple de x, 
 # L'expression x %% y vaut r si y n'est pas un multiple de x. 
-# r coorespond alors au reste de la division x/y
+# r correspond alors au reste de la division x/y
 z_mult3
 
 class(z_mult3)
@@ -195,8 +195,9 @@ levels(mois_hiver_facteur)
 
 Revenons maintenant aux *rasters*. Reprenons l'exemple du *raster* des multiples de 3. Nous allons le transformer en *raster* de type facteur.
 
-```{r}
-# Nous transformons d'abord le vecteur z de nombres entiers de 1 à 64, en vecteur de type caractère
+```{r, warning = FALSE, message = FALSE}
+# Nous transformons d'abord le vecteur z de nombres entiers de 1 à 64, 
+# en vecteur de type caractère
 z_char<-z
 z_char[z%%3==0]<-"Multiple de 3"
 z_char[z%%3!=0]<-"Autre"
@@ -216,7 +217,7 @@ mapview(M_factor)
 
 ```
 
-#### Comprendre la structure d'un *raster*
+#### Comprendre la structure d'un *raster* {-}
 
 Les objets de type *raster* disposent d'une structure d'objet particulière. Si l'on veut accéder aux valeurs stockées, on doit procéder d'une certaine manière. 
 
@@ -235,11 +236,10 @@ G<-raster(nrows=5, ncols=5, res = 0.5, xmn = 0, xmx = 2.5, ymn = 0, ymx = 2.5, v
 G
 ```
 
-La figure suivante illustre comment les cellules sont idexées et positionnées dans un raster. La cellule supérieure gauche, de position `[1,1]` est toujours celle portant l'indice `1`. 
+La figure suivante illustre comment les cellules sont indexées et positionnées dans un raster. La cellule supérieure gauche, de position `[1,1]` est toujours celle portant l'indice `1`. 
 
-```{r}
 knitr::include_graphics('Module5/images/ValeurRaster.png')
-```
+
 
 Ainsi, pour accéder à des valeurs spécifiques du *raster*, on procède de la façon suivante:
 
@@ -306,9 +306,9 @@ La fonction `summary()` permet d'obtenir plusieurs statistiques:
 ```{r}
 summary(G)
 ```
-En plus, du minimum, du maximum, et de la médiane, nous obtenons ainsi le premier et le troisième quantile, ainsi que le nombre de cellules de valeur `NA` contenu dans le raster.
+En plus du minimum, du maximum, et de la médiane, nous obtenons aussi le premier et le troisième quantile, ainsi que le nombre de cellules de valeur `NA` contenu dans le raster.
 
-La fonction `cellStats` permet également d'obtenir des statistiques sur les *rasters*. La statistique désirée doit être précisée dans les options de la fonction. Par exemple:
+La fonction `cellStats` permet également d'obtenir des statistiques sur les *rasters*. La statistique désirée doit être précisée dans les options de la fonction `cellStats`. Par exemple:
 ```{r}
 cellStats(G, mean, na.rm = T) 
 cellStats(G, sd, na.rm = T)   #la déviation standard
@@ -321,7 +321,7 @@ cellStats(G, sum, na.rm=T)
 ```
 
 Nous pouvons également visualiser la distribution des valeurs contenues dans un *raster* en utilisant les fonctions `R` usuelles telles que `hist()` ou `boxplot`. Par exemple,
-```{r}
+```{r, fig.dim = c(3, 3)}
 hist(G, 
      main ="Distribution des valeurs dans le raster G",
      xlab = "Valeurs",
@@ -330,7 +330,7 @@ hist(G,
 ```
 
 Ou encore,
-```{r}
+```{r,  fig.dim = c(3, 3)}
 boxplot(G,
         main ="Valeur moyenne et intervalle de confiance du raster G",
         ylab = "Valeurs",
@@ -340,12 +340,12 @@ boxplot(G,
 
 ### Lire un *raster* et explorer son contenu
 
-Dans la section précédente, nous avons créé et manipulé des *rasters* très simples et peu volumineux. Dans cette section, nous manipulerons un *raster* plus substantiel constitué de données sur les îlots de chaleur urbains.
+Dans la section précédente, nous avons créé et manipulé des *rasters* très simples et peu volumineux. Dans cette section, nous manipulerons un *raster* plus substantiel constitué de données réelles sur les îlots de chaleur urbains.
 
 Les îlots de chaleur urbains (ICU) sont des "zones urbaines où les températures sont plus chaudes que dans la région rurale voisine." [@SanteCanada2020] Les ICU amplifient les effets négatifs sur la santé humaine pendant les vagues de chaleur. Les ICU se produisent surtout dans les zones où les humains ont fortement altéré le couvert du sol, par exemple pour y aménager des infrastructures en béton (bâtiments, stationnement, route, etc.). L'absence de végétation, la présence de surfaces imperméables et non-réfléchissantes contribuent à la formation d'ICU [@SanteCanada2020]. 
 
 
-La température de surface mesurée sur les territoires urbains permet d'identifier la présence d'ilôts de chaleur. Les étudiants.es intéressés à comprendre la méthodologie utilisée pour déterminer la température de surface à partir d'images satellitaires sont invités à consulter cette [note technique](Module5/Module5_ICU_NoteTechnique.pdf) produite par le Ĉentre d'enseignement et de recherche en foresterie de Sainte-Foy inc.
+La température de surface mesurée sur les territoires urbains permet d'identifier la présence d'ilôts de chaleur. Les étudiants.es intéressés à comprendre la méthodologie utilisée pour déterminer la température de surface à partir d'images satellitaires sont invités à consulter cette [note technique](Module5/Module5_ICU_NoteTechnique.pdf) produite par le Centre d'enseignement et de recherche en foresterie de Sainte-Foy inc.
 
 Les donnees sur les ICU pour l'ensemble du territoire québécois sont disponibles sur le site gouvernemental [Données Québec](https://www.donneesquebec.ca/recherche/fr/dataset/ilots-de-chaleur-fraicheur-urbains-et-temperature-de-surface) en format `GeoTIFF`. Puisque cette base de données spatiales est particulièrement volumineuse, nous allons travailler seulement avec les données matricielles relatives à la région de la ville de Québec.
 
@@ -356,7 +356,7 @@ Dans un premier temps, téléchargez [les données d'ICU pour la région de la v
 
 #### Lire les donnéées {-}
 
-Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la librarie `raster'
+Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la librarie `raster`
 ```{r fake-icu, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module5/Donnees/"
 nom_du_fichier <- paste(chemin, "Temp_vdq.tif", sep = "")
@@ -365,7 +365,8 @@ T_vdq <- raster(nom_du_fichier)
 T_vdq
 ```
 
-```{r icu, eval=TRUE, ECHO = FALSE}
+
+```{r icu, eval=TRUE, ECHO = FALSE, warning = FALSE, message = FALSE}
 
 filename_rcrop = "Module5/data/Temp_vdq.tif"
 T_vdq<- raster(filename_rcrop)
@@ -376,7 +377,7 @@ Nous pouvons d'emblée reconnaitre les informations relatives à la dimension, l
 
 Nous pouvons également utiliser les fonctions `dim()`, `ncell()`, `res()`, `extent()`, `crs()`, et `cellStats(, range)` pour retrouver ces informations:
 
-```{r}
+```{r, collapse=TRUE}
 dim(T_vdq)   
 ncell(T_vdq)  
 res(T_vdq)
@@ -397,7 +398,7 @@ names(T_vdq)<-"ICU"
 T_vdq
 ```
 
-#### Explorer les statistiques de base 
+#### Explorer les statistiques de base {-}
 
 Utilisons la fonction `summary()` pour déterminer les statistiques de base du *raster* `T_vdq`:
 ```{r}
@@ -430,7 +431,7 @@ Remarquez que nous avons spécifié que la distribution soit calculée sur l'ens
 Nous allons visualiser la carte des températures de surface de la région de la ville de Québec en utilisant la fonction `mapview()`.
 Afin de situer plus facilement la région illustrée sur le territoire du Québec, nous allons demander d'ajouter la carte d'*OpenStreetMap*^[[OpenStreetMap](https://www.openstreetmap.org/) est un outil collaboratif et libre d'accès de cartographie en ligne.] comme carte de fonds.
 
-```{r}
+```{r, warning = FALSE, message = FALSE }
 mapview(T_vdq, 
         map.types = "OpenStreetMap",
         legend = TRUE,
@@ -441,7 +442,7 @@ L'échelle de la légende indique des niveaux de température. Le niveau 1 corre
 
 Vous remarquerez que la résolution de cette carte n'est pas parfaite. En effet, par défaut, la fonction `mapview()` appliquée à un raster utilise 500 000 pixels. Pour que l'ensemble des pixels soient pris en compte, nous devons le préciser en définissant l'option `maxpixels`.
 
-```{r}
+```{r, warning = FALSE, message = FALSE }
 mapview(T_vdq, maxpixels = ncell(T_vdq),
         map.types = "OpenStreetMap",
         legend = TRUE,
@@ -450,7 +451,7 @@ mapview(T_vdq, maxpixels = ncell(T_vdq),
 
 Naturellement, le temps nécessaire pour générer la carte est alors plus long.
 
-#### Visualiser une section d'un *raster*
+#### Visualiser une section d'un *raster* {-}
 
 Nous voulons maintenant nous concentrer sur une petite section de la carte de la région de la ville de Québec. Nous pouvons le faire en spécifiant les lignes et les colonnes qui nous intéressent dans le *raster*. Par exemple, choisissons une région carrée de 100 x 100 cellules dans le quartier Sainte-Foy.
 
@@ -639,7 +640,7 @@ SB
 
 Ainsi, `SR` correspond à la première bande (la rouge), `SG` à la deuxième bande (la verte), et `SB` à la troisième bande (la bleu). Chaque *raster* comprend des valeurs entre 0 et 255. Ces valeurs correspondent au format RGB, et ensemble ces trois couches permettent de visualiser des images couleurs.
 
-#### `RasterBrick` et `RasterStack`
+#### `RasterBrick` et `RasterStack` {-}
 
 Un `RasterBrick` correspond généralement a différentes bandes spectrales stockées dans un seul objet ou un seul fichier dans la mémoire de votre ordinateur. 
 
@@ -678,7 +679,7 @@ R_stack
 Nous avons ainsi créé un *raster* de classe `RasterStack`.
 
 
-#### Visualiser un *raster* multi-bande
+#### Visualiser un *raster* multi-bande {-}
 
 Visualisons individuellement les bandes d'un *raster* multi-bande en utilisant la fonction `mapview()` de la librarie `mapview`.
 ```{r}
