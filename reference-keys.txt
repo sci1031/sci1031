@@ -39,6 +39,7 @@ fig:LCC
 fig:LCCCanada
 fig:Resume
 fig:plot-viridis
+fig:unnamed-chunk-38
 fig:plot-geoOps
 fig:plot-geoConf
 intro
