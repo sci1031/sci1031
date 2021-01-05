@@ -87,7 +87,7 @@ La fonction `raster()` de la librairie `raster` permet de créer un *raster*. Pa
 M <-raster(nrows=8, ncols=8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, vals = 1:64)
 ```
 
-Où `nrows` et `ncols correspondent respectivement au nombre de lignes et au nombre de colonnes du *raster* `M`, `xmn` et `xmx` correspondent respectivement aux coordonnées-x minimale et maximale du *raster*, `ymn` et `ymx` aux coordonnées-y minimale et maximale, et `vals` est un vecteur comprenant la valeur de chaque pixel du *raster*. Dans le cas présent, le *raster* `M` contient 64 pixels. Le premier pixel a la valeur 1, le deuxième pixel a la valeur 2 et ainsi de suite. 
+Où `nrows` et `ncols` correspondent respectivement au nombre de lignes et au nombre de colonnes du *raster* `M`, `xmn` et `xmx` correspondent respectivement aux coordonnées-x minimale et maximale du *raster*, `ymn` et `ymx` aux coordonnées-y minimale et maximale, et `vals` est un vecteur comprenant la valeur de chaque pixel du *raster*. Dans le cas présent, le *raster* `M` contient 64 pixels. Le premier pixel a la valeur 1, le deuxième pixel a la valeur 2 et ainsi de suite. 
 
 Voyons les informations données, lorsque nous appelons le *raster* `M` que nous venons de créer:
 ```{r}
@@ -109,14 +109,21 @@ M
 Dans cette notation, nous avons spécifié la résolution et non la dimension du *raster*.
 
 Nous pouvons également connaître les paramètres d'un *raster* en utilisant les fonctions correspondantes.
-```{r}
+```{r, collapse=TRUE}
 dim(M)
+
 ncell(M)
+
 nrow(M)
+
 ncol(M)
+
 res(M)
+
 extent(M)
+
 crs(M)
+
 ```
 
 Il existe plusieurs fonctions permettant de visualiser les *rasters*. 
@@ -521,7 +528,7 @@ crs(T_vdq)
 ```
 Les arguments retournés par la fonction `crs()` ont la signification suivante:
 
-* `+proj' : le nom de la projection
+* `+proj` : le nom de la projection
 * `+lat_1` : la latitude du premier parallèle standard^[Souvenez-vous que pour une projection cylindrique ou conique, le plan intersecte le globe le long d'un ou de deux parallèles. Voir la [leçon 2]{#SRC}]
 * `+lat_2` : la latitude du deuxième parallèle standard
 * `+lat_0` : la latitude de l'origine 
@@ -563,12 +570,12 @@ T_mtm7<-projectRaster(T_vdq, crs = proj_mtm7)
 
 
 Comparons les deux cartes utilisant des projections différentes:
-```{r, fig.cap="Rasters de projections Québec Lamberet et MTM"}
+```{r, fig.cap="Rasters de projections Québec Lambert et MTM"}
 par(mfrow=c(1,2))
 plot(T_vdq, main = "Québec Lambert", legend = F)
 plot(T_mtm7, main = "MTM fuseau 7")
 ```
-
+<br>
 
 Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
 ```{r, eval=TRUE, ECHO = FALSE}
@@ -578,7 +585,7 @@ par(mfrow=c(1,2))
 plot(T_crop, main = "Québec Lambert", legend = F)
 plot(T_crop_mtm7, main = "MTM fuseau 7")
 ```
-
+<br>
 
 Remarquez que la carte de droite, utilisant la projection MTM, est, en effet, inclinée par rapport à la carte utilisant la projection Québec Lambert. Remarquez aussi que les coordonnées des axes x et y sont différentes.
 
