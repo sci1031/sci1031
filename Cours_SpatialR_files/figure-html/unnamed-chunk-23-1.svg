@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 216.00 216.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    line, polyline, polygon, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<text x='-16.05' y='34.77' style='font-size: 14.40px; font-weight: bold; font-family: Nimbus Sans;' textLength='276.90px' lengthAdjust='spacingAndGlyphs'>Distribution des valeurs dans le raster G</text>
+<text x='102.06' y='197.28' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='40.68px' lengthAdjust='spacingAndGlyphs'>Valeurs</text>
+<text transform='translate(12.96,129.48) rotate(-90)' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='57.36px' lengthAdjust='spacingAndGlyphs'>Fréquence</text>
+<line x1='63.73' y1='142.56' x2='181.07' y2='142.56' style='stroke-width: 0.75;' />
+<line x1='63.73' y1='142.56' x2='63.73' y2='149.76' style='stroke-width: 0.75;' />
+<line x1='87.20' y1='142.56' x2='87.20' y2='149.76' style='stroke-width: 0.75;' />
+<line x1='110.67' y1='142.56' x2='110.67' y2='149.76' style='stroke-width: 0.75;' />
+<line x1='134.13' y1='142.56' x2='134.13' y2='149.76' style='stroke-width: 0.75;' />
+<line x1='157.60' y1='142.56' x2='157.60' y2='149.76' style='stroke-width: 0.75;' />
+<line x1='181.07' y1='142.56' x2='181.07' y2='149.76' style='stroke-width: 0.75;' />
+<text x='55.39' y='168.48' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='102.33' y='168.48' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='149.26' y='168.48' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>0.8</text>
+<line x1='59.04' y1='139.47' x2='59.04' y2='70.73' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='139.47' x2='51.84' y2='139.47' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='122.28' x2='51.84' y2='122.28' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='105.10' x2='51.84' y2='105.10' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='87.91' x2='51.84' y2='87.91' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='70.73' x2='51.84' y2='70.73' style='stroke-width: 0.75;' />
+<text transform='translate(41.76,142.80) rotate(-90)' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text transform='translate(41.76,125.62) rotate(-90)' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text transform='translate(41.76,108.43) rotate(-90)' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text transform='translate(41.76,91.25) rotate(-90)' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text transform='translate(41.76,74.06) rotate(-90)' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>8</text>
+<defs>
+  <clipPath id='cpNTkuMDR8MTg1Ljc2fDE0Mi41Nnw1OS4wNA=='>
+    <rect x='59.04' y='59.04' width='126.72' height='83.52' />
+  </clipPath>
+</defs>
+<rect x='63.73' y='96.50' width='23.47' height='42.96' style='stroke-width: 0.75; fill: #8B008B;' clip-path='url(#cpNTkuMDR8MTg1Ljc2fDE0Mi41Nnw1OS4wNA==)' />
+<rect x='87.20' y='62.13' width='23.47' height='77.33' style='stroke-width: 0.75; fill: #8B008B;' clip-path='url(#cpNTkuMDR8MTg1Ljc2fDE0Mi41Nnw1OS4wNA==)' />
+<rect x='110.67' y='105.10' width='23.47' height='34.37' style='stroke-width: 0.75; fill: #8B008B;' clip-path='url(#cpNTkuMDR8MTg1Ljc2fDE0Mi41Nnw1OS4wNA==)' />
+<rect x='134.13' y='139.47' width='23.47' height='0.00' style='stroke-width: 0.75; fill: #8B008B;' clip-path='url(#cpNTkuMDR8MTg1Ljc2fDE0Mi41Nnw1OS4wNA==)' />
+<rect x='157.60' y='113.69' width='23.47' height='25.78' style='stroke-width: 0.75; fill: #8B008B;' clip-path='url(#cpNTkuMDR8MTg1Ljc2fDE0Mi41Nnw1OS4wNA==)' />
+</svg>

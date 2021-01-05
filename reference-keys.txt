@@ -41,8 +41,6 @@ fig:Resume
 fig:plot-viridis
 fig:plot-geoOps
 fig:plot-geoConf
-fig:include-figs-raster-centroids
-fig:unnamed-chunk-84
 intro
 leçon
 les-données-spatiales
@@ -76,19 +74,12 @@ ex_vec
 mat
 lecon_mat
 créer-un-raster-et-comprendre-sa-structure
-créer-un-raster-simple-et-le-visualiser
-raster-de-différents-types-de-données
-comprendre-la-structure-dun-raster
 statistiques-de-base-sur-un-raster
 lire-un-raster-et-explorer-son-contenu
-explorer-les-statistiques-de-base
 visualiser-les-données-matricielles-avec-mapview
-visualiser-une-section-dun-raster
 changer-la-résolution-dun-raster
 changer-la-projection-dun-raster
 lire-et-visualiser-des-données-matricielles-multi-bande.
-rasterbrick-et-rasterstack
-visualiser-un-raster-multi-bande
 ex_mat
 carto
 leçon-3
@@ -104,6 +95,9 @@ pour-chacune-de-ces-municipalités-combien-de-parcs-nationaux-se-retrouvent-dans
 ex_map_vec
 manip_mat
 leçon-4
+accéder-et-manipuler-les-valeurs-dun-raster-données-matricielles
+modifier-le-contenu
+changer-la-résolution-dun-raster-1
 parmi-les-4-parcs-nationaux-de-la-région-de-sherbrooke-lequel-dispose-du-plus-haut-sommet-1
 quelle-est-le-profil-topographique-du-sentier-se-rendant-au-plus-proche-de-ce-sommet
 quelle-est-le-mois-disposant-du-plus-faible-niveau-de-pluviométrie-pour-le-parc-national-possédant-ce-sommet
@@ -111,6 +105,6 @@ exercice-2
 spatiotemp
 leçon-5
 propriétés-des-données-spatio-temporelles
-visualisation-spatiotemporelle
-introduction-à-la-librairie-r-stars
+introduction-à-la-librairie-r-spacetime
+visualisation
 exercice-3
