@@ -125,21 +125,22 @@ extent(M)
 crs(M)
 
 ```
+<br>
 
 Il existe plusieurs fonctions permettant de visualiser les *rasters*. 
 Nous pouvons simplement utiliser la fonction `plot()`.
-```{r}
+```{r, fig.dim = c(5, 5), fig.cap="Visualisation du raster `M` avec la fonction `plot()`" }
 plot(M)
 ```
-
+<br>
 
 Nous pouvons aussi utiliser la fonction `mapview()` de la librarie `mapview`:
 
-```{r,  warning = FALSE, message = FALSE}
+```{r,  warning = FALSE, message = FALSE, fig.dim = c(5, 5), fig.cap="Visualisation du raster `M` avec la fonction `mapview()`"}
 library(mapview)
 mapview(M)
 ```
-
+<br>
 
 Nous avons une certaine preference pour l'esthétique qu'offre `mapview()`, n'est-ce pas?
 Peu importe la fonction choisie, celle-ci transforme la valeur de chaque cellule en couleur. Différentes pallettes de couleur peuvent etre utilisées, mais pour l'instant, limitons-nous à la palette de couleur par défaut, qui est `inferno` de la librarie `viridis`, inclue automatiquement dans la librarie `mapview`.
@@ -166,15 +167,21 @@ z_mult3<-(z%%3==0)
 # r correspond alors au reste de la division x/y
 z_mult3
 
-class(z_mult3)
+class(z_mult3) #vérifions que les valeurs sont bien de type logique
 
 # utilisons le vecteur logique z_mult3 pour créer un raster logique
 M_logique<-raster(nrows=8, ncols=8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, vals = z_mult3)
 
 M_logique
-mapview(M_logique)
-
 ```
+
+
+Visualisons maintenant ce *raster* de type logique:
+```{r, warning = FALSE, message = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
+mapview(M_logique)
+```
+<br>
+
 
 Les *rasters* ne peuvent pas prendre des valeurs de type caractères (`character`) mais ils peuvent tout de même prendre des valeurs catégoriques. 
 
@@ -220,9 +227,15 @@ class(z_fact)
 M_factor<-raster(nrows=8, ncols=8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, vals = z_fact)
 
 M_factor
-mapview(M_factor)
 
 ```
+
+Visualisons maintenant ce *raster* de type facteur:
+```{r, warning = FALSE, message = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
+mapview(M_factor)
+```
+<br>
+
 
 #### Comprendre la structure d'un *raster* {-}
 
@@ -247,10 +260,15 @@ La figure suivante illustre comment les cellules sont indexées et positionnées
 
 knitr::include_graphics('Module5/images/ValeurRaster.png')
 
+<br>
+```{r, echo=FALSE,fig.cap="Structure d'un raster: indice, position et valeur des pixels", out.width = '80%'}
+knitr::include_graphics('Module5/images/ValeurRaster.png')
+```
+<br>
 
 Ainsi, pour accéder à des valeurs spécifiques du *raster*, on procède de la façon suivante:
 
-```{r}
+```{r, collapse=TRUE}
 # Accéder à la première valeur
 G[1]
 # Accéder à la valeur de la cellule à la position (3,2)
@@ -317,7 +335,7 @@ La fonction `summary()` permet d'obtenir plusieurs statistiques:
 ```{r}
 summary(G)
 ```
-En plus du minimum, du maximum, et de la médiane, nous obtenons aussi le premier et le troisième quantile, ainsi que le nombre de cellules de valeur `NA` contenu dans le raster.
+En plus du minimum, du maximum, et de la médiane, la fonction `summary()` retourne le premier et le troisième quantile, ainsi que le nombre de cellules de valeur `NA` contenu dans le *raster*.
 
 La fonction `cellStats` permet également d'obtenir des statistiques sur les *rasters*. La statistique désirée doit être précisée dans les options de la fonction `cellStats`. Par exemple:
 ```{r, collapse=TRUE}
@@ -340,22 +358,21 @@ cellStats(G, sum, na.rm=T)
 ```
 
 Nous pouvons également visualiser la distribution des valeurs contenues dans un *raster* en utilisant les fonctions `R` usuelles telles que `hist()` ou `boxplot`. Par exemple,
-```{r, fig.dim = c(5, 5)}
+```{r, fig.dim = c(5, 5), fig.cap="Histogramme de la distribution des valeurs dans le raster G"}
 hist(G, 
-     main ="Distribution des valeurs dans le raster G",
      xlab = "Valeurs",
      ylab = "Fréquence",
-     col = "darkmagenta")
+     col = "darkorange")
 ```
+<br>
 
 Ou encore,
-```{r,  fig.dim = c(5, 5)}
+```{r,  fig.dim = c(4, 4), fig.cap="Valeur moyenne et intervalle de confiance du raster G"}
 boxplot(G,
-        main ="Valeur moyenne et intervalle de confiance du raster G",
         ylab = "Valeurs",
-        col = "darkred")
+        col = "darkorange")
 ```
-
+<br>
 
 ### Lire un *raster* et explorer son contenu
 
@@ -431,7 +448,7 @@ Utilisons la fonction `summary()` pour déterminer les statistiques de base du *
 summary(T_vdq)
 ```
 
-Remarquez le message retourné par `R`: "summary is an estimate based on a sample of 1e+05 cells (3.39% of all cells)". Ce message nous prévient que, par défaut, la fonction `summary()` est calculée sur un échantillon de 100 000 cellules choisies aléatoirement. Dans le cas présent, puisque le *raster* `T_vdq` contient `ncells(T_vdq) = 2946366` cellules, un échantillon de 100 000 cellules correspond donc seulement à 3.39% de toutes les cellules.
+Remarquez le message retourné par `R`: "`summary is an estimate based on a sample of 1e+05 cells (3.39% of all cells)`". Ce message nous prévient que, par défaut, la fonction `summary()` est calculée sur un échantillon de 100 000 cellules choisies aléatoirement. Dans le cas présent, puisque le *raster* `T_vdq` contient `ncells(T_vdq) = 2946366` cellules, un échantillon de 100 000 cellules correspond donc seulement à 3.39% de toutes les cellules.
 
 La limite par défaut du nombre de cellules sélectionnées pour calculer les statistiques dans la fonction `summary()` est très utile pour obtenir des résultats rapides, surtout lorsque *raster* est volumineux. Cependant, dans certains cas, cet échantillonnage limité pourrait mener à un estimé trompeur. Ainsi, il est toujours possible de spécifier la taille désirée de l'échantillon en utisant l'option `maxsamp`. Par exemple, 
 
@@ -441,14 +458,14 @@ summary(T_vdq, maxsamp = ncell(T_vdq))
 Vous remarquerez que l'éxécution de la fonction `summary()` peut prendre plus de temps lorsque le nombre de cellules échantillonnées est plus grand. Dans le cas présent du *raster* `T_vdq`, les statistiques demeurent inchangées mais le nombre de valeurs `NA` a été corrigées. 
 
 Nous pouvons également visualiser l'histogramme des valeurs de température de surface.
-```{r, fig.dim = c(6, 5)}
+```{r, fig.dim = c(6, 5), fig.cap="Distribution des températures de surface dans la ville de Québec"}
 hist( getValues(T_vdq),
      breaks = 10,
-     main ="Distribution des températures de surface dans la ville de Québec",
      xlab = "Valeurs",
      ylab = "Fréquence",
      col = "darkorange")
 ```
+<br>
 
 Remarquez que nous avons spécifié que la distribution soit calculée sur l'ensemble des valeurs contenues dans le *raster* `T_vdq` en utilisant la fonction `getValues()`. Autrement, la fonction `hist()` appliquée à un *raster* utilise un échantillonnage aléatoire de 100 000 cellules, similairement à la fonction `summary()`.
 
@@ -457,35 +474,39 @@ Remarquez que nous avons spécifié que la distribution soit calculée sur l'ens
 Nous allons visualiser la carte des températures de surface de la région de la ville de Québec en utilisant la fonction `mapview()`.
 Afin de situer plus facilement la région illustrée sur le territoire du Québec, nous allons demander d'ajouter la carte d'*OpenStreetMap*^[[OpenStreetMap](https://www.openstreetmap.org/) est un outil collaboratif et libre d'accès de cartographie en ligne.] comme carte de fonds.
 
-```{r, warning = FALSE, message = FALSE }
+```{r, warning = FALSE, message = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec" }
 mapview(T_vdq, 
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU')
 ```
+<br>
 
 L'échelle de la légende indique des niveaux de température. Le niveau 1 correspond aux températures les plus fraîches, et le niveau 9 aux température les plus chaudes. 
 
 Vous remarquerez que la résolution de cette carte n'est pas parfaite. En effet, par défaut, la fonction `mapview()` appliquée à un raster utilise 500 000 pixels. Pour que l'ensemble des pixels soient pris en compte, nous devons le préciser en définissant l'option `maxpixels`.
 
-```{r, warning = FALSE, message = FALSE }
+```{r, warning = FALSE, message = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec (visualisation de tous les pixels)"  }
 mapview(T_vdq, maxpixels = ncell(T_vdq),
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU')
 ```
+<br>
 
 Naturellement, le temps nécessaire pour générer la carte est alors plus long.
+
 
 #### Visualiser une section d'un *raster* {-}
 
 Nous voulons maintenant nous concentrer sur une petite section de la carte de la région de la ville de Québec. Nous pouvons le faire en spécifiant les lignes et les colonnes qui nous intéressent dans le *raster*. Par exemple, choisissons une région carrée de 100 x 100 cellules dans le quartier Sainte-Foy.
 
-```{r}
+```{r, fig.dim = c(6, 6), fig.cap="Carte de la température de surface dans le secteur de Sainte-Foy"}
 T<-T_vdq[1051:1150, 851:950, drop=FALSE]
 
 mapview(T,  map.types = "OpenStreetMap")
 ```
+<br>
 
 Notez que l'option `drop = FALSE` est importante car elle permet au nouvel objet `T` de demeurer un *raster* comme `T_vdq`. Autrement, `T` deviendrait un simple vecteur.
 
@@ -495,13 +516,13 @@ Nous observons sur la carte que les températures les plus chaudes (pixels de co
 ### Changer la résolution d'un *raster*
 
 Il est possible d'augmenter la résolution d'un *raster*. Cela peut s'avérér utile lorsque la résolution de ce dernier est trop petite (c'est-à-dire que la résolution est fine) pour exécuter rapidement des calculs sur celui-ci. 
-Aussi, cela peut s'avérer utie lorsque nous devons travailler avec des *rasters* de résolution différente, il peut alors être nécessaire que tous les *rasters* aient la même résolution.
+Aussi, cela peut s'avérer utile lorsque nous devons travailler avec des *rasters* de résolution différente, il peut alors être nécessaire que tous les *rasters* aient la même résolution.
 
 Pour augmenter la résolution d'un *raster* nous utilisons la fonction `aggregate()`. Nous devons alors spécifier le facteur, `fact` par lequel nous voulons augmenter la résolution. Par exemple, `fact = 4` augmentera la résolution par un facteur de 4. C'est-à-dire qu'une cellule dans le nouveau *raster* aura une taille quatre fois plus grande que dans le *raster* initial. 
 
 Quelle valeur prendra alors une cellule de plus grande résolution? Par défaut, la cellule aura comme valeur la moyenne des valeurs des cellules groupées par l'agrégation. Par ailleurs, il est aussi possible de spéficier d'autres fonctions pour calculer la valeur des cellules de plus grande résolution en utilisant l'option `fun`. Par exemple, nous pourrions choisir que la valeur agrégée corresponde à la valeur maximum des valeurs des cellules groupées.
 
-```{r}
+```{r, fig.dim = c(8, 8), fig.cap="Cartes de différentes résolutions"}
 T_fact4_moy<-aggregate(T, fact=4)
 T_fact4_max<-aggregate(T, fact=4, fun = 'max')
 T_fact8_moy<-aggregate(T, fact=8)
@@ -515,8 +536,9 @@ map_fact8_max<-mapview(T_fact8_max, legend = F)
 
 leafsync::latticeView(map_fact4_moy,map_fact4_max, map_fact8_moy,map_fact8_max, ncol = 2)
 ```
+<br>
 
-Remarquez que nous avons utilisé la fonction 'latticeView' pour visualiser ces quatre cartes sur deux colonnes.
+Remarquez que nous avons utilisé la fonction `latticeView()` pour visualiser ces quatre cartes sur deux colonnes.
 
 
 ### Changer la projection d'un *raster*
@@ -550,12 +572,9 @@ Nous remarquons que les données matricielles sur les îlots de chaleur de la vi
 
 Le terme `+towgs84=0,0,0,0,0,0,0` signifie que le datum du *raster* est transformé vers le datum WGS84. Les paramètres de cette transformation mathématique sont donnés par les sept chiffres suivants l'égalité. Ils déterminent la translation, la rotation et le facteur d'échelle de cette transformation. Or, puisque les paramètres sont nuls dans le cas présent, aucune transformation n'est appliquée. Ceci signifie que le datum des données peut être approximé par le datum WGS84. 
 
-En fait, ces données utilisent la projection Québec Lambert, qui est appropriée pour représenter des données à l'échelle de la province. Celle-ci est basée sur le datum NAD83 qui être très proche du datum WGS84.   
+En fait, ces données utilisent la projection Québec Lambert, qui est appropriée pour représenter des données à l'échelle de la province. Celle-ci est basée sur le datum NAD83 qui être très proche du datum WGS84. Retournez voir le [Module 2](#SRC) pour un rappel des systèmes de coordonnées de référence!
 
-
-Retournez voir le [Module 2](#SRC) pour un rappel des systèmes de coordonnées de référence!
-
-Nous voulons maintenant transformer le système de coordonnées de référence du *raster* `T_vdq` vers le système MTM, c'est-à-dire la projection Mercator transverse modifiée. Celle-ci est basée aussi sur le datum NAD83. La ville de Québec ce situe dans le fuseau 7. 
+Nous voulons maintenant transformer le système de coordonnées de référence du *raster* `T_vdq` vers le système MTM, c'est-à-dire la projection Mercator transverse modifiée. Celle-ci est basée aussi sur le datum NAD83. Dans le système MTM, la ville de Québec ce situe dans le fuseau 7. 
 
 Pour savoir comment définir cette projection, c'est-à-dire quels paramètres utilisés, vous pouvez vous rendre sur le site web [spatialreference.org](https://spatialreference.org/). Dans la fenêtre de recherche *Search* tapez "MTM zone 7". Une liste de de code EPSG apparaitra. Sélectionnez le code "EPSG:2949: NAD83(CSRS) / MTM zone 7". Le carré gris qui apparait propose différents formats possibles pour définir une projection. Choisissez "Proj4". La liste des paramètres qui définissent la projection MTM pour le fuseau 7 est alors donnée. Vous pouvez donc copier cette définition, et l'utiliser pour définir la nouvelle projection. 
 
@@ -578,7 +597,7 @@ plot(T_mtm7, main = "MTM fuseau 7")
 <br>
 
 Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
-```{r, eval=TRUE, ECHO = FALSE}
+```{r, eval=TRUE, ECHO = FALSE, fig.cap="Section des rasters de projections Québec Lambert et MTM"}
 T_crop<-crop(T_vdq,extent(T_vdq,951,1150, 751,950))
 T_crop_mtm7<-projectRaster(T_crop, crs = proj_mtm7)
 par(mfrow=c(1,2))
@@ -594,7 +613,7 @@ De plus, vous aurez sans doute remarqué que nous avons utilisé la fonction `pl
 Pour sélectionner une région précise dans un *raster*, nous avons utilisé la fonction `crop()`. Nous reviendrons en détails sur cette fonction dans le [module 8](#manip_mat) qui traite de la manipulation de données matricielles.
 
 
-Finalement, pour sauvegarder des données matricielles, nous utilons la fonction `writeRaster()` de la librarie `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformé dans le système de projection MTM.
+Finalement, pour sauvegarder des données matricielles, nous utilons la fonction `writeRaster()` de la librarie `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
 
 
 ```{r echo = FALSE,eval = FALSE}
@@ -609,13 +628,14 @@ nom_du_fichier<- paste(chemin, "ICU_vdq_MTM7.tif", sep = "")
 writeRaster(T_mtm7,nom_du_fichier)
 ```
 
+<br>
 
 ### Lire et visualiser des données matricielles multi-bande.
 
 Les données matricielles peuvent contenir plusieurs couches, appelées aussi des bandes ou des canaux. C'est le cas des images de couleurs qui contiennent souvent trois bandes: une bande de rouge, une bande de vert et une bande de bleu. Dans cette section, nous apprendrons à lire et visualiser ce type de *raster* en utilisant des données satellitaires.
 
 Le gouvernement québécois abrite sur son site [Données Québec](https://www.donneesquebec.ca/recherche/fr/dataset/mosaique-landsat) les données satellites, captées par Sentinel-2 et Landsat, couvrant l'ensemble de la province. Nous parlons alors d'une mosaïque d'images.
-Sentinel-2 est une mission d'observation de la Terre de l'Agence spatiale européenne, tandis que Landsat est une mission développée par l'Agence spatiale américaine. Pour en apprendre davantage sur ces programmes d'observation et sur les satellites utilisés, consultez les sites de [Sentinel-2](https://eos.com/sentinel-2/) et de [Landsat](https://landsat.gsfc.nasa.gov/) ou encore les sites respectifs de wikipédia ( [Sentinel-2](https://fr.wikipedia.org/wiki/Sentinel-2) et [Landsat](https://fr.wikipedia.org/wiki/Programme_Landsat)).
+Sentinel-2 est une mission d'observation de la Terre de l'Agence spatiale européenne, tandis que Landsat est une mission développée par l'Agence spatiale américaine. Pour en apprendre davantage sur ces programmes d'observation et sur les satellites utilisés, consultez les sites de [Sentinel-2](https://eos.com/sentinel-2/) et de [Landsat](https://landsat.gsfc.nasa.gov/) ou encore les sites respectifs de wikipédia ([Sentinel-2](https://fr.wikipedia.org/wiki/Sentinel-2) et [Landsat](https://fr.wikipedia.org/wiki/Programme_Landsat)).
 
 
 La résolution des images captées par Sentinel-2 est de 10 m par 10 m, et celle de Landsat est de 30 m par 30 m. Ces images permettent ainsi d'identifier la couverture du sol avec beaucoup de précisions. On les utilise alors pour décrire comment les milieux forestiers, agricoles, humides et anthropisés sont distribués sur le territoire et comment ils évoluent dans le temps. Ces images sont utilisées lors de la planification et l'aménagement du territoire et de ses ressources.
@@ -635,7 +655,7 @@ S <- raster(nom_du_fichier)
 S
 ```
 
-```{r eval = TRUE, echo=FALSE}
+```{r eval = TRUE, echo=FALSE, warning = FALSE, message = FALSE}
 filename<- "Module5/data/Landsat_LaTuque.tif"
 S <-raster(filename)
 S
@@ -644,7 +664,7 @@ S
 Nous remarquons qu'une information supplémentaire est apparue dans le description du *raster*. Il s'agit de `band : 1 (of 3 bands)`.
 Cette information nous précise que nous venons de lire une seule bande alors que ces données matricielles en contiennent trois. Lorsque nous rencontrons un *raster* de plusieurs bandes, il faut plutôt utiliser la fonction `brick()` ou la fonction `stack()` de la librairie `raster` pour lire l'ensemble des bandes.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 S_mult <- brick(filename)
 S_mult
 ```
@@ -653,7 +673,7 @@ Remarquez que la classe de l'objet `S_mult` est `RasterBrick` et non pas simplem
 
 
 Nous pouvons sélectionner chacune des bandes à partir du *raster* multi-bande de la façon suivante:
-```{r}
+```{r, warning = FALSE, message = FALSE}
 SR<- S_mult$Landsat_LaTuque.1
 SG<- S_mult$Landsat_LaTuque.2
 SB<- S_mult$Landsat_LaTuque.3
@@ -661,7 +681,7 @@ SB<- S_mult$Landsat_LaTuque.3
 
 
 Par ailleurs, nous pouvons également lire chacune des bandes individuellement avec la fonction `raster()`:
-```{r, collapse=TRUE}
+```{r, collapse=TRUE, warning = FALSE, message = FALSE}
 SR <- raster(filename, band = 1) #lecture de la bande rouge
 SG <- raster(filename, band = 2) #lecture de la bande verte (green)
 SB <- raster(filename, band = 3) #lecture de la bande bleu
@@ -677,9 +697,11 @@ Ainsi, `SR` correspond à la première bande (la rouge), `SG` à la deuxième ba
 
 Un `RasterBrick` correspond généralement a différentes bandes spectrales stockées dans un seul objet ou un seul fichier dans la mémoire de votre ordinateur. 
 
-D'autre part, un `RasterStack` qu'on obtient par l'utilisation de la fonction `stack()` permet de combiner des couches provenant de fichiers différents ou d'objets logés à différents endroits de la mémoire. Une condition essentielle pour combiner des couches dans un `RasterStack` est que celles-ci possèdent la même étendue, la même résolution, et le même SCR.
+D'autre part, un `RasterStack` qu'on obtient par l'utilisation de la fonction `stack()` permet de combiner des couches provenant de fichiers différents ou d'objets logés à différents endroits de la mémoire de votre ordinateur. Une condition essentielle pour combiner des couches dans un `RasterStack` est que celles-ci possèdent la même étendue, la même résolution, et le même SCR.
 
-Démontrons en quoi consiste un`RasterStack` par un exemple. Définissons deux couches provenant d'objets différents que nous combinerons par l'utilisation de la fonction `stack()`. D'abord, utilisons la fonction `raster()` pour créer un *raster* qui possède la même géométrie que les couches du *raster* `S_mult`.
+Démontrons en quoi consiste un`RasterStack` par un exemple. Définissons deux couches provenant d'objets différents que nous combinerons par l'utilisation de la fonction `stack()`. 
+
+D'abord, utilisons la fonction `raster()` pour créer un *raster* qui possède la même géométrie que les couches du *raster* `S_mult`.
 
 ```{r}
 raster_1<-raster(res = res(SR), ext = extent(SR), crs=crs(SR))
@@ -715,7 +737,7 @@ Nous avons ainsi créé un *raster* de classe `RasterStack`.
 #### Visualiser un *raster* multi-bande {-}
 
 Visualisons individuellement les bandes d'un *raster* multi-bande en utilisant la fonction `mapview()` de la librarie `mapview`.
-```{r, collapse=TRUE}
+```{r, collapse=TRUE, warning = FALSE, message = FALSE, fig.cap="Carte pour chacune des bandes rouge, verte et bleue"}
 # Définissons une palette de gris de 256 tons différents
 mapviewOptions(raster.palette = gray.colors(256))
 
@@ -727,26 +749,30 @@ Map_SB<-mapview(SB)
 # Visualisons les trois cartes côte à côte
 leafsync::latticeView(Map_SR,Map_SG,Map_SB, ncol = 3)
 ```
+<br>
 
 Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `viewRGB()` de la librarie `mapview`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu. 
 
-```{r}
-viewRGB(S_mult, r=1, g=2, b=3)
+```{r, fig.cap="Carte combinant les trois bandes de couleurs"}
+viewRGB(S_mult, warning = FALSE, message = FALSE, r=1, g=2, b=3)
 ```
+<br>
 
-Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présents. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières. Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://github.com/sci1031/sci1031/tree/master/Module5/Module5_guide-mosaiques-Landsat.pdf) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].
+Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présents. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières. 
+
+Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://github.com/sci1031/sci1031/tree/master/Module5/Module5_guide-mosaiques-Landsat.pdf) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].
 
 
 Finalement, pour sauvegarder un *raster* multi-bandes, nous pouvons encore utiliser la fonction `writeRaster()` de la librairie `raster`.
 
 
-```{r  eval = FALSE}
+```{r  eval = FALSE, warning = FALSE, message = FALSE,}
 chemin<-"D:/votrechemin/SCI1031/Module5/Donnees/"
 nom_du_fichier <- paste(chemin, "LaTuque-copie.tif", sep = "")
 writeRaster(S_mult, nom_du_fichier)
 ```
 
-```{r echo = FALSE, eval = TRUE}
+```{r echo = FALSE, eval = FALSE}
 root = "Module5/data"
 filename<- paste(root, "/LaTuque-copie.tif", sep = "")
 writeRaster(S_mult, filename, overwrite=TRUE)
