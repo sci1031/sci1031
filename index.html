@@ -24,7 +24,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2021-01-06" />
+<meta name="date" content="2021-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,7 +55,7 @@
 <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet/leaflet.js"></script>
 <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet/proj4-compressed.js"></script>
+<script src="libs/proj4/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-binding/leaflet.js"></script>
@@ -68,21 +68,21 @@
 <link href="libs/mapviewCSS/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS/mapview.css" rel="stylesheet" />
 <script src="libs/Leaflet.Sync/L.Map.Sync.js"></script>
-<script src="libs/M/data_stars_M730a9f.txt"></script>
+<script src="libs/M/data_stars_Me24073.txt"></script>
 <script src="libs/joda/joda.js"></script>
 <script src="libs/joda/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique/data_stars_M_logiqueef80d2.txt"></script>
-<script src="libs/M_factor/data_stars_M_factor53fd18.txt"></script>
-<script src="libs/ICU/data_stars_ICU8da0f6.txt"></script>
-<script src="libs/T/data_stars_Td17e9f.txt"></script>
-<script src="libs/T_fact4_moy/data_stars_T_fact4_moybf20a3.txt"></script>
-<script src="libs/T_fact4_max/data_stars_T_fact4_max93462b.txt"></script>
-<script src="libs/T_fact8_moy/data_stars_T_fact8_moyc0d837.txt"></script>
-<script src="libs/T_fact8_max/data_stars_T_fact8_max0b8dea.txt"></script>
-<script src="libs/SR/data_stars_SR7f85e9.txt"></script>
-<script src="libs/SG/data_stars_SG2ce753.txt"></script>
-<script src="libs/SB/data_stars_SBc756d3.txt"></script>
-<script src="libs/dem/data_stars_dem257493.txt"></script>
+<script src="libs/M_logique/data_stars_M_logiqueda352c.txt"></script>
+<script src="libs/M_factor/data_stars_M_factor67902d.txt"></script>
+<script src="libs/ICU/data_stars_ICU5490c6.txt"></script>
+<script src="libs/T/data_stars_Td0c9e5.txt"></script>
+<script src="libs/T_fact4_moy/data_stars_T_fact4_moy6cf582.txt"></script>
+<script src="libs/T_fact4_max/data_stars_T_fact4_max0835e7.txt"></script>
+<script src="libs/T_fact8_moy/data_stars_T_fact8_moy81d9e7.txt"></script>
+<script src="libs/T_fact8_max/data_stars_T_fact8_max51473d.txt"></script>
+<script src="libs/SR/data_stars_SRa759db.txt"></script>
+<script src="libs/SG/data_stars_SG7a3289.txt"></script>
+<script src="libs/SB/data_stars_SBcbe4f1.txt"></script>
+<script src="libs/dem/data_stars_dem8c4960.txt"></script>
 
 
 <style type="text/css">
@@ -264,7 +264,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-les-donnéées"><i class="fa fa-check"></i>Lire les donnéées</a></li>
 <li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#explorer-les-statistiques-de-base"><i class="fa fa-check"></i>Explorer les statistiques de base</a></li>
 </ul></li>
-<li class="chapter" data-level="5.1.4" data-path="lecon-mat.html"><a href="lecon-mat.html#visualiser-les-données-matricielles-avec-mapview"><i class="fa fa-check"></i><b>5.1.4</b> Visualiser les données matricielles avec <code>mapview()</code></a><ul>
+<li class="chapter" data-level="5.1.4" data-path="lecon-mat.html"><a href="lecon-mat.html#visualiser-les-données-matricielles-avec-mapview"><i class="fa fa-check"></i><b>5.1.4</b> Visualiser les données matricielles avec mapview()</a><ul>
 <li><a href="lecon-mat.html#visualiser-une-section-dun-raster">Visualiser une section d’un <em>raster</em></a></li>
 </ul></li>
 <li class="chapter" data-level="5.1.5" data-path="lecon-mat.html"><a href="lecon-mat.html#changer-la-résolution-dun-raster"><i class="fa fa-check"></i><b>5.1.5</b> Changer la résolution d’un <em>raster</em></a></li>
@@ -349,7 +349,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">SCI 1031 Visualisation et analyse de données spatiales sous R</h1>
-<p class="date"><em>2021-01-06</em></p>
+<p class="date"><em>2021-01-08</em></p>
 </div>
 <div id="bienvenue" class="section level1 unnumbered">
 <h1>Bienvenue!</h1>
