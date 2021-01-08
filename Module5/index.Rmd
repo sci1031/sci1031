@@ -155,7 +155,7 @@ Ils peuvent également prendre des valeurs logiques (`logical`). Par exemple, re
 
 
 ```{r, warning = FALSE, message = FALSE}
-z<-1:64
+z <- 1:64
 class(z) #la fonction class() renvoie le type de données de l'objet z
 
 # Créons un nombre logique qui est vrai lorsque z est un multiple de trois, et faux autrement
@@ -257,8 +257,6 @@ G
 ```
 
 La figure suivante illustre comment les cellules sont indexées et positionnées dans un raster. La cellule supérieure gauche, de position `[1,1]` est toujours celle portant l'indice `1`. 
-
-knitr::include_graphics('Module5/images/ValeurRaster.png')
 
 <br>
 ```{r, echo=FALSE,fig.cap="Structure d'un raster: indice, position et valeur des pixels", out.width = '80%'}
@@ -394,7 +392,7 @@ Dans un premier temps, téléchargez [les données d'ICU pour la région de la v
 
 #### Lire les donnéées {-}
 
-Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la librarie `raster`
+Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la librarie `raster`.
 ```{r fake-icu, eval = FALSE}
 chemin <- "D:/votrechemin/SCI1031/Module5/Donnees/"
 nom_du_fichier <- paste(chemin, "Temp_vdq.tif", sep = "")
