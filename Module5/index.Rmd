@@ -159,7 +159,7 @@ z <- 1:64
 class(z) #la fonction class() renvoie le type de données de l'objet z
 
 # Créons un nombre logique qui est vrai lorsque z est un multiple de trois, et faux autrement
-z_mult3 <- (z%%3 == 0)
+z_mult3 <- z %% 3 == 0
 
 # La fonction modulo, s'exprime par le symbole %%, 
 # L'expression x %% y vaut 0 si y est un multiple de x, 
@@ -170,8 +170,8 @@ z_mult3
 class(z_mult3) #vérifions que les valeurs sont bien de type logique
 
 # utilisons le vecteur logique z_mult3 pour créer un raster logique
-M_logique <- raster(nrows=8, ncols=8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, 
-    vals = z_mult3, crs = CRS("+proj=longlat +datum=WGS84"))
+M_logique <- raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, 
+    vals = z_mult3)
 
 M_logique
 ```
@@ -179,10 +179,11 @@ M_logique
 
 Visualisons maintenant ce *raster* de type logique:
 
-```{r, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
-mp_ml <- mapview(stars::st_as_stars(M_logique))
+```{r, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
+mp_ml <- mapview(M_logique)
 mp_ml@map
 ```
+
 <br>
 
 
