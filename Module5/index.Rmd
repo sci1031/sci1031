@@ -159,7 +159,7 @@ z <- 1:64
 class(z) #la fonction class() renvoie le type de données de l'objet z
 
 # Créons un nombre logique qui est vrai lorsque z est un multiple de trois, et faux autrement
-z_mult3 <- (z%%3==0)
+z_mult3 <- (z%%3 == 0)
 
 # La fonction modulo, s'exprime par le symbole %%, 
 # L'expression x %% y vaut 0 si y est un multiple de x, 
@@ -170,15 +170,18 @@ z_mult3
 class(z_mult3) #vérifions que les valeurs sont bien de type logique
 
 # utilisons le vecteur logique z_mult3 pour créer un raster logique
-M_logique <- raster(nrows=8, ncols=8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, vals = z_mult3)
+M_logique <- raster(nrows=8, ncols=8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, 
+    vals = z_mult3, crs = CRS("+proj=longlat +datum=WGS84"))
 
 M_logique
 ```
 
 
 Visualisons maintenant ce *raster* de type logique:
-```{r, warning = FALSE,  fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
-mapview(M_logique)
+
+```{r, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
+mp_ml <- mapview(stars::st_as_stars(M_logique))
+mp_ml@map
 ```
 <br>
 
@@ -186,9 +189,10 @@ mapview(M_logique)
 Les *rasters* ne peuvent pas prendre des valeurs de type caractères (`character`) mais ils peuvent tout de même prendre des valeurs catégoriques. 
 
 Petit rappel, en `R`, les données catégoriques sont représentées par des données de type facteurs (`factor`). Plus précisément, les données catégoriques sont emmagasinées comme étant des nombres entiers auxquels sont associés des étiquettes - des identifiants uniques. Nous référons à ces identifiants comme étant des niveaux (`levels`). Par exemple:
+
 ```{r}
 # Définissons un vecteur de caractères
-mois_hiver <- c("décembre", "janvier","février", "mars")
+mois_hiver <- c("décembre", "janvier", "février", "mars")
 
 # Ce vecteur est bel et bien de type caractère
 class(mois_hiver)
@@ -213,8 +217,8 @@ Revenons maintenant aux *rasters*. Reprenons l'exemple du *raster* des multiples
 # Nous transformons d'abord le vecteur z de nombres entiers de 1 à 64, 
 # en vecteur de type caractère
 z_char <- z
-z_char[z%%3==0] <- "Multiple de 3"
-z_char[z%%3!=0] <- "Autre"
+z_char[z%%3 == 0] <- "Multiple de 3"
+z_char[z%%3 != 0] <- "Autre"
 
 class(z_char)
 
@@ -224,14 +228,15 @@ z_fact <- factor(z_char)
 class(z_fact)
 
 # Obtenons maintenant un raster de type facteur
-M_factor <- raster(nrows=8, ncols=8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, vals = z_fact)
+M_factor <- raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, 
+    vals = z_fact)
 
 M_factor
 
 ```
 
 Visualisons maintenant ce *raster* de type facteur:
-```{r, warning = FALSE,   fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
+```{r, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
 mapview(M_factor)
 ```
 <br>
@@ -521,23 +526,26 @@ Aussi, cela peut s'avérer utile lorsque nous devons travailler avec des *raster
 
 Pour augmenter la résolution d'un *raster* nous utilisons la fonction `aggregate()`. Nous devons alors spécifier le facteur, `fact` par lequel nous voulons augmenter la résolution. Par exemple, `fact = 4` augmentera la résolution par un facteur de 4. C'est-à-dire qu'une cellule dans le nouveau *raster* aura une taille quatre fois plus grande que dans le *raster* initial. 
 
-Quelle valeur prendra alors une cellule de plus grande résolution? Par défaut, la cellule aura comme valeur la moyenne des valeurs des cellules groupées par l'agrégation. Par ailleurs, il est aussi possible de spéficier d'autres fonctions pour calculer la valeur des cellules de plus grande résolution en utilisant l'option `fun`. Par exemple, nous pourrions choisir que la valeur agrégée corresponde à la valeur maximum des valeurs des cellules groupées.
+Quelle valeur prendra alors une cellule de plus grande résolution? Par défaut, la cellule aura comme valeur la moyenne des valeurs des cellules groupées par l'agrégation. Par ailleurs, il est aussi possible de specifier d'autres fonctions pour calculer la valeur des cellules de plus grande résolution en utilisant l'option `fun`. Par exemple, nous pourrions choisir que la valeur agrégée corresponde à la valeur maximum des valeurs des cellules groupées.
 
-```{r, fig.dim = c(8, 8), fig.cap="Cartes de différentes résolutions"}
+```{r, fig.dim = c(8, 8), fig.cap = "Cartes de différentes résolutions"}
 T_fact4_moy <- aggregate(T, fact=4)
 T_fact4_max <- aggregate(T, fact=4, fun = 'max')
 T_fact8_moy <- aggregate(T, fact=8)
 T_fact8_max <- aggregate(T, fact=8, fun = 'max')
 
 mapviewOptions(basemaps = "OpenStreetMap")
-map_fact4_moy <- mapview(T_fact4_moy, legend = F)
-map_fact4_max <- mapview(T_fact4_max, legend = F)
-map_fact8_moy <- mapview(T_fact8_moy, legend = F)
-map_fact8_max <- mapview(T_fact8_max, legend = F)
+map_fact4_moy <- mapview(T_fact4_moy, legend = FALSE)
+map_fact4_max <- mapview(T_fact4_max, legend = FALSE)
+map_fact8_moy <- mapview(T_fact8_moy, legend = FALSE)
+map_fact8_max <- mapview(T_fact8_max, legend = FALSE)
 
 leafsync::latticeView(map_fact4_moy, map_fact4_max, map_fact8_moy, map_fact8_max, ncol = 2)
+
 ```
-<br>
+
+<br><br>
+
 
 Remarquez que nous avons utilisé la fonction `latticeView()` pour visualiser ces quatre cartes sur deux colonnes.
 
@@ -580,7 +588,7 @@ Nous voulons maintenant transformer le système de coordonnées de référence d
 Pour savoir comment définir cette projection, c'est-à-dire quels paramètres utilisés, vous pouvez vous rendre sur le site web [spatialreference.org](https://spatialreference.org/). Dans la fenêtre de recherche *Search* tapez "MTM zone 7". Une liste de de code EPSG apparaitra. Sélectionnez le code "EPSG:2949: NAD83(CSRS) / MTM zone 7". Le carré gris qui apparait propose différents formats possibles pour définir une projection. Choisissez "Proj4". La liste des paramètres qui définissent la projection MTM pour le fuseau 7 est alors donnée. Vous pouvez donc copier cette définition, et l'utiliser pour définir la nouvelle projection. 
 
 ```{r}
-proj_mtm7<-"+proj=tmerc +lat_0=0 +lon_0=-70.5 +k=0.9999 +x_0=304800 +y_0=0 +ellps=GRS80 +units=m +no_defs"
+proj_mtm7 <- "+proj=tmerc +lat_0=0 +lon_0=-70.5 +k=0.9999 +x_0=304800 +y_0=0 +ellps=GRS80 +units=m +no_defs"
 ```
 
 Pour transformer la projection d'un *raster*, nous devons utiliser la fonction `projectRaster()` de la librairie `Raster`.
@@ -592,17 +600,18 @@ T_mtm7 <- projectRaster(T_vdq, crs = proj_mtm7)
 Comparons les deux cartes utilisant des projections différentes:
 ```{r, fig.cap="Rasters de projections Québec Lambert et MTM"}
 par(mfrow = c(1,2))
-plot(T_vdq, main = "Québec Lambert", legend = F)
+plot(T_vdq, main = "Québec Lambert", legend = FALSE)
 plot(T_mtm7, main = "MTM fuseau 7")
 ```
 <br>
 
 Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
-```{r, eval=TRUE, ECHO = FALSE, fig.cap="Section des rasters de projections Québec Lambert et MTM"}
-T_crop<-crop(T_vdq,extent(T_vdq,951,1150, 751,950))
-T_crop_mtm7<-projectRaster(T_crop, crs = proj_mtm7)
-par(mfrow=c(1,2))
-plot(T_crop, main = "Québec Lambert", legend = F)
+
+```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM"}
+T_crop <- crop(T_vdq,extent(T_vdq,951,1150, 751,950))
+T_crop_mtm7 <- projectRaster(T_crop, crs = proj_mtm7)
+par(mfrow = c(1,2))
+plot(T_crop, main = "Québec Lambert", legend = FALSE)
 plot(T_crop_mtm7, main = "MTM fuseau 7")
 ```
 <br>
@@ -614,7 +623,7 @@ De plus, vous aurez sans doute remarqué que nous avons utilisé la fonction `pl
 Pour sélectionner une région précise dans un *raster*, nous avons utilisé la fonction `crop()`. Nous reviendrons en détails sur cette fonction dans le [module 8](#manip_mat) qui traite de la manipulation de données matricielles.
 
 
-Finalement, pour sauvegarder des données matricielles, nous utilons la fonction `writeRaster()` de la librarie `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
+Finalement, pour sauvegarder des données matricielles, nous utilisons la fonction `writeRaster()` de la librairie `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
 
 
 ```{r echo = FALSE,eval = FALSE}
@@ -649,6 +658,7 @@ Nous allons maintenant visualiser des données satellitaires captées par Landsa
 #### Lire les donnéées {-}
 
 Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la librarie `raster'
+
 ```{r  eval = FALSE}
 chemin <- "D:/votrechemin/SCI1031/Module5/Donnees/"
 nom_du_fichier <- paste(chemin, "Landsat_LaTuque.tif", sep = "")
@@ -715,6 +725,7 @@ values(raster_1) = 1:ncell(SR)
 Ici, chaque pixel a comme valeur le numéro de son indice dans la matrice. 
 
 Ensuite, définissons un deuxième couche correspondant à une bande du *raster* `S_mult`:
+
 ```{r}
 raster_2 <- SR
 ```
@@ -738,6 +749,7 @@ Nous avons ainsi créé un *raster* de classe `RasterStack`.
 #### Visualiser un *raster* multi-bande {-}
 
 Visualisons individuellement les bandes d'un *raster* multi-bande en utilisant la fonction `mapview()` de la librarie `mapview`.
+
 ```{r, collapse=TRUE, warning = FALSE, fig.cap="Carte pour chacune des bandes rouge, verte et bleue"}
 # Définissons une palette de gris de 256 tons différents
 mapviewOptions(raster.palette = gray.colors(256))
