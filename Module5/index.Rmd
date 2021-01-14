@@ -137,7 +137,14 @@ plot(M)
 Nous pouvons aussi utiliser la fonction `mapview()` de la librarie `mapview`:
 ```{r,  echo = TRUE, eval = FALSE}
 library(mapview)
+library(leaflet)
 mapview(M)
+```
+
+
+```{r}
+library(tmap)
+tm_shape(M)+tm_raster(n=ncell(M),legend.show = FALSE)
 ```
 
 
@@ -184,14 +191,16 @@ M_logique
 
 
 Visualisons maintenant ce *raster* de type logique:
-```{r, echo = TRUE, eval = FALSE}
-mapview(M_logique)
-```
+
 
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
-mp_ml <- mapview(M_logique)
-mp_ml@map
+#mp_ml <- mapview(M_logique)
+#mp_ml@map
+M_logique_numeric<-raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, 
+    vals = as.numeric(z_mult3))
+mapview(M_logique_numeric)
+
 ```
 
 <br>
@@ -255,6 +264,11 @@ Visualisons maintenant ce *raster* de type facteur:
 ```{r, warning = FALSE, echo = FALSE, eval = TRUE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
 m = mapview(M_factor)
 m@map
+
+#M_factor_numeric<-raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, 
+#    vals = as.numeric(z_fact))
+#mapview(M_factor_numeric)
+
 ```
 
 <br>
@@ -428,6 +442,7 @@ T_vdq
 ```{r icu, eval=TRUE, echo = FALSE, warning = FALSE, message = FALSE}
 
 filename_rcrop = "Module5/data/Temp_vdq.tif"
+filename_rcrop =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module5/data/Temp_vdq.tif"
 T_vdq <- raster(filename_rcrop)
 
 T_vdq
@@ -507,10 +522,13 @@ mapview(T_vdq,
 ```
 
 ```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec" }
-m = mapview(T_vdq, 
+m = mapview(T_vdq,
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU')
+
+m@map
+
 ```
 <br>
 
@@ -556,6 +574,7 @@ T <- T_vdq[1051:1150, 851:950, drop=FALSE]
 
 m = mapview(T,  map.types = "OpenStreetMap")
 m@map
+
 ```
 <br>
 
