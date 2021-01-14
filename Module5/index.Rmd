@@ -135,10 +135,16 @@ plot(M)
 <br>
 
 Nous pouvons aussi utiliser la fonction `mapview()` de la librarie `mapview`:
-
-```{r,  warning = FALSE, fig.dim = c(5, 5), fig.cap="Visualisation du raster `M` avec la fonction `mapview()`"}
+```{r,  echo = TRUE, eval = FALSE"}
 library(mapview)
 mapview(M)
+```
+
+
+```{r,  echo = FALSE, eval = TRUE, warning = FALSE, fig.dim = c(5, 5), fig.cap="Visualisation du raster `M` avec la fonction `mapview()`"}
+library(mapview)
+m = mapview(M)
+m@map
 ```
 <br>
 
@@ -178,8 +184,12 @@ M_logique
 
 
 Visualisons maintenant ce *raster* de type logique:
+```{r, echo = TRUE, eval = FALSE}
+mapview(M_logique)
+```
 
-```{r, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
 mp_ml <- mapview(M_logique)
 mp_ml@map
 ```
@@ -237,9 +247,16 @@ M_factor
 ```
 
 Visualisons maintenant ce *raster* de type facteur:
-```{r, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
+```{r, echo = TRUE, eval = FALSE}
 mapview(M_factor)
 ```
+
+Visualisons maintenant ce *raster* de type facteur:
+```{r, warning = FALSE, echo = FALSE, eval = TRUE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
+m = mapview(M_factor)
+m@map
+```
+
 <br>
 
 
@@ -265,7 +282,7 @@ G
 La figure suivante illustre comment les cellules sont indexées et positionnées dans un raster. La cellule supérieure gauche, de position `[1,1]` est toujours celle portant l'indice `1`. 
 
 <br>
-```{r, echo=FALSE,fig.cap="Structure d'un raster: indice, position et valeur des pixels", out.width = '80%'}
+```{r, echo=FALSE,fig.cap="Structure d'un raster: indice, position et valeur des pixels", out.width = '100%'}
 knitr::include_graphics('Module5/images/ValeurRaster.png')
 ```
 <br>
@@ -481,8 +498,16 @@ Remarquez que nous avons spécifié que la distribution soit calculée sur l'ens
 Nous allons visualiser la carte des températures de surface de la région de la ville de Québec en utilisant la fonction `mapview()`.
 Afin de situer plus facilement la région illustrée sur le territoire du Québec, nous allons demander d'ajouter la carte d'*OpenStreetMap*^[[OpenStreetMap](https://www.openstreetmap.org/) est un outil collaboratif et libre d'accès de cartographie en ligne.] comme carte de fonds.
 
-```{r, warning = FALSE, message = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec" }
+
+```{r, eval = FALSE, echo = TRUE" }
 mapview(T_vdq, 
+        map.types = "OpenStreetMap",
+        legend = TRUE,
+        layer.name = 'ICU')
+```
+
+```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec" }
+m = mapview(T_vdq, 
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU')
@@ -493,12 +518,22 @@ L'échelle de la légende indique des niveaux de température. Le niveau 1 corre
 
 Vous remarquerez que la résolution de cette carte n'est pas parfaite. En effet, par défaut, la fonction `mapview()` appliquée à un raster utilise 500 000 pixels. Pour que l'ensemble des pixels soient pris en compte, nous devons le préciser en définissant l'option `maxpixels`.
 
-```{r, warning = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec (visualisation de tous les pixels)"  }
+```{r, eval = FALSE, echo = TRUE}
 mapview(T_vdq, maxpixels = ncell(T_vdq),
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU')
 ```
+
+
+```{r, eval = TRUE, echo = FALSE, warning = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec (visualisation de tous les pixels)"  }
+m = mapview(T_vdq, maxpixels = ncell(T_vdq),
+        map.types = "OpenStreetMap",
+        legend = TRUE,
+        layer.name = 'ICU')
+m@map
+```
+
 <br>
 
 Naturellement, le temps nécessaire pour générer la carte est alors plus long.
@@ -508,10 +543,19 @@ Naturellement, le temps nécessaire pour générer la carte est alors plus long.
 
 Nous voulons maintenant nous concentrer sur une petite section de la carte de la région de la ville de Québec. Nous pouvons le faire en spécifiant les lignes et les colonnes qui nous intéressent dans le *raster*. Par exemple, choisissons une région carrée de 100 x 100 cellules dans le quartier Sainte-Foy.
 
-```{r, fig.dim = c(6, 6), fig.cap="Carte de la température de surface dans le secteur de Sainte-Foy"}
+```{r, eval = FALSE, echo = TRUE}
 T <- T_vdq[1051:1150, 851:950, drop=FALSE]
 
 mapview(T,  map.types = "OpenStreetMap")
+```
+
+
+
+```{r, eval = TRUE, echo = FALSE, warnings = FALSE, fig.cap="Carte de la température de surface dans le secteur de Sainte-Foy"}
+T <- T_vdq[1051:1150, 851:950, drop=FALSE]
+
+m = mapview(T,  map.types = "OpenStreetMap")
+m@map
 ```
 <br>
 
