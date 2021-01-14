@@ -135,7 +135,7 @@ plot(M)
 <br>
 
 Nous pouvons aussi utiliser la fonction `mapview()` de la librarie `mapview`:
-```{r,  echo = TRUE, eval = FALSE"}
+```{r,  echo = TRUE, eval = FALSE}
 library(mapview)
 mapview(M)
 ```
@@ -499,7 +499,7 @@ Nous allons visualiser la carte des températures de surface de la région de la
 Afin de situer plus facilement la région illustrée sur le territoire du Québec, nous allons demander d'ajouter la carte d'*OpenStreetMap*^[[OpenStreetMap](https://www.openstreetmap.org/) est un outil collaboratif et libre d'accès de cartographie en ligne.] comme carte de fonds.
 
 
-```{r, eval = FALSE, echo = TRUE" }
+```{r, eval = FALSE, echo = TRUE}
 mapview(T_vdq, 
         map.types = "OpenStreetMap",
         legend = TRUE,
@@ -824,7 +824,7 @@ Pour plus d'informations sur l'interprétation des images Landsat, consultez ce 
 Finalement, pour sauvegarder un *raster* multi-bandes, nous pouvons encore utiliser la fonction `writeRaster()` de la librairie `raster`.
 
 
-```{r  eval = FALSE, warning = FALSE, message = FALSE,}
+```{r  eval = FALSE, warning = FALSE, message = FALSE}
 chemin <- "D:/votrechemin/SCI1031/Module5/Donnees/"
 nom_du_fichier <- paste(chemin, "LaTuque-copie.tif", sep = "")
 writeRaster(S_mult, nom_du_fichier)
