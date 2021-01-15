@@ -143,8 +143,8 @@ mapview(M)
 
 
 ```{r}
-library(tmap)
-tm_shape(M)+tm_raster(n=ncell(M),legend.show = FALSE)
+#library(tmap)
+#tm_shape(M)+tm_raster(n=ncell(M),legend.show = FALSE)
 ```
 
 
