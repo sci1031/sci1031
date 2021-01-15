@@ -442,7 +442,7 @@ T_vdq
 ```{r icu, eval=TRUE, echo = FALSE, warning = FALSE, message = FALSE}
 
 filename_rcrop = "Module5/data/Temp_vdq.tif"
-filename_rcrop =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module5/data/Temp_vdq.tif"
+#filename_rcrop =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module5/data/Temp_vdq.tif"
 T_vdq <- raster(filename_rcrop)
 
 T_vdq
