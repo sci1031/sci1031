@@ -374,21 +374,21 @@ En plus du minimum, du maximum, et de la médiane, la fonction `summary()` retou
 
 La fonction `cellStats` permet également d'obtenir des statistiques sur les *rasters*. La statistique désirée doit être précisée dans les options de la fonction `cellStats`. Par exemple:
 ```{r, collapse=TRUE}
-cellStats(G, mean, na.rm = T)  
-
-cellStats(G, sd, na.rm = T)   #la déviation standard
-
-cellStats(G, max, na.rm = T)
-
-cellStats(G, min, na.rm = T)
-
-cellStats(G, median, na.rm = T)
-
-cellStats(G, quantile, na.rm = T)
-
-cellStats(G, range, na.rm = T) #le minimum et le maximum
-
-cellStats(G, sum, na.rm=T)
+# cellStats(G, mean, na.rm = T)  
+# 
+# cellStats(G, sd, na.rm = T)   #la déviation standard
+# 
+# cellStats(G, max, na.rm = T)
+# 
+# cellStats(G, min, na.rm = T)
+# 
+# cellStats(G, median, na.rm = T)
+# 
+# cellStats(G, quantile, na.rm = T)
+# 
+# cellStats(G, range, na.rm = T) #le minimum et le maximum
+# 
+# cellStats(G, sum, na.rm=T)
 
 ```
 
