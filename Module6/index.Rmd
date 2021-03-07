@@ -35,9 +35,66 @@ Dans la section Exercice, vous utiliserez XXXXX
 
 ## Leçon
 
-### Cartographie d’objets vectoriels
+```{r}
+library(sf)
+library(tmap)
+```
 
-- Carte de base (graticules, échelle, rose des vents, légende, titre).
+### tmap
+Blabla
+
+#### Données
+La taille des populations des régions administratives provient de la Banque de données des statistiques officielles sur le Québec (https://bdso.gouv.qc.ca/), et les limites géographiques des régions proviennent du site Données Québec (https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs)
+
+```{r}
+#filename_rcrop = "Module5/data/Temp_vdq.tif"
+filename =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module6/data/Quebec_RegAdm_Pop.shp"
+Q <- st_read(filename_rcrop)
+
+```
+Expliquer chaque colonne
+
+#### tm_fill
+
+```{r}
+tm_shape(Q)+ 
+  tm_fill()
+```
+####tm_borders
+Frontiere des regions admin
+```{r}
+tm_shape(Q)+
+  tm_borders()
+```
+#### Québec+frontière
+```{r}
+# Quebec + frontiere
+tm_shape(Q)+
+  tm_fill()+
+  tm_borders()
+```
+#### tm_polygons
+
+```{r}
+# tm_polygons = tm_fill + tm_borders (condense into one signe function)
+tm_shape(Q)+
+tm_polygons()
+
+```
+
+```{r}
+# tmap object
+map_Q<-tm_shape(Q)+ tm_polygons()
+class(map_Q)
+```
+#### raster
+```{r}
+# Prendre raster de l'elevation au QC
+library(raster)
+filename =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module6/data/qc3d.tif"
+E<-raster(filename)
+```
+
 
 ### Cartographie d’objets matriciels
 
