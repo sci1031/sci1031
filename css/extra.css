@@ -7,3 +7,18 @@ p.caption {
 .book h5 {
   font-size: 1.25em !important;
 }
+
+.book .book-body .page-wrapper .page-inner section.normal pre {
+  overflow: auto;
+  word-wrap: normal;
+   margin: 0 0 0 0;
+  padding: .85em 1em;
+  background: none !important; 
+}
+
+.leaflet-container {
+  background: #ddd;
+  outline: 0;
+  width: 100% !important;
+  margin-top: 10px;
+}

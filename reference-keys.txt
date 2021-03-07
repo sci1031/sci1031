@@ -54,7 +54,8 @@ fig:unnamed-chunk-48
 fig:plot-geoOps
 fig:plot-geoConf
 fig:include-figs-raster-centroids
-fig:unnamed-chunk-92
+fig:unnamed-chunk-98
+fig:geoide2
 intro
 leçon
 les-données-spatiales
@@ -111,6 +112,7 @@ manip_mat
 leçon-4
 parmi-les-4-parcs-nationaux-de-la-région-de-sherbrooke-lequel-dispose-du-plus-haut-sommet-1
 quelle-est-le-profil-topographique-du-sentier-se-rendant-au-plus-proche-de-ce-sommet
+mapviewsentiersst_nearest_featuresf_point_max_elev-sentiers
 quelle-est-le-mois-disposant-du-plus-faible-niveau-de-pluviométrie-pour-le-parc-national-possédant-ce-sommet
 exercice-2
 spatiotemp
