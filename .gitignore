@@ -9,3 +9,4 @@ _bookdown_files/
 gh-pages*
 *.log
 .Rprofile
+*gitignore
