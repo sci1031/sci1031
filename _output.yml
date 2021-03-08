@@ -1,6 +1,6 @@
 bookdown::gitbook:
   dev: svglite
-  css: [css/style.css, css/toc.css, css/extra.css]
+  css: [css/extra.css]
   toc_depth: 4
   split_by: section
   highlight: tango
@@ -9,14 +9,14 @@ bookdown::gitbook:
       collapse: subsection
       scroll_highlight: yes
       before: |
-        <li><a href="./">Ébauche #1 du cours SCI 1031.</a></li>
+        <li><a href="./">TELUQ -  SCI 1031.</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
       edit: https://github.com/sci1031/sci1031/edit/master/%s
       # download: ["pdf", "epub"]
     download: [["Cours_SpatialR.pdf","pdf"]]
 bookdown::html_chapters:
-  css: [css/style.css, css/toc.css]
+  css: [css/style.css]
 bookdown::pdf_book:
   includes:
     in_header: latex/preamble.tex

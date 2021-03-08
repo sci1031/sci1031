@@ -24,6 +24,7 @@ Imports:
   spacetime,
   spdep,
   stars,
-  svglite
+  svglite,
+  webshot
 Remotes: 
-  r-spatial/mapview@7555cbfcc6d4e8d804d36215bb8ba7dd050ec626
+  r-spatial/mapview
