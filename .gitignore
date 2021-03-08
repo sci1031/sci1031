@@ -10,3 +10,4 @@ gh-pages*
 *.log
 .Rprofile
 *gitignore
+packages.bib
