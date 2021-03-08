@@ -1,7 +1,7 @@
 # Manipulation de données matricielles {#manip_mat}
 
 
-L&rsquo;objectif principal de ce module est
+L'objectif principal de ce module est
 
 À la fin de ce module vous saurez:
 
@@ -32,9 +32,9 @@ library(sf)
 
 ## Leçon
 
-Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présent dans le secteur de la ville de Sherbrooke. Nous allons utiliser le modèle d&rsquo;élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d&rsquo;information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l&rsquo;élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d&rsquo;élévation des parcs de la région de Sherbrooke. Nous allons isoler le parc disposant du plus haut point culminant. Enfin, nous dresserons le profil d&rsquo;élévation du sentier de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) se rendant au plus proche de se point culminant. 
+Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présent dans le secteur de la ville de Sherbrooke. Nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l'élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d'élévation des parcs de la région de Sherbrooke. Nous allons isoler le parc disposant du plus haut point culminant. Enfin, nous dresserons le profil d'élévation du sentier de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) se rendant au plus proche de se point culminant. 
 
-Afin de faciliter l&rsquo;importation de ces données, l&rsquo;ensemble de ces couches d&rsquo;informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur l&rsquo;élévation et les parcs de la région de Sherbrooke](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Elevation_Parcs_Sherbrooke.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Elevation_Parcs_Sherbrooke` comprend deux sous-dossiers et un fichier:
+Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur l'élévation et les parcs de la région de Sherbrooke](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Elevation_Parcs_Sherbrooke.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Elevation_Parcs_Sherbrooke` comprend deux sous-dossiers et un fichier:
 
 - buffer_sherbrooke
 - parcs_sherbrooke
@@ -47,11 +47,11 @@ Afin de se familiariser avec la manipulation de données vectorielles, nous allo
 
 > Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
 
-En deuxième partie, on s&rsquo;interrogera sur:
+En deuxième partie, on s'interrogera sur:
 
 > Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
 
-Pour répondre à ces questions, il faut réaliser un ensemble d&rsquo;opérations spatiales. 
+Pour répondre à ces questions, il faut réaliser un ensemble d'opérations spatiales. 
 Pour la première question:
 
 - TODO: Étayer le pseudo code ici, chaque étapes pour chacune des trois questions
@@ -62,7 +62,7 @@ Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
 
 #### Importation des données {-}
 
-Afin de répondre à cette question, nous désirons dans un premier temps charger dans l&rsquo;environnement R, les différentes couches d&rsquo;informations spatiales.
+Afin de répondre à cette question, nous désirons dans un premier temps charger dans l'environnement R, les différentes couches d'informations spatiales.
 
 On charge les librairies requises pour importer les données spatiales vectorielles (`sf`), et les données spatiales matricielles (`raster`).
 
@@ -77,7 +77,7 @@ On charge également la librairie `mapview` permettant de visualiser les donnée
 library(mapview)
 ```
 
-Maintenant, on peut importer le *shapefile* des 4 parcs de la régions de Sherbrooke que nous avons isolé à l&rsquo;intérieur du module 7. 
+Maintenant, on peut importer le *shapefile* des 4 parcs de la régions de Sherbrooke que nous avons isolé à l'intérieur du module 7. 
 
 ```{r, eval = FALSE}
 chemin <-"D:/votrechemin/SCI1031/Module8/Donnees/"
@@ -89,7 +89,7 @@ parcs <- st_read(chemin_parcs)
 parcs <- st_read("Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
 ```
 
-Et enfin, on importe la couche d&rsquo;élévation pour la région d&rsquo;intérêt.
+Et enfin, on importe la couche d'élévation pour la région d'intérêt.
 
 ```{r, eval = FALSE}
 chemin_dem <- paste(chemin, "/DEM.tif", sep = "")
@@ -100,16 +100,16 @@ dem <- raster(chemin_dem)
 dem <- raster("Module8/data/DEM.tif")
 ```
 
-On visualise par la suite les deux objets spatiaux afin de valider l&rsquo;importation.
+On visualise par la suite les deux objets spatiaux afin de valider l'importation.
 
 ```{r, warning=FALSE}
 mapview(dem) + mapview(parcs, zcol = "TRQ_NM_", legend = FALSE)
 ```
 
 
-#### Accéder aux valeurs d&rsquo;un `raster` (données matricielles) {-}
+#### Accéder aux valeurs d'un `raster` (données matricielles) {-}
 
-Avant d&rsquo;aller plus loin, nous allons prendre un moment pour nous familiariser avec la manipulation de raster. Les objet de type `raster` dispose d&rsquo;une structure d&rsquo;objet particulière (communément appelé classe S4). Les rasters spatiaux peuvent être vu comme une image composée d&rsquo;une multitude de pixels. La seule différence réside dans le fait que cette image inclut un contexte géospatial, c&rsquo;est à dire, elle est référencée dans l&rsquo;espace. Pour accéder à des valeurs spécifiques, on utilise des numéros ou index référant à un ou plusieurs pixels.
+Avant d'aller plus loin, nous allons prendre un moment pour nous familiariser avec la manipulation de raster. Les objet de type `raster` dispose d'une structure d'objet particulière (communément appelé classe S4). Les rasters spatiaux peuvent être vu comme une image composée d'une multitude de pixels. La seule différence réside dans le fait que cette image inclut un contexte géospatial, c'est à dire, elle est référencée dans l'espace. Pour accéder à des valeurs spécifiques, on utilise des numéros ou index référant à un ou plusieurs pixels.
 
 ```{r}
 # Accéder à la première valeur
@@ -120,9 +120,9 @@ dem[1:100]
 dem[c(14, 30, 33:44)]
 ```
 
-Il est souvent dangereux d&rsquo;extraire des valeurs à des positions spécifiques en utilisant les index de pixels. En effet, on perd une information précieuse: la localisation dans l&rsquo;espace du pixel (coordonnées X et Y). C&rsquo;est pourquoi, il est souvent privilégié de convertir le raster en `data.frame`. La fonction `as.data.frame(..., xy = TRUE)`, appliqué sur un objet de class `raster`, présente l&rsquo;avantage de retourner les coordonnées associées à la valeur. Par défault, la coordonnée renvoyée par la fonction `as.data.frame` correspond au coin inférieur gauche de chaque pixel. Il est possible de renvoyer le centroid du pixel en utilisant l&rsquo;argument  `as.data.frame(..., xy = TRUE, centroids = TRUE)`.
+Il est souvent dangereux d'extraire des valeurs à des positions spécifiques en utilisant les index de pixels. En effet, on perd une information précieuse: la localisation dans l'espace du pixel (coordonnées X et Y). C'est pourquoi, il est souvent privilégié de convertir le raster en `data.frame`. La fonction `as.data.frame(..., xy = TRUE)`, appliqué sur un objet de class `raster`, présente l'avantage de retourner les coordonnées associées à la valeur. Par défault, la coordonnée renvoyée par la fonction `as.data.frame` correspond au coin inférieur gauche de chaque pixel. Il est possible de renvoyer le centroid du pixel en utilisant l'argument  `as.data.frame(..., xy = TRUE, centroids = TRUE)`.
 
-```{r include-figs-raster-centroids, fig.align = 'center', echo = FALSE, fig.cap = "(A) Coordonées renvoyées par défault par la fonction `as.data.frame`; (B) Coordonnées des centroides des pixels renvoyées lorque l&rsquo;argument `centroids = TRUE` est utilisé dans la fonction `as.data.frame`", out.width = '50%'}
+```{r include-figs-raster-centroids, fig.align = 'center', echo = FALSE, fig.cap = "(A) Coordonées renvoyées par défault par la fonction `as.data.frame`; (B) Coordonnées des centroides des pixels renvoyées lorque l'argument `centroids = TRUE` est utilisé dans la fonction `as.data.frame`", out.width = '50%'}
 knitr::include_graphics('Module8/images/coordsPixel.png')
 ```
 
@@ -147,25 +147,25 @@ df_dem[c(14, 30, 33:44),]
 
 #### Décrire un `raster` (données matricielles) par ses valeurs ou sa composition {-}
 
-En utilisant `getValues()` ou encore `dem[]`, on peut extraire l&rsquo;ensemble des valeurs du raster. Cette approche permet de calculer la moyenne, la médiane etc. 
+En utilisant `getValues()` ou encore `dem[]`, on peut extraire l'ensemble des valeurs du raster. Cette approche permet de calculer la moyenne, la médiane etc. 
 
 ```{r}
 max(getValues(dem))
 ```
 
-Certains pixels peuvent disposer d&rsquo;une valeur non-définie (`NA`). Lorsqu&rsquo;on applique des opérateurs mathématiques sur les valeurs des pixels (`mean()`, `sum()`, `median()` etc.), il est important de spécifier l&rsquo;argument `na.rm = TRUE` afin d&rsquo;ignorer ces valeurs non-définies sinon la valeur renvoyée par l&rsquo;opérateur sera `NA` telle que constaté ci-dessus lors de l&rsquo;appel de la fonction `max(getValues(dem))`.
+Certains pixels peuvent disposer d'une valeur non-définie (`NA`). Lorsqu'on applique des opérateurs mathématiques sur les valeurs des pixels (`mean()`, `sum()`, `median()` etc.), il est important de spécifier l'argument `na.rm = TRUE` afin d'ignorer ces valeurs non-définies sinon la valeur renvoyée par l'opérateur sera `NA` telle que constaté ci-dessus lors de l'appel de la fonction `max(getValues(dem))`.
 
 ```{r}
 max(getValues(dem), na.rm = TRUE)
 ```
 
-La fonction `summary()` peut s&rsquo;avérer utile pour en savoir davantage sur la distribution des valeurs à l&rsquo;intérieur du raster.
+La fonction `summary()` peut s'avérer utile pour en savoir davantage sur la distribution des valeurs à l'intérieur du raster.
 
 ```{r}
 summary(getValues(dem))
 ```
 
-Si l&rsquo;on s&rsquo;intéresse maintenant à la structure du raster, c&rsquo;est à dire à en savoir davantage sur la dimension du raster, on peut se référer aux fonctions suivantes:
+Si l'on s'intéresse maintenant à la structure du raster, c'est à dire à en savoir davantage sur la dimension du raster, on peut se référer aux fonctions suivantes:
 
 ```{r}
 # Nombre de lignes
@@ -178,7 +178,7 @@ ncell(dem)
 
 #### Modifier les valeurs contenues dans le raster {-}
 
-Après avoir exploré la distribution des valeurs avec `summary(getValues(dem))`, on a pu s&rsquo;apercevoir que certains pixels contenaient des valeurs négatives. Ces valeurs ne sont pas abberantes et signifient que ces pixels se retrouvent en dessous du niveau de la mer. Nous allons cependant leur assigné une valeur de `NA`. La première approche consiste à tester les valeurs et les remplacer si elles rencontrent la condition: `valeur < 0`.
+Après avoir exploré la distribution des valeurs avec `summary(getValues(dem))`, on a pu s'apercevoir que certains pixels contenaient des valeurs négatives. Ces valeurs ne sont pas aberrantes et signifient que ces pixels se retrouvent en dessous du niveau de la mer. Nous allons cependant leur assigné une valeur de `NA`. La première approche consiste à tester les valeurs et les remplacer si elles rencontrent la condition: `valeur < 0`.
 
 ```{r}
 which(getValues(dem) < 0)
@@ -190,15 +190,15 @@ La fonction `which` permet de renvoyer les numéros de pixels qui satisfont la c
 dem[which(getValues(dem) < 0)] <- NA
 ```
 
-On peut valider que l&rsquo;opération a été complété avec succès en effectuant une seconde fois le test logique.
+On peut valider que l'opération a été complété avec succès en effectuant une seconde fois le test logique.
 
 ```{r}
 which(getValues(dem) < 0)
 ```
 
-`integer(0)` indique qu&rsquo;aucun pixel dispose d&rsquo;une valeur inférieur à 0.
+`integer(0)` indique qu'aucun pixel dispose d'une valeur inférieur à 0.
 
-Si l&rsquo;on veut modifier le domaine de valeurs d&rsquo;un raster, une seconde approche consiste à utiliser la fonction `reclassify()`. Imaginons que l&rsquo;on désire catégoriser le niveau d&rsquo;élévation en 3 classes / catégories: de 0 à 250m comme une classe d&rsquo;élévation faible, de 251 à 500m comme modérée et enfin 501 à 1200 comme classe forte. La fonction `reclassify()` nécessite une matrice comprenant les bornes limites des différentes classes. Note: N&rsquo;oubliez pas qu&rsquo;un raster ne peut pas entreposé de valeurs de type `factor` , c.a.d en caractère. Nous allons donc assigné un entier (1 à 3 pour faible à forte) comme étant un identifiant de la classe. La première étape consiste à construire la matrice permettant de reclassifier le domaine de valeurs du raster.
+Si l'on veut modifier le domaine de valeurs d'un raster, une seconde approche consiste à utiliser la fonction `reclassify()`. Imaginons que l'on désire catégoriser le niveau d'élévation en 3 classes / catégories: de 0 à 250m comme une classe d'élévation faible, de 251 à 500m comme modérée et enfin 501 à 1200 comme classe forte. La fonction `reclassify()` nécessite une matrice comprenant les bornes limites des différentes classes. Note: N'oubliez pas qu'un raster ne peut pas entreposé de valeurs de type `factor` , c.a.d en caractère. Nous allons donc assigné un entier (1 à 3 pour faible à forte) comme étant un identifiant de la classe. La première étape consiste à construire la matrice permettant de reclassifier le domaine de valeurs du raster.
 
 ```{r}
 new_class <- matrix(c(0, 250, 1, 250, 500, 2, 500, 1200, 3), nrow = 3, ncol = 3, byrow = TRUE)
@@ -212,21 +212,21 @@ Cette matrice est utilisée comme argument de la fonction `reclassify()` afin de
 new_class_dem <- reclassify(dem, new_class)
 ```
 
-On peut valider la nouvelle classification du domaine de valeurs du raster d&rsquo;élévation `dem` à l&rsquo;aide de la fonction `mapview()`.
+On peut valider la nouvelle classification du domaine de valeurs du raster d'élévation `dem` à l'aide de la fonction `mapview()`.
 
 ```{r, warning=FALSE}
 mapview(new_class_dem)
 ```
 
-#### Changer la résolution d&rsquo;un raster {-}
+#### Changer la résolution d'un raster {-}
 
-La résolution spatiale d&rsquo;un raster fait référence à la taille des pixels d&rsquo;un raster. Tous les pixels d&rsquo;un raster disposent d&rsquo;une taille identique. La résolution peut cependant différé entre x (longitude) et y (latitude). Pour connaitre la résolution d&rsquo;un raster on utilise la fonction `res()`.
+La résolution spatiale d'un raster fait référence à la taille des pixels d'un raster. Tous les pixels d'un raster disposent d'une taille identique. La résolution peut cependant différé entre x (longitude) et y (latitude). Pour connaitre la résolution d'un raster on utilise la fonction `res()`.
 
 ```{r}
 res(dem)
 ```
 
-On peut s&rsquo;apercevoir ici que la résolution en `x` (premier élément du vecteur) et y (deuxième élément) est identique et que l&rsquo;unité de la résolution affiché ici est en degré, telle qu&rsquo;affiché dans la projection du raster. Ce type d&rsquo;unité est plus difficilement interprétable. On peut reprojeté le raster dans le système *Conique conforme de Lambert du Québec* (NAD83, EPSG: 32198) afin d&rsquo;obtenir la résolution en système métrique et non en degré. Cette projection est identique à l&rsquo;objet spatial `parcs`.
+On peut s'apercevoir ici que la résolution en `x` (premier élément du vecteur) et y (deuxième élément) est identique et que l'unité de la résolution affiché ici est en degré, telle qu'affiché dans la projection du raster. Ce type d'unité est plus difficilement interprétable. On peut reprojeter le raster dans le système *Conique conforme de Lambert du Québec* (NAD83, EPSG: 32198) afin d'obtenir la résolution en système métrique et non en degré. Cette projection est identique à l'objet spatial `parcs`.
 
 ```{r}
 st_crs(parcs) 
@@ -234,106 +234,106 @@ dem_lcc <- projectRaster(dem, crs = crs(parcs))
 res(dem_lcc)
 ```
 
-La largeur (x) d&rsquo;un pixel est de `r res(dem_lcc)[1]`&nbsp;m de largeur et `r res(dem_lcc)[2]`&nbsp;m de hauteur.
+La largeur (x) d'un pixel est de `r res(dem_lcc)[1]`&nbsp;m de largeur et `r res(dem_lcc)[2]`&nbsp;m de hauteur.
 
-Parfois, il peut être utile d&rsquo;ajuster la résolution d&rsquo;un raster afin de conduire des analyses sur des tailles de pixels de références. Par exemple, nous voudrions que chaque pixel du modèle d&rsquo;élévation numérique (DEM) est une taille prédéfinis de 500 par 500 mètres. La première étape consiste à créer un raster de référence disposant de cette résolution.
+Parfois, il peut être utile d'ajuster la résolution d'un raster afin de conduire des analyses sur des tailles de pixels de références. Par exemple, nous voudrions que chaque pixel du modèle d'élévation numérique (DEM) est une taille prédéfinis de 500 par 500 mètres. La première étape consiste à créer un raster de référence disposant de cette résolution.
 
 ```{r}
 dem500 <- raster(extent(dem_lcc), res = 500, crs = crs(dem_lcc))
 ```
-On utilise `extent()` pour créer un nouveau raster de référence (`dem500`) dont l&rsquo;étendu spatiale est identique à celle du raster d&rsquo;élévation `dem_lcc`. On définit la résolution à 500 mètres à l&rsquo;aide de l&rsquo;argument `res`. Enfin, on définit la projection comme identique au raster d&rsquo;élévation avec la fonction (`crs()`). 
+On utilise `extent()` pour créer un nouveau raster de référence (`dem500`) dont l'étendu spatiale est identique à celle du raster d'élévation `dem_lcc`. On définit la résolution à 500 mètres à l'aide de l'argument `res`. Enfin, on définit la projection comme identique au raster d'élévation avec la fonction (`crs()`). 
 
 ```{r}
 head(getValues(dem500)) 
 ```
 
-Par défault, les pixels du nouveau raster possédent tous une valeur `NA`. La dernière étape consiste à échantillonner le raster d&rsquo;élévation afin de remplir le raster de référence avec les valeurs du raster d&rsquo;élévation. La fonction `resample()` permet d&rsquo;aller échantillonner les valeurs selon deux méthodes.
+Par défaut, les pixels du nouveau raster possèdent tous une valeur `NA`. La dernière étape consiste à échantillonner le raster d'élévation afin de remplir le raster de référence avec les valeurs du raster d'élévation. La fonction `resample()` permet d'aller échantillonner les valeurs selon deux méthodes.
 
-```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="caption",fig.show='hold',fig.align='center', fig.cap = "Méthodes de rééchantillonnage d&rsquo;un raster de référence vide à partir d&rsquo;un autre raster contenant des valeurs. Figures adaptés de [Arcgis Pro](https://pro.arcgis.com/fr/pro-app/help/analysis/spatial-analyst/performing-analysis/cell-size-and-resampling-in-analysis.htm)"}
+```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="caption",fig.show='hold',fig.align='center', fig.cap = "Méthodes de ré-échantillonnage d'un raster de référence vide à partir d'un autre raster contenant des valeurs. Figures adaptés de [Arcgis Pro](https://pro.arcgis.com/fr/pro-app/help/analysis/spatial-analyst/performing-analysis/cell-size-and-resampling-in-analysis.htm)"}
 knitr::include_graphics("Module8/images/resampling.png")
 ``` 
 
-- Méthode A: L&rsquo;affectation par le voisin le plus proche est la technique de rééchantillonnage la plus adaptée aux données discrètes (catégoriques) car elle ne modifie pas la valeur des pixels en entrée. L&rsquo;affectation par le voisin le plus proche détermine l&rsquo;emplacement du centre du pixel la plus proche (bleu) sur le raster en entrée et attribue la valeur de ce pixel au pixel du raster en sortie. Cette méthode présente l&rsquo;avantage qu&rsquo;elle ne modifie en rien les valeurs.
+- Méthode A: L'affectation par le voisin le plus proche est la technique de rééchantillonnage la plus adaptée aux données discrètes (catégoriques) car elle ne modifie pas la valeur des pixels en entrée. L'affectation par le voisin le plus proche détermine l'emplacement du centre du pixel la plus proche (bleu) sur le raster en entrée et attribue la valeur de ce pixel au pixel du raster en sortie. Cette méthode présente l'avantage qu'elle ne modifie en rien les valeurs.
 
-- Méthode B: L&rsquo;interpolation bilinéaire utilise les centroides des quatres pixels (en bleu) les plus proches pour déterminer la valeur sur du pixel en sortie (rouge). La nouvelle valeur pour le pixel (rouge) correspond à la moyenne pondérée de ces quatre valeurs (bleu), ajustée pour tenir compte de la distance les séparant du centre de la cellule en sortie. Cette méthode d&rsquo;interpolation crée une surface à l&rsquo;aspect plus lisse qu&rsquo;avec l&rsquo;affectation par le voisin le plus proche.
+- Méthode B: L'interpolation bilinéaire utilise les centroides des quatre pixels (en bleu) les plus proches pour déterminer la valeur sur du pixel en sortie (rouge). La nouvelle valeur pour le pixel (rouge) correspond à la moyenne pondérée de ces quatre valeurs (bleu), ajustée pour tenir compte de la distance les séparant du centre de la cellule en sortie. Cette méthode d'interpolation crée une surface à l'aspect plus lisse qu'avec l'affectation par le voisin le plus proche.
 
-Afin d&rsquo;obtenir des valeurs de pixels contenus dans `dem_lcc`, nous allons utiliser la méthode A.
+Afin d'obtenir des valeurs de pixels contenus dans `dem_lcc`, nous allons utiliser la méthode A.
 
 ```{r}
 dem500 <- resample(dem_lcc, dem500, method = "ngb")
 dem500
 ```
 
-On a présent un nouveau raster d&rsquo;élévation dont la résolution d&rsquo;un pixel est de 100 mètres par 100 mètres.
-On peut également facilement changer la résolution de ce raster à l&rsquo;aide des fonctions `disaggregate()` et `aggregate()`. Par exemple, il est possible de diminuer la résolution du raster par 10 (1 pixel = 1000 mètres par 1000 mètres) à l&rsquo;aide de la fonction suivante:
+On a présent un nouveau raster d'élévation dont la résolution d'un pixel est de 100 mètres par 100 mètres.
+On peut également facilement changer la résolution de ce raster à l'aide des fonctions `disaggregate()` et `aggregate()`. Par exemple, il est possible de diminuer la résolution du raster par 10 (1 pixel = 1000 mètres par 1000 mètres) à l'aide de la fonction suivante:
 
 ```{r}
 dem1000 <- aggregate(dem500, fact = 2, fun = max, na.rm = TRUE)
 ```
 
-L&rsquo;argument `fact` permet de spécifier le facteur d&rsquo;aggégation et l&rsquo;argument `fun` précise quelle fonction sera utilisé pour réaliser l&rsquo;aggrégation 4 des pixels ensemble. Si l&rsquo;on veut augmenter la résolution d&rsquo;un raster on utilisera la fonction `disaggregate()`. 
+L'argument `fact` permet de spécifier le facteur d’agrégation et l'argument `fun` précise quelle fonction sera utilisé pour réaliser l’agrégation 4 des pixels ensemble. Si l'on veut augmenter la résolution d'un raster on utilisera la fonction `disaggregate()`. 
 
 ### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
 
-Nous avons à présent couvert les opérations sur un raster permettant de vérifier sa composition et la distribution de ses valeurs. On peut maintenant passer à notre question qui vise à déterminer parmis les 4 parcs nationaux à 70kms de Sherbrooke lequel dispose du plus haut sommet. 
+Nous avons à présent couvert les opérations sur un raster permettant de vérifier sa composition et la distribution de ses valeurs. On peut maintenant passer à notre question qui vise à déterminer parmi les 4 parcs nationaux à 70kms de Sherbrooke lequel dispose du plus haut sommet. 
 
 La première étape consiste à isoler les pixels se retrouvant dans les 4 parcs nationaux. Pour cela, on utilise la fonction `mask()`. 
 
-```{r, warning=FALSE}
+```{r, warning = FALSE}
 dem_parcs <- mask(dem_lcc, parcs)
 mapview(dem_parcs)
 ```
 
-La fonction `mask()` attribue une valeur `NA` aux pixels se retrouvant à l&rsquo;extérieur des 4 parcs (polygones contenus dans l&rsquo;objet `parcs`). On a ainsi isoler les valeurs d&rsquo;élévation se retrouvant à l&rsquo;intérieur des parcs.
-On peut maintenant retourner la valeur d&rsquo;élévation la plus élevé en utilisant la fonction `max()`. On désire conserver cette valeur maximale afin d&rsquo;isoler les pixels du raster `dem_parcs` disposant de cette valeur.
+La fonction `mask()` attribue une valeur `NA` aux pixels se retrouvant à l'extérieur des 4 parcs (polygones contenus dans l'objet `parcs`). On a ainsi isoler les valeurs d'élévation se retrouvant à l'intérieur des parcs.
+On peut maintenant retourner la valeur d'élévation la plus élevé en utilisant la fonction `max()`. On désire conserver cette valeur maximale afin d'isoler les pixels du raster `dem_parcs` disposant de cette valeur.
 
 ```{r}
 max(getValues(dem_parcs), na.rm = TRUE)
 vmax <- max(getValues(dem_parcs), na.rm = TRUE)
 ```
 
-L&rsquo;étape suivante consiste à isoler le pixel disposant de cette valeur et d&rsquo;obtenir sa coordonnée. Pour cela, on transforme le raster en `data.frame` avec la fonction `as.data.frame()` tel que vue précédemment. 
+L'étape suivante consiste à isoler le pixel disposant de cette valeur et d'obtenir sa coordonnée. Pour cela, on transforme le raster en `data.frame` avec la fonction `as.data.frame()` tel que vue précédemment. 
 
 ```{r}
 df_dem_parcs <- as.data.frame(dem_parcs, xy = TRUE, centroid = TRUE, na.rm = TRUE)
 head(df_dem_parcs)
 ```
 
-On retire les valeurs masquées (`NA`) en utilisant l&rsquo;argument `na.rm=FALSE` puisque ces dernières ne nous intéressent pas. On s&rsquo;assure également d&rsquo;obtenir la coordonnées au centre du pixel avec `centroid = TRUE`. On peut à présent d&rsquo;isoler la ligne du `data.frame` (1 ligne = 1 pixel) contenant la valeur maximale d&rsquo;élévation (contenu dans `vmax`). Pour cela, on utilise la fonction `subset()`.
+On retire les valeurs masquées (`NA`) en utilisant l'argument `na.rm=FALSE` puisque ces dernières ne nous intéressent pas. On s'assure également d'obtenir la coordonnées au centre du pixel avec `centroid = TRUE`. On peut à présent d'isoler la ligne du `data.frame` (1 ligne = 1 pixel) contenant la valeur maximale d'élévation (contenu dans `vmax`). Pour cela, on utilise la fonction `subset()`.
 
 ```{r}
 df_max_elev <- subset(df_dem_parcs, DEM == vmax) 
 df_max_elev
 ```
 
-Une fois isolé, les coordonnées du pixel (x et y) peuvent être utilisé pour un créer un objet spatial (POINT) contenant le centroide de ce pixel grâce à la fonction `st_as_sf()`. On n&rsquo;oublie pas de spécifier que le système de projection est identique à celui du raster d&rsquo;élévation (`dem_parcs`) pour les 4 parcs autours de la ville de Sherbrooke. Nous nous servirons par la suite de ce point pour vérifier dans lequel des 4 parc nationaux il se retrouve. 
+Une fois isolé, les coordonnées du pixel (x et y) peuvent être utilisé pour un créer un objet spatial (POINT) contenant le centroide de ce pixel grâce à la fonction `st_as_sf()`. On n'oublie pas de spécifier que le système de projection est identique à celui du raster d'élévation (`dem_parcs`) pour les 4 parcs autours de la ville de Sherbrooke. Nous nous servirons par la suite de ce point pour vérifier dans lequel des 4 parc nationaux il se retrouve. 
 
 ```{r}
 sf_point_max_elev <- st_as_sf(df_max_elev, coords = c("x", "y"), crs = 32198)
 sf_point_max_elev
 ```
 
-Une autre facon d&rsquo;obtenir le point d&rsquo;élévation maximal est d&rsquo;utiliser la fonction `rasterToPoints()` de la manière suivante:
+Une autre façon d'obtenir le point d'élévation maximal est d'utiliser la fonction `rasterToPoints()` de la manière suivante:
 
 ```{r}
 sp_max_elev <- rasterToPoints(dem_parcs, fun = function(x) x == vmax, spatial = TRUE)
 st_as_sf(sp_max_elev)
 ```
 
-L&rsquo;objet renvoyé par la fonction `rasterToPoints(... , spatial = TRUE)` permet d&rsquo;obtenir un objet spatial contenant également le point d&rsquo;élévation maximale. Cependant, la classe d&rsquo;objet retourné ne provient pas de la librairie `sf` mais de la librairie `sp`. Cette librairie spatiale est plus ancienne et ne sera pas abordé dans ce cours, puisque elle est amené à être remplacé par la librairie `sf`. Si jamais vous devez l&rsquo;utiliser ailleurs que dans ce cours, sachez qu&rsquo;il est possible de convertir un objet de classe `sf` à tout moment vers la classe `sp` grâce à la fonction `as(... , "Spatial")`. En voici un exemple. Cette conversion est possible pour l&rsquo;ensemble des couches spatiales vectorielles mais ne s&rsquo;applique par aux rasters.
+L'objet renvoyé par la fonction `rasterToPoints(... , spatial = TRUE)` permet d'obtenir un objet spatial contenant également le point d'élévation maximale. Cependant, la classe d'objet retourné ne provient pas de la librairie `sf` mais de la librairie `sp`. Cette librairie spatiale est plus ancienne et ne sera pas abordé dans ce cours, puisque elle est amené à être remplacé par la librairie `sf`. Si jamais vous devez l'utiliser ailleurs que dans ce cours, sachez qu'il est possible de convertir un objet de classe `sf` à tout moment vers la classe `sp` grâce à la fonction `as(... , "Spatial")`. En voici un exemple. Cette conversion est possible pour l'ensemble des couches spatiales vectorielles mais ne s'applique par aux rasters.
 
 
 ```{r}
 as(sf_point_max_elev, "Spatial")
 ```
 
-En supperposant les couches d&rsquo;informations spatiales avec mapview, on peut observer dans quel parc se retrouve à présent ce point d&rsquo;élévation maximal. 
+En superposant les couches d'informations spatiales avec mapview, on peut observer dans quel parc se retrouve à présent ce point d'élévation maximal. 
 
-```{r, fig.cap = "En cliquant sur le polygon du parc contenant le point rouge (point d&rsquo;élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-mégantic", warning=FALSE}
+```{r, fig.cap = "En cliquant sur le polygon du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-mégantic", warning=FALSE}
 mapview(dem_parcs) + mapview(parcs, alpha = 0.01) + mapview(sf_point_max_elev,  col.regions = "red")
 ```
 
-Ce point se retrouve dans le **Parc national du Mont-Mégantic**. On réalise à présent une opération sur la topologie permettant d&rsquo;isoler le polygon du parc dans lequel se retrouve ce point. 
+Ce point se retrouve dans le **Parc national du Mont-Mégantic**. On réalise à présent une opération sur la topologie permettant d'isoler le polygon du parc dans lequel se retrouve ce point. 
 
 ```{r}
 parcs[which(st_intersects(parcs, sf_point_max_elev, sparse = FALSE) == TRUE), ]
@@ -345,17 +345,17 @@ NOTE: Cette opération pourrait être réécrite beaucoup plus simplement sous l
 parcs[sf_point_max_elev,]
 ```
 
-Cette syntaxe permet d&rsquo;isoler le polygon du parc mégantic dans lequel se retrouve le point culminant entre les 4 parcs.
+Cette syntaxe permet d'isoler le polygon du parc mégantic dans lequel se retrouve le point culminant entre les 4 parcs.
 
 ### Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
 
-Le sommet le plus élevé des parcs nationaux se situe dans le Parc national du Mont-Mégantic. On désire maintenant se rendre sur ce sommet en randonnée pédestre et réaliser un profil topographique du sentier ce rendant au plus proche. Les profils topographiques sont des outils de visualisation puissants: ils permettant de caractériser le dénivellé et donc l&rsquo;effort que l&rsquo;on devra fournir pour compléter cette randonnée. 
+Le sommet le plus élevé des parcs nationaux se situe dans le Parc national du Mont-Mégantic. On désire maintenant se rendre sur ce sommet en randonnée pédestre et réaliser un profil topographique du sentier ce rendant au plus proche. Les profils topographiques sont des outils de visualisation puissants: ils permettant de caractériser le dénivelé et donc l'effort que l'on devra fournir pour compléter cette randonnée. 
 
-```{r geoide2, fig.align='left', echo=FALSE,fig.cap="Exemple de profil topographique: le sentier internationnal des Appalaches", out.width = '100%'}
+```{r geoide2, fig.align='left', echo=FALSE,fig.cap="Exemple de profil topographique: le sentier international des Appalaches", out.width = '100%'}
 knitr::include_graphics('Module8/images/gas_coupe_grande_traversee.png')
 ```
 
-Pour obtenir le sentier estival se retrouvant au plus proche du sommet, il faut croiser deux couches d&rsquo;informations spatiales: (i) [les sentiers estivaux de la SEPAQ](https://www.donneesquebec.ca/recherche/dataset/sentiers-estivaux) et (ii) la coordonnée géographique du sommet que nous avons isolé précédemment. On utilise la fonction `st_nearest()` afin de séléctionner le sentier (`LINES`) le plus proche du sommet (`POINT`). La première étape consiste à lire le fichier de forme (*shapefile*).
+Pour obtenir le sentier estival se retrouvant au plus proche du sommet, il faut croiser deux couches d'informations spatiales: (i) [les sentiers estivaux de la SEPAQ](https://www.donneesquebec.ca/recherche/dataset/sentiers-estivaux) et (ii) la coordonnée géographique du sommet que nous avons isolé précédemment. On utilise la fonction `st_nearest()` afin de sélectionner le sentier (`LINES`) le plus proche du sommet (`POINT`). La première étape consiste à lire le fichier de forme (*shapefile*).
 
 ```{r, eval = FALSE}
 chemin <-"D:/votrechemin/SCI1031/Module8/Donnees/"
@@ -367,13 +367,13 @@ sentiers <- st_read(chemin_parcs)
 sentiers <- st_read("Module8/data/sentiers_sepaq/Sentier_ete_l.shp")
 ```
 
-On peut à présent valider visuellement cette couche d&rsquo;information spatiale.
+On peut à présent valider visuellement cette couche d'information spatiale.
 
 ```{r}
 mapview(sentiers)
 ```
 
-En se référant à la section TODO, on peut à présent isoler les sentiers se retrouvant à l&rsquo;intérieur du parc du Mont-Mégantic.
+En se référant à la section TODO, on peut à présent isoler les sentiers se retrouvant à l'intérieur du parc du Mont-Mégantic.
 
 parc_megantic <- subset(parcs, TRQ_NM_ == 'Parc national du Mont-Mégantic')
 sentiers_megantic <- sentiers[parc_megantic,]
@@ -388,18 +388,18 @@ pour cela, on doit croiser les couches spatiales des sentiers estivaux de ce par
 - Puis, extraire les pixels du rasters se retrouvant sous la ligne du sentier (extract)
 - mapview des pixels passant sous la ligne du sentier
 - On montre habituellement les figures (distance parcourue vs élévation) présenté par la SEPAQ, on veut améliorer le rendu visuelle.
-- Utiliser la resolution du raster pour déterminer la distance inter-pixels - Ici ca va prendre de l&rsquo;illustration pour être sûr que la notion est saisie
+- Utiliser la resolution du raster pour déterminer la distance inter-pixels - Ici ca va prendre de l'illustration pour être sûr que la notion est saisie
 - Faire la figure de distance cumulée versus élévation 
 - On vient de répondre à notre question
 
 ### Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
 
-- Dans ce chapitre, on veut jouer avec les `rasterStack`. Préparation d&rsquo;un `rasterStack` avec la précipitation totale par mois pour le même bonding box que le raster de DEM. Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
-- On extract les valeurs de précipitation (par mois) du rasterStack pour le parc que l&rsquo;on a ciblé
+- Dans ce chapitre, on veut jouer avec les `rasterStack`. Préparation d'un `rasterStack` avec la précipitation totale par mois pour le même bonding box que le raster de DEM. Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
+- On extract les valeurs de précipitation (par mois) du rasterStack pour le parc que l'on a ciblé
 - On montre comment on peut réaliser une moyenne entre deux mois rasterStack[[1]] + rasterStack[[2]] / 2 ou alors mean rasterStack[[1:2]]. 
 - Crop un raster rasterStack
 - which.min pour déterminer le raster du stack disposant de la plus petite valeur
-- Compléter avec d&rsquo;autre chose, ca me parait léger... à voir quand au dessus ce sera écrit..
+- Compléter avec d'autre chose, ca me parait léger... à voir quand au dessus ce sera écrit..
 
 
 ## Exercice

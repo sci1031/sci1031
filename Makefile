@@ -1,9 +1,6 @@
 pdf:
 	Rscript --quiet "bookdown::pdf_book"
 
-# gitbook:
-# 	Rscript --quiet _render.R "bookdown::gitbook"
-
 gitbook:
 	Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
 
