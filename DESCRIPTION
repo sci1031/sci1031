@@ -25,6 +25,7 @@ Imports:
   spdep,
   stars,
   svglite,
+  tmap,
   webshot
 Remotes: 
   r-spatial/mapview
