@@ -13,33 +13,6 @@ on:
     
 jobs:
   
-  windows:
-    runs-on: windows-latest
-    steps:
-      - name: install Pandoc
-        run: choco install pandoc
-      - name: Checkout Repository
-        uses: actions/checkout@master 
-      - name: Use cache
-        uses: actions/cache@v2
-        with:
-          path: ~\AppData\Local\renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
-      - name: Install R packages with renv
-        run: |
-          Rscript -e "install.packages('renv', repos = 'https://muug.ca/mirror/cran/')"
-          Rscript -e "renv::restore()"
-      - name: Install Dependencies
-        run: |-
-          Rscript -e "install.packages(c('remotes', 'bookdown'), repos = 'https://muug.ca/mirror/cran/')"
-          Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://muug.ca/mirror/cran/')"
-      - name: Build inSileco Blog
-        run: |-
-          Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
-  
-  
   linux:
     runs-on: ubuntu-latest
     container: rocker/verse:latest
