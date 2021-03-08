@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-03-07" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -67,23 +67,19 @@
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 <script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/M-1/data_stars_Mfae596.txt"></script>
+<script src="libs/M-1/data_stars_Mfb0497.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric-1/data_stars_M_logique_numeric720bdc.txt"></script>
-<script src="libs/M_factor-1/data_stars_M_factor40da8f.txt"></script>
-<script src="libs/ICU-1/data_stars_ICU2a659d.txt"></script>
-<script src="libs/T-1/data_stars_T5e1a0b.txt"></script>
-<script src="libs/T_fact4_moy-1/data_stars_T_fact4_moy2b5c8a.txt"></script>
-<script src="libs/T_fact4_max-1/data_stars_T_fact4_maxab5790.txt"></script>
-<script src="libs/T_fact8_moy-1/data_stars_T_fact8_moy87ec64.txt"></script>
-<script src="libs/T_fact8_max-1/data_stars_T_fact8_max912bfa.txt"></script>
-<script src="libs/SR-1/data_stars_SR754c61.txt"></script>
-<script src="libs/SG-1/data_stars_SG071439.txt"></script>
-<script src="libs/SB-1/data_stars_SB9db12f.txt"></script>
-<script src="libs/dem-1/data_stars_dem9eac2b.txt"></script>
-<script src="libs/new_class_dem-1/data_stars_new_class_demdcf309.txt"></script>
-<script src="libs/dem_parcs-1/data_stars_dem_parcs26da7f.txt"></script>
+<script src="libs/M_logique_numeric-1/data_stars_M_logique_numeric0b5e63.txt"></script>
+<script src="libs/M_factor-1/data_stars_M_factor529b83.txt"></script>
+<script src="libs/ICU-1/data_stars_ICUb67d24.txt"></script>
+<script src="libs/T-1/data_stars_T4df150.txt"></script>
+<script src="libs/SR-1/data_stars_SRcd2f67.txt"></script>
+<script src="libs/SG-1/data_stars_SG369157.txt"></script>
+<script src="libs/SB-1/data_stars_SBf94c58.txt"></script>
+<script src="libs/dem-1/data_stars_demb17a20.txt"></script>
+<script src="libs/new_class_dem-1/data_stars_new_class_dem273051.txt"></script>
+<script src="libs/dem_parcs-1/data_stars_dem_parcs3d1f59.txt"></script>
 
 
 <style type="text/css">
@@ -279,7 +275,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.3" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-un-raster-et-explorer-son-contenu"><i class="fa fa-check"></i><b>5.1.3</b> Lire un <em>raster</em> et explorer son contenu</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#importer-les-données-2"><i class="fa fa-check"></i>Importer les données</a></li>
-<li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-les-donnéées"><i class="fa fa-check"></i>Lire les donnéées</a></li>
+<li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-les-données-1"><i class="fa fa-check"></i>Lire les données</a></li>
 <li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#explorer-les-statistiques-de-base"><i class="fa fa-check"></i>Explorer les statistiques de base</a></li>
 </ul></li>
 <li class="chapter" data-level="5.1.4" data-path="lecon-mat.html"><a href="lecon-mat.html#visualiser-les-données-matricielles-avec-mapview"><i class="fa fa-check"></i><b>5.1.4</b> Visualiser les données matricielles avec mapview()</a>
@@ -291,7 +287,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.7" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-et-visualiser-des-données-matricielles-multi-bande."><i class="fa fa-check"></i><b>5.1.7</b> Lire et visualiser des données matricielles multi-bande.</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#importer-les-données-3"><i class="fa fa-check"></i>Importer les données</a></li>
-<li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-les-donnéées-1"><i class="fa fa-check"></i>Lire les donnéées</a></li>
+<li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-les-donnéées"><i class="fa fa-check"></i>Lire les donnéées</a></li>
 <li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#rasterbrick-et-rasterstack"><i class="fa fa-check"></i>RasterBrick et RasterStack</a></li>
 <li><a href="lecon-mat.html#visualiser-un-raster-multi-bande">Visualiser un <em>raster</em> multi-bande</a></li>
 </ul></li>
@@ -357,8 +353,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="leçon-5.html"><a href="leçon-5.html"><i class="fa fa-check"></i><b>10.1</b> Leçon</a>
 <ul>
 <li class="chapter" data-level="10.1.1" data-path="leçon-5.html"><a href="leçon-5.html#propriétés-des-données-spatio-temporelles"><i class="fa fa-check"></i><b>10.1.1</b> Propriétés des données spatio-temporelles</a></li>
-<li class="chapter" data-level="10.1.2" data-path="leçon-5.html"><a href="leçon-5.html#visualisation-spatiotemporelle"><i class="fa fa-check"></i><b>10.1.2</b> Visualisation spatiotemporelle</a></li>
-<li class="chapter" data-level="10.1.3" data-path="leçon-5.html"><a href="leçon-5.html#introduction-à-la-librairie-r-stars"><i class="fa fa-check"></i><b>10.1.3</b> Introduction à la librairie R stars</a></li>
+<li class="chapter" data-level="10.1.2" data-path="leçon-5.html"><a href="leçon-5.html#introduction-à-la-librairie-r-spacetime"><i class="fa fa-check"></i><b>10.1.2</b> Introduction à la librairie R spacetime</a></li>
+<li class="chapter" data-level="10.1.3" data-path="leçon-5.html"><a href="leçon-5.html#visualisation"><i class="fa fa-check"></i><b>10.1.3</b> Visualisation</a></li>
+<li class="chapter" data-level="10.1.4" data-path="leçon-5.html"><a href="leçon-5.html#basic-analysis"><i class="fa fa-check"></i><b>10.1.4</b> Basic analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="exercice-3.html"><a href="exercice-3.html"><i class="fa fa-check"></i><b>10.2</b> Exercice</a></li>
 </ul></li>
@@ -434,7 +431,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><code>names()</code></li>
 </ul>
 <p>Dans la section <a href="lecon-mat.html#lecon_mat">leçon</a>, vous utiliserez deux ensembles de données matricielles.</p>
-<p>Le premier ensemble contient des données spatiales relatives aux ilôts de chaleur urbain dans la région de la ville de Québec.</p>
+<p>Le premier ensemble contient des données spatiales relatives aux îlots de chaleur urbain dans la région de la ville de Québec.</p>
 <p>Le second ensemble contient des données spatiales satellites captées par Landsat près de la ville de La Tuque en Mauricie.</p>
 <p>Dans la section <a href="ex-mat.html#ex_mat">exercice</a>, vous utiliserez XXXXX</p>
 </div>
