@@ -3,10 +3,10 @@ name: Render GitBook
 on:
   push:
     branches:
-      - elise-dev
+      - master
   pull_request:
     branches:
-      - elise-dev
+      - master
   schedule:
     - cron: '0 0 11 * *'
     
