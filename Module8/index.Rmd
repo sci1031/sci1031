@@ -220,7 +220,7 @@ mapview(new_class_dem)
 
 #### Changer la résolution d'un raster {-}
 
-La résolution spatiale d'un raster fait référence à la taille des pixels d'un raster. Tous les pixels d'un raster disposent d'une taille identique. La résolution peut cependant différé entre x (longitude) et y (latitude). Pour connaitre la résolution d'un raster on utilise la fonction `res()`.
+La résolution spatiale d'un raster fait référence à la taille des pixels d'un raster. Tous les pixels d'un raster disposent d'une taille identique. La résolution peut cependant différé entre x (longitude) et y (latitude). Pour connaître la résolution d'un raster on utilise la fonction `res()`.
 
 ```{r}
 res(dem)
