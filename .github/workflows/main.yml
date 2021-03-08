@@ -1,8 +1,16 @@
 name: Render and deploy GitBook
 
-'on':
-  - push
-
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+  schedule:
+    - cron: '0 0 11 * *'
+    
+    
 jobs:
   
   windows:
