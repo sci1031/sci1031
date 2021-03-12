@@ -47,9 +47,9 @@ Blabla
 La taille des populations des régions administratives provient de la Banque de données des statistiques officielles sur le Québec (https://bdso.gouv.qc.ca/), et les limites géographiques des régions proviennent du site Données Québec (https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs)
 
 ```{r}
-#filename_rcrop = "Module5/data/Temp_vdq.tif"
-filename =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module6/data/Quebec_RegAdm_Pop.shp"
-Q <- st_read(filename_rcrop)
+#filename = "Module6/data/QuebecPop/Quebec_RegAdm_Pop.shp"
+filename = "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module6/data/QuebecPop/Quebec_RegAdm_Pop.shp"
+Q <- st_read(filename)
 
 ```
 Expliquer chaque colonne
