@@ -5,14 +5,14 @@ L'objectif principal de ce module est
 
 À la fin de ce module vous saurez:
 
--
+- 
 -
 -
 
 Vous utiliserez les librairies suivantes:
 
--
--
+- `raster`
+- `sf`
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
@@ -21,16 +21,23 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `as.data.frame()`
 
 
-Dans la section Leçon, vous utiliserez des données XYXYX
+Dans la section Leçon, vous utiliserez des données de parc nationaux québécois.
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries8, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries8, echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
 library(raster)
 library(sf)
 ```
 
+
 ## Leçon
+
+<!-- Au module 4, vous avez appris les fonctions essentielles pour lire et visualiser des données spatiales vectorielles sous R. Le présent module vous amènera maintenant à manipuler des données vectorielles.
+
+Cette leçon est articulée autour d’une problématique qui nécessite de manipuler des données spatiales. Au cours des différentes étapes permettant d’explorer la problématique, vous apprendrez à utiliser diverses fonctions R. -->
+
+### Importer les données
 
 Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présent dans le secteur de la ville de Sherbrooke. Nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l'élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d'élévation des parcs de la région de Sherbrooke. Nous allons isoler le parc disposant du plus haut point culminant. Enfin, nous dresserons le profil d'élévation du sentier de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) se rendant au plus proche de se point culminant. 
 
@@ -43,7 +50,7 @@ Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'inf
 
 ### Opérations de base {-}
 
-Afin de se familiariser avec la manipulation de données vectorielles, nous allons explorer le région de Sherbrooke en se posant les questions suivantes: 
+Afin de se familiariser avec la manipulation de données vectorielles, nous allons explorer le région de Sherbrooke en se posant deux questions. Dans la première partie nous manipulerons les données d'élévation pour répondre  suivantes: 
 
 > Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
 
@@ -57,6 +64,8 @@ Pour la première question:
 - TODO: Étayer le pseudo code ici, chaque étapes pour chacune des trois questions
 
 Dans ce chapitre, nous allons passer à travers chacune de ces étapes.
+
+
 
 ### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet? { - }
 
