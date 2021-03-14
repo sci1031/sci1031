@@ -1,0 +1,50 @@
+name: Render and deploy GitBook
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 11 * *'
+    
+    
+jobs:
+  
+  linux:
+    runs-on: ubuntu-latest
+    container: rocker/verse:latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Install apt-get package(s)
+        run: |-
+          sudo apt-get update
+          sudo apt-get install -y libudunits2-0 libudunits2-dev libgeos-dev
+          sudo apt-get install -y libgeos++-dev libgdal-dev r-cran-ncdf4
+          sudo rm -rf _book _bookdown_files
+      - name: Use cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+      - name: Restore packages
+        env:
+          RENV_PATHS_ROOT: ~/.local/share/renv
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+      - name: Build GitBook
+        run: |-
+          Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
+      - name: Deploy GitBook to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./_book

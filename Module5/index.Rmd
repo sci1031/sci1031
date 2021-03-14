@@ -55,7 +55,7 @@ Vous utiliserez aussi les fonctions suivantes, qui ne sont pas spécifiques aux 
 
 Dans la section [leçon](#lecon_mat), vous utiliserez deux ensembles de données matricielles. 
 
-Le premier ensemble contient des données spatiales relatives aux ilôts de chaleur urbain dans la région de la ville de Québec.
+Le premier ensemble contient des données spatiales relatives aux îlots de chaleur urbain dans la région de la ville de Québec.
 
 Le second ensemble contient des données spatiales satellites captées par Landsat près de la ville de La Tuque en Mauricie.
 
@@ -84,7 +84,7 @@ Au [module 2](#base), nous avons expliqué qu'un *raster* est formé de rectangl
 
 La fonction `raster()` de la librairie `raster` permet de créer un *raster*. Par exemple:
 ```{r}
-M <- raster(nrows=8, ncols=8, xmn = 0, xmx = 4, ymn = 0, ymx = 4, vals = 1:64)
+M <- raster(nrows=8, ncols=8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
 ```
 
 Où `nrows` et `ncols` correspondent respectivement au nombre de lignes et au nombre de colonnes du *raster* `M`, `xmn` et `xmx` correspondent respectivement aux coordonnées-x minimale et maximale du *raster*, `ymn` et `ymx` aux coordonnées-y minimale et maximale, et `vals` est un vecteur comprenant la valeur de chaque pixel du *raster*. Dans le cas présent, le *raster* `M` contient 64 pixels. Le premier pixel a la valeur 1, le deuxième pixel a la valeur 2 et ainsi de suite.
@@ -99,17 +99,18 @@ Si le SCR d'un *raster* n'est pas défini au moment de sa création, comme dans 
 
 Remarquez que la classe (`class`) de l'objet `M` est défini comme étant un `RasterLayer`. Nous verrons dans la dernière section de cette leçon qu'il existe d'autres classes de *raster*, soit les `RasterBrick` et les `RasterStack`.
 
-Remarquez aussi que la résolution d'un pixel est de `0.5 x 0.5`, car les 64 pixels du raster occupent le carré d'aire 16 délimité par les quatres points (0,0), (0,4), (4,0) et (4,4).
+Remarquez aussi que la résolution d'un pixel est de `0.5 x 0.5`, car les 64 pixels du raster occupent le carré d'aire 16 délimité par les quatre points (0,0), (0,4), (4,0) et (4,4).
 
 Ainsi, une façon équivalente de créer le *raster* `M` est:
 ```{r}
-M <- raster(res = 0.5, xmn = 0, xmx = 4, ymn = 0, ymx = 4, vals = 1:64)
+M <- raster(res = 0.5, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
 M
 ```
 Dans cette notation, nous avons spécifié la résolution et non la dimension du *raster*.
 
 Nous pouvons également connaître les paramètres d'un *raster* en utilisant les fonctions correspondantes.
-```{r, collapse=TRUE}
+
+```{r, collapse = TRUE}
 dim(M)
 
 ncell(M)
@@ -142,21 +143,15 @@ mapview(M)
 ```
 
 
-```{r}
-#library(tmap)
-#tm_shape(M)+tm_raster(n=ncell(M),legend.show = FALSE)
-```
-
-
 ```{r,  echo = FALSE, eval = TRUE, warning = FALSE, fig.dim = c(5, 5), fig.cap="Visualisation du raster `M` avec la fonction `mapview()`"}
 library(mapview)
-m = mapview(M)
+m = mapview(M, homebutton = FALSE)
 m@map
 ```
 <br>
 
 Nous avons une certaine preference pour l'esthétique qu'offre `mapview()`, n'est-ce pas?
-Peu importe la fonction choisie, celle-ci transforme la valeur de chaque cellule en couleur. Différentes pallettes de couleur peuvent etre utilisées, mais pour l'instant, limitons-nous à la palette de couleur par défaut, qui est `inferno` de la librarie `viridis`, inclue automatiquement dans la librarie `mapview`.
+Peu importe la fonction choisie, celle-ci transforme la valeur de chaque cellule en couleur. Différentes pallettes de couleur peuvent être utilisées, mais pour l'instant, limitons-nous à la palette de couleur par défaut, qui est `inferno` de la librarie `viridis`, inclue automatiquement dans la librarie `mapview`.
 
 Remarquez que le premier pixel, qui porte la valeur 1 dans le cas présent, se trouve en haut à gauche. Le dernier pixel, quant à lui, se trouve dans le coin inférieur droit. L'identité des pixels suit donc les lignes d'un *raster*.
 
@@ -183,7 +178,7 @@ z_mult3
 class(z_mult3) #vérifions que les valeurs sont bien de type logique
 
 # utilisons le vecteur logique z_mult3 pour créer un raster logique
-M_logique <- raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4,
+M_logique <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, 
     vals = z_mult3)
 
 M_logique
@@ -197,10 +192,10 @@ Visualisons maintenant ce *raster* de type logique:
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
 #mp_ml <- mapview(M_logique)
 #mp_ml@map
-M_logique_numeric<-raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4,
+M_logique_numeric <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, 
     vals = as.numeric(z_mult3))
-mapview(M_logique_numeric)
-
+mp_ml <- mapview(M_logique_numeric, homebutton = FALSE)
+mp_ml@map
 ```
 
 <br>
@@ -248,7 +243,7 @@ z_fact <- factor(z_char)
 class(z_fact)
 
 # Obtenons maintenant un raster de type facteur
-M_factor <- raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4,
+M_factor <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, 
     vals = z_fact)
 
 M_factor
@@ -261,14 +256,9 @@ mapview(M_factor)
 ```
 
 Visualisons maintenant ce *raster* de type facteur:
-```{r, warning = FALSE, echo = FALSE, eval = TRUE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
+```{r, warning = FALSE, echo = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
 m = mapview(M_factor)
 m@map
-
-#M_factor_numeric<-raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4,
-#    vals = as.numeric(z_fact))
-#mapview(M_factor_numeric)
-
 ```
 
 <br>
@@ -289,7 +279,7 @@ g[3] = NA
 g[4] = NA
 g[12] =NA
 g[19] = NA
-G <- raster(nrows=5, ncols=5, res = 0.5, xmn = 0, xmx = 2.5, ymn = 0, ymx = 2.5, vals = g)
+G <- raster(nrows=5, ncols=5, res = 0.5, xmn = 1, xmx = 3.5, ymn = 1, ymx = 3.5, vals = g)
 G
 ```
 
@@ -325,8 +315,9 @@ head(G_df)
 ```
 
 Ainsi, en référant à l'indice d'une cellule, nous pouvons connaître non seulement sa valeur mais aussi sa localisation dans l'espace.
+
 ```{r}
-G_df[13,]
+G_df[13, ]
 ```
 
 
@@ -334,21 +325,27 @@ G_df[13,]
 
 Voyons maintenant comment calculer des statistiques de base sur les valeurs contenues dans un *raster*.
 Tout d'abord, pour connaître l'ensemble des valeurs d'un *raster*, nous pouvons utiliser la fonction `getValues()`.
+
 ```{r}
 getValues(G)
 ```
-Cette fonction est équivalente à
+
+Cette fonction est équivalente à 
+
 ```{r}
 G[]
 ```
 
 Nous pouvons alors calculer des statistiques élémentaires sur ces valeurs. Par exemple, quelle est la valeur maximale du *raster* `G`?
+
 ```{r}
-max(getValues(G),na.rm = TRUE)
+max(getValues(G), na.rm = TRUE)
 ```
+
 Noter que nous devons préciser que les valeurs `NA` ne soient pas prises en considération lors du calcul de statistiques. En effet, `na.rm = TRUE` signifie que les valeurs `NA` sont retirées (*remove* en anglais, abrégé par *rm*).
 
 Plus simplement, nous pouvons utiliser la fonction équivalente `maxValue` exclusive aux données de classe `raster`.
+
 ```{r}
 maxValue(G)
 ```
@@ -373,22 +370,23 @@ summary(G)
 En plus du minimum, du maximum, et de la médiane, la fonction `summary()` retourne le premier et le troisième quantile, ainsi que le nombre de cellules de valeur `NA` contenu dans le *raster*.
 
 La fonction `cellStats` permet également d'obtenir des statistiques sur les *rasters*. La statistique désirée doit être précisée dans les options de la fonction `cellStats`. Par exemple:
+
 ```{r, collapse=TRUE}
-# cellStats(G, mean, na.rm = T)
-#
-# cellStats(G, sd, na.rm = T)   #la déviation standard
-#
-# cellStats(G, max, na.rm = T)
-#
-# cellStats(G, min, na.rm = T)
-#
-# cellStats(G, median, na.rm = T)
-#
-# cellStats(G, quantile, na.rm = T)
-#
-# cellStats(G, range, na.rm = T) #le minimum et le maximum
-#
-# cellStats(G, sum, na.rm=T)
+cellStats(G, mean, na.rm = TRUE)  
+
+cellStats(G, sd, na.rm = TRUE)   #la déviation standard
+
+cellStats(G, max, na.rm = TRUE)
+
+cellStats(G, min, na.rm = TRUE)
+
+cellStats(G, median, na.rm = TRUE)
+
+cellStats(G, quantile, na.rm = TRUE)
+
+cellStats(G, range, na.rm = TRUE) #le minimum et le maximum
+
+cellStats(G, sum, na.rm=T)
 
 ```
 
@@ -427,7 +425,7 @@ Les donnees sur les ICU pour l'ensemble du territoire québécois sont disponibl
 
 Dans un premier temps, téléchargez [les données d'ICU pour la région de la ville de Québec](https://github.com/sci1031/sci1031/tree/master/Module5/data/Temp_vdq.tif). Sauvegardez l'image `tif` dans votre répertoire de travail `Donnees` pour ce module.
 
-#### Lire les donnéées {-}
+#### Lire les données {-}
 
 Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la librarie `raster`.
 ```{r fake-icu, eval = FALSE}
@@ -447,7 +445,7 @@ T_vdq <- raster(filename_rcrop)
 
 T_vdq
 ```
-Nous pouvons d'emblée reconnaitre les informations relatives à la dimension, la résolution, l'étendue, le CRS, et aux valeurs minimale et maximale du *raster* `T_vdq`.
+Nous pouvons d'emblée reconnaître les informations relatives à la dimension, la résolution, l'étendue, le CRS, et aux valeurs minimale et maximale du *raster* `T_vdq`.
 
 Nous pouvons également utiliser les fonctions `dim()`, `ncell()`, `res()`, `extent()`, `crs()`, et `cellStats(, range)` pour retrouver ces informations:
 
@@ -463,7 +461,6 @@ extent(T_vdq)
 crs(T_vdq)
 
 cellStats(T_vdq, range)
-
 ```
 
 
@@ -482,18 +479,19 @@ T_vdq
 #### Explorer les statistiques de base {-}
 
 Utilisons la fonction `summary()` pour déterminer les statistiques de base du *raster* `T_vdq`:
+
 ```{r}
 summary(T_vdq)
 ```
 
 Remarquez le message retourné par `R`: "`summary is an estimate based on a sample of 1e+05 cells (3.39% of all cells)`". Ce message nous prévient que, par défaut, la fonction `summary()` est calculée sur un échantillon de 100 000 cellules choisies aléatoirement. Dans le cas présent, puisque le *raster* `T_vdq` contient `ncells(T_vdq) = 2946366` cellules, un échantillon de 100 000 cellules correspond donc seulement à 3.39% de toutes les cellules.
 
-La limite par défaut du nombre de cellules sélectionnées pour calculer les statistiques dans la fonction `summary()` est très utile pour obtenir des résultats rapides, surtout lorsque *raster* est volumineux. Cependant, dans certains cas, cet échantillonnage limité pourrait mener à un estimé trompeur. Ainsi, il est toujours possible de spécifier la taille désirée de l'échantillon en utisant l'option `maxsamp`. Par exemple,
+La limite par défaut du nombre de cellules sélectionnées pour calculer les statistiques dans la fonction `summary()` est très utile pour obtenir des résultats rapides, surtout lorsque *raster* est volumineux. Cependant, dans certains cas, cet échantillonnage limité pourrait mener à un estimé trompeur. Ainsi, il est toujours possible de spécifier la taille désirée de l'échantillon en utilisant l'option `maxsamp`. Par exemple, 
 
 ```{r}
 summary(T_vdq, maxsamp = ncell(T_vdq))
 ```
-Vous remarquerez que l'éxécution de la fonction `summary()` peut prendre plus de temps lorsque le nombre de cellules échantillonnées est plus grand. Dans le cas présent du *raster* `T_vdq`, les statistiques demeurent inchangées mais le nombre de valeurs `NA` a été corrigées.
+Vous remarquerez que l’exécution de la fonction `summary()` peut prendre plus de temps lorsque le nombre de cellules échantillonnées est plus grand. Dans le cas présent du *raster* `T_vdq`, les statistiques demeurent inchangées mais le nombre de valeurs `NA` a été corrigées. 
 
 Nous pouvons également visualiser l'histogramme des valeurs de température de surface.
 ```{r, fig.dim = c(6, 5), fig.cap="Distribution des températures de surface dans la ville de Québec"}
@@ -525,10 +523,8 @@ mapview(T_vdq,
 m = mapview(T_vdq,
         map.types = "OpenStreetMap",
         legend = TRUE,
-        layer.name = 'ICU')
-
+        layer.name = 'ICU', homebutton = FALSE)
 m@map
-
 ```
 <br>
 
@@ -548,7 +544,7 @@ mapview(T_vdq, maxpixels = ncell(T_vdq),
 m = mapview(T_vdq, maxpixels = ncell(T_vdq),
         map.types = "OpenStreetMap",
         legend = TRUE,
-        layer.name = 'ICU')
+        layer.name = 'ICU', homebutton = FALSE)
 m@map
 ```
 
@@ -572,9 +568,8 @@ mapview(T,  map.types = "OpenStreetMap")
 ```{r, eval = TRUE, echo = FALSE, warnings = FALSE, fig.cap="Carte de la température de surface dans le secteur de Sainte-Foy"}
 T <- T_vdq[1051:1150, 851:950, drop=FALSE]
 
-m = mapview(T,  map.types = "OpenStreetMap")
+m = mapview(T,  map.types = "OpenStreetMap", homebutton = FALSE)
 m@map
-
 ```
 <br>
 
@@ -585,24 +580,24 @@ Nous observons sur la carte que les températures les plus chaudes (pixels de co
 
 ### Changer la résolution d'un *raster*
 
-Il est possible d'augmenter la résolution d'un *raster*. Cela peut s'avérér utile lorsque la résolution de ce dernier est trop petite (c'est-à-dire que la résolution est fine) pour exécuter rapidement des calculs sur celui-ci.
+Il est possible d'augmenter la résolution d'un *raster*. Cela peut s’avérer utile lorsque la résolution de ce dernier est trop petite (c'est-à-dire que la résolution est fine) pour exécuter rapidement des calculs sur celui-ci. 
 Aussi, cela peut s'avérer utile lorsque nous devons travailler avec des *rasters* de résolution différente, il peut alors être nécessaire que tous les *rasters* aient la même résolution.
 
 Pour augmenter la résolution d'un *raster* nous utilisons la fonction `aggregate()`. Nous devons alors spécifier le facteur, `fact` par lequel nous voulons augmenter la résolution. Par exemple, `fact = 4` augmentera la résolution par un facteur de 4. C'est-à-dire qu'une cellule dans le nouveau *raster* aura une taille quatre fois plus grande que dans le *raster* initial.
 
 Quelle valeur prendra alors une cellule de plus grande résolution? Par défaut, la cellule aura comme valeur la moyenne des valeurs des cellules groupées par l'agrégation. Par ailleurs, il est aussi possible de specifier d'autres fonctions pour calculer la valeur des cellules de plus grande résolution en utilisant l'option `fun`. Par exemple, nous pourrions choisir que la valeur agrégée corresponde à la valeur maximum des valeurs des cellules groupées.
 
-```{r, fig.dim = c(8, 8), fig.cap = "Cartes de différentes résolutions"}
+```{r, fig.dim = c(8, 8), fig.cap = "Cartes de différentes résolutions", eval = FALSE}
 T_fact4_moy <- aggregate(T, fact=4)
 T_fact4_max <- aggregate(T, fact=4, fun = 'max')
 T_fact8_moy <- aggregate(T, fact=8)
 T_fact8_max <- aggregate(T, fact=8, fun = 'max')
 
 mapviewOptions(basemaps = "OpenStreetMap")
-map_fact4_moy <- mapview(T_fact4_moy, legend = FALSE)
-map_fact4_max <- mapview(T_fact4_max, legend = FALSE)
-map_fact8_moy <- mapview(T_fact8_moy, legend = FALSE)
-map_fact8_max <- mapview(T_fact8_max, legend = FALSE)
+map_fact4_moy <- mapview(T_fact4_moy, legend = FALSE, homebutton = FALSE)
+map_fact4_max <- mapview(T_fact4_max, legend = FALSE, homebutton = FALSE)
+map_fact8_moy <- mapview(T_fact8_moy, legend = FALSE, homebutton = FALSE)
+map_fact8_max <- mapview(T_fact8_max, legend = FALSE, homebutton = FALSE)
 
 leafsync::latticeView(map_fact4_moy, map_fact4_max, map_fact8_moy, map_fact8_max, ncol = 2)
 
@@ -649,7 +644,7 @@ En fait, ces données utilisent la projection Québec Lambert, qui est appropri�
 
 Nous voulons maintenant transformer le système de coordonnées de référence du *raster* `T_vdq` vers le système MTM, c'est-à-dire la projection Mercator transverse modifiée. Celle-ci est basée aussi sur le datum NAD83. Dans le système MTM, la ville de Québec ce situe dans le fuseau 7.
 
-Pour savoir comment définir cette projection, c'est-à-dire quels paramètres utilisés, vous pouvez vous rendre sur le site web [spatialreference.org](https://spatialreference.org/). Dans la fenêtre de recherche *Search* tapez "MTM zone 7". Une liste de de code EPSG apparaitra. Sélectionnez le code "EPSG:2949: NAD83(CSRS) / MTM zone 7". Le carré gris qui apparait propose différents formats possibles pour définir une projection. Choisissez "Proj4". La liste des paramètres qui définissent la projection MTM pour le fuseau 7 est alors donnée. Vous pouvez donc copier cette définition, et l'utiliser pour définir la nouvelle projection.
+Pour savoir comment définir cette projection, c'est-à-dire quels paramètres utilisés, vous pouvez vous rendre sur le site web [spatialreference.org](https://spatialreference.org/). Dans la fenêtre de recherche *Search* tapez "MTM zone 7". Une liste de de code EPSG apparaîtra. Sélectionnez le code "EPSG:2949: NAD83(CSRS) / MTM zone 7". Le carré gris qui apparaît propose différents formats possibles pour définir une projection. Choisissez "Proj4". La liste des paramètres qui définissent la projection MTM pour le fuseau 7 est alors donnée. Vous pouvez donc copier cette définition, et l'utiliser pour définir la nouvelle projection. 
 
 ```{r}
 proj_mtm7 <- "+proj=tmerc +lat_0=0 +lon_0=-70.5 +k=0.9999 +x_0=304800 +y_0=0 +ellps=GRS80 +units=m +no_defs"
@@ -662,7 +657,7 @@ T_mtm7 <- projectRaster(T_vdq, crs = proj_mtm7)
 
 
 Comparons les deux cartes utilisant des projections différentes:
-```{r, fig.cap="Rasters de projections Québec Lambert et MTM"}
+```{r, fig.cap="Rasters de projections Québec Lambert et MTM", eval = FALSE}
 par(mfrow = c(1,2))
 plot(T_vdq, main = "Québec Lambert", legend = FALSE)
 plot(T_mtm7, main = "MTM fuseau 7")
@@ -671,7 +666,7 @@ plot(T_mtm7, main = "MTM fuseau 7")
 
 Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
 
-```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM"}
+```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM", eval = FALSE}
 T_crop <- crop(T_vdq,extent(T_vdq,951,1150, 751,950))
 T_crop_mtm7 <- projectRaster(T_crop, crs = proj_mtm7)
 par(mfrow = c(1,2))
@@ -690,7 +685,7 @@ Pour sélectionner une région précise dans un *raster*, nous avons utilisé la
 Finalement, pour sauvegarder des données matricielles, nous utilisons la fonction `writeRaster()` de la librairie `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
 
 
-```{r echo = FALSE,eval = FALSE}
+```{r echo = FALSE, eval = FALSE}
 chemin = "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Module5/"
 nom_du_fichier <- paste(chemin, "ICU_vdq_MTM7.tif", sep = "")
 writeRaster(T_mtm7,nom_du_fichier)
@@ -730,9 +725,9 @@ S <- raster(nom_du_fichier)
 S
 ```
 
-```{r eval = TRUE, echo=FALSE, warning = FALSE, message = FALSE}
+```{r include = FALSE}
 filename <- "Module5/data/Landsat_LaTuque.tif"
-S <-raster(filename)
+S <- raster(filename)
 S
 ```
 
@@ -819,9 +814,9 @@ Visualisons individuellement les bandes d'un *raster* multi-bande en utilisant l
 mapviewOptions(raster.palette = gray.colors(256))
 
 # Créons une carte pour chaque bande
-Map_SR <- mapview(SR)
-Map_SG <- mapview(SG)
-Map_SB <- mapview(SB)
+Map_SR <- mapview(SR, homebutton = FALSE)
+Map_SG <- mapview(SG, homebutton = FALSE)
+Map_SB <- mapview(SB, homebutton = FALSE)
 
 # Visualisons les trois cartes côte à côte
 leafsync::latticeView(Map_SR,Map_SG,Map_SB, ncol = 3)

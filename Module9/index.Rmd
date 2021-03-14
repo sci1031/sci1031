@@ -9,6 +9,17 @@ L'objectif principal de ce module est
 - 
 -
 
+```R
+library(stars)
+mint <- read_stars("data/mint.nc")
+maxt <- read_stars("data/maxt.nc")
+```
+
+nn <- raster("data/mint.nc")
+
+dts <- seq(as.Date("2009/01/01"), as.Date("2018/12/01"), by = "month") 
+st_set_dimensions(mint, 3, values = dts)
+
 Vous utiliserez les librairies suivantes:
 
 -
@@ -23,14 +34,8 @@ Dans la section Leçon, vous utiliserez des données XYXYX
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries9, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
-#library(raster)
-# library(rgdal)
-# library(ggplot2)
-# library(dplyr)
-# library(sf)
-# library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
-# library(ggpubr)
+```{r load-libraries9, echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+library(stars)
 ```
 
 
@@ -41,29 +46,27 @@ Dans la section Exercice, vous utiliserez XXXXX
 Les données spatio-temporelles représente une collection d'objets spatiaux ordonnées dans le temps: la même information spatiales pour différents dans le temps. 
 
 
-- Trajets en vélo (vitesse, distance) - POINT + LINES
-    - GeoJSON
-    - https://donnees.montreal.ca/ville-de-montreal/pistes-cyclables
-- Étendue spatial du réseau de pistes cyclabes à travers le temps.
-- Expansion des aires protégées au Québec
-    -  https://www.donneesquebec.ca/recherche/fr/dataset/aires-protegees-au-quebec
+![Source https://r-spatial.github.io/stars/index.html](https://raw.githubusercontent.com/r-spatial/stars/master/images/cube3.png)
 
 
-### Visualisation spatiotemporelle
+### Introduction à la librairie R spacetime
+
+-	Classes de données spatio-temporelles
+-	Création d’objet stars
+-	Manipulation de bases de données spatio-temporelles
+
+
+
+### Visualisation
 
 -	Figure à panneaux multiples
 -	Figure espace-temps
-    - Hovmoller plot
 -	Figure animée
 
+### Basic analysis 
 
-### Introduction à la librairie R stars
-
--	Classes de données spatiotemporelles
--	Création d’objet ST
--	Manipulation de bases de données spatiotemporelles
-
-
+- une tendance 
+- isolé une donnée dans le temps dans le temps 
 
 
 ## Exercice
