@@ -197,9 +197,9 @@ Visualisons maintenant ce *raster* de type logique:
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
 #mp_ml <- mapview(M_logique)
 #mp_ml@map
-M_logique_numeric<-raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5,
+M_logique_numeric<-raster(nrows = 8, ncols = 8, xmn = 0, xmx = 4, ymn = 0, ymx = 4,
     vals = as.numeric(z_mult3))
-mapview(M_logique_numeric, homebutton=false)
+mapview(M_logique_numeric)
 
 ```
 
