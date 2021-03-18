@@ -710,7 +710,7 @@ Prenons une section de la carte d'élévation autour de la région de l'Outaouai
 rectangle<-extent(-719204,-479847,182366,454979)
 
 # Utiliser ce rectangle pour sélectionner une région à l'intérieur de la carte d'élévation
-G<-crop(E,forme)
+G<-crop(E,rectangle)
 
 # Transformer les contours de ce rectangle en polygone grâce à la bibliothèque tmaptools
 library(tmaptools)
