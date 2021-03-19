@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-03-11" />
+<meta name="date" content="2021-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -67,19 +67,19 @@
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 <script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/M-1/data_stars_M041567.txt"></script>
+<script src="libs/M-1/data_stars_M054716.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric-1/data_stars_M_logique_numericc1b5de.txt"></script>
-<script src="libs/M_factor-1/data_stars_M_factored9874.txt"></script>
-<script src="libs/ICU-1/data_stars_ICU07efdc.txt"></script>
-<script src="libs/T-1/data_stars_Tcf54ab.txt"></script>
-<script src="libs/SR-1/data_stars_SR067ae3.txt"></script>
-<script src="libs/SG-1/data_stars_SGfd38a9.txt"></script>
-<script src="libs/SB-1/data_stars_SB74ba39.txt"></script>
-<script src="libs/dem-1/data_stars_dem1cbd92.txt"></script>
-<script src="libs/new_class_dem-1/data_stars_new_class_dem5c1fe7.txt"></script>
-<script src="libs/dem_parcs-1/data_stars_dem_parcs8f0c6e.txt"></script>
+<script src="libs/M_logique_numeric-1/data_stars_M_logique_numeric2ec75d.txt"></script>
+<script src="libs/M_factor-1/data_stars_M_factor3502ab.txt"></script>
+<script src="libs/ICU-1/data_stars_ICU58e3f1.txt"></script>
+<script src="libs/T-1/data_stars_T3aef52.txt"></script>
+<script src="libs/SR-1/data_stars_SR29c4fa.txt"></script>
+<script src="libs/SG-1/data_stars_SG94d3b7.txt"></script>
+<script src="libs/SB-1/data_stars_SB745cb8.txt"></script>
+<script src="libs/dem-1/data_stars_demcb051f.txt"></script>
+<script src="libs/new_class_dem-1/data_stars_new_class_dem87fd95.txt"></script>
+<script src="libs/dem_parcs-1/data_stars_dem_parcs6ef592.txt"></script>
 
 
 <style type="text/css">
@@ -284,7 +284,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.1.5" data-path="lecon-mat.html"><a href="lecon-mat.html#changer-la-résolution-dun-raster"><i class="fa fa-check"></i><b>5.1.5</b> Changer la résolution d’un <em>raster</em></a></li>
 <li class="chapter" data-level="5.1.6" data-path="lecon-mat.html"><a href="lecon-mat.html#changer-la-projection-dun-raster"><i class="fa fa-check"></i><b>5.1.6</b> Changer la projection d’un <em>raster</em></a></li>
-<li class="chapter" data-level="5.1.7" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-et-visualiser-des-données-matricielles-multi-bande."><i class="fa fa-check"></i><b>5.1.7</b> Lire et visualiser des données matricielles multi-bande.</a>
+<li class="chapter" data-level="5.1.7" data-path="lecon-mat.html"><a href="lecon-mat.html#sauvegarder-un-raster"><i class="fa fa-check"></i><b>5.1.7</b> Sauvegarder un <em>raster</em></a></li>
+<li class="chapter" data-level="5.1.8" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-et-visualiser-des-données-matricielles-multi-bande."><i class="fa fa-check"></i><b>5.1.8</b> Lire et visualiser des données matricielles multi-bande.</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#importer-les-données-3"><i class="fa fa-check"></i>Importer les données</a></li>
 <li class="chapter" data-level="" data-path="lecon-mat.html"><a href="lecon-mat.html#lire-les-donnéées"><i class="fa fa-check"></i>Lire les donnéées</a></li>
@@ -298,9 +299,59 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="leçon-3.html"><a href="leçon-3.html"><i class="fa fa-check"></i><b>6.1</b> Leçon</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="leçon-3.html"><a href="leçon-3.html#cartographie-dobjets-vectoriels"><i class="fa fa-check"></i><b>6.1.1</b> Cartographie d’objets vectoriels</a></li>
-<li class="chapter" data-level="6.1.2" data-path="leçon-3.html"><a href="leçon-3.html#cartographie-dobjets-matriciels"><i class="fa fa-check"></i><b>6.1.2</b> Cartographie d’objets matriciels</a></li>
-<li class="chapter" data-level="6.1.3" data-path="leçon-3.html"><a href="leçon-3.html#cartographie-en-ligne"><i class="fa fa-check"></i><b>6.1.3</b> Cartographie en ligne</a></li>
+<li class="chapter" data-level="6.1.1" data-path="leçon-3.html"><a href="leçon-3.html#principes-de-base-en-cartographie"><i class="fa fa-check"></i><b>6.1.1</b> Principes de base en cartographie</a></li>
+<li class="chapter" data-level="6.1.2" data-path="leçon-3.html"><a href="leçon-3.html#cartes-statiques-avec-tmap"><i class="fa fa-check"></i><b>6.1.2</b> Cartes statiques avec tmap</a></li>
+<li class="chapter" data-level="6.1.3" data-path="leçon-3.html"><a href="leçon-3.html#fonctionnement-de-base-de-tmap"><i class="fa fa-check"></i><b>6.1.3</b> Fonctionnement de base de tmap</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#données-sur-les-régions-administratives"><i class="fa fa-check"></i>Données sur les régions administratives</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#tm_fill"><i class="fa fa-check"></i>tm_fill</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#object-tmap"><i class="fa fa-check"></i>Object tmap</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.4" data-path="leçon-3.html"><a href="leçon-3.html#spécificités-cartographiques"><i class="fa fa-check"></i><b>6.1.4</b> Spécificités cartographiques</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#barre-déchelle-et-rose-des-vents"><i class="fa fa-check"></i>Barre d’échelle et rose des vents</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#grille-et-graticules"><i class="fa fa-check"></i>Grille et graticules</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#attribuer-les-crédits-ou-la-source-des-données"><i class="fa fa-check"></i>Attribuer les crédits ou la source des données</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.5" data-path="leçon-3.html"><a href="leçon-3.html#les-polygones"><i class="fa fa-check"></i><b>6.1.5</b> Les polygones</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#identification-des-frontières-des-polygones"><i class="fa fa-check"></i>Identification des frontières des polygones</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#identification-individuelle-des-polygones"><i class="fa fa-check"></i>Identification individuelle des polygones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.6" data-path="leçon-3.html"><a href="leçon-3.html#mise-en-page"><i class="fa fa-check"></i><b>6.1.6</b> Mise en page</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#titre-cadre-et-couleur-du-fond"><i class="fa fa-check"></i>Titre, cadre et couleur du fond</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#légende"><i class="fa fa-check"></i>Légende</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#ajustement-des-couleurs"><i class="fa fa-check"></i>Ajustement des couleurs</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#styles-prédéfinis"><i class="fa fa-check"></i>Styles prédéfinis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.7" data-path="leçon-3.html"><a href="leçon-3.html#écriture-sur-une-carte"><i class="fa fa-check"></i><b>6.1.7</b> Écriture sur une carte</a></li>
+<li class="chapter" data-level="6.1.8" data-path="leçon-3.html"><a href="leçon-3.html#les-lignes"><i class="fa fa-check"></i><b>6.1.8</b> Les lignes</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#données-sur-le-réseau-routier-du-qc"><i class="fa fa-check"></i>Données sur le réseau routier du QC</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.9" data-path="leçon-3.html"><a href="leçon-3.html#les-points"><i class="fa fa-check"></i><b>6.1.9</b> Les points</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#lire-le-shapefile-avec-les-municiaplites-du-qc"><i class="fa fa-check"></i>Lire le shapefile avec les municiaplites du QC</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#représentation-par-des-points"><i class="fa fa-check"></i>Représentation par des points</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#représentation-par-des-marqueurs"><i class="fa fa-check"></i>Représentation par des marqueurs</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.10" data-path="leçon-3.html"><a href="leçon-3.html#données-matricielles"><i class="fa fa-check"></i><b>6.1.10</b> Données matricielles</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#importer-les-données-délévation-du-qc"><i class="fa fa-check"></i>Importer les données d’élévation du QC</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.11" data-path="leçon-3.html"><a href="leçon-3.html#carte-avec-symboles-proportionnels"><i class="fa fa-check"></i><b>6.1.11</b> Carte avec symboles proportionnels</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#tm_symboles"><i class="fa fa-check"></i>tm_symboles</a></li>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#tm_bubbles"><i class="fa fa-check"></i>tm_bubbles</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.12" data-path="leçon-3.html"><a href="leçon-3.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-3.html"><a href="leçon-3.html#données-covid"><i class="fa fa-check"></i>Données COVID</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.13" data-path="leçon-3.html"><a href="leçon-3.html#cartes-à-panneau-multiple"><i class="fa fa-check"></i><b>6.1.13</b> Cartes à panneau multiple</a></li>
+<li class="chapter" data-level="6.1.14" data-path="leçon-3.html"><a href="leçon-3.html#cartes-avec-encadré"><i class="fa fa-check"></i><b>6.1.14</b> Cartes avec encadré</a></li>
+<li class="chapter" data-level="6.1.15" data-path="leçon-3.html"><a href="leçon-3.html#cartes-interactives-avec-tmap"><i class="fa fa-check"></i><b>6.1.15</b> Cartes interactives avec tmap</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="exercice-1.html"><a href="exercice-1.html"><i class="fa fa-check"></i><b>6.2</b> Exercice</a></li>
 </ul></li>
@@ -382,7 +433,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">SCI 1031 Visualisation et analyse de données spatiales sous R</h1>
 <p class="author"><em></em></p>
-<p class="date"><em>2021-03-11</em></p>
+<p class="date"><em>2021-03-19</em></p>
 </div>
 <div id="bienvenue" class="section level1 unnumbered">
 <h1>Bienvenue!</h1>
