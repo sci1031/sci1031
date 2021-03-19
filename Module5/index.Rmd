@@ -15,7 +15,7 @@ Cette leçon est une introduction aux données spatiales matricielles sous `R`. 
 - Transformer la résolution d'un *raster*
 - Lire et visualiser un *raster* multi-bande.
 
-Vous utiliserez les librairies suivantes:
+Vous utiliserez les bibliothèques suivantes:
 
 - `raster`
 - `mapview`
@@ -67,11 +67,11 @@ Dans la section [exercice](#ex_mat), vous utiliserez XXXXX
 
 Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un *raster*. Dans cette leçon, nous utiliserons les expressions «*raster*» et «données matricielles» de façon interchangeable.
 
-Commençons cette leçon en chargeant la librairie `raster` dans notre session de travail `R`.
+Commençons cette leçon en chargeant la bibliothèque `raster` dans notre session de travail `R`.
 ```{r}
-# Installez la librairie si ce n'est pas déjà fait
+# Installez la bibliothèque si ce n'est pas déjà fait
 # install.packages("raster")
-# Chargez la librairie
+# Chargez la bibliothèque
 library(raster)
 ```
 
@@ -82,7 +82,7 @@ Au [module 2](#base), nous avons expliqué qu'un *raster* est formé de rectangl
 
 #### Créer un *raster* simple et le visualiser {-}
 
-La fonction `raster()` de la librairie `raster` permet de créer un *raster*. Par exemple:
+La fonction `raster()` de la bibliothèque `raster` permet de créer un *raster*. Par exemple:
 ```{r}
 M <- raster(nrows=8, ncols=8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
 ```
@@ -99,7 +99,7 @@ Si le SCR d'un *raster* n'est pas défini au moment de sa création, comme dans 
 
 Remarquez que la classe (`class`) de l'objet `M` est défini comme étant un `RasterLayer`. Nous verrons dans la dernière section de cette leçon qu'il existe d'autres classes de *raster*, soit les `RasterBrick` et les `RasterStack`.
 
-Remarquez aussi que la résolution d'un pixel est de `0.5 x 0.5`, car les 64 pixels du raster occupent le carré d'aire 16 délimité par les quatre points (0,0), (0,4), (4,0) et (4,4).
+Remarquez aussi que la résolution d'un pixel est de `0.5 x 0.5`, car les 64 pixels du raster occupent le carré d'aire 16 délimité par les quatre points (1,1), (1,5), (5,1) et (5,5).
 
 Ainsi, une façon équivalente de créer le *raster* `M` est:
 ```{r}
@@ -439,8 +439,8 @@ T_vdq
 
 ```{r icu, eval=TRUE, echo = FALSE, warning = FALSE, message = FALSE}
 
-#filename_rcrop = "Module5/data/Temp_vdq.tif"
-filename_rcrop =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module5/data/Temp_vdq.tif"
+filename_rcrop = "Module5/data/Temp_vdq.tif"
+#filename_rcrop =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module5/data/Temp_vdq.tif"
 T_vdq <- raster(filename_rcrop)
 
 T_vdq
@@ -611,7 +611,7 @@ Remarquez que nous avons utilisé la fonction `latticeView()` pour visualiser ce
 
 ### Changer la projection d'un *raster*
 
-Comme pour les données vectorielles, il est possible de manipuler le système de coordonnées de référence de données matricielles. Rappelons que pour connaître le SCR d'un *raster* il s'agit d'utiliser la fonction `crs()` de la librairie `raster`.
+Comme pour les données vectorielles, il est possible de manipuler le système de coordonnées de référence de données matricielles. Rappelons que pour connaître le SCR d'un *raster* il s'agit d'utiliser la fonction `crs()` de la bibliothèque `raster`.
 
 ```{r}
 crs(T_vdq)
@@ -650,7 +650,7 @@ Pour savoir comment définir cette projection, c'est-à-dire quels paramètres u
 proj_mtm7 <- "+proj=tmerc +lat_0=0 +lon_0=-70.5 +k=0.9999 +x_0=304800 +y_0=0 +ellps=GRS80 +units=m +no_defs"
 ```
 
-Pour transformer la projection d'un *raster*, nous devons utiliser la fonction `projectRaster()` de la librairie `Raster`.
+Pour transformer la projection d'un *raster*, nous devons utiliser la fonction `projectRaster()` de la bibliothèque `Raster`.
 ```{r}
 T_mtm7 <- projectRaster(T_vdq, crs = proj_mtm7)
 ```
@@ -682,7 +682,8 @@ De plus, vous aurez sans doute remarqué que nous avons utilisé la fonction `pl
 Pour sélectionner une région précise dans un *raster*, nous avons utilisé la fonction `crop()`. Nous reviendrons en détails sur cette fonction dans le [module 8](#manip_mat) qui traite de la manipulation de données matricielles.
 
 
-Finalement, pour sauvegarder des données matricielles, nous utilisons la fonction `writeRaster()` de la librairie `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
+### Sauvegarder un *raster*
+Finalement, pour sauvegarder des données matricielles, nous utilisons la fonction `writeRaster()` de la bibliothèque `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
 
 
 ```{r echo = FALSE, eval = FALSE}
@@ -732,7 +733,7 @@ S
 ```
 
 Nous remarquons qu'une information supplémentaire est apparue dans le description du *raster*. Il s'agit de `band : 1 (of 3 bands)`.
-Cette information nous précise que nous venons de lire une seule bande alors que ces données matricielles en contiennent trois. Lorsque nous rencontrons un *raster* de plusieurs bandes, il faut plutôt utiliser la fonction `brick()` ou la fonction `stack()` de la librairie `raster` pour lire l'ensemble des bandes.
+Cette information nous précise que nous venons de lire une seule bande alors que ces données matricielles en contiennent trois. Lorsque nous rencontrons un *raster* de plusieurs bandes, il faut plutôt utiliser la fonction `brick()` ou la fonction `stack()` de la bibliothèque `raster` pour lire l'ensemble des bandes.
 
 ```{r, warning = FALSE, message = FALSE}
 S_mult <- brick(filename)
@@ -835,7 +836,7 @@ Les diverses teintes observées sur l'image Landsat peuvent être interprétées
 Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://github.com/sci1031/sci1031/tree/master/Module5/Module5_guide-mosaiques-Landsat.pdf) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].
 
 
-Finalement, pour sauvegarder un *raster* multi-bandes, nous pouvons encore utiliser la fonction `writeRaster()` de la librairie `raster`.
+Finalement, pour sauvegarder un *raster* multi-bandes, nous pouvons encore utiliser la fonction `writeRaster()` de la bibliothèque `raster`.
 
 
 ```{r  eval = FALSE, warning = FALSE, message = FALSE}
