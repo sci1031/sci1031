@@ -1,6 +1,5 @@
 book_filename: Cours_SpatialR
 output_dir: _book
-clean: [packages.bib, bookdown.bbl]
 delete_merged_file: true
 language:
   label:

@@ -72,7 +72,7 @@ Dans la section [exercice](#ex_mat), vous utiliserez XXXXX
 
 ## Leçon {#lecon_mat}
 
-Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un *raster*. Dans cette leçon, nous utiliserons les expressions «*raster*» et «données matricielles» de façon interchangeable. 
+Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un *raster*. Dans cette leçon, nous utiliserons les expressions «*raster*» et «données matricielles» de façon interchangeable.
 
 Commençons cette leçon en chargeant la bibliothèque `raster` dans notre session de travail `R`.
 ```{r}
@@ -90,12 +90,11 @@ Au [module 2](#base), nous avons expliqué qu'un *raster* est formé de rectangl
 #### Créer un *raster* simple et le visualiser {-}
 
 La fonction `raster()` de la bibliothèque `raster` permet de créer un *raster*. Par exemple:
-
-```{r create_M}
-M <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
+```{r}
+M <- raster(nrows=8, ncols=8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
 ```
 
-Où `nrows` et `ncols` correspondent respectivement au nombre de lignes et au nombre de colonnes du *raster* `M`, `xmn` et `xmx` correspondent respectivement aux coordonnées-x minimale et maximale du *raster*, `ymn` et `ymx` aux coordonnées-y minimale et maximale, et `vals` est un vecteur comprenant la valeur de chaque pixel du *raster*. Dans le cas présent, le *raster* `M` contient 64 pixels. Le premier pixel a la valeur 1, le deuxième pixel a la valeur 2 et ainsi de suite jusqu'à 64s. 
+Où `nrows` et `ncols` correspondent respectivement au nombre de lignes et au nombre de colonnes du *raster* `M`, `xmn` et `xmx` correspondent respectivement aux coordonnées-x minimale et maximale du *raster*, `ymn` et `ymx` aux coordonnées-y minimale et maximale, et `vals` est un vecteur comprenant la valeur de chaque pixel du *raster*. Dans le cas présent, le *raster* `M` contient 64 pixels. Le premier pixel a la valeur 1, le deuxième pixel a la valeur 2 et ainsi de suite.
 
 Voyons les informations données, lorsque nous appelons le *raster* `M` que nous venons de créer:
 
@@ -105,11 +104,11 @@ M
 
 Nous remarquons que des informations additionnelles apparaissent: `ncell` correspond au nombre de cellules (ou de pixels) dans le *raster*, `resolution` correspond à la résolution des pixels, `extent` correspond à l'étendue du *raster* définie par ses coordonnées maximales et minimales, et `crs` correspond aux paramètres du système de coordonnées de référence utilisé.
 
-Si le SCR d'un *raster* n'est pas défini au moment de sa création, comme dans le cas présent, alors le SCR WGS84 sera attribué par défaut. 
+Si le SCR d'un *raster* n'est pas défini au moment de sa création, comme dans le cas présent, alors le SCR WGS84 sera attribué par défaut.
 
 Remarquez que la classe (`class`) de l'objet `M` est défini comme étant un `RasterLayer`. Nous verrons dans la dernière section de cette leçon qu'il existe d'autres classes de *raster*, soit les `RasterBrick` et les `RasterStack`.
 
-Remarquez aussi que la résolution d'un pixel est de `0.5 x 0.5`, car les 64 pixels du raster occupent le carré d'aire 16 délimité par les quatre points (0,0), (0,4), (4,0) et (4,4).
+Remarquez aussi que la résolution d'un pixel est de `0.5 x 0.5`, car les 64 pixels du raster occupent le carré d'aire 16 délimité par les quatre points (1,1), (1,5), (5,1) et (5,5).
 
 Ainsi, une façon équivalente de créer le *raster* `M` est:
 
@@ -140,7 +139,7 @@ crs(M)
 
 <br>
 
-Il existe plusieurs fonctions permettant de visualiser les *rasters*. 
+Il existe plusieurs fonctions permettant de visualiser les *rasters*.
 Nous pouvons simplement utiliser la fonction `plot()`.
 
 ```{r, fig.dim = c(5, 5), fig.cap="Visualisation du raster `M` avec la fonction `plot()`" }
@@ -183,9 +182,9 @@ class(z) #la fonction class() renvoie le type de données de l'objet z
 # Créons un nombre logique qui est vrai lorsque z est un multiple de trois, et faux autrement
 z_mult3 <- z %% 3 == 0
 
-# La fonction modulo, s'exprime par le symbole %%, 
-# L'expression x %% y vaut 0 si y est un multiple de x, 
-# L'expression x %% y vaut r si y n'est pas un multiple de x. 
+# La fonction modulo, s'exprime par le symbole %%,
+# L'expression x %% y vaut 0 si y est un multiple de x,
+# L'expression x %% y vaut r si y n'est pas un multiple de x.
 # r correspond alors au reste de la division x/y
 z_mult3
 
@@ -213,7 +212,7 @@ mp_ml@map
 <br>
 
 
-Les *rasters* ne peuvent pas prendre des valeurs de type caractères (`character`) mais ils peuvent tout de même prendre des valeurs catégoriques. 
+Les *rasters* ne peuvent pas prendre des valeurs de type caractères (`character`) mais ils peuvent tout de même prendre des valeurs catégoriques.
 
 Petit rappel, avec `R`, les données catégoriques sont représentées par des données de type facteurs (`factor`). Plus précisément, les données catégoriques sont emmagasinées comme étant des nombres entiers auxquels sont associés des étiquettes - des identifiants uniques. Nous référons à ces identifiants comme étant des niveaux (`levels`). Par exemple:
 
@@ -240,7 +239,7 @@ levels(mois_hiver_facteur)
 Revenons maintenant aux *rasters*. Reprenons l'exemple du *raster* des multiples de 3. Nous allons le transformer en *raster* de type facteur.
 
 ```{r, warning = FALSE, message = FALSE}
-# Nous transformons d'abord le vecteur z de nombres entiers de 1 à 64, 
+# Nous transformons d'abord le vecteur z de nombres entiers de 1 à 64,
 # en vecteur de type caractère
 z_char <- z
 z_char[z%%3 == 0] <- "Multiple de 3"
@@ -278,7 +277,7 @@ m@map
 
 #### Comprendre la structure d'un *raster* {-}
 
-Les objets de type *raster* disposent d'une structure d'objet particulière. Si l'on veut accéder aux valeurs stockées, on doit procéder d'une certaine manière. 
+Les objets de type *raster* disposent d'une structure d'objet particulière. Si l'on veut accéder aux valeurs stockées, on doit procéder d'une certaine manière.
 
 La valeur d'une cellule peut être obtenue en référant à l'identifiant (indice) de son pixel; c'est-à-dire un numéro entre 1 et le nombre total de cellules, `ncell`, dans le *raster*.
 La valeur d'une cellule peut aussi être obtenue en référant à sa position (ligne, colonne) dans sa structure matricielle.
@@ -296,7 +295,7 @@ G <- raster(nrows=5, ncols=5, res = 0.5, xmn = 1, xmx = 3.5, ymn = 1, ymx = 3.5,
 G
 ```
 
-La figure suivante illustre comment les cellules sont indexées et positionnées dans un raster. La cellule supérieure gauche, de position `[1,1]` est toujours celle portant l'indice `1`. 
+La figure suivante illustre comment les cellules sont indexées et positionnées dans un raster. La cellule supérieure gauche, de position `[1,1]` est toujours celle portant l'indice `1`.
 
 <br>
 ```{r, echo=FALSE,fig.cap="Structure d'un raster: indice, position et valeur des pixels", out.width = '100%'}
@@ -342,7 +341,7 @@ knitr::include_graphics('Module8/images/coordsPixel.png')
 
 ### Statistiques de base sur un *raster*
 
-Voyons maintenant comment calculer des statistiques de base sur les valeurs contenues dans un *raster*. 
+Voyons maintenant comment calculer des statistiques de base sur les valeurs contenues dans un *raster*.
 Tout d'abord, pour connaître l'ensemble des valeurs d'un *raster*, nous pouvons utiliser la fonction `getValues()`.
 
 ```{r}
@@ -413,9 +412,8 @@ cellStats(G, sum, na.rm = TRUE)
 ```
 
 Nous pouvons également visualiser la distribution des valeurs contenues dans un *raster* en utilisant les fonctions `R` usuelles telles que `hist()` ou `boxplot`. Par exemple,
-
-```{r hist_G, fig.dim = c(5, 5), fig.cap = "Histogramme de la distribution des valeurs dans le raster G"}
-hist(G, 
+```{r, fig.dim = c(5, 5), fig.cap="Histogramme de la distribution des valeurs dans le raster G"}
+hist(G,
      main = "",
      xlab = "Valeurs",
      ylab = "Fréquence",
@@ -438,7 +436,7 @@ boxplot(G,
 
 Dans la section précédente, nous avons créé et manipulé des *rasters* très simples et peu volumineux. Dans cette section, nous manipulerons un *raster* plus substantiel, constitué de données réelles sur les îlots de chaleur urbains.
 
-Les îlots de chaleur urbains (ICU) sont des "zones urbaines où les températures sont plus chaudes que dans la région rurale voisine." [@SanteCanada2020] Les ICU amplifient les effets négatifs sur la santé humaine pendant les vagues de chaleur. Les ICU se produisent surtout dans les zones où les humains ont fortement altéré le couvert du sol, par exemple pour y aménager des infrastructures en béton (bâtiments, stationnement, route, etc.). L'absence de végétation, la présence de surfaces imperméables et non-réfléchissantes contribuent à la formation d'ICU [@SanteCanada2020]. 
+Les îlots de chaleur urbains (ICU) sont des "zones urbaines où les températures sont plus chaudes que dans la région rurale voisine." [@SanteCanada2020] Les ICU amplifient les effets négatifs sur la santé humaine pendant les vagues de chaleur. Les ICU se produisent surtout dans les zones où les humains ont fortement altéré le couvert du sol, par exemple pour y aménager des infrastructures en béton (bâtiments, stationnement, route, etc.). L'absence de végétation, la présence de surfaces imperméables et non-réfléchissantes contribuent à la formation d'ICU [@SanteCanada2020].
 
 
 La température de surface mesurée sur les territoires urbains permet d'identifier la présence d’îlots de chaleur. Les étudiants.es intéressés à comprendre la méthodologie utilisée pour déterminer la température de surface à partir d'images satellitaires sont invités à consulter cette [note technique](Module5/Module5_ICU_NoteTechnique.pdf) produite par le Centre d'enseignement et de recherche en foresterie de Sainte-Foy inc.
@@ -476,8 +474,8 @@ Nous pouvons d'emblée reconnaître les informations relatives à la dimension, 
 
 Nous pouvons également utiliser les fonctions `dim()`, `ncell()`, `res()`, `extent()`, `crs()`, et `cellStats(, range)` pour retrouver ces informations:
 
-```{r check_T_vdq, collapse = TRUE}
-dim(T_vdq) 
+```{r, collapse=TRUE}
+dim(T_vdq)
 
 ncell(T_vdq)
 
@@ -546,7 +544,7 @@ Afin de situer plus facilement la région illustrée sur le territoire du Québe
 
 
 ```{r, eval = FALSE, echo = TRUE}
-mapview(T_vdq, 
+mapview(T_vdq,
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU')
@@ -561,7 +559,7 @@ m@map
 ```
 <br>
 
-L'échelle de la légende indique des niveaux de température. Le niveau 1 correspond aux températures les plus fraîches, et le niveau 9 aux température les plus chaudes. 
+L'échelle de la légende indique des niveaux de température. Le niveau 1 correspond aux températures les plus fraîches, et le niveau 9 aux température les plus chaudes.
 
 Vous remarquerez que la résolution de cette carte n'est pas parfaite. En effet, par défaut, la fonction `mapview()` appliquée à un raster utilise 500 000 pixels. Pour que l'ensemble des pixels soient pris en compte, nous devons le préciser en définissant l'option `maxpixels`.
 
@@ -616,7 +614,7 @@ Nous observons sur la carte que les températures les plus chaudes (pixels de co
 Il est possible d'augmenter la résolution d'un *raster*. Cela peut s’avérer utile lorsque la résolution de ce dernier est trop petite (c'est-à-dire que la résolution est fine) pour exécuter rapidement des calculs sur celui-ci. 
 Aussi, cela peut s'avérer utile lorsque nous devons travailler avec des *rasters* de résolution différente, il peut alors être nécessaire que tous les *rasters* aient la même résolution.
 
-Pour augmenter la résolution d'un *raster* nous utilisons la fonction `aggregate()`. Nous devons alors spécifier le facteur, `fact` par lequel nous voulons augmenter la résolution. Par exemple, `fact = 4` augmentera la résolution par un facteur de 4. C'est-à-dire qu'une cellule dans le nouveau *raster* aura une taille quatre fois plus grande que dans le *raster* initial. 
+Pour augmenter la résolution d'un *raster* nous utilisons la fonction `aggregate()`. Nous devons alors spécifier le facteur, `fact` par lequel nous voulons augmenter la résolution. Par exemple, `fact = 4` augmentera la résolution par un facteur de 4. C'est-à-dire qu'une cellule dans le nouveau *raster* aura une taille quatre fois plus grande que dans le *raster* initial.
 
 Quelle valeur prendra alors une cellule de plus grande résolution? Par défaut, la cellule aura comme valeur la moyenne des valeurs des cellules groupées par l'agrégation. Par ailleurs, il est aussi possible de specifier d'autres fonctions pour calculer la valeur des cellules de plus grande résolution en utilisant l'option `fun`. Par exemple, nous pourrions choisir que la valeur agrégée corresponde à la valeur maximum des valeurs des cellules groupées.
 
@@ -654,7 +652,7 @@ Les arguments retournés par la fonction `crs()` ont la signification suivante:
 * `+proj` : le nom de la projection
 * `+lat_1` : la latitude du premier parallèle standard^[Souvenez-vous que pour une projection cylindrique ou conique, le plan intersecte le globe le long d'un ou de deux parallèles. Voir la [leçon 2]{#SRC}]
 * `+lat_2` : la latitude du deuxième parallèle standard
-* `+lat_0` : la latitude de l'origine 
+* `+lat_0` : la latitude de l'origine
 * `+lon_0` : la longitude du méridien central
 * `+x_0` : le faux est (false easting; dans le cas de projection transverse comme UTM)
 * `+y_0` : le faux nord (false northing)
@@ -668,13 +666,13 @@ D'autres arguments auraient pu aussi apparaître, comme:
 * `+k_0`: facteur d'échelle
 
 
-Nous remarquons que les données matricielles sur les îlots de chaleur de la ville de Québec sont dans la projection conique conforme de Lambert (`+proj=lcc`). De plus, elles utilisent l'ellipsoïde du Système de référence géodésique 1980 (`+ellps=GRS80`). 
+Nous remarquons que les données matricielles sur les îlots de chaleur de la ville de Québec sont dans la projection conique conforme de Lambert (`+proj=lcc`). De plus, elles utilisent l'ellipsoïde du Système de référence géodésique 1980 (`+ellps=GRS80`).
 
-Le terme `+towgs84=0,0,0,0,0,0,0` signifie que le datum du *raster* est transformé vers le datum WGS84. Les paramètres de cette transformation mathématique sont donnés par les sept chiffres suivants l'égalité. Ils déterminent la translation, la rotation et le facteur d'échelle de cette transformation. Or, puisque les paramètres sont nuls dans le cas présent, aucune transformation n'est appliquée. Ceci signifie que le datum des données peut être approximé par le datum WGS84. 
+Le terme `+towgs84=0,0,0,0,0,0,0` signifie que le datum du *raster* est transformé vers le datum WGS84. Les paramètres de cette transformation mathématique sont donnés par les sept chiffres suivants l'égalité. Ils déterminent la translation, la rotation et le facteur d'échelle de cette transformation. Or, puisque les paramètres sont nuls dans le cas présent, aucune transformation n'est appliquée. Ceci signifie que le datum des données peut être approximé par le datum WGS84.
 
 En fait, ces données utilisent la projection Québec Lambert, qui est appropriée pour représenter des données à l'échelle de la province. Celle-ci est basée sur le datum NAD83 qui être très proche du datum WGS84. Retournez voir le [Module 2](#SRC) pour un rappel des systèmes de coordonnées de référence!
 
-Nous voulons maintenant transformer le système de coordonnées de référence du *raster* `T_vdq` vers le système MTM, c'est-à-dire la projection Mercator transverse modifiée. Celle-ci est basée aussi sur le datum NAD83. Dans le système MTM, la ville de Québec ce situe dans le fuseau 7. 
+Nous voulons maintenant transformer le système de coordonnées de référence du *raster* `T_vdq` vers le système MTM, c'est-à-dire la projection Mercator transverse modifiée. Celle-ci est basée aussi sur le datum NAD83. Dans le système MTM, la ville de Québec ce situe dans le fuseau 7.
 
 Pour savoir comment définir cette projection, c'est-à-dire quels paramètres utilisés, vous pouvez vous rendre sur le site web [spatialreference.org](https://spatialreference.org/). Dans la fenêtre de recherche *Search* tapez "MTM zone 7". Une liste de de code EPSG apparaîtra. Sélectionnez le code "EPSG:2949: NAD83(CSRS) / MTM zone 7". Le carré gris qui apparaît propose différents formats possibles pour définir une projection. Choisissez "Proj4". La liste des paramètres qui définissent la projection MTM pour le fuseau 7 est alors donnée. Vous pouvez donc copier cette définition, et l'utiliser pour définir la nouvelle projection. 
 
@@ -715,6 +713,7 @@ De plus, vous aurez sans doute remarqué que nous avons utilisé la fonction `pl
 Pour sélectionner une région précise dans un *raster*, nous avons utilisé la fonction `crop()`. Nous reviendrons en détails sur cette fonction dans le [module 8](#manip_mat) qui traite de la manipulation de données matricielles.
 
 
+### Sauvegarder un *raster*
 Finalement, pour sauvegarder des données matricielles, nous utilisons la fonction `writeRaster()` de la bibliothèque `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
 
 
@@ -772,7 +771,7 @@ S_mult <- brick(filename)
 S_mult
 ```
 
-Remarquez que la classe de l'objet `S_mult` est `RasterBrick` et non pas simplement `Raster` comme l'objet `S` précédent. De plus, `dimensions` spécifie maintenant que `S_mult` contient trois couches (`nlayers`). Le nom de chaque couche est également donné: `Landsat_LaTuque.1`, `Landsat_LaTuque.2` et `Landsat_LaTuque.3`. Finalement, les valeurs minimum (0) et maximum (255) sont données pour chacune des trois couches. 
+Remarquez que la classe de l'objet `S_mult` est `RasterBrick` et non pas simplement `Raster` comme l'objet `S` précédent. De plus, `dimensions` spécifie maintenant que `S_mult` contient trois couches (`nlayers`). Le nom de chaque couche est également donné: `Landsat_LaTuque.1`, `Landsat_LaTuque.2` et `Landsat_LaTuque.3`. Finalement, les valeurs minimum (0) et maximum (255) sont données pour chacune des trois couches.
 
 
 Nous pouvons sélectionner chacune des bandes à partir du *raster* multi-bande de la façon suivante:
@@ -800,11 +799,11 @@ Ainsi, `SR` correspond à la première bande (la rouge), `SG` à la deuxième ba
 
 #### RasterBrick et RasterStack {-}
 
-Un `RasterBrick` correspond généralement a différentes bandes spectrales stockées dans un seul objet ou un seul fichier dans la mémoire de votre ordinateur. 
+Un `RasterBrick` correspond généralement a différentes bandes spectrales stockées dans un seul objet ou un seul fichier dans la mémoire de votre ordinateur.
 
 D'autre part, un `RasterStack` qu'on obtient par l'utilisation de la fonction `stack()` permet de combiner des couches provenant de fichiers différents ou d'objets logés à différents endroits de la mémoire de votre ordinateur. Une condition essentielle pour combiner des couches dans un `RasterStack` est que celles-ci possèdent la même étendue, la même résolution, et le même SCR.
 
-Démontrons en quoi consiste un`RasterStack` par un exemple. Définissons deux couches provenant d'objets différents que nous combinerons par l'utilisation de la fonction `stack()`. 
+Démontrons en quoi consiste un`RasterStack` par un exemple. Définissons deux couches provenant d'objets différents que nous combinerons par l'utilisation de la fonction `stack()`.
 
 D'abord, utilisons la fonction `raster()` pour créer un *raster* qui possède la même géométrie que les couches du *raster* `S_mult`.
 
@@ -817,8 +816,7 @@ Attribuons des values aux pixels de `raster_1`. Par exemple,
 ```{r}
 values(raster_1) = 1:ncell(SR)
 ```
-
-Ici, chaque pixel a comme valeur le numéro de son indice dans la matrice. 
+Ici, chaque pixel a comme valeur le numéro de son indice dans la matrice.
 
 Ensuite, définissons un deuxième couche correspondant à une bande du *raster* `S_mult`:
 
@@ -862,14 +860,14 @@ leafsync::latticeView(Map_SR,Map_SG,Map_SB, ncol = 3)
 ```
 <br>
 
-Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `viewRGB()` de la bibliothèque `mapview`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu. 
+Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `viewRGB()` de la librarie `mapview`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu.
 
 ```{r, fig.cap = "Carte combinant les trois bandes de couleurs"}
 viewRGB(S_mult, warning = FALSE, message = FALSE, r = 1, g = 2, b = 3)
 ```
 <br>
 
-Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présents. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières. 
+Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présents. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières.
 
 Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://github.com/sci1031/sci1031/tree/master/Module5/Module5_guide-mosaiques-Landsat.pdf) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].
 
