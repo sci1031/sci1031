@@ -5,8 +5,8 @@ L'objectif principal de ce module est de manipuler conjointement des données ma
 
 À la fin de ce module vous saurez:
 
-- Sélectionner des cellules d'un raster selon leur valeur.
-- Sélectionner des cellules d'un raster selon leur coordonnée.
+- Filtrer des cellules d'un raster selon leur valeur.
+- Filtrer des cellules d'un raster selon leur coordonnée.
 - Découper un raster en utiliser un rectangle de délimitation.
 - Découper un raster en utiliser un objet vectoriel.
 
@@ -20,10 +20,16 @@ Vous apprendrez à utiliser les fonctions suivantes:
 
 - `getValues()`
 - `nrow()`, `ncol()` et `ncell()`
-- `as.data.frame()`
+- `summary()`
+- `which()`
+- `as.data.frame()`, `data.frame()`
+- `extent()`
+- `plot()`
 - `crop()` `mask()`
 - `extract()`
-- `plot()`
+- `st_crs()`
+- `st_sfc()`, `st_polygon()`, `st_as_sf()`
+
 
 
 Dans la section Leçon, vous utiliserez des données de parc nationaux québécois.
@@ -38,7 +44,20 @@ library(sf)
 
 ## Leçon
 
-Au [module 5](#mat), vous avez appris les fonctions essentielles pour lire et visualiser des données spatiales matricielles sous R. Le présent module vous amènera maintenant à manipuler conjointement des données matricielles et vectorielles pour répondre à des questions précises.
+Au [module 5](#mat), vous avez appris les fonctions essentielles pour lire et visualiser des données spatiales matricielles sous R. Le présent module vous amènera maintenant à manipuler conjointement des données matricielles et vectorielles pour répondre à des questions précises. Nous allons en effet explorer le région de Sherbrooke en se posant deux questions. Dans la première partie, nous manipulerons les données d'élévation pour répondre à l’interrogation suivante: 
+
+* **Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?**
+
+Celle-ci demande d’extraire l'ensemble des valeurs d'élévation associées aux 4 parcs et de les comparer. Cela nous amènera à manipuler conjointement des données matricielles et vectorielles.
+
+En deuxième partie, nous chercherons à répondre à la question suivante:
+
+* **Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?**
+
+Ce qui nécessite de nouvelles extraction et surtout une étape de visualisation. 
+
+Dans ce chapitre, nous allons détailler chacune des étapes réalisées en vue de répondre à nos deux questions. Nous commencerons par importer les données et compléter les modules [3](#vec), [5](#mat) et [7]({#manip_vec}) en montrant comment filtrer des cellules d'un raster en utilisant leur valeur et leur coordonnée spatiale.
+
 
 
 ### Importer les données
@@ -51,45 +70,11 @@ Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'inf
 - parcs_sherbrooke
 - DEM.tif
 
+Nous allons charger ces différentes couches d'informations spatiales dans l'environnement R. Nous commençons par charger les bibliothèques requises pour importer les données spatiales vectorielles (`sf`), et les données spatiales matricielles (`raster`) et les visualiser (`mapview`).
 
-Afin de se familiariser avec la manipulation de données matricielles, nous allons explorer le région de Sherbrooke en se posant deux questions. Dans la première partie, nous manipulerons les données d'élévation pour répondre à l’interrogation suivante: 
-
-* **Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?**
-
-Celle-ci demande d’extraire l'ensemble des valeurs d'élévation associées aux 4 parcs et de les comparer. Cela nous amènera à manipuler conjointement des données matricielles et vectorielles.
-
-En deuxième partie, nous chercherons à répondre à la question suivante:
-
-* **Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?**
-
-Ce qui nécessite de nouvelles extraction et surtout une étape de visualisation. 
-
-Dans ce chapitre, nous allons passer détailler chacune des étapes réalisées en vue de répondre à nos deux questions.
-
-
-
-### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
-
-#### Suite d'opérations à réaliser
-
-Pour parvenir il faut 
-
-
-Dans la suite, nous completer ce qui a été vu au chapire aisb reste indispensavle aurons donc besoin d'extraire les données de raster, si votre mémoire fait défaut, reportez-vous au [module 5](#mat) pour plus de détails.
-
-
-#### Importation des données {-}
-
-Dans un premier temps, nous allons charger dans l'environnement R, les différentes couches d'informations spatiales. Nous Commençons par charger les bibliothèques requises pour importer les données spatiales vectorielles (`sf`), et les données spatiales matricielles (`raster`).
-
-```{r load80}
+```{r load80, warning = FALSE}
 library(sf)
 library(raster)
-```
-
-On charge également la bibliothèque `mapview` permettant de visualiser les données spatiales.
-
-```{r, warning = FALSE}
 library(mapview)
 ```
 
@@ -118,36 +103,69 @@ dem <- raster("Module8/data/DEM.tif")
 
 Nous visualisons ensuite les deux objets spatiaux afin de valider l'importation.
 
-```{r, warning=FALSE}
+```{r, warning = FALSE}
 mapview(dem) + mapview(parcs, zcol = "TRQ_NM_", legend = FALSE)
 ```
 
 
 
 
-#### Modifier les valeurs contenues dans le raster {-}
 
-Après avoir exploré la distribution des valeurs avec `summary(getValues(dem))`, on a pu s'apercevoir que certains pixels contenaient des valeurs négatives. Ces valeurs ne sont pas aberrantes et signifient que ces pixels se retrouvent en dessous du niveau de la mer. Nous allons cependant leur assigné une valeur de `NA`. La première approche consiste à tester les valeurs et les remplacer si elles rencontrent la condition: `valeur < 0`.
 
-```{r}
-which(getValues(dem) < 0)
+### Filtrer les cellules d'un raster 
+
+Comme indiquer ci-dessus pour réaliser l'ensemble des opérations, nous allons avoir besoin de filter des données spatiales selon leur valeur et leur coordonnée spatiale. Nous allons détailler comment procéder dans cette section.
+
+
+#### Filtrer en utilisant la valeur des cellules
+
+Au [module 5](#mat), nous avons vu comment accéder et manipuler les données de raster, en utilisant, entre autres, `getValues()`. 
+Par exemple, il est possible d'avoir une idée de la distribution des valeurs de `dem` en utilisant la ligne suivante :
+
+```{R getval_dem}
+summary(getValues(dem))
 ```
 
-La fonction `which` permet de renvoyer les numéros de pixels qui satisfont la condition du test logique `getValues(dem) < 0`. On souhaite à présent remplacer ces valeurs par `NA`.
+Avec cette commande, nous pouvons nous apercevoir que certains pixels
+contenaient des valeurs négatives. Ces valeurs ne sont pas aberrantes et
+signifient que ces pixels se retrouvent en dessous du niveau de la mer. Pour la
+suite du module (et à titre d'exemple), nous allons exclure ces valeurs
+négatives. En d'autre terme, nous allons appliquer un filtre sur les cellules du
+raster, filtre qui ne laisse passé que les valeurs positives. Avant cela, nous allons voir comment identifier les cellules avec la function `which()`. Cette fonction nous permet d'identifié les `TRUE` dans un vecteur logique, par exemple: 
+
+```{r which}
+which(c(1, 2, 1) == 2)
+```
+Nous pouvons aussi l'utiliser pour les valeurs d'un raster et ici, nous allons le faire pour trouver identifier les cellules qui ont des valeurs d'élévation négatives.
+
 
 ```{r}
-dem[which(getValues(dem) < 0)] <- NA
+ind <- which(getValues(dem) < 0)
+ind
 ```
 
-On peut valider que l'opération a été complété avec succès en effectuant une seconde fois le test logique.
+La ligne ci-dessus nous retourne des indices des cellules demandées. Pour savoir combien il y en a, nous pouvons les compter en regardant le vecteur que nous retourne R, mais si les cellules sélectionnées étaient très nombreuses ou si nous avions besoin de ce nombre dans notre code, nous utiliserions `length()` qui nous retourne la taille du vecteur: 
 
 ```{r}
-which(getValues(dem) < 0)
+length(ind)
 ```
 
-`integer(0)` indique qu'aucun pixel dispose d'une valeur inférieur à 0.
+Notez qu'il est aussi possible d'accéder aux valeurs en utilisant ces indices:
 
-Si l'on veut modifier le domaine de valeurs d'un raster, une seconde approche consiste à utiliser la fonction `reclassify()`. Imaginons que l'on désire catégoriser le niveau d'élévation en 3 classes / catégories: de 0 à 250m comme une classe d'élévation faible, de 251 à 500m comme modérée et enfin 501 à 1200 comme classe forte. La fonction `reclassify()` nécessite une matrice comprenant les bornes limites des différentes classes. Note: N'oubliez pas qu'un raster ne peut pas entreposé de valeurs de type `factor` , c.a.d en caractère. Nous allons donc assigné un entier (1 à 3 pour faible à forte) comme étant un identifiant de la classe. La première étape consiste à construire la matrice permettant de re-classifier le domaine de valeurs du raster.
+```{r}
+getValues(dem)[ind]
+```
+
+Pour filtrer ces données, nous allons remplacer les valeurs des cellules identifiées par `NA`.
+
+```{r}
+dem[ind] <- NA
+summary(getValues(dem))
+```
+
+L'élévation minimale est maintenant de 0 et le nombre de `NA` a augmenté de `r length(ind)`, notre filtre a bien été appliqué. 
+
+Avec l'approche présentée nous pouvons utiliser des expressions logiques plus complexes. Ainsi, nous pouvons remplacer `getValues(dem) < 0` par `getValues(dem) < 0 | getValues(dem) > 1000` pour aussi exclure cellules avec des valeurs plus grandes que 1000&nbsp;m. De plus, il est aussi possible de changer les valeurs des cellules identifiées en utilisant la valeur désirée à la place de `NA`. La fonction `reclassify()` vous permet de réaliser plusieurs de ces opérations très facilement. Imaginons que nous désirions catégoriser le niveau d'élévation en 3 catégories: de 0 à 250&nbsp;m comme une classe d'élévation faible, de 251 à 500&nbsp;m comme modérée et enfin 501 à 1200&nbsp;m comme classe forte. Nous pouvons utiliser la fonction `reclassify()` pour le faire. Celle-ci nécessite une matrice comprenant les bornes limites des différentes classes et donc la première étape consiste à construire cette matrice.
 
 ```{r}
 new_class <- matrix(c(0, 250, 1, 250, 500, 2, 500, 1200, 3), nrow = 3, ncol = 3, byrow = TRUE)
@@ -157,76 +175,150 @@ new_class
 
 Cette matrice est utilisée comme argument de la fonction `reclassify()` afin de déterminer les nouvelles classes de valeurs.
 
-```{r}
+```{r reclassify}
 new_class_dem <- reclassify(dem, new_class)
 ```
 
-On peut valider la nouvelle classification du domaine de valeurs du raster d'élévation `dem` à l'aide de la fonction `mapview()`.
+Visualisons la nouvelle classification du domaine de valeurs du raster d'élévation `dem` à l'aide de la fonction `mapview()`:
 
-```{r, warning=FALSE}
+```{r, warning = FALSE}
 mapview(new_class_dem)
 ```
 
-#### Changer la résolution d'un raster {-}
+Notez que nous pouvons aussi utiliser `NA` pour exclure certaines cellules:
 
-La résolution spatiale d'un raster fait référence à la taille des pixels d'un raster. Tous les pixels d'un raster disposent d'une taille identique. La résolution peut cependant différé entre x (longitude) et y (latitude). Pour connaître la résolution d'un raster on utilise la fonction `res()`.
-
-```{r}
-res(dem)
+```{r, warning = FALSE}
+new_class2 <- matrix(c(0, 250, NA, 250, 500, 2, 500, 1200, 3), nrow = 3, ncol = 3, byrow = TRUE)
+mapview(reclassify(dem, new_class2))
 ```
 
-On peut s'apercevoir ici que la résolution en `x` (premier élément du vecteur) et y (deuxième élément) est identique et que l'unité de la résolution affiché ici est en degré, telle qu'affiché dans la projection du raster. Ce type d'unité est plus difficilement interprétable. On peut re-projeter le raster dans le système *Conique conforme de Lambert du Québec* (NAD83, EPSG: 32198) afin d'obtenir la résolution en système métrique et non en degré. Cette projection est identique à l'objet spatial `parcs`.
+
+#### Filtrer en utilisant les coordonnées spatiales des cellules
+
+##### Utiliser `crop()`
+
+Une des opérations les plus fréquentes sur les raster est de filtrer les cellules d'un raster en fonction de leur coordonnée spatiale. Dans cette section nous allons utiliser `crop()` et `mask()` pour réalisé de telle type. 
+
+La fonction `crop()` vous permet de rogner un raster, autrement dit utiliser un rectangle pour filter les cellules selon qu'elles soient ou non dedans. Pour utiliser `crop()`, en plus du raster à rogner, il faut un objet de classe `Extent` qui peut être créé en utilisant les coordonnées des points inférieur-gauche (`xmin`, `ymin`) et supérieur-droit (`xmax`, `ymax`) du rectangle utilisé pour rogner:
+
+```{r extent}
+ext <- extent(c(-72, -71.5, 45.2, 45.8))
+ext 
+```
+
+
+Avec `plot()`, nous pouvons visualiser quelle partie du raster va être rogner. 
 
 ```{r}
+plot(dem)
+plot(ext, add = TRUE) 
+```
+
+Il est très important de relever que de manière implicite les valeurs des coordonnées utilisées dans `extent()` sont exprimées dans le SCR de notre raster `dem`. Nous utilisons maintenant la fonction `crop()` dont le premier argument est le raster à rogner et le second argument l'objet de classe `Extent`.
+
+```{r}
+dem_cr <- crop(dem, ext)
+```
+
+La sortie est un raster (que nous appelons `dem_cr`) qui est recadré selon `ext`, les cellules qui ne sont pas dans ce rectangle sont exclues.
+
+```{r, warning = FALSE}
+mapview(dem_cr)
+```
+
+La fonction `crop()` accepte en fait, en second argument, tout object dont un object de classe `Extent` peut être extrait, cela inclut, entre autres, les objets de classe `RasterLayer` et les objets spatiaux de classe `sf`. Nous allons utiliser alors utiliser le premier parc de `parcs` pour rogner `dem`, mais avant, nous avons besoin de re-projeter `dem` dans le SCR de `parcs` (notez que nous aurions pu faire l'inverse). L'opération qui suit utilise l'étendue spatiale de `parcs[1, ]` pour rogner `dem_lcc`.
+
+
+```{r, warning = FALSE}
+dem_lcc <- projectRaster(dem, crs = crs(parcs))
+dem_cr_p <- crop(dem_lcc, parcs[1, ])
+mapview(dem_cr_p)
+```
+
+
+
+##### Utiliser `mask()`
+
+Avec la fonction `mask()` il est possible de découper un raster non plus selon un rectangle uniquement, mais selon n'importe quel polygon. Pour illustrer cette fonction nous allons créer un polygon avec `sf`:
+
+```{r pol}
+# coordonnées du polygon
+mat <- matrix(c(
+  -72.5, 45.8,
+  -72, 45.5,
+  -72.5, 45.2,
+  -71.5, 45.2,
+  -71.5, 45.8,
+  -72.5, 45.8), ncol = 2, byrow = TRUE)
+# transform les coordonnées en 1 objet de class sp
+pol <- st_as_sf(
+    data.frame(
+      var = 1,
+      geom = st_sfc(st_polygon(x = list(mat)))
+      ),
+      crs = st_crs(dem) 
+  )
+```
+
+Notons que nous avons utilisé le même SCR que `dem`. Regardons ce à quoi ressemble le polygon que nous venons de créer.
+
+```{r}
+plot(dem)
+plot(pol, add = TRUE, col = NA) 
+```
+
+Avec `mask()`, nous sélectionnons seulement les cellules qui sont dans `pol` (passé en second argument): 
+
+```{r mask, warning = FALSE}
+dem_ma <- mask(dem, pol)
+mapview(dem_ma)
+```
+
+
+La fonction `mask()` a également un argument `inverse` qui s'il prend la valeur `TRUE`, nous permet de sélectionner tout ce qui m'est pas dans le polygon, ce que nous faisons ci-dessous.
+
+```{r mask_inv, warning = FALSE}
+dem_ma_inv <- mask(dem, pol, inverse = TRUE)
+mapview(dem_ma_inv)
+```
+
+Nous avons de cette manière réaliser simplement, un filtre spatial relativement complex. Les valeurs de `dem_ma` sont, en effet, seulement le sont ensemble des valeurs des cellules qui sont dans `pol`. Nous avons donc filtré spatialement les données de `dem` et nous avons assigné ce raster à la variable `dem_ma` que nous pouvons alors utiliser comme tout autre raster.
+
+```{r, warning = FALSE}
+summary(getValues(dem_ma))
+```
+
+Trois remarques pour finir: 
+
+1. L'étendue du raster retourné par `crop()` sera différente de celle du raster initial (sauf si l'étendue initiale est utilisée pour rogner). À l'inverse, `mask()` préserve l'étendue spatiale.
+
+2. L'opération `crop()` est souvent très rapide ce qui n'est pas le cas de `mask()` quand le polygon est complexe. Il est parfois possible d'avoir des gains d'efficacité en faisant un appel à `crop()` avant d'utiliser `mask()`.
+
+3. Dans le cas où seulement les valeur du raster sont à utiliser, il est possible d'appeler `extract()` à la place de `mask()` qui nous retourne une liste chaque élément de la liste correspond au valeur à extraire pour les différentes couche du raster (ici nous n'avons qu'une seule couche).
+
+
+```{r, warning = FALSE}
+summary(extract(dem, pol)[[1]])
+```
+
+
+
+### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
+
+Nous sommes maintenant en mesure de répondre à cette première question. Les données étant déjà importées, il nous reste à : 
+
+1. nous assurer que le raster d'élévation `dem` et les limites des parcs `parcs` sont dans le même SCR,
+
+2. uiliser `mask()` pour extraire les cellules de `dem` qui sont dans les parcs nationaux considérés
+
+
+
+```{r, eval = FALSE}
 st_crs(parcs) 
 dem_lcc <- projectRaster(dem, crs = crs(parcs))
 res(dem_lcc)
 ```
 
-La largeur (x) d'un pixel est de `r res(dem_lcc)[1]`&nbsp;m de largeur et `r res(dem_lcc)[2]`&nbsp;m de hauteur.
-
-Parfois, il peut être utile d'ajuster la résolution d'un raster afin de conduire des analyses sur des tailles de pixels de références. Par exemple, nous voudrions que chaque pixel du modèle d'élévation numérique (DEM) est une taille prédéfinis de 500 par 500 mètres. La première étape consiste à créer un raster de référence disposant de cette résolution.
-
-```{r}
-dem500 <- raster(extent(dem_lcc), res = 500, crs = crs(dem_lcc))
-```
-On utilise `extent()` pour créer un nouveau raster de référence (`dem500`) dont l'étendu spatiale est identique à celle du raster d'élévation `dem_lcc`. On définit la résolution à 500 mètres à l'aide de l'argument `res`. Enfin, on définit la projection comme identique au raster d'élévation avec la fonction (`crs()`). 
-
-```{r}
-head(getValues(dem500)) 
-```
-
-Par défaut, les pixels du nouveau raster possèdent tous une valeur `NA`. La dernière étape consiste à échantillonner le raster d'élévation afin de remplir le raster de référence avec les valeurs du raster d'élévation. La fonction `resample()` permet d'aller échantillonner les valeurs selon deux méthodes.
-
-```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="caption",fig.show='hold',fig.align='center', fig.cap = "Méthodes de ré-échantillonnage d'un raster de référence vide à partir d'un autre raster contenant des valeurs. Figures adaptés de [Arcgis Pro](https://pro.arcgis.com/fr/pro-app/help/analysis/spatial-analyst/performing-analysis/cell-size-and-resampling-in-analysis.htm)"}
-knitr::include_graphics("Module8/images/resampling.png")
-``` 
-
-- Méthode A: L'affectation par le voisin le plus proche est la technique de rééchantillonnage la plus adaptée aux données discrètes (catégoriques) car elle ne modifie pas la valeur des pixels en entrée. L'affectation par le voisin le plus proche détermine l'emplacement du centre du pixel la plus proche (bleu) sur le raster en entrée et attribue la valeur de ce pixel au pixel du raster en sortie. Cette méthode présente l'avantage qu'elle ne modifie en rien les valeurs.
-
-- Méthode B: L'interpolation bilinéaire utilise les centroïdes des quatre pixels (en bleu) les plus proches pour déterminer la valeur sur du pixel en sortie (rouge). La nouvelle valeur pour le pixel (rouge) correspond à la moyenne pondérée de ces quatre valeurs (bleu), ajustée pour tenir compte de la distance les séparant du centre de la cellule en sortie. Cette méthode d'interpolation crée une surface à l'aspect plus lisse qu'avec l'affectation par le voisin le plus proche.
-
-Afin d'obtenir des valeurs de pixels contenus dans `dem_lcc`, nous allons utiliser la méthode A.
-
-```{r}
-dem500 <- resample(dem_lcc, dem500, method = "ngb")
-dem500
-```
-
-On a présent un nouveau raster d'élévation dont la résolution d'un pixel est de 100 mètres par 100 mètres.
-On peut également facilement changer la résolution de ce raster à l'aide des fonctions `disaggregate()` et `aggregate()`. Par exemple, il est possible de diminuer la résolution du raster par 10 (1 pixel = 1000 mètres par 1000 mètres) à l'aide de la fonction suivante:
-
-```{r}
-dem1000 <- aggregate(dem500, fact = 2, fun = max, na.rm = TRUE)
-```
-
-L'argument `fact` permet de spécifier le facteur d’agrégation et l'argument `fun` précise quelle fonction sera utilisé pour réaliser l’agrégation 4 des pixels ensemble. Si l'on veut augmenter la résolution d'un raster on utilisera la fonction `disaggregate()`. 
-
-
-
-
-
-### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
 
 Nous avons à présent couvert les opérations sur un raster permettant de vérifier sa composition et la distribution de ses valeurs. Nous pouvons maintenant passer à répondre à la première question qui vise à déterminer parmi les 4 parcs nationaux dans un rayon de 70&nbsp;kms autour de Sherbrooke lequel dispose du plus haut sommet. 
 
@@ -299,6 +391,9 @@ parcs[sf_point_max_elev,]
 ```
 
 Cette syntaxe permet d'isoler le polygon du parc mégantic dans lequel se retrouve le point culminant entre les 4 parcs.
+
+
+
 
 
 
