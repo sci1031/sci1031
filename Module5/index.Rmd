@@ -235,7 +235,6 @@ mois_hiver_facteur
 
 # ou encore
 levels(mois_hiver_facteur)
-
 ```
 
 Revenons maintenant aux *rasters*. Reprenons l'exemple du *raster* des multiples de 3. Nous allons le transformer en *raster* de type facteur.
@@ -286,8 +285,9 @@ La valeur d'une cellule peut aussi être obtenue en référant à sa position (l
 
 
 Par exemple, considérons le *raster* `G` suivant, de dimensions 5 par 5, former de nombres aléatoires entre 0 et 1.
+
 ```{r, eval = TRUE, echo = FALSE}
-g = c(0.2, 0.3, 0, 0, 0.4, 0.3, 0.6, 0.4, 0.6, 0.4, 1, 0, 1, 0.1, 0.3, 0.4, 0.6, 0.4, 0, 0.2, 0.1, 1, 0.1, 0.3, 0.5)
+g <- c(0.2, 0.3, 0, 0, 0.4, 0.3, 0.6, 0.4, 0.6, 0.4, 1, 0, 1, 0.1, 0.3, 0.4, 0.6, 0.4, 0, 0.2, 0.1, 1, 0.1, 0.3, 0.5)
 g[3] = NA
 g[4] = NA
 g[12] =NA
@@ -306,7 +306,7 @@ knitr::include_graphics('Module5/images/ValeurRaster.png')
 
 Ainsi, pour accéder à des valeurs spécifiques du *raster*, on procède de la façon suivante:
 
-```{r access_G, collapse=TRUE}
+```{r access_G, collapse = TRUE}
 # Accéder à la première valeur
 G[1]
 # Accéder à la valeur de la cellule à la position (3,2)
@@ -331,6 +331,12 @@ Ainsi, en référant à l'indice d'une cellule, nous pouvons connaître non seul
 
 ```{r}
 G_df[13, ]
+```
+
+Notez que par défaut, la coordonnée renvoyée par la fonction `as.data.frame()` correspond au coin inférieur gauche de chaque pixel. Il est cependant possible de renvoyer le centroid du pixel en utilisant l'argument  `as.data.frame(..., xy = TRUE, centroids = TRUE)`.
+
+```{r include-figs-raster-centroids, fig.align = 'center', echo = FALSE, fig.cap = "(A) Coordonnées renvoyées par défaut par la fonction `as.data.frame`; (B) Coordonnées des centroïdes des pixels renvoyées lorsque l'argument `centroids = TRUE` est utilisé dans la fonction `as.data.frame`", out.width = '50%'}
+knitr::include_graphics('Module8/images/coordsPixel.png')
 ```
 
 
@@ -374,6 +380,8 @@ min(getValues(G), na.rm = TRUE)
 mean(getValues(G), na.rm = TRUE)
 
 median(getValues(G), na.rm = TRUE)
+
+quantile(getValues(G), na.rm = TRUE)
 ```
 
 La fonction `summary()` permet d'obtenir plusieurs statistiques:
@@ -401,8 +409,7 @@ cellStats(G, quantile, na.rm = TRUE)
 
 cellStats(G, range, na.rm = TRUE) #le minimum et le maximum
 
-cellStats(G, sum, na.rm=T)
-
+cellStats(G, sum, na.rm = TRUE)
 ```
 
 Nous pouvons également visualiser la distribution des valeurs contenues dans un *raster* en utilisant les fonctions `R` usuelles telles que `hist()` ou `boxplot`. Par exemple,
@@ -519,7 +526,7 @@ Vous remarquerez que l’exécution de la fonction `summary()` peut prendre plus
 Nous pouvons également visualiser l'histogramme des valeurs de température de surface.
 
 ```{r, fig.dim = c(6, 5), fig.cap = "Distribution des températures de surface dans la ville de Québec"}
-hist( getValues(T_vdq),
+hist(getValues(T_vdq),
      breaks = 10,
      main = "",
      xlab = "Valeurs",
@@ -546,7 +553,7 @@ mapview(T_vdq,
 ```
 
 ```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec" }
-m = mapview(T_vdq,
+m <- mapview(T_vdq,
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU', homebutton = FALSE)
@@ -567,7 +574,7 @@ mapview(T_vdq, maxpixels = ncell(T_vdq),
 
 
 ```{r, eval = TRUE, echo = FALSE, warning = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec (visualisation de tous les pixels)"  }
-m = mapview(T_vdq, maxpixels = ncell(T_vdq),
+m <- mapview(T_vdq, maxpixels = ncell(T_vdq),
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU')
@@ -584,7 +591,7 @@ Naturellement, le temps nécessaire pour générer la carte est alors plus long.
 Nous voulons maintenant nous concentrer sur une petite section de la carte de la région de la ville de Québec. Nous pouvons le faire en spécifiant les lignes et les colonnes qui nous intéressent dans le *raster*. Par exemple, choisissons une région carrée de 100 x 100 cellules dans le quartier Sainte-Foy.
 
 ```{r map_T, eval = FALSE, echo = TRUE}
-T <- T_vdq[1051:1150, 851:950, drop=FALSE]
+T <- T_vdq[1051:1150, 851:950, drop = FALSE]
 
 mapview(T,  map.types = "OpenStreetMap")
 ```
@@ -712,13 +719,13 @@ Finalement, pour sauvegarder des données matricielles, nous utilisons la foncti
 
 
 ```{r echo = FALSE, eval = FALSE}
-chemin = "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Module5/"
+chemin <- "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Module5/"
 nom_du_fichier <- paste(chemin, "ICU_vdq_MTM7.tif", sep = "")
 writeRaster(T_mtm7,nom_du_fichier)
 ```
 
 ```{r echo = TRUE, eval = FALSE}
-chemin<-"D:/votrechemin/SCI1031/Module5/Donnees/"
+chemin <- "D:/votrechemin/SCI1031/Module5/Donnees/"
 nom_du_fichier<- paste(chemin, "ICU_vdq_MTM7.tif", sep = "")
 writeRaster(T_mtm7,nom_du_fichier)
 ```
@@ -879,7 +886,7 @@ writeRaster(S_mult, nom_du_fichier)
 ```{r echo = FALSE, eval = FALSE}
 root = "Module5/data"
 filename<- paste(root, "/LaTuque-copie.tif", sep = "")
-writeRaster(S_mult, filename, overwrite=TRUE)
+writeRaster(S_mult, filename, overwrite = TRUE)
 ```
 
 
