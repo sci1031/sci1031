@@ -37,11 +37,214 @@ Le dossier `Donnees` comprend cinq sous-dossiers:
 
 
 
-## Leçon
+## (PART) Leçon {-}
 
-### Principes de base en cartographie
+## Principes de base en cartographie
 
-### Cartes statiques avec tmap
+La mise en page d'une carte est importante pour que cette dernière puisse être utilisée efficacement. Nous avons tous déjà vu des cartes de mauvaise qualité. Celles-ci peuvent être difficiles à lire et à interpréter. Elles peuvent être peu informatives, trompeuses et même erronées car certaines informations essentielles sont absentes ou sont diffusées incorrectement. Les figures  \@ref(fig:mauvaises-cartesA)-\@ref(fig:mauvaises-cartesD) donne quelques exemples de cartes que l'on peut facilement qualifier de mauvaises.
+
+<br>
+```{r mauvaises-cartesA, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemple d'une mauvaise carte: Carte de la diplomation et du revenu selon les comtés aux États-Unis (source: https://blog.stratasan.com/bad-maps-bad-maps).",fig.show='hold',fig.align='center'}
+
+chemin<-"Module6/images/"
+image<- paste(chemin, "CarteA.png", sep = "")
+knitr::include_graphics(image)
+``` 
+<br>
+```{r mauvaises-cartesB, echo=FALSE,out.width="49%",out.height="20%",fig.cap="Exemple d'une mauvaise carte: Carte de la localisation de tous les pubs dans le sud est du Royaume-Uni (source:http://www.math.uwaterloo.ca/tsp/pubs/data.html).",fig.show='hold',fig.align='center'}
+
+chemin<-"Module6/images/"
+image<- paste(chemin, "CarteB.png", sep = "")
+knitr::include_graphics(image)
+``` 
+
+<br>
+
+```{r mauvaises-cartesC, echo=FALSE,out.width="60%",out.height="60%",fig.cap="Exemple d'une mauvaise carte: Carte de l'Europe (source:https://gis.stackexchange.com).",fig.show='hold',fig.align='center'}
+
+chemin<-"Module6/images/"
+image<- paste(chemin, "CarteC.png", sep = "")
+knitr::include_graphics(image)
+``` 
+
+<br>
+
+```{r mauvaises-cartesD, echo=FALSE,out.width="70%",out.height="70%",fig.cap="Exemple d'une mauvaise carte: Carte du monde (source:https://carto.com).",fig.show='hold',fig.align='center'}
+
+chemin<-"Module6/images/"
+image<- paste(chemin, "CarteD.png", sep = "")
+knitr::include_graphics(image)
+``` 
+<br>
+
+La carte de la figure \@ref(fig:mauvaises-cartesA) utilise une superposition de trois couleurs pour chaque comté du territoire américain. Le rose représente le taux de diplomation à l'école secondaire, le jaune, le taux de diplomation au collègue, et le bleu, le revenu médian. Une multitude de couleurs apparait donc sur la carte la rendant difficile à interpréter. Dans un cas pareil, la carte devient inutile car elle ne permet pas de transmettre un message unique et clair. Une carte est efficace lorsqu'elle est simple. Il faut donc éviter d'y mettre trop d'informations.
+
+La carte de la figure \@ref(fig:mauvaises-cartesB) donne la position de tous les pubs dans le sud est du Royaume-Uni. Une telle carte est utile si l'utilisateur a la possibilité d'agrandir l'écran en mode zoom. Autrement, la quantité trop grande de marqueurs masque l'information sur la localisation des pubs. Si l'objectif de cette carte est d'illustrer l'abondance des pubs dans ce pays, alors une représentation de la densité de pubs par habitant pour une division administrative donnée serait plus informative.
+
+La carte c de la figure \@ref(fig:mauvaises-cartesC) représente une section de l'Europe. Nous observons un usage exagéré d'écriture sur la carte qui, en plus, repose sur une trop grande diversité de polices et de tailles de caractère. Cette écriture est dense et n'est pas structurée de manière hiérarchique si bien qu'il est impossible de dégager les éléments importants. Également, la signification du gradient de couleurs utilisé n'est pas évidente.  
+
+Finalement, la carte de la figure \@ref(fig:mauvaises-cartesD) qui illustre l'ensemble des pays de la planète présente plusieurs problèmes. D'abord le nom de chaque pays, abrégé par trois lettres, est positionné sur chacun de ceux-ci. Cette approche rend totalement illisible le nom des pays dans les régions où ils sont nombreux. De plus, l'usage d'abbréviation est peu utile à moins de connaître déjà le nom du pays. Finalement, le choix des couleurs employées pour le texte et pour la carte elle-même est épouvantable. Les lettres sont beaucoup trop pâles, nuisant à la lisibilité des noms, et la palette de couleurs pour représenter les pays et les océans (en jaune!) est dérangeante.     
+
+Il existe quelques principes fondamentaux à respecter lorsque nous concevons une carte. Nous les résumons ici.
+Une carte doit être:
+<br>
+
+>
+>- **Claire et cohérente**. Nous devons pouvoir comprendre et interpréter la carte facilement.
+>- **Adaptée à son public cible**. Une carte qui s'adresse au grand public sera différente d'une carte qui s'adresse à des experts.
+>- **Conforme aux conventions**. Une carte doit respectée les conventions propres à son domaine d'application. Cela signifie aussi de respecter les associations naturelles de couleur tel que d'illustrer les plans d'eau par la couleur bleue. 
+>- **Esthétique**. Une carte doit, par sa composition, le choix des couleurs, sa typographie, être agréable à l'oeil. À titre d'exemple, la carte Fig \@ref(fig:mauvaises-cartes)-d, n'est pas esthétique.
+>- **Bien structurée**. Une carte doit être dotée d'une certaine hierarchie visuelle. La visualisation d'une carte doit permettre de dégager rapidement ses éléments importants. La carte Fig \@ref(fig:mauvaises-cartes)-c, par exemple, ne respecte pas ce principe de hierarchie visuelle. 
+>
+
+<br>
+
+### Informations indispensables et optionnelles 
+
+Plusieurs éléments de mise en page sont indispensables dans une carte (Figure \@ref(fig:elements-indisp)):
+
+>
+>- **Un titre**
+>- **Une échelle graphique**
+>- **Une légende**
+>- **L'orientation**
+>- **La source**
+>- **L'auteur ou l'autrice**
+>- **La référence spatiale**
+
+<br>
+
+```{r elements-indisp, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Éléments indispensables d'une carte (source: https://crelaurentides.org/).",fig.show='hold',fig.align='center'}
+chemin<-"Module6/images/"
+image<- paste(chemin, "ElementsIndispensables.png", sep = "")
+knitr::include_graphics(image)
+
+```
+<br>
+<br>
+
+Le **titre** est essentiel car il est la synthèse du message cartographie. Il doit être complet mais concis. Il peut être neutre (p. ex: *Nouveaux cas de COVID-19*) ou subjectif (p. ex: *Hausse fulgurante des cas de COVID-19*).
+
+L'**échelle graphique** est essentielle pour que le lecteur puisse saisir l'étendue et la résolution du phénomène illustré dans la carte. L'échelle doit être simple (sans trop de subdivisions), pas trop longue, donner des valeurs arrondies, et toujours fournir l'unité métrique utilisée ou son abbréviation (p. ex. kilomètres ou km).
+
+La **légende** est essentielle à l'interprétation d'une carte. Celle-ci traduit les éléments graphiques en texte. En effet, tous les éléments qui ne sont pas évidents ou conformes doivent apparaître dans la légende de façon alignée et claire. Une légende doit comprendre: les éléments graphiques, le texte associé à chaque élément et les unités de mesure. Les éléments graphiques se rapportant à des données vectorielles doivent idéalement suivre l'ordre point-ligne-polygone dans la légende. Notez qu'il est aussi inutile d'écrire le mot *Légende*.
+
+L'**orientation** de la carte, spécifiée par une flèche du nord ou une rose des vents, est indispensable si les données illustrées sont en rotation de sorte que le nord ne corresponde pas au haut de la carte. Par exemple, la flèche du nord est indiquée sur la carte du réseau d'autobus de nuit de la Société de transport de Montréal (figure \@ref(fig:fleche-nord)). En effet, pour facilité la lecture de la carte, l'île de Montréal est représentée sur un axe horizontal qui ne correspond pas à l'axe géographique est-ouest. La flèche du nord doit être discrète sur une carte. Par ailleurs, si le nord est bien au haut de la carte, la flèche du nord est optionnelle.
+<br>
+
+```{r fleche-nord, echo=FALSE,out.width="80%",out.height="80%",fig.cap="La flèche du nord est indispensable lorsque ce dernier ne correspond pas au haut de la carte (source: http://www.mondecarte.com).",fig.show='hold',fig.align='center'}
+chemin<-"Module6/images/"
+image<- paste(chemin, "FlecheNord.png", sep = "")
+knitr::include_graphics(image)
+
+```
+<br>
+
+La **source**, l'**auteur.trice**, la **date**, et la **projection** doivent toujours être présents sur une carte. La citation de la source des données est importante pour des raisons éthiques. Les données illustrées ont été assemblées par une personne ou un organisme et nous devons reconnaître le travail de ce dernier. De plus, la citation d'une source, si celle-ci est reconnue, apporte de la crédibilité au contenu de la carte. Finalement, la citation d'une source permet au lecteur ou à la lectrice d'une carte de retracer et d'accéder aux données. Notez que ces quatre éléments devraient apparaître en petits caractères sur la carte car ils ne sont pas centrals au message.
+<br>
+
+D'autres éléments sont souvent présents sur une carte mais sont optionnels:
+
+>
+>- **Un cadre**
+>- **Un encart**
+>- **Des graticules** 
+>- **Un quadrillage**
+>
+
+<br>
+Un **cadre** sert à délimiter la zone cartographiée  (figure \@ref(fig:cadre-encart)).
+
+Un **encart** est une carte secondaire de petite taille que l'on appose à la carte principale (figure \@ref(fig:cadre-encart)). Cette carte secondaire peut servir, par exemple, à représenter une étendue géographique plus grande qui permet de mieux situer la zone représentée dans la carte principale. Un encart peut être situé à l'intérieur ou à l'extérieur du cadre.
+
+<br>
+
+```{r cadre-encart, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Un cadre et un encart sont des éléments optionnels de la mise en page d'une carte (source: Proulx et al. 2019).",fig.show='hold',fig.align='center'}
+chemin<-"Module6/images/"
+image<- paste(chemin, "CadreEncart.png", sep = "")
+knitr::include_graphics(image)
+
+```
+
+<br>
+
+Les **graticules** correspondent au réseau de latitudes et de longitudes permettant d'afficher les coordonnées géographiques des données représentées. Les coordonnées, en degrés, sont affichées sur le cadre de la carte (figure \@ref(fig:graticules)). 
+
+```{r graticules, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Les graticules sont les coordonnées géographiques (degrés de latitude et de longitude) sur le cadre d'une carte (source:https://cwfis.cfs.nrcan.gc.ca/) .",fig.show='hold',fig.align='center'}
+chemin<-"Module6/images/"
+image<- paste(chemin, "Graticules.jpg", sep = "")
+knitr::include_graphics(image)
+
+```
+<br>
+
+Un **quadrillage**, ou une grille, est un réseau de lignes horizontales et verticales perpendiculaires permettant d'afficher le système de coordonnées projetées (figure \@ref(fig:quadrillage)). 
+<br>
+
+```{r quadrillage, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Le quadrillage correspond au système de coordonnées projetées. Il est identifé par le nom de la projection cartographique utilisée (source:https://www.sepaq.com/) .",fig.show='hold',fig.align='center'}
+chemin<-"Module6/images/"
+image<- paste(chemin, "Quadrillage.png", sep = "")
+knitr::include_graphics(image)
+
+```
+
+<br>
+
+Certaines cartes font l'usage à la fois du quadrillage et des graticules (figure \@ref(fig:gratquad))
+```{r gratquad, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Les graticules et le quadrillage peuvent être utilisées sur une même carte (source:https://sbl.umontreal.ca/) .",fig.show='hold',fig.align='center'}
+chemin<-"Module6/images/"
+image<- paste(chemin, "GratQuad.png", sep = "")
+knitr::include_graphics(image)
+
+```
+
+<br>
+
+### Le texte
+
+Différents types de texte apparaissent sur une carte. Il y a le texte utilisé sur ou autour d’une carte comme le titre, le texte de la légende et le texte affichant la source des données, la date, la projection, etc. Une carte peut aussi afficher des **étiquettes**  qui servent à décrire les attributs des données spatiales représentées. Par exemple, le nom d’un pays sur le polygone délimitant les frontières de ce dernier. Une carte peut aussi contenir des **annotations**, c’est-à-dire du texte apposées sur la carte pour préciser des informations ou identifier des éléments qui ne sont pas nécessairement des attributs des données spatiales représentées.
+
+Le choix de la police, de la fonte, de la taille et de la couleur des caractères utilisés dans le texte d'une carte a une influence sur sa lisibilité. Il existe quelques principes à respecter lors du choix de ces éléments.
+
+Nous devons nous limiter à deux polices de caractères : une police avec empattement (*serif* en anglais) et une autre sans empattement (*sans serif*) (figure \@ref(fig:serif)).  Les polices avec empattement  sont généralement utilisées pour étiqueter des objets naturels (plans d’eau, montagnes, etc.) alors que les polices sans serif sont utilisées pour étiqueter des objets anthropiques (villes, routes, ponts, etc.).
+
+```{r serif, echo=FALSE,out.width="50%",out.height="50%",fig.cap="Lettre avec empattement à gauche et sans empattement à droite.",fig.show='hold',fig.align='center'}
+chemin<-"Module6/Images/"
+image<- paste(chemin, "Serif.png", sep = "")
+knitr::include_graphics(image)
+```
+
+La taille de caractère doit être supérieure à 7 points. Il est préférable de conserver une seule taille de caractères à moins de vouloir créer une hiérarchie visuelle dans les étiquettes. 
+
+Nous devons favoriser également l’utilisation d’une seule couleur de texte, à moins de vouloir identifier différentes catégories d’étiquettes. 
+L’usage de différentes couleurs et tailles de caractères dans l’objectif de créer une hiérarchie visuelle peut améliorer la lisibilité d’une carte mais doit se faire judicieusement et avec parcimonie. Les figures (\@ref(fig:text1)) et (\@ref(fig:text2)) donnent des exemples dans lesquels le texte a été adapté pour améliorer la présentation d’une carte.
+<br>
+
+```{r text1, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Exemple de carte où l'écriture a été améliorée. Le choix de couleurs différentes pour représenter les frontières et les plans d'eau, ainsi que l'orientation du texte améliore la lisibilité de la carte (source: Gimond 2021) .",fig.show='hold',fig.align='center'}
+chemin<-"Module6/Images/"
+image<- paste(chemin, "ImprovedText1.png", sep = "")
+knitr::include_graphics(image)
+
+```
+
+<br>
+```{r text2, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Exemple de carte où l'écriture a été améliorée. La carte du dessus fait l'usage de caractères de tailles, de fonte, de couleurs et d'orientation différentes créant une hiérarchie visuelle efficace (source: https://www.axismaps.com/) .",fig.show='hold',fig.align='center'}
+chemin<-"Module6/Images/"
+image<- paste(chemin, "ImprovedText2.png", sep = "")
+knitr::include_graphics(image)
+
+```
+<br>
+Dans la figure (\@ref(fig:text2)), remarquez le lettrage en majuscule pour étiqueter des territoires ainsi que la fonte italique et la couleur bleue pour identifier des plans d’eau. De plus, remarquez que les étiquettes associées aux points ne sont jamais directement dessus, dessous ou à côté des points. Elles sont plutôt en haut à droite, en haut à gauche, en bas à droite ou en bas à gauche. 
+
+
+
+### Les couleurs
+
+### Les types de carte
+
+
+## Cartes statiques avec tmap
 Il y a d'autres bibliothèques mais nous étudierons tmap.
 Voilà pourquoi: 
 
@@ -737,7 +940,7 @@ print(Map_inset, vp=viewport(0.67,0.17,width=0.3, height=0.3))
 ```
 
 
-### Cartes interactives avec tmap
+## Cartes interactives avec tmap
 
-## Exercice
+## (PART) Exercice {-}
 
