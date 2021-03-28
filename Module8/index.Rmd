@@ -18,23 +18,29 @@ Vous utiliserez les bibliothèques suivantes:
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
-- `getValues()`
+
+<!-- - `getValues()`
 - `nrow()`, `ncol()` et `ncell()`
 - `summary()`
+- `unique()`
+- `subset()`
 - `which()`, `which.max()`
-- `max`
+- `max()`
 - `as.data.frame()`, `data.frame()`
 - `extent()`
-- `plot()`
+- `plot()` -->
 - `crop()` `mask()`
 - `extract()`
-- `crs()`, `st_crs()`
+<!-- - `crs()`, `st_crs()` -->
 - `st_sfc()`, `st_polygon()`, `st_as_sf()`
 - `st_intersects()` 
+- `st_combine()`
+- `st_nearest_feature()`
+- `xyFromCell()`
 
 
 
-Dans la section Leçon, vous utiliserez des données de parc nationaux québécois.
+Dans la section Leçon, vous utiliserez des données d'élévation pour le Québec et les limites de quatre parcs nationaux québécois.
 
 Dans la section Exercice, vous utiliserez XXX
 
@@ -321,7 +327,6 @@ Nous sommes maintenant en mesure de répondre à la première question. Les donn
 
 Commençons par re-projeter le raster `dem` en utilisant le SCR de `parcs`. Nous avons déjà réalisé cette opération à la section précédente et nous reprenons donc ci-dessous les lignes vues plus haut&nbsp;: 
 
-
 ```{r, eval = FALSE}
 dem_lcc <- projectRaster(dem, crs = crs(parcs))
 ```
@@ -378,13 +383,13 @@ sf_point_max_elev
 ```
 
 
-En superposant les couches d'informations spatiales avec `mapview`, on peut observer dans quel parc se retrouve à présent ce point d'élévation maximal. 
+En superposant les couches d'informations spatiales avec `mapview()`, on peut observer dans quel parc se retrouve à présent ce point d'élévation maximal. 
 
 ```{r, fig.cap = "En cliquant sur le polygon du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-Mégantic", warning = FALSE}
 mapview(dem_parcs) + mapview(parcs, alpha = 0.01) + mapview(sf_point_max_elev,  col.regions = "red")
 ```
 
-Ce point se retrouve dans le **Parc national du Mont-Mégantic**. Au lieu de faire une déduction visuellement, nous allons à présent réaliser une opération sur la topologie permettant d'isoler le polygon du parc dans lequel se retrouve. Pour ce faire, nous utilisons la fonction `st_intersects()` comme nous l'avons vu au [module 7](#manip_vec).
+Ce point se retrouve dans le **parc national du Mont-Mégantic**. Au lieu de faire une déduction visuellement, nous allons à présent réaliser une opération sur la topologie permettant d'isoler le polygon du parc dans lequel se retrouve. Pour ce faire, nous utilisons la fonction `st_intersects()` comme nous l'avons vu au [module 7](#manip_vec).
 
 ```{r}
 st_intersects(parcs, sf_point_max_elev, sparse = FALSE)
@@ -399,7 +404,8 @@ parcs[st_intersects(parcs, sf_point_max_elev, sparse = FALSE), ]
 Notons que cette opération peut être écrite plus simplement sous la forme:
 
 ```{r}
-parcs[sf_point_max_elev, ]
+parc_megantic <- parcs[sf_point_max_elev, ]
+parc_megantic
 ```
 
 Cette dernière manipulation nous permet de répondre à notre première question: 
@@ -413,13 +419,33 @@ dans les 4 parcs nationaux sélectionnés, c'est le Parc national du Mont-Mégan
 
 ### Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
 
-Le sommet le plus élevé des parcs nationaux se situe dans le Parc national du Mont-Mégantic. On désire maintenant se rendre sur ce sommet en randonnée pédestre et réaliser un profil topographique du sentier ce rendant au plus proche. Les profils topographiques sont des outils de visualisation puissants: ils permettant de caractériser le dénivelé et donc l'effort que l'on devra fournir pour compléter cette randonnée. 
+Nous allons maintenant nous placer dans la situation suivante&nbsp;: nous désirons faire une randonnée pédestre jusqu'au sommet que nous venons d'identifier (à tout du moins, le plus proche possible). Afin de nous faire une idée précise de l'effort que nous devrons fournir lors de cette randonnée, nous allons réaliser un profil topographique du sentier se rendant au plus proche de ce sommet. 
 
-```{r geoide2, fig.align='left', echo=FALSE,fig.cap="Exemple de profil topographique: le sentier international des Appalaches", out.width = '100%'}
+
+```{r prof_topo, fig.align = 'left', echo = FALSE, fig.cap = "Exemple de profil topographique: le sentier international des Appalaches", out.width = '100%'}
 knitr::include_graphics('Module8/images/gas_coupe_grande_traversee.png')
 ```
 
-Pour obtenir le sentier estival se retrouvant au plus proche du sommet, il faut croiser deux couches d'informations spatiales: (i) [les sentiers estivaux de la SEPAQ](https://www.donneesquebec.ca/recherche/dataset/sentiers-estivaux) et (ii) la coordonnée géographique du sommet que nous avons isolé précédemment. On utilise la fonction `st_nearest()` afin de sélectionner le sentier (`LINES`) le plus proche du sommet (`POINT`). La première étape consiste à lire le fichier de forme (*shapefile*).
+Pour obtenir le sentier estival qui va au plus proche du sommet, nous allons avoir besoin de croiser deux couches d'informations spatiales: (i) [les sentiers estivaux de la SEPAQ](https://www.donneesquebec.ca/recherche/dataset/sentiers-estivaux) mentionnés plu haut et (ii) la coordonnée géographique du sommet que nous avons isolé précédemment. 
+
+Dans ce qui suit, en vue de répondre à la question posée, nous allons: 
+
+1. importer les données des sentiers estivaux de la SEPAQ (les autres données étant déjà importées),
+
+2. s'assurer que l'objet spatial importé et `parcs` ont le même SCR,
+
+3. isoler les sentiers estivaux du parc national du Mont-Mégantic,
+
+4. trouver le chemin le plus proche du sommet identifié à la section précédente,
+
+5. extraire les cellules d'élévation de `dem_lcc` sur ce sentier,
+
+6. faire un profile d'élévation. 
+
+
+<br>
+
+Commençons la première étape et importons les sentiers de la SEPAQ:
 
 ```{r, eval = FALSE}
 chemin <-"D:/votrechemin/SCI1031/Module8/Donnees/"
@@ -429,33 +455,152 @@ sentiers <- st_read(chemin_parcs)
 
 ```{r, echo = FALSE}
 sentiers <- st_read("Module8/data/sentiers_sepaq/Sentier_ete_l.shp")
-```
-
-Nous pouvons à présent inspecter visuellement cette couche d'information spatiale.
-
-```{r}
 mapview(sentiers)
 ```
 
-En se référant à la section TODO, on peut à présent isoler les sentiers se retrouvant à l'intérieur du parc du Mont-Mégantic.
+Dans ce qui suit, nous allons utiliser des données d'élévation plus fines pour obtenir un profil topologique plus précis. Ces données ont été téléchargées avec R, avec la fonction ` get_elev_raster()` de la bibliothèque [`elevatr`](https://CRAN.R-project.org/package=elevatr) en utilisant les commandes suivante&nbsp;:
 
-parc_megantic <- subset(parcs, TRQ_NM_ == 'Parc national du Mont-Mégantic')
-sentiers_megantic <- sentiers[parc_megantic,]
+```{R, eval = FALSE}
+# install.packages("elevatr")
+library(elevatr)
+elv_megantic <- get_elev_raster(crop(dem_lcc, parc_megantic), proj = projection(dem_lcc), z = 13) 
+# il y a encore un niveau de resolution, z (zoom), encore plus fin avec z = 14
+```
+
+```{R, echo = FALSE}
+# writeRaster(ra_elv,  "megantic_elevation.grd")
+elv_megantic <- raster("Module8/data/megantic_elevation.grd")
+```
+
+Vérifions que les SCR&nbsp; utilisés sont tous identiques avec `st_crs()`:
+
+```{r check_crs}
+st_crs(sentiers) == st_crs(parcs)
+st_crs(elv_megantic) == st_crs(parcs)
+```
+
+À présent, nous allons isoler les sentiers du parc du Mont-Mégantic qui se trouvent dans `sentier`. Commençons par inspecter la table des attributs&nbsp;:
+
+```{r} 
+head(sentiers)
+```
+
+La colonne `Nom_etab` contient le non des parcs que nous pouvons lister rapidement avec `unique()` qui enlève les doublons.
+
+```{r} 
+unique(sentiers$Nom_etab)
+```
+
+Nous avons alors deux manière de procéder, nous pouvons soit utiliser cette colonne et la fonction `subset()`&nbsp;:
+
+```{r}
+sentiers_megantic <- subset(sentiers, Nom_etab == "Mont-Mégantic")
+```
+
+soit un filtre spatial avec les limites du parc Mont-Mégantic que contiennent `parcs`&nbsp;:
+
+```{r sentier_megantic} 
+sentiers_megantic <- sentiers[parc_megantic, ]
+mapview(sentiers_megantic)
+```
+
+Nous avons ainsi obtenu, quelle que soit la méthode choisie, un objet vectoriel, `sentiers_megantic` qui contient les sentiers du parc Mont-Mégantic. Nous allons à présent appeler la fonction `st_nearest_feature()` pour sélectionner le sentier (`LINES`) le plus proche du sommet (`POINT`).
+
+```{r, st_nearest_feature}
+id_nearest <- st_nearest_feature(sf_point_max_elev, sentiers_megantic)
+id_nearest
+```
+
+La fonction `st_nearest_feature()` nous retourne l'indice de la géométrie recherchée.
+
+```{r}
+sentier_top <- sentiers_megantic[id_nearest, ]
+sentier_top
+```
+
+Notons que nous aurions pu faire la même opération directement sur l'objet `sentiers`. Regardons ce sentier&nbsp;:
+
+```{r}
+mapview(sentier_top)
+```
+
+Il s'agit d'une des sections du Sentier du Mont-Mégantic et nous décidons de parcourir ce sentier pendant notre randonnée, nous allons combiner les différentes portions du sentier. Commençons par sélectionner ces portions en utilisant la colonne `Toponyme1`.
+
+```{r rando_sections}
+rando_sections <- subset(sentiers_megantic, Toponyme1 == "Sentier du Mont-Mégantic")
+```
+
+Visualisons ensuite ces différentes portions en les colorant selon un identifiant `id`&nbsp;:
+
+```{r}
+rando_sections$id <- 1:5
+mapview(rando_sections, zcol = "id")
+```
+Nous allons combinant dans l'ordre du sentier depuis, avec `st_combine()`, en débutant avec la section 5: 
+
+```{r}
+rando <- st_combine(rando_sections[c(5, 1:4),])
+```
+
+Pour parvenir à faire notre profile, nous allons utiliser `extract()` comme suit.
+
+```{r elv_profile}
+topo_elv <- extract(elv_megantic, st_as_sf(rando), along = TRUE, cellnumbers = TRUE) 
+```
+
+Trois remarques sur cette ligne de commande&nbsp;: 
+
+1. Nous avons de convertir `rando` qui est de classe `sfc` en objet de classe `sf` pour l'utiliser avec `extract()`, ce que nous faisons avec `st_as_sf()`,
+
+2. `along = TRUE` nous permet d'avoir les cellules ordeonnées le long des lignes de `rando_sections`,
+
+3. `cellnumbers = TRUE` nous permet d'avoir les numéros de cellules extraites.
 
 
+Comme vu un peu plus haut, `topo_elv` est une liste, mais cette fois le premier élément est une matrice avec deux colonnes: une pour l'identifiant des cellules, la seconde colonne à la valeur d’élévation (précédemment, c'était un vecteur avec seulement des valeurs d'élévation).  
 
-# mapview(sentiers[st_nearest_feature(sf_point_max_elev, sentiers),])
 
-pour cela, on doit croiser les couches spatiales des sentiers estivaux de ce parc avec le 
+```{r}
+names(topo_elv[[1]]) <- c("cellule_id", "elevation")
+head(topo_elv[[1]])
+```
 
-- Isoler le sentier le plus proche du sommet (st_nearest)
-- Puis, extraire les pixels du rasters se retrouvant sous la ligne du sentier (extract)
-- mapview des pixels passant sous la ligne du sentier
-- On montre habituellement les figures (distance parcourue vs élévation) présenté par la SEPAQ, on veut améliorer le rendu visuelle.
-- Utiliser la resolution du raster pour déterminer la distance inter-pixels - Ici ca va prendre de l'illustration pour être sûr que la notion est saisie
-- Faire la figure de distance cumulée versus élévation 
-- On vient de répondre à notre question
+Nous avons donc toutes les valeurs d'élévation, il nous reste à parcourir le sentier et calculer les distances entre chaque paires de points qui se suivent. Pour se faire, nous allons transformer les données de `topo_elv` en un objet spatial avec `st_as_sf()`. Nous commençons par créer un data frame de coordonnées en utisant la première colone de `topo_elv[[1]]`, `elv_megantic`
+et la fonction `xyFromCell()` qui nous retourne les coordonnées spatiales pour une sélection de cellules d'un raster.
 
+```{r xyFromCell}
+df_pts <- as.data.frame(xyFromCell(elv_megantic, topo_elv[[1]][, 1]))
+head(df_pts)
+```
+
+Puis nous appelons `st_as_sf()`&nbsp;:
+
+```{r}
+topo_pts <- st_as_sf(df_pts,
+    coords = c("x", "y"),
+    crs = st_crs(sentiers_megantic)
+  )
+```
+
+Il nous reste alors à utiliser la distance `st_distance()` pour calculer les distance entre points successifs. Une astuce pour le faire est d'utiliser deux fois `topo_pts`, une fois sans le premier point et la deuxième fois sans le dernier élément et d'utiliser une distance élément par élément avec l'argument `by_element = TRUE`, ce qui nous permet de faire la distance entre points qui se suivent.
+
+
+```{r}
+pts_dist_all <- st_distance(topo_pts[-1, ], topo_pts[-nrow(topo_pts),],
+ by_element = TRUE)
+```
+
+Pour répondre à notre question. il nous reste à visualiser l'élévation (la deuxième colone de `topo_elv[[1]][, 2]`) en fonction de la somme cumulée des distances que nous venons de calculer (avec `cumsum()`). Remarquons que le calcul précédent nous donne une valeur de distance de moins (car nous calculons des intervalles), nous rajoutons donc le 0 initial aux distances calculées.
+
+```{r profile_topo, fig.width = 9.5}
+plot(c(0, cumsum(pts_dist_all)), topo_elv[[1]][, 2], 
+  main = "Profile topographique du Sentier du Mont-Mégantic", 
+  xlab = "Distance depuis le sommet (en mètre)", 
+  ylab = "Altitude (en mètre)", 
+  type = "l", # pour utiliser une ligne
+  lwd = 2 # augmente le trait de la ligne 
+) 
+```
 
 
 
@@ -463,3 +608,4 @@ pour cela, on doit croiser les couches spatiales des sentiers estivaux de ce par
 
 
 ## Exercice {#ex_mat_manip}
+
