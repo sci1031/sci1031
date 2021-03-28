@@ -21,20 +21,22 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `getValues()`
 - `nrow()`, `ncol()` et `ncell()`
 - `summary()`
-- `which()`
+- `which()`, `which.max()`
+- `max`
 - `as.data.frame()`, `data.frame()`
 - `extent()`
 - `plot()`
 - `crop()` `mask()`
 - `extract()`
-- `st_crs()`
+- `crs()`, `st_crs()`
 - `st_sfc()`, `st_polygon()`, `st_as_sf()`
+- `st_intersects()` 
 
 
 
 Dans la section Leçon, vous utiliserez des données de parc nationaux québécois.
 
-Dans la section Exercice, vous utiliserez TODO
+Dans la section Exercice, vous utiliserez XXX
 
 ```{r load-libraries8, echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
 library(raster)
@@ -62,7 +64,7 @@ Dans ce chapitre, nous allons détailler chacune des étapes réalisées en vue 
 
 ### Importer les données
 
-Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présents dans le secteur de la ville de Sherbrooke. Nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l'élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d'élévation des parcs de la région de Sherbrooke. Nous allons isoler le parc disposant du plus haut point culminant. Enfin, nous dresserons le profil d'élévation du sentier de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) se rendant au plus proche de se point culminant. 
+Dans le cadre de cette leçon, nous allons repartir des 4 parcs nationaux présents dans le secteur de la ville de Sherbrooke (plus précisément dans un rayon de 70&nbsp;kms autour de Sherbrooke). Nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale (donnée matricielle) est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)) est une matrice contenant l'élévation. Nous allons, dans un premier temps, extraire et manipuler les valeurs d'élévation des parcs de la région de Sherbrooke. Nous allons isoler le parc disposant du plus haut point culminant. Enfin, nous dresserons le profil d'élévation du sentier de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)) se rendant au plus proche de se point culminant. 
 
 Afin de faciliter l'importation de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargez en cliquant sur un seul lien: [données sur l'élévation et les parcs de la région de Sherbrooke](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Elevation_Parcs_Sherbrooke.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Donnees` pour ce module, et dézippez-le. Le dossier `Elevation_Parcs_Sherbrooke` comprend deux sous-dossiers et un fichier:
 
@@ -78,7 +80,7 @@ library(raster)
 library(mapview)
 ```
 
-Maintenant, nous importons le *shapefile* des 4 parcs de la régions de Sherbrooke que nous avons isolé à l'intérieur du module 7. 
+Maintenant, nous importons le *shapefile* des 4 parcs de la régions de Sherbrooke que nous avons isolé à l'intérieur du [module 7](#manip_vec). 
 
 ```{r, eval = FALSE}
 chemin <- "D:/votrechemin/SCI1031/Module8/Donnees/"
@@ -126,7 +128,7 @@ Par exemple, il est possible d'avoir une idée de la distribution des valeurs de
 summary(getValues(dem))
 ```
 
-Avec cette commande, nous pouvons nous apercevoir que certains pixels
+Avec cette commande, nous pouvons nous apercevoir que certaines cellules
 contenaient des valeurs négatives. Ces valeurs ne sont pas aberrantes et
 signifient que ces pixels se retrouvent en dessous du niveau de la mer. Pour la
 suite du module (et à titre d'exemple), nous allons exclure ces valeurs
@@ -237,6 +239,7 @@ mapview(dem_cr_p)
 
 
 
+
 ##### Utiliser `mask()`
 
 Avec la fonction `mask()` il est possible de découper un raster non plus selon un rectangle uniquement, mais selon n'importe quel polygon. Pour illustrer cette fonction nous allons créer un polygon avec `sf`:
@@ -305,92 +308,102 @@ summary(extract(dem, pol)[[1]])
 
 ### Parmi les 4 parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
 
-Nous sommes maintenant en mesure de répondre à cette première question. Les données étant déjà importées, il nous reste à : 
+Nous sommes maintenant en mesure de répondre à la première question. Les données étant déjà importées, il nous reste à : 
 
 1. nous assurer que le raster d'élévation `dem` et les limites des parcs `parcs` sont dans le même SCR,
 
-2. uiliser `mask()` pour extraire les cellules de `dem` qui sont dans les parcs nationaux considérés
+2. utiliser `mask()` pour extraire les cellules de `dem` qui sont dans les parcs nationaux considérés,
 
+3. déterminer le maximum d'élévation dans cet ensemble de cellules,
+
+4. identifier les coordonnées spatiales associées à ce point.
+
+
+Commençons par re-projeter le raster `dem` en utilisant le SCR de `parcs`. Nous avons déjà réalisé cette opération à la section précédente et nous reprenons donc ci-dessous les lignes vues plus haut&nbsp;: 
 
 
 ```{r, eval = FALSE}
-st_crs(parcs) 
 dem_lcc <- projectRaster(dem, crs = crs(parcs))
-res(dem_lcc)
 ```
 
+Pour les prochaines manipulations, nous utiliserons donc `dem_lcc` et `parcs`. 
 
-Nous avons à présent couvert les opérations sur un raster permettant de vérifier sa composition et la distribution de ses valeurs. Nous pouvons maintenant passer à répondre à la première question qui vise à déterminer parmi les 4 parcs nationaux dans un rayon de 70&nbsp;kms autour de Sherbrooke lequel dispose du plus haut sommet. 
-
-La première étape consiste à isoler les pixels se retrouvant dans les 4 parcs nationaux. Pour cela, on utilise la fonction `mask()`. 
+Nous cherchons maintenant à isoler les valeurs d'élévation (du raster `dem`) associées aux 4 parcs nationaux considérés. Étant donné que nous avons les objets vectoriels délimitant les 4 pars, nous pouvons directement faire cette selection en utilisant `mask()`. 
 
 ```{r, warning = FALSE}
 dem_parcs <- mask(dem_lcc, parcs)
 mapview(dem_parcs)
 ```
 
-La fonction `mask()` attribue une valeur `NA` aux pixels se retrouvant à l'extérieur des 4 parcs (polygones contenus dans l'objet `parcs`). On a ainsi isoler les valeurs d'élévation se retrouvant à l'intérieur des parcs.
-On peut maintenant retourner la valeur d'élévation la plus élevé en utilisant la fonction `max()`. On désire conserver cette valeur maximale afin d'isoler les pixels du raster `dem_parcs` disposant de cette valeur.
+Nous avons ainsi isolé les valeurs d'élévation se retrouvant à l'intérieur des 4 parcs nationaux. Nous pouvons alors retourner la valeur d'élévation la plus élevée en utilisant la fonction `max()`. 
 
 ```{r}
-max(getValues(dem_parcs), na.rm = TRUE)
 vmax <- max(getValues(dem_parcs), na.rm = TRUE)
+vmax
 ```
 
-L'étape suivante consiste à isoler le pixel disposant de cette valeur et d'obtenir sa coordonnée. Pour cela, on transforme le raster en `data.frame` avec la fonction `as.data.frame()` tel que vue précédemment. 
+Nous avons ainsi obtenu le maximum d’élévation pour ces parc qui est de `r format(vmax, digits = 4)`&nbsp;m. Nous cherchons alors les cordonnées spatiales associées à cette valeurs. Nous pouvons faire appel à la fonction `which()` pour trouver l'indice de la cellule (ou les indices des cellules, si il y en a plusieurs) en question
 
 ```{r}
-df_dem_parcs <- as.data.frame(dem_parcs, xy = TRUE, centroid = TRUE, na.rm = TRUE)
-head(df_dem_parcs)
+ind_max <- which(getValues(dem_parcs) ==  max(getValues(dem_parcs), na.rm = TRUE))
+ind_max 
 ```
 
-On retire les valeurs masquées (`NA`) en utilisant l'argument `na.rm=FALSE` puisque ces dernières ne nous intéressent pas. On s'assure également d'obtenir la coordonnées au centre du pixel avec `centroid = TRUE`. On peut à présent d'isoler la ligne du `data.frame` (1 ligne = 1 pixel) contenant la valeur maximale d'élévation (contenu dans `vmax`). Pour cela, on utilise la fonction `subset()`.
+Notons qu'il existe une function pour identifier le maximum, `which.max()` et qui nous permet de trouver avec une syntaxe plus simple.
+
+```{r which.max}
+which.max(getValues(dem_parcs))
+```
+
+Cette remarque étant faite, nous pouvons maintenant utiliser l'indice `ind_max` et la fonction `as.data.frame()` avec `xy = TRUE` et `centroid = TRUE` comme vu au [module 5](#mat)&nbsp;:
 
 ```{r}
-df_max_elev <- subset(df_dem_parcs, DEM == vmax) 
+df_max_elev <- as.data.frame(dem_parcs[ind_max, drop = FALSE], xy = TRUE, centroid = TRUE, na.rm = TRUE)
 df_max_elev
 ```
 
-Une fois isolé, les coordonnées du pixel (x et y) peuvent être utilisé pour un créer un objet spatial (POINT) contenant le centroïde de ce pixel grâce à la fonction `st_as_sf()`. On n'oublie pas de spécifier que le système de projection est identique à celui du raster d'élévation (`dem_parcs`) pour les 4 parcs autours de la ville de Sherbrooke. Nous nous servirons par la suite de ce point pour vérifier dans lequel des 4 parc nationaux il se retrouve. 
+Deux remarques sur ce que nous avons fait: 
+
+1. L'argument `drop = FALSE` permet d'éviter que R ne convertisse `dem_parcs[ind_max, ]` en un vecteur car nous avons besoin d'un raster. 
+
+2. `na.rm = TRUE` nous permet d'ignorer toutes les valeurs masquées, comme nous l'avons dans d'autres fonctions (e.g. `mean()`).
+
+
+Une fois isolé, les coordonnées du pixel (x et y) peuvent être utilisées pour créer un objet spatial (de classe `sf`) contenant le centroïde de ce pixel grâce à la fonction `st_as_sf()`. Nous nous servirons par la suite de ce point pour vérifier dans lequel des 4 parc nationaux il se retrouve. 
 
 ```{r}
-sf_point_max_elev <- st_as_sf(df_max_elev, coords = c("x", "y"), crs = 32198)
+sf_point_max_elev <- st_as_sf(df_max_elev, coords = c("x", "y"), 
+  crs = st_crs(dem_parcs))
 sf_point_max_elev
 ```
 
-Une autre façon d'obtenir le point d'élévation maximal est d'utiliser la fonction `rasterToPoints()` de la manière suivante:
-
-```{r}
-sp_max_elev <- rasterToPoints(dem_parcs, fun = function(x) x == vmax, spatial = TRUE)
-st_as_sf(sp_max_elev)
-```
-
-L'objet renvoyé par la fonction `rasterToPoints(... , spatial = TRUE)` permet d'obtenir un objet spatial contenant également le point d'élévation maximale. Cependant, la classe d'objet retourné ne provient pas de la bibliothèque `sf` mais de la bibliothèque `sp`. Cette bibliothèque spatiale est plus ancienne et ne sera pas abordé dans ce cours, puisque elle est amené à être remplacé par la bibliothèque `sf`. Si jamais vous devez l'utiliser ailleurs que dans ce cours, sachez qu'il est possible de convertir un objet de classe `sf` à tout moment vers la classe `sp` grâce à la fonction `as(... , "Spatial")`. En voici un exemple. Cette conversion est possible pour l'ensemble des couches spatiales vectorielles mais ne s'applique par aux rasters.
-
-
-```{r}
-as(sf_point_max_elev, "Spatial")
-```
 
 En superposant les couches d'informations spatiales avec `mapview`, on peut observer dans quel parc se retrouve à présent ce point d'élévation maximal. 
 
-```{r, fig.cap = "En cliquant sur le polygon du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-mégantic", warning=FALSE}
+```{r, fig.cap = "En cliquant sur le polygon du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-Mégantic", warning = FALSE}
 mapview(dem_parcs) + mapview(parcs, alpha = 0.01) + mapview(sf_point_max_elev,  col.regions = "red")
 ```
 
-Ce point se retrouve dans le **Parc national du Mont-Mégantic**. On réalise à présent une opération sur la topologie permettant d'isoler le polygon du parc dans lequel se retrouve ce point. 
+Ce point se retrouve dans le **Parc national du Mont-Mégantic**. Au lieu de faire une déduction visuellement, nous allons à présent réaliser une opération sur la topologie permettant d'isoler le polygon du parc dans lequel se retrouve. Pour ce faire, nous utilisons la fonction `st_intersects()` comme nous l'avons vu au [module 7](#manip_vec).
 
 ```{r}
-parcs[which(st_intersects(parcs, sf_point_max_elev, sparse = FALSE) == TRUE), ]
+st_intersects(parcs, sf_point_max_elev, sparse = FALSE)
 ```
 
-NOTE: Cette opération pourrait être réécrite beaucoup plus simplement sous la forme:
+et nous pouvons ensuite utiliser ce vecteur logique pour identifier le parc auquel ce sommet appartient&nbsp;:
 
 ```{r}
-parcs[sf_point_max_elev,]
+parcs[st_intersects(parcs, sf_point_max_elev, sparse = FALSE), ]
 ```
 
-Cette syntaxe permet d'isoler le polygon du parc mégantic dans lequel se retrouve le point culminant entre les 4 parcs.
+Notons que cette opération peut être écrite plus simplement sous la forme:
+
+```{r}
+parcs[sf_point_max_elev, ]
+```
+
+Cette dernière manipulation nous permet de répondre à notre première question: 
+dans les 4 parcs nationaux sélectionnés, c'est le Parc national du Mont-Mégantic qui a le plus haut sommet, sommet qui culmine à `r format(vmax, digits = 4)`&nbsp;m d'altitude.
 
 
 
