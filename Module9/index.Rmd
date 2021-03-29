@@ -69,5 +69,17 @@ Les données spatio-temporelles représente une collection d'objets spatiaux ord
 - isolé une donnée dans le temps dans le temps 
 
 
+### Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+
+- Dans ce chapitre, on veut jouer avec les `rasterStack`. Préparation d'un `rasterStack` avec la précipitation totale par mois pour le même bonding box que le raster de DEM. Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
+- On extract les valeurs de précipitation (par mois) du rasterStack pour le parc que l'on a ciblé
+- On montre comment on peut réaliser une moyenne entre deux mois rasterStack[[1]] + rasterStack[[2]] / 2 ou alors mean rasterStack[[1:2]]. 
+- Crop un raster rasterStack
+- which.min pour déterminer le raster du stack disposant de la plus petite valeur
+- Compléter avec d'autre chose, ca me parait léger... à voir quand au dessus ce sera écrit..
+
+
+
 ## Exercice
+
 

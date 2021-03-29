@@ -11,3 +11,4 @@ gh-pages*
 .Rprofile
 *gitignore
 packages.bib
+tmp/
