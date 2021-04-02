@@ -1,19 +1,14 @@
 # Données spatiotemporelles {#spatiotemp}
 
 
-L'objectif principal de ce module est
+L'objectif principal de ce module est de manipuler des d'objets spatiaux, vecteurs et rasters, qui sont indexés dans le temps. Cela nous permettra.
 
 À la fin de ce module vous saurez:
 
-- 
-- 
+- écire des fonctions simples 
+- utiliser les objets `rasterStack`
 -
 
-```R
-library(stars)
-mint <- read_stars("data/mint.nc")
-maxt <- read_stars("data/maxt.nc")
-```
 
 nn <- raster("data/mint.nc")
 
@@ -22,61 +17,343 @@ st_set_dimensions(mint, 3, values = dts)
 
 Vous utiliserez les librairies suivantes:
 
--
--
+- `mapview`
+- `raster`
+- `sf`
+- `lubridate`
+- `animation`
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
--
--
+- `st_length()`
+- `stack()`
+- `calc()`
+- `as_date_time()`, `ym()`, `hour()`, `minute()`, `second()`
+- `getZ`, `setZ()`
 
-Dans la section Leçon, vous utiliserez des données XYXYX
+Dans la première partie de la section Leçon, nous utiliserons des données de trajets de vélo dans la ville de Montréal, ce qui nous amènera à manipuler des objets vectorielles à des échelles de temps fines (quelques heures). Dans la seconde partie, nous utiliserons des données matricielles de températures et de précipitations et nous travaillerons sur une échelle de temps plu grossière, avec des données mensuelles sur une période de 10 ans. 
 
 Dans la section Exercice, vous utiliserez XXXXX
 
-```{r load-libraries9, echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
-library(stars)
-```
+
 
 
 ## Leçon
 
-### Propriétés des données spatio-temporelles
-
-Les données spatio-temporelles représente une collection d'objets spatiaux ordonnées dans le temps: la même information spatiales pour différents dans le temps. 
-
-
-![Source https://r-spatial.github.io/stars/index.html](https://raw.githubusercontent.com/r-spatial/stars/master/images/cube3.png)
+* Manipuler des données vectorielles sur un temps court.
+* Manipuler des données matricielles sur un temps long.
 
 
-### Introduction à la librairie R spacetime
+### Trajets de vélo à la ville de Montréal
 
--	Classes de données spatio-temporelles
--	Création d’objet stars
--	Manipulation de bases de données spatio-temporelles
+Nous allons 
 
+* Quelle est le plus rapide?
 
+* Quel mois de l'année attire le plus de cycliste. 
 
-### Visualisation
-
--	Figure à panneaux multiples
--	Figure espace-temps
--	Figure animée
-
-### Basic analysis 
-
-- une tendance 
-- isolé une donnée dans le temps dans le temps 
+* Visualiser le plus long trajet sous forme d'animation. 
 
 
-### Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+### Importer les données 
 
-- Dans ce chapitre, on veut jouer avec les `rasterStack`. Préparation d'un `rasterStack` avec la précipitation totale par mois pour le même bonding box que le raster de DEM. Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
+Sur le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent a disposition près de [5000 trajets de vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#) enregistré avec l'application "Mon RésoVélo" et anonymisée. Une description complète. Pour chaque trajet, "intervalles réguliers", les arrêts long divisés en plusieurs..
+
+
+<!--  -->
+
+Le jeu de données et un fichier [GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` qui a été zippé. Ces données étant un peu volumineuses (>150MB), nous avons
+seulement gardé les 400 premiers trajets. Aussi, la colonne `liste_segments_jsonb` permet de faire le lien entre et les réseaux routiers et de pistes cyclable, que nous avons enlevés. Ce que nous avons fait en utilisant des manipulations vues dans les modules précédents.
+
+```R
+tmp <- st_read("trip5000.json") 
+st_write(tmp[1:400, names(tmp) != "liste_segments_jsonb"], "trip400.geojson") 
+```
+
+Et nous pouvons utiliser [XXX] comme suit.
+
+```{R}
+library(sf)
+trajets <- st_read("Module9/data/trip400.geojson")
+```
+
+
+
+### Qui est le plus rapide ?
+
+Nous avons 400 trajets de vélo et avec nous allons répondre aux questions suivantes. 
+
+
+Pour calculer une vitesse, il faut diviser une longeure par le temps. 
+Nous allons devoir diviser la longueure par le temps. Colnne `length` ou st_length(trajets)
+
+```{R trajet_length}
+len <- st_length(trajets)
+len[1:20]
+plot(trajets$length, st_length(trajets), xlab = "distance - colonne 'length' (m)", ylab = "distance - st_length() (m)")
+```
+
+Pour la manipulation des date nous allons utiliser le package [`lubridate`](https://CRAN.R-project.org/package=lubridate) qui offre (R offre tout les utilisé nécessaires mais ce package rend la manipulation plus intuitif). Voir le l'aide mémoire (<https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf>) pour un tour d'horizon très complet des fonctionnalités du package. 
+
+```{R}
+class(trajets$start)
+library(lubridate)
+trajets$start <- as_datetime(trajets$start)
+trajets$stop <- as_datetime(trajets$stop) 
+trajets$duree_s <- trajets$stop - trajets$start
+```
+
+Nous obtenons les durée des trajets en seconde. 
+
+
+```{R histo}
+par(mfrow = c(1, 2))
+hist(trajets$length, breaks = seq(0, 44000, 2000))
+hist(as.numeric(trajets$duree_s), breaks = seq(0, 20000, 1000))
+```
+
+```{R vitess}
+trajets$vitesse_m_s <- trajets$duree_s/trajets$length
+```
+
+```{R}
+trajets$vitesse_km_h <- trajets$vitesse_m_s*3.6
+```
+
+
+### Quel mois le plus beau?
+
+```{R}
+trajets$month <- month(trajets$start)
+table(trajets$month)
+```
+
+```{R}
+barplot(table(day(trajets$start[trajets$month == 7])))
+```
+
+Noté [`hms`](https://CRAN.R-project.org/package=hms)
+
+### Visualisons
+
+Passé un peu plus de temps pour visualiser les données. 
+
+```{R}
+library(mapview)
+traj_long <- trajets[which.max(trajets$length), ]
+mapview(traj_long)
+```
+
+```{R}
+traj_long$n_coord
+```
+
+
+```{R}
+traj_long_pts <- st_as_sf(st_cast(st_geometry(traj_long), "POINT"))
+traj_long_pts$temps <- seq(traj_long$start, traj_long$stop, length.out = nrow(traj_long_pts))
+```
+
+```{R}
+txt_temps <- function(temps) {
+  paste0("Temps: ", hour(temps), "h ", minute(temps), "m ", floor(second(temps)), "s")
+} 
+txt_distance <- function(line) {
+  len <- st_length(line)
+  paste0(" - Distance parcourue: ", format(as.numeric(len)/1000, digits = 4), "km")
+}
+visual <- function(n = 100, basemap = NULL) {
+  tps <- traj_long_pts$temps[n]
+  pts <- traj_long_pts[seq_len(n),]
+  lin <- st_cast(st_combine(pts), "LINESTRING")
+  basemap + 
+  tm_shape(lin, bbox = st_bbox(traj_long_pts)) + 
+    tm_lines(size = .25, col = "#62852eaa") +
+    tm_layout(title = paste(txt_temps(tps), txt_distance(lin)) , title.position = c("right","top"))
+}
+animation <- function(nb_img = 10, basemap = NULL) {
+  tmap_mode("plot")
+  for (i in floor(seq(2, nrow(traj_long_pts), length.out = nb_img))) {
+    print(visual(i, basemap))
+  }
+}
+```
+
+```R
+library(animation)
+library(tmap)
+library(rosm)
+x <- osm.raster(extent(traj_long_pts), crop = TRUE)
+
+saveGIF(animation(10, tm_shape(x) + tm_rgb()))
+```
+
+![](Module9/img/animation.gif)
+
+
+
+
+
+
+
+
+
+### Précipitations et Température autour du Mont-Mégantic. 
+
+#### Importer les données 
+
+Les données sont au format [NetCDF (Network Common Data Form) ](https://fr.wikipedia.org/wiki/NetCDF)
+et peuvent être importées de la sorte. 
+<!-- TODO prendre les données de chelsa -->
+
+```{R stack}
+library(raster)
+mint <- stack("Module9/data/mint.nc")
+maxt <- stack("Module9/data/maxt.nc")
+pcp <- stack("Module9/data/pcp.nc")
+```
+
+
+#### Les stack de raster
+
+- Dans ce chapitre, on veut jouer avec les `rasterStack`. Préparation d'un `rasterStack` avec la précipitation totale par mois pour le même bonding box que le raster de DEM. 
+
+
+```{R}
+class(mint)
+class(mint[[1]])
+```
+
+`rasterStack` est une collection d'objet de class `rasterLayer`.
+
+
+
+```{R}
+extent(mint)
+projection(mint)
+```
+
+```{R manip_stack}
+dim(mint)
+ncell(mint)
+nlayers(mint)
+```
+
+Facilement extraire les différentes couches avec `[[()`
+
+
+```{R}
+class(mint[[1:3]])
+class(mint[[1]])
+```
+
+
+```{R}
+mapview(mint[[1:3]])
+```
+
+```{R}
+getValues(mint)
+summary(mint)
+```
+
+TODO 
+<!-- crop -->
+
+```{R}
+plot(max(mint))
+plot(max(mint))
+```
+
+```{R}
+quantile(mint)
+```
+
+```{R}
+plot(calc(mint, quantile)) 
+```
+
+
+
+```{R}
+paste0(rep(1:12, 10), "/", rep(1:10, each = 12))
+temps <- my(paste0(rep(1:12, 10), "/", rep(1:10, each = 12)))
+names(mint) <- paste0(temps)
+```
+
+```{R setZ}
+mint <- setZ(mint, temps)
+getZ(mint)
+```
+
+```{R}
+temps <- my(paste0(rep(1:12, 10), rep(1:10, each = 12)))
+names(mint) <- paste0(temps)
+```
+
+
+
+#### Question 1
+
+* Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+
+
+1. cropper elevation raster autour du parc
+
+2. Sur dix ans, mois par mois
+
+
+```{R}
+ra_mean <- list()
+for (i in 1:12) {
+  ra_mean[[i]] <- mean(mint[[i + (0:9)*12]])
+}
+ra <- stack(ra_mean)
+names(ra) <- month.name[1:12]
+plot(ra)
+```
+
+
+```{R}
+val <- apply(getValues(ra), 2, mean)
+val 
+which.min(val)
+```
+
+
+* Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
+
 - On extract les valeurs de précipitation (par mois) du rasterStack pour le parc que l'on a ciblé
 - On montre comment on peut réaliser une moyenne entre deux mois rasterStack[[1]] + rasterStack[[2]] / 2 ou alors mean rasterStack[[1:2]]. 
-- Crop un raster rasterStack
+
 - which.min pour déterminer le raster du stack disposant de la plus petite valeur
 - Compléter avec d'autre chose, ca me parait léger... à voir quand au dessus ce sera écrit..
+
+
+#### Profile temperature et precipitation
+
+
+```{R}
+# TODO le mettre en fonction!
+plot(0.1*apply(getValues(mint), 2, mean), type = "l", lty = 2)
+lines(1:120, apply(getValues(maxt), 2, mean), lty = 2, col = 2)
+```
+
+
+#### Visualisation
+
+<!-- profile et raster a coté avec le parc -->
+<!-- 
+plot(mint[[2]]) 
+plot(0.1*apply(getValues(mint), 2, mean), type = "l", lty = 2) -->
+
+
+### Remarques finales
+
+L'écosystème de package R est toujours en activement, aisn quelque années
+vous pourrez faire les même opérations avec des finctoins au nom similaires. 
+Cela dit tout ce qui a été vu ici reste valid.
+
 
 
 

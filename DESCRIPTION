@@ -13,6 +13,7 @@ Imports:
   GISTools,
   latex2exp,
   leafsync,
+  lubridate,
   lwgeom,
   mapview,
   rasterVis,

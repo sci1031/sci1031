@@ -58,7 +58,7 @@ Les données vectorielles comprennent également des variables additionnelles ap
 Les **points** sont les données vectorielles les plus simples. Par exemple, un point pourrait représenter l’emplacement d’un restaurant dans une ville. Les attributs associés à ce point pourraient inclure les heures d’ouverture, sa spécialité culinaire, l’échelle de prix de son menu ou d’autres informations.
 
 <br>
-```{r multipoints, fig.align='left', echo=FALSE,fig.cap="L’emplacement des stations de vélo en libre partage, *Bixi*, dans un quartier de Montréal correspond à une géométrie multipoints. Source : https://secure.bixi.com/map/", out.width = '60%'}
+```{r multipoints, fig.align='left', echo=FALSE,fig.cap="L’emplacement des stations de vélo en libre partage, *Bixi*, dans un quartier de Montréal correspond à une géométrie multipoints. Source : https://secure.bixi.com/map/ [taille réelle](Module2/images/2_multipoints.PNG)", out.width = '60%'}
 knitr::include_graphics('Module2/images/2_multipoints.PNG')
 ```
 <br>
