@@ -1,21 +1,17 @@
 # Données spatiotemporelles {#spatiotemp}
 
-
-L'objectif principal de ce module est de manipuler des d'objets spatiaux, vecteurs et rasters, qui sont indexés dans le temps. Cela nous permettra.
-
-À la fin de ce module vous saurez:
-
-- écire des fonctions simples 
-- utiliser les objets `rasterStack`
--
+Manipuler le temps (les dates, les heures, les secondes, etc.) représente une compétence indispensable en science des données et les données spatio-temporelles ont cette particularité d'être doublement indexées : dans le temps et dans l'espace. L'objectif principal de ce module est justement de manipuler des objets spatiaux, vecteurs et rasters, qui sont aussi indexés dans le temps, et ce à différentes échelles temporelles.
 
 
-nn <- raster("data/mint.nc")
+À la fin de ce module vous saurez&nbsp;:
 
-dts <- seq(as.Date("2009/01/01"), as.Date("2018/12/01"), by = "month") 
-st_set_dimensions(mint, 3, values = dts)
+- Manipuler le temps et les dates.
+- Écrire des fonctions simples et les utiliser pour structurer vos scripts.
+- Créer des animations simples qui montre l’évolution de données spatialisées dans le temps.
+- Utiliser les objets de classe `rasterStack`.
 
-Vous utiliserez les librairies suivantes:
+
+Vous utiliserez les bibliothèques suivantes&nbsp;:
 
 - `mapview`
 - `raster`
@@ -23,112 +19,213 @@ Vous utiliserez les librairies suivantes:
 - `lubridate`
 - `animation`
 
-Vous apprendrez à utiliser les fonctions suivantes:
+Vous apprendrez à utiliser les fonctions suivantes&nbsp;:
 
 - `st_length()`
 - `stack()`
 - `calc()`
 - `as_date_time()`, `ym()`, `hour()`, `minute()`, `second()`
-- `getZ`, `setZ()`
+- `getZ()`, `setZ()`
 
-Dans la première partie de la section Leçon, nous utiliserons des données de trajets de vélo dans la ville de Montréal, ce qui nous amènera à manipuler des objets vectorielles à des échelles de temps fines (quelques heures). Dans la seconde partie, nous utiliserons des données matricielles de températures et de précipitations et nous travaillerons sur une échelle de temps plu grossière, avec des données mensuelles sur une période de 10 ans. 
+Dans la première partie de la section [Leçon](#lecon_spatiotemp), nous manipulerons des données des trajets de vélo dans la ville de Montréal. Dans la seconde partie, nous utiliserons des données matricielles de températures et de précipitations  autour et nous travaillerons sur une échelle de temps plu grossière, avec des données mensuelles sur une période de 10 ans. 
 
-Dans la section Exercice, vous utiliserez XXXXX
-
-
+Dans la section [Exercice](#ex_spatiotemp), vous utiliserez XXX
 
 
-## Leçon
 
-* Manipuler des données vectorielles sur un temps court.
-* Manipuler des données matricielles sur un temps long.
+
+## Leçon {#lecon_spatiotemp}
+
+Cette leçon est structurée autour de deux exemples inspirés des autres modules.
+Dans la première partie, nous allons analyser un jeu de données de 400 trajets de cyclistes à Montréal. Cette analyse nous conduira à manipuler des objets
+vectorielles à des échelles de temps fines (de l'ordre de quelques heures). Dans la seconde partie nous étudierons l'évolution au cours des 10 dernières années des température et précipitations dans la région du parc national du Mont-Mégantic. Nous manipulerons alors des climatiques mensuelles sous forme d'une série de rasters.
+
 
 
 ### Trajets de vélo à la ville de Montréal
 
-Nous allons 
+Dans cette section nous allons manipuler le temps et l'espace avec un ensemble de 400 trajets de vélo et avec cette ensemble de données nous répondrons aux deux questions suivante&nbsp;:
 
-* Quelle est le plus rapide?
+* Quel trajet présente la vitesse moyenne la plus élevée?
 
-* Quel mois de l'année attire le plus de cycliste. 
+* Quelle est période de l'année favorite des cyclistes du jeu de données?
 
-* Visualiser le plus long trajet sous forme d'animation. 
-
-
-### Importer les données 
-
-Sur le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent a disposition près de [5000 trajets de vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#) enregistré avec l'application "Mon RésoVélo" et anonymisée. Une description complète. Pour chaque trajet, "intervalles réguliers", les arrêts long divisés en plusieurs..
+Nous finirons cette partie avec un exercice de visualisation du trajet le plus long, sous forme d'animation. 
 
 
-<!--  -->
+#### Importer les données 
 
-Le jeu de données et un fichier [GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` qui a été zippé. Ces données étant un peu volumineuses (>150MB), nous avons
-seulement gardé les 400 premiers trajets. Aussi, la colonne `liste_segments_jsonb` permet de faire le lien entre et les réseaux routiers et de pistes cyclable, que nous avons enlevés. Ce que nous avons fait en utilisant des manipulations vues dans les modules précédents.
+Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent à disposition un jeu de données incluant près [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions du cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr) (les trajets ont notamment été anonymisés, reportez-vous au lien précédent pour plus d’informations relatives au traitement de ces données).
+
+
+L'ensemble de ces trajets est contenu dans un fichier
+[GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` qui a été
+zippé. Ces données étant un peu volumineuses (>150MB), nous avons seulement
+gardé les 400 premiers trajets. Aussi, nous avons enlevé la colonne `liste_segments_jsonb` qui permet d'identifier les pistes cyclables et les portions du réseau routier emprunter par les cyclistes. Nous avons fait ce pré-traitement en utilisant des manipulations vues dans
+les modules précédents, que nous décrivons ci-dessous&nbsp;:
 
 ```R
+library(sf)
 tmp <- st_read("trip5000.json") 
 st_write(tmp[1:400, names(tmp) != "liste_segments_jsonb"], "trip400.geojson") 
 ```
 
-Et nous pouvons utiliser [XXX] comme suit.
+Nous pouvons maintenant utiliser le fichier `trip400.geojson` disponible à l'URL suivante [XXX]() comme suit&nbsp;:
 
-```{R}
+```{r, eval = FALSE}
+chemin <- "D:/votrechemin/SCI1031/Module9/Donnees/"
+chemin_trajet <- paste(chemin, "/trip400.geojson", sep = "")
+trajets <- st_read(chemin_trajet)
+trajets
+```
+
+```{r read_trajet, echo = FALSE, message = FALSE}
 library(sf)
 trajets <- st_read("Module9/data/trip400.geojson")
+trajets
 ```
 
+Il s'agit d'un objet de classe `sf` qui contient un ensemble de 400 lignes décrivant les trajets à vélo et pour lesquels nous avons les informations suivantes&nbsp;:
+
+```{r, names_trajet}
+names(trajets)
+```
+
+Dans la suite nous utiliserons les colonnes suivantes:
+
+- `start` : date et heure associées au début du trajet, 
+- `stop` : date et heure associées à la fin du trajet,
+- `length`: longueur du trajet.
 
 
-### Qui est le plus rapide ?
 
-Nous avons 400 trajets de vélo et avec nous allons répondre aux questions suivantes. 
+#### Quel trajet présente la vitesse moyenne la plus élevée?
+
+Nous avons maintenant importée 400 trajets à vélo et nous cherchons, dans un premier temps, celui qui présente la vitesse moyenne la plus élevée. Pour calculer une vitesse, nous devons diviser une longueur par le temps. Nous avons donc besoin de trouver la distance des trajets. Dans la table des attributs de `trajets`, il y a une colonne `length` qui nous donne cette distance.
+
+```{r, col_length}
+trajets$length[1:20] 
+```
+
+Sans cette colonne, il demeure relativement aisé de calculer ces distances avec la fonction `st_length()` qui calcule la longueur de chaque ligne de `trajets`. 
 
 
-Pour calculer une vitesse, il faut diviser une longeure par le temps. 
-Nous allons devoir diviser la longueure par le temps. Colnne `length` ou st_length(trajets)
-
-```{R trajet_length}
+```{r trajet_length}
 len <- st_length(trajets)
 len[1:20]
-plot(trajets$length, st_length(trajets), xlab = "distance - colonne 'length' (m)", ylab = "distance - st_length() (m)")
 ```
 
-Pour la manipulation des date nous allons utiliser le package [`lubridate`](https://CRAN.R-project.org/package=lubridate) qui offre (R offre tout les utilisé nécessaires mais ce package rend la manipulation plus intuitif). Voir le l'aide mémoire (<https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf>) pour un tour d'horizon très complet des fonctionnalités du package. 
+Est-ce que les deux distances sont identiques? Un moyen simple de le vérifier est de visualiser une distance en fonction de l'autre.
 
-```{R}
+```{r, len_vs_len}
+plot(trajets$length, st_length(trajets), 
+  xlab = "distance - colonne 'length' (m)", # 
+  ylab = "distance - st_length() (m)", 
+  pch = 19) # change le symbole des points
+abline(a = 0, b = 1, lty = 2) # ligne 1:1; lty = 2 donne une ligne discontinue
+```
+
+Nous voyons ainsi rapidement que tous les points sont sur la ligne 1:1, donc les valeurs sont identiques (ou très proches, car nous n'avons pas fait de tests formels, ils se pourraient donc qu'il y ait de minimes différences entre les deux distances). 
+
+Il nous reste à quantifier la durée des trajets pour obtenir les vitesses moyennes. Pour cela, nous avons besoin des les colonnes `start` et `stop`. Pour la manipulation des dates et du temps, nous allons utiliser le package [`lubridate`](https://CRAN.R-project.org/package=lubridate). R dispose, de base, de toutes les fonctionnalités nécessaires à la manipulation des dates et du temps, `lubridate` rend ces manipulations plus intuitives (l'aide mémoire (<https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf> fait un tour d'horizon complet des fonctionnalités du package). 
+
+Regardons à présent la classe des colonnes `start` et `stop`&nbsp;:
+
+```{r}
 class(trajets$start)
+class(trajets$stop)
+```
+
+Les classes de ces objets signifient que les chaînes de charactère suivent une norme [POSIX](https://fr.wikipedia.org/wiki/POSIX) (*Portable Operating System Interface*), en l'occurrence `POSIXct` (*calendar time*) est une variété de `POSIXt` (*time*) qui contient le nombre de secondes écoulées depuis l'[Heure Unix](https://fr.wikipedia.org/wiki/Heure_Unix) (*Epoch time*), le 1^er^ janvier 1970 00:00:00 UTC. Ainsi, en convertissant les objets de classe `POSIXct` en objet de classe `numeric`, nous obtenons ce nombre de secondes, par exemple&nbsp;:
+
+```{r}
+nb_sec <- as.numeric(trajets$start)
+nb_sec[1:20]
+```
+
+Ces classes peuvent être manipulées avec les fonctions de `lubridate`, par exemple nous pouvons extraire l'année avec la fonction `year()`&nbsp;:
+
+```{r get_year, message = FALSE}
 library(lubridate)
-trajets$start <- as_datetime(trajets$start)
-trajets$stop <- as_datetime(trajets$stop) 
+year(trajets$start)[1:20]
+```
+
+Aussi, la soustraction de deux objets `POSIXct` nous donne un objet de classe `difftime` qui exprime une durée en seconde:
+
+```{r duree}
+duree <- trajets$stop[1] - trajets$start[1]
+duree
+class(duree)
+```
+Nous calculons alors les durées pour les différents trajets.
+
+```{r}
 trajets$duree_s <- trajets$stop - trajets$start
 ```
 
-Nous obtenons les durée des trajets en seconde. 
+Regardons les distributions de longueurs et de durées en dessinant un histogramme avec la fonction `hist()`. 
 
 
-```{R histo}
-par(mfrow = c(1, 2))
-hist(trajets$length, breaks = seq(0, 44000, 2000))
-hist(as.numeric(trajets$duree_s), breaks = seq(0, 20000, 1000))
+```{r histo, fig.width = 9.5}
+par(mfrow = c(1, 2)) # figure a deux panneaux côte à côte
+hist(trajets$length, 
+  breaks = seq(0, 44000, 2000), # spécifie les catégories de longueur
+  xlab = "Longueur (m)",
+  ylab = "Fréquence",
+  main = "" # pas de titre
+) 
+hist(as.numeric(trajets$duree_s), 
+  breaks = seq(0, 20000, 1000),
+  xlab = "Durée (s)",
+  ylab = "Fréquence",
+  main = "" # pas de titre
+)
 ```
 
-```{R vitess}
-trajets$vitesse_m_s <- trajets$duree_s/trajets$length
+Nous rajoutons maintenant une colonne `vitesse_m_s` à `trajets` qui est la vitesse moyenne exprimé en mètre par seconde. 
+
+```{r vitesse}
+trajets$vitesse_m_s <- trajets$length/as.numeric(trajets$duree_s)
 ```
 
-```{R}
+Il peut être préférable d'exprimer ces vitesse en kilomètre par heure, pour cela il nous suffit de diviser par 1000 pour convertir les mètres en kilomètres et multiplier les secondes par 3600 pour les convertir en heures, ce qui revient à multiplier par 3.6
+
+```{r kms}
 trajets$vitesse_km_h <- trajets$vitesse_m_s*3.6
 ```
+
+Nous allons maintenant ordonner les vitesse avec et regarder les 10 premieères valeurs: 
+
+```{r sort_vitesse}
+vit_dec <- sort(trajets$vitesse_km_h, decreasing = TRUE)[1:10]
+```
+Le premier va a une vitesse de `r format(vit_dec[1], digits = 3)`&nbsp;km/h, ce qui ne semble pas réaliste et un problème d'enregistrement est probablement à l'origine, nous excluons ce trajet le second et retenons le second comme étant le plus rapide. Pour l'extraire, nous utiliser la fonction `order()`...
+
+```{r traj_rapide}
+traj_rapide <- trajets[order(trajets$vitesse_km_h, decreasing = TRUE)[2], ]
+traj_rapide 
+```
+
+... et nous le visualisons avec `mapview`.
+
+```{r}
+library(mapview)
+mapview(traj_rapide)
+```
+
+Un bien drôle de trajet à 22h près du parc Laurier.
+
+
 
 
 ### Quel mois le plus beau?
 
-```{R}
+```{r}
 trajets$month <- month(trajets$start)
 table(trajets$month)
 ```
 
-```{R}
+```{r}
 barplot(table(day(trajets$start[trajets$month == 7])))
 ```
 
@@ -138,23 +235,23 @@ Noté [`hms`](https://CRAN.R-project.org/package=hms)
 
 Passé un peu plus de temps pour visualiser les données. 
 
-```{R}
+```{r}
 library(mapview)
 traj_long <- trajets[which.max(trajets$length), ]
 mapview(traj_long)
 ```
 
-```{R}
+```{r}
 traj_long$n_coord
 ```
 
 
-```{R}
+```{r}
 traj_long_pts <- st_as_sf(st_cast(st_geometry(traj_long), "POINT"))
 traj_long_pts$temps <- seq(traj_long$start, traj_long$stop, length.out = nrow(traj_long_pts))
 ```
 
-```{R}
+```{r}
 txt_temps <- function(temps) {
   paste0("Temps: ", hour(temps), "h ", minute(temps), "m ", floor(second(temps)), "s")
 } 
@@ -206,7 +303,7 @@ Les données sont au format [NetCDF (Network Common Data Form) ](https://fr.wiki
 et peuvent être importées de la sorte. 
 <!-- TODO prendre les données de chelsa -->
 
-```{R stack}
+```{r stack}
 library(raster)
 mint <- stack("Module9/data/mint.nc")
 maxt <- stack("Module9/data/maxt.nc")
@@ -219,7 +316,7 @@ pcp <- stack("Module9/data/pcp.nc")
 - Dans ce chapitre, on veut jouer avec les `rasterStack`. Préparation d'un `rasterStack` avec la précipitation totale par mois pour le même bonding box que le raster de DEM. 
 
 
-```{R}
+```{r}
 class(mint)
 class(mint[[1]])
 ```
@@ -228,12 +325,12 @@ class(mint[[1]])
 
 
 
-```{R}
+```{r}
 extent(mint)
 projection(mint)
 ```
 
-```{R manip_stack}
+```{r manip_stack}
 dim(mint)
 ncell(mint)
 nlayers(mint)
@@ -242,17 +339,17 @@ nlayers(mint)
 Facilement extraire les différentes couches avec `[[()`
 
 
-```{R}
+```{r}
 class(mint[[1:3]])
 class(mint[[1]])
 ```
 
 
-```{R}
+```{r}
 mapview(mint[[1:3]])
 ```
 
-```{R}
+```{r}
 getValues(mint)
 summary(mint)
 ```
@@ -260,33 +357,33 @@ summary(mint)
 TODO 
 <!-- crop -->
 
-```{R}
+```{r}
 plot(max(mint))
 plot(max(mint))
 ```
 
-```{R}
+```{r}
 quantile(mint)
 ```
 
-```{R}
+```{r}
 plot(calc(mint, quantile)) 
 ```
 
 
 
-```{R}
+```{r}
 paste0(rep(1:12, 10), "/", rep(1:10, each = 12))
 temps <- my(paste0(rep(1:12, 10), "/", rep(1:10, each = 12)))
 names(mint) <- paste0(temps)
 ```
 
-```{R setZ}
+```{r setZ}
 mint <- setZ(mint, temps)
 getZ(mint)
 ```
 
-```{R}
+```{r}
 temps <- my(paste0(rep(1:12, 10), rep(1:10, each = 12)))
 names(mint) <- paste0(temps)
 ```
@@ -303,7 +400,7 @@ names(mint) <- paste0(temps)
 2. Sur dix ans, mois par mois
 
 
-```{R}
+```{r}
 ra_mean <- list()
 for (i in 1:12) {
   ra_mean[[i]] <- mean(mint[[i + (0:9)*12]])
@@ -314,7 +411,7 @@ plot(ra)
 ```
 
 
-```{R}
+```{r}
 val <- apply(getValues(ra), 2, mean)
 val 
 which.min(val)
@@ -333,7 +430,7 @@ which.min(val)
 #### Profile temperature et precipitation
 
 
-```{R}
+```{r}
 # TODO le mettre en fonction!
 plot(0.1*apply(getValues(mint), 2, mean), type = "l", lty = 2)
 lines(1:120, apply(getValues(maxt), 2, mean), lty = 2, col = 2)
@@ -357,6 +454,6 @@ Cela dit tout ce qui a été vu ici reste valid.
 
 
 
-## Exercice
+## Exercice {#ex_spatiotemp}
 
 
