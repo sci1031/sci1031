@@ -21,6 +21,7 @@ Vous utiliserez les bibliothèques suivantes&nbsp;:
 
 Vous apprendrez à utiliser les fonctions suivantes&nbsp;:
 
+- `sort()`, `table()`
 - `st_length()`
 - `stack()`
 - `calc()`
@@ -127,7 +128,7 @@ abline(a = 0, b = 1, lty = 2) # ligne 1:1; lty = 2 donne une ligne discontinue
 
 Nous voyons ainsi rapidement que tous les points sont sur la ligne 1:1, donc les valeurs sont identiques (ou très proches, car nous n'avons pas fait de tests formels, ils se pourraient donc qu'il y ait de minimes différences entre les deux distances). 
 
-Il nous reste à quantifier la durée des trajets pour obtenir les vitesses moyennes. Pour cela, nous avons besoin des les colonnes `start` et `stop`. Pour la manipulation des dates et du temps, nous allons utiliser le package [`lubridate`](https://CRAN.R-project.org/package=lubridate). R dispose, de base, de toutes les fonctionnalités nécessaires à la manipulation des dates et du temps, `lubridate` rend ces manipulations plus intuitives (l'aide mémoire (<https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf> fait un tour d'horizon complet des fonctionnalités du package). 
+Il nous reste à quantifier la durée des trajets pour obtenir les vitesses moyennes. Pour cela, nous avons besoin des les colonnes `start` et `stop`. Pour la manipulation des dates et du temps, nous allons utiliser la bibliothèque [`lubridate`](https://CRAN.R-project.org/package=lubridate). R dispose, de base, de toutes les fonctionnalités nécessaires à la manipulation des dates et du temps, `lubridate` rend ces manipulations plus intuitives (l'aide mémoire (<https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf> fait un tour d'horizon complet des fonctionnalités de `lubridate`). 
 
 Regardons à présent la classe des colonnes `start` et `stop`&nbsp;:
 
@@ -213,26 +214,92 @@ library(mapview)
 mapview(traj_rapide)
 ```
 
-Un bien drôle de trajet à 22h près du parc Laurier.
+Un trajet bien singulier, à 22h près du parc Laurier.
 
 
 
 
-### Quel mois le plus beau?
+#### Quelle est période de l'année favorite des cyclistes du jeu de données?
 
-```{r}
-trajets$month <- month(trajets$start)
-table(trajets$month)
+
+Pour répondre à cette deuxième question, nous allons commencer par identifier le mois de l'année qui compte le plus de trajet à vélo (les trajets on été enregistrés en 2013). Pour cela, nous allons utiliser la fonction `month()` de la bibliothèque `lubridate`. Cette fonction nous retourne le mois associé à un objet de classe `POSIXct`
+
+```{r fun_month}
+month(trajets$start[1])
 ```
 
+`month` nous offre aussi la possibilité d'utiliser les noms de mois sous forme de facteurs, de manière abbréviés&nbsp;:
+
 ```{r}
-barplot(table(day(trajets$start[trajets$month == 7])))
+month(trajets$start[1], label = TRUE)
 ```
 
-Noté [`hms`](https://CRAN.R-project.org/package=hms)
+ou complet&nbsp;:
+
+```{r}
+month(trajets$start[1], label = TRUE, abbr = FALSE)
+```
+
+Nous utilisons seulement les numéros de mois et nous créons une colonne `month` dans la table d'attribut de `trajets` pour les conserver&nbsp;:
+
+```{r}
+trajets$mois <- month(trajets$start)
+```
+
+une manière efficace de compter le nombre d'occurrence est d'appliquer la fonction `table()` sur la colonne nouvellement créée&nbsp;:
+
+```{r table_month}
+nb_mois <- table(trajets$mois)
+nb_mois 
+```
+
+Juillet est donc le mois qui concentre le plus de trajet à vélo dans le jeu de données étudié. Nous allons maintenant regardé le jour qui concentre le plus de trajet avec la fonction `day()`. Nous commençons par ajouter une colonne `jour` 
+
+```{r jour}
+trajets$jour <- day(trajets$start)
+```
+
+puis nous isolons que les trajets qui sont en juillet
+
+```{r traj_juillet, fig.width = 9.5}
+traj_juillet <- trajets[trajets$mois == 7, ]
+```
+
+puis nous visualiser le nombre de trajet par jour avec les fonctions `table()` et `barplot()` cette fois-ci. 
+
+```{r barplot_day, fig.width = 9.5}
+barplot(
+  table(traj_juillet$jour),
+  xlab = "Jour de juillet",
+  ylab = "Nombre de trajets"
+)
+```
+
+C'est donc le 10 juillet que nous recensons le plus grand nombre de trajets.
+Nous allons même aller à l'échelle de l'heure et nous recommençons les étapes précédentes avec la fonction `hour`. Au passage mentionnons la la bibliothèque [`hms`](https://CRAN.R-project.org/package=hms) pour manipuler les heures, minutes et secondes (nous ne l'utiliserons pas ici, mais elles pourraient vous être utile).
+
+```{r traj_10juillet, fig.width = 9.5}
+trajets$heure <- hour(trajets$start)
+traj_10juillet <- trajets[trajets$mois == 7 & trajets$jour == 10, ]
+barplot(
+  table(traj_10juillet$heure),
+  xlab = "Jour de juillet",
+  ylab = "Nombre de trajets"
+)
+```
+
+C'est donc à 17h le 10 juillet que les trajets sont le plus nombreux.
+
+
+
+
 
 ### Visualisons
 
+Nous allons à présent faire une animer le chemin le plus long. Pour y arriver nous devrons faire les étapes suivantes&nbsp;:
+
+
+ qui montrera le chemin le plus. 
 Passé un peu plus de temps pour visualiser les données. 
 
 ```{r}
