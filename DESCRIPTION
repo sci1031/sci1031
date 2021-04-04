@@ -19,6 +19,7 @@ Imports:
   rasterVis,
   remotes,
   raster,
+  rosm
   sf,
   spacetime,
   spdep,

@@ -23,6 +23,7 @@ Vous apprendrez à utiliser les fonctions suivantes&nbsp;:
 
 - `sort()`, `table()`
 - `st_length()`
+- `st_cast()`
 - `stack()`
 - `calc()`
 - `as_date_time()`, `ym()`, `hour()`, `minute()`, `second()`
@@ -294,65 +295,230 @@ C'est donc à 17h le 10 juillet que les trajets sont le plus nombreux.
 
 
 
-### Visualisons
+#### Le trajet le plus long en animation
 
-Nous allons à présent faire une animer le chemin le plus long. Pour y arriver nous devrons faire les étapes suivantes&nbsp;:
+Nous allons à présent animer le chemin le plus long, nous voulons créer un fichier [GIF](https://fr.wikipedia.org/wiki/Graphics_Interchange_Format) qui illustrera le parcours du cycliste. Pour y arriver nous devrons faire les étapes suivantes&nbsp;:
+
+1. Trouver le chemin le plus long.
+
+2. Associer un temps à chaque segment du parcours. 
+
+3. Créer une même figure à différent point du parcours.
+
+4. Rassembler les figure et en faire un fichier GIF.
 
 
- qui montrera le chemin le plus. 
-Passé un peu plus de temps pour visualiser les données. 
+La première étape est une manipulation de filtre que nous avons fait à maintes reprises. Cette fois-ci appliquons `which.max()` sur la colonne `length()` et nous filtrons avec `[`. 
+
+```{r traj_long}
+traj_long <- trajets[which.max(trajets$length), ]
+```
+
+Regardons ce trajet&nbsp;:
 
 ```{r}
-library(mapview)
-traj_long <- trajets[which.max(trajets$length), ]
 mapview(traj_long)
 ```
 
+Passons à la seconde étape. Pour pouvoir associer un temps à chaque portion du trajet, nous allons commencer par convertir la ligne en point avec la fonction `st_cast()`.
+
 ```{r}
-traj_long$n_coord
+traj_long_pts <- st_as_sf(st_cast(st_geometry(traj_long), to = "POINT"))
 ```
 
+Décortiquons cette ligne: 
 
-```{r}
-traj_long_pts <- st_as_sf(st_cast(st_geometry(traj_long), "POINT"))
-traj_long_pts$temps <- seq(traj_long$start, traj_long$stop, length.out = nrow(traj_long_pts))
+1. nous utilisons la géométrie de `traj_long` avec `st_geometry()`,
+
+2. nous faisons la conversion point/ligne avec `st_cast()`,
+
+3. l'objet de classe `sfc` ainsi obtenu est converti en objet de classe `sf` avec `st_as_sf()`.
+
+
+Nous ajoutons alors, au nouvel objet de classe `sf` ainsi créé, une colonne temps. Pour cela nous créons une séquence régulière (l'application "Mon RésoVélo" enregistrant des coordonnées spatiales à intervalle régulier) avec la fonction `seq()` en spécifiant le temps de départ (dans la colonne `start`), le temps d'arrivé (colonne stop `stop`) et le nombre de point que doit inclure la séquence (argument `length.out`) qui est le nombre de ligne (`nrow()`) de la table d'attribut de `traj_long`.
+
+```{r seq_time}
+traj_long_pts$temps <- seq(
+  from = traj_long$start, 
+  to = traj_long$stop, 
+  length.out = nrow(traj_long_pts)
+)
 ```
 
+Maintenant nous allons créer l'animation. Pour y parvenir nous avons besoin d'être capable de visualiser le trajet à différent moment. Nous commençons par le faire pour les 2000 premiers points de `traj_long_pts`.
+
+```{r pt_to_li}
+lin <- st_cast(st_combine(traj_long_pts[1:2000, ]), "LINESTRING")
+```
+
+Cette ligne contient les étapes suivantes: 
+
+1. nous extrayons les 2000 premiers points avec `[`, 
+2. nous les combinons en `MULTIPOINT` avec `st_combine()`,
+3. nous transformons le `MULTIPOINT` en `LINESTRING` avec `st_cast()`. 
+
+Notons que sans l'étape 2, `st_cast()` transformera chaque point en ligne ce qui donnera un ensemble de lignes de un seul point. Regardons cette section avec `mapview()`.
+
 ```{r}
-txt_temps <- function(temps) {
-  paste0("Temps: ", hour(temps), "h ", minute(temps), "m ", floor(second(temps)), "s")
-} 
-txt_distance <- function(line) {
-  len <- st_length(line)
-  paste0(" - Distance parcourue: ", format(as.numeric(len)/1000, digits = 4), "km")
+mapview(lin) 
+```
+
+Grâce à l'étape précédente nous pouvons facilement avoir accès à l'heure correspondant au dernier point de ce trajet. 
+
+```{r}
+traj_long_pts[2000, "temps"]
+```
+
+Et avec `st_length()` nous pouvons avoir la distance parcourue pour cette section&nbsp;:
+
+```{r}
+st_length(lin)
+```
+
+Pour l'animation nous ferons des cartes simples avec `tmap` et nous ajouterons ces deux éléments que nous combinons avec `paste0()`. 
+
+```{r simple_map}
+library(tmap)
+tm_shape(lin, bbox = st_bbox(traj_long_pts)) + 
+  tm_lines(lwd = 2, col = "#62852eaa") + 
+  tm_layout(main.title = paste0(
+    "temps: ",
+    traj_long_pts[2000, "temps"], 
+    " / distance", st_length(lin)
+  ),  main.title.size = 0.9)
+```
+
+Il nous reste alors à faire ce même graphique pour un nombre croissant de points et nous combinerons toutes ces graphiques en un GIF. Nous allons structurer notre code avec quelques fonctions. Nous devons donc prendre un peu de temps pour expliquer comment créer une fonction. Jusqu'ici nous avons utiliser de nombreuses fonctions sans que nous n'ayons eu besoin de créer nos propres fonctions. Pour comprendre comment est structurer une fonction, nous en créons une simple. 
+
+```{r}
+ma_fonction <- function(a, b = 1) {
+  if (b > 0) {
+    c <- a + b
+  } else {
+    c <- a - 2*b
+  }
+  return(c) # ou simplement c
 }
-visual <- function(n = 100, basemap = NULL) {
-  tps <- traj_long_pts$temps[n]
-  pts <- traj_long_pts[seq_len(n),]
+```
+
+Dans R, une fonction est un objet créé avec `function`. Comme tout objet nous pouvons l'assigner à une variable et dans notre exemple, nous l'assignons à `ma_fonction` qui sera le nom de la fonction.  Dans la parenthèse qui suit `function`, nous écrivons les arguments de la fonction, en l'occurrence pour `ma_fonction`, nous avons `a` et `b`. Dans notre exemple `b` a une valeur par défaut qui est 1, donc si nous ne spécifier pas `b`, alors Le corps de la fonction est l'expression juste après cette parenthèse, dans notre case cela inclut tout ce qui est entre accolades (`{}`). Une fonction peut comprendre autant de ligne de code que souhaité et peut contenir n'importe quel code R valid. Pour l'exemple nous avons utiliser un test logique `if`/`else`. Une fonction dans R retourne la dernière ligne de code (l’utilisation de `return()` à la dernière ligne est optionnelle, mais permet de clarifier ce que retourne la fonction). Une fois la fonction créée, nous l'appelons comme toute autre fonction. 
+
+```{r}
+ma_fonction(1) # utlise b = 1
+ma_fonction(1, 2)
+ma_fonction(1, -2)
+```
+
+Notre fonction principal `visual()` a pour argument les points du trajet, `traj_pts` et le nombre de points à combiner, que nous appellerons `n` et reprendra les étapes précédentes.
+
+
+```R
+visual <- function(traj_pts, n = 100) {
+  # extraction
+  pts <- traj_pts[1:n, ] 
+  lin <- st_cast(st_combine(pts), "LINESTRING")
+  # graphique
+  tm_shape(lin, bbox = st_bbox(traj_long_pts)) + 
+    tm_lines(lwd = 2, col = "#62852eaa") + 
+    tm_layout(main.title = paste0(
+      "temps: ",
+      traj_long_pts[n, "temps"], 
+      " / distance", st_length(lin)
+    ), main.title.size = 0.9)
+}
+```
+
+Nous allons faire quelques amélioration sur le texte en créant deux autre fonctions. La première `txt_temps()` a pour argument un temps (nous utiliseron le temps du point `n`) et retourne un texte formaté grâce aux fonctionalités de `lubridate`. 
+
+
+```{r txt_temps}
+txt_temps <- function(temps) {
+  paste0(hour(temps), "h ", minute(temps), "m ", floor(second(temps)), "s")
+} 
+```
+
+La seconde prend pour argument une line et retourne un texte formaté comprenant la distance en kilomètre. 
+ 
+```{r txt_distance}
+txt_distance <- function(lin) {
+  len <- st_length(lin)
+  paste0("Distance parcourue: ", format(as.numeric(len)/1000, digits = 4), "km")
+}
+```
+
+Notons que la fonction `format()` nous permet de contrôler le nombre de chiffres (`digits`) affiché. Dans `visual()`, nous appelons ces deux fonctions. De plus nous ajoutons un argument, `basemap`, qui nous permet d'ajouter un fond de carte. Cet argument a pour valeur `NULL` par défaut, ce qui nous permet d'avoir un cas sans carte de fond par défaut. Enfin nous allons nous assurer qu'il y ait au moins 2 points car nous avons besoin de 2 points pour faire une ligne. 
+
+
+```{r visual}
+visual <- function(traj_pts, n = 100, basemap = NULL) {
+  stopifnot(n > 1)
+  tps <- traj_pts$temps[n]
+  pts <- traj_pts[1:n, drop = FALSE]
   lin <- st_cast(st_combine(pts), "LINESTRING")
   basemap + 
   tm_shape(lin, bbox = st_bbox(traj_long_pts)) + 
-    tm_lines(size = .25, col = "#62852eaa") +
-    tm_layout(title = paste(txt_temps(tps), txt_distance(lin)) , title.position = c("right","top"))
+    tm_lines(lwd = 2, col = "#62852eaa") +
+    tm_layout(main.title = paste0(txt_temps(tps), "  -  ", txt_distance(lin)), 
+    main.title.size = 0.9)
 }
-animation <- function(nb_img = 10, basemap = NULL) {
-  tmap_mode("plot")
-  for (i in floor(seq(2, nrow(traj_long_pts), length.out = nb_img))) {
-    print(visual(i, basemap))
+```
+
+Nous pouvons maintenant faire la figure pour le nombre de point désiré, avec un minimum de 2 et un maximum de `r nrow(traj_long_pts)` points). Pour faire la figure précédente nous utilisons le code suivant&nbsp;:
+
+```{r}
+visual(traj_long_pts, 2000)
+```
+
+Que nous avons à modifier légèrement pour faire la même figure avec les 4000 points.
+
+```{r}
+visual(traj_long_pts, 4000)
+```
+
+Pour faire un GIF nous utilisons la fonction `saveGIF()` du package `animation`. Cette fonction prend en premier argument une expression (du code R) qui permet de généré une série de figures qui seront combinées en GIF. Pour nous allons faire une nouvelle fonction `anim()` qui nous permet de généré une série de `n_img` de notre trajet en appelant `visual()`.
+
+
+```{R}
+anim <- function(traj_pts, n_img = 10, basemap = NULL) {
+  for (i in floor(seq(2, nrow(traj_pts), length.out = n_img))) {
+    print(visual(traj_pts, i, basemap))
   }
 }
 ```
 
-```R
-library(animation)
-library(tmap)
-library(rosm)
-x <- osm.raster(extent(traj_long_pts), crop = TRUE)
+Quelques remarques: 
 
-saveGIF(animation(10, tm_shape(x) + tm_rgb()))
+* Nous utilisons `seq()` pour générer une séquence entre 2 et le maximum de points (`r nrow(traj_long_pts)`). 
+
+* La séquence peut générer des nombres décimaux, mais `visual()` demande des nombre entiers, nous utilisons `floor()` pour la conversion. 
+
+* Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`. 
+
+Nous pouvons maintenant utilisé `saveGIF()`.
+
+```R
+saveGIF(anim(20), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
 ```
 
-![](Module9/img/animation.gif)
+![](Module9/img/anim1.gif)
+
+Pour finir, nous allons ajouter un fond de carte. Pour cela nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grâce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
+
+```R
+library(rosm)
+bm <- osm.raster(extent(traj_long_pts), crop = TRUE)
+bm
+```
+
+Nous créons alors un fond de carte rapide avec `tmap` et la fonction `tm_rgb()`
+
+```R
+saveGIF(animation(20, tm_shape(bm) + tm_rgb()), 
+   movie.name = "anim2.gif", ani.height = 500, ani.width = 500)
+```
+
+![](Module9/img/anim2.gif)
+
 
 
 
