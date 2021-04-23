@@ -363,7 +363,7 @@ Notons que sans l'étape 2, `st_cast()` transformera chaque point en ligne ce qu
 mapview(lin) 
 ```
 
-Grâce à l'étape précédente nous pouvons facilement avoir accès à l'heure correspondant au dernier point de ce trajet. 
+Grâce à l'étape précédente, nous pouvons facilement avoir accès à l'heure correspondant au dernier point de ce trajet. 
 
 ```{r}
 traj_long_pts[2000, "temps"]
@@ -500,7 +500,7 @@ Nous pouvons maintenant utilisé `saveGIF()`.
 saveGIF(anim(20), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
 ```
 
-![](Module9/img/anim1.gif)
+![](Module9/images/anim1.gif)
 
 Pour finir, nous allons ajouter un fond de carte. Pour cela nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grâce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
 
@@ -518,7 +518,7 @@ saveGIF(animation(20, tm_shape(bm) + tm_rgb()),
    movie.name = "anim2.gif", ani.height = 500, ani.width = 500)
 ```
 
-![](Module9/img/anim2.gif)
+![](Module9/images/anim2.gif)
 
 
 
@@ -535,11 +535,11 @@ saveGIF(animation(20, tm_shape(bm) + tm_rgb()),
 
 ### Précipitations et Température autour du Mont-Mégantic
 
-Nous allons maintenant nous intéresser aux précipitations et aux températures moyennes autour du par national du Mont-Mégantic entre 2007 et 2016. Nous nous poserons deux nouvelles questions&nbsp;:
+Nous allons maintenant nous intéresser aux précipitations et aux températures moyennes autour du parc national du Mont-Mégantic entre 2007 et 2016. Nous nous poserons deux nouvelles questions&nbsp;:
 
-* Quelle est le mois disposant du plus faible?
+* Quel est le mois disposant du plus faible?
 
-* Quelle est le mois le plus chaud?
+* Quel est le mois le plus chaud?
 
 Nous terminerons par un nouveau travail de visualisation avec profiles de temperature et precipitation, ainsi qu'une animation.
 
@@ -547,7 +547,25 @@ Nous terminerons par un nouveau travail de visualisation avec profiles de temper
 
 #### Importer les données 
 
-Les données sont au format [NetCDF (Network Common Data Form)](https://fr.wikipedia.org/wiki/NetCDF) et peuvent être importées en utilisant la fonction `stack()`. Ces données ont été préparées à partir de données climatiques à haute résolution pour l'Amérique du Nord [@macdonald_north_2020], disponibles sur l'espace dédié à l'archivage de données du centre allemand de calcul pour le climat, [DKRZ](https://cera-www.dkrz.de/WDCC/ui/cerasearch/project?acronym=CanClim). Nous importons ces données avec la fonction `stack()` du pacake `raster`.
+Les données que nous allons utiliser dans cette partie ont été préparées à partir de données climatiques historiques à haute résolution pour l'Amérique du Nord [@macdonald_north_2020], disponibles sur l'espace dédié à l'archivage de données du centre allemand de calcul pour le climat, [DKRZ](https://cera-www.dkrz.de/WDCC/ui/cerasearch/project?acronym=CanClim) (pour y accéder, il faut d'abord s'enregistrer sur le site). Les données disponibles inclues, pour l'ensemble de l'Amérique du Nord, à une résolution de 60&nbsp;arc-secondes, pour chaque mois de 1901 à 2016, les trois variables suivantes: 
+
+* la température minimale moyenne, 
+* la température maximale moyenne,  
+* les précipitations cumulées.
+
+
+```{r exdataclim, fig.align = 'left', echo = FALSE, fig.cap="Température minimale moyenne au mois de janvier 2000", out.width = '80%'}
+knitr::include_graphics('Module9/images/mmint_janv_2000.png')
+```
+<br>
+
+
+Par exemple, sur la figure \@ref(fig:exdataclim), nous présentons les températures minimales moyennes pour le mois de janvier 2000. À partir des données brutes, nous avons sélectionné les données correspondantes aux années 2007 à 2016, puis nous avons fait un opération de rognage en utilisant l'étendue spatiale suivante (dans le système géodésique mondial WGS84): 
+
+* longitude : de 72°Ouest à 71°Ouest,
+* latitude : 45°Nord à 46°Nord. 
+
+Les données préparées sont au format [NetCDF (Network Common Data Form)](https://fr.wikipedia.org/wiki/NetCDF) et peuvent être importées en utilisant la fonction `stack()` de la bibliothèque `raster`.
 
 
 ```{r stack, message = FALSE}
@@ -567,6 +585,7 @@ class(mint)
 Il s'agit là d'objets de classe `rasterStack` que nous détaillons dans la section suivante.
 
 
+
 #### Les objets `rasterStack`
 
 Pour cette section, nous nous concentrons sur `mint`, mais tout ce que nous
@@ -577,11 +596,10 @@ Inspectons rapidement ce nouvel objet.
 mint
 ```
 
-Nous obtenons des informations similaire à celle d'un objet de classe `rasterLayer`, cependant la ligne qui indique les dimensions a un élément de plus indiquant le nombre de couche, et les valeurs affichés sont les valeurs minimales et maximales pour les différentes couches. 
+Nous obtenons des informations similaires à celles d'un objet de classe `rasterLayer`, cependant la ligne qui indique les dimensions a un élément de plus indiquant le nombre de couche, et les valeurs affichées correspondent aux valeurs minimales et maximales pour les différentes couches. 
 
 
 ##### Extraire les informations générales
-
 
 Un raster `rasterStack` est en fait une collection de`rasterLayer` qui
 ont la même projection spatiale, la même résolution, la même étendue
@@ -607,7 +625,7 @@ nlayers(mint[[1]])
 ```
 
 
-L'objet `mint` est une donc collection de `r nlayers(mint)` `rasterLayer`s, chacune de ces couches représente des valeurs de température minimales sur toutes la zone pour un mois donné. Ici les couches sont ordonnées dans le temps (elles ont été combinées ainsi) et nous avons 1 couche par mois sur 10 ans. 
+L'objet `mint` est une donc collection de `r nlayers(mint)` objets de classe `rasterLayer`, chacune de ces couches représente des valeurs de température minimales sur toutes la zone pour un mois donné. Ici les couches sont ordonnées dans le temps (elles ont été combinées ainsi) et nous avons 1 couche par mois sur 10 ans. 
 
 
 
@@ -645,7 +663,7 @@ Nous pouvons extraire les valeurs en utilisant la double indexation: `[[` pour c
 mint[[1:12]][1:10]
 ```
 
-Nous obtenons une matrice de 12 colonnes (1 colonne par mois) et 10 lignes (1 par cellule). Il est aussi possible d'utiliser `getValues()` et pour un objet `rasterStack`, l'ensemble des valeurs nous sont alors retournées sous forme de matrice. 
+Nous obtenons ainsi une matrice de 12 colonnes (1 colonne par mois) et 10 lignes (1 par cellule). Il est aussi possible d'utiliser `getValues()` et pour un objet `rasterStack`, l'ensemble des valeurs nous sont alors retournées sous forme de matrice. 
 
 ```{r}
 val <- getValues(mint)
@@ -655,7 +673,7 @@ dim(val)
 Pour appliquer les mêmes opérations sur les différentes couches, il est donc possible d'utiliser la valeur après avoir utilisé `getValues()`. 
 
 ```{r}
-apply(val, 1, min)
+apply(val, 2, min)
 ```
 
 
@@ -667,15 +685,32 @@ su_mint[1:10]
 ```
 
 
-Aussi certaine
+Aussi, certaines fonctions ont des comportements prédéfinies pour les objets de classe `rasterStack`. Par exemple, les fonctions `min()` et `max()` retourne un objet de classe `rasterLayer` qui a pour chaque cellules, a le 
+pour toutes les cellules des 
+
+```{}
+max(mint)
+```
+
+La  `quantile`
+
+
+```{r}
+quantile(mint)
+```
+
+Notons que pour faire un calcul couche par couche, `calc()`
+
+```{r}
+calc(mint, quantile)
+```
+
 
 
 ##### Visualiser 
 
 
 ```{r, warning = FALSE}
-
-
 mapview(mint[[1:3]])
 ```
 
@@ -712,15 +747,22 @@ temps <- my(paste0(rep(1:12, 10), rep(1:10, each = 12)))
 names(mint) <- paste0(temps)
 ```
 
+#### Opération spatiales 
 
-TODO 
-<!-- crop -->
+Il est donc possible d'utiliser `crop()`, `mask()` de la même manière que pour un objet de classe `rasterLayer`.
+
+
+
 
 
 #### Question 1
 
 * Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
 
+Nous allons profiter pour faire une opération fréquente, c'est croper avec un une zone (*buffer*). 
+
+
+cropper avec un buffer.
 
 1. cropper elevation raster autour du parc
 
