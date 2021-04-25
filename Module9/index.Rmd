@@ -494,7 +494,7 @@ Quelques remarques:
 
 * Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`. 
 
-Nous pouvons maintenant utilisé `saveGIF()`.
+Nous pouvons maintenant utiliser `saveGIF()`.
 
 ```R
 saveGIF(anim(20), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
@@ -541,7 +541,12 @@ Nous allons maintenant nous intéresser aux précipitations et aux températures
 
 * Quel est le mois le plus chaud?
 
-Nous terminerons par un nouveau travail de visualisation avec profiles de temperature et precipitation, ainsi qu'une animation.
+Nous terminerons par deux exercices de visualisation de données: 
+
+* profiles de temperature et precipitation, 
+
+* animation du changement. 
+
 
 
 
@@ -588,9 +593,7 @@ Il s'agit là d'objets de classe `rasterStack` que nous détaillons dans la sect
 
 #### Les objets `rasterStack`
 
-Pour cette section, nous nous concentrons sur `mint`, mais tout ce que nous
-voyons ici s'applique aux autres objets `rasterStack` que nous avons importés.
-Inspectons rapidement ce nouvel objet.
+Pour cette section, nous nous concentrons sur `mint`, relevons cependant que tout ce que nous voyons ici s'applique aux autres objets `rasterStack` que nous avons importés. Inspectons rapidement ce nouvel objet.
 
 ```{r}
 mint
@@ -617,7 +620,7 @@ Les dimensions du `rasterStack` peuvent être aussi être affichées avec `dim()
 dim(mint)
 ```
 
-Comme nous pouvons les constater, 3 nombres sont retournés, un de plus pour les `rasterLayer`s, le dernier chiffre est le nombre de couches que nous avons mentionné plus haut, ici `r nlayers(mint)`. Ce nombre peut aussi être affiché en utilisant la fonction `nlayers()`. 
+Comme nous pouvons le constater, 3 nombres sont retournés, un de plus pour les objets `rasterLayer`, le dernier chiffre est le nombre de couches que nous avons mentionné plus haut, ici `r nlayers(mint)`. Ce nombre peut aussi être affiché en utilisant la fonction `nlayers()`. 
 
 
 ```{r}
@@ -625,7 +628,8 @@ nlayers(mint[[1]])
 ```
 
 
-L'objet `mint` est une donc collection de `r nlayers(mint)` objets de classe `rasterLayer`, chacune de ces couches représente des valeurs de température minimales sur toutes la zone pour un mois donné. Ici les couches sont ordonnées dans le temps (elles ont été combinées ainsi) et nous avons 1 couche par mois sur 10 ans. 
+L'objet `mint` est une donc collection de `r nlayers(mint)` objets de classe `rasterLayer`, chaque couche représente des valeurs de températures minimales moyennes sur toutes la zone pour un mois donné. Ici, les couches sont ordonnées dans le temps (elles ont été combinées ainsi) et nous avons 1 couche par mois sur 10 ans.
+
 
 
 
@@ -653,6 +657,14 @@ Nous pouvons aussi obtenir les températures minimales pour les 10 mois de septe
 mint[[seq(9, by = 12, length.out = 10)]]
 ```
 
+<!-- TODO recombinder des rasterstack -->
+
+Il est aussi possible de combiner des couches du même `rasterStack` et de différents `rasterStack` (si les contraintes spatiales sont respectées) avec `stack()`.
+
+```{r}
+stack(mint[[1]], maxt[[1]], pcp[[1]])
+```
+
 
 
 ##### Extraire et manipuler les valeurs
@@ -670,12 +682,11 @@ val <- getValues(mint)
 dim(val)
 ```
 
-Pour appliquer les mêmes opérations sur les différentes couches, il est donc possible d'utiliser la valeur après avoir utilisé `getValues()`. 
+Pour appliquer les mêmes opérations sur les différentes couches, il est donc possible d'utiliser `apply()` après avoir utilisée `getValues()`, par exemple, pour voir la valeur minimale de chaque couche, nous pouvons utiliser la ligne suivante&nbsp;:
 
 ```{r}
 apply(val, 2, min)
 ```
-
 
 Nous pouvons aussi utiliser `summary()` qui nous donne un aperçu de la distribution des valeurs pour chaque couche.  
 
@@ -684,72 +695,166 @@ su_mint <- summary(mint)
 su_mint[1:10]
 ```
 
-
-Aussi, certaines fonctions ont des comportements prédéfinies pour les objets de classe `rasterStack`. Par exemple, les fonctions `min()` et `max()` retourne un objet de classe `rasterLayer` qui a pour chaque cellules, a le 
-pour toutes les cellules des 
+Aussi, certaines fonctions ont des comportements prédéfinies pour les objets `rasterStack`. Par exemple, la fonction `min()` retourne un objet de classe `rasterLayer` dont chaque cellule contient la valeur minimale des cellules des différentes couches ayant même latitude et même longitude. 
 
 ```{}
-max(mint)
+min(mint)
 ```
 
-La  `quantile`
+La fonction `max()` a le même comportement, pour une combinaison (longitude, latitude) donnée, elle retourne la valeur maximale des différentes cellules. La fonction `quantile()` retourne les quantiles pour les différentes couches, par défaut, 5 quantiles sont retournées. Ci-dessous, nous présentons le résultat pour les 20 premières couches. 
+
+```{r}
+quantile(mint)[1:10, ]
+```
+
+Cela revient à appliquer la fonction `apply()` et `quantile()` après avoir utilisé `getValues()`.  
 
 
 ```{r}
-quantile(mint)
+apply(val, 2, quantile)[1:10]
 ```
 
-Notons que pour faire un calcul couche par couche, `calc()`
+
+Il est aussi possible de faire des calculs sur les différentes couches en utilisant la fonction `calc()`, par exemple nous pouvons obtenir le quantiles cellule par cellule ainsi: 
 
 ```{r}
 calc(mint, quantile)
 ```
 
+Ce qui nous donne un objet `rasterStack` qui a les valeurs des différents quantiles, nous pas pour chacune des couches, mais pour chacune des combinaisons (longitude, latitude). Nous noterons alors qu'utiliser `calc(mint, min)` revient à utiliser `min(mint)`.
+
+
+
+##### Opérations spatiales 
+
+Pour les principales opérations spatiales, pour les objets de classe `rasterStack`, nous pouvons utiliser les mêmes fonctions que pour les objets de classe `rasterLayer`. Les opérations spatiales à réaliser seront alors, au besoin, répétées sur les différentes couches (cela étant dit, pour des raisons d'optimisation algorithmiques, il se peut que les opérations soient plus rapides sur un `rasterStack` de $n$ couches plutôt que d'appliquer $n$ fois les mêmes opérations sur $n$  `rasterLayer`). Pour illustrer code principe, nous allons utiliser `projectRaster()`, `crop()`, `mask()` et `extract()` sur `mint` (voir le [Module 5](#mat) et le [Module 8](#manip_mat) pour plus de détails).
+
+
+Pour illustrer le changement de projections des `rasterStack`, projetons `mint` en utilisant la projection de Mercator. 
+
+```{r reproj_stack}
+mint_merc <- projectRaster(mint, crs = st_crs(3857)$proj4string)
+mint_merc
+```
+
+Nous allons maintenant faire une opération de rognage sur `mint` en utilisant 
+l'étendue spatiale suivante (dans le système géodésique mondial WGS84): 
+
+* longitude : de 71.5°Ouest à 71°Ouest,
+* latitude : 45°Nord à 45.5°Nord. 
+
+```{r crop_stack}
+mint_crop <- crop(mint, extent(c(-71.5, -71, 45, 45.5)))
+```
+
+
+Pour les deux dernières opérations nous allons utiliser les contours du Parc national de Frontenac, en utilisant le premier élément de l'objet `parc` du [Module 8](#manip_mat). Nous commençons par créer l'objet (de classe `sf`) `frontenac` en utilisant la projection de `mint`, puis nous utilisons `mask()` pour isoler les cellules qui sont dans les limites du parc, et cela, pour toutes les couches de `mint`. 
+
+```{r, include = FALSE}
+library(sf)
+parcs <- st_read("Module8/data/parcs_sherbrooke") 
+```
+
+```{r}
+frontenac <- st_transform(parcs[1, ], st_crs(mint))
+mint_mask <- mask(mint, frontenac)
+```
+
+Enfin nous allons extraire les valeurs de ces cellules, pour 
+
+```{r}
+extract(mint, frontenac)
+```
+
+Notons que cela peut aussi être fait en utilisant `getValues()` sur `mint_mask()`.
+
+
 
 
 ##### Visualiser 
 
+Comme pour les objets, nous pouvons rapidement visualiser les objets `rasterStack` avec la fonction `plot()` (en fait, une méthode de la fonction plot pour les objets de la bibliothèque `raster`).
+
+```{r plot_stack}
+plot(mint)
+```
+
+par défaut, 16 couches vont être affichées, il est possible d'augmenter ce nombre avec l'argument `maxnl`
+
+
+```{r}
+plot(mint, maxnl = 25) 
+```
+
+Mais avec plus de 16 cartes, il est difficile de bien visualiser et il est parfois souhaitable de choisir, par exemple, il est possible de visualiser les données des 4 derniers mois en sélectionnant les 4 dernières couches de `mint`.
+
+```{r}
+plot(mint[[117:120]]) 
+```
+
+Par défaut, le titre utilisé est le nom des couches, pour changer cela nous pouvons renommer les couches en utilisant la fonction `names()`. Cela étant dit, il y a des contraintes sur les noms des couches (par exemple, les espaces blancs sont à éviter), pour avoir un titre libre de ces contraintes, nous pouvons utiliser l'argument `main` auquel nous donnons le vecteur de titres souhaité.
+
+```{r}
+plot(mint[[117:120]], main = c("09/2016", "10/2016", "11/2016", "12/2016"))
+```
+
+
+La fonction `mapview` peut aussi être utilisée pour visualiser les `rasterStack`. Les différentes couches seront alors mis les unes par dessus les autres dans l'ordre donné (la dernière étant sur le dessus de la pile).
+
 
 ```{r, warning = FALSE}
+library(mapview)
 mapview(mint[[1:3]])
 ```
 
+<!-- parler de tmap? -->
 
+
+
+##### Lien entre `rasterStack` et objets spatio-temporels
+
+Jusqu'ici nous avons implicitement utilisé un objet `rasterStack` comme objet 
+spatio-temporel: 
+
+- chaque couche est bien un objet spatial (avec son étendue spatiale, sa projection, etc.)
+- les couches sont ordonnées dans le temps. 
+
+Il est cependant important d'insister sur le fait qu'un `rasterStack` ne contient pas nécessairement un objet spatio-temporel. La seule contrainte sur les couches contenues dans l'objet est spatiale: étendue, projection et  résolution doivent être identiques. Ainsi, il est commun de travailler sur une même période avec des objets `rasterStack` qui contiennent différentes variables pour une période donnée. Cela permet, entre autre, d'éviter la répétition des mêmes opérations sur plusieurs objets `rasterLayer`. Aussi, certaines données sont, par nature, multi-couches, c'est le cas des données d'imagerie satellitaire (on parle alors de bandes).
+
+Jusqu'ici, nous n'avons pas formalisé l'utilisation du temps, nous savons simplement ce à quoi correspondent les différentes couches. Cette information a été donnée dans le texte plus haut, et dans un contexte de partage de données cette information aurait été dans les métadonnées (les données qui décrivent les données). Il existe un moyen de formaliser l'information qui ordonne les couches avec la fonction `setZ()`. Nous allons utiliser cette fonction pour avoir des dates le long de cette axes. En premier lieu, nous créons une séquence de date mois/année" en utilisant `rep()` et `paste0()`:
 
 ```{r}
-plot(max(mint))
-plot(max(mint))
+moan <- paste0(rep(1:12, 10), "/", rep(2007:2016, each = 12))
 ```
 
-```{r}
-quantile(mint)
+Nous utilisons ensuite la fonction `my()` de la bibliothèque `lubridate` pour formaliser la séquence de temps (avec la classe `POSIXt`) . 
+
+```{r use_my}
+library(lubridate)
+temps <- my(paste0(rep(1:12, 10), "/", rep(2007:2016, each = 12)))
 ```
 
-```{r}
-plot(calc(mint, quantile)) 
-```
-
-
-
-```{r}
-paste0(rep(1:12, 10), "/", rep(1:10, each = 12))
-temps <- my(paste0(rep(1:12, 10), "/", rep(1:10, each = 12)))
-names(mint) <- paste0(temps)
-```
+Nous sommes alors en mesure d'ajouter cette information à `mint` (notons que cette séquence doit avoir la dimension de `nlayers(mint)`, sinon un message d'erreur sera retourné).
 
 ```{r setZ}
-mint <- setZ(mint, temps)
+mint <- setZ(mint, temps, name = "temps")
+mint
+```
+
+Nous pouvons constater qu'une ligne "`temps`" a été ajoutée, résumant cette nouvelle information. Ces données sont facilement accessible avec `getZ()`
+
+```{r getZ}
 getZ(mint)
 ```
 
-```{r}
-temps <- my(paste0(rep(1:12, 10), rep(1:10, each = 12)))
-names(mint) <- paste0(temps)
+Il devient alors aisé de trier les couches sur la date. Par exemple, nous pouvons sélectionner toutes les couches de 2015 en utilisant `year()` de `lubridate`.
+
+```{r getZ}
+mint[[which(year(getZ(mint)) == 2015)]]
 ```
 
-#### Opération spatiales 
+Noter qu'ici l'appelle à `which()` est important, sinon une erreur est retournée.
 
-Il est donc possible d'utiliser `crop()`, `mask()` de la même manière que pour un objet de classe `rasterLayer`.
 
 
 
@@ -796,6 +901,8 @@ which.min(val)
 - Compléter avec d'autre chose, ca me parait léger... à voir quand au dessus ce sera écrit..
 
 
+
+
 #### Profile temperature et precipitation
 
 
@@ -806,6 +913,7 @@ lines(1:120, apply(getValues(maxt), 2, mean), lty = 2, col = 2)
 ```
 
 
+
 #### Visualisation
 
 <!-- profile et raster a coté avec le parc -->
@@ -814,11 +922,6 @@ plot(mint[[2]])
 plot(0.1*apply(getValues(mint), 2, mean), type = "l", lty = 2) -->
 
 
-### Remarques finales
-
-L'écosystème de package R est toujours en activement, aisn quelque années
-vous pourrez faire les même opérations avec des finctoins au nom similaires. 
-Cela dit tout ce qui a été vu ici reste valid.
 
 
 
