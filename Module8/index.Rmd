@@ -24,6 +24,7 @@ Vous utiliserez les bibliothèques suivantes:
 - `sf`
 
 Vous apprendrez à utiliser les fonctions suivantes:
+
 - `reclassify()`
 - `crop()` `mask()`
 - `extract()`
@@ -64,13 +65,13 @@ Comme pour le [module 7](#manip_vec) portant sur la manipulation des données ve
 
 Nous allons en effet explorer le région de la ville de Sherbrooke en se posant deux questions. D'abord, nous manipulerons les données d'élévation pour répondre à l’interrogation suivante: 
 
-> Parmi les quatre parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
+> **Parmi les quatre parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?**
 
 Pour y répondre, nous devrons extraire l'ensemble des valeurs d'élévation associées aux quatre parcs identifiés au [module 7](#manip_vec) et les comparer. 
 
 Ensuite, nous chercherons à répondre à la question suivante:
 
-> Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
+> **Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?**
 
 Répondre à cette question nécessite de manipuler des données d'élévation ainsi que des données vectorielles sur les sentiers de randonnées dans les parcs de la Société des établissements de plein air du Québec (SÉPAQ). 
 
@@ -80,7 +81,7 @@ Répondre à cette question nécessite de manipuler des données d'élévation a
 
 Pour résoudre cette problématique, nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)). Cette couche est une matrice de données (*raster*) contenant des valeurs d'élévation en mètres.
 
-Nous allons également nous servir de la base de données vectorielles des sentiers de randonnées de la SÉPAQ (LINESTRINGS, [source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)), ainsi que celle des parcs nationaux de la région de Sherbrooke identifiés au [module 7](#manip_vec).
+Nous allons également nous servir de la base de données vectorielles des sentiers de randonnées de la SÉPAQ ([source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)), ainsi que celle des parcs nationaux de la région de Sherbrooke identifiés au [module 7](#manip_vec).
 
 <!-- ICI il faudra changer le nom du dossier qui inclu les donnees   -->
 Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargée en cliquant sur un seul lien: [données pour le module 8](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module8_donnees.zip). Une fois téléchargé, le dossier compressé (`zip`) doit être dézippé dans votre répertoire de travail. Le dossier `Module8_donnees` comprend deux sous-dossiers et un fichier:
@@ -96,7 +97,7 @@ Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches
 Avant d'entamer la résolution des deux questions, familiarisons-nous avec les opérations fréquemment utilisées sur les données matricielles.
 
 
-#### Importer, lire et visualiser les données {-}
+#### Importer et visualiser les données {-}
 
 Dans allons d'abord charger les différentes couches d'informations spatiales dans l'environnement `R`. Nous commençons par charger les bibliothèques requises pour importer les données spatiales vectorielles (`sf`), pour importer les données spatiales matricielles (`raster`) et pour visualiser ces données (`mapview`).
 
@@ -105,19 +106,21 @@ library(sf)
 library(raster)
 library(mapview)
 ```
+<br>
 
 Ensuite, nous importons le *shapefile* des quatre parcs de la régions de Sherbrooke que nous avons identifié au [module 7](#manip_vec) en utilisant la fonction `st_read()`. 
 
 ```{r, eval = FALSE}
-chemin <- "D:/votrechemin/SCI1031/Module8/Donnees/"
+chemin <- "D:/votrechemin/SCI1031/Module8/Module8_donnees/"
 chemin_parcs <- paste(chemin, "/parcs_sherbrooke/parcs_sherbrooke.shp", sep = "")
 parcs <- st_read(chemin_parcs)
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE}
 #parcs<-st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
 parcs <- st_read("Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
 ```
+<br>
 
 Enfin, nous importons la couche d'élévation pour la région d'intérêt en utilisant la fonction `raster()``.
 
@@ -126,11 +129,12 @@ chemin_dem <- paste(chemin, "/DEM.tif", sep = "")
 dem <- raster(chemin_dem)
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE}
 #dem<-raster("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/DEM.tif")
 
 dem <- raster("Module8/data/DEM.tif")
 ```
+<br>
 
 Nous visualisons ensuite les deux objets spatiaux afin de valider l'importation en utilisant la fonction `mapview()`.
 
@@ -139,10 +143,14 @@ mapview(dem) + mapview(parcs, zcol = "TRQ_NM_", legend = FALSE)
 ```
 <br>
 
+Notez que l'attribut `TRQ_NM_` correspond aux noms des parcs nationaux.
+<br>
 
 #### Filtrer les cellules d'un *raster* {-}
 
-Une des opérations les plus fréquentes sur les *raster* est celle de filtrer les cellules (ou pixels). Ceci peut être fait dans le but de sélectionner des cellules possédant une valeur d'attribut particulière. Par exemple, à partir d'une couche matricielle des différentes classes d'utilisation du sol pour une région donnée, nous pourrions vouloir sélectionner les pixels de classe "Eaux" ou encore de classe "Terres humides". Filtrer les cellules peut également être fait dans le but de sélectionner des cellules sur la base de leur localisation spatiale. Par exemple, nous pourrions vouloir choisir les cellules d'un *raster* qui sont à l'intérieur des limites administratives d'une municipalité.  
+Une des opérations les plus fréquentes sur les *raster* est celle de filtrer les cellules (ou pixels). Ceci peut être fait dans le but de sélectionner des cellules possédant une valeur d'attribut particulière. Par exemple, à partir d'une couche matricielle des différentes classes d'utilisation du sol pour une région donnée, nous pourrions vouloir sélectionner les pixels de la classe "Eaux" ou encore ceux de la classe "Terres humides". 
+
+Filtrer les cellules peut également être fait dans le but de sélectionner des cellules sur la base de leur localisation spatiale. Par exemple, nous pourrions vouloir choisir les cellules d'un *raster* qui sont à l'intérieur des limites administratives d'une municipalité.  
 
 Dans les sous-sections qui suivent, nous présenterons des fonctions qui permettent de réaliser ces deux types d'opération de filtrage de données matricielles.
 
@@ -206,10 +214,11 @@ summary(getValues(dem))
 
 L'élévation minimale est maintenant de 2 et le nombre de `NA` a augmenté de `r length(ind)`. Ceci confirme que notre filtre a bien été appliqué. 
 
-La fonction `which()` peut aussi être utilisée pour filtrer des données selon des expressions logiques plus complexes. Nous pouvons, par exemple, remplacer `getValues(dem) < 0` par `getValues(dem) < 0 | getValues(dem) > 1000` pour exclure également les cellules avec des valeurs plus grandes que 1000&nbsp;m. De plus, il est aussi possible de changer les valeurs des cellules identifiées en d'autres valeurs que `NA`. 
+La fonction `which()` peut aussi être utilisée pour filtrer des données selon des expressions logiques plus complexes. Nous pouvons, par exemple, remplacer `getValues(dem) < 0` par `getValues(dem) < 0 | getValues(dem) > 1000` pour exclure également les cellules avec des valeurs plus grandes que 1000&nbsp;m. De plus, il est aussi possible de changer les valeurs des cellules identifiées en d'autres valeurs que `NA`.
 
+<br>
 
-###### Fonction `reclassify`{-}
+###### Fonction `reclassify` {-}
 
 La fonction `reclassify()` de la bibliothèque `raster` permet également de filtrer des données matricielles et de leur assigner de nouvelles valeurs.  
 
@@ -233,6 +242,7 @@ Cette matrice est utilisée comme argument de la fonction `reclassify()` afin d'
 ```{r reclassify}
 nouvelles_classes_dem <- reclassify(dem, nouvelles_classes, rigth = FALSE)
 ```
+<br>
 
 Notez que l'utilisation par défaut de la fonction `reclassify()` inclue la borne supérieure mais pas la borne inférieure de l'intervalle de reclassification (`]limite_lim, limite_max]`). L'ajout de l'argument `rigth = FALSE` vient spécifier que nous souhaitons le contraire, c'est-à-dire l'inclusion de la borne inférieure mais pas de la borne supérieure (`[limite_lim, limite_max[`). Ainsi, nous avons précisé que les valeurs inclues dans la nouvelle classe 1 vont de 0 à 249 m plutôt que de 1 à 250 m.
 
@@ -255,7 +265,7 @@ mapview(reclassify(dem, nouvelles_classes))
 
 Une des opérations les plus fréquentes sur les *raster* est de filtrer les cellules en fonction de leurs coordonnées spatiales. Dans cette section nous allons apprendre à utiliser les fonctions `crop()` et `mask()` pour réaliser ces manipulations. 
 
-###### Fonction `crop()`{-}
+###### Fonction `crop()` {-}
 
 La fonction `crop()` vous permet de rogner un *raster*, autrement dit d'utiliser un rectangle pour filter les cellules selon qu'elles soient ou non à l'intérieur de ce dernier. 
 
@@ -275,7 +285,6 @@ plot(ext, add = TRUE)
 ```
 <br>
 
-
 Il est très important de relever que de manière implicite les valeurs des coordonnées utilisées dans `extent()` sont exprimées dans le SCR de notre *raster* `dem`. 
 
 Utilisons maintenant la fonction `crop()` dont le premier argument est le *raster* à rogner et le second argument est l'objet de classe `Extent`.
@@ -283,8 +292,9 @@ Utilisons maintenant la fonction `crop()` dont le premier argument est le *raste
 ```{r}
 dem_cr <- crop(dem, ext)
 ```
+<br>
 
-La sortie est un raster (que nous appelons `dem_cr`) qui est recadré selon `ext`. Les cellules qui ne sont pas dans ce rectangle sont exclues.
+La sortie est un *raster* (que nous appelons `dem_cr`) qui est recadré selon `ext`. Les cellules qui ne sont pas dans ce rectangle sont exclues.
 
 ```{r, warning = FALSE}
 mapview(dem_cr)
@@ -309,7 +319,7 @@ mapview(dem_cr_p)
 ```
 <br>
 
-###### Fonction `mask()`{-}
+###### Fonction `mask()` {-}
 
 La fonction `mask()` permet de découper un raster avec un polygone de n'importe quelle forme et non uniquement selon un rectangle. Pour illustrer cette fonction nous allons d'abord créer un polygone avec la fonction `st_as_sf()` de la bibliothèque `sf` (voir le [module 4](#vec)) :
 
@@ -332,6 +342,7 @@ pol <- st_as_sf(
       crs = st_crs(dem) 
   )
 ```
+<br>
 
 Notons que nous avons utilisé le même SCR que `dem`. Regardons ce à quoi ressemble le polygone que nous venons de créer.
 
@@ -363,6 +374,7 @@ summary(getValues(dem_ma))
 ```
 
 Terminons cette section sur les opérations de filtre par trois remarques importantes: 
+
 >
 >1. L'étendue du *raster* retourné par la fonction `crop()` sera différente de celle du *raster* initial (sauf si l'étendue initiale est utilisée pour rogner). À l'inverse, la fonction `mask()` préserve l'étendue spatiale.
 >
@@ -377,7 +389,7 @@ extent(dem_ma)
 >
 >2. Le temps de calcul pour réaliser l'opération `crop()` est souvent très rapide, ce qui n'est pas le cas de l'opération `mask()` quand le polygone est complexe. Il est parfois possible d'avoir des gains d'efficacité en faisant appel à `crop()` avant d'utiliser `mask()`.
 >
-
+<br>
 >
 >3. Dans la situation où seules les valeurs des cellules filtrées nous intéresse, il est possible d'utiliser la fonction `extract()` plutôt que la fonction `mask()`. La fonction `extract()` de la bibliothèque `raster` retourne une liste pour laquelle chaque élément donne les valeurs des cellules extraites pour chaque couche du *raster*. 
 >
@@ -393,7 +405,7 @@ summary(dem_ex[[1]])
 ```
 <br>
 
-#### Combiner des *raster* {-}
+#### Combiner des *rasters* {-}
 
 Une opération qui peut s'avérer utile est celle de combiner des *rasters*, c'est-à-dire former un seul *raster* à partir de deux *rasters* ou plus. Par exemple, une telle opération pourrait être nécessaire si, pour une problématique donnée, nous devions combiner des *rasters* d'élévation de chaque région administrative du Québec pour obtenir un seul *raster* couvrant l'entièreté de la province. 
 
@@ -401,33 +413,38 @@ Une opération qui peut s'avérer utile est celle de combiner des *rasters*, c'e
 
 ###### Fonction `merge()` {-}
 
-La fonction `merge()` de la bibliothèque `raster` permet de combiner deux *rasters* ou plus. En guise d'exemple, prenons les *rasters* `dem_ma` et `dem_ma_inv` créés plus haut en applicant la fonction `mask()` au *raster* `dem`&nbsp;: 
+La fonction `merge()` de la bibliothèque `raster` permet de combiner deux *rasters* ou plus. En guise d'exemple, combinons les *rasters* `dem_ma` et `dem_ma_inv` créés plus haut en applicant la fonction `mask()` au *raster* `dem`&nbsp;: 
 
 
 ```{r, warning = FALSE}
 dem_merge <- merge(dem_ma, dem_ma_inv)
 ```
+<br>
+
 <!-- BESOIN D'AIDE:  j'aimerais que les map aient le même niveau de zoom initialement. J'arrive pas. La première carte est toujours à un zoom de plus.
 Voir: https://github.com/r-spatial/mapview/issues/37
 ET: https://rdrr.io/cran/leafsync/man/latticeView.html
-J'ai essayé avec no.initial.sync = FALSE, marche pas.
+J'ai essayé avec no.initial.sync = FALSE, setView(zoom = 7), marche pas.
 --> 
 
-```{r merge, echo = FALSE, warning = FALSE, fig.cap = "La fonction merge() est utilisée pour combiner les *rasters* `dem_ma` (à gauche) et `dem_ma_inv` (au centre). Le résultat de cette opération est un *raster* identique à `dem`.", fig.align = 'left', out.width = '100%'}
+
+```{r merge, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%'}
 library(leaflet)
 library(leafsync)
 
-map_merge <- mapview(dem_merge)
-map_ma <- mapview(dem_ma)
-map_ma_inv <- mapview(dem_ma_inv)
+map_merge <- mapview(dem_merge, legend = F)
+map_ma <- mapview(dem_ma, legend = F)
+map_ma_inv <- mapview(dem_ma_inv, legend = F)
 
-setView(zoom = 7)
 leafsync::latticeView(map_ma, map_ma_inv, map_merge, ncol = 3)
 ```
 
 <br>
 
+>
 > Notez que pour combiner des *rasters* avec la fonction `merge()` ceux-ci doivent avoir la même résolution et posséder le même système de coordonnées de référence (SCR).
+>
+
 
 <!-- BESOIN D'AIDE:  La docu dit aussi qu'ils doivent avoir la même origine. QU'est-ce-que ça veut dire?? Voir la section Details dans https://www.rdocumentation.org/packages/raster/versions/3.4-5/topics/merge --> 
 
@@ -439,7 +456,7 @@ Par exemple, créons un *raster* qui soit identique à `dem_cr` mais pour lequel
 #Ajoutons 100m à tous les pixels de dem_cr
 dem_cr_plus <- dem_cr + 100
 ```
-
+<br>
 
 Ensuite, combinons `dem_cr_plus` à `dem_ma` avec la fonction `merge()`. Le *raster* combiné prendra des valeurs différentes sur les pixels qui se superposent selon l'ordre des arguments&nbsp;:
 
@@ -447,11 +464,13 @@ Ensuite, combinons `dem_cr_plus` à `dem_ma` avec la fonction `merge()`. Le *ras
 dem_merge_ordre1 <- merge(dem_cr_plus, dem_ma)
 dem_merge_ordre2 <- merge(dem_ma, dem_cr_plus)
 ```
+<br>
 
-```{r merge_ordre, echo = FALSE, warning = FALSE, fig.cap = "La fonction merge() donne priorité au *raster* en premier argument lors de son traitement des pixels qui se chevauchent. Les pixels de `dem_cr_plus` ont été sélectionnés pour créer le *raster* affiché à gauche tandis que ceux de `dem_ma` ont été sélectionnés pour créer le *raster* affiché à droite.", fig.align = 'left', out.width = '100%}
 
-map_ordre1 <- mapview(dem_merge_ordre1)
-map_ordre2 <- mapview(dem_merge_ordre2)
+```{r mergeordre, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%'}
+
+map_ordre1 <- mapview(dem_merge_ordre1, legend = F)
+map_ordre2 <- mapview(dem_merge_ordre2, legend = F)
 
 leafsync::latticeView(map_ordre1,map_ordre2, ncol = 2)
 ```
@@ -471,14 +490,13 @@ dem_mosaic_mean <- mosaic(dem_cr_plus, dem_ma, fun = mean)
 ```
 
 
-<!-- BESOIN D"AIDE: J'aimerais vraiment ça que les légendes soient plus transparentes (pour ne pas cacher l'image) mais peu importe la valeur donnée à legend.opacity, rien ne change.  -->
 
-```{r mosaic, echo = FALSE, warning = FALSE, fig.cap = "Utilisation de la fonction `mosaic` pour combiner les rasters `dem_cr_plus` et `dem_ma` avec la fonction `min` (à gauche), `max` (au centre) et `mean` (à droite).", fig.align = 'left', out.width = '100%}
+```{r mosaic, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%'}
 mapviewOptions(legend.pos="bottomleft", legend.opacity = 0.3)
 
-map_mosaic_min <- mapview(dem_mosaic_min)
-map_mosaic_max <- mapview(dem_mosaic_max)
-map_mosaic_mean <- mapview(dem_mosaic_mean)
+map_mosaic_min <- mapview(dem_mosaic_min, legend = F)
+map_mosaic_max <- mapview(dem_mosaic_max, legend = F)
+map_mosaic_mean <- mapview(dem_mosaic_mean, legend = F)
 
 
 leafsync::latticeView(map_mosaic_min , map_mosaic_max, map_mosaic_mean, ncol = 3)
@@ -496,8 +514,10 @@ Il existe des bibliothèques spécialisés qui offrent des fonctions plus avanc�
 Maintenant que nous avons appris les opérations de base pour manipuler les données matricielles, nous sommes en mesure de répondre à la première question:
 
 >
-> Parmi les quatre parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?
+> **Parmi les quatre parcs nationaux de la région de Sherbrooke, lequel dispose du plus haut sommet?**
 >
+
+<br>
 
 Les données étant déjà importées, les étapes que nous devons résoudre sont les suivantes:
 
@@ -573,6 +593,7 @@ Pour déterminer les coordonnées de la cellule identifiée nous utilisons l'ind
 df_max <- as.data.frame(dem_parcs[ind_max, drop = FALSE], xy = TRUE, centroid = TRUE, na.rm = TRUE)
 df_max
 ```
+<br>
 
 Deux remarques méritent d'être mentionnées concernant cette opération&nbsp;: 
 
@@ -582,7 +603,7 @@ Deux remarques méritent d'être mentionnées concernant cette opération&nbsp;:
 
 <br>
 
-##### v. Déterminer le parc possédant le point d'élévation maximale
+##### v. Déterminer le parc possédant le point d'élévation maximale {-}
 
 Une fois isolées, les coordonnées `x` et `y` du pixel d'élévation maximale peuvent être utilisées pour créer un objet spatial de classe `sf` contenant le centroïde de ce pixel grâce à la fonction `st_as_sf()`. Nous nous servirons par la suite de ce point pour visualiser sa position et déterminer dans quel parc national il est situé. 
 
@@ -594,15 +615,17 @@ sf_point_max
 
 Remarquez que nous avons attribué à ce point le même SRC que celui du *raster* `dem_parcs()`.
 
-En superposant avec `mapview()` les trois couches d'informations spatiales que nous venons de manipuler, nous pouvons repérer le parc dans lequel se trouve ce point d'élévation maximale. 
+En superposant, avec `mapview()`, les trois couches d'informations spatiales que nous venons de manipuler, nous pouvons repérer le parc dans lequel se trouve ce point d'élévation maximale. 
 
-```{r, fig.cap = "En cliquant sur le polygone du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-Mégantic", warning = FALSE}
+<!-- NOTE: Le caption n'apparait pas ?  Il faudrait enlever les légendes. Faire avec tmap?-->
+
+```{r sommet, fig.cap = "En cliquant sur le polygone du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-Mégantic", warning = FALSE}
 mapview(dem_parcs) + mapview(parcs, alpha = 0.01) + mapview(sf_point_max,  col.regions = "red")
 ```
 
 <br>
 
-Nous constatons que ce point est situé dans le **parc national du Mont-Mégantic**. Au lieu de déduire sa localisation de manière visuelle, nous allons à présent réaliser une opération topologique pour isoler le polygone du parc abritant ce plus haut sommet. Pour ce faire, nous utilisons la fonction `st_intersects()` étudiée au [module 7](#manip_vec). Rappelons que cette fonction retourne la valeur `TRUE` lorsque deux objets vectoriels se recoupent et `TRUE` autrement.
+Nous constatons que ce point est situé dans le **Parc national du Mont-Mégantic**. Au lieu de déduire sa localisation de manière visuelle, nous allons à présent réaliser une opération topologique pour isoler le polygone du parc abritant ce plus haut sommet. Pour ce faire, nous utilisons la fonction `st_intersects()` étudiée au [module 7](#manip_vec). Rappelons que cette fonction retourne la valeur `TRUE` lorsque deux objets vectoriels se recoupent et `TRUE` autrement.
 
 ```{r}
 st_intersects(parcs, sf_point_max, sparse = FALSE)
@@ -628,15 +651,16 @@ parmi les quatre parcs nationaux sélectionnés, c'est le Parc national du Mont-
 ### Résolution de la question 2
 
 Nous allons maintenant répondre à la deuxième question de notre problématique: 
+
 >
-> Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?
+> **Quelle est le profil topographique du sentier se rendant au plus proche de ce sommet?**
 >
 
 Nous allons nous placer dans la situation suivante&nbsp;: nous désirons faire une randonnée pédestre jusqu'au sommet que nous venons d'identifier (à tout le moins, le plus proche possible du sommet). Afin de nous faire une idée précise de l'effort physique que nous devrons fournir lors de cette randonnée, nous allons réaliser un profil topographique du sentier se rendant au plus proche de ce sommet. 
 
-La figure \@ref(fig:prof_topo) donne un exemple de profil topographique pour sentier de la grande traversée dans le Parc national de la Gaspésie.
+La figure \@ref(fig:proftopo) donne un exemple de profil topographique pour sentier de la grande traversée dans le Parc national de la Gaspésie.
 
-```{r prof_topo, fig.align = 'left', echo = FALSE, fig.cap = "Exemple de profil topographique: le sentier international des Appalaches [taille réelle](Module8/images/8_Profil_ex.png)", out.width = '100%'}
+```{r proftopo, fig.align = 'left', echo = FALSE, fig.cap = "Exemple de profil topographique: le sentier international des Appalaches [taille réelle](Module8/images/8_Profil_ex.png)", out.width = '100%'}
 knitr::include_graphics('Module8/images/8_Profil_ex.png')
 ```
 
@@ -683,18 +707,20 @@ chemin_sentiers <- paste(chemin, "/sentiers_sepaq/Sentier_ete_l.shp", sep = "")
 sentiers <- st_read(chemin_parcs)
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE}
 sentiers <- st_read("Module8/data/sentiers_sepaq/Sentier_ete_l.shp")
 #sentiers <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/sentiers_sepaq/Sentier_ete_l.shp")
 mapview(sentiers)
 ```
 <br>
 
-Notre objectif est de savoir comment l'élévation varie le long du sentier qui conduit le plus près possible du plus haut sommet. Ainsi, en plus des données sur la localisation des sentiers, nous avons besoin des données d'élévation. Or, au lieu d'utiliser le *raster* `dem_lcc` dont la résolution spatiale est de `r res(dem_lcc)[1]` par `r res(dem_lcc)[2]` $m^2$, nous allons nous procurer une autre couche d'élévation de résolution plus fine afin d'obtenir un profil topologique plus précis.
+<!-- Supscript non-math??  -->
+
+Notre objectif est de savoir comment l'élévation varie le long du sentier qui conduit le plus près possible du plus haut sommet. Ainsi, en plus des données sur la localisation des sentiers, nous avons besoin des données d'élévation. Or, au lieu d'utiliser le *raster* `dem_lcc` dont la résolution spatiale est de `r res(dem_lcc)[1]` par `r res(dem_lcc)[2]` m$^2$, nous allons nous procurer une autre couche d'élévation de résolution plus fine afin d'obtenir un profil topologique plus précis.
 
 Pour ce faire, nous utiliserons la fonction `get_elev_raster()` de la bibliothèque [`elevatr`](https://CRAN.R-project.org/package=elevatr). Cette fonction permet d'accéder aux données d'élévation disponibles sur le service d'infonuagique d'Amazon ([AWS](https://registry.opendata.aws/terrain-tiles/)) et cela à différents niveaux de résolution.
 
-La fonction `get_elev_raster()` requière deux arguments. Le premier argument spécifie la localisation des données recherchées. Dans notre cas, la localisation est définie le polygone `parc_megantic`. Le deuxième argument spécifie le niveau de résolution des données recherchées, c'est-à-dire le [*zoom*](https://github.com/tilezen/joerd/blob/master/docs/data-sources.md#what-is-the-ground-resolution), une valeur allant de z = 1 à z = 14.  
+La fonction `get_elev_raster()` requière deux arguments. Le premier argument spécifie la localisation des données recherchées. Dans notre cas, la localisation est définie le polygone `parc_megantic`. Le deuxième argument spécifie le niveau de résolution des données recherchées, c'est-à-dire le [*zoom*](https://github.com/tilezen/joerd/blob/master/docs/data-sources.md#what-is-the-ground-resolution), une valeur allant de `z = 1` à `z = 14`.  
 
 ```{R, eval = FALSE}
 # install.packages("elevatr")
@@ -714,7 +740,7 @@ Nous avons ainsi obtenu le *raster* d'élévation `elv_megantic` pour le Parc na
 res(elv_megantic)
 ```
 
-Ce qui correspond à environ `round(res(elv_megantic)[1], digits = 1)` par `round(res(elv_megantic)[2], digits = 1)` $m^2$.
+Ce qui correspond à environ `r round(res(elv_megantic)[1], digits = 1)` par `r round(res(elv_megantic)[2], digits = 1)` m$^2$.
 
 <br>
 
@@ -782,9 +808,10 @@ sentier_top
 Observez que la géométrie de cette entité spatiale est une multiligne (`MULTILINESTRING`).
 
 Notons que nous aurions pu faire la même opération directement sur l'objet `sentiers`, c'est-à-dire par la commande suivante:
-```{r}
+```{r, eval = FALSE}
 sentiers[st_nearest_feature(sf_point_max, sentiers),]
 ```
+<br>
 
 Regardons où ce sentier se situe par rapport aux autres sentiers du parc&nbsp;:
 
@@ -834,6 +861,7 @@ Pour faire le profil topographique du sentier `rando`, nous devons extraire des 
 ```{r elv_profile}
 topo_elv <- extract(elv_megantic, st_as_sf(rando), along = TRUE, cellnumbers = TRUE) 
 ```
+<br>
 
 Notons que cette opération peut prendre plusieurs secondes pour être complétée par votre ordinateur.
 
@@ -846,6 +874,7 @@ Trois remarques méritent d'être mentionnées concernant cette opération&nbsp;
 
 3. `cellnumbers = TRUE` nous permet d'avoir les indices des cellules extraites.
 
+<br>
 
 Comme vu un peu plus haut, la fonction `extract()` retourne une liste. Ainsi, `topo_elv` est un objet de classe `list`, mais cette fois le premier élément est une matrice avec deux colonnes: la première colonne contient les identifiants des cellules, et la seconde, les valeurs d’élévation (précédemment, le résultat de `extract()` était simplement un vecteur avec des valeurs d'élévation).  
 
@@ -853,8 +882,9 @@ Nous pouvons confirmer ces propos par les commandes suivantes&nbsp;:
 ```{r}
 class(topo_elv)       #topo_elv est un objet de classe "list"
 length(topo_elv)      #cette liste comprend une seule entrée
-dim(topo_elv[[1]])    #La première entrée de liste est une matrice de 2 colonnes et 876 lignes.
+dim(topo_elv[[1]])    #La première entrée de la liste est une matrice de 2 colonnes et 876 lignes.
 ```
+<br>
 
 Attribuons des noms à chacune des colonnes de la matrice contenue dans la première entrée de la liste `topo_elv`&nbsp;
 ```{r}
@@ -868,7 +898,7 @@ Nous avons donc toutes les valeurs d'élévation le long du sentier.
 
 ##### vii. Obtenir le profil topographique {-}
  
-Rappelons qu'un profil topographique est une représentation graphique du relief qui affiche l'élévation à chaque point le long d'un sentier (voir la figure \@ref(fig:prof_topo)). L'abscisse d'un tel graphique (c'est-à-dire l'axe des x) correspond à la distance parcourue depuis le début de la randonnée (par exemple de 0 à 100 km) et l'ordonnée (c'est-à-dire l'axe des y) correspond à l'élévation. Maintenant que nous avons l'élévation pour chaque point le long du sentier (`topo_elv`), nous devons déterminer la distance parcourue depuis le début du trajet jusqu'à chaque point le long de ce sentier. 
+Rappelons qu'un profil topographique est une représentation graphique du relief qui affiche l'élévation à chaque point le long d'un sentier (voir la figure \@ref(fig:proftopo)). L'abscisse d'un tel graphique (c'est-à-dire l'axe des x) correspond à la distance parcourue depuis le début de la randonnée (par exemple de 0 à 100 km) et l'ordonnée (c'est-à-dire l'axe des y) correspond à l'élévation. Maintenant que nous avons l'élévation pour chaque point le long du sentier (`topo_elv`), nous devons déterminer la distance parcourue depuis le début du trajet jusqu'à chaque point le long de ce sentier. 
 
 Tout d'abord, nous devons calculer la distance parcourue entre chaque paires de points qui se suivent le long du sentier. Pour ce faire, nous utiliserons la fonction `st_distance()` de la bibliothèque `st`. Or, cette fonction ne peut être utilisée que sur un objet spatial, et comme nous venons de le constater `topo_elv` est un objet de classe `list`. Nous devons donc transformer `topo_elv` en objet spatial avec la fonction `st_as_sf()`. 
 
@@ -898,7 +928,7 @@ dist_tout <- st_distance(topo_pts,topo_pts)
 dist_tout[1:5,1:5]
 ```
 
-L'élément `dist_tout[1,1]` est la distance entre le premier point de `topo_pts` et lui-même (donc zéro), l'élément `dist_tout[1,2]` est la distance entre le premier et le deuxième points de `topo_pts`, `dist_tout[1,3]` entre le premier et le troisième points de `topo_pts`, et ainsi de suite pour tous les points de `topo_pts`. 
+L'élément `dist_tout[1,1]` est la distance entre le premier point de `topo_pts` et lui-même (donc zéro), l'élément `dist_tout[1,2]` est la distance entre le premier et le deuxième points de `topo_pts` (auss zéro car ces deux points sont probablement très rapprochés), `dist_tout[1,3]` entre le premier et le troisième points de `topo_pts`, et ainsi de suite pour tous les points de `topo_pts`. 
 
 La fonction `st_distance()` s'utilise aussi avec l'argument `by_element = TRUE`. Dans ce cas, la fonction retourne un vecteur dont le premier élément correspond à la distance entre le premier élément de `x` et le premier élément de `y`; le deuxième élément, à la distance entre le deuxième élément de `x` et le deuxième élément de `y`, et ainsi de suite. Par exemple, l'opération suivante&nbsp;:
 
@@ -915,12 +945,13 @@ Pour répondre à notre question, nous devons calculer la distance entre des poi
 dist_pts <- st_distance(topo_pts[-1, ], topo_pts[-nrow(topo_pts),],
  by_element = TRUE)
 ```
+<br>
 
 Nous pouvons maintenant calculer la distance parcourue à chaque point le long du sentier depuis le début de la randonnée. Pour ce faire nous utilisons la fonction `cumsum()` qui calcule la somme cumulée des distances entre chaque point&nbsp;:
 ```{r}
 dist_parcourue <- cumsum(dist_pts)
 ```
-
+<br>
 
 Nous pouvons finalement visualiser l'élévation (la deuxième colonne de `topo_elv[[1]][, 2]`) en fonction de la somme cumulée des distances, `dist_parcourue`. Remarquons que le vecteur `dist_parcourue` comprend un élément de moins que le vecteur `topo_elv[[1]][, 2]`. Ceci s'explique par le fait que `dist_pts`, à partir duquel nous calculons `dist_parcourue`, mesure la distance entre les points (c'est à dire des intervalles). Par conséquent, nous ajountons la distance initiale de 0m au vecteur des distances parcourues.  
 
