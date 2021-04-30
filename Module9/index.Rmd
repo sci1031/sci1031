@@ -533,21 +533,21 @@ saveGIF(animation(20, tm_shape(bm) + tm_rgb()),
 
 
 
-### Précipitations et Température autour du Mont-Mégantic
+### Précipitations et Températurea au Parc National du Mont-Mégantic
 
 Nous allons maintenant nous intéresser aux précipitations et aux températures moyennes autour du parc national du Mont-Mégantic entre 2007 et 2016. Nous nous poserons deux nouvelles questions&nbsp;:
 
-* Quel est le mois disposant du plus faible?
+* Quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
 
-* Quel est le mois le plus chaud?
+* Où se situe le (ou les) point(s) le(s) plus chaud(s)? (La question porte sur la localisation spatio-temporelle du ou des points)
 
 Nous terminerons par deux exercices de visualisation de données: 
 
-* profiles de temperature et precipitation, 
+* Nous dessinerons les profiles de temperatures et de précipitations pour la période étudiée.
 
-* animation du changement. 
+* Nous animerons ces profiles en ajoutant une carte, elle aussi animée.
 
-
+Pour pouvoir faire tout ce travail, nous allons utiliser différents couches d'objet matricielles qui seront sous forme d'objet `rasterStack` qui seront l'objet des principaux objectifs d'apprentissage de cette section.
 
 
 #### Importer les données 
@@ -779,27 +779,26 @@ Comme pour les objets, nous pouvons rapidement visualiser les objets `rasterStac
 plot(mint)
 ```
 
-par défaut, 16 couches vont être affichées, il est possible d'augmenter ce nombre avec l'argument `maxnl`
+par défaut, 16 couches vont être affichées au maximum, il est possible d'augmenter ce nombre avec l'argument `maxnl`
 
 
 ```{r}
 plot(mint, maxnl = 25) 
 ```
 
-Mais avec plus de 16 cartes, il est difficile de bien visualiser et il est parfois souhaitable de choisir, par exemple, il est possible de visualiser les données des 4 derniers mois en sélectionnant les 4 dernières couches de `mint`.
+Avec un grand nombre de cartes (au-delà de 10), il peut s'avérer difficile de visualiser correctement les données et il est parfois souhaitable de sélectionner les couches à inspecter. Par exemple, il est possible de visualiser les données des 4 derniers mois en sélectionnant les 4 dernières couches de `mint`.
 
 ```{r}
 plot(mint[[117:120]]) 
 ```
 
-Par défaut, le titre utilisé est le nom des couches, pour changer cela nous pouvons renommer les couches en utilisant la fonction `names()`. Cela étant dit, il y a des contraintes sur les noms des couches (par exemple, les espaces blancs sont à éviter), pour avoir un titre libre de ces contraintes, nous pouvons utiliser l'argument `main` auquel nous donnons le vecteur de titres souhaité.
+Par défaut, le titre utilisé est le nom des couches, pour changer cela nous pouvons renommer les couches en utilisant la fonction `names()`. Cela dit, il y a des contraintes sur les noms des couches (par exemple, les espaces blancs sont à éviter), pour avoir un titre libre de ces contraintes, nous pouvons utiliser l'argument `main` auquel nous donnons le vecteur contenant les titres souhaités.
 
 ```{r}
 plot(mint[[117:120]], main = c("09/2016", "10/2016", "11/2016", "12/2016"))
 ```
 
-
-La fonction `mapview` peut aussi être utilisée pour visualiser les `rasterStack`. Les différentes couches seront alors mis les unes par dessus les autres dans l'ordre donné (la dernière étant sur le dessus de la pile).
+La fonction `mapview` peut aussi être utilisée pour visualiser les `rasterStack`. Les différentes couches seront alors mis les unes par dessus les autres dans l'ordre donné (la dernière étant sur le dessus de la pile), la remarque précédente reste alors valide : mieux vaut sélectionner les couches à visualiser. Ci-dessous nous visualisons les trois premières couches.
 
 
 ```{r, warning = FALSE}
@@ -813,17 +812,19 @@ mapview(mint[[1:3]])
 
 ##### Lien entre `rasterStack` et objets spatio-temporels
 
-Jusqu'ici nous avons implicitement utilisé un objet `rasterStack` comme objet 
+Jusqu'ici nous avons implicitement utilisé un objet `rasterStack` comme un objet 
 spatio-temporel: 
 
 - chaque couche est bien un objet spatial (avec son étendue spatiale, sa projection, etc.)
 - les couches sont ordonnées dans le temps. 
 
-Il est cependant important d'insister sur le fait qu'un `rasterStack` ne contient pas nécessairement un objet spatio-temporel. La seule contrainte sur les couches contenues dans l'objet est spatiale: étendue, projection et  résolution doivent être identiques. Ainsi, il est commun de travailler sur une même période avec des objets `rasterStack` qui contiennent différentes variables pour une période donnée. Cela permet, entre autre, d'éviter la répétition des mêmes opérations sur plusieurs objets `rasterLayer`. Aussi, certaines données sont, par nature, multi-couches, c'est le cas des données d'imagerie satellitaire (on parle alors de bandes).
+Il est cependant important d'insister sur le fait qu'un `rasterStack` ne contient pas nécessairement un objet spatio-temporel. La seule contrainte sur les couches contenues est spatiale: étendue, projection et  résolution doivent être identiques. Ainsi, il est commun de travailler sur une même période avec des objets `rasterStack` qui contiennent différentes variables pour une période donnée. Cela permet, entre autre, d'éviter la répétition des mêmes opérations sur plusieurs objets `rasterLayer`. Aussi, certaines données sont, par nature, multi-couches, c'est le cas des données d'imagerie satellitaire (on parle alors de bandes).
 
-Jusqu'ici, nous n'avons pas formalisé l'utilisation du temps, nous savons simplement ce à quoi correspondent les différentes couches. Cette information a été donnée dans le texte plus haut, et dans un contexte de partage de données cette information aurait été dans les métadonnées (les données qui décrivent les données). Il existe un moyen de formaliser l'information qui ordonne les couches avec la fonction `setZ()`. Nous allons utiliser cette fonction pour avoir des dates le long de cette axes. En premier lieu, nous créons une séquence de date mois/année" en utilisant `rep()` et `paste0()`:
+Jusqu'ici, nous n'avons pas formalisé l'utilisation du temps, nous savons simplement à quoi correspondent les différentes couches. Cette information a été donnée dans le texte plus haut, et dans un contexte de partage de données cette information aurait été ajoutée dans les métadonnées (les données qui décrivent les données). Il existe cependant un moyen de formaliser un peu plus l'information qui ordonne les couches avec la fonction `setZ()`. Nous allons utiliser cette fonction pour avoir des dates le long de cette axes. En premier lieu, nous créons une séquence de date "mois/année", `moan`, en utilisant `rep()` et `paste0()`:
 
 ```{r}
+# ci-dessous la séquence 1, 2..., 12 est répétée 10 fois
+# et chacune des 10 années (2007, ..., 2016) est répétée consécutivement 10 fois
 moan <- paste0(rep(1:12, 10), "/", rep(2007:2016, each = 12))
 ```
 
@@ -841,28 +842,32 @@ mint <- setZ(mint, temps, name = "temps")
 mint
 ```
 
-Nous pouvons constater qu'une ligne "`temps`" a été ajoutée, résumant cette nouvelle information. Ces données sont facilement accessible avec `getZ()`
+Nous pouvons constater qu'une ligne "`temps`" a été ajoutée, résumant cette nouvelle information. Ces données sont facilement accessibles avec `getZ()`
 
 ```{r getZ}
 getZ(mint)
 ```
 
-Il devient alors aisé de trier les couches sur la date. Par exemple, nous pouvons sélectionner toutes les couches de 2015 en utilisant `year()` de `lubridate`.
+Il devient alors plus aisé de trier les couches sur la date. Par exemple, nous pouvons sélectionner toutes les couches de 2015 en utilisant `year()` de `lubridate`.
 
-```{r getZ}
+```{r getZ_sort}
 mint[[which(year(getZ(mint)) == 2015)]]
 ```
 
-Noter qu'ici l'appelle à `which()` est important, sinon une erreur est retournée.
+Notons qu'ici l'appel à `which()` est important, nous ne pouvons pas utiliser un vecteur de logique dans `[[` (ce qui nous permettrait de nous passer de `which()`), sinon une erreur est retournée.
 
 
 
 
 
 
-#### Question 1
+#### Quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
 
-* Quelle est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+Nous allons maintenant répondre au 
+
+* Quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+
+
 
 Nous allons profiter pour faire une opération fréquente, c'est croper avec un une zone (*buffer*). 
 
@@ -902,6 +907,12 @@ which.min(val)
 
 
 
+#### Où se situe le (ou les) point(s) le(s) plus chaud(s)?
+
+Sans crop 
+
+
+
 
 #### Profile temperature et precipitation
 
@@ -913,8 +924,12 @@ lines(1:120, apply(getValues(maxt), 2, mean), lty = 2, col = 2)
 ```
 
 
-
 #### Visualisation
+
+Pour finir, nous allons animer en présentant construisant les donn.es.
+
+
+
 
 <!-- profile et raster a coté avec le parc -->
 <!-- 
@@ -926,6 +941,7 @@ plot(0.1*apply(getValues(mint), 2, mean), type = "l", lty = 2) -->
 
 
 
-## Exercice {#ex_spatiotemp}
 
+
+## Exercice {#ex_spatiotemp}
 
