@@ -919,7 +919,7 @@ df_pts <- as.data.frame(xyFromCell(elv_megantic, topo_elv[[1]][, 1]))
 head(df_pts)
 ```
 
-Nous avons mis les coordonnées spatiales dans le tableau `df_pts` de type *data frame*. Notez que l'argument `topo_elv[[1]][, 1]` correspond aux indices des cellules (c'est la première colonne de la première entrée de la liste `topo_elv`). 
+Nous avons mis les coordonnées spatiales dans le tableau `df_pts` de type `data.frame`. Notez que l'argument `topo_elv[[1]][, 1]` correspond aux indices des cellules (c'est la première colonne de la première entrée de la liste `topo_elv`). 
 
 Nous pouvons ensuite utiliser la fonction `st_as_sf()` pour transformer `df_pts` en objet de classe `sf`&nbsp;:
 
