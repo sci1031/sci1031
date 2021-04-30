@@ -122,7 +122,7 @@ parcs <- st_read("Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
 ```
 <br>
 
-Enfin, nous importons la couche d'élévation pour la région d'intérêt en utilisant la fonction `raster()``.
+Enfin, nous importons la couche d'élévation pour la région d'intérêt en utilisant la fonction `raster()`.
 
 ```{r, eval = FALSE}
 chemin_dem <- paste(chemin, "/DEM.tif", sep = "")
@@ -421,7 +421,7 @@ dem_merge <- merge(dem_ma, dem_ma_inv)
 ```
 <br>
 
-<!-- BESOIN D'AIDE:  j'aimerais que les map aient le même niveau de zoom initialement. J'arrive pas. La première carte est toujours à un zoom de plus.
+<!-- SERA RESOLU QUAND ON ON UTILISERA TMAP. BESOIN D'AIDE:  j'aimerais que les map aient le même niveau de zoom initialement. J'arrive pas. La première carte est toujours à un zoom de plus.
 Voir: https://github.com/r-spatial/mapview/issues/37
 ET: https://rdrr.io/cran/leafsync/man/latticeView.html
 J'ai essayé avec no.initial.sync = FALSE, setView(zoom = 7), marche pas.
@@ -437,16 +437,19 @@ map_ma <- mapview(dem_ma, legend = F)
 map_ma_inv <- mapview(dem_ma_inv, legend = F)
 
 leafsync::latticeView(map_ma, map_ma_inv, map_merge, ncol = 3)
+
 ```
 
 <br>
+<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Note m@map marche pas avec leafsync --> 
 
 >
 > Notez que pour combiner des *rasters* avec la fonction `merge()` ceux-ci doivent avoir la même résolution et posséder le même système de coordonnées de référence (SCR).
 >
 
+<br>
 
-<!-- BESOIN D'AIDE:  La docu dit aussi qu'ils doivent avoir la même origine. QU'est-ce-que ça veut dire?? Voir la section Details dans https://www.rdocumentation.org/packages/raster/versions/3.4-5/topics/merge --> 
+<!-- ON LAISSE FAIRE. BESOIN D'AIDE:  La docu dit aussi qu'ils doivent avoir la même origine. QU'est-ce-que ça veut dire?? Voir la section Details dans https://www.rdocumentation.org/packages/raster/versions/3.4-5/topics/merge --> 
 
 Il est possible que deux *rasters* que l'on souhaite combiner couvrent certaines régions communes. C'est-à-dire que certains pixels se superposent. Si la valeur des pixels se superposant diffère, la fonction `merge()` choisira la valeur que prend le pixel dans le *raster* donné en premier argument. 
 
@@ -473,7 +476,10 @@ map_ordre1 <- mapview(dem_merge_ordre1, legend = F)
 map_ordre2 <- mapview(dem_merge_ordre2, legend = F)
 
 leafsync::latticeView(map_ordre1,map_ordre2, ncol = 2)
+
 ```
+
+<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Faire m@map car ce n'est pas la bonne classe d'objet créé avec leafsync --> 
 
 <br>
 
@@ -500,8 +506,12 @@ map_mosaic_mean <- mapview(dem_mosaic_mean, legend = F)
 
 
 leafsync::latticeView(map_mosaic_min , map_mosaic_max, map_mosaic_mean, ncol = 3)
+
 ```
 <br>
+
+<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Faire m@map car ce n'est pas la bonne classe d'objet créé avec leafsync --> 
+
 
 La fonction `mosaic()` requière également que les *rasters* utilisés possèdent la même résolution et le même SCR.
 
@@ -617,10 +627,10 @@ Remarquez que nous avons attribué à ce point le même SRC que celui du *raster
 
 En superposant, avec `mapview()`, les trois couches d'informations spatiales que nous venons de manipuler, nous pouvons repérer le parc dans lequel se trouve ce point d'élévation maximale. 
 
-<!-- NOTE: Le caption n'apparait pas ?  Il faudrait enlever les légendes. Faire avec tmap?-->
 
 ```{r sommet, fig.cap = "En cliquant sur le polygone du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-Mégantic", warning = FALSE}
-mapview(dem_parcs) + mapview(parcs, alpha = 0.01) + mapview(sf_point_max,  col.regions = "red")
+map_point <- mapview(dem_parcs) + mapview(parcs, alpha = 0.01) + mapview(sf_point_max,  col.regions = "red")
+map_point@map
 ```
 
 <br>
@@ -714,9 +724,9 @@ mapview(sentiers)
 ```
 <br>
 
-<!-- Supscript non-math??  -->
+<!-- MARCHE m^2^  ou m<sup>2</sup>   Supscript non-math?? $^2$ -->
 
-Notre objectif est de savoir comment l'élévation varie le long du sentier qui conduit le plus près possible du plus haut sommet. Ainsi, en plus des données sur la localisation des sentiers, nous avons besoin des données d'élévation. Or, au lieu d'utiliser le *raster* `dem_lcc` dont la résolution spatiale est de `r res(dem_lcc)[1]` par `r res(dem_lcc)[2]` m$^2$, nous allons nous procurer une autre couche d'élévation de résolution plus fine afin d'obtenir un profil topologique plus précis.
+Notre objectif est de savoir comment l'élévation varie le long du sentier qui conduit le plus près possible du plus haut sommet. Ainsi, en plus des données sur la localisation des sentiers, nous avons besoin des données d'élévation. Or, au lieu d'utiliser le *raster* `dem_lcc` dont la résolution spatiale est de `r res(dem_lcc)[1]` par `r res(dem_lcc)[2]` m^2^, nous allons nous procurer une autre couche d'élévation de résolution plus fine afin d'obtenir un profil topologique plus précis.
 
 Pour ce faire, nous utiliserons la fonction `get_elev_raster()` de la bibliothèque [`elevatr`](https://CRAN.R-project.org/package=elevatr). Cette fonction permet d'accéder aux données d'élévation disponibles sur le service d'infonuagique d'Amazon ([AWS](https://registry.opendata.aws/terrain-tiles/)) et cela à différents niveaux de résolution.
 
@@ -740,7 +750,7 @@ Nous avons ainsi obtenu le *raster* d'élévation `elv_megantic` pour le Parc na
 res(elv_megantic)
 ```
 
-Ce qui correspond à environ `r round(res(elv_megantic)[1], digits = 1)` par `r round(res(elv_megantic)[2], digits = 1)` m$^2$.
+Ce qui correspond à environ `r round(res(elv_megantic)[1], digits = 1)` par `r round(res(elv_megantic)[2], digits = 1)` m^2^.
 
 <br>
 
