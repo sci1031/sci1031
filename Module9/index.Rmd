@@ -83,7 +83,7 @@ trajets
 
 ```{r read_trajet, echo = FALSE, message = FALSE}
 library(sf)
-trajets <- st_read("Module9/data/trip400.geojson")
+trajets <- st_read("Module9/Donnees/trip400.geojson")
 trajets
 ```
 
@@ -537,9 +537,9 @@ saveGIF(animation(20, tm_shape(bm) + tm_rgb()),
 
 Nous allons maintenant nous intéresser aux précipitations et aux températures moyennes autour du parc national du Mont-Mégantic entre 2007 et 2016. Nous nous poserons deux nouvelles questions&nbsp;:
 
-* Quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+* Question 1&nbsp;: quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
 
-* Où se situe le (ou les) point(s) le(s) plus chaud(s)? (La question porte sur la localisation spatio-temporelle du ou des points)
+* Question 2&nbsp;: où se situe le (ou les) point(s) le(s) plus chaud(s)? (La question porte sur la localisation spatio-temporelle du ou des points)
 
 Nous terminerons par deux exercices de visualisation de données: 
 
@@ -547,7 +547,7 @@ Nous terminerons par deux exercices de visualisation de données:
 
 * Nous animerons ces profiles en ajoutant une carte, elle aussi animée.
 
-Pour pouvoir faire tout ce travail, nous allons utiliser différents couches d'objet matricielles qui seront sous forme d'objet `rasterStack` qui seront l'objet des principaux objectifs d'apprentissage de cette section.
+Pour pouvoir faire tout ce travail, nous allons utiliser différents couches d'objet matricielles qui seront sous forme d'objets `rasterStack` (mentionnés au [Module 8][#mat])qui seront l'objet des principaux objectifs d'apprentissage de cette section.
 
 
 #### Importer les données 
@@ -576,14 +576,11 @@ Les données préparées sont au format [NetCDF (Network Common Data Form)](http
 ```{r stack, message = FALSE}
 library(raster)
 # temperature minimale par mois pour
-mint <- stack("Module9/data/mint.nc")
+mint <- stack("Module9/Donnees/mint.nc")
 # temperature maximale par mois 
-maxt <- stack("Module9/data/maxt.nc")
+maxt <- stack("Module9/Donnees/maxt.nc")
 # total des precipitations par mois 
-pcp <- stack("Module9/data/pcp.nc")
-```
-
-```{r}
+pcp <- stack("Module9/Donnees/pcp.nc")
 class(mint)
 ```
 
@@ -861,80 +858,136 @@ Notons qu'ici l'appel à `which()` est important, nous ne pouvons pas utiliser u
 
 
 
-#### Quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+#### Réponse à la question 1
 
-Nous allons maintenant répondre au 
+Nous allons maintenant utiliser ce que nous venons de voir pour répondre à la question suivante: 
 
 * Quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
 
+Pour répondre à cette question, nous devons procéder ainsi :
+
+1. Isoler les cellules de `pcp` qui correspondent à la zone du parc du Mont Mégantic.
+1. Calculer la pluviométrie moyenne pour toutes les couches. 
+1. Déterminer le mois et l'année pour lequel la pluviométrie moyenne est la plus faible. 
 
 
-Nous allons profiter pour faire une opération fréquente, c'est croper avec un une zone (*buffer*). 
+Pour la première étape, nous allons utiliser `mask()`. Mais ici, nous décidons de prendre les cellules de nos couches qui sont à l'intérieur du Parc du Mont-Mégantic ainsi que les cellules qui sont proches du parcs, dans un rayon de 5&nbsp;km. Cette opération de *buffer* est très souvent utilisée pour augmenter la couverture spatiale et ainsi obtenir une moyenne climatique à une plus large échelle. 
 
 
-cropper avec un buffer.
 
-1. cropper elevation raster autour du parc
+de pour isoler les cellules de `pcp` . Nous allons ajouter utiliser aussi faire une opération 
 
-2. Sur dix ans, mois par mois
+```{R}
+megantic <- st_buffer(parcs[2,], dist = 5000)
+```
+
+Notons qu'il est possible de connaître l'unité avec `st_crs()`.
+
+```{R}
+st_crs(parcs)$units  
+```
 
 
-```{r}
-ra_mean <- list()
-for (i in 1:12) {
-  ra_mean[[i]] <- mean(mint[[i + (0:9)*12]])
+Nous allons maintenant appeler `mask()` pour extraire les cellules désirer (afin de pouvoir les visualiser mais notons que nous aurions pu utiliser seulement `extract()`)
+
+```{R pcp_megantic}
+pcp_megantic <- mask(pcp, st_transform(megantic, st_crs(pcp)))
+```
+
+Visualisons les 4 premières couches de `pcp_megantic`
+
+```{R plot_pcp_megantic}
+plot(pcp_megantic[[1:4]])
+```
+
+Nous pouvons alors extraire avec `getValues()` et faire la moyenne couche par 
+couche en utilisant `apply()` et `mean()` sans oublier d'enlever les valeurs non attribuées (`NA`).
+
+```{R mean_pcp}
+mean_pcp <- apply(getValues(pcp_megantic), 2, mean, na.rm = TRUE)
+```
+
+Et nous pouvons alors chercher le minimum de ces moyennes.
+
+```{R}
+min(mean_pcp)
+which.min(mean_pcp)
+getZ(mint)[which.min(mean_pcp)]
+```
+
+La couche `r which.min(mean_pcp)`, ce qui correspond au mois de novembre 2012. 
+
+
+
+#### Réponse à la question 2
+
+Pour répondre à la question 2, nous devons 
+
+1. Isoler les cellules de `maxt` qui correspondent à la zone du parc du Mont Mégantic (pas de *buffer* cette fois).
+2. Trouver la cellules pour laquelle cette valeur est maximale 
+
+
+Comme nous avons maintenant l'habitude des opérations de `mask()`, nous allons faire cette première étape à l'aide d'une seule ligne de commande.
+
+
+```{R}
+maxt_megantic <- mask(maxt, st_transform(parcs[2, ], st_crs(maxt)))
+```
+
+Pour la seconde étape, il y a plusieurs façons de procéder. Nous allons procéder en deux temps&nbsp;: nous allons d'abord trouver la couche ou est le maximum puis trouver quelle est le point sur cette couche. 
+
+
+```{R}
+id <- which.max(apply(getValues(maxt_megantic), 2, max, na.rm = TRUE))
+id
+```
+
+La couche `r id` correspond au mois de Juillet 2010. Nous utilisons alors `xyFromCell()` pour avoir les coordonnées satiale de ces points, ce qui nous permet de répondre à notre questions.
+
+
+```{R}
+xyFromCell(maxt_megantic[[id]], which.max(maxt_megantic[[id]]))
+```
+
+
+
+
+#### Profiles de temperatures et de precipitations
+
+Pour réaliser des profiles de températures, nous allons dans pour, nous allons réutiliser l'objet `megantic`
+mais cette fois, simplement `extract()`, nous utiliserons ensuite la moyenne pour chaque couche. Nous pouvons faire une fonction comme vu plus haut. 
+
+```{r prof_fun}
+profile <- function(ras, mask) {
+  apply(extract(ras, st_transform(mask, st_crs(ras)))[[1]], 2, mean, na.rm = TRUE)
 }
-ra <- stack(ra_mean)
-names(ra) <- month.name[1:12]
-plot(ra)
 ```
 
-
-```{r}
-val <- apply(getValues(ra), 2, mean)
-val 
-which.min(val)
-```
+Nous utiliserons les dates, nous pouvons utiliser celle de `mint` étant donné que ce sont les même dates pour les trois couches.
 
 
-* Trouver le mois le moins pluvieux pour préparer notre saison de randonnée.
-
-- On extract les valeurs de précipitation (par mois) du rasterStack pour le parc que l'on a ciblé
-- On montre comment on peut réaliser une moyenne entre deux mois rasterStack[[1]] + rasterStack[[2]] / 2 ou alors mean rasterStack[[1:2]]. 
-
-- which.min pour déterminer le raster du stack disposant de la plus petite valeur
-- Compléter avec d'autre chose, ca me parait léger... à voir quand au dessus ce sera écrit..
-
-
-
-#### Où se situe le (ou les) point(s) le(s) plus chaud(s)?
-
-Sans crop 
-
-
-
-
-#### Profile temperature et precipitation
-
-
-```{r}
-# TODO le mettre en fonction!
-plot(0.1*apply(getValues(mint), 2, mean), type = "l", lty = 2)
-lines(1:120, apply(getValues(maxt), 2, mean), lty = 2, col = 2)
+```{r profiles, warning = FALSE, fig.height = 9}
+par(mfrow = c(3, 1))
+plot(getZ(mint), profile(mint, megantic), type = "l")
+plot(getZ(mint), profile(maxt, megantic), type = "l")
+plot(getZ(mint), profile(pcp, megantic), type = "h")
 ```
 
 
 #### Visualisation
 
-Pour finir, nous allons animer en présentant construisant les donn.es.
+Pour finir, nous allons animer en présentant construisant les donn.es. Nous allons commencer par 
+
+1 carte par et une et ceux une date.
 
 
-
-
-<!-- profile et raster a coté avec le parc -->
-<!-- 
-plot(mint[[2]]) 
-plot(0.1*apply(getValues(mint), 2, mean), type = "l", lty = 2) -->
+```{r fun_anim, warning = FALSE, fig.height = 9}
+layout(rbind(1, 2), heights = c(2, 1))
+# image(mint[[1]])
+# image(mint[[2]])
+plot(pcp[[1]])
+plot(getZ(mint), profile(pcp, megantic), type = "h")
+```
 
 
 
