@@ -46,9 +46,8 @@ En effet, cette leçon vous amène à planifier vos vacances pour la prochaine s
 
 Plus précisément, nous allons explorer le territoire Québécois en se posant la question suivante: 
 
->
-> **Parmi les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux (dans un rayon de 70 km)? **
->
+> Parmi les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux (dans un rayon de 70 km)? 
+
 
 #### Télécharger les données {-}
 
@@ -60,17 +59,36 @@ Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches
 - `parcs.gdb`,
 - `provinces`.
 
- <!-- À VOIR probablement retirer et faire quelque chose de plus simple pour la partie exo  -->
+
 Le sous-dossier `sentiers` correspond aux [sentiers de randonnées de la SÉPAQ](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux) et sera utilisé lors dans la section [exercice](#ex_manip_vec).
+
+### Résolution de la problématique
+
+Pour répondre à notre question, nous devons résoudre sont les suivantes:
+
+- Lire dans `R` le fichier spatial comprenant l'ensemble des municipalités du Québec.
+- Obtenir la taille de la population de chacune des municipalités.
+- Filtrer ces municipalités pour retenir les 10 municipalités ayant la taille de population la plus importante.
+- Lire la géodatabase du réseau de la SÉPAQ.
+- Filtrer les aires récréatives pour retenir seulement les parcs nationaux.
+- Tracer un polygone en forme de cercle (une zone tampon) avec 70 km de rayon autour de chacune des dix plus grandes villes.
+- Pour chacun des polygones, compter le nombre de parcs présent dans la zone tampon de 70&nbsp;km.
+- Déterminer la ville qui compte le plus grand nombre de parc dans la zone tampon qui lui est associée.
+
 
 
 ### Opérations de base 
 
-Avant d'entamer la résolution de notre question, familiarisons-nous avec les opérations fréquemment utilisées sur les données matricielles.
 
-#### Importer et visualiser les données {-}
 
-La première étape consiste à charger les bibliothèques requises pour lire les données spatiales vectorielles (`sf`) et les visualiser (`mapview`). Nous chargeons aussi la bibliothèque `units` qui nous permettra de manipuler les unités de mesure utilisées pour le calcul d'aire ou de distance.
+
+
+### Quelles sont les 10 plus grandes villes du Québec? 
+
+#### Importer, lire et visualiser les données {-}
+
+La première étape consiste à charger les bibliothèques requises pour lire les données spatiales vectorielles (`sf`) et les visualiser (`mapview`).
+XXXXUNITS??
 
 ```{r load-libraries7, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 library(sf)
@@ -79,153 +97,74 @@ library(units)
 ```
 
 
-La seconde étape consiste à lire le fichier *shapefile* de l'ensemble des municipalités du Québec en utilisant la fonction `st_read()` tel que vu dans le [module 2](#lire-shp).
+La seconde étape consiste à lire le fichier *shapefile* de l'ensemble des villes du Québec en utilisant la fonction `st_read()` tel que vu dans le [module 2](#lire-shp).
 
 ```{r load-villes, eval = FALSE}
-chemin <-"D:/votrechemin/SCI1031/Module7/Module7_donnees/"
-chemin_muni <- paste(chemin, "/villes/villes.shp", sep = "")
-municipalites <- st_read(chemin_muni)
+chemin <-"D:/votrechemin/SCI1031/Module7/Donnees/"
+chemin_villes <- paste(chemin, "/villes/villes.shp", sep = "")
+villes <- st_read(chemin_villes)
 ```
 
 ```{r load-villes2, eval = TRUE, echo = FALSE}
-municipalites <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/data/villes/villes.shp")
-#municipalites <- st_read("Module7/data/villes/villes.shp")
+villes <- st_read("Module7/data/villes/villes.shp")
 ```
 
-Le *shapefile* a maintenant été importé dans un objet `R` de classe `sf` (c'est-à-dire un objet importé ou généré par l'utilisation de la librairie `sf`). Nous remarquons que la géométrie de cet object vectoriel est de type point. Plus précisément, cet objet contient 767 points (*features*) et 17 attributs (*fields*).
+Le *shapefile* a maintenant été importé dans un objet `R` de classe `sf` (c.à.d un objet importé ou généré par l'utilisation de la librairie `sf`). Nous remarquons que la géométrie de cet object vectoriel est de type point. Plus précisément, cet objet contient 767 points (*features*) et 17 attributs (*fields*).
 
-Pour en savoir davantage sur ces attributs de nature géographique, démographique et administrative, vous pouvez télécharger et consulter la [documentation] (https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326) disponible sur le site de Données Québec.  
+Nous pouvons maintenant visuellement valider que l'importation a bien été réussi en utilisant la fonction `mapview()`:
 
-
-La troisième étape consiste à charger la couche d'informations spatiales contenant les différentes aires récréatives du Québec. Cette information se trouve à l'intérieur d'une géodatabase disponible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000). Comme vu dans le module {#vec}, les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et explorer les différentes couches afin de déterminer celle qui correspond aux aires récréatives.
-
-```{r, eval = FALSE}
-chemin_parcs_nationaux <- paste(chemin, "/parcs.gdb", sep = "")
-st_layers(chemin_parcs_nationaux)
+```{r viz-load-villes}
+mapview(villes, legend = FALSE)
 ```
 
-```{r list-layers, echo = FALSE, eval = TRUE}
-st_layers("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/data/parcs.gdb") 
-#st_layers("/Module7/data/parcs.gdb") 
+Dans cette carte interactive, vous pouvez accéder à la table d'attributs de chaque municipalité en cliquant sur le marqueur géograhique lui correspondant. Pour en savoir davantage sur ces attributs de nature géographique, démographique et administrative, vous pouvez télécharger et consulter la [documentation] (https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326) disponible sur le site de Données Québec.  
 
-```
-
-Nous pouvons remarquer que les intitulés des différentes couches ne sont pas bien définis. Il faut donc prendre le temps de regarder la documentation accessible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000/resource/229322ef-eca2-4ae9-a511-ba599bc2745e). Ne vous inquiétez pas, je l'ai fait pour vous! En s'intéressant à la structure de données et à la nomenclature utilisée et décrite, nous pouvons déterminer que la couche `terpnq_s` correspond aux territoires des parc nationaux du Québec. Nous pouvons donc faire la lecture de la géodatabase avec la fonction `st_read()` en précisant cette couche à l'aide de l'argument `layer`.
-
-```{r load-parcs, eval = FALSE}
-chemin_provinces <- paste(chemin, "/parcs.gdb", sep = "")
-provinces <- st_read(chemin_provinces, layer = "terpnq_s")
-```
-
-```{r load-parcs2, echo = FALSE}
-parcs_nationaux <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/data/parcs.gdb", layer = "terpnq_s") 
-#parcs_nationaux <- st_read("Module7/data/parcs.gdb", layer = "terpnq_s") 
-
-```
-
-Nous pouvons maintenant visuellement valider que l'importation des données a bien été réussi en utilisant la fonction `mapview()` &nbsp;:
-
-```{r visualisation}
-carte_donnees <- mapview(municipalites, legend = FALSE) +                
-                 mapview(parcs_nationaux, zcol = "TRQ_NM_TER", legend = FALSE)
-
-carte_donnees@map
-```
+Cette table d'attributs contient une diversité d'informations plus ou moins pertinentes pour répondre à notre question. Nous voulons donc nettoyer cette table en sélectionnant la ou les colonnes utiles pour notre besoin. 
 <br>
 
-Notez que l'attribut "TRQ_NM_TER" de l'objet `parcs_nationaux` correspond au nom de chaque parc national.
+#### Sélectionner des attributs (colonnes) ou des localisations (lignes) spécifiques {-}
 
-Dans le précédent module portant sur la [cartographie](#carto), nous avons décrit plusieurs fonctionnalités de la bibliothèque `tmap` et avons démontré sa flexibilité et à sa capacité à produire des cartes de qualité. Toutefois, la bibliothèque `mapview` demeure fort utile lorsque nous souhaitons visualiser rapidement des données. Par défaut, la fonction `mapview()` affiche la carte d'OpenstreeMap en arrière-pan, ce qui permet de contextualiser facilement les données. 
+L'objet spatial `villes` contient `r nrow(villes)` points correspondant chacun à une municipalité. La table d'attributs contient quant à elle `r ncol(villes)` colonnes correspondant à chacun des attributs permettant de décrire les municipalités. L'attribut qui nous intéresse ici est la colonne `HAP_NM_TOP` contenant le nom des municipalités. L’abréviation `TOP` signifie [toponymie](https://fr.wikipedia.org/wiki/Toponymie) qui sert à référencer les noms propres désignant un lieu. On veut donc extraire la colonne `HAP_NM_TOP` contenant le nom (toponyme) des villes du Québec. 
 
+Les objets `sf` sont manipulables de la même façon qu'un `data.frame` (étant eux-mêmes des `data.frame`). Pour accéder à une colonne ou à une ligne spécifique dans la table d'attributs, nous devons utiliser la syntaxe suivante:
 
-De plus, les cartes produites avec `mapview()` sont interactives, permettant d'accéder directement à la table d'attributs des données vectorielles représentées. Par exemple, sur la carte ci-dessus, vous n'avez qu'à cliquer sur le marqueur géographique correspondant à chaque municipalité (point) ou à chaque parc (polygone) pour obtenir la liste des attributs et leur valeur. De plus, vous pouvez choisir d'afficher l'une ou l'autre des couches en cochant la couche désirée dans la fenêtre située dans le coin supérieur gauche. 
-
-
-
-
-<br>
-
-#### Filter des *shapefiles* {-}
-
-<!-- À arranger -->
-Souvent besoin de filtrer des données vectorielles pour sélectionner certaines localisations (par exemple certaines municipalites, ou parcs), certains attributs (par exemple noms des municipalites), ou encore des attributs possédant une valeur spécifique. 
-
-Dans les sous-sections qui suivent, nous présenterons des opérations qui permettent de filtrer des données vectorielles.
-
-<br>
-
-##### Sélectionner des attributs ou des localisations spécifiques {-}
-
-Les objets `sf` sont manipulables de la même façon qu'un `data.frame` (étant eux-mêmes des `data.frame`). Les attributs correspondent aux colonnes tandis que les entités spatiales (points, lignes ou polygones) correspondent aux lignes du `data.frame`.
-
-Par exemple, l'objet spatial `municipalites` contient `r nrow(municipalites)` points correspondant chacun à une municipalité. La table d'attributs contient quant à elle `r ncol(municipalites)` colonnes correspondant à chacun des attributs permettant de décrire les municipalités. 
-
-###### Sélectionner à partir des indices du `data.frame` {-}
-
-Pour sélectionner un élément spatial spécifique d'un *shapefile*, nous pouvons simplement spécifier l'indice de la ligne qui lui est associée dans le `data.frame`. Par exemple :
-
-```{r villes-ligne}
-municipalites[1, ] # Pour accéder à la première ligne. 
+```{r ville1}
+villes[1, ] # Pour accéder à la première ligne. 
 ```
 
-Nous remarquons que le nombre de *features* (points) est maintenant de 1 (première ligne de la sortie produite par `R`). En effet, puisque nous avons sélectionné le premier point de l'objet spatial `municipalites` nous avons exclu les 766 autres points. 
+Nous remarquons que le nombre de *features* (points) à diminuer à 1, puisque nous avons sélectionné le premier point de l'objet spatial `villes`. Maintenant, regardons comment sélectionner une seule colonne:
 
-De la même manière, pour sélectionner un attribut spécifique, nous pouvons simplement spécifier l'indice de la colonne qui lui est associée :
-
-
-```{r villes-col}
-municipalites[, 2] # Pour accéder à la deuxième colonne. 
+```{r ville2}
+villes[, 2] # Pour accéder à la deuxième colonne. 
 ```
 
 Nous remarquons également que le nombre de *fields* (colonnes) à diminuer à 1. 
 
-###### Sélectionner des attributs à partir de leur nom {-}
+Les colonnes disposent toujours d'un nom unique dans un `data.frame`. Nous pouvons afficher le nom des colonnes en utilisant la fonction `names()` et extraire une colonne spécifique par son nom de la manière suivante:
 
-Il est également possible de sélectionner un attribut particulier en spécifiant son nom.
-
-Les colonnes disposent toujours d'un nom unique dans un `data.frame`. Nous pouvons afficher le nom des colonnes en utilisant la fonction `names()`&nbsp;:
-
-```{r villes-nom}
-names(municipalites)
-```
-
-Cette table d'attributs contient une diversité d'informations. L'attribut nommé `HAP_NM_TOP` contient le nom des municipalités. Notez que l’abréviation `TOP` signifie [toponyme](https://fr.wikipedia.org/wiki/Toponymie). 
-
-
-Pour sélectionner cet attribut nous pouvons le faire simplement en utilisant son nom. Par exemple, en utilisant la syntaxe suivante :
-
-```{r villes-col-nom}
-municipalites[, "HAP_NM_TOP"]
+```{r villes-topo-col}
+names(villes)
+villes[, "HAP_NM_TOP"]
 # Ce qui revient également au même que la syntaxe suivante 
-municipalites[, 13] 
+villes[, 13] 
 # Puisque cette colonne est en treizième position.
 ```
 
-Notez que la syntaxe familière `municipalites$HAP_NM_TOP` retourne un vecteur listant les valeurs de l'attribut `HAP_NM_TOP`, mais ne conserve pas la géométrie du *shapefile*:
-```{r}
-head(municipalites$HAP_NM_TOP)
-```
-Toutefois, la syntaxte précédente conserve la géométrie du *shapefile* et peut ainsi être utilisée pour définir un nouvel objet spatial. Par exemple, créons un nouveau *shapefile* qui contient seulement le nom des municipalités et leur position géographique :
+Nous souhaitons à présent sélectionner dans l'objet spatial `villes` seulement le nom des municipalités, car, pour le moment, les autres attributs ne nous sont pas utiles pour répondre à notre question.
 
 ```{r villes-topo-col2}
-villes <- municipalites[,"HAP_NM_TOP"]
+villes <- villes[,"HAP_NM_TOP"]
 villes
 ```
 
-Profitons-en pour renommer l'attribut `HAP_NM_TOP` afin d'avoir un intitulé de colonne plus explicite : 
+Remarquez que notre nouvel spatial `villes` contient seulement l'attribut donnant le nom des municipalités ainsi que la position géographique de chaque point. 
+
+Renommons maintenant l'attribut `HAP_NM_TOP` afin d'avoir un intitulé de colonne plus explicite. 
 
 ```{r col-villes}
-names(villes) <- c("toponyme", "geometry")
 names(villes)
+names(villes) <- c("toponyme", "geometry")
 ```
-
-
-##### Filtrer selon la valeur d'un attribut {-}
-
-On peut vouloir sélectionner un ou plusieurs éléments spatiaux d'un *shapefile* qui possèdent une valeur spécifique d'attribut.
-
-###### Fonction `subset()` {-}
-
 
 Si nous souhaitons vérifier qu'une municipalité soit bel et bien présente dans notre jeu de données `villes`, nous pouvons utiliser la fonction `subset()` afin de filtrer les valeurs attributs et sélectionner seulement le ou les points correspondants à une valeur précise:
 
@@ -234,25 +173,17 @@ la_poc <- subset(villes, toponyme == "La Pocatière")
 mapview(la_poc, legend = FALSE)
 ```
 
-<!-- A DEPLACER DANS SECTION ST_COORDINATE
 Nous pouvons également déterminer les coordonnées géographiques de la municipalité de La Pocatière en utilisant la fonction `st_coordinates()`
 
 ```{r ex-coordinates}
 st_coordinates(la_poc)
 ```
 
-Le `X` correspond à la longitude et le `Y`, à la latitude. Cette fonction peut être appliquée sur l'ensemble des données spatiales de type vectoriel (`POLYGON`, `POINT`, `LINE`) et 
--->
-
-appartenant à la classe d'objet `sf`. Nous pouvons valider la classe d'un objet dans `R` avec la fonction `class()`. 
+Le `X` correspond à la longitude et le `Y`, à la latitude. Cette fonction peut être appliquée sur l'ensemble des données spatiales de type vectoriel (`POLYGON`, `POINT`, `LINE`) et appartenant à la classe d'objet `sf`. Nous pouvons valider la classe d'un objet dans `R` avec la fonction `class()`. 
 
 ```{r ex-class}
 class(la_poc)
 ```
-
-###### Fonction `which()` {-}
-
-
 
 #### Joindre l'information d'une autre couche spatiale: `st_join()` {-}
 
@@ -312,7 +243,6 @@ Renommons la colonne `NAME_1` (en position 2) par `province` pour que cet attrib
 names(villes)[2] <- "province"
 ```
 
-#### Lier À la question
 Nous voulons maintenant filtrer l'objet `villes` afin de retenir seulement les municipalités dont la province d'attache est le Québec. Pour ce faire, nous utiliserons encore la fonction `subset()` ainsi que l'opérateur logique `==`.
 
 ```{r subset-villes}
@@ -356,8 +286,7 @@ pop <- read.csv(chemin_pop)
 ```
 
 ```{r, eval = TRUE, echo = FALSE}
-pop <- read.csv("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/data/villes/population.csv",encoding="UTF-8")
-#pop <- read.csv("Module7/data/villes/population.csv",encoding="UTF-8")
+pop <- read.csv("Module7/data/villes/population.csv",encoding="UTF-8")
 ```
 
 Notez que la précision de l'encodage permet de s'assurer que les accents français sont bien importés lors de la lecture du document.
@@ -455,7 +384,6 @@ knitr::include_graphics('Module7/images/geoOps.png')
 
 Nous allons maintenant nous servir de l'objet spatial `top10_villes_buffer` contenant les zones tampon afin de dénombrer le nombre de parcs nationaux se retrouvant à l'intérieur de ces zones. On appelle cette famille d'opérations spatiales des interceptions.
 
-<!--  DEPLACER DANS IMPORTER LES DONNNEES 
 Pour réaliser cette étape, nous devons, dans un premier temps, charger la couche d'informations spatiales contenant les différentes aires récréatives du Québec. Cette information se trouve à l'intérieur d'une géodatabase téléchargeable depuis le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000). Comme vu dans le module {#vec}, les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et explorer les différentes couches afin de déterminer laquelle est pertinente pour continuer notre analyse.
 
 ```{r, eval = FALSE}
@@ -482,7 +410,6 @@ mapview(parcs_nationaux, zcol = "TRQ_NM_TER", legend = FALSE)
 
 
 L'attribut "TRQ_NM_TER" correspond au nom de chaque parc national.
--->
 
 Par curiosité, nous pouvons nous demander quelle fraction de la superficie du Québec est occupée par des parcs nationaux.
 
@@ -600,44 +527,11 @@ top10_villes
 
 Nous constatons que Sherbrooke et Saint-Jean-sur-Richelieu disposent toutes deux du plus grand nombre (4) de parcs nationaux dans un rayon de 70&nbsp;km. 
 
-
-### Résolution de la question
-
-Maintenant que nous avons appris les opérations de base pour manipuler les données vectorielles, nous sommes en mesure de répondre à la question demandée:
-
->
-> **Parmi les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux (dans un rayon de 70 km)? **
->
-
-Les données étant déjà importées, les étapes que nous devons résoudre sont les suivantes:
-
-
-- Obtenir la taille de la population de chacune des municipalités.
-- Filtrer ces municipalités pour retenir les 10 municipalités ayant la taille de population la plus importante.
-- Lire la géodatabase du réseau de la SÉPAQ.
-- Filtrer les aires récréatives pour retenir seulement les parcs nationaux.
-- Tracer un polygone en forme de cercle (une zone tampon) avec 70 km de rayon autour de chacune des dix plus grandes villes.
-- Pour chacun des polygones, compter le nombre de parcs présent dans la zone tampon de 70&nbsp;km.
-- Déterminer la ville qui compte le plus grand nombre de parc dans la zone tampon qui lui est associée.
-
-
-#####
-
-
-
-
-
 <!---
 NOTE: ICI on pourrait introduire la notion de cropping pour tenter de départager mais je pense qu'il y a déjà pas de stock alors 
 -->
 
 Dans le module 8, nous allons caractériser le profil d'élévation des 4 parcs de la région de Sherbrooke afin de trouver les meilleurs panoramas de la région.
-
-
-
-
-
-
 
 
 
