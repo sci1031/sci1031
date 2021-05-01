@@ -954,29 +954,40 @@ xyFromCell(maxt_megantic[[id]], which.max(maxt_megantic[[id]]))
 
 #### Profiles de temperatures et de precipitations
 
-Pour réaliser des profiles de températures, nous allons dans pour, nous allons réutiliser l'objet `megantic_buf`
-mais cette fois, simplement `extract()`, nous utiliserons ensuite la moyenne pour chaque couche. Nous pouvons faire une fonction comme vu plus haut. 
+Pour réaliser des profiles de températures et de précipitations, nous allons faire une moyenne pour chaque couche des valeurs puis les affichées en fonction du temps. Nous allons répétées trois fois la même opérations ici, au lieu de copier/coller notre code pour les trois sources de données, nous allons créer une fonction `profile()`. Cette fonction prend en intrant `ras`, un objet `rasterLayer` ou `rasterStack` et `mask`, l'objet spatial utilisé pour découper le *raster*.
 
 ```{r prof_fun}
 profile <- function(ras, mask) {
-  apply(extract(ras, st_transform(mask, st_crs(ras)))[[1]], 2, mean, na.rm = TRUE)
+  # mask doit utiliser le même SCR que ras
+  geom <- st_transform(mask, st_crs(ras))
+  # notons que la fonction `extract` permet de faire des extractions pour des 
+  # plusieurs polygones, ici `mask` n'aura qu'un seul polygon et nous 
+  # utiliserons que le premier élément de la liste retournée par `extract()` 
+  apply(extract(ras, geom)[[1]], 2, mean, na.rm = TRUE)
 }
 ```
 
-Nous utiliserons les dates, nous pouvons utiliser celle de `mint` étant donné que ce sont les même dates pour les trois couches.
+Nous obtenons ainsi une fonction qui nous donnes les valeurs à mettre en ordonnées des nos profile. Il nous reste à obtenir les valeurs des abscisses, autrement dit les dates pour chacune des moyennes. Comme les dates sont les même pour toutes les couches, nous utilisons `getZ(mint)` qui nous donne exactement ce dont nous avons besoin. 
+
+Nous allons maintenant faire la figure. Ici, nous créons une figure avec 3 panels. Pour les températures, nous utilisons des lignes et pour les précipitations nous utiliserons des barres, ces réglages peuvent se faire avec l'argument `type` de `plot()`. Enfin comme l'axe des abscisses est identique pour les trois panels, nous ajouterons un titre seulement à cet axe seulement pour le dernier panel. 
 
 
-```{r profiles, warning = FALSE, fig.height = 9}
-par(mfrow = c(3, 1))
-plot(getZ(mint), profile(mint, megantic_buf), type = "l")
-plot(getZ(mint), profile(maxt, megantic_buf), type = "l")
-plot(getZ(mint), profile(pcp, megantic_buf), type = "h")
+```{r profiles, warning = FALSE, fig.height = 8}
+# figures de trois lignes et 1 seule colonne
+par(mfrow = c(3, 1), mar = c(4, 4, 1, 1))
+plot(getZ(mint), profile(mint, megantic_buf), 
+  type = "l", ylab = "Températures minimales (°C)", xlab = "")
+plot(getZ(mint), profile(maxt, megantic_buf), 
+  type = "l", ylab = "Températures maximales (°C)", xlab = "")
+# 
+plot(getZ(mint), profile(pcp, megantic_buf), 
+  type = "h", ylab = "Précipitations totales (mm)", xlab = "Années")
 ```
 
 
-#### Visualisation
+#### Animations
 
-Pour finir, nous allons animer en présentant construisant les donn.es. Nous allons commencer par 
+Pour finir, nous allons animer en présentant construisant les données. Nous allons commencer par 
 
 1 carte par et une et ceux une date.
 
