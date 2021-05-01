@@ -537,9 +537,9 @@ saveGIF(animation(20, tm_shape(bm) + tm_rgb()),
 
 Nous allons maintenant nous intéresser aux précipitations et aux températures moyennes autour du parc national du Mont-Mégantic entre 2007 et 2016. Nous nous poserons deux nouvelles questions&nbsp;:
 
-* Question 1&nbsp;: quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+* Question 1&nbsp;: quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national du Mont-Mégantic?
 
-* Question 2&nbsp;: où se situe le (ou les) point(s) le(s) plus chaud(s)? (La question porte sur la localisation spatio-temporelle du ou des points)
+* Question 2&nbsp;: où se situe le (ou les) point(s) le(s) plus chaud(s) autour du parc national du Mont-Mégantic? (La question porte sur la localisation spatio-temporelle du ou des points)
 
 Nous terminerons par deux exercices de visualisation de données: 
 
@@ -860,38 +860,38 @@ Notons qu'ici l'appel à `which()` est important, nous ne pouvons pas utiliser u
 
 #### Réponse à la question 1
 
-Nous allons maintenant utiliser ce que nous venons de voir pour répondre à la question suivante: 
+Pour répondre à la première question, nous devons&nbsp;:
 
-* Quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national possédant ce sommet?
+1. isoler les cellules de `pcp` qui correspondent à la zone du parc du Mont Mégantic,
+2. calculer la pluviométrie moyenne pour toutes les couches,
+3. déterminer le mois et l'année pour lequel la pluviométrie moyenne ainsi calculée est la plus faible. 
 
-Pour répondre à cette question, nous devons procéder ainsi :
+Ici, nous décidons de prendre les cellules de nos couches qui sont à l'intérieur du Parc du Mont-Mégantic ainsi que les cellules qui sont proches du parcs, dans un rayon de 5&nbsp;km. Cette opération de *buffer* est très souvent utilisée pour augmenter la couverture spatiale et ainsi obtenir une moyenne climatique à une plus large échelle. Nous commençons donc par extraire les limites du parc de l'objet `parcs` et nous y ajoutons un *buffer* de 5&nbsp;km. 
 
-1. Isoler les cellules de `pcp` qui correspondent à la zone du parc du Mont Mégantic.
-1. Calculer la pluviométrie moyenne pour toutes les couches. 
-1. Déterminer le mois et l'année pour lequel la pluviométrie moyenne est la plus faible. 
-
-
-Pour la première étape, nous allons utiliser `mask()`. Mais ici, nous décidons de prendre les cellules de nos couches qui sont à l'intérieur du Parc du Mont-Mégantic ainsi que les cellules qui sont proches du parcs, dans un rayon de 5&nbsp;km. Cette opération de *buffer* est très souvent utilisée pour augmenter la couverture spatiale et ainsi obtenir une moyenne climatique à une plus large échelle. 
-
-
-
-de pour isoler les cellules de `pcp` . Nous allons ajouter utiliser aussi faire une opération 
 
 ```{R}
-megantic <- st_buffer(parcs[2,], dist = 5000)
+megantic <- parcs[2, ]
+megantic_buf <- st_buffer(megantic, dist = 5000)
 ```
 
-Notons qu'il est possible de connaître l'unité avec `st_crs()`.
+Ici `dist = 5000` car les distances sont à exprimer en mètre, nous pouvons le savoir en regardant le champ `units` retourner par `st_crs()`.
 
 ```{R}
 st_crs(parcs)$units  
 ```
 
+Nous affichons maintenant, les deux objets&nbsp;: les limites du parc et les mêmes limites auxquelles un *buffer* de 5&nbsp;km a été ajouté. 
 
-Nous allons maintenant appeler `mask()` pour extraire les cellules désirer (afin de pouvoir les visualiser mais notons que nous aurions pu utiliser seulement `extract()`)
+```{R}
+parc_buffer <- mapview(megantic) + mapview(megantic_buf) 
+parc_buffer@map
+```
+
+
+Nous allons maintenant appeler `mask()` pour extraire les cellules désirées. Utiliser cette fonction nous permet de visualiser spatialement les données extraites, mais notons que nous aurions pu utiliser seulement `extract()` pour répondre à la question.
 
 ```{R pcp_megantic}
-pcp_megantic <- mask(pcp, st_transform(megantic, st_crs(pcp)))
+pcp_megantic <- mask(pcp, st_transform(megantic_buf, st_crs(pcp)))
 ```
 
 Visualisons les 4 premières couches de `pcp_megantic`
@@ -900,14 +900,13 @@ Visualisons les 4 premières couches de `pcp_megantic`
 plot(pcp_megantic[[1:4]])
 ```
 
-Nous pouvons alors extraire avec `getValues()` et faire la moyenne couche par 
-couche en utilisant `apply()` et `mean()` sans oublier d'enlever les valeurs non attribuées (`NA`).
+Nous pouvons alors extraire les valeurs des différentes couches avec `getValues()` et faire la moyenne couche par couche en utilisant `apply()` et `mean()`, sans oublier d'enlever les valeurs non attribuées (`NA`).
 
 ```{R mean_pcp}
 mean_pcp <- apply(getValues(pcp_megantic), 2, mean, na.rm = TRUE)
 ```
 
-Et nous pouvons alors chercher le minimum de ces moyennes.
+Nous sommes alors en mesure dechercher le minimum de ces moyennes.
 
 ```{R}
 min(mean_pcp)
@@ -915,26 +914,27 @@ which.min(mean_pcp)
 getZ(mint)[which.min(mean_pcp)]
 ```
 
-La couche `r which.min(mean_pcp)`, ce qui correspond au mois de novembre 2012. 
+C'est la couche `r which.min(mean_pcp)` qui présente la plus faible valeur moyenne des précipitations totales, cette couche correspond au mois de novembre 2012. 
 
 
 
 #### Réponse à la question 2
 
-Pour répondre à la question 2, nous devons 
+Pour répondre à la question 2, nous allons&nbsp;:
 
-1. Isoler les cellules de `maxt` qui correspondent à la zone du parc du Mont Mégantic (pas de *buffer* cette fois).
-2. Trouver la cellules pour laquelle cette valeur est maximale 
+1. isoler les cellules de `maxt` qui correspondent à la zone du parc du Mont-Mégantic (nous n'ajouterons pas de *buffer* ici),
+2. trouver la cellules pour laquelle cette valeur est maximale.
 
 
-Comme nous avons maintenant l'habitude des opérations de `mask()`, nous allons faire cette première étape à l'aide d'une seule ligne de commande.
+Comme nous avons déjà réalisé des opérations de `mask()` à plusieurs reprises, nous allons faire cette première étape à l'aide d'une seule ligne de commande.
 
 
 ```{R}
-maxt_megantic <- mask(maxt, st_transform(parcs[2, ], st_crs(maxt)))
+maxt_megantic <- mask(maxt, st_transform(megantic, st_crs(maxt)))
 ```
 
-Pour la seconde étape, il y a plusieurs façons de procéder. Nous allons procéder en deux temps&nbsp;: nous allons d'abord trouver la couche ou est le maximum puis trouver quelle est le point sur cette couche. 
+
+Pour la seconde étape, il y a plusieurs façons de procéder. Ici, nous allons procéder en deux temps&nbsp;: nous allons d'abord trouver la couche (ou les couches) qui contient (contiennent) la valeur de température maximum, puis trouver les coordonnées du point (ou des points) associées. Nous calculons donc le maximum pour chaque couche, puis nous en determinons quel est le maximum de ces maximumx.
 
 
 ```{R}
@@ -942,7 +942,7 @@ id <- which.max(apply(getValues(maxt_megantic), 2, max, na.rm = TRUE))
 id
 ```
 
-La couche `r id` correspond au mois de Juillet 2010. Nous utilisons alors `xyFromCell()` pour avoir les coordonnées satiale de ces points, ce qui nous permet de répondre à notre questions.
+C'est la couche `r id` qui contient ce maximum, elle correspond au mois de Juillet 2010. Nous utilisons alors `xyFromCell()` pour avoir les coordonnées spatiale de ces points, ce qui nous permet de compléter notre réponse à la question.
 
 
 ```{R}
@@ -954,7 +954,7 @@ xyFromCell(maxt_megantic[[id]], which.max(maxt_megantic[[id]]))
 
 #### Profiles de temperatures et de precipitations
 
-Pour réaliser des profiles de températures, nous allons dans pour, nous allons réutiliser l'objet `megantic`
+Pour réaliser des profiles de températures, nous allons dans pour, nous allons réutiliser l'objet `megantic_buf`
 mais cette fois, simplement `extract()`, nous utiliserons ensuite la moyenne pour chaque couche. Nous pouvons faire une fonction comme vu plus haut. 
 
 ```{r prof_fun}
@@ -968,9 +968,9 @@ Nous utiliserons les dates, nous pouvons utiliser celle de `mint` étant donné 
 
 ```{r profiles, warning = FALSE, fig.height = 9}
 par(mfrow = c(3, 1))
-plot(getZ(mint), profile(mint, megantic), type = "l")
-plot(getZ(mint), profile(maxt, megantic), type = "l")
-plot(getZ(mint), profile(pcp, megantic), type = "h")
+plot(getZ(mint), profile(mint, megantic_buf), type = "l")
+plot(getZ(mint), profile(maxt, megantic_buf), type = "l")
+plot(getZ(mint), profile(pcp, megantic_buf), type = "h")
 ```
 
 
@@ -986,7 +986,7 @@ layout(rbind(1, 2), heights = c(2, 1))
 # image(mint[[1]])
 # image(mint[[2]])
 plot(pcp[[1]])
-plot(getZ(mint), profile(pcp, megantic), type = "h")
+plot(getZ(mint), profile(pcp, megantic_buf), type = "h")
 ```
 
 
