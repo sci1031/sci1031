@@ -514,6 +514,7 @@ bm
 Nous créons alors un fond de carte rapide avec `tmap` et la fonction `tm_rgb()`
 
 ```R
+library(animation)
 saveGIF(animation(20, tm_shape(bm) + tm_rgb()), 
    movie.name = "anim2.gif", ani.height = 500, ani.width = 500)
 ```
@@ -979,7 +980,6 @@ plot(getZ(mint), profile(mint, megantic_buf),
   type = "l", ylab = "Températures minimales (°C)", xlab = "")
 plot(getZ(mint), profile(maxt, megantic_buf), 
   type = "l", ylab = "Températures maximales (°C)", xlab = "")
-# 
 plot(getZ(mint), profile(pcp, megantic_buf), 
   type = "h", ylab = "Précipitations totales (mm)", xlab = "Années")
 ```
@@ -987,19 +987,65 @@ plot(getZ(mint), profile(pcp, megantic_buf),
 
 #### Animations
 
-Pour finir, nous allons animer en présentant construisant les données. Nous allons commencer par 
+Pour finir, nous allons animer les profiles construit plus haut. Nous allons commencer par améliorer quelque peu le rendu visuel. Pour cela nous allons: 
 
-1 carte par et une et ceux une date.
+* Utiliser les our faire une envelope (avec `polygons`)
+* Ajouter les valeurs de précipitations sur la même figure, avec une légende sur l'axe de droite.
+
+Nous allons encore une fois structurer notre code avec des fonctions. Nous commencer par créer `part_profile()` qui prend en entrée `i`, le nombre de mois à afficher, les différents profiles et la séquence de date. Ici, nous ne calculons pas les profiles dans la fonction pour ne pas les recalculer à chaque fois que nous créons une nouvelle figure, cela ajouterait un temps de calcul important inutilement, nous les calculerons en amont une fois pour toutes.
 
 
-```{r fun_anim, warning = FALSE, fig.height = 9}
-layout(rbind(1, 2), heights = c(2, 1))
-# image(mint[[1]])
-# image(mint[[2]])
-plot(pcp[[1]])
-plot(getZ(mint), profile(pcp, megantic_buf), type = "h")
+```{R part_profile}
+part_profile <- function(i, pr_mint, pr_maxt, pr_pcp, temps) {
+  # indices de 1 à i
+  id <- seq_len(i)
+  # premier passage, les temperatures 
+  par(mar = c(4, 4.5, 1, 4.5), las = 1)
+  # crée une figure vide (type = "n") avec les dimension 
+  plot(range(temps), c(min(pr_mint), max(pr_maxt)), type = "n", 
+    xlab = "Années", ylab = "Températures minimales et maximales (°C)")
+  # crée une enveloppe 
+  polygon(c(temps[id], rev(temps[id])), c(pr_mint[id], pr_maxt[rev(id)]), col = "#aaaaaa", border = "#6a6a6a")
+
+  # deuxième passage, les précipitations
+  par(new = TRUE) # permet de recommencer à dessiner sur la figure
+  plot(range(temps), range(pr_pcp), type = "n", axes = FALSE, ann = FALSE)
+  points(temps[id], pr_pcp[id], type = "h", col = "#c62b63", lwd = 2)
+  axis(4)
+  mtext("Précipitations totales (mm)", side = 4, line = 3, las = 0, 
+    col = "#c62b63")
+  # Ajoutons le mois en bas a gauche 
+  mtext(temps[i], side = 1, line = 2.5, at = as.Date("2007-01-01"),cex = 1.4)
+}
 ```
 
+Il nous reste maintenant à faire les profiles une foi pour toute.
+
+```{R}
+pr_mint <- profile(mint, megantic_buf)
+pr_maxt <- profile(maxt, megantic_buf)
+pr_pcp <- profile(pcp, megantic_buf)
+temps <- getZ(mint)
+```
+
+Et les passer à notre fonction. Par exemple pour visualiser le profile pour les 40 premiers mois, nous utilisons la valeur `40` pour le premier argument.  
+
+```{R part_profile_40}
+part_profile(40, pr_mint, pr_maxt, pr_pcp, temps)
+```
+
+Nous utilisons alors la fonction `saveGIF()` du package `animation` et une séquence de figure, ci-dessous, nous générons une figure par trimestre.  
+
+
+```R
+library(animation)
+saveGIF({
+  for (i in seq(2, 120, by = 3)) part_profile(i, pr_mint, pr_maxt, pr_pcp, temps)
+}, movie.name = "anim3.gif", ani.height = 400, ani.width = 600)
+```
+
+
+![](Module9/images/anim3.gif)
 
 
 
