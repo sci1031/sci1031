@@ -542,27 +542,29 @@ Nous allons maintenant nous intéresser aux précipitations et aux températures
 
 * Question 1&nbsp;: quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national du Mont-Mégantic?
 
-* Question 2&nbsp;: où se situe le (ou les) point(s) le(s) plus chaud(s) autour du parc national du Mont-Mégantic? (La question porte sur la localisation spatio-temporelle du ou des points)
+* Question 2&nbsp;: où se situe le (ou les) point(s) le(s) plus chaud(s) autour du parc national du Mont-Mégantic? Cette question porte sur la localisation spatio-temporelle du ou des points les plus chauds.
 
-Nous terminerons par deux exercices de visualisation de données: 
+Nous terminerons par deux exercices de visualisation de données&nbsp;: 
 
 * Nous dessinerons les profiles de temperatures et de précipitations pour la période étudiée.
 
 * Nous animerons ces profiles en ajoutant une carte, elle aussi animée.
 
-Pour pouvoir faire tout ce travail, nous allons utiliser différents couches d'objet matricielles qui seront sous forme d'objets `rasterStack` (mentionnés au [Module 8][#mat])qui seront l'objet des principaux objectifs d'apprentissage de cette section.
+Pour pouvoir faire tout ce travail, nous allons utiliser différents *rasters* qui seront manipulés sous forme d'objets `rasterStack` (mentionnés au [Module 8][#mat]) qui seront l'objet des principaux objectifs d'apprentissage de cette section.
 
 
 #### Importer les données 
 
-Les données que nous allons utiliser dans cette partie ont été préparées à partir de données climatiques historiques à haute résolution pour l'Amérique du Nord [@macdonald_north_2020], disponibles sur l'espace dédié à l'archivage de données du centre allemand de calcul pour le climat, [DKRZ](https://cera-www.dkrz.de/WDCC/ui/cerasearch/project?acronym=CanClim) (pour y accéder, il faut d'abord s'enregistrer sur le site). Les données disponibles inclues, pour l'ensemble de l'Amérique du Nord, à une résolution de 60&nbsp;arc-secondes, pour chaque mois de 1901 à 2016, les trois variables suivantes: 
+Les données que nous allons utiliser dans cette partie ont été préparées à partir de données climatiques historiques à haute résolution pour l'Amérique du Nord [@macdonald_north_2020]. Ces données (issues d'un travail de modélisation) sont disponibles sur l'espace dédié à l'archivage de données du centre allemand de calcul pour le climat, [DKRZ](https://cera-www.dkrz.de/WDCC/ui/cerasearch/project?acronym=CanClim) (pour y accéder, il faut d'abord s'enregistrer sur le site). Les données disponibles inclues, pour l'ensemble de l'Amérique du Nord et pour chaque mois de 1901 à 2016, les trois variables suivantes: 
 
 * la température minimale moyenne, 
 * la température maximale moyenne,  
-* les précipitations cumulées.
+* les précipitations cumulées,
+
+et ce, à une résolution de 60&nbsp;arc-secondes.
 
 
-```{r exdataclim, fig.align = 'left', echo = FALSE, fig.cap="Température minimale moyenne au mois de janvier 2000", out.width = '80%'}
+```{r exdataclim, fig.align = 'left', echo = FALSE, fig.cap="Température minimale moyenne au mois de janvier 2000.", out.width = '80%'}
 knitr::include_graphics('Module9/images/mmint_janv_2000.png')
 ```
 <br>
@@ -593,7 +595,7 @@ Il s'agit là d'objets de classe `rasterStack` que nous détaillons dans la sect
 
 #### Les objets `rasterStack`
 
-Pour cette section, nous nous concentrons sur `mint`, relevons cependant que tout ce que nous voyons ici s'applique aux autres objets `rasterStack` que nous avons importés. Inspectons rapidement ce nouvel objet.
+Pour cette section, nous nous concentrons sur `mint`, notons cependant que tout ce que nous voyons ici s'applique aux autres objets `rasterStack` que nous avons importés. Inspectons rapidement ce nouvel objet.
 
 ```{r}
 mint
@@ -669,7 +671,7 @@ stack(mint[[1]], maxt[[1]], pcp[[1]])
 
 ##### Extraire et manipuler les valeurs
 
-Nous pouvons extraire les valeurs en utilisant la double indexation: `[[` pour choisir les couches désirées, et puis `[` pour extraire les valeurs des couches sélectionnées. Ainsi, nous pouvons extraire les valeurs des 10 premières cellules pour la première année. 
+Nous pouvons extraire les valeurs en utilisant la double indexation&nbsp;: `[[` pour choisir les couches désirées, et puis `[` pour extraire les valeurs des couches sélectionnées. Ainsi, nous pouvons extraire les valeurs des 10 premières cellules pour la première année. 
 
 ```{r}
 mint[[1:12]][1:10]
@@ -682,7 +684,7 @@ val <- getValues(mint)
 dim(val)
 ```
 
-Pour appliquer les mêmes opérations sur les différentes couches, il est donc possible d'utiliser `apply()` après avoir utilisée `getValues()`, par exemple, pour voir la valeur minimale de chaque couche, nous pouvons utiliser la ligne suivante&nbsp;:
+Pour appliquer les mêmes opérations sur les différentes couches, il est alors possible d'utiliser `apply()` après avoir utilisée `getValues()`, par exemple, pour voir la valeur minimale de chaque couche, nous pouvons utiliser la ligne suivante&nbsp;:
 
 ```{r}
 apply(val, 2, min)
@@ -701,7 +703,7 @@ Aussi, certaines fonctions ont des comportements prédéfinies pour les objets `
 min(mint)
 ```
 
-La fonction `max()` a le même comportement, pour une combinaison (longitude, latitude) donnée, elle retourne la valeur maximale des différentes cellules. La fonction `quantile()` retourne les quantiles pour les différentes couches, par défaut, 5 quantiles sont retournées. Ci-dessous, nous présentons le résultat pour les 20 premières couches. 
+La fonction `max()` a le même comportement, pour une combinaison (longitude, latitude) donnée, elle retourne la valeur maximale des différentes cellules. La fonction `quantile()` retourne les quantiles pour les différentes couches, par défaut, 5 quantiles sont retournées. Ci-dessous, nous présentons le résultat pour les 10 premières couches. 
 
 ```{r}
 quantile(mint)[1:10, ]
@@ -711,7 +713,7 @@ Cela revient à appliquer la fonction `apply()` et `quantile()` après avoir uti
 
 
 ```{r}
-apply(val, 2, quantile)[1:10]
+apply(val, 2, quantile)[, 1:10]
 ```
 
 
@@ -727,7 +729,7 @@ Ce qui nous donne un objet `rasterStack` qui a les valeurs des différents quant
 
 ##### Opérations spatiales 
 
-Pour les principales opérations spatiales, pour les objets de classe `rasterStack`, nous pouvons utiliser les mêmes fonctions que pour les objets de classe `rasterLayer`. Les opérations spatiales à réaliser seront alors, au besoin, répétées sur les différentes couches (cela étant dit, pour des raisons d'optimisation algorithmiques, il se peut que les opérations soient plus rapides sur un `rasterStack` de $n$ couches plutôt que d'appliquer $n$ fois les mêmes opérations sur $n$  `rasterLayer`). Pour illustrer code principe, nous allons utiliser `projectRaster()`, `crop()`, `mask()` et `extract()` sur `mint` (voir le [Module 5](#mat) et le [Module 8](#manip_mat) pour plus de détails).
+Pour les principales opérations spatiales, pour les objets de classe `rasterStack`, nous pouvons utiliser les mêmes fonctions que pour les objets de classe `rasterLayer`. Les opérations spatiales à réaliser seront alors, au besoin, répétées sur les différentes couches (cela étant dit, pour des raisons d'optimisation algorithmiques, il se peut que les opérations soient plus rapides sur un `rasterStack` de $n$ couches plutôt que d'appliquer $n$ fois les mêmes opérations sur $n$ objets `rasterLayer`). Pour illustrer ce principe, nous allons utiliser `projectRaster()`, `crop()`, `mask()` et `extract()` sur `mint` (voir le [Module 5](#mat) et le [Module 8](#manip_mat) pour plus de détails).
 
 
 Pour illustrer le changement de projections des `rasterStack`, projetons `mint` en utilisant la projection de Mercator. 
@@ -747,8 +749,7 @@ l'étendue spatiale suivante (dans le système géodésique mondial WGS84):
 mint_crop <- crop(mint, extent(c(-71.5, -71, 45, 45.5)))
 ```
 
-
-Pour les deux dernières opérations nous allons utiliser les contours du Parc national de Frontenac, en utilisant le premier élément de l'objet `parc` du [Module 8](#manip_mat). Nous commençons par créer l'objet (de classe `sf`) `frontenac` en utilisant la projection de `mint`, puis nous utilisons `mask()` pour isoler les cellules qui sont dans les limites du parc, et cela, pour toutes les couches de `mint`. 
+Pour les deux dernières opérations nous allons utiliser les contours du Parc national de Frontenac qui est le premier élément de l'objet `parc` manipulé au [Module 8](#manip_mat). Nous commençons par créer l'objet (de classe `sf`) `frontenac` en utilisant la projection de `mint`, puis nous utilisons `mask()` pour isoler les cellules qui sont dans les limites du parc, et cela, pour toutes les couches de `mint`. 
 
 ```{r, include = FALSE}
 library(sf)
@@ -763,23 +764,27 @@ mint_mask <- mask(mint, frontenac)
 Enfin nous allons extraire les valeurs de ces cellules, pour 
 
 ```{r}
-extract(mint, frontenac)
+val_frontenac <- extract(mint, frontenac)
+# nous retournons les 10 premières lignes et les 5 premiers éléments du 
+# premier élément de val_frontenac  (qui n'a qu'un élément ici car il 
+# n'y a qu'un élément dans `frontenac`)
+val_frontenac[[1]][1:10, 1:5] 
 ```
 
-Notons que cela peut aussi être fait en utilisant `getValues()` sur `mint_mask()`.
+Notons qu'ici, cette opération aurait aussi pu être réalisée en utilisant `getValues()` sur `mint_mask()`.
 
 
 
 
 ##### Visualiser 
 
-Comme pour les objets, nous pouvons rapidement visualiser les objets `rasterStack` avec la fonction `plot()` (en fait, une méthode de la fonction plot pour les objets de la bibliothèque `raster`).
+Comme pour les objets, nous pouvons rapidement visualiser les objets `rasterStack` avec la fonction `plot()` (en fait, une méthode de la fonction `plot()` pour les objets de la bibliothèque `raster`).
 
 ```{r plot_stack}
 plot(mint)
 ```
 
-par défaut, 16 couches vont être affichées au maximum, il est possible d'augmenter ce nombre avec l'argument `maxnl`
+par défaut, 16 couches vont être affichées au maximum, il est possible d'augmenter ce nombre en modifiant la valeur de l'argument `maxnl`&nbsp;:
 
 
 ```{r}
@@ -798,7 +803,7 @@ Par défaut, le titre utilisé est le nom des couches, pour changer cela nous po
 plot(mint[[117:120]], main = c("09/2016", "10/2016", "11/2016", "12/2016"))
 ```
 
-La fonction `mapview` peut aussi être utilisée pour visualiser les `rasterStack`. Les différentes couches seront alors mis les unes par dessus les autres dans l'ordre donné (la dernière étant sur le dessus de la pile), la remarque précédente reste alors valide : mieux vaut sélectionner les couches à visualiser. Ci-dessous nous visualisons les trois premières couches.
+La fonction `mapview` peut aussi être utilisée pour visualiser les `rasterStack` (voir [Module 8][#mat]). Les différentes couches seront alors mises les unes par dessus les autres dans l'ordre donné (la dernière étant sur le dessus de la pile), la remarque précédente reste alors valide&nbsp;: mieux vaut sélectionner les couches à visualiser. Ci-dessous, nous visualisons les trois premières couches.
 
 
 ```{r, warning = FALSE}
@@ -820,7 +825,7 @@ spatio-temporel:
 
 Il est cependant important d'insister sur le fait qu'un `rasterStack` ne contient pas nécessairement un objet spatio-temporel. La seule contrainte sur les couches contenues est spatiale: étendue, projection et  résolution doivent être identiques. Ainsi, il est commun de travailler sur une même période avec des objets `rasterStack` qui contiennent différentes variables pour une période donnée. Cela permet, entre autre, d'éviter la répétition des mêmes opérations sur plusieurs objets `rasterLayer`. Aussi, certaines données sont, par nature, multi-couches, c'est le cas des données d'imagerie satellitaire (on parle alors de bandes).
 
-Jusqu'ici, nous n'avons pas formalisé l'utilisation du temps, nous savons simplement à quoi correspondent les différentes couches. Cette information a été donnée dans le texte plus haut, et dans un contexte de partage de données cette information aurait été ajoutée dans les métadonnées (les données qui décrivent les données). Il existe cependant un moyen de formaliser un peu plus l'information qui ordonne les couches avec la fonction `setZ()`. Nous allons utiliser cette fonction pour avoir des dates le long de cette axes. En premier lieu, nous créons une séquence de date "mois/année", `moan`, en utilisant `rep()` et `paste0()`:
+Jusqu'ici, nous n'avons pas formalisé l'utilisation du temps, nous savons simplement à quoi correspondent les différentes couches. Cette information a été donnée dans le texte plus haut, et dans un contexte de partage de données, cette information aurait été ajoutée dans les métadonnées (les données qui décrivent les données). Il existe cependant un moyen de formaliser un peu plus l'information qui ordonne les couches avec la fonction `setZ()`. Nous allons utiliser cette fonction pour avoir des dates le long de cette axes. En premier lieu, nous créons une séquence de date "mois/année", `moan`, en utilisant `rep()` et `paste0()`:
 
 ```{r}
 # ci-dessous la séquence 1, 2..., 12 est répétée 10 fois
@@ -842,7 +847,7 @@ mint <- setZ(mint, temps, name = "temps")
 mint
 ```
 
-Nous pouvons constater qu'une ligne "`temps`" a été ajoutée, résumant cette nouvelle information. Ces données sont facilement accessibles avec `getZ()`
+Nous pouvons constater qu'une ligne "`temps`" a été ajoutée, résumant cette nouvelle information. Ces données sont facilement accessibles avec `getZ()`&nbsp;:
 
 ```{r getZ}
 getZ(mint)
@@ -877,7 +882,7 @@ megantic <- parcs[2, ]
 megantic_buf <- st_buffer(megantic, dist = 5000)
 ```
 
-Ici `dist = 5000` car les distances sont à exprimer en mètre, nous pouvons le savoir en regardant le champ `units` retourner par `st_crs()`.
+Ici `dist = 5000`, car les distances sont à exprimer en mètre, nous pouvons le savoir en regardant le champ `units` retourner par `st_crs()`.
 
 ```{R}
 st_crs(parcs)$units  
@@ -890,14 +895,13 @@ parc_buffer <- mapview(megantic) + mapview(megantic_buf)
 parc_buffer@map
 ```
 
-
-Nous allons maintenant appeler `mask()` pour extraire les cellules désirées. Utiliser cette fonction nous permet de visualiser spatialement les données extraites, mais notons que nous aurions pu utiliser seulement `extract()` pour répondre à la question.
+Nous allons maintenant appeler `mask()` pour extraire les cellules désirées. Utiliser cette fonction nous permet de visualiser spatialement les données extraites, mais notons que nous aurions pu utiliser `extract()` pour répondre à la question.
 
 ```{R pcp_megantic}
 pcp_megantic <- mask(pcp, st_transform(megantic_buf, st_crs(pcp)))
 ```
 
-Visualisons les 4 premières couches de `pcp_megantic`
+Visualisons les 4 premières couches de `pcp_megantic`&nbsp;:
 
 ```{R plot_pcp_megantic}
 plot(pcp_megantic[[1:4]])
@@ -909,7 +913,7 @@ Nous pouvons alors extraire les valeurs des différentes couches avec `getValues
 mean_pcp <- apply(getValues(pcp_megantic), 2, mean, na.rm = TRUE)
 ```
 
-Nous sommes alors en mesure dechercher le minimum de ces moyennes.
+Nous sommes alors en mesure de chercher le minimum de ces moyennes.
 
 ```{R}
 min(mean_pcp)
@@ -931,13 +935,11 @@ Pour répondre à la question 2, nous allons&nbsp;:
 
 Comme nous avons déjà réalisé des opérations de `mask()` à plusieurs reprises, nous allons faire cette première étape à l'aide d'une seule ligne de commande.
 
-
 ```{R}
 maxt_megantic <- mask(maxt, st_transform(megantic, st_crs(maxt)))
 ```
 
-
-Pour la seconde étape, il y a plusieurs façons de procéder. Ici, nous allons procéder en deux temps&nbsp;: nous allons d'abord trouver la couche (ou les couches) qui contient (contiennent) la valeur de température maximum, puis trouver les coordonnées du point (ou des points) associées. Nous calculons donc le maximum pour chaque couche, puis nous en determinons quel est le maximum de ces maximumx.
+Pour la seconde étape, il y a plusieurs façons de procéder. Ici, nous allons procéder en deux temps&nbsp;: nous allons d'abord trouver la couche (ou les couches) qui contient (contiennent) la valeur de température maximum, puis trouver les coordonnées du point (ou des points) associées. Nous calculons donc le maximum pour chaque couche, puis nous en déterminons quel est le maximum de ces maximums.
 
 
 ```{R}
@@ -961,16 +963,16 @@ Pour réaliser des profiles de températures et de précipitations, nous allons 
 
 ```{r prof_fun}
 profile <- function(ras, mask) {
-  # mask doit utiliser le même SCR que ras
+  # l'argument `mask` doit utiliser le même SCR que ras
   geom <- st_transform(mask, st_crs(ras))
-  # notons que la fonction `extract` permet de faire des extractions pour des 
-  # plusieurs polygones, ici `mask` n'aura qu'un seul polygon et nous 
+  # notons que la fonction `extract()` permet de faire des extractions 
+  #pour plusieurs polygones, ici `mask` n'aura qu'un seul polygon et nous 
   # utiliserons que le premier élément de la liste retournée par `extract()` 
   apply(extract(ras, geom)[[1]], 2, mean, na.rm = TRUE)
 }
 ```
 
-Nous obtenons ainsi une fonction qui nous donnes les valeurs à mettre en ordonnées des nos profile. Il nous reste à obtenir les valeurs des abscisses, autrement dit les dates pour chacune des moyennes. Comme les dates sont les même pour toutes les couches, nous utilisons `getZ(mint)` qui nous donne exactement ce dont nous avons besoin. 
+Nous obtenons ainsi une fonction qui nous donnes les valeurs à mettre en ordonnées de nos profile. Il nous reste à obtenir les valeurs des abscisses, autrement dit les dates pour chacune des moyennes. Comme les dates sont les même pour `mint`, `maxt` et `pcp`, nous utilisons `getZ(mint)` qui nous donne exactement ce dont nous avons besoin. 
 
 Nous allons maintenant faire la figure. Ici, nous créons une figure avec 3 panels. Pour les températures, nous utilisons des lignes et pour les précipitations nous utiliserons des barres, ces réglages peuvent se faire avec l'argument `type` de `plot()`. Enfin comme l'axe des abscisses est identique pour les trois panels, nous ajouterons un titre seulement à cet axe seulement pour le dernier panel. 
 
@@ -989,24 +991,24 @@ plot(getZ(mint), profile(pcp, megantic_buf),
 
 #### Animations
 
-Pour finir, nous allons animer les profiles construit plus haut. Nous allons commencer par améliorer quelque peu le rendu visuel. Pour cela nous allons: 
+Pour finir, nous allons animer les profiles que nous venons de dessiner. Nous allons commencer par améliorer quelque peu le rendu visuel. Pour cela nous allons: 
 
-* Utiliser les our faire une envelope (avec `polygons`)
-* Ajouter les valeurs de précipitations sur la même figure, avec une légende sur l'axe de droite.
+1. utiliser les températures minimales et maximales pour faire une envelope de températures (avec la fonction `polygon()`),
+2. ajouter les valeurs de précipitations sur la même figure, avec une légende sur l'axe de droite.
 
-Nous allons encore une fois structurer notre code avec des fonctions. Nous commencer par créer `part_profile()` qui prend en entrée `i`, le nombre de mois à afficher, les différents profiles et la séquence de date. Ici, nous ne calculons pas les profiles dans la fonction pour ne pas les recalculer à chaque fois que nous créons une nouvelle figure, cela ajouterait un temps de calcul important inutilement, nous les calculerons en amont une fois pour toutes.
+Nous allons encore une fois structurer notre code avec une fonction. Nous commencer par créer `plot_profile()` qui prend en entrée `n`, le nombre de mois à afficher, les différents profiles ainsi que la séquence de dates. Ici, nous ne calculons pas les profiles dans la fonction pour ne pas les recalculer à chaque fois que nous créons une nouvelle figure, cela ajouterait un temps de calcul important inutilement, nous les calculerons en amont, une fois pour toutes.
 
 
-```{R part_profile}
-part_profile <- function(i, pr_mint, pr_maxt, pr_pcp, temps) {
-  # indices de 1 à i
-  id <- seq_len(i)
+```{R plot_profile}
+plot_profile <- function(n, pr_mint, pr_maxt, pr_pcp, temps) {
+  # indices de 1 à n
+  id <- seq_len(n)
   # premier passage, les temperatures 
   par(mar = c(4, 4.5, 1, 4.5), las = 1)
-  # crée une figure vide (type = "n") avec les dimension 
+  # créé une figure vide (type = "n") avec les dimension 
   plot(range(temps), c(min(pr_mint), max(pr_maxt)), type = "n", 
     xlab = "Années", ylab = "Températures minimales et maximales (°C)")
-  # crée une enveloppe 
+  # créé une enveloppe 
   polygon(c(temps[id], rev(temps[id])), c(pr_mint[id], pr_maxt[rev(id)]), col = "#aaaaaa", border = "#6a6a6a")
 
   # deuxième passage, les précipitations
@@ -1017,11 +1019,11 @@ part_profile <- function(i, pr_mint, pr_maxt, pr_pcp, temps) {
   mtext("Précipitations totales (mm)", side = 4, line = 3, las = 0, 
     col = "#c62b63")
   # Ajoutons le mois en bas a gauche 
-  mtext(temps[i], side = 1, line = 2.5, at = as.Date("2007-01-01"),cex = 1.4)
+  mtext(temps[n], side = 1, line = 2.5, at = as.Date("2007-01-01"),cex = 1.4)
 }
 ```
 
-Il nous reste maintenant à faire les profiles une foi pour toute.
+Il nous reste maintenant à faire les profiles une fois pour toute.
 
 ```{R}
 pr_mint <- profile(mint, megantic_buf)
@@ -1030,19 +1032,20 @@ pr_pcp <- profile(pcp, megantic_buf)
 temps <- getZ(mint)
 ```
 
-Et les passer à notre fonction. Par exemple pour visualiser le profile pour les 40 premiers mois, nous utilisons la valeur `40` pour le premier argument.  
+Nous passons alors ces profiles à `plot_profile()` et pour visualiser le profile pour les 40 premiers mois (par exemple), nous utilisons la valeur `40` pour `n`.   
 
-```{R part_profile_40}
-part_profile(40, pr_mint, pr_maxt, pr_pcp, temps)
+```{R plot_profile_40}
+plot_profile(40, pr_mint, pr_maxt, pr_pcp, temps)
 ```
 
-Nous utilisons alors la fonction `saveGIF()` du package `animation` et une séquence de figure, ci-dessous, nous générons une figure par trimestre.  
+Nous utilisons alors la fonction `saveGIF()` du package `animation`, et avec une séquence de figures créée avec `plot_profile()`&nbsp;: 
 
 
 ```R
 library(animation)
 saveGIF({
-  for (i in seq(2, 120, by = 3)) part_profile(i, pr_mint, pr_maxt, pr_pcp, temps)
+  # nous générons une figure par trimestre en commençant au mois de mars 
+  for (i in seq(3, 120, by = 3)) plot_profile(i, pr_mint, pr_maxt, pr_pcp, temps)
 }, movie.name = "anim3.gif", ani.height = 400, ani.width = 600)
 ```
 
