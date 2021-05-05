@@ -169,16 +169,7 @@ summary(getValues(dem))
 Nous pouvons apercevoir que certaines cellules du *raster* `dem` contiennent des valeurs négatives. Notez que ces valeurs ne sont pas aberrantes et signifient simplement que ces pixels se retrouvent en dessous du niveau de la mer. Pour la suite de la leçon (et à titre d'exemple), nous allons exclure ces valeurs négatives. En d'autres termes, nous allons appliquer un filtre sur les cellules du
 *raster*, filtre qui ne laissera passé que les valeurs positives. 
 
-Plus précisément, nous allons utiliser la fonction `which()` pour filter les données du *raster* `dem`. Comment fonctionne la fonction `which()`? La fonction `which()` n'est pas spécifique aux données spatiales, c'est une fonction générale qui identifie la position des éléments de valeur `TRUE` dans un vecteur logique. Par exemple: 
-
-```{r which}
-#Exemple 1
-which(c(TRUE, FALSE, TRUE, FALSE, TRUE))
-
-#Exemple 2
-which(c(1, 1, 2) == 2)
-```
-Nous pouvons aussi appliquer la fonction `which()` pour filtrer les valeurs d'un *raster*. Utilisons donc cette fonction pour trouver les cellules qui ont des valeurs d'élévation négatives.
+Plus précisément, nous allons utiliser la fonction `which()` pour filter les données du *raster* `dem`. Rappelons que la fonction `which()` identifie la position des éléments de valeur `TRUE` dans un vecteur logique (voir le [module 7](#fct_which) pour un rappel). Utilisons donc cette fonction pour trouver les cellules qui ont des valeurs d'élévation négatives.
 
 
 ```{r}
@@ -413,7 +404,9 @@ Une opération qui peut s'avérer utile est celle de combiner des *rasters*, c'e
 
 ###### Fonction `merge()` {-}
 
-La fonction `merge()` de la bibliothèque `raster` permet de combiner deux *rasters* ou plus. En guise d'exemple, combinons les *rasters* `dem_ma` et `dem_ma_inv` créés plus haut en applicant la fonction `mask()` au *raster* `dem`&nbsp;: 
+La fonction `merge()` de la bibliothèque `raster` permet de combiner deux *rasters* ou plus. Cette fonction s'utilise différemment de la fonction générale `merge()` vue au [module 7](#fct_merge) pour combiner des *data frame*. 
+
+En guise d'exemple, combinons les *rasters* `dem_ma` et `dem_ma_inv` créés plus haut en applicant la fonction `mask()` au *raster* `dem`&nbsp;: 
 
 
 ```{r, warning = FALSE}
