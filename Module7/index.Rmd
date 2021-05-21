@@ -485,6 +485,10 @@ reg_pop
 
 ```
 
+La fonction `aggregate()` a aggrégé l'attribut "population" des villes appartenant à la même région l'objet "villes_reg_pop" par leur région
+
+La fonction
+
 La géométrie est celle de x.
 On a combiné les points ensemble = devenu multipoints.
 
