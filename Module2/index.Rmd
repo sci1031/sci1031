@@ -58,7 +58,7 @@ Les données vectorielles comprennent également des variables additionnelles ap
 Les **points** sont les données vectorielles les plus simples. Par exemple, un point pourrait représenter l’emplacement d’un restaurant dans une ville. Les attributs associés à ce point pourraient inclure les heures d’ouverture, sa spécialité culinaire, l’échelle de prix de son menu ou d’autres informations.
 
 <br>
-```{r multipoints, fig.align='left', echo=FALSE,fig.cap="L’emplacement des stations de vélo en libre partage, *Bixi*, dans un quartier de Montréal correspond à une géométrie multipoints. Source : https://secure.bixi.com/map/", out.width = '60%'}
+```{r multipoints, fig.align='left', echo=FALSE,fig.cap="L’emplacement des stations de vélo en libre partage, *Bixi*, dans un quartier de Montréal correspond à une géométrie multipoints. Source : https://secure.bixi.com/map/ [taille réelle](Module2/images/2_multipoints.PNG)", out.width = '60%'}
 knitr::include_graphics('Module2/images/2_multipoints.PNG')
 ```
 <br>
@@ -81,7 +81,7 @@ Un **polygone** désigne un ensemble de polylignes fermées. La géométrie d’
 
 Une particularité des polygones est qu’ils peuvent comprendre des trous. C’est-à-dire qu’un polygone peut être entièrement compris à l’intérieur d’un polygone de plus grande superficie. Ceci est le cas d’une île au sein d’un lac, par exemple. Le polygone formant un îlot permet d’éliminer une partie du polygone qui l’englobe. De plus, alors que l’auto-intersection est permise pour une ligne (c’est-à-dire qu’elle peut se croiser sur elle-même), cette propriété n’est pas valide pour un polygone.
 
-Finalement, plusieurs polygones peuvent être considérés comme formant une géométrie unique ((Figure \@ref(fig:multipolygones))). Par exemple, l’Indonésie est constituée de plusieurs îles. Chaque île peut être représentée par son propre polygone, ou encore l’ensemble des îles peut être représenté par un seul polygone (ou multi-polygones) désignant le pays en entier.
+Finalement, plusieurs polygones peuvent être considérés comme formant une géométrie unique (Figure \@ref(fig:multipolygones)). Par exemple, l’Indonésie est constituée de plusieurs îles. Chaque île peut être représentée par son propre polygone, ou encore l’ensemble des îles peut être représenté par un seul polygone (ou multi-polygones) désignant le pays en entier.
 
 <br>
 ```{r multipolygones, fig.align='left', echo=FALSE,fig.cap="Les Antilles peuvent être représentées par plusieurs polygones distincts pour chaque île, ou par un seul multipolygone. Source : https://fr.wikipedia.org/wiki/Antilles", out.width = '50%'}
