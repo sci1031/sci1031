@@ -345,6 +345,8 @@ Dans la présente section, nous verrons plutôt des opérations qui dépendent d
 
 ##### Jointure et agrégation spatiale {-}
 
+<!-- sur la base de la valeur de leurs attributs  -->
+
 
 ###### La fonction `st_join()`{#fct_join} {-}
 
@@ -455,10 +457,8 @@ Cette opération nous a permis de filtrer les municipalités du Québec pour ret
 
 La fonction `aggregate()` de la bibliothèque `sf` permet d'agréger (c'est-à-dire de grouper) des éléments spatiaux d'une même couche de données vectorielles. 
 
-<!-- groupement se fait selon une certaine condition.-->
-
 Afin de démontrer comment opère la fonction `aggregate()` considérons d'abord l'objet `villes_reg_pop`. Ce dernier est formé par la jointure spatiale entre `villes_pop`, le *shapefile* associant à chaque municipalité la taille de sa population, et `regions`&nbsp;:
-```{r}
+```{r, warning = FALSE}
 villes_reg_pop <- st_join(villes_pop, regions[ ,"Rgns_Ad"], left = FALSE)
 villes_reg_pop
 ```
@@ -466,102 +466,51 @@ L'objet `villes_reg_pop` associe à chaque municipalité la taille de sa populat
 En agrégeant ensemble les villes d'une même région, il nous est possible de déterminer la taille de la population de cette région. C'est ce que nous allons faire en utilisant la fonction `aggregate()`&nbsp;:
 
 
-```{r}
+```{r, warning = FALSE}
 reg_pop<-aggregate(villes_reg_pop["population"], by = list(villes_reg_pop$Rgns_Ad), FUN = sum, na.rm = TRUE)
 reg_pop
-
-#mapview(reg_pop,zcol="Group.1")
-
-# agg_Laurentides <-subset(agg, Group.1=="Laurentides")
-# mapview(agg_Laurentides)
-# 
-# agg_diss<-aggregate(villes_reg_pop["population"], by = list(villes_reg_pop$Rgns_Ad), FUN = sum, na.rm = TRUE, dissolve = TRUE)
-# agg_diss
-# mapview(agg_diss,zcol="Group.1") 
-# 
-# agg_union<-aggregate(villes_reg_pop["population"], by = list(villes_reg_pop$Rgns_Ad), FUN = sum, na.rm = TRUE, do_union = TRUE, simplify = TRUE)
-# agg_union
-# mapview(agg_union,zcol="Group.1") 
-
 ```
 
-La fonction `aggregate()` a aggrégé l'attribut "population" des villes appartenant à la même région l'objet "villes_reg_pop" par leur région
+De façon générale, la fonction `aggregate(x, by, FUN)` comprend trois arguments:
+- `x` est l'objet spatial que l'on souhaite agréger,
+- `by` défini la condition utilisée pour regrouper les éléments de `x`,
+- `FUN` défini la fonction selon laquelle l'attribut d'un groupement est calculé à partir des attributs des éléments agrégés.
 
-La fonction
+Dans notre exemple, nous avons regroupé les points de l'objet spatial `villes_reg_pop["population"]` qui possèdent la même valeur d'attribut `"Rgns_Ad"`. Les points ainsi regroupés forment une géométrie multipoint. Chaque groupe de points est identifié par le nom de sa région administrative. L'attribut d'un groupe est calculé en faisant la somme (`FUN = sum`) des attributs des points qui le constituent. L'argument additionnel `na.rm = TRUE` précise que lors du calcul de la somme, les éléments dont l'attribut `"population"` prend la valeur `NA` doivent être ignorés. En effet, la population de quelques municipalités n'est pas définie dans cette base de données. Notez qu'une autre fonction aurait pu être utilisée, par exemple la moyenne, le maximum, le minimum, etc.
 
-La géométrie est celle de x.
-On a combiné les points ensemble = devenu multipoints.
-
-by veut dire.
-
-FUN veut dire (on aurait pu mettre mean)
-na.rm veut dire.
-
-by aurait pu être un autre objet spatial
-
-Faire l'inverse
-mapview
+La condition `by` peut prendre différentes forment. Elle peut être définie par une liste de longueur égale au nombre d'éléments dans `x` (c'est-à-dire le même nombre de rangées). C'est de cette façon que nous l'avons définie plus haut. De plus, `by` peut prendre la forme d'un objet spatial dont la géométrie est utilisée pour grouper les éléments de `x`. Dans ce cas, la géométrie du nouvel objet créé par la fonction `aggregate()` est la même que l'objet `by`.
 
 
+Donnons un exemple illustrant cette situation. Agrégeons maintenant les municipalités de l'objet `villes_pop["population"]` en utilisant directement l'objet `regions` constitué de polygones &nbsp;: 
+
+```{r, warning = FALSE}
+reg_pop2 <-aggregate(villes_pop["population"], by = regions, FUN = sum, na.rm = TRUE)
+reg_pop2
+```
+Observez que les groupements sont maintenant des polygones, et non des multipoints. Par ailleurs le calcul de l'attribut `"population"` est le même. 
+
+Une visualisation du nouvel objet `reg_pop2` permet d'illustrer les régions selon la taille de leur population&nbsp;:
 ```{r}
-villes_reg_pop_CN<-subset(villes_reg_pop,Rgns_Ad=="Côte-Nord")
-villes_reg_pop_CN
-mapview(villes_reg_pop_CN)
-pop_CN<-sum(villes_reg_pop_CN$population,na.rm = TRUE)
-pop_CN
+reg_pop2
 ```
-```{r}
-test[6,]$population  # fonctionne
-test[6,]$geometry    # fonctionne pas ... pas les memes points
-```
+<!-- SERA plus simple de parler de ça après avoir défini les fonctions topologiques -->
+Il est important de préciser que les fonctions `st_join()` et `aggregate()` utilisent implicitement la fonction `st_intersects()`. Nous discuterons plus en détail de cette fonction ainsi que d'autres fonctions topologiques dans la sous-section sur les relations topologiques
+NOTE utilise implicitement st_intersects
+<!----------------------------------------------------------------->
 
 
-
-
-<!-- Aggregate parcs regions  
-
-
-
-Celui-ci fonctionne.
-```{r}
-test<-aggregate(parcs_reg["AREA"], by = list(parcs_reg$Rgns_Ad), FUN = sum, na.rm = TRUE)
-mapview(test, zcol="Group.1")
-```
-
-```{r}
-test2<-aggregate(parcs["AREA"], parcs_reg, FUN = sum, na.rm = TRUE)
-test2
-mapview(test2)
-```
-
-
-```{r}
-test3<-aggregate(parcs_reg["AREA"], regions, FUN = sum, na.rm = TRUE)
-test3
-mapview(test3)
-```
-
-Celui-ci fonctionne aussi mais il faudrait régler le problème de la Mauricie?
-```{r}
-#Ceci fait l'equivalent de nz_avheight = aggregate(x = nz_height, by = nz, FUN = mean)
-test4<-aggregate(parcs["AREA"],regions,FUN = sum, na.rm = TRUE )
-test4
-mapview(test4)
-```
-
--->
-
-
-
-<!-- st_combine ??? -->
 
 ##### Opérations géométriques {-}
+<!-- faire une intro -->
+
+Les opérations géométriques affectent la géométrie des objets vectoriels?
+
 
 ###### La fonction `st_simplify()` {#fct_simplify}{-}
 
 Il est parfois utile de simplifier les objets vectoriels de types ligne ou polygone afin de produire des cartes à des échelles plus petites. La simplification permet de réduire l'utilisation de la mémoire, du disque, et de la bande passante. 
 
-La fonction `st_simplify()` de la bibliothèque `sf` permet simplifier des objets vectoriels de types ligne ou polygone en réduisant le nombre de points que ceux-ci comprennent (souvenez-vous qu'une ligne est constituée d'une sucession de points, et un polygone d'un ensemble de lignes). 
+La fonction `st_simplify()` de la bibliothèque `sf` permet simplifier des objets vectoriels de types ligne ou polygone en réduisant le nombre de points que ceux-ci comprennent (souvenez-vous qu'une ligne est constituée d'une succession de points et qu'un polygone est constitué d'un ensemble de lignes). 
 
 Cette fonction est basée sur l'algorithme de [Douglas-Peucker](https://fr.wikipedia.org/wiki/Algorithme_de_Douglas-Peucker). Décrire le fonctionnement de cet algorithme dépasse l'objectif de ce cours. Grosso modo, l'algorithme fait appel à un seuil de distance (le paramètre `dTolerance`) qu'il utilise pour transformer en ligne droite toute courbe qui dévie d'une ligne droite par une quantité moindre que ce seuil. Cette distance réflète en quelque sorte la résolution que nous souhaitons atteindre avec l'objet simplifié.
 
@@ -587,8 +536,100 @@ tmap_arrange(map0,map1,map2)
 
 Remarquez que nous avons d’abord transformé l’objet spatial `regions` dans le système de coordonnées de référence NAD83, dont le EPSG correspond à 32198, puisque l’unité de ce système est le mètre.
 
+
+###### La fonction `st_combine()` {#fct_combine}{-}
+
+<!-- INTRO   -->
+
+
+
+```{r}
+villes_NQ <- subset(villes_reg, Rgns_Ad == "Nord-du-Québec") 
+villes_NQ
+
+villes_NQ_combo <- st_combine(villes_NQ)
+villes_NQ_combo
+
+villes_NQ_union <- st_union(villes_NQ)
+```
+```{r}
+mapview(villes_NQ)
+mapview(villes_NQ_combo)
+```
+
+```{r}
+reg_combo<-st_combine(regions)
+reg_combo
+mapview(reg_combo)
+
+reg_union<-st_union(regions)
+reg_union
+mapview(reg_union)
+```
+
+
+
 ###### La fonction `st_cast()` {-}
-<!--   -->
+<!--  INTRO  -->
+Le terme anglais *cast* signifie plâtre ou moule en français.
+
+La fonction `st_cast(x, to)` comprend deux arguments. Le premier argument, `x`, correspond à l'objet vectoriel dont on souhaite modifier la géométrie, alors que le second argument, `to` correspond à la géométrie que l'on souhaite lui attribuer. 
+
+Donnons un exemple. Utilisons d'abord le *shapefile* `regions` pour isoler le polygone de la région administrative de la Mauricie grâce à la fonciton `subset()`&nbsp;:
+```{r}
+Mauricie <- subset(regions,Rgns_Ad=="Mauricie")
+Mauricie
+```
+Nous observons que l'objet `Mauricie` est bel et bien de type *polygone*. Maintenant utilisons la fonction `st_cast()` pour transformer la géométrie de cet objet en type *multilignes* et *multipoints*  &nbsp;:
+
+```{r, warning=FALSE}
+Mauricie_lines <- st_cast(Mauricie, to = "MULTILINESTRING")
+Mauricie_lines
+Mauricie_pts<-st_cast(Mauricie, to = "MULTIPOINT")
+Mauricie_pts
+```
+Nous observons que les deux nouveaux objets vectoriels ont bel et bien la géométrie souhaitée ()
+
+```{r ex_cast1, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="La fonction `st_cast()` a été utilisée pour transformer le polygone de la Mauricie (gauche) en multilignes (centre) et en multipoints (droite)."}
+
+Lines<- mapview(Mauricie_lines, legend = FALSE)
+Poly <- mapview(Mauricie, legend = FALSE)
+Points<-mapview(Mauricie_pts, legend = FALSE)
+
+# Visualisons les trois cartes côte à côte
+leafsync::latticeView(Poly,Lines,Points, ncol = 3)
+```
+
+Dans cet exemple, nous avons en quelque sorte "dissous" la géométrie d'un polygone en lignes puis en points. Or, la fonction `st_cast()` peut également servir à "consolider" des géométries.
+
+En guise d'exemple, considérons l'objet `villes_NQ_combo` que nous avons créé plus haut avec la fonction `st_combine()`&nbsp;:
+
+```{r}
+villes_NQ_combo
+```
+Cet objet possède une géométrie multipoint où chaque point correspond à une municipalité du Nord-du-Québec.
+
+Utilisons la fonction `st_cast()` pour transformer la géométrie de cet objet en ligne et en polygone &nbsp;:
+
+```{r}
+villes_NQ_lines<-st_cast(villes_NQ_combo, to = "LINESTRING")
+villes_NQ_lines
+
+
+villes_NQ_pol<-st_cast(villes_NQ_combo, to = "POLYGON")
+villes_NQ_pol
+```
+```{r ex_cast2, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="La fonction `st_cast()` a été utilisée pour transformer les villes du Nord-du-Québec de multipoints (gauche) en ligne (centre) et en polygone (droite).}
+
+Points <- mapview(villes_NQ_combo, legend = FALSE)
+Lines <- mapview(villes_NQ_lines, legend = FALSE)
+Pol <- mapview(villes_NQ_pol, legend = FALSE)
+
+leafsync::latticeView(Points,Lines,Pol, ncol = 3)
+```
+
+
+
 
 ###### La fonction `st_buffer()` {-}
 
