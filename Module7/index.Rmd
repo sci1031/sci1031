@@ -539,44 +539,73 @@ Remarquez que nous avons d’abord transformé l’objet spatial `regions` dans 
 
 ###### La fonction `st_combine()` {#fct_combine}{-}
 
-<!-- INTRO   -->
+La fonction `st_combine()` de la bibliothéque `st` sert à combiner des géométries afin d'en former une seule. Cette opération peut être utile lorsque nous souhaitons considérer plusieurs géométries comme formant un même objet spatial.
 
+
+```{r, warning=FALSE, echo=FALSE, eval=TRUE}
+reg_tourist <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/regions_touristiques/Shapefile/regn_tours_s250k_20160125.shp")
+
+#reg_tourist <- st_read("Module7/Module7_données/regions_touristiques/regn_tours_s250k_20160125.shp")
+
+#reg_tourist
+iles<-subset(reg_tourist, Nom_reg_to =="Îles-de-la-Madeleine")
+gasp<-subset(reg_tourist, Nom_reg_to =="Gaspésie")
+#mapview(iles, col.regions = "green", alpha.regions = 0.4) + mapview(gasp, col.regions = "blue", alpha.regions = 0.4)
+
+GIM <-iles
+GIM[2,]<-gasp
+GIM <-GIM[,-4]
+GIM <-GIM[,-2]
+names(GIM)<-c("Id", "Nom_reg", "geometry")
+
+GIM
+mapview(GIM, zcol = "Nom_reg")
+
+# iles_poly<-st_cast(iles, to = "POLYGON")
+# iles_poly
+# mapview(iles_poly)
+```
+Considérons le *shapefile* `GIM` contenant deux géométries: le polygone délimitant la Gaspésie et un polygone délimitant les Îles-de-la-Madeleine.
+
+```{r}
+GIM
+```
+
+Maintenant, combinons ces deux polygones pour former une géométrie unique qui correspondra à la région administratie de la Gaspésie - Îles-de-la-Madeleine
 
 
 ```{r}
-villes_NQ <- subset(villes_reg, Rgns_Ad == "Nord-du-Québec") 
-villes_NQ
-
-villes_NQ_combo <- st_combine(villes_NQ)
-villes_NQ_combo
-
-villes_NQ_union <- st_union(villes_NQ)
+GIM_combine <- st_combine(GIM)
+GIM_combine
 ```
+Le nouvel objet `GIM_combine` est effectivement formée d'une seule géométrie. Notez cependant que la fonction `st_combine()` ne fusionne pas les frontières à l'intérieur du nouveau polygone formé (\@ref(fig:map_combo)). Pour unir deux polygones, il faut plutôt utiliser la fonction `st_union()` que nous définirons plus bas dans cette leçon.
+
+```{r map_combo, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="La Gaspésie et les Îles-de-la-Madeleine  traités comme deux polygones distincts (gauche), leur combinaison par la fonction `st_combine()` (centre), et leur union par la fonction `st_union()` (droite)".}
+GIM_union<-st_union(iles, gasp)
+map_GIM_union <-mapview(GIM_union,  col.regions = "green", alpha.regions = 0.2)
+map_GIM <- mapview(GIM, zcol = "Nom_reg")
+map_GIM_combo <- mapview(GIM_combine, col.regions = "blue", alpha.regions = 0.2)
+leafsync::latticeView(map_GIM,map_GIM_combo, map_GIM_union, ncol = 3)
+```
+
+<!--  La classe est aussi changée
+
 ```{r}
-mapview(villes_NQ)
-mapview(villes_NQ_combo)
+class(GIM)
+class(GIM_combine)
+class(GIM_union)
 ```
 
-```{r}
-reg_combo<-st_combine(regions)
-reg_combo
-mapview(reg_combo)
 
-reg_union<-st_union(regions)
-reg_union
-mapview(reg_union)
-```
-
+-->
 
 
 ###### La fonction `st_cast()` {-}
-<!--  INTRO  -->
-Le terme anglais *cast* signifie plâtre ou moule en français.
 
-La fonction `st_cast(x, to)` comprend deux arguments. Le premier argument, `x`, correspond à l'objet vectoriel dont on souhaite modifier la géométrie, alors que le second argument, `to` correspond à la géométrie que l'on souhaite lui attribuer. 
+La fonction `st_cast()` sert à convertir la géométrie d'un objet spatial donné vers une autre géométrie. Cette fonction comprend deux arguments : `st_cast(x, to)` . Le premier argument, `x`, correspond à l'objet vectoriel dont on souhaite modifier la géométrie, alors que le second argument, `to` correspond à la géométrie que l'on souhaite lui attribuer. 
 
 Donnons un exemple. Utilisons d'abord le *shapefile* `regions` pour isoler le polygone de la région administrative de la Mauricie grâce à la fonciton `subset()`&nbsp;:
-```{r}
+```{r, warning=FALSE}
 Mauricie <- subset(regions,Rgns_Ad=="Mauricie")
 Mauricie
 ```
@@ -588,7 +617,7 @@ Mauricie_lines
 Mauricie_pts<-st_cast(Mauricie, to = "MULTIPOINT")
 Mauricie_pts
 ```
-Nous observons que les deux nouveaux objets vectoriels ont bel et bien la géométrie souhaitée ()
+Nous observons que les deux nouveaux objets vectoriels ont bel et bien la géométrie souhaitée (\@ref(fig:ex_cast1))
 
 ```{r ex_cast1, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="La fonction `st_cast()` a été utilisée pour transformer le polygone de la Mauricie (gauche) en multilignes (centre) et en multipoints (droite)."}
 
@@ -600,16 +629,18 @@ Points<-mapview(Mauricie_pts, legend = FALSE)
 leafsync::latticeView(Poly,Lines,Points, ncol = 3)
 ```
 
-Dans cet exemple, nous avons en quelque sorte "dissous" la géométrie d'un polygone en lignes puis en points. Or, la fonction `st_cast()` peut également servir à "consolider" des géométries.
+Dans cet exemple, nous avons en quelque sorte "décomposé" la géométrie d'un polygone en lignes puis en points. Or, la fonction `st_cast()` peut également servir à "consolider" des géométries.
 
-En guise d'exemple, considérons l'objet `villes_NQ_combo` que nous avons créé plus haut avec la fonction `st_combine()`&nbsp;:
+En guise d'exemple, considérons l'objet `villes_NQ_combo` créé en isolant du *shapefile* `villes_reg` les villes situées dans la région administrative du Nord-du-Québec et en les combinant par l'utilisation de la fonction `st_combine()`&nbsp;:
 
 ```{r}
+villes_NQ <- subset(villes_reg, Rgns_Ad == "Nord-du-Québec") 
+villes_NQ_combo <- st_combine(villes_NQ)
 villes_NQ_combo
 ```
 Cet objet possède une géométrie multipoint où chaque point correspond à une municipalité du Nord-du-Québec.
 
-Utilisons la fonction `st_cast()` pour transformer la géométrie de cet objet en ligne et en polygone &nbsp;:
+Utilisons maintenant la fonction `st_cast()` pour transformer la géométrie de cet objet en ligne et en polygone &nbsp;:
 
 ```{r}
 villes_NQ_lines<-st_cast(villes_NQ_combo, to = "LINESTRING")
@@ -619,6 +650,7 @@ villes_NQ_lines
 villes_NQ_pol<-st_cast(villes_NQ_combo, to = "POLYGON")
 villes_NQ_pol
 ```
+
 ```{r ex_cast2, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="La fonction `st_cast()` a été utilisée pour transformer les villes du Nord-du-Québec de multipoints (gauche) en ligne (centre) et en polygone (droite).}
 
 Points <- mapview(villes_NQ_combo, legend = FALSE)
@@ -627,18 +659,17 @@ Pol <- mapview(villes_NQ_pol, legend = FALSE)
 
 leafsync::latticeView(Points,Lines,Pol, ncol = 3)
 ```
-
-
+L'objet `villes_NQ_lines` correspond effectivement à un ensemble de lignes et l'objet `villes_NQ_lines` à un ensemble de polygones formés en reliant les points ensembles.
 
 
 ###### La fonction `st_buffer()` {-}
 
 Une zone tampon est un polygone dont les frontières sont définies par une distance donnée autour d'un objet vectoriel. Une zone tampon peut être créée autour de tout objet vectoriel, que ce soit des points, des lignes ou des polygones. 
 
-La création de zones tampons est généralement réalisée pour répondre à des questions de nature géographique. Par exemple, combien de garderies se situent à une distance de 2&nbsp;km de ma maison&nbsp;? Ou encore, combien de stations services se situent à moins de 500&nbsp;m de la route menant de Chelsey à Cantley, en Outaouais&nbsp;? 
+La création de zones tampons est généralement réalisée pour répondre à des questions de nature géographique. Par exemple, combien de garderies se situent à une distance de 2&nbsp;km de ma maison&nbsp;? Ou encore, combien de stations services se situent à moins de 500&nbsp;m de la route menant de Chelsey à Cantley en Outaouais&nbsp;? 
 
 
-La fonction `st_buffer()` de la bibliothèque `sf` permet de créer des zones tampons - appelées *buffers* en anglais. Cette fonction comprend obligatoirement deux arguments. Le premier correspond à l'objet vectoriel autour du quel nous souhaitons construire une zone tampon, et le deuxième argument défini la distance sur laquelle la zone tampon s'étendra autour de l'objet vectoriel. Comme pour la fonction `st_simplify()`, l'objet vectoriel auquel nous appliquons la fonction `st_buffer()` doit être exprimé dans un CRS d'unité de mesure métrique.
+La fonction `st_buffer()` de la bibliothèque `sf` permet de créer des zones tampons - appelées *buffers* en anglais. Cette fonction comprend obligatoirement deux arguments. Le premier correspond à l'objet vectoriel autour du quel nous souhaitons construire une zone tampon, et le deuxième argument défini la distance sur laquelle la zone tampon s'étendra autour de l'objet vectoriel. Comme pour la fonction `st_simplify()`, l'objet vectoriel auquel nous appliquons la fonction `st_buffer()` doit être exprimé dans un SCR d'unité de mesure métrique.
 
 Construisons des zones tampons autour de la ville de La Pocatière, que nous avons isolée plus haut, en considérant deux distances différentes:
 
@@ -648,7 +679,7 @@ la_poc_tampon10 <- st_buffer(la_poc_nad, dist = 10e3)
 la_poc_tampon50 <- st_buffer(la_poc_nad, dist = 50e3)
 ```
 
-```{r buffer_lapoc, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="Deux zones tampons de 10 km (bleu) et de 50 km autour de la ville de La Pocatière"}
+```{r buffer_lapoc, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="Deux zones tampons de 10 km (en bleu) et de 50 km (en vert) autour de la ville de La Pocatière"}
 # library(tmap)
 # new_bb <- bb(regions_nad, xlim = c(0.25, 0.75), ylim = c(0.25, 0.75), relative = TRUE)
 # mapQ <- tm_shape(regions_nad, bbox = new_bb) + tm_fill()
@@ -665,7 +696,7 @@ mapview(la_poc_tampon50, col.regions = "green", alpha.regions = 0.2, legend = FA
 
 Notez que l'expression `e3` correspond au chiffre 1000 (c'est-à-dire 10 exposent 3).
 
-Maintenant, construisons des zones tampons autour des régions administratives de l'Abitibi-Témiscamingue et de la Mauricie. Utilisons d'abord la fonction `subset()` pour isoler les polygones correspondants à ces régions à partir du *shapefile* `regions_nad` dont l'unité de mesure du CRS est le mètre. 
+Maintenant, construisons des zones tampons autour des régions administratives de l'Abitibi-Témiscamingue et du Saguenay - Lac-Saint-Jean. Utilisons d'abord la fonction `subset()` pour isoler les polygones correspondants à ces régions à partir du *shapefile* `regions_nad` dont l'unité de mesure du CRS est le mètre. 
 
 
 ```{r}
@@ -674,11 +705,11 @@ Abitibi <- subset(regions_nad, Rgns_Ad == "Abitibi-Témiscamingue")
 SagStJean <- subset(regions_nad, Rgns_Ad == "Saguenay - Lac-Saint-Jean")
 
 # Calculer une zone tampon pour chacun des polygones
-Abitibi_tampon10 <- st_buffer(Abitibi, dist = 20e3)
-SagStJean_tampon50 <- st_buffer(SagStJean, dist = 70e3)
+Abitibi_tampon10 <- st_buffer(Abitibi, dist = 20e3)  #20 km
+SagStJean_tampon50 <- st_buffer(SagStJean, dist = 70e3)  #70 km
 ```
 
-```{r buffer_regions, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="Une zone tampon de 20 km autour de la région administrative de l'Abitibi-Témicamingue et une zone tampon de 70 km autour de la Mauricie."}
+```{r buffer_regions, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="Une zone tampon de 20 km autour de la région administrative de l'Abitibi-Témicamingue et une zone tampon de 70 km autour du Saguenay - Lac-Saint-Jean."}
 mapview(SagStJean_tampon50, col.regions = "green", alpha.regions = 0.2, legend = FALSE) +
 mapview(SagStJean, col.regions = "green", alpha.regions = 0.4, legend = FALSE) + 
 mapview(Abitibi_tampon10, col.regions = "blue", alpha.regions = 0.2,  legend = FALSE) +
@@ -691,18 +722,20 @@ Notez que la zone tampon d'un polygone inclue le polygone d'origine. C'est-à-di
 
 ###### La fonction `st_centroid` {-}
 
-Trouver le centre d'un polygone
+Le centroïde d'un polygone en cartographie correspond approximativement au centre géométrique d'un polygone^[Le centre géométrique d'une forme planaire est la moyenne des positions de tous les points constituants la forme. Vous pouvez trouver des informations supplémentaires sur le centroïde [ici]^(http://wiki.gis.com/wiki/index.php/Centroid). Ces coordonnées servent parfois à définir la localisation du polygone. La fonction `st_centroid()` de la bibliothèque `st` permet de calculer le centroïde de polygone.
 
-```{r}
+Déterminons les centroïdes des polygones de l'Abitibi et du Saguenay - Lac-Saint-Jean. Notez que la fonction `st_centroid()` nécessite également que le polygone soit défini selon un SCR dont l'unité de mesure est le mètre.
+
+```{r, warning=FALSE}
 centre_Abitibi <- st_centroid(Abitibi)
 centre_Abitibi
 centre_SagStJean <- st_centroid(SagStJean)
 centre_SagStJean
 ```
 
-Retourne un objet vectoriel qui conserve les attributs.
+La fonction `st_centroid()` retourne un objet vectoriel de type point qui conserve les attributs du polygone.
 
-```{r}
+```{r centroid_regions, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="Les centroïdes (en rouge) des régions de l'Abitibi-Témicamingue (en bleu) et du Saguenay - Lac-Saint-Jean (vert) calculés avec la fonction  `st_centroid()`."}
 mapview(centre_SagStJean, col.regions = "red", legend = FALSE) +
 mapview(SagStJean, col.regions = "green", alpha.regions = 0.4, legend = FALSE) + 
 mapview(centre_Abitibi, col.regions = "red" ,legend = FALSE) +
@@ -710,59 +743,154 @@ mapview(Abitibi, col.regions = "blue", alpha.regions = 0.4,  legend = FALSE)
 ```
 
 
-###### Les fonctions de découpage spatial {-}
+######  Opérations topologiques entre deux couches {-}
+
+L'équivalent spatial des opérations logiques sur les ensembles.
+Entre deux couches
+Peuvent servir à faire du découpage spatiale
+
 ```{r}
 A <- st_buffer(Abitibi, dist = 80e3)
 B <- st_buffer(SagStJean, dist = 100e3)
 ```
 
-```{r}
-mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE)+
-mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE)
-```
 
-<!-- | arranger: faire tout ensemble  -->
-
-###### La fonction `st_union()` {-}
 
 ```{r}
-unionAB <- st_union(A,B)
-mapview(unionAB)
-```
-###### La fonction `st_intersection()` {-}
-
-```{r}
-inter <- st_intersection(A,B)
-mapview(union, col.regions = "grey", alpha.regions = 0.2) + mapview(inter)
-```
-```{r}
+union_AB <- st_union(A,B)
+inter_AB <- st_intersection(A,B)
 diff_AB <- st_difference(A,B)
-mapview(diff)
 diff_BA <- st_difference(B,A)
-sym_diff <- st_sym_difference(A,B)
-mapview(sym_diff)
+sym_diff_AB <- st_sym_difference(A,B)
+
 ```
-Dire quelque chose sur la fonction st_combine.
+CHange la géométrie. Devient celle correspond au nouveau polygone formé
 
-##### Opérations topologiques {-}
-<!-- OU faire tout ensemble comme plus haut pour d/coupage spatial.   -->
-
-###### La fonction st_intersects {-}
-<!-- A comprendre   -->
 
 
 ```{r}
+map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE)+mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE)
+map_union <- mapview(union_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
+map_inter <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legend = FALSE) + mapview(inter_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
+map_diffAB <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legend = FALSE) + mapview(diff_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
+map_diffBA <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legend = FALSE) + mapview(diff_BA, col.regions = "darkmagenta", alpha.regions = 0.2)
+map_symdiff <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legend = FALSE) + mapview(sym_diff_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
+```
+
+
+```{r}
+leafsync::latticeView(map_AB, map_union,map_diffAB, map_diffBA, map_inter, map_symdiff, ncol = 2)
+
+```
+
+
+
+
+
+###### Opérations topologiques de confirmation {-}
+
+On ne change pas la géométrie mais on veut savoir oui ou non si deux couches satisfont à une relations topologiques.
+
+
+
+```{r, warning=FALSE}
 centre_A <- st_centroid(A)
 centre_B <- st_centroid(B)
-centre_unionAB <- st_centroid(unionAB)
+centre_unionAB <- st_centroid(union_AB)
+centre_interAB <- st_centroid(inter_AB)
+
+
+A_lines<-st_cast(A, to = "LINESTRING")
+B_lines<-st_cast(B, to = "LINESTRING")
+AB_lines_int<-st_intersection(B_lines,A_lines)
+ABpoints<-st_cast(B_lines_A_lines_int, to = "POINT")
+point_interAB<-ABpoints[1,]
+```
+
+```{r, warning=FALSE}
+points<-st_centroid(A)[,"geometry"]
+points[2,]<-st_centroid(B)[,"geometry"]
+points[3,]<-st_centroid(inter_AB)[,"geometry"]
+points[4,]<-st_centroid(union_AB)[,"geometry"]
+points[5,]<-point_interAB[,"geometry"]
+
+noms<-c("Centre_A","Centre_B","Centre_interAB", "Centre_unionAB","point_interAB")
+points$position<-noms
+colors<-c("Bleu","Rouge","Violet","Jaune","Vert")
+points$couleur<-colors
+```
+
+
+```{r}
+map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
+  mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE) +
+  mapview(centre_A, col.regions="blue",legend = FALSE) + 
+  mapview(centre_B, col.regions="red",legend = FALSE) +
+  mapview(centre_interAB, col.regions="darkmagenta",legend = FALSE)+
+  mapview(centre_unionAB, col.regions="darkgoldenrod",legend = FALSE)+
+  mapview(point_interAB, col.regions="darkgreen",legend = FALSE)
+map_AB
+```
+
+```{r, warning=FALSE}
+st_intersects(points, A)
+#st_intersects(B, centre_B)
+#st_intersects(A,B)
 ```
 ```{r}
-st_intersects(B, centre_A)
-st_intersects(B, centre_B)
-st_intersects(B, centre_unionAB)
-st_intersects(A,B)
+st_intersects(points, A, sparse = FALSE)
 ```
-<!-- A FAIRE  -->
+```{r}
+st_intersects(A, points)
+```
+
+```{r}
+st_contains(B, points)
+st_contains(B, points, sparse = FALSE)
+```
+```{r}
+points$couleur[st_contains(B, points, sparse = FALSE)]
+```
+
+
+```{r}
+x=0
+if(st_contains(B, centre_B,sparse = TRUE)==TRUE){x=1}
+x
+```
+
+```{r}
+st_touches(points, sym_diff_AB)
+```
+```{r}
+st_covers(points,A)
+
+```
+```{r}
+A <- st_buffer(Abitibi, dist = 80e3)
+B <- st_buffer(SagStJean, dist = 100e3)
+a<-Abitibi
+b<-SagStJean
+Mauricie <- subset(regions_nad, Rgns_Ad == "Mauricie")
+c<-Mauricie
+
+```
+
+```{r}
+mapview(a, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
+ mapview(b, col.regions = "red", alpha.regions = 0.2, legend = FALSE) +
+  mapview(c, col.regions = "green", alpha.regions = 0.2, legend = FALSE)
+```
+
+```{r}
+st_covers(B,b)
+st_touches(a,c)
+st_disjoint(a,c)
+st_disjoint(a,b)
+st_overlaps(a,c)
+st_crosses(union_AB,b)
+```
+http://postgis.net/workshops/postgis-intro/spatial_relationships.html
 
 ###### La fonction st_disjoint {-}
 ###### La fonction st_touches {-}
