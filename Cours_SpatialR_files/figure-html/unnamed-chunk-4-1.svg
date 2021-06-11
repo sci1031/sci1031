@@ -40,7 +40,7 @@
 <text transform='translate(41.76,172.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>3</text>
 <text transform='translate(41.76,118.55) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>4</text>
 <text transform='translate(41.76,64.29) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>5</text>
-<polyline points='59.04,286.56 275.76,286.56 275.76,59.04 59.04,59.04 59.04,286.56 ' style='stroke-width: 0.75;' />
+<polygon points='59.04,286.56 275.76,286.56 275.76,59.04 59.04,59.04 ' style='stroke-width: 0.75; fill: none;' />
 </g>
 <defs>
   <clipPath id='cpNTkuMDR8Mjc1Ljc2fDU5LjA0fDI4Ni41Ng=='>
@@ -74,7 +74,7 @@
 <text x='319.32' y='163.63' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>40</text>
 <text x='319.32' y='145.57' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>50</text>
 <text x='319.32' y='127.52' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>60</text>
-<polyline points='298.44,229.68 304.92,229.68 304.92,115.92 298.44,115.92 298.44,229.68 ' style='stroke-width: 0.75;' />
+<polygon points='298.44,229.68 304.92,229.68 304.92,115.92 298.44,115.92 ' style='stroke-width: 0.75; fill: none;' />
 </g>
 <defs>
   <clipPath id='cpNTkuMDR8MzI5Ljc2fDU5LjA0fDI4Ni41Ng=='>
@@ -86,6 +86,6 @@
 <g clip-path='url(#cpNTkuMDR8Mjc1Ljc2fDU5LjA0fDI4Ni41Ng==)'>
 </g>
 <g clip-path='url(#cpMC4wMHwzNjAuMDB8MC4wMHwzNjAuMDA=)'>
-<polyline points='59.04,286.56 275.76,286.56 275.76,59.04 59.04,59.04 59.04,286.56 ' style='stroke-width: 0.75;' />
+<polygon points='59.04,286.56 275.76,286.56 275.76,59.04 59.04,59.04 ' style='stroke-width: 0.75; fill: none;' />
 </g>
 </svg>

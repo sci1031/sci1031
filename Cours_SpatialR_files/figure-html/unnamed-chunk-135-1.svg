@@ -40,7 +40,7 @@
 <text transform='translate(41.76,241.30) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='26.73px' lengthAdjust='spacingAndGlyphs'>45.6</text>
 <text transform='translate(41.76,180.52) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='26.73px' lengthAdjust='spacingAndGlyphs'>45.8</text>
 <text transform='translate(41.76,119.74) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='26.73px' lengthAdjust='spacingAndGlyphs'>46.0</text>
-<polyline points='59.04,466.56 455.76,466.56 455.76,59.04 59.04,59.04 59.04,466.56 ' style='stroke-width: 0.75;' />
+<polygon points='59.04,466.56 455.76,466.56 455.76,59.04 59.04,59.04 ' style='stroke-width: 0.75; fill: none;' />
 </g>
 <defs>
   <clipPath id='cpNTkuMDR8NDU1Ljc2fDU5LjA0fDQ2Ni41Ng=='>
@@ -72,7 +72,7 @@
 <text x='499.32' y='265.77' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='22.92px' lengthAdjust='spacingAndGlyphs'>600</text>
 <text x='499.32' y='230.16' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='22.92px' lengthAdjust='spacingAndGlyphs'>800</text>
 <text x='499.32' y='194.54' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='30.56px' lengthAdjust='spacingAndGlyphs'>1000</text>
-<polyline points='478.44,364.68 484.92,364.68 484.92,160.92 478.44,160.92 478.44,364.68 ' style='stroke-width: 0.75;' />
+<polygon points='478.44,364.68 484.92,364.68 484.92,160.92 478.44,160.92 ' style='stroke-width: 0.75; fill: none;' />
 </g>
 <defs>
   <clipPath id='cpNTkuMDR8NTA5Ljc2fDU5LjA0fDQ2Ni41Ng=='>
@@ -84,7 +84,7 @@
 <g clip-path='url(#cpNTkuMDR8NDU1Ljc2fDU5LjA0fDQ2Ni41Ng==)'>
 </g>
 <g clip-path='url(#cpMC4wMHw1NDAuMDB8MC4wMHw1NDAuMDA=)'>
-<polyline points='59.04,466.56 455.76,466.56 455.76,59.04 59.04,59.04 59.04,466.56 ' style='stroke-width: 0.75;' />
+<polygon points='59.04,466.56 455.76,466.56 455.76,59.04 59.04,59.04 ' style='stroke-width: 0.75; fill: none;' />
 </g>
 <defs>
   <clipPath id='cpMTQuNDB8NTI1LjYwfDE3LjI4fDUyNS42MA=='>

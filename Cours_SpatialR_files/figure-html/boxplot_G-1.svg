@@ -31,7 +31,7 @@
 <line x1='158.40' y1='64.80' x2='158.40' y2='128.80' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
 <line x1='140.00' y1='208.80' x2='176.80' y2='208.80' style='stroke-width: 0.75;' />
 <line x1='140.00' y1='64.80' x2='176.80' y2='64.80' style='stroke-width: 0.75;' />
-<polyline points='121.60,176.80 195.20,176.80 195.20,128.80 121.60,128.80 121.60,176.80 ' style='stroke-width: 0.75;' />
+<polygon points='121.60,176.80 195.20,176.80 195.20,128.80 121.60,128.80 ' style='stroke-width: 0.75; fill: none;' />
 </g>
 <g clip-path='url(#cpMC4wMHwyODguMDB8MC4wMHwyODguMDA=)'>
 <line x1='59.04' y1='192.80' x2='59.04' y2='64.80' style='stroke-width: 0.75;' />
@@ -46,6 +46,6 @@
 <text transform='translate(41.76,96.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='19.09px' lengthAdjust='spacingAndGlyphs'>0.8</text>
 <text transform='translate(41.76,64.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='19.09px' lengthAdjust='spacingAndGlyphs'>1.0</text>
 <text transform='translate(12.96,136.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='44.16px' lengthAdjust='spacingAndGlyphs'>Valeurs</text>
-<polyline points='59.04,214.56 257.76,214.56 257.76,59.04 59.04,59.04 59.04,214.56 ' style='stroke-width: 0.75;' />
+<polygon points='59.04,214.56 257.76,214.56 257.76,59.04 59.04,59.04 ' style='stroke-width: 0.75; fill: none;' />
 </g>
 </svg>

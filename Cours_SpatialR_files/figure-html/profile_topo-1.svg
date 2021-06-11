@@ -52,7 +52,7 @@
 <text transform='translate(41.76,257.83) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='22.92px' lengthAdjust='spacingAndGlyphs'>900</text>
 <text transform='translate(41.76,165.72) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='30.56px' lengthAdjust='spacingAndGlyphs'>1000</text>
 <text transform='translate(41.76,73.61) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='30.56px' lengthAdjust='spacingAndGlyphs'>1100</text>
-<polyline points='59.04,466.56 653.76,466.56 653.76,59.04 59.04,59.04 59.04,466.56 ' style='stroke-width: 0.75;' />
+<polygon points='59.04,466.56 653.76,466.56 653.76,59.04 59.04,59.04 ' style='stroke-width: 0.75; fill: none;' />
 <text x='356.40' y='34.77' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: Nimbus Sans;' textLength='420.50px' lengthAdjust='spacingAndGlyphs'>Profile topographique du Sentier du Mont-Mégantic</text>
 <text x='356.40' y='521.28' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='231.41px' lengthAdjust='spacingAndGlyphs'>Distance depuis le sommet (en mètre)</text>
 <text transform='translate(12.96,262.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: Nimbus Sans;' textLength='114.74px' lengthAdjust='spacingAndGlyphs'>Altitude (en mètre)</text>
