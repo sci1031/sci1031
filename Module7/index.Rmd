@@ -30,7 +30,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `rowSums()`
 - `lengths()`
 
-Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec et sur les parcs nationaux de Société des établissements de plein air du Québec.
+Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec.
 
 Dans la section Exercice, vous utiliserez <!-- A FAIRE -->
 
@@ -40,9 +40,12 @@ Dans la section Exercice, vous utiliserez <!-- A FAIRE -->
 
 Au [module 4](#vec), vous avez appris les fonctions essentielles pour lire et visualiser des données spatiales vectorielles sous `R`. Le présent module vous amènera maintenant à manipuler des données vectorielles. 
 
-Cette leçon est articulée autour d'une problématique qui nécessite de manipuler des données spatiales. Au cours des différentes étapes permettant d'explorer la problématique, vous apprendrez à utiliser diverses fonctions `R`. 
+Dans un premier temps, cette leçon vous enseignera le fonctionnement d'opérations de base sur les données vectorielles. 
+<!-- Spatiale pas spatiale -->
 
-En effet, cette leçon vous amène à planifier vos vacances pour la prochaine saison estivale au Québec. Vous aimez la nature mais vous appréciez aussi la vie urbaine. Vous aimeriez visiter une grande ville et en même temps pouvoir séjourner dans divers parcs nationaux à proximité de celle-ci. Où se rendre? Quelle ville vous permettra de faire des escapades dans une diversité de parcs? 
+Dans un second temps, cette leçon vous guidera dans la résolution d'une problèmatique qui nécessite de manipuler des données vectorielles.  Au cours des différentes étapes permettant de résoudre la problématique, vous mettrez en pratique les diverses fonctions `R` apprises jusqu'à maintenant. 
+
+En particulier, la problématique à explorer porte sur la planification de vos prochaines vacances estivales au Québec. Vous aimez la nature mais vous appréciez aussi la vie urbaine. Vous aimeriez visiter une grande ville et en même temps pouvoir séjourner dans divers parcs nationaux à proximité de celle-ci. Où se rendre? Quelle ville vous permettra de faire des escapades dans une diversité de parcs? 
 
 Plus précisément, nous allons explorer le territoire Québécois en se posant la question suivante: 
 
@@ -52,32 +55,29 @@ Plus précisément, nous allons explorer le territoire Québécois en se posant la q
 
 #### Télécharger les données {-}
 
-Pour résoudre cette problématique, nous allons utiliser les données vectorielles relatives aux [municipalités du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives) et au réseau de la [Société des établissements de plein air du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000), la SÉPAQ. 
+Pour résoudre cette problématique, nous allons utiliser les données vectorielles relatives aux [municipalités](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives) et aux [régions administratives du Québec](https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs), ainsi qu'au réseau de la [Société des établissements de plein air du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000), la SÉPAQ. 
 
-Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module7_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier `Quebec_Parcs` comprend trois sous-dossiers:
+Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module7_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier comprend trois sous-dossiers:
 
-<!-- ajouter régions  -->
+<!-- nettoyer le dossier  -->
 
 - `villes`,
 - `parcs.gdb`,
-- `provinces`.
+- `regions_admin`.
 
- <!-- À VOIR probablement retirer et faire quelque chose de plus simple pour la partie exo  -->
-Le sous-dossier `sentiers` correspond aux [sentiers de randonnées de la SÉPAQ](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux) et sera utilisé lors dans la section [exercice](#ex_manip_vec).
 
 
 ### Opérations de base 
 
-Avant d'entamer la résolution de notre question, familiarisons-nous avec les opérations fréquemment utilisées sur les données matricielles.
+Avant d'entamer la résolution de notre question, familiarisons-nous avec les opérations fréquemment utilisées sur les données vectorielles.
 
 #### Importer et visualiser les données {-}
 
-La première étape consiste à charger les bibliothèques requises pour lire les données spatiales vectorielles (`sf`) et les visualiser (`mapview`). Nous chargeons aussi la bibliothèque `units` qui nous permettra de manipuler les unités de mesure utilisées pour le calcul d'aire ou de distance.
+La première étape consiste à charger les bibliothèques requises pour lire les données spatiales vectorielles (`sf`) et les visualiser (`mapview`). 
 
 ```{r load-libraries7, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 library(sf)
 library(mapview)
-library(units)
 ```
 
 
@@ -94,7 +94,7 @@ municipalites <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Develo
 #municipalites <- st_read("Module7/data/villes/villes.shp")
 ```
 
-Le *shapefile* a maintenant été importé dans un objet `R` de classe `sf` (c'est-à-dire un objet importé ou généré par l'utilisation de la librairie `sf`). Nous remarquons que la géométrie de cet object vectoriel est de type point. Plus précisément, cet objet contient 767 points (*features*) et 17 attributs (*fields*).
+Le *shapefile* a maintenant été importé dans un objet `R` de classe `sf` (c'est-à-dire un objet importé ou généré par l'utilisation de la bibliothèque `sf`). Nous remarquons que la géométrie de cet object vectoriel est de type point (`POINT`). Plus précisément, cet objet contient 767 points (*features*) et 17 attributs (*fields*).
 
 Pour en savoir davantage sur ces attributs de nature géographique, démographique et administrative, vous pouvez télécharger et consulter la [documentation] (https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326) disponible sur le site de Données Québec.  
 
@@ -115,8 +115,8 @@ st_layers("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structu
 Nous pouvons remarquer que les intitulés des différentes couches ne sont pas bien définis. Il faut donc prendre le temps de regarder la documentation accessible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000/resource/229322ef-eca2-4ae9-a511-ba599bc2745e). Ne vous inquiétez pas, je l'ai fait pour vous! En s'intéressant à la structure de données et à la nomenclature utilisée et décrite, nous pouvons déterminer que la couche `terpnq_s` correspond aux territoires des parc nationaux du Québec. Nous pouvons donc faire la lecture de la géodatabase avec la fonction `st_read()` en précisant cette couche à l'aide de l'argument `layer`.
 
 ```{r load-parcs, eval = FALSE}
-chemin_provinces <- paste(chemin, "/parcs.gdb", sep = "")
-provinces <- st_read(chemin_provinces, layer = "terpnq_s")
+chemin_parcs_nationaux <- paste(chemin, "/parcs.gdb", sep = "")
+parcs_nationaux <- st_read(chemin_parcs_nationaux, layer = "terpnq_s")
 ```
 
 ```{r load-parcs2, echo = FALSE}
@@ -149,10 +149,10 @@ De plus, les cartes produites avec `mapview()` sont interactives, permettant d'a
 
 ##### Filter des attributs {-}
 
-<!--  À arranger  -->
+<!--  À arranger: Pu sur que ce soit necessaire  -->
 Une opération fréquente lorsque nous manipulons des données vectorielles est celle de filtrer les données. Par exemple, dans le *shapefile* `municipalites` que nous venons d'importer, nous pourrions vouloir sélectionner seulement certaines municipalités parmi les 767 répertoriées ou certains attributs parmi les 17. Nous pourrions aussi vouloir déterminer quelles municipalités possédent une valeur spécifique pour un attribut donné.
 
-Dans les sous-sections qui suivent, nous présenterons des opérations qui permettent de filtrer des données vectorielles.
+Dans les sous-sections qui suivent, nous présenterons des opérations qui permettent de filtrer les attributs de données vectorielles.
 
 <br>
 
@@ -162,8 +162,6 @@ Dans les sous-sections qui suivent, nous présenterons des opérations qui permett
 Les objets `sf` sont manipulables de la même façon qu'un `data.frame` (étant eux-mêmes des `data.frame`). Les attributs correspondent aux colonnes tandis que les entités spatiales (points, lignes ou polygones) correspondent aux lignes du `data.frame`.
 
 Par exemple, l'objet spatial `municipalites` contient `r nrow(municipalites)` points correspondant chacun à une municipalité. La table d'attributs contient quant à elle `r ncol(municipalites)` colonnes correspondant à chacun des attributs permettant de décrire les municipalités. 
-
-<!-- Logiquement, il faudrait retirer et garder juste sur les attributs  -->
 
 
 Pour sélectionner un élément spatial spécifique d'un *shapefile*, nous pouvons simplement spécifier l'indice de la ligne qui lui est associée dans le `data.frame`. Par exemple :
@@ -194,7 +192,7 @@ Les colonnes disposent toujours d'un nom unique dans un `data.frame`. Nous pouvo
 names(municipalites)
 ```
 
-Cette table contient 17 attributs. L'attribut nommé `HAP_NM_TOP` réfère au nom des municipalités. Notez que lâ€™abréviation `TOP` signifie [toponyme](https://fr.wikipedia.org/wiki/Toponymie). 
+Cette table contient 17 attributs. L'attribut nommé `HAP_NM_TOP` réfère au nom des municipalités. Notez que l'abréviation `TOP` signifie [toponyme](https://fr.wikipedia.org/wiki/Toponymie). 
 
 
 Pour sélectionner cet attribut nous pouvons le faire simplement en utilisant son nom. Par exemple, en utilisant la syntaxe suivante :
@@ -226,7 +224,7 @@ names(villes)
 <!-- visualiser villes et en profiter pour noter que certaines villes ne sont pas à l'intérieur des frontières du QC  -->
 
 ##### Filtrer des valeurs d'attribut {-}
-<!-- À arranger: ramener texte d'en haut  -->
+<!-- À arranger: ramener texte d'en haut  Pu sur que ce soit necessaire-->
 On peut vouloir sélectionner un ou plusieurs éléments spatiaux d'un *shapefile* qui possèdent une valeur spécifique d'attribut. Cette opération peut être réalisée en utilisant les fonctions `subset()` ou `which()`.
 
 
@@ -241,7 +239,7 @@ la_poc <- subset(villes, toponyme == "La Pocatière")
 mapview(la_poc, legend = FALSE)
 ```
 
-Notez que l'objet retourné, ici `la_poc`, est de même classe que l'objet filtré. Nous pouvons valider la classe d'un objet dans `R` avec la fonction `class()`. 
+Notez que l'objet retourné, ici `la_poc`, est de même classe que l'objet filtré, ici `villes`. Nous pouvons valider la classe d'un objet dans `R` avec la fonction `class()`. 
 
 ```{r ex-class}
 class(la_poc)
@@ -263,7 +261,6 @@ which(c(1, 1, 2) == 2)
 Maintenant, utilisons la fonction `which()` pour isoler la ville de La Pocatière:
 ```{r}
 which(villes$toponyme == "La Pocatière")
-
 ```
 Remarquez que la fonction `which()` retourne l'**indice** de la ligne dans la table d'attributs de l'objet `villes` satisfaisant la condition `toponyme == "La Pocatière"`. 
 
@@ -273,9 +270,10 @@ Nous pouvons ensuite consigner cet identifiant dans l'objet `id_la_poc` et l'uti
 id_la_poc <- which(villes$toponyme == "La Pocatière")
 villes[id_la_poc,]   
 ```
+
 ##### Ajouter des attributs {-}
 
-Un autre type de manipulations fréquemment utilisé est celle d'enrichir un jeu de données vectorielles en lui ajoutant des attributs. Ces nouvelles informations peuvent provenir d'une base de données non-spatiales ou d'un autre *shapefile*.
+Un autre type de manipulations fréquemment utilisé est celui d'enrichir un jeu de données vectorielles en lui ajoutant des attributs. Ces nouvelles informations peuvent provenir d'une base de données non-spatiales ou d'un autre *shapefile*.
 
 
 Dans le cas de données non-spatiales, nous pouvons combiner les attributs désirés en utilisant l'opération `merge()` que nous définissons dans cette sous-section. Lorsque nous souhaitons ajouter des attributs provenant de données spatiales, nous devons faire une jointure spatiale en utilisant l'opération `st_join()`. Nous définirons `st_join()` dans la section suivante portant sur les [opérations spatiales sur les données vectorielles](#fct_join).
@@ -315,32 +313,36 @@ pop <- pop[, c("munnom", "msuperf", "mpopul")]
 
 Le nouvel objet `pop` ainsi défini, contient seulement `r ncol(pop)` colonnes.
 
-Nous voulons à présent fusionner l'objet `pop` avec l'objet spatial `villes` en utilisant la fonction `merge()`. Cette fusion entre les deux objets `villes` et `pop` sera réalisée sur les colonnes `toponyme` et `munnom` respectivement. Ces deux colonnes contiennent le nom des municipalités et agissent donc comme dénominateur commun entre les deux jeux de données. L'argument `all.x = TRUE` spécifie que toutes les entrées (POINT) de l'objet `villes` doivent être conservées. 
+Nous voulons à présent fusionner l'objet `pop` avec l'objet spatial `villes` en utilisant la fonction `merge()`. Cette fusion entre les deux objets `villes` et `pop` sera réalisée sur les colonnes `toponyme` et `munnom` respectivement. Ces deux colonnes contiennent le nom des municipalités et agissent donc comme dénominateur commun entre les deux jeux de données. L'argument `all.x = TRUE` spécifie que toutes les entrées (`POINT`) de l'objet `villes` doivent être conservées. 
+
+L'argument `all.x = FALSE` spécifie que seules les entrées (`POINT`) de l'objet `villes` qui 
 
 ```{r}
 #villes_qc <- merge(x = villes_qc, y = pop, by.x="toponyme", by.y="munnom",  all.x = TRUE)
-villes_pop <- merge(x = villes, y = pop, by.x="toponyme", by.y="munnom",  all.x = TRUE)
+villes_pop <- merge(x = villes, y = pop, by.x="toponyme", by.y="munnom")
+villes_pop
 ``` 
 
-Nous renommons encore une fois les colonnes pour qu'elles portent un nom plus représentatif de leur contenu. 
+Le nouveau *shapefile* `villes_pop` contient les mêmes attributs que `villes` auxquels se sont ajoutés les attributs de `pop`. 
+
+Remarquez que `villes_pop` contient moins d'éléments que `villes`. En effet, la fonction `merge()` n'a retenue que les villes qui étaient contenues à la fois dans le *shapefile* `villes` et dans la base de données `pop`. Pour conserver l'entièreté des éléments initialement présents dans `villes`, il faudrait ajouter l'argument `all.x = TRUE` à la fonction `merge()`. Dans ce cas, les villes dont la population n'est pas définie dans `pop` se verraient attribuer une valeur `NA` à l'attribut `mpopul`.
+
+
+Renommons les colonnes de `villes_pop` pour qu'elles portent un nom plus représentatif de leur contenu. 
 
 ```{r}
 names(villes_pop)
 names(villes_pop)[2:3] <- c("superficie", "population")
 names(villes_pop) 
 ```
-Le nouveau *shapefile* `villes_pop` contient donc les mêmes éléments et les mêmes attributs que `villes` auxquels se sont ajoutés les attributs de `pop` pour les municipalités présentes à la fois dans `pop` et dans `villes`. 
 
-```{r}
-villes_pop
-```
 
 
 #### Opérations spatiales sur les données vectorielles {-}
 
 Les opérations réalisées dans la section précédente sur les attributs des données vectorielles, telles `merge()`, `which()` et `subset()`, sont indépendantes de la composante spatiale des données. Si nous changions la géométrie des objets spatiaux décrits par les données vectorielles (par exemple en changeant les coordonnées des villes), ces opérations produiraient les mêmes résultats. Ce sont des fonctions générales pour manipuler des bases de données et qui s'appliquent aux `data.frame` des données vectorielles. 
 
-Dans la présente section, nous verrons plutÃ´t des opérations qui dépendent de la composante spatiale des données vectorielles. Ces opérations prennent en considération la géométrie des données et certaines peuvent aussi la transformer. 
+Dans la présente section, nous verrons plutôt des opérations qui dépendent de la composante spatiale des données vectorielles. Ces opérations prennent en considération la géométrie des données et certaines peuvent aussi la transformer. 
 
 
 ##### Jointure et agrégation spatiale {-}
@@ -705,14 +707,14 @@ Abitibi <- subset(regions_nad, Rgns_Ad == "Abitibi-Témiscamingue")
 SagStJean <- subset(regions_nad, Rgns_Ad == "Saguenay - Lac-Saint-Jean")
 
 # Calculer une zone tampon pour chacun des polygones
-Abitibi_tampon10 <- st_buffer(Abitibi, dist = 20e3)  #20 km
+Abitibi_tampon20 <- st_buffer(Abitibi, dist = 20e3)  #20 km
 SagStJean_tampon50 <- st_buffer(SagStJean, dist = 70e3)  #70 km
 ```
 
 ```{r buffer_regions, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="Une zone tampon de 20 km autour de la région administrative de l'Abitibi-Témicamingue et une zone tampon de 70 km autour du Saguenay - Lac-Saint-Jean."}
 mapview(SagStJean_tampon50, col.regions = "green", alpha.regions = 0.2, legend = FALSE) +
 mapview(SagStJean, col.regions = "green", alpha.regions = 0.4, legend = FALSE) + 
-mapview(Abitibi_tampon10, col.regions = "blue", alpha.regions = 0.2,  legend = FALSE) +
+mapview(Abitibi_tampon20, col.regions = "blue", alpha.regions = 0.2,  legend = FALSE) +
 mapview(Abitibi, col.regions = "blue", alpha.regions = 0.4,  legend = FALSE) 
 ```
 
@@ -1167,41 +1169,75 @@ st_distance(Abitibi, SagStJean, by_element = TRUE)
 ```
 Cette mesure correspond à la plus petite distance séparant les deux polygones.
 
-<!-- Demander à Kev  -->
-
-```{r}
-Abitibi_points<-st_cast(Abitibi, to = "POINT")
-mapview(Abitibi_points)
-st_distance(Abitibi_points[2055:2059,], SagStJean)
-```
-
-
-
-
 
 ###### La fonction `st_area()` {-}
 
+La fonction `st_area()` calcule la superficie d'un polygone. Calculons par exemple la superficie des polygones illustrés à la figure \@ref(fig:st-geo-conf5))&nbsp;:
+
+
 ```{r}
-st_area(Abitibi)
-st_area(Abitibi_tampon10)
+st_area(A)
+st_area(B)
+st_area(inter_AB)
 ```
+Remarquez que les unités, ici des mètres carrés, sont fournies. L'objet retourné par la fonction `st_area()` est aussi de classe `units`&nbsp;:
+
+```{r}
+class(st_area(A))
+```
+La superficie d'objets spatiaux de dimension inférieure à deux est bien nulle&nbsp;:
+
+```{r}
+st_area(point_bleu)
+st_area(trait_bleu)
+```
+
+
 ###### La fonction `st_length()` {-}
 
-Créer une ligne qui va de centre abitibi à centre st-jean à la_poc
-Mesurer la longueur
+La fonction `st_length()` calcule la longueur d'un objet spatial unidimensionnel (`LINESTRING`, `MULTILINESTRING`). 
 
 ```{r}
-c_abitibi<-as.vector(st_coordinates(centre_Abitibi))
-c_sagstjean <- as.vector(st_coordinates(centre_SagStJean))
-mat<- rbind(c_abitibi, c_sagstjean)
-
-a<-st_join(centre_Abitibi, centre_SagStJean)
-                     
-                     
-                     
-                     
+st_length(trait_bleu)
+st_length(trait_mauve)
+st_length(contour_rose)
 ```
+Comme pour les fonctions `st_distance()` et `st_area()`, la fonction `st_length()` retourne un objet de classe `units`.
+
+
+La fonction calcule une longueur nulle pour les polygones ou les points&nbsp;:
+```{r}
+st_length(A)
+st_length(point_bleu)
+```
+
 ###### La fonction `set_units` {-}
+
+Il peut être pratique de changer les unités de mesure avec lesquelles nous travaillons. Par exemple, utiliser les mètres carrés lorsque nous traitons de larges étendues peut être encombrant. La fonction `set_units` de la bibliothèque `units` permet de transformer les unités de mesure d'un objet ou d'en assigner à un objet sans unités.
+
+Par exemple, pour les unités de longueur&nbsp;:
+```{r}
+library(units)
+L_m <- st_length(trait_bleu)
+L_km <- set_units(L_m,km)
+L_miles <- set_units(L_m, miles)
+
+L_m
+L_km
+L_miles
+```
+Et, pour les unités d'aire&nbsp;:
+```{r}
+A_m2 <- st_area(A)
+A_km2 <- set_units(A_m2, km2)
+A_ha <- set_units(A_m2, ha) # 1 hectare (ha) mesure 100 m x 100 m
+
+A_m2
+A_km2
+A_ha
+```
+
+
 
 
 
