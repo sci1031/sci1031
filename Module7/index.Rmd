@@ -71,17 +71,18 @@ Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'
 
 Avant d'entamer la résolution de notre question, familiarisons-nous avec les opérations fréquemment utilisées sur les données vectorielles.
 
+
 #### Importer et visualiser les données {-}
 
-La première étape consiste à charger les bibliothèques requises pour lire les données spatiales vectorielles (`sf`) et les visualiser (`mapview`). 
+
+Commençons par charger les bibliothèques requises pour lire les données spatiales vectorielles (`sf`) et les visualiser (`mapview`). 
 
 ```{r load-libraries7, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 library(sf)
 library(mapview)
 ```
 
-
-La seconde étape consiste à lire le fichier *shapefile* de l'ensemble des municipalités du Québec en utilisant la fonction `st_read()` tel que vu dans le [module 4](#lire-shp).
+Maintenant, allons lire le fichier *shapefile* de l'ensemble des municipalités du Québec en utilisant la fonction `st_read()` tel que vu dans le [module 4](#lire-shp).
 
 ```{r load-villes, eval = FALSE}
 chemin <-"D:/votrechemin/SCI1031/Module7/Module7_donnees/"
@@ -94,62 +95,33 @@ municipalites <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Develo
 #municipalites <- st_read("Module7/data/villes/villes.shp")
 ```
 
-Le *shapefile* a maintenant été importé dans un objet `R` de classe `sf` (c'est-à-dire un objet importé ou généré par l'utilisation de la bibliothèque `sf`). Nous remarquons que la géométrie de cet object vectoriel est de type point (`POINT`). Plus précisément, cet objet contient 767 points (*features*) et 17 attributs (*fields*).
+Le *shapefile* a été importé dans un objet `R` de classe `sf` (c'est-à-dire un objet importé ou généré par l'utilisation de la bibliothèque `sf`). Nous remarquons que la géométrie de cet object vectoriel est de type point (`POINT`). Plus précisément, cet objet contient 767 points (*features*) et 17 attributs (*fields*).
 
 Pour en savoir davantage sur ces attributs de nature géographique, démographique et administrative, vous pouvez télécharger et consulter la [documentation] (https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326) disponible sur le site de Données Québec.  
 
-
-La troisième étape consiste à charger la couche d'informations spatiales contenant les différentes aires récréatives du Québec. Cette information se trouve à l'intérieur d'une géodatabase disponible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000). Comme vu dans le module {#vec}, les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et explorer les différentes couches afin de déterminer celle qui correspond aux aires récréatives.
-
-```{r, eval = FALSE}
-chemin_parcs_nationaux <- paste(chemin, "/parcs.gdb", sep = "")
-st_layers(chemin_parcs_nationaux)
-```
-
-```{r list-layers, echo = FALSE, eval = TRUE}
-st_layers("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/parcs.gdb") 
-#st_layers("/Module7/data/parcs.gdb") 
-
-```
-
-Nous pouvons remarquer que les intitulés des différentes couches ne sont pas bien définis. Il faut donc prendre le temps de regarder la documentation accessible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000/resource/229322ef-eca2-4ae9-a511-ba599bc2745e). Ne vous inquiétez pas, je l'ai fait pour vous! En s'intéressant à la structure de données et à la nomenclature utilisée et décrite, nous pouvons déterminer que la couche `terpnq_s` correspond aux territoires des parc nationaux du Québec. Nous pouvons donc faire la lecture de la géodatabase avec la fonction `st_read()` en précisant cette couche à l'aide de l'argument `layer`.
-
-```{r load-parcs, eval = FALSE}
-chemin_parcs_nationaux <- paste(chemin, "/parcs.gdb", sep = "")
-parcs_nationaux <- st_read(chemin_parcs_nationaux, layer = "terpnq_s")
-```
-
-```{r load-parcs2, echo = FALSE}
-parcs_nationaux <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/parcs.gdb", layer = "terpnq_s") 
-#parcs_nationaux <- st_read("Module7/data/parcs.gdb", layer = "terpnq_s") 
-
-```
-
-Nous pouvons maintenant visuellement valider que l'importation des données a bien été réussi en utilisant la fonction `mapview()` &nbsp;:
+Nous pouvons maintenant visuellement valider que l'importation des données a bien été réussi en utilisant la fonction `mapview()`&nbsp;:
 
 ```{r visualisation}
-carte_donnees <- mapview(municipalites, legend = FALSE) +                
-                 mapview(parcs_nationaux, zcol = "TRQ_NM_TER", legend = FALSE)
-
-carte_donnees@map
+mapview(municipalites, legend = FALSE) 
 ```
 <br>
 
-Notez que l'attribut "TRQ_NM_TER" de l'objet `parcs_nationaux` correspond au nom de chaque parc national.
-
-Dans le précédent module portant sur la [cartographie](#carto), nous avons décrit plusieurs fonctionnalités de la bibliothèque `tmap` et avons démontré sa flexibilité et à sa capacité à produire des cartes de qualité. Toutefois, la bibliothèque `mapview` demeure fort utile lorsque nous souhaitons visualiser rapidement des données. Par défaut, la fonction `mapview()` affiche la carte d'OpenstreeMap en arrière-pan, ce qui permet de contextualiser facilement les données. 
+Dans le précédent module portant sur la [cartographie](#carto), nous avons décrit plusieurs fonctionnalités de la bibliothèque `tmap` et avons démontré sa flexibilité et à sa capacité à produire des cartes de grande qualité. Toutefois, la bibliothèque `mapview` demeure fort utile lorsque nous souhaitons visualiser rapidement des données. Par défaut, la fonction `mapview()` affiche la carte d'OpenstreeMap en arrière-pan, ce qui permet de contextualiser facilement les données. 
 
 
 De plus, les cartes produites avec `mapview()` sont interactives, permettant d'accéder directement à la table d'attributs des données vectorielles représentées. Par exemple, sur la carte ci-dessus, vous n'avez qu'à cliquer sur le marqueur géographique correspondant à chaque municipalité (point) ou à chaque parc (polygone) pour obtenir la liste des attributs et leur valeur. De plus, vous pouvez choisir d'afficher l'une ou l'autre des couches en cochant la couche désirée dans la fenêtre située dans le coin supérieur gauche. 
-
 
 <br>
 
 #### Opérations sur les attributs des données vectorielles {-}
 
+Les opérations sur les données vectorielles peuvent être séparées en deux grandes catégories. Les opérations qui portent sur les attributs des données et les opérations qui portent sur la géométrie des données. 
+
+Les opérations réalisées sur les attributs des données vectorielles sont indépendantes de la composante spatiale des données. Ce sont des fonctions générales pour manipuler des bases de données et qui s'appliquent aux `data.frame` des données vectorielles. La présente section s'attarde à décrire certaines de ces fonctions. 
+
+
 ##### Filter des attributs {-}
 
-<!--  À arranger: Pu sur que ce soit necessaire  -->
 Une opération fréquente lorsque nous manipulons des données vectorielles est celle de filtrer les données. Par exemple, dans le *shapefile* `municipalites` que nous venons d'importer, nous pourrions vouloir sélectionner seulement certaines municipalités parmi les 767 répertoriées ou certains attributs parmi les 17. Nous pourrions aussi vouloir déterminer quelles municipalités possédent une valeur spécifique pour un attribut donné.
 
 Dans les sous-sections qui suivent, nous présenterons des opérations qui permettent de filtrer les attributs de données vectorielles.
@@ -224,7 +196,7 @@ names(villes)
 <!-- visualiser villes et en profiter pour noter que certaines villes ne sont pas à l'intérieur des frontières du QC  -->
 
 ##### Filtrer des valeurs d'attribut {-}
-<!-- À arranger: ramener texte d'en haut  Pu sur que ce soit necessaire-->
+
 On peut vouloir sélectionner un ou plusieurs éléments spatiaux d'un *shapefile* qui possèdent une valeur spécifique d'attribut. Cette opération peut être réalisée en utilisant les fonctions `subset()` ou `which()`.
 
 
@@ -337,7 +309,6 @@ names(villes_pop)
 ```
 
 
-
 #### Opérations spatiales sur les données vectorielles {-}
 
 Les opérations réalisées dans la section précédente sur les attributs des données vectorielles, telles `merge()`, `which()` et `subset()`, sont indépendantes de la composante spatiale des données. Si nous changions la géométrie des objets spatiaux décrits par les données vectorielles (par exemple en changeant les coordonnées des villes), ces opérations produiraient les mêmes résultats. Ce sont des fonctions générales pour manipuler des bases de données et qui s'appliquent aux `data.frame` des données vectorielles. 
@@ -347,7 +318,7 @@ Dans la présente section, nous verrons plutôt des opérations qui dépendent de la
 
 ##### Jointure et agrégation spatiale {-}
 
-<!-- sur la base de la valeur de leurs attributs  -->
+Les opérations de jointure et d'aggrégation permettent de lier entre eux des éléments spatiaux sur la base d'une valeur d'attribut commune.
 
 
 ###### La fonction `st_join()`{#fct_join} {-}
@@ -428,6 +399,7 @@ mapview(villes_CN, legend = FALSE)
 
 Cette opération nous a permis de filtrer les municipalités du Québec pour retenir seulement celles situées dans la région administrative de la Côte-Nord.
 
+<!-- il faut mettre aggregate comme une fonction géométrique car elle change la geéométrie   -->
 
 ###### La fonction `aggregate()`{-}
 
@@ -469,11 +441,27 @@ Une visualisation du nouvel objet `reg_pop2` permet d'illustrer les régions selo
 ```{r}
 mapview(reg_pop2)
 ```
-<!-- SERA plus simple de parler de ça après avoir défini les fonctions topologiques -->
-Il est important de préciser que les fonctions `st_join()` et `aggregate()` utilisent implicitement la fonction `st_intersects()`. Nous discuterons plus en détail de cette fonction ainsi que d'autres fonctions topologiques dans la sous-section sur les relations topologiques
-NOTE utilise implicitement st_intersects
-<!----------------------------------------------------------------->
 
+Donnons un dernier exemple de l'utilisation de la fonction `aggregate()` en considérant le *shapefile* régions
+
+```{r}
+regions
+```
+Remarquez que certaines régions, comme la Côte-Nord, sont représentées par plusieurs polygones. C'est pour cette raison que ce *shapefile* contient 21 éléments spatiaux alors qu'il y a 17 régions administratives au Québec.
+
+Utilisons la fonction `aggregate()` pour agréger en un seul multipolygone les polygones qui portent la même valeur d'attribut `"Rgns_Ad"`&nbsp;: 
+
+```{r}
+regions_agg <-aggregate(regions, by=list(regions$Rgns_Ad), unique)
+regions_agg
+```
+
+Cette fois nous avons utilisé la fonction `unique` pour agréger les attributs qui sont de classe caractère. Remarquez que la Côte-Nord est maintenant représentée par un multipolygone (`MULTIPOLYGON`) et que le nouveau *shapefile* `regions_agg` contient 17 éléments, un pour chacune des régions administratives.
+
+Retirons la première colonne superflue de ce nouveau *shapefile* et utilisons-le dans les futurs exemples pour désigner les régions administratives. 
+```{r}
+regions <- regions_agg[-1]  #pour retirer la première ligne
+```
 
 
 ##### Opérations géométriques {-}
@@ -720,11 +708,16 @@ Ces opérations sont équivalentes aux opérations ensemblistes en mathématiques, t
 
 La bibliothèque `sf` contient plusieurs opérateurs topologiques; par exemple: `st_union()`, `st_intersection()`, `st_difference()` et `st_sym_difference()`. Ces opérateurs forment un nouvel objet spatial à partir des deux objets spatiaux intérroger. Par exemple, la géométrie de l'objet `z` formé par l'opération `z <- st_union(x,y)` est constituée de la géométrie de `x` *et* de celle de `y` sans toutefois qu'il y ait de chevauchement.
 
-Pour illustrer les opérations topologiques entre deux objets vectoriels considérons les polygones `A` et `B` créés en définissant des zones tampons à partir des polygones de l'Abitibi-Témiscamingue et du Saguenay - Lac-Saint-Jean respectivement. 
+Pour illustrer les opérations topologiques entre deux objets vectoriels considérons les polygones A et B créés en définissant des zones tampons à partir des polygones de l'Abitibi-Témiscamingue et du Saguenay - Lac-Saint-Jean respectivement. 
 
 ```{r}
 A <- st_buffer(Abitibi, dist = 80e3)
 B <- st_buffer(SagStJean, dist = 100e3)
+```
+
+```{r, warning = FALSE, echo = FALSE, eval = TRUE}
+A$Rgns_Ad<-"A"
+B$Rgns_Ad<-"B"
 ```
 
 Calculons maintenant des opérations topologiques sur ces polygones &nbsp;: 
@@ -736,11 +729,11 @@ diff_AB <- st_difference(A,B)
 diff_BA <- st_difference(B,A)
 sym_diff_AB <- st_sym_difference(A,B)
 ```
+
 Observons les géométries produites par ces opérations (figure \@ref(fig:topo-op)) &nbsp;:
 
-ICI CAPTION
-```{r topo-op, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="Les centroïdes (en rouge) des régions de l'Abitibi-Témicamingue (en bleu) et du Saguenay - Lac-Saint-Jean (vert) calculés avec la fonction  `st_centroid()`."}
-map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE)+mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE)
+```{r topo-op, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="Exemples d'opérations topologiques sur les polygones A et B. En haut: illustrations de A et B (gauche) et de `st_union(A,B)` (droite). Au centre:   illustrations de `st_difference(A,B)` (gauche) et de `st_difference(B,A)` (droite). En bas: illustrations de `st_intersection(A,B)` (gauche) et de `st_sym_difference(A,B)` (droite)."}
+map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2)+mapview(B, col.regions = "red", alpha.regions = 0.2)
 map_union <- mapview(union_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
 map_inter <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legend = FALSE) + mapview(inter_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
 map_diffAB <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legend = FALSE) + mapview(diff_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
@@ -748,18 +741,17 @@ map_diffBA <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legen
 map_symdiff <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legend = FALSE) + mapview(sym_diff_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
 
 leafsync::latticeView(map_AB, map_union,map_diffAB, map_diffBA, map_inter, map_symdiff, ncol = 2)
-
 ```
-
-
 
 ###### Opérations topologiques de confirmation {-}
 
-<!--  Arranger  -->On ne change pas la géométrie mais on veut savoir oui ou non si deux couches satisfont à une relations topologiques.
+Les opérations topologiques de confirmation sont des fonctions qui permettent de vérifier si deux objets spatiaux satisfont à une relation topologique donnée. Ces opérations ne créent pas un nouvel objet spatial, elles retournent plutôt une valeur binaire qui confirme si oui ou non la relation existe entre les deux objets interrogés. 
+
+La bibliothèque `sf` contient plusieurs opérateurs topologiques de confirmation; par exemple: `st_intersects()`, `st_disjoint()`, `st_crosses()`, `st_overlaps()`, `st_touches()`, `st_within()` et `st_contains()`.
 
 ####### `st_intersects` {-}
 
-La fonction `st_intersects()` vérifie si deux objets spatiaux `X` et `Y` occupent un espace commun. La fonction confirmera qu'il y a bel et bien une intersection entre les deux objets si leurs intérieurs ou leurs frontières se recoupent. `X` et `Y` peuvent avoir n'importe quelle géométrie (point, multipoint, ligne, multiligne, polygone, multipolygone) (Figure  \@ref(fig:st-intersects)).
+La fonction `st_intersects()` vérifie si deux objets spatiaux `X` et `Y` occupent un espace commun. La fonction confirmera qu'il y a bel et bien une intersection entre les deux objets si leurs intérieurs ou leurs frontières se recoupent. `X` et `Y` peuvent avoir n'importe quelle géométrie (point, multipoint, ligne, multiligne, polygone, multipolygone) (figure  \@ref(fig:st-intersects)).
 
 
 ```{r st-intersects, fig.align='center', echo=FALSE, fig.cap="Combinaisons de géométries satisfaisant à la condition d'intersection. Récupérer sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '50%'}
@@ -848,7 +840,7 @@ Dans ce cas, la fonction retourne une liste d'une seule combinaison éléments ass
 
 ####### `st_disjoint` {-}
 
-La fonction `st_disjoint()` vérifie la condition inverse de la fonction `st_intersects()`, c'est-à-dire l'absence d'intersection entre deux objets `X` et `Y` ((Figure  \@ref(fig:st-disjoint)). 
+La fonction `st_disjoint()` vérifie la condition inverse de la fonction `st_intersects()`, c'est-à-dire l'absence d'intersection entre deux objets `X` et `Y` (figure  \@ref(fig:st-disjoint)). 
 
 
 ```{r st-disjoint, fig.align='center', echo=FALSE, fig.cap="Combinaisons de géométries disjointes. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '50%'}
@@ -897,7 +889,6 @@ trait_mauve<-B_trait
 
 ```{r geo-conf2, warning=FALSE, echo=FALSE, fig.align='center', fig.cap="Exemples illustrant la fonction `st_crosses()`.", out.width = '100%'}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
-  #mapview(A_trait, color = "black", lwd = 3, legend = FALSE) +
   mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE) +
   mapview(trait_bleu, color ="darkblue", lwd = 3, legend = FALSE)+
   mapview(trait_mauve, color = "purple", lwd = 3, legend = FALSE)
@@ -926,7 +917,7 @@ La fonction `st_overlaps()` vérifie si l'intersection entre deux géométries de m
 knitr::include_graphics('Module7/images/st_overlaps.png')
 ```
 
-Considérons les polygones A, B, ainsi que celui de l'Abitibi illustrés à la figure \@ref(fig:st-geo-conf3). 
+Considérons les polygones A, B, ainsi que celui de l'Abitibi-Témiscamingue illustrés à la figure \@ref(fig:st-geo-conf3). 
 
 ```{r geo-conf3, warning=FALSE, echo=FALSE, fig.align='center', fig.cap="Exemples illustrant la fonction `st_overlaps()`.", out.width = '100%'}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
@@ -934,7 +925,7 @@ mapview(Abitibi, col.regions = "green", alpha.regions = 0.2, legend = FALSE) +
     mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE) 
 map_AB
 ```
-Les polygones A et B satisfont la condition de superposition car leur intersection est aussi un polygone. Par ailleurs le polygone A et celui de l'Abitibi ne satisfont pas à la condition de superposition car l'intersection est identique au polygone de l'Abitibi. 
+Les polygones A et B satisfont la condition de superposition car leur intersection est aussi un polygone. Par ailleurs le polygone A et celui de l'Abitibi ne satisfont pas à la condition de superposition car l'intersection est identique au polygone de l'Abitibi-Témiscamingue. 
 
 ```{r}
 st_overlaps(A,B)
@@ -971,7 +962,7 @@ leafsync::latticeView(map_AB, mapreg, ncol = 2)
 
 ```
 
-La fonction `st_touches()` nous permet de vérifier que le polygone B, en rouge, touche au trait mauve et que le polygone A, en bleu, touche au point vert. Par ailleurs, la fonction confirme aussi que le polygone A ne touche pas au point bleu car ce sont leurs intérieurs qui s'intersectent. La même situation s'observe pour les polygones A et B qui partagent plus que leurs frontières. Cependant les polygones de l'Abitibi, en vert, et de la Mauricie, en jaune, s'intersectent seulement le long de leurs frontières et ainsi se touchent.
+La fonction `st_touches()` nous permet de vérifier que le polygone B, en rouge, touche au trait mauve et que le polygone A, en bleu, touche au point vert. Par ailleurs, la fonction confirme aussi que le polygone A ne touche pas au point bleu car ce sont leurs intérieurs qui s'intersectent. La même situation s'observe pour les polygones A et B qui partagent plus que leurs frontières. Cependant les polygones de l'Abitibi-Témiscamingue, en vert, et de la Mauricie, en jaune, s'intersectent seulement le long de leurs frontières et ainsi se touchent.
 
 ```{r, warning=FALSE}
 st_touches(B, trait_mauve)
@@ -981,8 +972,6 @@ st_touches(A,B)
 st_touches(Abitibi,Mauricie)
 
 ```
-
-
 
 ####### `st_within`  et `st_contains` {-}
 
@@ -995,15 +984,10 @@ La figure \@ref(fig:st-within) illustre différentes combinaisons de géométries q
 knitr::include_graphics('Module7/images/st_within.png')
 ```
 
+
 ```{r, warning = FALSE, echo = FALSE}
 B_contour <- st_cast(B, to = "MULTILINESTRING")
 contour_rose <- B_contour
-```
-
-
-
-```{r, warning = FALSE, echo = FALSE}
-
 B_points<-st_cast(B,to = "POINT")
 B_sub<-B_points[40:90,]
 B_trait <- st_combine(B_sub)
@@ -1017,7 +1001,6 @@ trait_vert<-trait_gros
 
 
 Pour illustrer ces fonctions, considérons les objets spatiaux illustrés à la figure \@ref(fig:st-geo-conf5) &nbsp;:
-
 
 ```{r st-geo-conf5, warning=FALSE, echo=FALSE, fig.align='center', fig.cap="Exemples illustrant les fonctions `st_contains()` et `st_within()`.", out.width = '100%'}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
@@ -1047,8 +1030,7 @@ st_contains(B, contour_rose)
 st_contains(B, trait_mauve)
 st_contains(B, trait_vert)
 ```
-La fonction `st_contains()` vérifie exactement la condition inverse &nbsp;: 
-
+La fonction `st_contains()` vérifie exactement la condition inverse de la fonction `st_within()`&nbsp;: 
 
 ```{r}
 st_within(point_bleu, A)
@@ -1060,8 +1042,19 @@ st_within(trait_mauve, B)
 st_within(trait_vert, B)
 ```
 
-<!-- ICI note sur st-intersect  -->
+Terminons cette sous-section par une remarque importante: 
 
+>
+> La fonction [`st_join()`](#fct_join), vue plus, qui permet de faire une jointure spatiale entre deux objets vectoriels s'appuie, par défaut, sur la fonction de confirmation `st_intersects()`. En effet, la fonction `st_join(x,y)` identifie la présence d'une intersection entre les éléments de `x` et de `y` puis assigne les attributs de `y` aux éléments de `x` qui satisfont cette condition d'intersection. Par aileurs, il est possible d'utiliser la fonction `st_join()` en utilisant d'autres opérations topologiques de confirmation que celle par défaut. En effet, il est possible de définir un troisième argument, `join`, pour préciser une autre opération comme `st_contains`, `st_touches`, `st_overlaps` etc. 
+>
+
+Donnons un exemple. Pour chaque régions administratives du Québec, déterminons les régions qui lui sont adjacentes. Il s'agit ici d'utiliser la fonction `st_join()` avec la condition `st_touches`&nbsp;:
+
+```{r}
+st_join(regions, regions, join = st_touches)
+```
+
+Cette fonction nous retourne un objet spatial composé de deux attributs. L'attribut de gauche, `Rgns_Ad.x` donne le nom de chaque polygone des régions administratives de `regions` alors que l'attribut de droite, `Rgns_Ad.y`, assigne à chacun de ces polygones, le nom d'une des régions administrives qui lui est voisine. Puisque chaque polygone possède plus d'une région voisine, leur nom et leur géométrie sont répétées pour chaque région voisine. 
 
 
 ##### Opérations de mesure {-}
@@ -1268,6 +1261,49 @@ names(villes)[2] <- "province"
 ```
 
 -->
+
+##### DU DEBUT.
+
+
+La troisième étape consiste à charger la couche d'informations spatiales contenant les différentes aires récréatives du Québec. Cette information se trouve à l'intérieur d'une géodatabase disponible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000). Comme vu dans le module {#vec}, les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et explorer les différentes couches afin de déterminer celle qui correspond aux aires récréatives.
+
+```{r, eval = FALSE}
+chemin_parcs_nationaux <- paste(chemin, "/parcs.gdb", sep = "")
+st_layers(chemin_parcs_nationaux)
+```
+
+```{r list-layers, echo = FALSE, eval = TRUE}
+st_layers("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/parcs.gdb") 
+#st_layers("/Module7/data/parcs.gdb") 
+
+```
+
+Nous pouvons remarquer que les intitulés des différentes couches ne sont pas bien définis. Il faut donc prendre le temps de regarder la documentation accessible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000/resource/229322ef-eca2-4ae9-a511-ba599bc2745e). Ne vous inquiétez pas, je l'ai fait pour vous! En s'intéressant à la structure de données et à la nomenclature utilisée et décrite, nous pouvons déterminer que la couche `terpnq_s` correspond aux territoires des parc nationaux du Québec. Nous pouvons donc faire la lecture de la géodatabase avec la fonction `st_read()` en précisant cette couche à l'aide de l'argument `layer`.
+
+```{r load-parcs, eval = FALSE}
+chemin_parcs_nationaux <- paste(chemin, "/parcs.gdb", sep = "")
+parcs_nationaux <- st_read(chemin_parcs_nationaux, layer = "terpnq_s")
+```
+
+```{r load-parcs2, echo = FALSE}
+parcs_nationaux <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/parcs.gdb", layer = "terpnq_s") 
+#parcs_nationaux <- st_read("Module7/data/parcs.gdb", layer = "terpnq_s") 
+
+```
+
+
+```{r visualisation}
+carte_donnees <- mapview(municipalites, legend = FALSE) +                
+                 mapview(parcs_nationaux, zcol = "TRQ_NM_TER", legend = FALSE)
+
+carte_donnees@map
+```
+<br>
+
+Notez que l'attribut "TRQ_NM_TER" de l'objet `parcs_nationaux` correspond au nom de chaque parc national.
+
+#####
+
 
 #### Lier À la question
 Nous voulons maintenant filtrer l'objet `villes` afin de retenir seulement les municipalités dont la province d'attache est le Québec. Pour ce faire, nous utiliserons encore la fonction `subset()` ainsi que l'opérateur logique `==`.
