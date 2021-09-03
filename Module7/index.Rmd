@@ -30,7 +30,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `rowSums()`
 - `lengths()`
 
-Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec.
+Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec (SÉPAQ).
 
 Dans la section Exercice, vous utiliserez <!-- A FAIRE -->
 
@@ -99,7 +99,7 @@ Le *shapefile* a été importé dans un objet `R` de classe `sf` (c'est-à-dire un o
 
 Pour en savoir davantage sur ces attributs de nature géographique, démographique et administrative, vous pouvez télécharger et consulter la [documentation] (https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives/resource/beb4472a-0edb-4824-b67e-40e20b425326) disponible sur le site de Données Québec.  
 
-Nous pouvons maintenant visuellement valider que l'importation des données a bien été réussi en utilisant la fonction `mapview()`&nbsp;:
+Nous pouvons maintenant visuellement valider que l'importation des données a bien été réussie en utilisant la fonction `mapview()`&nbsp;:
 
 ```{r visualisation}
 mapview(municipalites, legend = FALSE) 
@@ -202,7 +202,7 @@ On peut vouloir sélectionner un ou plusieurs éléments spatiaux d'un *shapefile* 
 
 ###### Fonction `subset()` {-}
 
-La fonction `subset()` n'est pas spécifique aux données spatiales, c'est une fonction générale de `R` qui retourne le sous-ensemble d'un vecteur, d'une matrice or d'un tableau de données qui satisfait une condition spécifique. 
+La fonction `subset()` n'est pas spécifique aux données spatiales, c'est une fonction générale de `R` qui retourne le sous-ensemble d'un vecteur, d'une matrice or d'un tableau de données qui satisfait une condition donnée. 
 
 Par exemple, nous pouvons utiliser la  fonction `subset()` pour filtrer le jeu de données `villes` afin d'obtenir la localisation d'une municipalité précise:
 
@@ -275,7 +275,7 @@ Notez que la précision de l'encodage assure que les accents français sont bien i
 
 L'objet `pop` est un `data.frame` de `r ncol(pop)` colonnes décrivant un ensemble d'informations propres aux municipalités du Québec allant de leur nom jusqu'à la composition de leur conseil municipal. Toutes ces informations ne sont pas pertinentes pour le présent exercice. Pour faciliter la manipulation de ce tableau, sélectionnons seulement les colonnes suivantes:
 
-- `munnom`: Nom de la ville. Cette colonne servira à faire la jointure entre l'objet spatial `villes` et l'objet `pop` contenant la taille des populations.
+- `munnom`: Nom de la ville. 
 - `msuperf`: Superficie de la municipalité.
 - `mpopul`: Taille de la population de la municipalité.
 
@@ -285,9 +285,8 @@ pop <- pop[, c("munnom", "msuperf", "mpopul")]
 
 Le nouvel objet `pop` ainsi défini, contient seulement `r ncol(pop)` colonnes.
 
-Nous voulons à présent fusionner l'objet `pop` avec l'objet spatial `villes` en utilisant la fonction `merge()`. Cette fusion entre les deux objets `villes` et `pop` sera réalisée sur les colonnes `toponyme` et `munnom` respectivement. Ces deux colonnes contiennent le nom des municipalités et agissent donc comme dénominateur commun entre les deux jeux de données. L'argument `all.x = TRUE` spécifie que toutes les entrées (`POINT`) de l'objet `villes` doivent être conservées. 
+Nous voulons à présent fusionner l'objet `pop` avec l'objet spatial `villes` en utilisant la fonction `merge()`. Cette fusion entre les deux objets `villes` et `pop` sera réalisée sur les colonnes `toponyme` et `munnom` respectivement. Ces deux colonnes contiennent le nom des municipalités et agissent donc comme dénominateur commun entre les deux jeux de données. 
 
-L'argument `all.x = FALSE` spécifie que seules les entrées (`POINT`) de l'objet `villes` qui 
 
 ```{r}
 #villes_qc <- merge(x = villes_qc, y = pop, by.x="toponyme", by.y="munnom",  all.x = TRUE)
@@ -356,7 +355,7 @@ Remarquez que l'objet `villes_reg` est identique à l'objet `villes` mais contien
 
 Il est important de préciser que la fonction `st_join()` nécessite que les deux couches spatiales à joindre utilisent le même système de coordonnées de référence (SCR).
 
-Contrairement à la fonction `merge()` vue plus haut, la fonction `st_join()` est bien une opération spatiale. En effet, `st_join(x,y)` détermine s'il y a une intersection spatiale entre chaque éléments de l'objet de gauche (`x = villes`) et l'un ou l'autre des éléments de l'objet de droite (`y = regions`). Une intersection entre deux éléments spatiaux se produit lorsqu'ils partagent une même portion de l'espace. Ainsi, il y a une intersection entre le point associé à la ville de Shawinigan et le polygone associé à la région de la Mauricie. Par ailleurs, il n'y a pas d'intersection entre le point associé à la ville de Sherbrooke et le polygone de la Mauricie.
+Contrairement à la fonction `merge()` vue plus haut, la fonction `st_join()` est bien une opération spatiale. En effet, `st_join(x,y)` détermine s'il y a une intersection spatiale entre chaque élément de l'objet de gauche (`x = villes`) et l'un ou l'autre des éléments de l'objet de droite (`y = regions`). Une intersection entre deux éléments spatiaux se produit lorsqu'ils partagent une même portion de l'espace. Ainsi, il y a une intersection entre le point associé à la ville de Shawinigan et le polygone associé à la région de la Mauricie. Par ailleurs, il n'y a pas d'intersection entre le point associé à la ville de Sherbrooke et le polygone de la Mauricie.
 
 Lorsque `st_join(x,y)` identifie la présence d'une intersection entre deux éléments, elle assigne à l'élément de gauche la valeur de l'attribut (ici `"Rgns_Ad"`) de l'élément de droite. 
 
@@ -469,6 +468,8 @@ regions <- regions_agg[-1]  #pour retirer la première ligne
 Les opérations géométriques sur les données vectorielles sont des opérations qui peuvent changer la géométrie des données ou qui peuvent créer, à partir de celles-ci, des nouveaux objets vectoriels de géométrie différente. 
 
 
+<!-- Ici mettre aggregate ?  -->
+
 ###### La fonction `st_simplify()` {#fct_simplify}{-}
 
 Il est parfois utile de simplifier les objets vectoriels de types ligne ou polygone afin de produire des cartes à des échelles plus petites. La simplification permet de réduire l'utilisation de la mémoire, du disque, et de la bande passante. 
@@ -551,6 +552,7 @@ leafsync::latticeView(map_GIM,map_GIM_combo, map_GIM_union, ncol = 3)
 ```
 
 <!--  La classe est aussi changée
+En fait, on dirait que non: je retire?
 
 ```{r}
 class(GIM)
@@ -563,7 +565,7 @@ class(GIM_union)
 
 ###### La fonction `st_cast()` {-}
 
-La fonction `st_cast()` sert à convertir la géométrie d'un objet spatial donné vers une autre géométrie. Cette fonction comprend deux arguments : `st_cast(x, to)`. Le premier argument, `x`, correspond à l'objet vectoriel dont on souhaite modifier la géométrie, alors que le second argument, `to` correspond à la géométrie que l'on souhaite lui attribuer. 
+La fonction `st_cast()` sert à convertir la géométrie d'un objet spatial donné vers une autre géométrie. Cette fonction comprend deux arguments : `st_cast(x, to)`. Le premier argument, `x`, correspond à l'objet vectoriel dont on souhaite modifier la géométrie, alors que le second argument, `to`, correspond à la géométrie que l'on souhaite lui attribuer. 
 
 Donnons un exemple. Utilisons d'abord le *shapefile* `regions` pour isoler le polygone de la région administrative de la Mauricie grâce à la fonction `subset()`&nbsp;:
 ```{r, warning=FALSE}
@@ -575,9 +577,13 @@ Nous observons que l'objet `Mauricie` est bel et bien de type *polygone*. Mainte
 ```{r, warning=FALSE}
 Mauricie_lines <- st_cast(Mauricie, to = "MULTILINESTRING")
 Mauricie_lines
+```
+```{r, warning=FALSE}
 Mauricie_pts<-st_cast(Mauricie, to = "MULTIPOINT")
 Mauricie_pts
 ```
+
+
 Nous observons que les deux nouveaux objets vectoriels ont bel et bien la géométrie souhaitée (\@ref(fig:ex-cast1)).
 
 ```{r ex-cast1, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', fig.cap="La fonction `st_cast()` a été utilisée pour transformer le polygone de la Mauricie (gauche) en multilignes (centre) et en multipoints (droite)."}
@@ -1092,11 +1098,12 @@ Nous pouvons également utiliser la fonction `st_distance()` pour calculer la dis
 # Transformer le SRC de villes
 villes_nad <- st_transform(villes, crs = 32198)
 # Calculer les distances
-distance_la_poc_villes <- st_distance(la_poc_nad, villes_nad)
+distance_la_poc_villes <- st_distance(villes_nad, la_poc_nad)
 # Assigner le nom des villes
-colnames(distance_la_poc_villes) <- villes$toponyme
-# Les 10 premières entrées 
-distance_la_poc_villes[1,1:10]
+rownames(distance_la_poc_villes) <- villes$toponyme
+colnames(distance_la_poc_villes) <- "La Pocatière"
+# Les premières entrées 
+head(distance_la_poc_villes)
 ```
 Ou encore, calculons la distance qui sépare chacune des villes du Québec &nbsp;:
 ```{r}
@@ -1110,7 +1117,7 @@ distance_villes_villes[quelques_villes, quelques_villes]
 Cette fois, la fonction `st_distance()` retourne une matrice pour laquelle chaque entrée correspond à la distance entre deux villes. Cette matrice est bien sûr symétrique et sa diagonale est nulle.
 
 
-Nous pouvons aussi utiliser la fonction `st_distance()`pour calculer la distance entre un point et un polygone. Par exemple, calculons la distance entre le point correspondant au centre du polygone de l'Abitibi-Témiscamingue et de le polygone du Saguenay - Lac-Saint-Jean (voir la figure \@ref(fig:centroid_regions)).
+Nous pouvons aussi utiliser la fonction `st_distance()`pour calculer la distance entre un point et un polygone. Par exemple, calculons la distance entre le point correspondant au centre du polygone de l'Abitibi-Témiscamingue et le polygone du Saguenay - Lac-Saint-Jean (voir la figure \@ref(fig:centroid_regions)).
 
 ```{r}
 st_distance(centre_Abitibi, SagStJean)
