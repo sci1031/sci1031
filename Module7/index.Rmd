@@ -705,6 +705,32 @@ mapview(SagStJean, col.regions = "green", alpha.regions = 0.4, legend = FALSE) +
 mapview(centre_Abitibi, col.regions = "red" ,legend = FALSE) +
 mapview(Abitibi, col.regions = "blue", alpha.regions = 0.4,  legend = FALSE) 
 ```
+###### La fonction `st_coordinates` {-}
+
+La fonction `st_coordinates()` permet de connaître les coordonnées d'un objet vectoriel. Trouvons, par exemple, les coordonnées de la ville de La Pocatière que nous avons isolée plus haut &nbsp;: 
+
+
+```{r ex-coordinates}
+st_coordinates(la_poc)
+```
+Dans le cas présent, les coordonnées sont exprimées en *degrés*. Le `X` correspond à la longitude et le `Y`, à la latitude. En effet, le SCR de `la_poc` utilise des longitudes-latitudes. Ceci peut-être confirmé en utilisant la fonction `st_is_longlat()` &nbsp;: 
+
+```{r}
+st_is_longlat(la_poc)
+```
+D'autre part, l'objet `la_poc_nad`, que nous avons obtenu en transformant `la_poc` dans le SCR NAD83 utilise plutôt des mètres. Ainsi &nbsp;: 
+
+
+```{r}
+st_is_longlat(la_poc_nad)
+```
+Conséquemment, les coordonnées identifiées par la fonction `st_coordinates()` sont en mètres &nbsp;: 
+```{r}
+st_coordinates(la_poc_nad)
+```
+
+Notez que cette fonction peut être utilisée sur tout objet de type vectoriel (ligne, multiligne, polygone, etc.). La sortie correspondra alors à un tableau donnant les coordonnées de chaque point consituant l'objet. 
+
 
 
 ######  Opérations topologiques entre deux couches {-}
