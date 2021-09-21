@@ -1120,7 +1120,7 @@ knitr::include_graphics('Module7/images/st_overlaps.png')
 
 Considérons les polygones A, B, ainsi que celui de l'Abitibi-Témiscamingue illustrés à la figure \@ref(fig:st-geo-conf3). 
 
-```{r geo-conf3, warning=FALSE, echo=FALSE, fig.align='center', fig.cap="Exemples illustrant la fonction `st_overlaps()`.", out.width = '100%'}
+```{r st-geo-conf3, warning=FALSE, echo=FALSE, fig.align='center', fig.cap="Exemples illustrant la fonction `st_overlaps()`.", out.width = '100%'}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
 mapview(Abitibi, col.regions = "green", alpha.regions = 0.2, legend = FALSE) + 
     mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE) 
