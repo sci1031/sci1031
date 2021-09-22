@@ -9,7 +9,8 @@ Manipuler le temps (les dates, les heures, les secondes, etc.) représente une c
 
 - Manipuler le temps et les dates.
 - Écrire des fonctions simples et les utiliser pour structurer vos scripts.
-- Créer des animations simples qui montre lâévolution de données spatialisées dans le temps.
+
+- Créer des animations simples qui montre l’évolution de données spatialisées dans le temps.
 - Utiliser les objets de classe `rasterStack`.
 
 
@@ -63,8 +64,7 @@ Nous finirons cette partie avec un exercice de visualisation du trajet le plus l
 
 #### Importer les données 
 
-Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent à disposition un jeu de données incluant près [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions du cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr) (les trajets ont notamment été anonymisés, reportez-vous au lien précédent pour plus dâinformations relatives au traitement de ces données).
-
+Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent à disposition un jeu de données incluant près [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions du cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr) (les trajets ont notamment été anonymisés, reportez-vous au lien précédent pour plus d’informations relatives au traitement de ces données).
 
 L'ensemble de ces trajets est contenu dans un fichier
 [GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` qui a été
@@ -90,9 +90,10 @@ trajets
 
 ```{r read_trajet, echo = FALSE, message = FALSE}
 library(sf)
-#trajets <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/trip400.geojson")
 
+#trajets <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/trip400.geojson")
 trajets <- st_read("Module9/Donnees/trip400.geojson")
+
 trajets
 ```
 
@@ -150,7 +151,9 @@ class(trajets$start)
 class(trajets$stop)
 ```
 
-Les classes de ces objets signifient que les chaÃ®nes de caractères suivent une norme [POSIX](https://fr.wikipedia.org/wiki/POSIX) (*Portable Operating System Interface*), en l'occurrence `POSIXct` (*calendar time*) est une variété de `POSIXt` (*time*) qui contient le nombre de secondes écoulées depuis l'[Heure Unix](https://fr.wikipedia.org/wiki/Heure_Unix) (*Epoch time*), le 1^er^ janvier 1970 00:00:00 UTC ([Temps Universel Coordonné](https://fr.wikipedia.org/wiki/Temps_universel_coordonn%C3%A9)). Ainsi, en convertissant les objets de classe `POSIXct` en objet de classe `numeric`, nous obtenons ce nombre de secondes, par exemple&nbsp;:
+
+Les classes de ces objets signifient que les chaînes de caractères suivent une norme [POSIX](https://fr.wikipedia.org/wiki/POSIX) (*Portable Operating System Interface*), en l'occurrence `POSIXct` (*calendar time*) est une variété de `POSIXt` (*time*) qui contient le nombre de secondes écoulées depuis l'[Heure Unix](https://fr.wikipedia.org/wiki/Heure_Unix) (*Epoch time*), le 1^er^ janvier 1970 00:00:00 UTC ([Temps Universel Coordonné](https://fr.wikipedia.org/wiki/Temps_universel_coordonn%C3%A9)). Ainsi, en convertissant les objets de classe `POSIXct` en objet de classe `numeric`, nous obtenons ce nombre de secondes, par exemple&nbsp;:
+
 
 <!-- Serait p-e utile d'avoir une etape preliminaire avec 
 ```{r}
@@ -188,7 +191,9 @@ Regardons les distributions de longueurs et de durées en dessinant un histogram
 
 
 ```{r histo, fig.width = 9.5}
-par(mfrow = c(1, 2)) # figure a deux panneaux cÃ´te à cÃ´te
+
+par(mfrow = c(1, 2)) # figure a deux panneaux côte à côte
+
 hist(trajets$length, 
   breaks = seq(0, 44000, 2000), # spécifie les catégories de longueur
   xlab = "Longueur (m)",
@@ -375,7 +380,9 @@ traj_long_pts$temps <- seq(
 )
 ```
 
-<!-- pas sÃ»r de comprendre l'idée derrière ce qu'on fait  -->
+
+<!-- pas sûr de comprendre l'idée derrière ce qu'on fait  -->
+
 <!-- segmenter le trajet, visualisons une premier segment -->
 
 
@@ -397,7 +404,8 @@ Notons que sans l'étape 2, `st_cast()` transformera chaque point en ligne ce qu
 mapview(lin) 
 ```
 
-GrÃ¢ce à l'étape précédente, nous pouvons facilement avoir accès à l'heure correspondant au dernier point de ce trajet. 
+Grâce à l'étape précédente, nous pouvons facilement avoir accès à l'heure correspondant au dernier point de ce trajet. 
+
 
 ```{r}
 traj_long_pts[2000, "temps"]
@@ -435,7 +443,9 @@ ma_fonction <- function(a, b = 1) {
 }
 ```
 
-Dans `R`, une fonction est un objet créé avec `function()`. Comme tout objet nous pouvons l'assigner à une variable et dans notre exemple, nous l'assignons à `ma_fonction` qui sera le nom de la fonction. Dans la parenthèse qui suit `function`, nous écrivons les arguments de la fonction, en l'occurrence pour `ma_fonction`, nous avons `a` et `b`. Dans notre exemple, `b` a une valeur par défaut qui est 1, donc si nous ne spécifions pas `b`, alors `b` aura automatiquement une valeur de 1. Le corps de la fonction est l'expression juste après cette parenthèse, dans notre cas cela inclut tout ce qui est entre accolades (`{ }`). Une fonction peut comprendre autant de ligne de code que souhaité et peut contenir n'importe quelle expression `R` valide. À titre d'exemple, nous avons utilisé un test logique `if`/`else` pour que la valeur retournée change selon la valeur de `c`. Avec `R`, une fonction retourne la dernière ligne de code (lâutilisation de `return()` à la dernière ligne est ainsi optionnelle, mais elle permet de clarifier ce que retourne la fonction). Une fois la fonction créée, nous l'appelons comme toute autre fonction. 
+
+Dans `R`, une fonction est un objet créé avec `function()`. Comme tout objet nous pouvons l'assigner à une variable et dans notre exemple, nous l'assignons à `ma_fonction` qui sera le nom de la fonction. Dans la parenthèse qui suit `function`, nous écrivons les arguments de la fonction, en l'occurrence pour `ma_fonction`, nous avons `a` et `b`. Dans notre exemple, `b` a une valeur par défaut qui est 1, donc si nous ne spécifions pas `b`, alors `b` aura automatiquement une valeur de 1. Le corps de la fonction est l'expression juste après cette parenthèse, dans notre cas cela inclut tout ce qui est entre accolades (`{ }`). Une fonction peut comprendre autant de ligne de code que souhaité et peut contenir n'importe quelle expression `R` valide. À titre d'exemple, nous avons utilisé un test logique `if`/`else` pour que la valeur retournée change selon la valeur de `c`. Avec `R`, une fonction retourne la dernière ligne de code (l’utilisation de `return()` à la dernière ligne est ainsi optionnelle, mais elle permet de clarifier ce que retourne la fonction). Une fois la fonction créée, nous l'appelons comme toute autre fonction. 
+
 
 ```{r}
 ma_fonction(1) # utlise b = 1
@@ -462,7 +472,9 @@ visual <- function(traj_pts, n = 100) {
 }
 ```
 
-Nous allons faire quelques améliorations sur le texte accompagnant les cartes en créant deux autres fonctions. La première, `txt_temps()`, a pour argument un temps (nous utiliserons le temps du point `n`) et retourne un texte formaté grÃ¢ce aux fonctionnalités de `lubridate`. 
+
+Nous allons faire quelques améliorations sur le texte accompagnant les cartes en créant deux autres fonctions. La première, `txt_temps()`, a pour argument un temps (nous utiliserons le temps du point `n`) et retourne un texte formaté grâce aux fonctionnalités de `lubridate`. 
+
 
 
 ```{r txt_temps}
@@ -480,7 +492,7 @@ txt_distance <- function(lin) {
 }
 ```
 
-Notons que la fonction `format()` nous permet de contrÃ´ler le nombre de chiffres (`digits`) affiché. La fonction `visual()` appelle ces deux fonctions. De plus, nous y ajoutons un argument, `basemap`, qui nous permet d'ajouter un fond de carte. Cet argument a pour valeur `NULL` par défaut, ce qui nous permet d'avoir, par défaut, une carte sans fond. Enfin, nous allons nous assurer qu'il y ait au moins 2 points car nous avons besoin de 2 points pour faire une ligne. 
+Notons que la fonction `format()` nous permet de contrôler le nombre de chiffres (`digits`) affiché. La fonction `visual()` appelle ces deux fonctions. De plus, nous y ajoutons un argument, `basemap`, qui nous permet d'ajouter un fond de carte. Cet argument a pour valeur `NULL` par défaut, ce qui nous permet d'avoir, par défaut, une carte sans fond. Enfin, nous allons nous assurer qu'il y ait au moins 2 points car nous avons besoin de 2 points pour faire une ligne. 
 
 
 ```{r visual}
@@ -537,7 +549,7 @@ saveGIF(anim(20), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
 
 ![](Module9/images/anim1.gif)
 
-Pour finir, nous allons ajouter un fond de carte. Pour cela nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grÃ¢ce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
+Pour finir, nous allons ajouter un fond de carte. Pour cela nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grâce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
 
 <!-- c'est quoi?  -->
 
@@ -569,7 +581,7 @@ Nous allons maintenant nous intéresser aux précipitations et aux températures
 
 * Question 1&nbsp;: quel est le mois disposant du plus faible niveau de pluviométrie pour le parc national du Mont-Mégantic?
 
-* Question 2&nbsp;: oÃ¹ se situe le (ou les) point(s) le(s) plus chaud(s) autour du parc national du Mont-Mégantic? Cette question porte sur la localisation spatio-temporelle du ou des points les plus chauds.
+* Question 2&nbsp;: où se situe le (ou les) point(s) le(s) plus chaud(s) autour du parc national du Mont-Mégantic? Cette question porte sur la localisation spatio-temporelle du ou des points les plus chauds.
 
 Nous terminerons par deux exercices de visualisation de données&nbsp;: 
 
@@ -599,8 +611,8 @@ knitr::include_graphics('Module9/images/mmint_janv_2000.png')
 
 Par exemple, sur la figure \@ref(fig:exdataclim), nous présentons les températures minimales moyennes pour le mois de janvier 2000. À partir des données brutes, nous avons sélectionné les données correspondantes aux années 2007 à 2016, puis nous avons fait une opération de rognage en utilisant l'étendue spatiale suivante (dans le système géodésique mondial WGS84): 
 
-* longitude : de 72Â°Ouest à 71Â°Ouest,
-* latitude : 45Â°Nord à 46Â°Nord. 
+* longitude : de 72°Ouest à 71°Ouest,
+* latitude : 45°Nord à 46°Nord. 
 
 Les données préparées sont au format [NetCDF (Network Common Data Form)](https://fr.wikipedia.org/wiki/NetCDF) et peuvent être importées en utilisant la fonction `stack()` de la bibliothèque `raster`.
 
@@ -608,19 +620,18 @@ Les données préparées sont au format [NetCDF (Network Common Data Form)](http
 
 
 <!-- requireNamespace("ncdf4")-->
-<!--
-```{r stack-2, message = FALSE, echo = FALSE}
-#library(raster)
-#library(ncdf4)
+```{r stack, message = FALSE}
+library(raster)
+library(ncdf4)
 # temperature minimale par mois pour
-#mint <- stack("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/mint.nc")
+mint <- stack("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/mint.nc")
 # temperature maximale par mois 
-#maxt <- stack("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/maxt.nc")
+maxt <- stack("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/maxt.nc")
 # total des precipitations par mois 
-#pcp <- stack("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/pcp.nc")
-#class(mint)
+pcp <- stack("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/pcp.nc")
+class(mint)
 ```
--->
+
 
 ```{r stack, message = FALSE}
 library(raster)
@@ -775,7 +786,7 @@ Ce qui nous donne un objet `rasterStack` qui a les valeurs des différents quant
 
 ##### Opérations spatiales 
 
-Les principales opérations spatiales pour les objets de classe `rasterStack` utilisent les mêmes fonctions que pour les objets de classe `rasterLayer`. Les opérations spatiales à réaliser seront alors, au besoin, répétées sur les différentes couches (cela étant dit, pour des raisons d'optimisation algorithmiques, il se peut que les opérations soient plus rapides sur un `rasterStack` de $n$ couches plutÃ´t que d'appliquer $n$ fois les mêmes opérations sur $n$ objets `rasterLayer`). Pour illustrer ce principe, nous allons utiliser `projectRaster()`, `crop()`, `mask()` et `extract()` sur `mint` (voir le [Module 5](#mat) et le [Module 8](#manip_mat) pour plus de détails sur ces fonctions).
+Les principales opérations spatiales pour les objets de classe `rasterStack` utilisent les mêmes fonctions que pour les objets de classe `rasterLayer`. Les opérations spatiales à réaliser seront alors, au besoin, répétées sur les différentes couches (cela étant dit, pour des raisons d'optimisation algorithmiques, il se peut que les opérations soient plus rapides sur un `rasterStack` de $n$ couches plutôt que d'appliquer $n$ fois les mêmes opérations sur $n$ objets `rasterLayer`). Pour illustrer ce principe, nous allons utiliser `projectRaster()`, `crop()`, `mask()` et `extract()` sur `mint` (voir le [Module 5](#mat) et le [Module 8](#manip_mat) pour plus de détails sur ces fonctions).
 
 <!-- vérifier que j'ai bien projetRaster dans le 5   -->
 Pour illustrer le changement de projections des `rasterStack`, projetons `mint` en utilisant la projection de Mercator. 
@@ -788,8 +799,8 @@ mint_merc
 Nous allons maintenant faire une opération de rognage sur `mint` en utilisant 
 l'étendue spatiale suivante (dans le système géodésique mondial WGS84): 
 
-* longitude : de 71.5Â°Ouest à 71Â°Ouest,
-* latitude : 45Â°Nord à 45.5Â°Nord. 
+* longitude : de 71.5°Ouest à 71°Ouest,
+* latitude : 45°Nord à 45.5°Nord. 
 
 ```{r crop_stack}
 mint_crop <- crop(mint, extent(c(-71.5, -71, 45, 45.5)))
@@ -1004,6 +1015,7 @@ maxt_megantic <- mask(maxt, st_transform(megantic, st_crs(maxt)))
 Pour la seconde étape, il y a plusieurs façons de procéder. Ici, nous allons procéder en deux temps&nbsp;: nous allons d'abord trouver la couche (ou les couches) qui contient (ou contiennent) la valeur de température maximum, puis trouver les coordonnées du point (ou des points) associées. Nous calculons donc le maximum pour chaque couche, puis nous déterminons quel est le maximum de ces maximums.
 
 
+
 ```{R}
 id <- which.max(apply(getValues(maxt_megantic), 2, max, na.rm = TRUE))
 id
@@ -1012,10 +1024,32 @@ id
 
 C'est la couche `r id` qui contient ce maximum, elle correspond au mois de Juillet 2010. Nous utilisons alors `xyFromCell()` pour avoir les coordonnées spatiale de ces points, ce qui nous permet de compléter notre réponse à la question.
 
+Quelques remarques: 
+
+* Nous utilisons `seq()` pour générer une séquence de `n_img` images entre 2 et le maximum de points (`r nrow(traj_long_pts)`). 
+
+* La séquence peut générer des nombres décimaux, mais `visual()` demande des nombre entiers, nous utilisons alors `floor()` pour la conversion. 
+
+* Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`. 
+
+Nous pouvons maintenant utiliser `saveGIF()`.
+
+```R
+saveGIF(anim(20), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
+```
+
+![](Module9/images/anim1.gif)
+
+
+Pour finir, nous allons ajouter un fond de carte. Pour cela nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grÃ¢ce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
+
 
 ```{R}
 xyFromCell(maxt_megantic[[id]], which.max(maxt_megantic[[id]]))
 ```
+
+<!-- c'est quoi?  -->
+
 
 <!-- Expliquer les deux arguments, couche qu'on vient d'identifier, et id de la ou des cellules qui sont max dans cette couche en réutilisant which.max  -->
 
@@ -1044,7 +1078,7 @@ profil <- function(ras, mask) {
 Nous obtenons ainsi une fonction qui nous donne les valeurs à mettre en ordonnées de nos profils. Il nous reste à obtenir les valeurs des abscisses, autrement dit les dates pour chacune des moyennes. Comme les dates sont les mêmes pour `mint`, `maxt` et `pcp`, nous utilisons `getZ(mint)` qui nous donne exactement ce dont nous avons besoin. <!-- Cette explication doit aller en haut aussi quand on joue avec pcp  -->
 
 
-<!-- pas sÃ»r si panel est français  -->
+<!-- pas sûr si panel est français  -->
 Nous allons maintenant faire la figure. Ici, nous créons une figure avec 3 panels. Pour les températures, nous utilisons des lignes et pour les précipitations nous utiliserons des barres, ces réglages peuvent se faire avec l'argument `type` de `plot()`. Enfin comme l'axe des abscisses est identique pour les trois panels, nous ajouterons un titre seulement à cet axe seulement pour le dernier panel. 
 
 
@@ -1052,9 +1086,9 @@ Nous allons maintenant faire la figure. Ici, nous créons une figure avec 3 pane
 # figures de trois lignes et 1 seule colonne
 par(mfrow = c(3, 1), mar = c(4, 4, 1, 1))
 plot(getZ(mint), profil(mint, megantic_buf), 
-  type = "l", ylab = "Températures minimales (Â°C)", xlab = "")
+  type = "l", ylab = "Températures minimales (°C)", xlab = "")
 plot(getZ(mint), profil(maxt, megantic_buf), 
-  type = "l", ylab = "Températures maximales (Â°C)", xlab = "")
+  type = "l", ylab = "Températures maximales (°C)", xlab = "")
 plot(getZ(mint), profil(pcp, megantic_buf), 
   type = "h", ylab = "Précipitations totales (mm)", xlab = "Années")
 ```
@@ -1079,7 +1113,7 @@ plot_profil <- function(n, pr_mint, pr_maxt, pr_pcp, temps) {
   par(mar = c(4, 4.5, 1, 4.5), las = 1)
   # créer une figure vide (type = "n") avec les dimensions 
   plot(range(temps), c(min(pr_mint), max(pr_maxt)), type = "n", 
-    xlab = "Années", ylab = "Températures minimales et maximales (Â°C)")
+    xlab = "Années", ylab = "Températures minimales et maximales (°C)")
   # créer une enveloppe 
   polygon(c(temps[id], rev(temps[id])), c(pr_mint[id], pr_maxt[rev(id)]), col = "#aaaaaa", border = "#6a6a6a")
 
