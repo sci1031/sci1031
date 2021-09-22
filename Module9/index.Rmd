@@ -9,11 +9,12 @@ Manipuler le temps (les dates, les heures, les secondes, etc.) représente une c
 
 - Manipuler le temps et les dates.
 - Écrire des fonctions simples et les utiliser pour structurer vos scripts.
+
 - Créer des animations simples qui montre l’évolution de données spatialisées dans le temps.
 - Utiliser les objets de classe `rasterStack`.
 
 
-Vous utiliserez les bibliothèques suivantes&nbsp;:
+Vous utiliserez les bibliothques suivantes&nbsp;:
 
 - `mapview`
 - `raster`
@@ -65,7 +66,6 @@ Nous finirons cette partie avec un exercice de visualisation du trajet le plus l
 
 Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent à disposition un jeu de données incluant près [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions du cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr) (les trajets ont notamment été anonymisés, reportez-vous au lien précédent pour plus d’informations relatives au traitement de ces données).
 
-
 L'ensemble de ces trajets est contenu dans un fichier
 [GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` qui a été
 zippé. Ces données étant un peu volumineuses (>150MB), nous avons seulement
@@ -90,9 +90,10 @@ trajets
 
 ```{r read_trajet, echo = FALSE, message = FALSE}
 library(sf)
-trajets <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/trip400.geojson")
 
-#trajets <- st_read("Module9/Donnees/trip400.geojson")
+#trajets <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/trip400.geojson")
+trajets <- st_read("Module9/Donnees/trip400.geojson")
+
 trajets
 ```
 
@@ -150,7 +151,9 @@ class(trajets$start)
 class(trajets$stop)
 ```
 
+
 Les classes de ces objets signifient que les chaînes de caractères suivent une norme [POSIX](https://fr.wikipedia.org/wiki/POSIX) (*Portable Operating System Interface*), en l'occurrence `POSIXct` (*calendar time*) est une variété de `POSIXt` (*time*) qui contient le nombre de secondes écoulées depuis l'[Heure Unix](https://fr.wikipedia.org/wiki/Heure_Unix) (*Epoch time*), le 1^er^ janvier 1970 00:00:00 UTC ([Temps Universel Coordonné](https://fr.wikipedia.org/wiki/Temps_universel_coordonn%C3%A9)). Ainsi, en convertissant les objets de classe `POSIXct` en objet de classe `numeric`, nous obtenons ce nombre de secondes, par exemple&nbsp;:
+
 
 <!-- Serait p-e utile d'avoir une etape preliminaire avec 
 ```{r}
@@ -188,7 +191,9 @@ Regardons les distributions de longueurs et de durées en dessinant un histogram
 
 
 ```{r histo, fig.width = 9.5}
+
 par(mfrow = c(1, 2)) # figure a deux panneaux côte à côte
+
 hist(trajets$length, 
   breaks = seq(0, 44000, 2000), # spécifie les catégories de longueur
   xlab = "Longueur (m)",
@@ -375,7 +380,9 @@ traj_long_pts$temps <- seq(
 )
 ```
 
+
 <!-- pas sûr de comprendre l'idée derrière ce qu'on fait  -->
+
 <!-- segmenter le trajet, visualisons une premier segment -->
 
 
@@ -398,6 +405,7 @@ mapview(lin)
 ```
 
 Grâce à l'étape précédente, nous pouvons facilement avoir accès à l'heure correspondant au dernier point de ce trajet. 
+
 
 ```{r}
 traj_long_pts[2000, "temps"]
@@ -435,7 +443,9 @@ ma_fonction <- function(a, b = 1) {
 }
 ```
 
+
 Dans `R`, une fonction est un objet créé avec `function()`. Comme tout objet nous pouvons l'assigner à une variable et dans notre exemple, nous l'assignons à `ma_fonction` qui sera le nom de la fonction. Dans la parenthèse qui suit `function`, nous écrivons les arguments de la fonction, en l'occurrence pour `ma_fonction`, nous avons `a` et `b`. Dans notre exemple, `b` a une valeur par défaut qui est 1, donc si nous ne spécifions pas `b`, alors `b` aura automatiquement une valeur de 1. Le corps de la fonction est l'expression juste après cette parenthèse, dans notre cas cela inclut tout ce qui est entre accolades (`{ }`). Une fonction peut comprendre autant de ligne de code que souhaité et peut contenir n'importe quelle expression `R` valide. À titre d'exemple, nous avons utilisé un test logique `if`/`else` pour que la valeur retournée change selon la valeur de `c`. Avec `R`, une fonction retourne la dernière ligne de code (l’utilisation de `return()` à la dernière ligne est ainsi optionnelle, mais elle permet de clarifier ce que retourne la fonction). Une fois la fonction créée, nous l'appelons comme toute autre fonction. 
+
 
 ```{r}
 ma_fonction(1) # utlise b = 1
@@ -462,7 +472,9 @@ visual <- function(traj_pts, n = 100) {
 }
 ```
 
+
 Nous allons faire quelques améliorations sur le texte accompagnant les cartes en créant deux autres fonctions. La première, `txt_temps()`, a pour argument un temps (nous utiliserons le temps du point `n`) et retourne un texte formaté grâce aux fonctionnalités de `lubridate`. 
+
 
 
 ```{r txt_temps}
@@ -1003,6 +1015,7 @@ maxt_megantic <- mask(maxt, st_transform(megantic, st_crs(maxt)))
 Pour la seconde étape, il y a plusieurs façons de procéder. Ici, nous allons procéder en deux temps&nbsp;: nous allons d'abord trouver la couche (ou les couches) qui contient (ou contiennent) la valeur de température maximum, puis trouver les coordonnées du point (ou des points) associées. Nous calculons donc le maximum pour chaque couche, puis nous déterminons quel est le maximum de ces maximums.
 
 
+
 ```{R}
 id <- which.max(apply(getValues(maxt_megantic), 2, max, na.rm = TRUE))
 id
@@ -1011,10 +1024,32 @@ id
 
 C'est la couche `r id` qui contient ce maximum, elle correspond au mois de Juillet 2010. Nous utilisons alors `xyFromCell()` pour avoir les coordonnées spatiale de ces points, ce qui nous permet de compléter notre réponse à la question.
 
+Quelques remarques: 
+
+* Nous utilisons `seq()` pour générer une séquence de `n_img` images entre 2 et le maximum de points (`r nrow(traj_long_pts)`). 
+
+* La séquence peut générer des nombres décimaux, mais `visual()` demande des nombre entiers, nous utilisons alors `floor()` pour la conversion. 
+
+* Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`. 
+
+Nous pouvons maintenant utiliser `saveGIF()`.
+
+```R
+saveGIF(anim(20), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
+```
+
+![](Module9/images/anim1.gif)
+
+
+Pour finir, nous allons ajouter un fond de carte. Pour cela nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grÃ¢ce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
+
 
 ```{R}
 xyFromCell(maxt_megantic[[id]], which.max(maxt_megantic[[id]]))
 ```
+
+<!-- c'est quoi?  -->
+
 
 <!-- Expliquer les deux arguments, couche qu'on vient d'identifier, et id de la ou des cellules qui sont max dans cette couche en réutilisant which.max  -->
 
