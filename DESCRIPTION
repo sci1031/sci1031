@@ -7,6 +7,7 @@ Imports:
   citr,
   dplyr,
   DT,
+  e1071,
   formatR,
   ggplot2,
   ggpubr,
