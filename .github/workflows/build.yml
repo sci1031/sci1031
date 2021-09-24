@@ -24,8 +24,9 @@ jobs:
             ${{ runner.os }}-renv-
       - name: Install R packages with remotes
         run: |
-          Rscript -e "install.packages('remotes', repos = 'https://muug.ca/mirror/cran/')"
-          Rscript -e "remotes::install_deps()"
+          install.packages('remotes', repos = 'https://muug.ca/mirror/cran/')
+          remotes::install_deps()
+        shell: shell: Rscript {0}
       - name: Build GitBook
         run: |-
           Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"

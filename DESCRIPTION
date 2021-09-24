@@ -25,5 +25,3 @@ Imports:
   svglite,
   tmap,
   webshot
-Remotes: 
-  r-spatial/mapview
