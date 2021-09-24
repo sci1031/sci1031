@@ -26,7 +26,7 @@ jobs:
         run: |
           install.packages('remotes', repos = 'https://muug.ca/mirror/cran/')
           remotes::install_deps()
-        shell: shell: Rscript {0}
+        shell: Rscript {0}
       - name: Build GitBook
         run: |-
           Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
