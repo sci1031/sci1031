@@ -16,4 +16,6 @@ mod:
 clean:
 	rm -rf _book _bookdown_files *.html
 	
+renv:
+	Rscript -e "renv::init(bare = TRUE); renv::snapshot()"
 
