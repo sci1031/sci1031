@@ -8,6 +8,14 @@ L'objectif principal de ce module est d'apprendre à manipuler des données vect
 - Filtrer des données vectorielles en se basant sur leurs attributs.
 - Joindre spatialement deux ensembles de données vectorielles.
 - Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
+- Combiner, aggréger et simplifier des objets vectoriels. 
+- Transformer la géométrie d'objets vectoriels.
+- Créer des zones tampons autour d'objets vectoriels.
+- Trouver le centroid et les coordonnées d'objets vectoriels.
+- Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
+- Confirmer des relations topologiques entre deux objets vectoriels.
+- Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
+
 
 Vous utiliserez les bibliothèques suivantes:
 
@@ -33,7 +41,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 
 Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec (SÉPAQ).
 
-Dans la section Exercice, vous utiliserez ces mêmes données. <!-- A FAIRE -->
+Dans la section [exercice](#ex_map_vec), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
 
 
 ## Leçon {#lecon_manip_vec}
@@ -54,13 +62,13 @@ Dans un second temps, cette leçon vous guidera dans la résolution d'une probl�
 
 Dans cette leçon, nous allons utiliser les données vectorielles relatives aux [municipalités](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives) et aux [régions administratives du Québec](https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs), ainsi qu'au réseau de la [Société des établissements de plein air du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000), la SÉPAQ. 
 
-Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module7_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier comprend trois sous-dossiers:
+Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module7_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier comprend trois sous-dossiers et un fichier *.csv*:
 
-<!-- nettoyer le dossier  -->
 
 - `villes`,
 - `parcs.gdb`,
-- `regions_admin`.
+- `regions_admin`,
+- `population.csv`.
 
 
 
@@ -76,6 +84,13 @@ Commençons par charger les bibliothèques requises pour lire les données spati
 library(sf)
 library(mapview)
 ```
+
+```{r, echo = FALSE, eval=TRUE}
+library(leafsync)
+```
+
+
+<br>
 
 Maintenant, allons lire le fichier *shapefile* de l'ensemble des municipalités du Québec en utilisant la fonction `st_read()` tel que vu dans le [module 4](#lire-shp).
 
@@ -672,7 +687,7 @@ Lines<- mapview(Mauricie_lines, legend = FALSE)
 Poly <- mapview(Mauricie, legend = FALSE)
 Points<-mapview(Mauricie_pts, legend = FALSE)
 
-# Visualisons les trois cartes cÃ´te à cÃ´te
+# Visualisons les trois cartes côte à côte
 M <- leafsync::latticeView(Poly@map,Lines@map,Points@map, ncol = 3)
 M
 
@@ -1636,7 +1651,16 @@ Nous constatons que Sherbrooke *et* Saint-Jean-sur-Richelieu disposent toutes de
 ## Exercice {#ex_map_vec}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_manip_vec) de ce module.
-Bien que la réponse à chaque question soit disponible en cliquant sur XX, il est **très important** de tenter d'y répondre par vous même&nbsp;!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même&nbsp;!
+
+<br>
+
+```{r, echo=FALSE, eval=TRUE}
+library(sf)
+library(mapview)
+library(units)
+```
+
 
 ### Question 1 {-}
 
@@ -1899,10 +1923,11 @@ SJSR_tampon <- subset(top10_villes_buffer, toponyme == "Saint-Jean-sur-Richelieu
 
 Utiliser la fonction `st_intersection` pour trouver les parcs du *shapefile* `parcs_nationaux_lcc` qui intersectent cette zone tampon.
 
-```{r, warning=FALSE}
+```{r}
 Parcs_SJSR_tampon <- st_intersection(parcs_nationaux_lcc, SJSR_tampon)
 
 mapview(Parcs_SJSR_tampon) + mapview(SJSR_tampon, col.regions = "red", alpha.regions = 0.2)
+
 ```
 <br>
 
