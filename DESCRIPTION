@@ -18,6 +18,8 @@ Imports:
   rasterVis,
   remotes,
   raster,
+  rgdal,
+  rgeos,
   sf,
   spacetime,
   spdep,
