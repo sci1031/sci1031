@@ -1448,7 +1448,7 @@ A_ha
 
 
 
-### Problématique à résoudre {#res_mod7}
+### Problématique à résoudre {#prob_mod7}
 
 Maintenant que nous avons appris les opérations de base pour manipuler les données vectorielles, nous sommes en mesure de résoudre la problématique énoncée au début de cette leçon&nbsp;: 
 
@@ -1635,6 +1635,294 @@ Nous constatons que Sherbrooke *et* Saint-Jean-sur-Richelieu disposent toutes de
 
 ## Exercice {#ex_map_vec}
 
-- Pour chaque ville, qu'elle est le plus proche parc? (st_nearest_feature) *
-- En utilisant les données des sentiers hivernaux de la SEPAQ (XXXX), parmi les 4 parcs de la région de Sherbrooke, lequel dispose de la plus longue distance de sentier de raquette? (Exercice plus intégrateur mais XXX)
-- Départager les deux villes gagnantes en calculant le pourcentage de couverture des parcs nationaux dans la zone tampon de 70&nbsp;km. L'un des parcs de la région de Sherbrooke chevauche partiellement la zone tampon. Pour répondre à cette question, il faudra découper (`st_crop()`) ce polygone afin d'obtenir seulement la portion se retrouvant dans la zone tampon (XXX) 
+Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_manip_vec) de ce module.
+Bien que la réponse à chaque question soit disponible en cliquant sur XX, il est **très important** de tenter d'y répondre par vous même&nbsp;!
+
+### Question 1 {-}
+
+**a)** Construire un polygone de la forme d'un quadrilatère dont les sommets correspondent aux municipalités suivantes: Blanc-Sablon, Gaspé, Ivujivik et Chisasibi.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Utiliser la fonction `subset()` pour filtrer le *shapefile* `municipalites` et isoler ces quatres villes.
+
+```{r, warning = FALSE}
+Selection <- subset(villes, (toponyme == "Blanc-Sablon") | 
+                      (toponyme == "Gaspé") | 
+                      (toponyme == "Ivujivik") | 
+                      (toponyme == "Chisasibi"))
+
+Selection
+```
+<br>
+
+Le symbole `|` signifie *et*.
+
+Combiner ces quatres villes (points) en un seul objet spatial (multipoints) en utilisant la fonction `st_combine()`&nbsp;:
+
+```{r}
+Combo_Selection <- st_combine(Selection)
+Combo_Selection
+```
+<br>
+
+Transformer cet objet multipoints en polygone en utilisant la fonction `st_cast()`&nbsp;:
+
+```{r, warning = FALSE}
+Poly_Selection <- st_cast(Combo_Selection, to = "POLYGON")
+Poly_Selection
+```
+<br>
+
+Confirmer votre réponse en visualisant le polygone formé&nbsp;:
+
+```{r, warning = FALSE}
+mapview(Poly_Selection)
+
+```
+<br>
+
+
+
+</p>
+</details> 
+
+<br>
+
+**b)** Quelle est la superficie, en km, de ce polygone?
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+S'assurer d'abord que le polygone est représenté dans une projection métrique&nbsp;:
+
+```{r, warning = FALSE}
+st_crs(Poly_Selection)$proj4string 
+```
+<br>
+
+`+proj=longlat` atteste que la projection est en degré. Reprojet l'objet dans le SCR NAD83 dont le EPSG est 32198&nbsp;:
+
+```{r, warning = FALSE}
+Poly_Selection_nad83 <- st_transform(Poly_Selection, crs = 32198)
+st_crs(Poly_Selection_nad83)$proj4string 
+```
+<br>
+
+Les unités sont à présent en mètres.
+
+Calculer la superficie du polygone en utilisant la fonction `st_area()` et convertisser les unités en $km^2$ en utilisant la fonction `set_units()`&nbsp;:
+
+```{r, warning = FALSE}
+Aire <- st_area(Poly_Selection_nad83)
+Aire_km2 <- set_units(Aire, km2)
+Aire_km2
+```
+<br>
+
+</p>
+</details> 
+
+<br>
+
+### Question 2 {-}
+
+**a)** Combien de villes se trouvent dans une zone tampon de 20 km autour de la frontière séparant les régions administratives des Laurentides et de Lanaudière.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Utiliser la fonction `subset()` pour filtrer le *shapefile* `regions` et isoler les polygones correspondants aux Laurentides et à Lanaudière.
+
+```{r, warning = FALSE}
+regions_nad <- st_transform(regions, crs = 32198) #utiliser une projection métrique
+Laurentides <- subset(regions_nad, Rgns_Ad == "Laurentides")
+Lanaudiere <- subset(regions_nad, Rgns_Ad == "Lanaudière")
+```
+<br>
+
+Trouver la frontière entre les deux régions en utilisant la fonction `st_intersection()`&nbsp;:
+
+```{r, warning = FALSE}
+Frontiere <- st_intersection(Laurentides, Lanaudiere)
+mapview(Frontiere)
+```
+<br>
+
+La visualisation permet de valider votre calcul.
+
+Créer maintenant une zone tampon de 50 km autour de la frontière en utilisant la fonction `st_buffer`&nbsp;:
+
+```{r, warning = FALSE}
+Frontiere_tampon <- st_buffer(Frontiere, dist = 20e3)
+mapview(Frontiere_tampon)
+```
+<br> 
+
+
+Utiliser à nouveau la fonction `st_intersection()` pour trouver les municipalités à l'intérieur de la zone tampon. Il s'agit, en effet, de trouver l'intersection entre les *shapeliles* `villes` et `Frontiere_tampon`.
+
+```{r, warning = FALSE}
+villes_nad <- st_transform(villes, crs = 32198) #utiliser une projection métrique
+Villes_Frontiere_tampon <- st_intersection(villes_nad, Frontiere_tampon)
+mapview(Villes_Frontiere_tampon)
+```
+<br>
+
+Utiliser la fonction `nrow()` pour trouver le nombre de villes dans la zone tampon.
+
+```{r, warning=FALSE}
+nrow(Villes_Frontiere_tampon)
+```
+<br>
+
+</p>
+</details> 
+
+<br>
+
+**b)** Calculer la taille de la population qui habite cette zone tampon.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Utiliser la fonction `merge()` pour combiner le tableau `pop` listant la taille des populations municipales à l'objet `Villes_Frontiere_tampon` défini plus haut.
+
+```{r, warning=FALSE}
+Villes_Frontiere_tampon_pop <- merge(x = Villes_Frontiere_tampon, y = pop, by.x = "toponyme", by.y = "munnom" )
+head(Villes_Frontiere_tampon_pop)
+```
+<br>
+
+Utiliser la fonction `sum()` pour calculer la population totale comprise dans la zone tampon.
+
+```{r, warning=FALSE}
+sum(Villes_Frontiere_tampon_pop$mpopul)
+```
+Une autre façon d'obtenir le même résultat est d'utiliser la fonction `aggregate()`&nbsp;:
+
+```{r, warning=FALSE}
+villes_nad_pop <- merge(x = villes_nad, y = pop, by.x = "toponyme", by.y = "munnom" )
+aggregate(villes_nad_pop["mpopul"], by = Frontiere_tampon, FUN = sum)
+```
+
+
+</p>
+</details> 
+
+<br>
+
+
+
+### Question 3 {-}
+
+Trouver les régions administratives traversées par la ligne reliant la ville de Sherbrooke à celle de Fermont.
+<br>
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+<br>
+Utiliser la fonction `subset()` pour isoler les points du *shapefile* `villes_nad` correspondants aux villes de Sherbrooke et de Fermont.
+
+```{r, warning = FALSE}
+Sherb_Fermont <- subset(villes_nad, (toponyme == "Sherbrooke") | (toponyme == "Fermont"))
+
+mapview(Sherb_Fermont) 
+```
+<br>
+
+Utiliser la fonction `st_combine()` pour combiner ces deux points en une seule géométrie multipoint.
+
+```{r, warning=FALSE}
+Sherb_Fermont_points <- st_combine(Sherb_Fermont)
+```
+
+<br>
+
+Utiliser la fonction `st_cast()` pour transformer la géométrie multipoint en ligne.
+
+```{r, warning=FALSE}
+Sherb_Fermont_ligne <- st_cast(Sherb_Fermont_points, to = "LINESTRING")
+
+mapview(Sherb_Fermont_ligne)
+```
+<br>
+
+Utiliser maintenant la fonction `st_crosses` pour déterminer les régions administratives traversées par cette ligne.
+
+```{r, warning=FALSE}
+regions_nad[st_crosses(regions_nad, Sherb_Fermont_ligne, sparse = FALSE ),]
+```
+<br>
+
+Utiliser la fonction `mapview()` pour valider visuellement votre réponse.
+
+```{r, warning=FALSE}
+regions_traversees <- regions_nad[st_crosses(regions_nad, Sherb_Fermont_ligne, sparse = FALSE ),]
+
+mapview(regions_traversees) + mapview(Sherb_Fermont_ligne)
+
+```
+<br>
+
+
+</p>
+</details> 
+
+<br>
+
+### Question 4 {-}
+
+La [problématique](#prob_mod7) résolue à la fin de la leçon, nous a permis de déterminer que 4 parcs de la SÉPAQ se trouvent dans un rayon de 70&nbsp;km de la municipalité de Saint-Jean-sur-Richelieu. Quelle est la superficie totale couverte par ces parcs à l'intérieur de ce rayon ?
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+À partir de l'objet spatial `top10_villes_buffer` créé plus tôt, isoler la zone tampon autour de la municipalité de Saint-Jean-sur-Richelieu en utilisant la fonction `subset()`.
+
+```{r, warning=FALSE}
+SJSR_tampon <- subset(top10_villes_buffer, toponyme == "Saint-Jean-sur-Richelieu")
+```
+
+<br>
+
+Utiliser la fonction `st_intersection` pour trouver les parcs du *shapefile* `parcs_nationaux_lcc` qui intersectent cette zone tampon.
+
+```{r, warning=FALSE}
+Parcs_SJSR_tampon <- st_intersection(parcs_nationaux_lcc, SJSR_tampon)
+
+mapview(Parcs_SJSR_tampon) + mapview(SJSR_tampon, col.regions = "red", alpha.regions = 0.2)
+```
+<br>
+
+Utiliser la fonction `st_area()` pour déterminer la superficie de chacun des parcs.
+
+```{r, warning=FALSE}
+Aire_Parcs_SJSR_tampon <- st_area(Parcs_SJSR_tampon)
+Aire_Parcs_SJSR_tampon
+```
+<br>
+
+Utiliser la fonction `sum()` pour déterminer la superficie totale, puis la fonction `set_units()` pour transformer les mètres carrés en hectares.
+
+```{r, warning=FALSE}
+AireTot_Parcs_SJSR_tampon <- sum(Aire_Parcs_SJSR_tampon)
+AireTot_Parcs_SJSR_tampon <- set_units(AireTot_Parcs_SJSR_tampon, ha)
+AireTot_Parcs_SJSR_tampon
+```
+<br>
+
+
+</p>
+</details> 
