@@ -4,12 +4,7 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - elise-dev
-  schedule:
-    - cron: '0 0 11 * *'
-    
+
     
 jobs:
   
@@ -27,10 +22,10 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-      - name: Install R packages with renv
+      - name: Install R packages with remotes
         run: |
-          Rscript -e "install.packages('renv', repos = 'https://muug.ca/mirror/cran/')"
-          Rscript -e "renv::restore()"
-      - name: Build inSileco Blog
+          Rscript -e "install.packages('remotes', repos = 'https://muug.ca/mirror/cran/')"
+          Rscript -e "remotes::install_deps()"
+      - name: Build GitBook
         run: |-
           Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
