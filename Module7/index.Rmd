@@ -41,7 +41,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 
 Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec (SÉPAQ).
 
-Dans la section [exercice](#ex_map_vec), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
+Dans la section [exercices](#ex_map_vec), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
 
 
 ## Leçon {#lecon_manip_vec}
@@ -228,7 +228,7 @@ names(villes)
 On peut vouloir sélectionner un ou plusieurs éléments spatiaux d'un *shapefile* qui possèdent une valeur spécifique d'attribut. Cette opération peut être réalisée en utilisant les fonctions `subset()` ou `which()`.
 
 
-###### Fonction `subset()` {-}
+###### Fonction `subset()` {.unnumbered #fct_subset}
 
 La fonction `subset()` n'est pas spécifique aux données spatiales, c'est une fonction générale de `R` qui retourne le sous-ensemble d'un vecteur, d'une matrice or d'un tableau de données qui satisfait une condition donnée. 
 
@@ -941,7 +941,7 @@ Les opérations topologiques de confirmation sont des fonctions qui permettent d
 La bibliothèque `sf` contient plusieurs opérateurs topologiques de confirmation; par exemple: `st_intersects()`, `st_disjoint()`, `st_crosses()`, `st_overlaps()`, `st_touches()`, `st_within()` et `st_contains()`.
 
 
-####### La fonction `st_intersects` {-}
+####### La fonction `st_intersects` {.unnumbered #fct_intersects}
 
 
 La fonction `st_intersects()` vérifie si deux objets spatiaux `X` et `Y` occupent un espace commun. La fonction confirmera qu'il y a bel et bien une intersection entre les deux objets si leurs intérieurs ou leurs frontières se recoupent. `X` et `Y` peuvent avoir n'importe quelle géométrie (point, multipoint, ligne, multiligne, polygone, multipolygone) (figure  \@ref(fig:st-intersects)).
@@ -1297,7 +1297,7 @@ Cette fonction nous retourne un objet spatial composé de deux attributs. L'attr
 
 Plusieurs fonctions de la bibliothèque `sf` permettent de calculer des mesures spatiales comme la distance, la superficie, ou la longueur. 
 
-###### La fonction `st_distance()` {-}
+###### La fonction `st_distance()` {.unnumbered #fct_distance}
 
 La fonction `st_distance()` retourne la distance euclidienne entre deux objets spatiaux. Par exemple, nous pouvons utiliser cette fonction pour calculer la distance entre deux points. Calculons la distance qui sépare la ville de La Pocatière, dont nous avons isolé les coordonnées plus haut, et la ville de Rimouski.
 
@@ -1648,7 +1648,7 @@ Nous constatons que Sherbrooke *et* Saint-Jean-sur-Richelieu disposent toutes de
 
 
 
-## Exercice {#ex_map_vec}
+## Exercices {#ex_map_vec}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_manip_vec) de ce module.
 Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même&nbsp;!
