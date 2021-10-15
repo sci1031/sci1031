@@ -1,19 +1,18 @@
 # Données spatiotemporelles {#spatiotemp}
 
-<!-- Présenter/définir le terme indexé: ordonner  -->
 
-Manipuler le temps (les dates, les heures, les secondes, etc.) représente une compétence indispensable en science des données. Les données spatiales peuvent elles aussi être indexées sur le temps, on parle alors de **données spatio-temporelles** qui sont donc des données doublement indexées : indexées sur le temps et indexées sur l'espace. L'objectif principal de ce module est justement de manipuler ce type de données, des séries de vecteurs et de temporellement ordonnées, et cela, pour différentes échelles temporelles.
+Manipuler le temps (les dates, les heures, les secondes, etc.) représente une compétence indispensable en science des données. Les données spatiales peuvent elles aussi être indexées sur le temps, c'est-à-dire se faire attribuer un indice de classification (une «coordonnée») temporelle. On parle alors de **données spatio-temporelles** qui sont donc des données doublement indexées : indexées sur le temps et indexées sur l'espace. L'objectif principal de ce module est justement de manipuler ce type de données, des séries de vecteurs temporellement ordonnées, et cela pour différentes échelles temporelles.
 
 
 À la fin de ce module vous saurez&nbsp;:
 
 - Manipuler le temps et les dates.
-- Écrire des fonctions simples et les utiliser pour structurer vos scripts.
-- Créer des animations simples qui montre lâévolution de données spatialisées dans le temps.
+- Créer des animations simples qui montre l'évolution de données spatialisées dans le temps.
 - Utiliser les objets de classe `rasterStack`.
+- Écrire des fonctions simples et les utiliser pour structurer vos codes d'analyse `R`.
 
 
-Vous utiliserez les bibliothques suivantes&nbsp;:
+Vous utiliserez les bibliothèques suivantes&nbsp;:
 
 - `mapview`
 - `raster`
@@ -21,11 +20,13 @@ Vous utiliserez les bibliothques suivantes&nbsp;:
 - `lubridate`
 - `animation`
 
+<!-- Séparer entre nouvelles fonctions et anciennes  -->
 Vous apprendrez à utiliser les fonctions suivantes&nbsp;:
 
 - `hist()`
 - `sort()`, `table()`
 - `st_length()`
+- `stopifnot`
 - `st_cast()`
 - `stack()`
 - `calc()`
@@ -36,163 +37,205 @@ Vous apprendrez à utiliser les fonctions suivantes&nbsp;:
 Et vous apprendrez aussi à créer vos propres fonctions avec `function()`.
 
 
-Dans la première partie de la section [Leçon](#lecon_spatiotemp), nous manipulerons des données des trajets de vélo dans la ville de Montréal. Dans la seconde partie, nous utiliserons des données matricielles de températures et de précipitations  autour <!--MOnt-megantic  --> et nous travaillerons sur une échelle de temps plu grossière, avec des données mensuelles sur une période de 10 ans. 
+Dans la section [Leçon](#lecon_spatiotemp), vous utiliserez des données vectorielles de trajets de vélo dans la ville de Montréal ainsi que des données matricielles de températures et de précipitations dans le Parc national du Mont-Mégantic.
 
-Dans la section [Exercice](#ex_spatiotemp), vous utiliserez XXX.
-
+Dans la section [Exercice](#ex_spatiotemp), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
 
 
 
 ## Leçon {#lecon_spatiotemp}
 
-Cette leçon est structurée autour de deux exemples inspirés des autres modules.
-Dans la première partie, nous allons analyser un jeu de données de 400 trajets de cyclistes à Montréal. Cette analyse nous conduira à manipuler des objets
-vectorielles à des échelles de temps fines (de l'ordre de quelques heures). Dans la seconde partie nous étudierons l'évolution des température et précipitations dans la région du parc national du Mont-Mégantic de 2007 à 2016. Nous manipulerons alors des climatiques mensuelles sous forme d'une série de rasters.
+Cette leçon est divisée en deux parties. Dans la première partie, vous apprendrez à manipuler des données spatiotemporelles de type vectoriel, et dans la seconde partie, des données spatiotemporelles de type matriciel. 
+
+Chacune des parties est structurée autour d'une problématique à résoudre. Dans la première partie, vous analyser un jeu de données de 400 trajets de cyclistes à Montréal. Cette analyse vous amènera à manipuler des objets
+vectoriels à des échelles de temps fines (de l'ordre de quelques heures). 
+
+Dans la seconde partie, vous étudierez l'évolution des températures et des précipitations dans la région du Parc national du Mont-Mégantic de 2007 à 2016. Vous manipulerez alors des données climatiques mensuelles sous forme d'une série de *rasters*.
 
 
+### Télécharger les données {#data_mod9}
 
-### Trajets de vélo à la ville de Montréal
+Les données vectorielles et matricielles utilisées dans ce module peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 9](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module9_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module9_donnees` pour ce module, et dézippez-le. Le dossier comprend quatre fichiers:
 
-Dans cette section nous allons manipuler le temps et l'espace avec un ensemble de 400 trajets de vélo. Avec cet ensemble de données nous répondrons aux deux questions suivante&nbsp;:
 
-* Quel trajet présente la vitesse moyenne la plus élevée?
+- `maxt.nc`
+- `mint.nc`
+- `pcp.nc`
+- `trip400.geojson`.
+<!-- Fonction R? Si oui remplacer quatre par cinq fichiers  -->
+ 
 
-* Quelle est la période de l'année favorite des cyclistes du jeu de données?
+### Données spatiotemporelles vectorielles
+
+Dans cette première partie, nous allons manipuler le temps et l'espace dans un ensemble de données vectorielles. Plus précisément, nous utiliserons un ensemble de données comptabilisant 400 trajets en vélo dans la ville de Montréal, et répondrons aux questions suivantes&nbsp;:
+
+>
+> **Quel trajet présente la vitesse moyenne la plus élevée?**
+>
+
+>
+> **Quelle est la période de l'année préférée des cyclistes du jeu de données?**
+>
+
+<br>
 
 Nous finirons cette partie avec un exercice de visualisation du trajet le plus long, que nous animerons. 
 
 
+
 #### Importer les données 
 
-Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent à disposition un jeu de données incluant près [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions du cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr) (les trajets ont notamment été anonymisés, reportez-vous au lien précédent pour plus dâinformations relatives au traitement de ces données).
+Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent à disposition un jeu de données incluant près de [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions de cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr). Les trajets ont notamment été anonymisés - reportez-vous au lien précédent pour plus d'informations relatives au traitement de ces données.
 
-L'ensemble de ces trajets est contenu dans un fichier
-[GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` qui a été
-zippé. Ces données étant un peu volumineuses (>150MB), nous avons seulement
+Ce jeu de données de 500 trajets est contenu dans un fichier zippé d'extension 
+[GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` que nous avons préalablement téléchargé. 
+Ces données étant un peu volumineuses (>150MB), nous avons seulement
 conservé les 400 premiers trajets. Aussi, nous avons enlevé la colonne `liste_segments_jsonb` qui permet d'identifier les pistes cyclables et les portions du réseau routier emprunter par les cyclistes. Nous avons fait ce pré-traitement en utilisant des manipulations vues dans
 les modules précédents et que nous décrivons ci-dessous&nbsp;:
 
-<!-- Ceci est la commande fait pour simplifier les données?  -->
+<br>
+
 ```R
 library(sf)
 tmp <- st_read("trip5000.json") 
 st_write(tmp[1:400, names(tmp) != "liste_segments_jsonb"], "trip400.geojson") 
 ```
+<br>
 
-Nous pouvons maintenant utiliser le fichier `trip400.geojson` disponible à l'URL suivante <https://github.com/sci1031/sci1031/raw/master/Module9/Donnees/trip400.geojson> comme suit&nbsp;:
+Nous pouvons maintenant utiliser la fonction `st_read()` de la bibliothèque `sf` pour lire le fichier simplifié `trip400.geojson` disponible dans le répertoire `Module9_donnees`&nbsp;:
 
 ```{r, eval = FALSE}
+library(sf)
 chemin <- "D:/votrechemin/SCI1031/Module9/Donnees/"
 chemin_trajet <- paste(chemin, "/trip400.geojson", sep = "")
 trajets <- st_read(chemin_trajet)
-trajets
 ```
+
+<br>
 
 ```{r read_trajet, echo = FALSE, message = FALSE}
 library(sf)
 #trajets <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/trip400.geojson")
 
 trajets <- st_read("Module9/Donnees/trip400.geojson")
-
-trajets
 ```
 
-Il s'agit d'un objet de classe `sf` qui contient un ensemble de 400 lignes décrivant les trajets à vélo et pour lesquels nous avons les informations suivantes&nbsp;:
+L'objet `trajets` est de classe `sf` et contient un ensemble de 400 lignes décrivant les trajets à vélo et pour lesquels nous avons les informations suivantes&nbsp;:
 
 ```{r, names_trajet}
 names(trajets)
 ```
 
-Dans la suite, nous utiliserons les colonnes suivantes:
+<br>
+
+Afin de résoudre notre problématique, nous utiliserons les colonnes suivantes:
 
 - `start` : date et heure associées au début du trajet, 
 - `stop` : date et heure associées à la fin du trajet,
-- `length`: longueur du trajet.
+- `length`: longueur du trajet en mètres.
 
+<br>
 
+#### Vitesse moyenne des trajets
 
-#### Quel trajet présente la vitesse moyenne la plus élevée?
+Commençons par résoudre la première question:
 
-Nous avons maintenant importé 400 trajets à vélo et nous cherchons, dans un premier temps, celui qui présente la vitesse moyenne la plus élevée. Pour calculer une vitesse pour un trajet en particulier, nous devons diviser sa longueur par le temps de parcours. Nous avons donc besoin de trouver la distance des trajets. Dans la table des attributs de `trajets`, il y a une colonne `length` qui nous donne cette distance.
-<!-- Est-ce qu'on sait comment elle a été calculée?  -->
+>
+> **Quel trajet présente la vitesse moyenne la plus élevée?**
+>
+
+Nous avons importé 400 trajets à vélo et nous cherchons celui qui présente la vitesse moyenne la plus élevée. Pour calculer une vitesse pour un trajet en particulier, nous devons diviser sa longueur par le temps de parcours. Nous avons donc besoin de trouver d'abord la distance des trajets. Dans la table des attributs de `trajets`, il y a une colonne `length` qui nous donne cette distance.
+
+Par exemple, nous pouvons obtenir la longueur des 10 premiers trajets&nbsp;:
 
 ```{r, col_length}
-trajets$length[1:20] 
+trajets$length[1:10] 
 ```
+<br>
 
-Notons que sans cette colonne, il demeure relativement aisé de calculer ces distances avec la fonction `st_length()` <!-- ajouter ancre vers la fonction au module 7  --> qui calcule la longueur de chaque ligne de `trajets`. 
+Notons qu'en l'absence de cette colonne `length`, nous pourrions estimer ces distances en utilisant la fonction [`st_length()`](#fct_length) vue au module 7 et qui calcule la longueur de chaque ligne de `trajets`. 
 
 ```{r trajet_length}
 len <- st_length(trajets)
-len[1:20]
+len[1:10]
 ```
+<br>
 
-<!-- Dire comment on peut confirmer que ce sont des mètres  crs(trajet)$units-->
+Comment nous assurer que les distances répertoriées dans la colonne `length` sont identiques à celles calculées avec la fonction `st_length()`? Un moyen simple de le vérifier est de visualiser une distance en fonction de l'autre.
 
-Comment nous assurer que les deux distances sont identiques? Un moyen simple de le vérifier est de visualiser une distance en fonction de l'autre.
-<!-- SUPER!  -->
 
 ```{r, len_vs_len}
+# Tracer une distance en x, et l'autre en y
 plot(trajets$length, st_length(trajets), 
   xlab = "distance - colonne 'length' (m)", # 
-  ylab = "distance - st_length() (m)", 
-  pch = 19) # change le symbole des points
-abline(a = 0, b = 1, lty = 2) # ligne 1:1; lty = 2 donne une ligne discontinue
+  ylab = "distance - fonction 'st_length()' (m)", 
+  pch = 19) # la forme des points est un cercle plein
+# Tracer une ligne droite de pente 1 passant par l'origine.
+# La fonction abline(a,b) permet de créer facilement une ligne en spécifiant 
+# le point d'interception sur l'axe des y (paramètre a) et la pente (paramètre b)
+abline(a = 0, b = 1, lty = 2) # lty = 2 donne une ligne discontinue
+```
+<br>
+
+Nous voyons ainsi rapidement que tous les points sont sur la ligne 1:1. Ceci nous permet de conclure que les valeurs sont identiques ou très proches -  car nous n'avons pas fait de tests formels, et ils se pourraient donc qu'il y ait de minimes différences entre les deux distances. 
+
+Nous devons ensuite quantifier la durée des trajets pour obtenir les vitesses moyennes. Pour cela, nous avons besoin des colonnes `start` et `stop` de l'objet `trajets` qui donnent la date et l'heure associées au début et à la fin de chaque trajet. Par exemple, pour les 20 premiers trajets ces colonnes nous donnent&nbsp;: 
+
+```{r}
+trajets$start[1:10]
+
+trajets$stop[1:10]
 ```
 
-Nous voyons ainsi rapidement que tous les points sont sur la ligne 1:1, donc les valeurs sont identiques (ou très proches, car nous n'avons pas fait de tests formels, ils se pourraient donc qu'il y ait de minimes différences entre les deux distances). 
+<br>
 
-Il nous reste à quantifier la durée des trajets pour obtenir les vitesses moyennes. Pour cela, nous avons besoin des colonnes `start` et `stop`. Pour la manipulation des dates et du temps, nous allons utiliser la bibliothèque [`lubridate`](https://CRAN.R-project.org/package=lubridate). `R` dispose, de base, de toutes les fonctionnalités nécessaires à la manipulation des dates et du temps, `lubridate` rend ces manipulations plus intuitives (l'aide mémoire (<https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf> fait un tour d'horizon complet des fonctionnalités de `lubridate`). 
-
-Regardons à présent la classe des colonnes `start` et `stop`&nbsp;:
+Nous remarquons que la date et l'heure sont exprimées dans un format particulier. Regardons la classe des colonnes `start` et `stop` &nbsp;:
 
 ```{r}
 class(trajets$start)
 class(trajets$stop)
 ```
+<br>
 
-
-Les classes de ces objets signifient que les chaînes de caractères suivent une norme [POSIX](https://fr.wikipedia.org/wiki/POSIX) (*Portable Operating System Interface*), en l'occurrence `POSIXct` (*calendar time*) est une variété de `POSIXt` (*time*) qui contient le nombre de secondes écoulées depuis l'[Heure Unix](https://fr.wikipedia.org/wiki/Heure_Unix) (*Epoch time*), le 1^er^ janvier 1970 00:00:00 UTC ([Temps Universel Coordonné](https://fr.wikipedia.org/wiki/Temps_universel_coordonn%C3%A9)). Ainsi, en convertissant les objets de classe `POSIXct` en objet de classe `numeric`, nous obtenons ce nombre de secondes, par exemple&nbsp;:
-
-
-<!-- Serait p-e utile d'avoir une etape preliminaire avec 
-```{r}
-trajets$start[1:20]
-```
--->
+Les classes obtenues signifient que `start` et `stop` sont exprimés par des chaînes de caractères qui suivent une norme [POSIX](https://fr.wikipedia.org/wiki/POSIX) (*Portable Operating System Interface*). En l'occurrence `POSIXct` (*calendar time*) est une variété de `POSIXt` (*time*) qui contient le nombre de secondes écoulées depuis l'[Heure Unix](https://fr.wikipedia.org/wiki/Heure_Unix) (*Epoch time*), le 1^er^ janvier 1970 00:00:00 UTC ([Temps Universel Coordonné](https://fr.wikipedia.org/wiki/Temps_universel_coordonn%C3%A9)). Ainsi, il est possible de convertir des objets de classe `POSIXct` en objet de classe `numeric` pour obtenir le temps écoulé en secondes, par exemple&nbsp;:
 
 ```{r}
 nb_sec <- as.numeric(trajets$start)
-nb_sec[1:20]
+nb_sec[1:10]
 ```
+<br>
 
-Ces classes peuvent être manipulées avec les fonctions de `lubridate`, par exemple nous pouvons extraire l'année avec la fonction `year()`&nbsp;:
-
-```{r get_year, message = FALSE}
-library(lubridate)
-year(trajets$start)[1:20]
-```
-
-Aussi, la soustraction de deux objets `POSIXct` nous donne un objet de classe `difftime` qui exprime une durée en seconde:
+Aussi, la soustraction de deux objets `POSIXct` nous donne un objet de classe `difftime` qui exprime une durée:
 
 ```{r duree}
 duree <- trajets$stop[1] - trajets$start[1]
 duree
 class(duree)
 ```
-Nous calculons alors les durées pour les différents trajets.
+<br>
+
+Nous pouvons aussi spécifier l'unité de temps dans laquelle nous voulons obtenir la durée entre deux évènements en utilisant la fonction `R` `difftime()`. Cette dernière est composée de trois arguments `difftime(end, start, units)`&nbsp;: la date et l'heure de l'évènement final, la date et l'heure de l'évènement initial, et l'unité désirée.
+
+```{r difftime}
+duree <- difftime(trajets$stop[1], trajets$start[1], units = 'secs')
+duree
+```
+<br>
+
+Ainsi, nous pouvons calculer la durée de chaque trajet en seconde en utilisant la fonction `difftime()`. Ajoutons une colonne à l'objet `trajets` pour conserver le résultat de ce calcul.
 
 ```{r}
-trajets$duree_s <- trajets$stop - trajets$start
-trajets$duree_s[1:20]
+trajets$duree_s <- difftime(trajets$stop, trajets$start, units = 'secs')
+trajets$duree_s[1:10]
 ```
+<br>
 
-Regardons les distributions de longueurs et de durées en dessinant un histogramme avec la fonction `hist()`. 
+Regardons maintenant les distributions de longueurs et de durées de trajets en dessinant un histogramme avec la fonction `hist()`. 
 
 
 ```{r histo, fig.width = 9.5}
 
-par(mfrow = c(1, 2)) # figure a deux panneaux côte à côte
+par(mfrow = c(1, 2)) # figure à deux panneaux côte à côte
 
 hist(trajets$length, 
   breaks = seq(0, 44000, 2000), # spécifie les catégories de longueur
@@ -201,102 +244,144 @@ hist(trajets$length,
   main = "" # pas de titre
 ) 
 hist(as.numeric(trajets$duree_s), 
-  breaks = seq(0, 20000, 1000),
+  breaks = seq(0, 20000, 1000), # spécifie les catégories de durée
   xlab = "Durée (s)",
   ylab = "Fréquence",
   main = "" # pas de titre
 )
 ```
 
-Nous rajoutons maintenant une colonne `vitesse_m_s` à `trajets` qui est la vitesse moyenne exprimée en mètre par seconde. 
+<br>
+
+Nous rajoutons maintenant une colonne `vitesse_m_s` à `trajets` qui est la vitesse moyenne de chaque trajet, exprimée en mètre par seconde. 
 
 ```{r vitesse}
 trajets$vitesse_m_s <- trajets$length/as.numeric(trajets$duree_s)
+trajets$vitesse_m_s[1:10]
 ```
+<br>
 
-Il peut être préférable d'exprimer ces vitesses en kilomètre par heure, pour cela, il nous suffit de diviser par 1000 pour convertir les mètres en kilomètres et multiplier les secondes par 3600 pour les convertir en heures, ce qui revient à multiplier par 3.6 :
+Notez que nous avons converti l'objet `trajets$duree_s` qui est de classe `difftime` en format numérique pour réaliser cette division.
+
+Il peut être plus intuitif d'exprimer ces vitesses en kilomètre par heure, plutôt qu'en mètre par seconde, pour cela il nous suffit de diviser par 1000 [m/km] pour convertir les mètres en kilomètres et de multiplier les secondes par 3600 [s/h] pour les convertir en heures, ce qui revient à multiplier par 3.6 :
 
 ```{r kms}
 trajets$vitesse_km_h <- trajets$vitesse_m_s * 3.6
+trajets$vitesse_km_h[1:10]
 ```
+<br>
 
-Nous allons maintenant ordonner les vitesses par ordre décroissant, avec la fonction `sort()`, et regarder les 10 premières valeurs : 
+Afin de déterminer le trajet le plus rapide, nous allons maintenant ordonner les vitesses par ordre décroissant, avec la fonction `sort()`, et regarder les 10 premières valeurs : 
 
 ```{r sort_vitesse}
 vit_dec <- sort(trajets$vitesse_km_h, decreasing = TRUE)
 vit_dec[1:10]
 ```
-Le plus rapide des cyclistes circule à une vitesse moyenne de `r format(vit_dec[1], digits = 3)`&nbsp;km/h, ce qui ne semble pas réaliste et un problème d'enregistrement est probablement à l'origine, nous excluons ce trajet et retenons le second comme étant le plus rapide. Pour extraire le second trajet, nous utilisons la fonction `order()`.
+<br>
+
+Le ou la plus rapide des cyclistes circule à une vitesse moyenne de `r format(vit_dec[1], digits = 3)`&nbsp;km/h, ce qui ne semble pas réaliste! Nous supposons qu'un problème d'enregistrement de ce trajet est à l'origine de cette valeur abberante. Nous excluons donc ce trajet et retenons le second comme étant le plus rapide. Pour extraire le second trajet, nous utilisons la fonction `order()`.
 
 ```{r traj_rapide}
 traj_rapide <- trajets[order(trajets$vitesse_km_h, decreasing = TRUE)[2], ]
 traj_rapide 
 ```
-<!-- Notez que order retourne l'indice alors que sort retourne la valeur   -->
+<br>
 
-Nous pouvons visualiser ce trajet avec `mapview()`.
+Notez que la fonction `order()` retourne l'indice de l'élément désiré, alors que la fonction `sort()` retourne la valeur de l'élément. 
+
+
+Nous pouvons visualiser ce trajet en utilisant la fonction `mapview()` de la bibliothèque `mapview()`.
 
 ```{r}
 library(mapview)
 mapview(traj_rapide)
 ```
 
+<br>
+
 Un trajet bien singulier, à 22h près du parc Laurier.
 
-<!-- Il faudrait commenter sur la précision du trajet, impossible que le/la cycliste "rentre" dans des buildings. 
-La personne semble ivre 
-peut-être que prendre un autre ?-->
+Nous remarquons que l'enregistrement du trajet manque probablement de précision, ce qui expliquerait son allure quelque peu tordue...
 
+<br>
 
-#### Quelle est la période de l'année favorite des cyclistes du jeu de données?
+#### Période de l'année préférée
 
-Pour répondre à cette deuxième question, nous allons commencer par identifier le mois de l'année qui compte le plus de trajet à vélo (les trajets on été enregistrés en 2013). Pour cela, nous allons utiliser la fonction `month()` de la bibliothèque `lubridate`. Cette fonction nous retourne le mois associé à un objet de classe `POSIXct`
+Penchons-nous maintenant sur la deuxième question.
+
+>
+> **Quelle est la période de l'année préférée des cyclistes du jeu de données?**
+>
+
+<!-- Ajouter icone biblio  -->
+Pour répondre à cette deuxième question, nous allons utiliser certaines fonctions de la bibliothèque  [`lubridate`](https://CRAN.R-project.org/package=lubridate). Bien que `R` dispose, de base, de toutes les fonctionnalités nécessaires à la manipulation des dates et du temps, `lubridate` rend ces manipulations plus intuitives (l'aide mémoire (<https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf> fait un tour d'horizon complet des fonctionnalités de `lubridate`). 
+
+Installons donc la bibliothèque `lubridate`&nbsp;:
+```{r eval=FALSE}
+install.packages("lubridate")
+```
+
+Chargeons la bibliothèque `lubridate` dans notre session de travail `R` afin de manipuler les données de classes `POSIXct` des colonnes `start` et `stop`. Par exemple nous pouvons extraire l'année avec la fonction `year()`&nbsp;:
+
+```{r get_year, message = FALSE}
+library(lubridate)
+year(trajets$start)[1:20]
+```
+<br>
+
+Afin de répondre à la question, nous commençons par identifier le mois de l'année qui compte le plus de trajets à vélo. Pour cela, nous allons utiliser la fonction `month()` de la bibliothèque `lubridate`. Cette fonction nous retourne le mois associé à un objet de classe `POSIXct`
 
 ```{r fun_month}
 month(trajets$start[1])
 ```
+<br>
 
-`month` nous offre aussi la possibilité d'utiliser les noms de mois sous forme de facteurs, de manière abréviés&nbsp;:
+La fonction `month()` nous offre aussi la possibilité d'utiliser les noms de mois (en anglais) sous forme de facteurs, de manière abrégée &nbsp;:
 
 ```{r}
 month(trajets$start[1], label = TRUE)
 ```
+<br>
 
-ou complet&nbsp;:
+ou intégrale&nbsp;:
 
 ```{r}
 month(trajets$start[1], label = TRUE, abbr = FALSE)
 ```
+<br>
 
-Nous utilisons seulement les numéros de mois et nous créons une colonne `mois` dans la table d'attributs de `trajets` pour les conserver&nbsp;:
+Pour la tâche à réaliser, utilisons seulement le numéro des mois et créons une colonne `mois` dans la table d'attributs de l'objet `trajets` pour les conserver&nbsp;:
 
 ```{r}
 trajets$mois <- month(trajets$start)
+trajets$mois[1:20]
 ```
+<br>
 
-une manière efficace de compter le nombre d'occurrence est d'appliquer la fonction `table()` sur la colonne nouvellement créée&nbsp;:
+Une manière efficace de compter le nombre d'occurrence est d'appliquer la fonction `table()` sur la colonne nouvellement créée&nbsp;:
 
 ```{r table_month}
 nb_mois <- table(trajets$mois)
 nb_mois 
 ```
+<br>
 
-Juillet (le 7^ième^ mois de l'année) est donc le mois qui concentre le plus de trajets à vélo dans le jeu de données étudié. Nous allons maintenant regarder le jour qui concentre le plus de trajets avec la fonction `day()`. Nous commençons par ajouter une colonne `jour`.
+Juillet (le 7^ième^ mois de l'année) est donc le mois qui concentre le plus de trajets à vélo dans le jeu de données étudié. Nous allons maintenant regarder le jour qui concentre le plus de trajets avec la fonction `day()` de la bibliothèque `lubridate`. Nous commençons par ajouter une colonne `jour` à l'objet `trajets`.
 
 ```{r jour}
 trajets$jour <- day(trajets$start)
 trajets$jour[1:10]
 ```
-<!-- la fonction jour donne le jour 1 à 31 de la date (peu importe le mois)  -->
+<br>
 
-
-Nous isolons ensuite que les trajets qui sont en juillet.
+Isolons ensuite les trajets effectués au mois de juillet.
 
 ```{r traj_juillet, fig.width = 9.5}
 traj_juillet <- trajets[trajets$mois == 7, ]
 ```
+<br>
 
-Enfin, nous visualisons le nombre de trajets par jour avec les fonctions `table()` et `barplot()` cette fois-ci. 
+Enfin, visualisons le nombre de trajets par jour avec les fonctions `table()` et `barplot()` cette fois-ci. 
 
 ```{r barplot_day, fig.width = 9.5}
 barplot(
@@ -307,33 +392,38 @@ barplot(
 ```
 
 C'est donc le 10 juillet que nous recensons le plus grand nombre de trajets.
-Nous allons même aller à l'échelle de l'heure et nous recommençons les étapes précédentes avec la fonction `hour`. Au passage, mentionnons la bibliothèque [`hms`](https://CRAN.R-project.org/package=hms) pour manipuler les heures, minutes et secondes (nous ne l'utiliserons pas ici, mais elles pourraient vous être utile dans vos projets futurs).
+Nous allons même aller à l'échelle de l'heure et nous recommençons les étapes précédentes avec la fonction `hour()`. Au passage, mentionnons la bibliothèque [`hms`](https://CRAN.R-project.org/package=hms) pour manipuler les heures, minutes et secondes (nous ne l'utiliserons pas ici, mais elles pourraient vous être utile dans vos projets futurs).
 
 ```{r traj_10juillet, fig.width = 9.5}
 trajets$heure <- hour(trajets$start)
 traj_10juillet <- trajets[trajets$mois == 7 & trajets$jour == 10, ]
 barplot(
   table(traj_10juillet$heure),
-  xlab = "Jour de juillet",
+  xlab = "Jours de juillet",
   ylab = "Nombre de trajets"
 )
 ```
 
 C'est donc à 17h le 10 juillet que les trajets sont les plus nombreux.
 
+<br>
 
-#### Le trajet le plus long en animation
+#### Animation du trajet le plus long
 
-Nous allons à présent animer le chemin le plus long. Nous voulons, en effet, créer un fichier [GIF](https://fr.wikipedia.org/wiki/Graphics_Interchange_Format) qui illustrera le parcours du cycliste. Pour y arriver nous devrons faire les étapes suivantes&nbsp;:
+Nous allons à présent animer le trajet de vélo le plus long. Nous voulons, en effet, créer un fichier [GIF](https://fr.wikipedia.org/wiki/Graphics_Interchange_Format) qui illustrera le parcours de la ou du cycliste. Pour y arriver nous devrons faire les étapes suivantes&nbsp;:
 
-1. Trouver le chemin le plus long.
+>
+> 1. Trouver le trajet le plus long.
+> 2. Associer un temps à chaque segment du parcours. 
+> 3. Créer une carte pour différents états d'avancement du parcours.
+> 4. Rassembler les cartes ainsi créées et en faire un fichier GIF.
+>
 
-2. Associer un temps à chaque segment du parcours. 
+<br>
 
-3. Créer une même figure pour différents états d'avancement du parcours.
+Commençons!
 
-4. Rassembler les figures ainsi créées et en faire un fichier GIF.
-
+###### 1. Trajet le plus long {-}
 
 La première étape est une manipulation de filtres que nous avons fait à maintes reprises. Cette fois-ci appliquons `which.max()` sur la colonne `length()` et nous filtrons avec `[`. 
 
@@ -341,36 +431,44 @@ La première étape est une manipulation de filtres que nous avons fait à maint
 traj_long <- trajets[which.max(trajets$length), ]
 traj_long
 ```
+<br>
 
 Regardons ce trajet&nbsp;:
 
 ```{r}
 mapview(traj_long)
 ```
+<br>
 
-Passons à la seconde étape. Pour pouvoir associer un temps à chaque portion du trajet, nous allons commencer par convertir la géométrie de `traj_long` de `LINESTRING` à `POINT` avec la fonction `st_cast()`.
+###### 2. Segmentation du trajet {-}
+
+Nous allons segmenter le trajet le plus long en une série de points successifs. Chaque point marquera ainsi une portion du trajet total. Nous allons ensuite associer un temps à chacune de ces portions. Pour ce faire, nous commencons par convertir la géométrie de `traj_long` de `LINESTRING` à `POINT` avec la fonction [`st_cast()`](#fct_cast) vue au module 7.
 
 ```{r}
 traj_long_pts <- st_as_sf(st_cast(st_geometry(traj_long), to = "POINT"))
+traj_long_pts
 ```
+<br>
 
 Décortiquons cette ligne: 
 
-1. nous utilisons la géométrie de `traj_long` avec `st_geometry()`,
+i. Nous isolons d'abord la géométrie de `traj_long` avec la fonction `st_geometry()`. 
 
-2. nous faisons la conversion point/ligne avec `st_cast()`,
+ii. Nous faisons ensuite la conversion point/ligne avec la fonction `st_cast()`.
 
-3. l'objet de classe `sfc` ainsi obtenu est converti en objet de classe `sf` avec `st_as_sf()`.
+iii. Finalement, nous convertissons l'objet de classe `sfc` ainsi obtenu en objet de classe `sf` avec `st_as_sf()`.
 
-<!-- L'objet ainsi créé contient X points  
+<br>
+
+L'objet `traj_long_pts` ainsi créé contient 10818 points  
 ```{r}
-traj_long_pts
+nrow(traj_long_pts)
 ```
 
--->
+<br>
 
+Maintenant, nous allons associer un temps à chaque point du trajet. D'emblée, il nous est possible de déterminer le temps de départ et le temps d'arrivée de ce trajet puisque ceux-ci sont donnés par les valeurs de `traj_long$start` et de `traj_long$stop` respectivement. De plus, l'application "Mon RésoVélo" enregistre les coordonnées spatiales le long d'un trajet à intervalle régulier. Ainsi, le temps associé à chaque point d'un trajet est réparti de façon régulière entre son temps de départ et son temps d'arrivée. Nous créons donc une séquence régulière avec la fonction `R` `seq()` en spécifiant le temps de départ, le temps d'arrivé et le nombre de points que doit inclure la séquence (argument `length.out`) qui est le nombre de lignes (`nrow()`) de la table d'attributs de `traj_long_pts`. Finalement, nous ajoutons cette séquence au nouvel objet `traj_long_pts` dans une colonne `temps`. 
 
-Nous ajoutons alors, au nouvel objet de classe `sf` ainsi créé, une colonne temps. Pour cela nous créons une séquence régulière (l'application "Mon RésoVélo" enregistrant des coordonnées spatiales à intervalle régulier) avec la fonction `seq()` en spécifiant le temps de départ (dans la colonne `start`), le temps d'arrivé (colonne stop `stop`) et le nombre de points que doit inclure la séquence (argument `length.out`) qui est le nombre de lignes (`nrow()`) de la table d'attributs de `traj_long_pts`.
 
 ```{r seq_time}
 traj_long_pts$temps <- seq(
@@ -380,44 +478,54 @@ traj_long_pts$temps <- seq(
 )
 ```
 
+<br>
 
-<!-- pas sûr de comprendre l'idée derrière ce qu'on fait  -->
-
-<!-- segmenter le trajet, visualisons une premier segment -->
+###### 3. Visualisation du trajet pour différentes périodes {-}
 
 
-À présent, nous devons visualiser le trajet parcouru pour un temps arbitraire, autrement dit pour n'importe pour les $n$ premiers points du trajets. Nous commençons par le faire pour les 2000 premiers points de `traj_long_pts`.
+À présent, nous allons visualiser le trajet parcouru sur différentes périodes de temps. Pour chaque période, nous sauvegarderons la visualisation obtenue. À la prochaine étape, nous combinerons ces images pour obtenir une animation. 
+
+Dans un premier temps, visualisons le trajet parcouru pour une période de temps arbitraire, autrement dit pour une période allant du premier point jusqu'à n'importe quel points $n$ le long du trajet `traj_long_pts`. À titre d'exemple, choisissons les 2000 premiers points.
 
 ```{r pt_to_li}
 lin <- st_cast(st_combine(traj_long_pts[1:2000, ]), "LINESTRING")
 ```
+<br>
 
 Cette ligne contient les étapes suivantes: 
 
-1. nous extrayons les 2000 premiers points avec `[`, 
-2. nous les combinons en `MULTIPOINT` avec `st_combine()`,
-3. nous transformons le `MULTIPOINT` en `LINESTRING` avec `st_cast()`. 
+i. Nous extrayons les 2000 premiers points avec `[`. 
+ii. Nous les combinons en `MULTIPOINT` avec `st_combine()`.
+iii. Nous transformons le `MULTIPOINT` en `LINESTRING` avec `st_cast()`. 
 
-Notons que sans l'étape 2, `st_cast()` transformera chaque point en ligne ce qui donnera un ensemble de lignes de 1 seul point. Regardons cette section avec `mapview()`.
+<br>
+
+Notons que sans l'étape (ii), `st_cast()` transformera chaque point en ligne ce qui donnera un ensemble de lignes de 1 seul point. 
+
+Regardons cette section du trajet avec `mapview()`.
 
 ```{r}
 mapview(lin) 
 ```
+<br>
 
-Grâce à l'étape précédente, nous pouvons facilement avoir accès à l'heure correspondant au dernier point de ce trajet. 
+Grâce à l'étape précédente, nous pouvons facilement avoir accès à l'heure correspondant au dernier point de cette section du trajet. 
 
 
 ```{r}
-traj_long_pts[2000, "temps"]
+traj_long_pts$temps[2000]
 ```
+<br>
 
-Avec `st_length()` nous pouvons avoir la distance parcourue pour cette section&nbsp;:
+Avec la fonction `st_length()` de la bibliothèque `sf` nous pouvons connaître la distance parcourue pour cette section du trajet&nbsp;:
 
 ```{r}
 st_length(lin)
 ```
+<br>
 
-Pour l'animation nous ferons des cartes simples avec la bibliothèque `tmap` et nous ajouterons ces deux éléments que nous combinons avec `paste0()`. 
+Visualisons maintenant cette section du trajet en utilisant la bibliothèque `tmap`. Dans le titre de la carte, indiquons la distance parcourue ainsi que le temps associé. Des objets de classe caractère peuvent être combinés (c'est-à-dire écrits l'un à la suite des autres sans espacement) en utilisant la fonction `R` `paste0()`. 
+
 
 ```{r simple_map}
 library(tmap)
@@ -425,12 +533,18 @@ tm_shape(lin, bbox = st_bbox(traj_long_pts)) +
   tm_lines(lwd = 2, col = "#62852eaa") + 
   tm_layout(main.title = paste0(
     "temps: ",
-    traj_long_pts[2000, "temps"], 
+    traj_long_pts$temps[2000], 
     " / distance", st_length(lin)
   ),  main.title.size = 0.9)
 ```
+<br>
 
-Il nous reste alors à faire ce même graphique pour un nombre croissant de points et nous combinerons tous ces graphiques en un fichier GIF. Dans ce qui suit nous allons structurer notre code avec quelques fonctions. Cela nous permet d'isoler les différentes étapes à réaliser et d'éviter de répétées du code. De manière générales, structurer son code en différentes fonctions permet d'augmenter la clarté du code et de diminuer les erreurs qui arrivent rapidement quand le code se complexifie. Nous devons donc prendre un peu de temps pour expliquer comment créer une fonction. Jusqu'ici nous avons utilisé de nombreuses fonctions sans que nous n'ayons eu besoin de créer nos propres fonctions. Pour comprendre comment est structurée une fonction, nous allons détailler un exemple simple. 
+
+Pour obtenir une animation pour la totalité du trajet `traj_long`, nous devons alors faire cette même carte pour un nombre croissant de points et combiner toutes ces cartes en un seul fichier GIF. Puisque le trajet total compte `r nrow(traj_long_pts)` points, cette tâche est répétitive. 
+
+Dans ce qui suit nous allons structurer notre code avec quelques fonctions. Cela nous permet d'isoler les différentes étapes à réaliser et d'éviter de répétées du code. De manière générales, structurer son code en différentes fonctions permet d'augmenter la clarté du code et de diminuer les erreurs qui arrivent rapidement quand le code se complexifie. 
+
+Nous devons donc prendre un peu de temps pour expliquer comment créer une fonction. Jusqu'ici nous avons utilisé de nombreuses fonctions déjà définies dans `R` ou dans les bibliothèques employées sans que nous n'ayons eu besoin de créer nos propres fonctions. Pour comprendre comment est structurée une fonction, nous allons détailler un exemple simple. 
 
 ```{r}
 ma_fonction <- function(a, b = 1) {
@@ -442,9 +556,13 @@ ma_fonction <- function(a, b = 1) {
   return(c) # ou simplement c
 }
 ```
+<br>
 
+Dans `R`, une fonction est un objet créé avec `function()`. Comme tout objet nous pouvons l'assigner à une variable et dans notre exemple, nous l'assignons à `ma_fonction` qui sera le nom de la fonction. Dans la parenthèse qui suit `function`, nous écrivons les arguments de la fonction, en l'occurrence pour `ma_fonction`, nous avons `a` et `b`. Dans notre exemple, `b` a une valeur par défaut qui est 1, donc si nous ne spécifions pas `b`, alors `b` aura automatiquement une valeur de 1. 
 
-Dans `R`, une fonction est un objet créé avec `function()`. Comme tout objet nous pouvons l'assigner à une variable et dans notre exemple, nous l'assignons à `ma_fonction` qui sera le nom de la fonction. Dans la parenthèse qui suit `function`, nous écrivons les arguments de la fonction, en l'occurrence pour `ma_fonction`, nous avons `a` et `b`. Dans notre exemple, `b` a une valeur par défaut qui est 1, donc si nous ne spécifions pas `b`, alors `b` aura automatiquement une valeur de 1. Le corps de la fonction est l'expression juste après cette parenthèse, dans notre cas cela inclut tout ce qui est entre accolades (`{ }`). Une fonction peut comprendre autant de ligne de code que souhaité et peut contenir n'importe quelle expression `R` valide. À titre d'exemple, nous avons utilisé un test logique `if`/`else` pour que la valeur retournée change selon la valeur de `c`. Avec `R`, une fonction retourne la dernière ligne de code (lâutilisation de `return()` à la dernière ligne est ainsi optionnelle, mais elle permet de clarifier ce que retourne la fonction). Une fois la fonction créée, nous l'appelons comme toute autre fonction. 
+Le corps de la fonction est l'expression juste après cette parenthèse, dans notre cas cela inclut tout ce qui est entre accolades (`{ }`). Une fonction peut comprendre autant de ligne de code que souhaité et peut contenir n'importe quelle expression `R` valide. À titre d'exemple, nous avons utilisé un test logique `if`/`else` pour que la valeur retournée `c` change selon les valeurs de `b`. 
+
+Avec `R`, une fonction retourne la dernière ligne de code (l'utilisation de `return()` à la dernière ligne est ainsi optionnelle, mais elle permet de clarifier ce que retourne la fonction). Une fois la fonction créée, nous l'appelons comme toute autre fonction. 
 
 
 ```{r}
@@ -452,28 +570,33 @@ ma_fonction(1) # utlise b = 1
 ma_fonction(1, 2)
 ma_fonction(1, -2)
 ```
+<br>
 
-Nous sommes maintenant outillés pour créer différentes fonctions pour structurer notre code. Notre fonction principale, `visual()`, a pour argument les points du trajet, `traj_pts` et le nombre de points à combiner, que nous appellerons `n` et reprendra les étapes précédentes.
+Nous sommes maintenant outillés pour créer différentes fonctions pour structurer notre code. Notre fonction principale, `visual()`, a pour argument les points du trajet, `traj_pts`, et le nombre de points à combiner, que nous appellerons `n`. Cette fonction reprend les étapes précédentes.
 
 
 ```R
 visual <- function(traj_pts, n = 100) {
-  # extraction
+  
+  # extraction des n premiers points
   pts <- traj_pts[1:n, ] 
+  
+  # conversion des points en ligne
   lin <- st_cast(st_combine(pts), "LINESTRING")
-  # graphique
+  
+  # carte de la ligne
   tm_shape(lin, bbox = st_bbox(traj_long_pts)) + 
     tm_lines(lwd = 2, col = "#62852eaa") + 
     tm_layout(main.title = paste0(
       "temps: ",
-      traj_long_pts[n, "temps"], 
+      traj_long_pts$temps[n], 
       " / distance", st_length(lin)
     ), main.title.size = 0.9)
 }
 ```
+<br>
 
-
-Nous allons faire quelques améliorations sur le texte accompagnant les cartes en créant deux autres fonctions. La première, `txt_temps()`, a pour argument un temps (nous utiliserons le temps du point `n`) et retourne un texte formaté grÃ¢ce aux fonctionnalités de `lubridate`. 
+Nous allons faire quelques améliorations sur le texte accompagnant les cartes en créant deux autres fonctions. La première, `txt_temps()`, a pour argument un temps (nous utiliserons le temps du point `n`) et retourne un texte formaté grâce aux fonctionnalités de la bibliothèque `lubridate`. 
 
 
 ```{r txt_temps}
@@ -481,6 +604,8 @@ txt_temps <- function(temps) {
   paste0(hour(temps), "h ", minute(temps), "m ", floor(second(temps)), "s")
 } 
 ```
+
+<br>
 
 La seconde, `txt_distance()`, prend pour argument une ligne et retourne un texte formaté comprenant la distance en kilomètre. 
  
@@ -491,8 +616,15 @@ txt_distance <- function(lin) {
 }
 ```
 
+<br>
 
-Notons que la fonction `format()` nous permet de contrôler le nombre de chiffres (`digits`) affiché. La fonction `visual()` appelle ces deux fonctions. De plus, nous y ajoutons un argument, `basemap`, qui nous permet d'ajouter un fond de carte. Cet argument a pour valeur `NULL` par défaut, ce qui nous permet d'avoir, par défaut, une carte sans fond. Enfin, nous allons nous assurer qu'il y ait au moins 2 points car nous avons besoin de 2 points pour faire une ligne. 
+Notons que la fonction `R` `format()` nous permet de contrôler le nombre de chiffres (`digits`) affiché. Nous allons reformuler notre fonction `visual()` pour qu'elle appelle ces deux fonctions. 
+
+
+De plus, nous y ajoutons un argument, `basemap`, de la bibliothèque `tmap`, qui nous permet d'ajouter un fond de carte. Cet argument a pour valeur `NULL` par défaut, ce qui nous permet d'avoir, par défaut, une carte sans fond. 
+
+
+Enfin, nous allons nous assurer que le nombre `n` de points à combiner soit supérieur à 1 car nous avons besoin d'un minimum de 2 points pour créer une ligne. Cette condition est assurée par la fonction `R` `stopifnot()`.
 
 
 ```{r visual}
@@ -509,70 +641,131 @@ visual <- function(traj_pts, n = 100, basemap = NULL) {
 }
 ```
 
-Nous pouvons maintenant faire la figure pour le nombre de points désirés, avec un minimum de 2 et un maximum de `r nrow(traj_long_pts)` points). Pour faire la figure précédente nous utilisons le code suivant&nbsp;:
+<br>
+
+Nous pouvons maintenant faire la carte pour le nombre de points désirés, avec un minimum de 2 et un maximum de `r nrow(traj_long_pts)` points. Pour faire la figure précédente nous utilisons le code suivant&nbsp;:
 
 ```{r}
 visual(traj_long_pts, 2000)
 ```
+<br>
 
-L'avantage du travail précédent est que nous pouvons maintenant très facilement faire la même figure en appelant notre fonction et en changeant simplement la valeur de `n`, par exemple, nous pouvons faire la même figure avec les 4000 points.
+L'avantage du travail précédent est que nous pouvons maintenant très facilement faire la même carte en appelant notre fonction et en changeant simplement la valeur de `n`, par exemple, nous pouvons faire la même carte avec les 4000 premiers points.
 
 ```{r}
 visual(traj_long_pts, 4000)
 ```
+<br>
 
-Pour générer un fichier GIF, nous utilisons la fonction `saveGIF()` de la bibliothèque `animation`. Cette fonction prend en premier argument une expression (du code `R`) qui permet de générer une série de figures qui seront ensuite combinées en GIF. Nous allons faire une dernière fonction, `anim()`, qui nous permet de générer une série de `n_img` images de notre trajet en appelant `visual()`.
+
+###### 4. Créer une animation {-}
+
+
+Nous allons maintenant créer une nouvelle fonction, `anim()`, qui nous permettra de générer une série de `n_img` images de notre trajet en appelant notre fonction `visual()` créée à l'étape précédente.
 
 
 ```{R}
-anim <- function(traj_pts, n_img = 10, basemap = NULL) {
+anim <- function(traj_pts, n_img, basemap = NULL) {
   for (i in floor(seq(2, nrow(traj_pts), length.out = n_img))) {
     print(visual(traj_pts, i, basemap))
   }
 }
 ```
 
+<br>
 
 Quelques remarques: 
 
-* Nous utilisons `seq()` pour générer une séquence de `n_img` images entre 2 et le maximum de points (`r nrow(traj_long_pts)`). 
+i. La fonction `for()` constitue ce qu'on appelle une **boucle** en programmation informatique. La boucle vient répéter une action, donnée par les lignes de codes entre les accolades `{ }`, pour chaque élément contenu dans une séquence. 
 
-* La séquence peut générer des nombres décimaux, mais `visual()` demande des nombre entiers, nous utilisons alors `floor()` pour la conversion. 
+ii. Nous utilisons `seq()` pour générer une séquence de `n_img` images entre 2 et le maximum de points (`r nrow(traj_long_pts)`). 
 
-* Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`. 
+iii. La séquence peut générer des nombres décimaux, mais `visual()` demande des nombre entiers, nous utilisons alors `floor()` pour la conversion. 
+
+iv. Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`. 
+
+<br>
+
+Observons, par exemple, la succession de cartes créées par la fonction `anim()` lorsque `n_img = 5`&nbsp;:
+<!-- Moyen de ne pas les afficher une a la suite des autres?? c<est laid sur la page web  -->
+
+```{r}
+anim(traj_long_pts, n_img = 5, NULL)
+```
+
+
+<br>
+
+
+Une fois l'animation créée, pour un nombre d'images donné, nous voulons la sauvegarder en format GIF. Pour générer un fichier GIF, nous utilisons la fonction `saveGIF()` de la bibliothèque `animation`. Cette fonction prend en premier argument une expression (du code `R`) qui permet de générer une série de figures qui seront ensuite combinées en GIF. 
+
+Installons la bibliothèque `animation`.
+```{r eval=FALSE}
+install.packages("animation")
+```
+<br>
 
 Nous pouvons maintenant utiliser `saveGIF()`.
 
 ```R
-saveGIF(anim(20), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
+library(animation)
+saveGIF(anim(traj_long_pts, 20, NULL), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
+```
+   
+<!-- ![](Module9/images/anim1.gif)-->
+
+
+```{r anim2, fig.align='center', echo=FALSE}
+knitr::include_graphics('Module9/images/anim1.gif')
 ```
 
-![](Module9/images/anim1.gif)
+<br>
 
 Pour finir, nous allons ajouter un fond de carte. Pour cela nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grâce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
 
-<!-- c'est quoi?  -->
 
+Installons la bibliothèque `rosm`.
+
+```{r eval=FALSE}
+install.packages("rosm")
+```
+<br>
+
+La fonction `osm.raster()` s'utilise avec la library `raster`. Nous devons donc charger également cette library dans notre session de travail `R`. Nous devons aussi spécifier à la fonction `osm.raster()` l'étendue de la carte de fond désirée.
 
 ```R
 library(raster)
 library(rosm)
-bm <- osm.raster(extent(traj_long_pts), crop = TRUE)
-bm
+carte_fond <- osm.raster(extent(traj_long_pts), crop = TRUE)
+carte_fond
 ```
-<!-- Choisir une autre couleur, genre mauve, on voit pas super bien le vert  -->
+<br>
+
+Visualisons cette carte de fond avec les fonctionnalités de la library `tmap`:
+
+```{r}
+tm_shape(carte_fond) + tm_rgb()
+```
+<br> 
 
 
-Nous créons alors un fond de carte rapide avec `tmap` et la fonction `tm_rgb()`
+
+Maintenant, répétons notre animation en remplaçant la valeur `NULL` de l'argument `basemap` par la carte de fond.
 
 ```R
-library(animation)
-saveGIF(animation(20, tm_shape(bm) + tm_rgb()), 
+saveGIF(anim(traj_long_pts, 20, tm_shape(carte_fond) + tm_rgb()), 
    movie.name = "anim2.gif", ani.height = 500, ani.width = 500)
+
+```
+   
+<!--![](Module9/images/anim2.gif)-->
+
+```{r anim2, fig.align='center', echo=FALSE}
+knitr::include_graphics('Module9/images/anim2.gif')
 ```
 
-![](Module9/images/anim2.gif)
 
+<br>
 
 
 ### Précipitations et Températures au Parc National du Mont-Mégantic
