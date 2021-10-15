@@ -654,7 +654,7 @@ class(GIM_union)
 -->
 
 
-###### La fonction `st_cast()` {-}
+###### La fonction `st_cast()` {.unnumbered #fct_cast}
 
 La fonction `st_cast()` sert à convertir la géométrie d'un objet spatial donné vers une autre géométrie. Cette fonction comprend deux arguments : `st_cast(x, to)`. Le premier argument, `x`, correspond à l'objet vectoriel dont on souhaite modifier la géométrie, alors que le second argument, `to`, correspond à la géométrie que l'on souhaite lui attribuer. 
 
@@ -1411,7 +1411,7 @@ st_area(trait_bleu)
 ```
 
 
-###### La fonction `st_length()` {-}
+###### La fonction `st_length()` {.unnumbered #fct_length}
 
 La fonction `st_length()` calcule la longueur d'un objet spatial unidimensionnel (`LINESTRING`, `MULTILINESTRING`). 
 
