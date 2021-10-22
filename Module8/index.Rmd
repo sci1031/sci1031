@@ -1045,7 +1045,7 @@ Et voilà qui complète la réalisation du profil topographique du sentier menan
 ## Exercices {#ex_mat_manip}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_manip_mat) de ce module.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même&nbsp;!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
 
 <br>
 

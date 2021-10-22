@@ -1651,7 +1651,7 @@ Nous constatons que Sherbrooke *et* Saint-Jean-sur-Richelieu disposent toutes de
 ## Exercices {#ex_map_vec}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_manip_vec) de ce module.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même&nbsp;!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
 
 <br>
 
