@@ -8,6 +8,14 @@ L'objectif principal de ce module est d'apprendre à manipuler des données vect
 - Filtrer des données vectorielles en se basant sur leurs attributs.
 - Joindre spatialement deux ensembles de données vectorielles.
 - Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
+- Combiner, aggréger et simplifier des objets vectoriels. 
+- Transformer la géométrie d'objets vectoriels.
+- Créer des zones tampons autour d'objets vectoriels.
+- Trouver le centroid et les coordonnées d'objets vectoriels.
+- Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
+- Confirmer des relations topologiques entre deux objets vectoriels.
+- Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
+
 
 Vous utiliserez les bibliothèques suivantes:
 
@@ -33,7 +41,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 
 Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec (SÉPAQ).
 
-Dans la section Exercice, vous utiliserez ces mêmes données. <!-- A FAIRE -->
+Dans la section [exercices](#ex_map_vec), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
 
 
 ## Leçon {#lecon_manip_vec}
@@ -54,13 +62,13 @@ Dans un second temps, cette leçon vous guidera dans la résolution d'une probl�
 
 Dans cette leçon, nous allons utiliser les données vectorielles relatives aux [municipalités](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives) et aux [régions administratives du Québec](https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs), ainsi qu'au réseau de la [Société des établissements de plein air du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000), la SÉPAQ. 
 
-Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module7_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier comprend trois sous-dossiers:
+Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module7_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier comprend trois sous-dossiers et un fichier *.csv*:
 
-<!-- nettoyer le dossier  -->
 
 - `villes`,
 - `parcs.gdb`,
-- `regions_admin`.
+- `regions_admin`,
+- `population.csv`.
 
 
 
@@ -76,6 +84,13 @@ Commençons par charger les bibliothèques requises pour lire les données spati
 library(sf)
 library(mapview)
 ```
+
+```{r, echo = FALSE, eval=TRUE}
+library(leafsync)
+```
+
+
+<br>
 
 Maintenant, allons lire le fichier *shapefile* de l'ensemble des municipalités du Québec en utilisant la fonction `st_read()` tel que vu dans le [module 4](#lire-shp).
 
@@ -213,7 +228,7 @@ names(villes)
 On peut vouloir sélectionner un ou plusieurs éléments spatiaux d'un *shapefile* qui possèdent une valeur spécifique d'attribut. Cette opération peut être réalisée en utilisant les fonctions `subset()` ou `which()`.
 
 
-###### Fonction `subset()` {-}
+###### Fonction `subset()` {.unnumbered #fct_subset}
 
 La fonction `subset()` n'est pas spécifique aux données spatiales, c'est une fonction générale de `R` qui retourne le sous-ensemble d'un vecteur, d'une matrice or d'un tableau de données qui satisfait une condition donnée. 
 
@@ -639,7 +654,7 @@ class(GIM_union)
 -->
 
 
-###### La fonction `st_cast()` {-}
+###### La fonction `st_cast()` {.unnumbered #fct_cast}
 
 La fonction `st_cast()` sert à convertir la géométrie d'un objet spatial donné vers une autre géométrie. Cette fonction comprend deux arguments : `st_cast(x, to)`. Le premier argument, `x`, correspond à l'objet vectoriel dont on souhaite modifier la géométrie, alors que le second argument, `to`, correspond à la géométrie que l'on souhaite lui attribuer. 
 
@@ -672,7 +687,7 @@ Lines<- mapview(Mauricie_lines, legend = FALSE)
 Poly <- mapview(Mauricie, legend = FALSE)
 Points<-mapview(Mauricie_pts, legend = FALSE)
 
-# Visualisons les trois cartes cÃ´te à cÃ´te
+# Visualisons les trois cartes côte à côte
 M <- leafsync::latticeView(Poly@map,Lines@map,Points@map, ncol = 3)
 M
 
@@ -926,7 +941,7 @@ Les opérations topologiques de confirmation sont des fonctions qui permettent d
 La bibliothèque `sf` contient plusieurs opérateurs topologiques de confirmation; par exemple: `st_intersects()`, `st_disjoint()`, `st_crosses()`, `st_overlaps()`, `st_touches()`, `st_within()` et `st_contains()`.
 
 
-####### La fonction `st_intersects` {-}
+####### La fonction `st_intersects` {.unnumbered #fct_intersects}
 
 
 La fonction `st_intersects()` vérifie si deux objets spatiaux `X` et `Y` occupent un espace commun. La fonction confirmera qu'il y a bel et bien une intersection entre les deux objets si leurs intérieurs ou leurs frontières se recoupent. `X` et `Y` peuvent avoir n'importe quelle géométrie (point, multipoint, ligne, multiligne, polygone, multipolygone) (figure  \@ref(fig:st-intersects)).
@@ -1282,7 +1297,7 @@ Cette fonction nous retourne un objet spatial composé de deux attributs. L'attr
 
 Plusieurs fonctions de la bibliothèque `sf` permettent de calculer des mesures spatiales comme la distance, la superficie, ou la longueur. 
 
-###### La fonction `st_distance()` {-}
+###### La fonction `st_distance()` {.unnumbered #fct_distance}
 
 La fonction `st_distance()` retourne la distance euclidienne entre deux objets spatiaux. Par exemple, nous pouvons utiliser cette fonction pour calculer la distance entre deux points. Calculons la distance qui sépare la ville de La Pocatière, dont nous avons isolé les coordonnées plus haut, et la ville de Rimouski.
 
@@ -1396,7 +1411,7 @@ st_area(trait_bleu)
 ```
 
 
-###### La fonction `st_length()` {-}
+###### La fonction `st_length()` {.unnumbered #fct_length}
 
 La fonction `st_length()` calcule la longueur d'un objet spatial unidimensionnel (`LINESTRING`, `MULTILINESTRING`). 
 
@@ -1448,7 +1463,7 @@ A_ha
 
 
 
-### Problématique à résoudre {#res_mod7}
+### Problématique à résoudre {#prob_mod7}
 
 Maintenant que nous avons appris les opérations de base pour manipuler les données vectorielles, nous sommes en mesure de résoudre la problématique énoncée au début de cette leçon&nbsp;: 
 
@@ -1633,8 +1648,306 @@ Nous constatons que Sherbrooke *et* Saint-Jean-sur-Richelieu disposent toutes de
 
 
 
-## Exercice {#ex_map_vec}
+## Exercices {#ex_map_vec}
 
-- Pour chaque ville, qu'elle est le plus proche parc? (st_nearest_feature) *
-- En utilisant les données des sentiers hivernaux de la SEPAQ (XXXX), parmi les 4 parcs de la région de Sherbrooke, lequel dispose de la plus longue distance de sentier de raquette? (Exercice plus intégrateur mais XXX)
-- Départager les deux villes gagnantes en calculant le pourcentage de couverture des parcs nationaux dans la zone tampon de 70&nbsp;km. L'un des parcs de la région de Sherbrooke chevauche partiellement la zone tampon. Pour répondre à cette question, il faudra découper (`st_crop()`) ce polygone afin d'obtenir seulement la portion se retrouvant dans la zone tampon (XXX) 
+Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_manip_vec) de ce module.
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+
+<br>
+
+```{r, echo=FALSE, eval=TRUE}
+library(sf)
+library(mapview)
+library(units)
+```
+
+
+### Question 1 {-}
+
+**a)** Construire un polygone de la forme d'un quadrilatère dont les sommets correspondent aux municipalités suivantes: Blanc-Sablon, Gaspé, Ivujivik et Chisasibi.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Utiliser la fonction `subset()` pour filtrer le *shapefile* `municipalites` et isoler ces quatres villes.
+
+```{r, warning = FALSE}
+Selection <- subset(villes, (toponyme == "Blanc-Sablon") | 
+                      (toponyme == "Gaspé") | 
+                      (toponyme == "Ivujivik") | 
+                      (toponyme == "Chisasibi"))
+
+Selection
+```
+<br>
+
+Le symbole `|` signifie *et*.
+
+Combiner ces quatres villes (points) en un seul objet spatial (multipoints) en utilisant la fonction `st_combine()`&nbsp;:
+
+```{r}
+Combo_Selection <- st_combine(Selection)
+Combo_Selection
+```
+<br>
+
+Transformer cet objet multipoints en polygone en utilisant la fonction `st_cast()`&nbsp;:
+
+```{r, warning = FALSE}
+Poly_Selection <- st_cast(Combo_Selection, to = "POLYGON")
+Poly_Selection
+```
+<br>
+
+Confirmer votre réponse en visualisant le polygone formé&nbsp;:
+
+```{r, warning = FALSE}
+mapview(Poly_Selection)
+
+```
+<br>
+
+
+
+</p>
+</details> 
+
+<br>
+
+**b)** Quelle est la superficie, en km, de ce polygone?
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+S'assurer d'abord que le polygone est représenté dans une projection métrique&nbsp;:
+
+```{r, warning = FALSE}
+st_crs(Poly_Selection)$proj4string 
+```
+<br>
+
+`+proj=longlat` atteste que la projection est en degré. Reprojet l'objet dans le SCR NAD83 dont le EPSG est 32198&nbsp;:
+
+```{r, warning = FALSE}
+Poly_Selection_nad83 <- st_transform(Poly_Selection, crs = 32198)
+st_crs(Poly_Selection_nad83)$proj4string 
+```
+<br>
+
+Les unités sont à présent en mètres.
+
+Calculer la superficie du polygone en utilisant la fonction `st_area()` et convertisser les unités en $km^2$ en utilisant la fonction `set_units()`&nbsp;:
+
+```{r, warning = FALSE}
+Aire <- st_area(Poly_Selection_nad83)
+Aire_km2 <- set_units(Aire, km2)
+Aire_km2
+```
+<br>
+
+</p>
+</details> 
+
+<br>
+
+### Question 2 {-}
+
+**a)** Combien de villes se trouvent dans une zone tampon de 20 km autour de la frontière séparant les régions administratives des Laurentides et de Lanaudière.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Utiliser la fonction `subset()` pour filtrer le *shapefile* `regions` et isoler les polygones correspondants aux Laurentides et à Lanaudière.
+
+```{r, warning = FALSE}
+regions_nad <- st_transform(regions, crs = 32198) #utiliser une projection métrique
+Laurentides <- subset(regions_nad, Rgns_Ad == "Laurentides")
+Lanaudiere <- subset(regions_nad, Rgns_Ad == "Lanaudière")
+```
+<br>
+
+Trouver la frontière entre les deux régions en utilisant la fonction `st_intersection()`&nbsp;:
+
+```{r, warning = FALSE}
+Frontiere <- st_intersection(Laurentides, Lanaudiere)
+mapview(Frontiere)
+```
+<br>
+
+La visualisation permet de valider votre calcul.
+
+Créer maintenant une zone tampon de 50 km autour de la frontière en utilisant la fonction `st_buffer`&nbsp;:
+
+```{r, warning = FALSE}
+Frontiere_tampon <- st_buffer(Frontiere, dist = 20e3)
+mapview(Frontiere_tampon)
+```
+<br> 
+
+
+Utiliser à nouveau la fonction `st_intersection()` pour trouver les municipalités à l'intérieur de la zone tampon. Il s'agit, en effet, de trouver l'intersection entre les *shapeliles* `villes` et `Frontiere_tampon`.
+
+```{r, warning = FALSE}
+villes_nad <- st_transform(villes, crs = 32198) #utiliser une projection métrique
+Villes_Frontiere_tampon <- st_intersection(villes_nad, Frontiere_tampon)
+mapview(Villes_Frontiere_tampon)
+```
+<br>
+
+Utiliser la fonction `nrow()` pour trouver le nombre de villes dans la zone tampon.
+
+```{r, warning=FALSE}
+nrow(Villes_Frontiere_tampon)
+```
+<br>
+
+</p>
+</details> 
+
+<br>
+
+**b)** Calculer la taille de la population qui habite cette zone tampon.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Utiliser la fonction `merge()` pour combiner le tableau `pop` listant la taille des populations municipales à l'objet `Villes_Frontiere_tampon` défini plus haut.
+
+```{r, warning=FALSE}
+Villes_Frontiere_tampon_pop <- merge(x = Villes_Frontiere_tampon, y = pop, by.x = "toponyme", by.y = "munnom" )
+head(Villes_Frontiere_tampon_pop)
+```
+<br>
+
+Utiliser la fonction `sum()` pour calculer la population totale comprise dans la zone tampon.
+
+```{r, warning=FALSE}
+sum(Villes_Frontiere_tampon_pop$mpopul)
+```
+Une autre façon d'obtenir le même résultat est d'utiliser la fonction `aggregate()`&nbsp;:
+
+```{r, warning=FALSE}
+villes_nad_pop <- merge(x = villes_nad, y = pop, by.x = "toponyme", by.y = "munnom" )
+aggregate(villes_nad_pop["mpopul"], by = Frontiere_tampon, FUN = sum)
+```
+
+
+</p>
+</details> 
+
+<br>
+
+
+
+### Question 3 {-}
+
+Trouver les régions administratives traversées par la ligne reliant la ville de Sherbrooke à celle de Fermont.
+<br>
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+<br>
+Utiliser la fonction `subset()` pour isoler les points du *shapefile* `villes_nad` correspondants aux villes de Sherbrooke et de Fermont.
+
+```{r, warning = FALSE}
+Sherb_Fermont <- subset(villes_nad, (toponyme == "Sherbrooke") | (toponyme == "Fermont"))
+
+mapview(Sherb_Fermont) 
+```
+<br>
+
+Utiliser la fonction `st_combine()` pour combiner ces deux points en une seule géométrie multipoint.
+
+```{r, warning=FALSE}
+Sherb_Fermont_points <- st_combine(Sherb_Fermont)
+```
+
+<br>
+
+Utiliser la fonction `st_cast()` pour transformer la géométrie multipoint en ligne.
+
+```{r, warning=FALSE}
+Sherb_Fermont_ligne <- st_cast(Sherb_Fermont_points, to = "LINESTRING")
+
+mapview(Sherb_Fermont_ligne)
+```
+<br>
+
+Utiliser maintenant la fonction `st_crosses` pour déterminer les régions administratives traversées par cette ligne.
+
+```{r, warning=FALSE}
+regions_nad[st_crosses(regions_nad, Sherb_Fermont_ligne, sparse = FALSE ),]
+```
+<br>
+
+Utiliser la fonction `mapview()` pour valider visuellement votre réponse.
+
+```{r, warning=FALSE}
+regions_traversees <- regions_nad[st_crosses(regions_nad, Sherb_Fermont_ligne, sparse = FALSE ),]
+
+mapview(regions_traversees) + mapview(Sherb_Fermont_ligne)
+
+```
+<br>
+
+
+</p>
+</details> 
+
+<br>
+
+### Question 4 {-}
+
+La [problématique](#prob_mod7) résolue à la fin de la leçon, nous a permis de déterminer que 4 parcs de la SÉPAQ se trouvent dans un rayon de 70&nbsp;km de la municipalité de Saint-Jean-sur-Richelieu. Quelle est la superficie totale couverte par ces parcs à l'intérieur de ce rayon ?
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+À partir de l'objet spatial `top10_villes_buffer` créé plus tôt, isoler la zone tampon autour de la municipalité de Saint-Jean-sur-Richelieu en utilisant la fonction `subset()`.
+
+```{r, warning=FALSE}
+SJSR_tampon <- subset(top10_villes_buffer, toponyme == "Saint-Jean-sur-Richelieu")
+```
+
+<br>
+
+Utiliser la fonction `st_intersection` pour trouver les parcs du *shapefile* `parcs_nationaux_lcc` qui intersectent cette zone tampon.
+
+```{r}
+Parcs_SJSR_tampon <- st_intersection(parcs_nationaux_lcc, SJSR_tampon)
+
+mapview(Parcs_SJSR_tampon) + mapview(SJSR_tampon, col.regions = "red", alpha.regions = 0.2)
+
+```
+<br>
+
+Utiliser la fonction `st_area()` pour déterminer la superficie de chacun des parcs.
+
+```{r, warning=FALSE}
+Aire_Parcs_SJSR_tampon <- st_area(Parcs_SJSR_tampon)
+Aire_Parcs_SJSR_tampon
+```
+<br>
+
+Utiliser la fonction `sum()` pour déterminer la superficie totale, puis la fonction `set_units()` pour transformer les mètres carrés en hectares.
+
+```{r, warning=FALSE}
+AireTot_Parcs_SJSR_tampon <- sum(Aire_Parcs_SJSR_tampon)
+AireTot_Parcs_SJSR_tampon <- set_units(AireTot_Parcs_SJSR_tampon, ha)
+AireTot_Parcs_SJSR_tampon
+```
+<br>
+
+
+</p>
+</details> 
