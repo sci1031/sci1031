@@ -1070,10 +1070,18 @@ parc_orford <- subset(parcs, TRQ_NM_== "Parc national du Mont-Orford")
 
 Filtrer le *raster* `dem_lcc` pour ne retenir que les cellules situées à l'intérieure du polygone délimitant les limites du parc du Mont-Orford
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 dem_orford <- mask(dem_lcc, parc_orford)
 mapview(dem_orford)
 ```
+```{r, warning=FALSE, echo=FALSE}
+dem_orford <- mask(dem_lcc, parc_orford)
+m <- mapview(dem_orford)
+m@map
+```
+
+
+
 <br>
 
 Déterminer l'indice de la cellule ou des cellules d'élévation maximale en utilisant les fonctions `getValues()` et `which.max()`.
@@ -1109,8 +1117,12 @@ pt_max_orford <- st_as_sf(coordmax_orford_df,
 
 Visualiser la carte du parc du Mont-Orford ainsi que le point d'élévalion maximale.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 mapview(dem_orford) + mapview(pt_max_orford, col.regions="red")
+```
+```{r, warning=FALSE,echo=FALSE}
+m <- mapview(dem_orford) + mapview(pt_max_orford, col.regions="red")
+m@map
 ```
 
 
@@ -1173,8 +1185,12 @@ dem_orford_quantile <- reclassify(dem_orford, classes_orford, rigth = FALSE)
 
 Confirmer visuellement la reclassification en utilisant la fonction `mapview()` 
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 mapview(dem_orford_quantile)
+```
+```{r, warning=FALSE, echo=FALSE}
+m <-mapview(dem_orford_quantile)
+m@map
 ```
 
 <br>
@@ -1199,8 +1215,12 @@ dem_orford_quantile
 <br>
 
 La classification est maintenant traitée comme une variable catégorique.
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 mapview(dem_orford_quantile)
+```
+```{r, warning=FALSE, echo=FALSE}
+m <- mapview(dem_orford_quantile)
+m@map
 ```
 <br>
 
@@ -1289,11 +1309,19 @@ pt_max_frontenac <- st_as_sf(coordmax_frontenac_df,
 
 Confirmer vos calculs en visualisant les points trouvés.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 mapview(pt_max_orford, col.regions = "red") + 
   mapview(pt_max_megantic, col.regions = "blue") +
   mapview(pt_max_yamaska, col.regions = "green") +
   mapview(pt_max_frontenac, col.regions = "yellow")
+
+```
+```{r, warning=FALSE, echol=FALSE}
+m <- mapview(pt_max_orford, col.regions = "red") + 
+  mapview(pt_max_megantic, col.regions = "blue") +
+  mapview(pt_max_yamaska, col.regions = "green") +
+  mapview(pt_max_frontenac, col.regions = "yellow")
+m@map
 
 ```
 <br>
@@ -1334,8 +1362,13 @@ Noter que la fonction `merge()` s'utilise sur deux *rasters* à la fois. Il faut
 
 Visualiser le *raster* final contenant les quatre zones tampons:
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 mapview(dem_tampon_max)
+```
+
+```{r, warning=FALSE, echo=FALSE}
+m <- mapview(dem_tampon_max)
+m@map
 ```
 
 <br>
