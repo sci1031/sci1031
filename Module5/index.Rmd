@@ -846,7 +846,7 @@ Nous avons ainsi créé un *raster* de classe `RasterStack`.
 
 Visualisons individuellement les bandes d'un *raster* multi-bande en utilisant la fonction `mapview()` de la bibliothèque `mapview`.
 
-```{r, collapse = TRUE, warning = FALSE, fig.cap="Carte pour chacune des bandes rouge, verte et bleue"}
+```{r latticeView, collapse = TRUE, warning = FALSE, fig.cap="Carte pour chacune des bandes rouge, verte et bleue"}
 # Définissons une palette de gris de 256 tons différents
 mapviewOptions(raster.palette = gray.colors(256))
 
@@ -856,14 +856,14 @@ Map_SG <- mapview(SG, homebutton = FALSE)
 Map_SB <- mapview(SB, homebutton = FALSE)
 
 # Visualisons les trois cartes côte à côte
-leafsync::latticeView(Map_SR,Map_SG,Map_SB, ncol = 3)
+leafsync::latticeView(Map_SR, Map_SG, Map_SB, ncol = 3)
 ```
 <br>
 
 Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `viewRGB()` de la librarie `mapview`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu.
 
-```{r, fig.cap = "Carte combinant les trois bandes de couleurs"}
-viewRGB(S_mult, warning = FALSE, message = FALSE, r = 1, g = 2, b = 3)
+```{r viewRG, fig.cap = "Carte combinant les trois bandes de couleurs", warning = FALSE, message = FALSE}
+viewRGB(S_mult, r = 1, g = 2, b = 3)
 ```
 <br>
 

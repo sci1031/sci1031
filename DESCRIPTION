@@ -7,6 +7,7 @@ Imports:
   citr,
   dplyr,
   DT,
+  e1071,
   formatR,
   ggplot2,
   ggpubr,
@@ -21,6 +22,8 @@ Imports:
   remotes,
   raster,
   rosm,
+  rgdal,
+  rgeos,
   sf,
   spacetime,
   spdep,
@@ -28,5 +31,3 @@ Imports:
   svglite,
   tmap,
   webshot
-Remotes: 
-  r-spatial/mapview
