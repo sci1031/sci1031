@@ -740,23 +740,23 @@ install.packages("rosm")
 
 La fonction `osm.raster()` s'utilise avec la library `raster`. Nous devons donc charger également cette library dans notre session de travail `R`. Nous devons aussi spécifier à la fonction `osm.raster()` l'étendue de la carte de fond désirée.
 
-<!--   
+   
 ```R
 library(raster)
 library(rosm)
 carte_fond <- osm.raster(extent(traj_long_pts), crop = TRUE)
 carte_fond
 ```
--->
 
 
+<!--   
 ```{r, message = FALSE, warning=FALSE}
 library(raster)
 library(rosm)
 carte_fond <- osm.raster(extent(traj_long_pts), crop = TRUE)
 carte_fond
 ```
-
+-->
 
 <br>
 
@@ -812,7 +812,7 @@ De plus, nous terminerons cette partie par la réalisation de deux exercices de 
 
 <br>
 
-Pour pouvoir répondre à ces questions et réaliser ces exercices, nous utiliserons différents *rasters* qui seront manipulés sous forme d'objets `rasterStack` (mentionnés au [Module 5](#mat). 
+Pour pouvoir répondre à ces questions et réaliser ces exercices, nous utiliserons différents *rasters* qui seront manipulés sous forme d'objets `rasterStack` (mentionnés au [Module 5](#mat)). 
 
 <br>
 
