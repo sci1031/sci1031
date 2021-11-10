@@ -99,7 +99,7 @@ Il cartographia les lieux de résidence des personnes infectées et observa qu�
 <br>
 
 ```{r cholera, fig.align='left', echo=FALSE, fig.cap="Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source : [Wikipedia](https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg).", out.width = '50%'}
-knitr::include_graphics('Module1/images/1_Cholera.png')
+knitr::include_graphics('Module1/images/1_Cholera.PNG')
 ```
 
 <br>
