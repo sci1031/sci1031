@@ -1,67 +1,106 @@
 # (PART) Apprentissage {-}
 # Introduction {#intro}
 
-
-
 ```{r setup1, include = FALSE}
 source("bin/chunk-options.R")
 ```
 
+Ce module est une introduction au cours que vous vous apprêter à suivre. Dans la section [Leçon](#lecon_intro), nous discuterons de l’évolution historique de la visualisation des données spatiales, des premières cartes jusqu’à l’avènement des systèmes d’information géographique. Nous ferons une revue des outils existants pour visualiser et analyser les données spatiales. Finalement, nous présenterons quelques concepts de base essentiels à l’étude des données spatiales.
+
+À la fin de ce module vous saurez :
+
+-	Comprendre les changements dans la représentation géographique au cours de l’histoire.
+-	Définir ce qu’est la géomatique.
+-	Décrire les propriétés générales des systèmes d’information géographique (SIG). 
+-	Donner des exemples d’application des SIG.
+-	Nommer des outils et logiciels de visualisation et d’analyse géospatiale.
+-	Décrire les avantages offerts par le logiciel R.
+-	Définir les concepts de bases dans l’étude des données spatiales : la résolution, l’étendue, le voisinage, les gradients, l’effet de bordure, etc. 
+
+La section [exercice](#ex_intro) est divisée en deux parties. La première partie est une auto-évaluation constituée d’une série de questions corrigées. Cette évaluation vous permettra de vérifier votre compréhension des concepts enseignés dans ce module. 
+La deuxième partie constitue est une courte introduction au langage de programmation `R`. Vous y verrez les commandes et les fonctions de base. 
 
 
-L'objectif principal de ce module est
+## Leçon {#lecon_intro}
 
-À la fin de ce module vous saurez:
+### Les données spatiales d'hier à aujourd'hui {#hist}
 
-- abc
--
--
+#### Les cartes anciennes {-}
 
-Vous utiliserez les librairies suivantes:
+La représentation géographique est une description de l’emplacement des éléments naturels (cours d’eaux, montagnes, forêts, etc.) et artificiels (routes, ponts, bâtiments, etc.) au sein d’un territoire. Cette représentation peut être détaillée ou abstraite, et décrire un espace restreint tout comme un vaste territoire. 
 
--
--
+La cartographie est utilisée depuis l’Antiquité pour répondre à de multiples besoins comme celui d’illustrer la distribution spatiale des ressources, de définir les frontières et l’appartenance des territoires ou encore de guider les déplacements. 
 
-Vous apprendrez à utiliser les fonctions suivantes:
+La carte de la cité babylonienne de Nippur, datant d’environ 1500 av. J.-C., constitue probablement la plus vieille carte connue tracée à l’échelle (\@ref(fig:nippur)). Dessinée sur une tablette d’argile, cette carte représente, notamment, un réseau d’irrigation destiné à l’agriculture.
 
--
--
+<br>
+```{r nippur, fig.align='left', echo=FALSE, fig.cap="La carte de Nippur tracée sur une tablette d’argile. Source : [Mary Harrsch](https://www.flickr.com/photos/mharrsch/19212374832/)", out.width = '100%'}
+knitr::include_graphics('Module1/images/1_Nippur.jpg')
+```
+<br>
 
-Dans la section Leçon, vous utiliserez des données XYXYX
+Les cartes reflètent la compréhension et la perception qu’ont le ou leurs auteurs du territoire. Le géographe et historien grec [Hécatée de Milet](https://fr.wikipedia.org/wiki/H%C3%A9cat%C3%A9e_de_Milet), qui a vécu au 5^ième^ siècle av. J.-C., aurait conçu une des premières cartes du monde. Cette dernière est circulaire et place la Méditerranée en son centre (\@ref(fig:hecatee)). 
 
-Dans la section Exercice, vous utiliserez XXXXX
-
-```{r load-libraries1, include = FALSE}
-#library(raster)
-# library(rgdal)
-# library(ggplot2)
-# library(dplyr)
-# library(sf)
-# library(svglite) ## J'ai pas besoin de ça pour créer les figures, mais pour les inclure dans le markdown, oui.
-# library(ggpubr)
+<br>
+```{r hecatee, fig.align='left', echo=FALSE, fig.cap="Une reconstitution de la carte du monde d’Hétacée. Source : [Arnaud, P. (2009). *Les cartes antiques*. L'archéotherma](http://www.archeothema.com/numero/les-cartes-antiques.htm).", out.width = '100%'}
+knitr::include_graphics('Module1/images/1_Hecatee.jpg')
 ```
 
+<br>
 
+Un regard sur les cartes anciennes du monde est révélateur de l’évolution des connaissances en géographie (\@ref(fig:ptolemee) et \@ref(fig:munster)). Par le choix des éléments représentés et l’importance visuelle accordée à certains éléments plutôt que d’autres, les cartes témoignent aussi des valeurs et des croyances qui animaient les sociétés qui les ont produites. 
 
+<br>
 
-## Leçon
-### Les données spatiales
+```{r ptolemee, fig.align='left', echo=FALSE, fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807).", out.width = '100%'}
+knitr::include_graphics('Module1/images/1_Ptolemee.jpg')
+```
 
-Les données spatiales d'hier à aujourd'hui
+<br>
 
--	La cartographie, la géomatique, la science des données
--	Exemples de données spatiales et d'applications
+```{r munster, fig.align='left', echo=FALSE, fig.cap="Carte du nouveau monde de [Sebastien Münster](https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster). Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre *Cosmographia Universalis* a produit cette carte en 1552. Source : [https://digital.library.yorku.ca/islandora/object/yul:1153586](https://digital.library.yorku.ca/islandora/object/yul:1153586).", out.width = '100%'}
+knitr::include_graphics('Module1/images/1_munster.jpg')
+```
 
-### Les outils
+<br>
+
+Pour ceux et celles intéressés aux cartes historiques, la figure \@ref(fig:evo_mtl) présente des cartes de Montréal produites à différents moments depuis la colonisation. Ces cartes démontrent l’évolution dans l’organisation du territoire de l’île de Montréal et aussi dans le rendu visuel des cartes.
+
+<br>
+
+```{r evo_mtl, out.width = "50%",fig.show='hold', fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources : [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
+a1<-'Module1/images/1_Montreal1556.png'
+a2<-'Module1/images/1_Montreal1645.png'
+a3<-'Module1/images/1_Montreal1758.png'
+a4<-'Module1/images/1_Montreal1843.tif'
+a5<-'Module1/images/1_Montreal1897.png'
+a6<-'Module1/images/1_Montreal1920.png'
+a7<-'Module1/images/1_Montreal1960.png'
+a8<-'Module1/images/1_Montreal1982.png'
+m1 <-c(a1,a2,a3,a4)
+m2 <-c(a5,a6,a7,a8)
+m3 <-rbind(m1,m2)
+m4 <-c(a1,a2,a3,a4,a5,a6,a7,a8)
+knitr::include_graphics(rep(m4),1)
+```
+
+<br>
+
+#### La géomatique {-}
+
+#### La science des données {-}
+
+### Les outils {#outils}
+
 Les outils et logiciels de visualisation et d'analyse géospatiale
 
 - Logiciels commerciaux
 - Logiciels ouverts (open-source)
 - Services d'infonuagique
 
-### L'utilisation de R
+### L'utilisation de R  {#outil_R}
 
-L'utilisation de R pour l'analyse spatiale...
+L'utilisation de R en visualisation et analyse spatiale
 
 Les libraries essentielles:
 
@@ -76,8 +115,13 @@ Les libraries essentielles:
 -	GISTools
 
 
-## Exercice
+### La pensée géographique {#pensee_geo}
 
-### Mon premier R-Markdown
 
-<!-- KC -->
+## Exercice {#ex_intro}
+
+### Partie 1 {#ex_intro_partie1}
+
+### Partie 2 {#ex_intro_partie2}
+
+

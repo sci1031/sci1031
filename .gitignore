@@ -13,3 +13,6 @@ gh-pages*
 packages.bib
 tmp/
 trip5000.json
+*.zip
+*.tar
+*.cache

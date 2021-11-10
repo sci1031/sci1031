@@ -3,3 +3,17 @@
 ```{r FeuilleRoute, fig.align='left', echo=FALSE,out.width = '100%'}
 knitr::include_graphics('Images/Calendrier.png')
 ```
+
+```{r}
+
+route <- read.csv("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/FeuilleRoute.csv")
+route
+```
+
+```{r}
+library(kableExtra)
+route %>%
+kbl() %>%
+kable_paper("hover", full_width = F)
+```
+

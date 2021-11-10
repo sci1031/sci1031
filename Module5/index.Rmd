@@ -862,8 +862,8 @@ leafsync::latticeView(Map_SR,Map_SG,Map_SB, ncol = 3)
 
 Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `viewRGB()` de la librarie `mapview`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu.
 
-```{r, fig.cap = "Carte combinant les trois bandes de couleurs"}
-viewRGB(S_mult, warning = FALSE, message = FALSE, r = 1, g = 2, b = 3)
+```{r, warning = FALSE, message = FALSE, fig.cap = "Carte combinant les trois bandes de couleurs"}
+viewRGB(S_mult, r = 1, g = 2, b = 3)
 ```
 <br>
 
