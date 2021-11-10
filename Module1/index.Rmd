@@ -5,7 +5,7 @@
 source("bin/chunk-options.R")
 ```
 
-Ce module est une introduction au cours que vous vous apprêter à suivre. Dans la section [Leçon](#lecon_intro), nous discuterons de l’évolution historique de la visualisation des données spatiales, des premières cartes jusqu’à l’avènement des systèmes d’information géographique. Nous ferons une revue des outils existants pour visualiser et analyser les données spatiales. Finalement, nous présenterons quelques concepts de base essentiels à l’étude des données spatiales.
+Ce module est une introduction au cours que vous vous apprêter à suivre. Dans la section [leçon](#lecon_intro), nous discuterons de l’évolution historique de la visualisation des données spatiales, des premières cartes jusqu’à l’avènement des systèmes d’information géographique. Nous ferons une revue des outils existants pour visualiser et analyser les données spatiales. Finalement, nous présenterons quelques concepts de base essentiels à l’étude des données spatiales.
 
 À la fin de ce module vous saurez :
 
@@ -31,44 +31,48 @@ La représentation géographique est une description de l’emplacement des él�
 
 La cartographie est utilisée depuis l’Antiquité pour répondre à de multiples besoins comme celui d’illustrer la distribution spatiale des ressources, de définir les frontières et l’appartenance des territoires ou encore de guider les déplacements. 
 
-La carte de la cité babylonienne de Nippur, datant d’environ 1500 av. J.-C., constitue probablement la plus vieille carte connue tracée à l’échelle (\@ref(fig:nippur)). Dessinée sur une tablette d’argile, cette carte représente, notamment, un réseau d’irrigation destiné à l’agriculture.
+La carte de la cité babylonienne de Nippur, datant d’environ 1500 av. J.-C., constitue probablement la plus vieille carte connue tracée à l’échelle (Figure \@ref(fig:nippur)). Dessinée sur une tablette d’argile, cette carte représente, notamment, un réseau d’irrigation destiné à l’agriculture.
 
 <br>
-```{r nippur, fig.align='left', echo=FALSE, fig.cap="La carte de Nippur tracée sur une tablette d’argile. Source : [Mary Harrsch](https://www.flickr.com/photos/mharrsch/19212374832/)", out.width = '100%'}
+```{r nippur, fig.align='left', echo=FALSE, fig.cap="La carte de Nippur tracée sur une tablette d’argile. Source : [Mary Harrsch](https://www.flickr.com/photos/mharrsch/19212374832/).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Nippur.jpg')
 ```
 <br>
 
-Les cartes reflètent la compréhension et la perception qu’ont le ou leurs auteurs du territoire. Le géographe et historien grec [Hécatée de Milet](https://fr.wikipedia.org/wiki/H%C3%A9cat%C3%A9e_de_Milet), qui a vécu au 5^ième^ siècle av. J.-C., aurait conçu une des premières cartes du monde. Cette dernière est circulaire et place la Méditerranée en son centre (\@ref(fig:hecatee)). 
+Les cartes reflètent la compréhension et la perception qu’ont le ou leurs auteurs du territoire. Le géographe et historien grec [Hécatée de Milet](https://fr.wikipedia.org/wiki/H%C3%A9cat%C3%A9e_de_Milet), qui a vécu au 5^ième^ siècle av. J.-C., aurait conçu une des premières cartes du monde. Cette dernière est circulaire et place la Méditerranée en son centre (Figure \@ref(fig:hecatee)). 
 
 <br>
-```{r hecatee, fig.align='left', echo=FALSE, fig.cap="Une reconstitution de la carte du monde d’Hétacée. Source : [Arnaud, P. (2009). *Les cartes antiques*. L'archéotherma](http://www.archeothema.com/numero/les-cartes-antiques.htm).", out.width = '100%'}
+```{r hecatee, fig.align='left', echo=FALSE, fig.cap="Une reconstitution de la carte du monde d’Hétacée. Source : [Arnaud, P. (2009). *Les cartes antiques*. L'archéotherma](http://www.archeothema.com/numero/les-cartes-antiques.htm).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Hecatee.jpg')
 ```
 
 <br>
 
-Un regard sur les cartes anciennes du monde est révélateur de l’évolution des connaissances en géographie (\@ref(fig:ptolemee) et \@ref(fig:munster)). Par le choix des éléments représentés et l’importance visuelle accordée à certains éléments plutôt que d’autres, les cartes témoignent aussi des valeurs et des croyances qui animaient les sociétés qui les ont produites. 
+Un regard sur les cartes anciennes du monde est révélateur de l’évolution des connaissances en géographie (Figure \@ref(fig:ptolemee) et  Figure \@ref(fig:munster)). Par le choix des éléments représentés et l’importance visuelle accordée à certains éléments plutôt que d’autres, les cartes témoignent aussi des valeurs et des croyances qui animaient les sociétés qui les ont produites. 
 
 <br>
-
-```{r ptolemee, fig.align='left', echo=FALSE, fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807).", out.width = '100%'}
+```{r ptolemeeGros,fig.align='left', echo=FALSE, include=FALSE, fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807).", out.width = '100%' }
 knitr::include_graphics('Module1/images/1_Ptolemee.jpg')
+```
+
+
+```{r ptolemee, fig.align='left', echo=FALSE, fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807). (\\@ref(fig:ptolemee))", out.width = '50%'}
+knitr::include_graphics('Module1/images/1_Ptolemee.jpg', dpi=200)
 ```
 
 <br>
 
-```{r munster, fig.align='left', echo=FALSE, fig.cap="Carte du nouveau monde de [Sebastien Münster](https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster). Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre *Cosmographia Universalis* a produit cette carte en 1552. Source : [https://digital.library.yorku.ca/islandora/object/yul:1153586](https://digital.library.yorku.ca/islandora/object/yul:1153586).", out.width = '100%'}
+```{r munster, fig.align='left', echo=FALSE, fig.cap="Carte du nouveau monde de [Sebastien Münster](https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster). Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre *Cosmographia Universalis* a produit cette carte en 1552. Source : [https://digital.library.yorku.ca/islandora/object/yul:1153586](https://digital.library.yorku.ca/islandora/object/yul:1153586).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Munster.jpg')
 ```
 
 <br>
 
-Pour ceux et celles intéressés aux cartes historiques, la figure \@ref(fig:evo_mtl) présente des cartes de Montréal produites à différents moments depuis la colonisation. Ces cartes démontrent l’évolution dans l’organisation du territoire de l’île de Montréal et aussi dans le rendu visuel des cartes.
+Pour ceux et celles intéressés aux cartes historiques, la figure \@ref(fig:evomtl) présente des cartes de Montréal produites à différents moments depuis la colonisation. Ces cartes démontrent l’évolution dans l’organisation du territoire de l’île de Montréal et aussi dans le rendu visuel des cartes.
 
 <br>
 
-```{r evo_mtl, out.width = "50%",fig.show='hold', fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources : [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
+```{r evomtl, fig.align='left', out.width = "50%",fig.show='hold', fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources : [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
 a1<-'Module1/images/1_Montreal1556.png'
 a2<-'Module1/images/1_Montreal1645.png'
 a3<-'Module1/images/1_Montreal1758.png'
@@ -82,6 +86,20 @@ m2 <-c(a5,a6,a7,a8)
 m3 <-rbind(m1,m2)
 m4 <-c(a1,a2,a3,a4,a5,a6,a7,a8)
 knitr::include_graphics(rep(m4),1)
+```
+
+<br>
+
+À partir du 19e siècle, on commence à utiliser la représentation géographique afin d’explorer les relations entre l’occurrence de certains phénomènes et leur localisation. C’est le début de l’analyse spatiale. Un exemple bien connu est celui de l’analyse réalisée en 1854 par le docteur anglais [John Snow](https://fr.wikipedia.org/wiki/John_Snow) pour comprendre la propagation d’une épidémie soudaine de choléra dans le quartier Soho de Londres.
+
+John Snow doutait de la théorie  en vigueur à l’époque voulant que les maladies telles le cholera ou la peste soient transmises par l’inhalation d’émanations malsaines (appelées des [miasmes](https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_miasmes) – des mauvais airs). Il supportait plutôt l’hypothèse que le choléra se développe par l’ingestion d’eau impropre. 
+
+Il cartographia les lieux de résidence des personnes infectées et observa qu’ils se trouvaient à proximité de la pompe à eau de Broad Street (Figure \@ref(fig:cholera). Cette dernière puisait son eau d’une section polluée de la Tamise. Il sut convaincre les autorités de fermer la pompe, ce qui stoppa l’épidémie.  John Snow est perçu aujourd’hui comme un des pionniers de l’épidémiologie moderne.
+
+<br>
+
+```{r cholera, fig.align='left', echo=FALSE, fig.cap="Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source : [Wikipedia](https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg).", out.width = '50%'}
+knitr::include_graphics('Module1/images/1_Cholera.png')
 ```
 
 <br>

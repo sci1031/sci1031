@@ -5,8 +5,31 @@
 # (PART) À propos du cours {-}
 # Présentation {-}
 
-Présentation générale du cours  
-Je n'ai jamais utilisé R, puis-je suivre ce cours?  
+Comme son nom l’indique, le cours SCI1031 porte sur la visualisation et l’analyse de données spatiales avec le langage de programmation et logiciel libre R.
+
+#### Pourquoi suivre ce cours ? {-}
+
+L’intérêt du cours SCI 1031 est lié plusieurs aspects. Tout d’abord, nos sociétés sont confrontées à une incroyable augmentation des données spatiales. C’est-à-dire des données qui possèdent une composante spatiale, comme des coordonnées géographiques. 
+
+Pensons, par exemple, aux données de télédétection récoltées par des satellites et des véhicules aériens télépilotés (drones). Ou encore, aux données échantillonnées par des technologies de notre vie quotidienne qui sont munis d’un système de géo-positionnement par satellite (GPS!) intégré comme les téléphones intelligents, les caméras, et les tablettes.  
+
+Cet accroissement des données spatiales est interrelié avec une explosion d’applications qui dépendent des données spatiales et qui en génèrent dans des domaines aussi variés que le marketing, l’évaluation des risques par les compagnies d’assurances, la logistique des réseaux de transports, et les études d’impact environnementaux. 
+
+Ainsi, cette effervescence des données spatiales et de leurs applications entrainement nécessairement une hausse de la demande pour des compétences spécialisées dans la manipulation, la visualisation et l’analyse de données spatiales. 
+
+L’objectif général du cours SCI 1031 est donc de permettre aux étudiantes et aux étudiants de développer ces compétences essentielles pour traiter les données spatiales, tant dans leurs études que sur le marché de l’emploi.
+
+
+#### Pourquoi R ? {-}
+
+R^[R est soutenu par le *R Core Team* et la *R Foundation for Statistical Computing*: [www.r-project.org](www.r-project.org)] est un logiciel libre et un langage de programmation qui offre un environnement riche permettant de réaliser une multitude de tâches incluant des calculs statistiques, des graphiques scientifiques, de la manipulation de bases de données, et de la modélisation. 
+
+R est devenu un outil incontournable en sciences des données. La communauté R est constituée non seulement d’utilisatrices et d’utilisateurs, mais aussi de créatrices et de créateurs. Ceux-ci améliorent constamment les capacités de R par le développement de nouvelles fonctionnalités et de bibliothèques spécialisées qui deviennent accessibles à toute la communauté.
+
+Dans les dernières années, plusieurs expertes et experts de l’analyse et de la visualisation de données spatiales se sont affairés à bâtir des bibliothèques simples et efficaces destinées aux traitements des données spatiales.  Ces bibliothèques sont mise-à-jour continuellement alors que d’autres bibliothèques voient le jour pour répondre à des nouveaux besoins.
+
+Un avantage indéniable à utiliser R, en comparaison aux autres outils de visualisation de données spatiales, est sa grande flexibilité.  L’abondance des bibliothèques permet d’utiliser R pour accomplir des opérations diverses. Il est ainsi possible de produire des cartes géographiques de grande qualité avec R et de faire des analyses statistiques spatiales très poussées. Tout cela sans changer de logiciel et en conservant la même syntaxe générale. 
+
 
 
 ## Objectifs {-}
@@ -18,7 +41,7 @@ Les objectifs du cours sont:
 
 ## Fonctionnement du cours {-}
 
-Le cours est divisé en X modules et s'échelonne sur 15 semaines.  
+Le cours est divisé en 9 modules et s'échelonne sur 15 semaines.  
 La feuille de route explique ...  
 Elle se veut un guide, une suggestion, ...  
 Guide des études à distance
