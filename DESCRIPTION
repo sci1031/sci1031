@@ -24,6 +24,7 @@ Imports:
   rosm,
   rgdal,
   rgeos,
+  rosm,
   sf,
   spacetime,
   spdep,
