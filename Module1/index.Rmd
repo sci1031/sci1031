@@ -59,7 +59,7 @@ knitr::include_graphics('Module1/images/1_Ptolemee.jpg')
 <br>
 
 ```{r munster, fig.align='left', echo=FALSE, fig.cap="Carte du nouveau monde de [Sebastien Münster](https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster). Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre *Cosmographia Universalis* a produit cette carte en 1552. Source : [https://digital.library.yorku.ca/islandora/object/yul:1153586](https://digital.library.yorku.ca/islandora/object/yul:1153586).", out.width = '100%'}
-knitr::include_graphics('Module1/images/1_munster.jpg')
+knitr::include_graphics('Module1/images/1_Munster.jpg')
 ```
 
 <br>
