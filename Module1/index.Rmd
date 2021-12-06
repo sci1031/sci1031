@@ -34,7 +34,7 @@ La cartographie est utilisée depuis l’Antiquité pour répondre à de multipl
 La carte de la cité babylonienne de Nippur, datant d’environ 1500 av. J.-C., constitue probablement la plus vieille carte connue tracée à l’échelle (Figure \@ref(fig:nippur)). Dessinée sur une tablette d’argile, cette carte représente, notamment, un réseau d’irrigation destiné à l’agriculture.
 
 <br>
-```{r nippur, fig.align='left', echo=FALSE, fig.cap="La carte de Nippur tracée sur une tablette d’argile. Source : [Mary Harrsch](https://www.flickr.com/photos/mharrsch/19212374832/).", out.width = '50%'}
+```{r nippur, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Nippur.jpg', fig.cap="La carte de Nippur tracée sur une tablette d’argile. Source : [Mary Harrsch](https://www.flickr.com/photos/mharrsch/19212374832/).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Nippur.jpg')
 ```
 <br>
@@ -42,7 +42,7 @@ knitr::include_graphics('Module1/images/1_Nippur.jpg')
 Les cartes reflètent la compréhension et la perception qu’ont le ou leurs auteurs du territoire. Le géographe et historien grec [Hécatée de Milet](https://fr.wikipedia.org/wiki/H%C3%A9cat%C3%A9e_de_Milet), qui a vécu au 5^ième^ siècle av. J.-C., aurait conçu une des premières cartes du monde. Cette dernière est circulaire et place la Méditerranée en son centre (Figure \@ref(fig:hecatee)). 
 
 <br>
-```{r hecatee, fig.align='left', echo=FALSE, fig.cap="Une reconstitution de la carte du monde d’Hétacée. Source : [Arnaud, P. (2009). *Les cartes antiques*. L'archéotherma](http://www.archeothema.com/numero/les-cartes-antiques.htm).", out.width = '50%'}
+```{r hecatee, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Hecatee.jpg', fig.cap="Une reconstitution de la carte du monde d’Hétacée. Source : [Arnaud, P. (2009). *Les cartes antiques*. L'archéotherma](http://www.archeothema.com/numero/les-cartes-antiques.htm).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Hecatee.jpg')
 ```
 
@@ -51,18 +51,14 @@ knitr::include_graphics('Module1/images/1_Hecatee.jpg')
 Un regard sur les cartes anciennes du monde est révélateur de l’évolution des connaissances en géographie (Figure \@ref(fig:ptolemee) et  Figure \@ref(fig:munster)). Par le choix des éléments représentés et l’importance visuelle accordée à certains éléments plutôt que d’autres, les cartes témoignent aussi des valeurs et des croyances qui animaient les sociétés qui les ont produites. 
 
 <br>
-```{r ptolemeeGros,fig.align='left', echo=FALSE, include=FALSE, fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807).", out.width = '100%' }
-knitr::include_graphics('Module1/images/1_Ptolemee.jpg')
-```
 
-
-```{r ptolemee, fig.align='left', echo=FALSE, fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807). (\\@ref(fig:ptolemee))", out.width = '50%'}
+```{r ptolemee, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Ptolemee.jpg', fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807). ", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Ptolemee.jpg', dpi=200)
 ```
 
 <br>
 
-```{r munster, fig.align='left', echo=FALSE, fig.cap="Carte du nouveau monde de [Sebastien Münster](https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster). Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre *Cosmographia Universalis* a produit cette carte en 1552. Source : [https://digital.library.yorku.ca/islandora/object/yul:1153586](https://digital.library.yorku.ca/islandora/object/yul:1153586).", out.width = '50%'}
+```{r munster, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Munster.jpg', fig.cap="Carte du nouveau monde de [Sebastien Münster](https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster). Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre *Cosmographia Universalis* a produit cette carte en 1552. Source : [https://digital.library.yorku.ca/islandora/object/yul:1153586](https://digital.library.yorku.ca/islandora/object/yul:1153586).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Munster.jpg')
 ```
 
@@ -72,7 +68,7 @@ Pour ceux et celles intéressés aux cartes historiques, la figure \@ref(fig:evo
 
 <br>
 
-```{r evomtl, fig.align='left', out.width = "50%",fig.show='hold', fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources : [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
+```{r evomtl, fig.align='left', out.width = "50%",fig.show='hold', fig.link=c("Module1/images/1_Montreal1556.png", "Module1/images/1_Montreal1645.png", "Module1/images/1_Montreal1758.png", "Module1/images/1_Montreal1843.tif", "Module1/images/1_Montreal1897.png", "Module1/images/1_Montreal1920.png", "Module1/images/1_Montreal1960.png", "Module1/images/1_Montreal1982.png"), fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources : [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
 a1<-'Module1/images/1_Montreal1556.png'
 a2<-'Module1/images/1_Montreal1645.png'
 a3<-'Module1/images/1_Montreal1758.png'
@@ -81,12 +77,10 @@ a5<-'Module1/images/1_Montreal1897.png'
 a6<-'Module1/images/1_Montreal1920.png'
 a7<-'Module1/images/1_Montreal1960.png'
 a8<-'Module1/images/1_Montreal1982.png'
-m1 <-c(a1,a2,a3,a4)
-m2 <-c(a5,a6,a7,a8)
-m3 <-rbind(m1,m2)
 m4 <-c(a1,a2,a3,a4,a5,a6,a7,a8)
 knitr::include_graphics(rep(m4),1)
 ```
+
 
 <br>
 
@@ -98,13 +92,79 @@ Il cartographia les lieux de résidence des personnes infectées et observa qu�
 
 <br>
 
-```{r cholera, fig.align='left', echo=FALSE, fig.cap="Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source : [Wikipedia](https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg).", out.width = '50%'}
+```{r cholera, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Cholera.PNG', fig.cap="Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source : [Wikipedia](https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Cholera.PNG')
 ```
 
 <br>
 
 #### La géomatique {-}
+
+L’arrivée de l’informatique et des données numériques viennent transformer la cartographie traditionnelle et la façon de traiter l’information géographique. Dans les années 1960, le terme « géomatique », qui est une contraction entre les mots géographie et informatique, est proposé pour désigner cette nouvelle discipline. 
+
+On définit la géomatique comme « l’ensemble des connaissances et technologies nécessaires à la production et au traitement des données numériques décrivant le territoire, ses ressources ou tout autre objet ou phénomène ayant une position géographique. »^[Définition donnée par le Département des sciences géomatiques de l’Université Laval - https://www.scg.ulaval.ca/la-geomatique-cest-quoi, consultée le 11 novembre 2021]
+
+En effet, les géographes ou autres utilisateurs de données spatiales doivent maintenant composer avec des données numériques diverses acquises par la photographie aérienne et satellitaire, les outils topographiques électroniques ou munis de GPS, la numérisation de documents papiers, etc. 
+
+De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multi-sources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales. 
+
+Un SIG est composé d’un ordinateur, de données numériques, et d’un ou plusieurs logiciels spécialisés. De plus, un SIG doit être développé par du personnel qualifié et pouvoir servir à des utilisatrices ou des utilisateurs. 
+
+Les SIG sont de puissants outils pour visualiser et diffuser de l’information et sont de plus en plus utilisés pour faciliter la prise de décisions dans divers contextes. Nommons quelques exemples parmi les multiples domaines d’application des SIG : 
+
+* Logistique des transports : connaître l’état du réseau routier, les chantiers de construction, les accidents et le trafic, pour planifier des trajets ou des travaux futurs. 
+```{r sigexemplea, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleA.png", fig.cap='Suivi de l’état du réseau routier par Transport Québec (https://www.quebec511.info/fr/Carte/).',echo=FALSE}
+a1<-'Module1/images/1_SIGexempleA.png'
+knitr::include_graphics(a1)
+```
+<br>
+
+* Études sociodémographiques : cartographier des indices de défavorisation qui servent au gouvernement à répartir de façon équitable les ressources financières dédiées à l’éducation. 
+```{r sigexempleb, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleB.png", fig.cap='Atlas de défavorisation du Ministère de l’Éducation et de l’Enseignement supérieur du Québec (https://infogeo.education.gouv.qc.ca/public/Atlas_Defavorisation/).',echo=FALSE}
+a2<-'Module1/images/1_SIGexempleB.png'
+knitr::include_graphics(a2)
+```
+<br>
+
+* Évaluation des risques : identifier les risques d’inondation d’un secteur pour déterminer la couverture d’assurance requise pour une habitation.
+```{r sigexemplec, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleC.png", fig.cap='Cartographie interactive des zones inondables développée par le Ministère de l’Environnement et de la Lutte contre les changements climatiques du Québec (https://geoinondations.gouv.qc.ca/).',echo=FALSE}
+a3<-'Module1/images/1_SIGexempleC.png'
+knitr::include_graphics(a3)
+```
+<br>
+
+* Gestion des risques : surveiller les risques journaliers d’incendies de forêt pour déterminer les mesures préventives à adopter et les ressources nécessaires pour assumer la suppression de feux. 
+
+```{r sigexempled, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleD.png", fig.cap='Cartographie des risques d’incendies de forêt mise à jour quotidiennement par la Société de protection des forêts contre le feu (https://sopfeu.qc.ca/cartes/) (source : image récupérée de https://www.rcinet.ca/).',echo=FALSE}
+a4<-'Module1/images/1_SIGexempleD.png'
+knitr::include_graphics(a4)
+```
+<br>
+
+* Gestion des ressources naturelles : cartographier la distribution des peuplements forestiers et leurs caractéristiques (composition essences, âge, sol, etc.) pour déterminer les futures récoltes de bois. 
+
+```{r sigexemplee, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleE.png", fig.cap='Cartographie des peuplements forestiers et de leurs caractéristiques par le Ministère des Forêts, de la Faune et des Parcs du Québec (https://www.foretouverte.gouv.qc.ca/).',echo=FALSE}
+a5<-'Module1/images/1_SIGexempleE.png'
+knitr::include_graphics(a5)
+```
+<br>
+
+* Évaluation foncière : représenter les limites géographiques des cadastres et identifier la valeur des terrains et des bâtiments pour projeter les revenus municipaux provenant des taxes municipales ou pour préparer une vente immobilière. 
+
+```{r sigexemplef, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleF.png", fig.cap='Zonage et évaluation foncière de la municipalité de Mont-Laurier dans la MRC d’Antoine-Labelle (http://geo.mrc-antoine-labelle.qc.ca/sigimweb/).',echo=FALSE}
+a6<-'Module1/images/1_SIGexempleF.png'
+knitr::include_graphics(a6)
+```
+<br>
+
+* Géomarketing : mener une étude de marcher qui évaluera comment la clientèle visée par une entreprise ainsi que les entreprises concurrentes sont distribuées dans le secteur géographique convoité. 
+```{r sigexempleg, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleG.png", fig.cap='Géomarketing pour les études de marché (source : https://www.geopoint.pt/en/retalho/).',echo=FALSE}
+a7<-'Module1/images/1_SIGexempleG.png'
+knitr::include_graphics(a7)
+```
+<br>
+
+
 
 #### La science des données {-}
 
