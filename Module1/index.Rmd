@@ -68,7 +68,7 @@ Pour ceux et celles intéressés aux cartes historiques, la figure \@ref(fig:evo
 
 <br>
 
-```{r evomtl, fig.align='left', out.width = "50%",fig.show='hold', fig.link=c("Module1/images/1_Montreal1556.png", "Module1/images/1_Montreal1645.png", "Module1/images/1_Montreal1758.png", "Module1/images/1_Montreal1843.tif", "Module1/images/1_Montreal1897.png", "Module1/images/1_Montreal1920.png", "Module1/images/1_Montreal1960.png", "Module1/images/1_Montreal1982.png"), fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources : [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
+```{r evomtl, fig.align='left', out.width = "50%",fig.show='hold', fig.link=c("Module1/images/1_Montreal1556.png", "Module1/images/1_Montreal1645.png", "Module1/images/1_Montreal1758.png", "Module1/images/1_Montreal1843.tif", "Module1/images/1_Montreal1897.png", "Module1/images/1_Montreal1920.png", "Module1/images/1_Montreal1960.png", "Module1/images/1_Montreal1982.png"), fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
 a1<-'Module1/images/1_Montreal1556.png'
 a2<-'Module1/images/1_Montreal1645.png'
 a3<-'Module1/images/1_Montreal1758.png'
@@ -92,7 +92,7 @@ Il cartographia les lieux de résidence des personnes infectées et observa qu�
 
 <br>
 
-```{r cholera, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Cholera.PNG', fig.cap="Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source : [Wikipedia](https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg).", out.width = '50%'}
+```{r cholera, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Cholera.PNG', fig.cap="Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source: [Wikipedia](https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Cholera.PNG')
 ```
 
@@ -106,59 +106,74 @@ On définit la géomatique comme « l’ensemble des connaissances et technologi
 
 En effet, les géographes ou autres utilisateurs de données spatiales doivent maintenant composer avec des données numériques diverses acquises par la photographie aérienne et satellitaire, les outils topographiques électroniques ou munis de GPS, la numérisation de documents papiers, etc. 
 
-De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multi-sources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales. 
+De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multi-sources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales (Figure \@ref(fig:sigelements)). 
+
+
+```{r sigelements, fig.align='left', echo=FALSE, fig.link='Module1/images/1_SIGelements.jpg', fig.cap="Les différents éléments qui composent un SIG. Source: image récupérée le 6 décembre 2021 à https://bookdown.org/tep/gisbooklet/introduction-to-gis.html.", out.width = '80%'}
+knitr::include_graphics('Module1/images/1_SIGelements.jpg')
+```
+<br>
 
 Un SIG est composé d’un ordinateur, de données numériques, et d’un ou plusieurs logiciels spécialisés. De plus, un SIG doit être développé par du personnel qualifié et pouvoir servir à des utilisatrices ou des utilisateurs. 
 
-Les SIG sont de puissants outils pour visualiser et diffuser de l’information et sont de plus en plus utilisés pour faciliter la prise de décisions dans divers contextes. Nommons quelques exemples parmi les multiples domaines d’application des SIG : 
+Les SIG font maintenant partie de notre vie quotidienne. Pensez par exemple à Google Map, un des SIG les plus utilisés. Ce dernier permet de calculer des itinéraires, de localiser des services près d’une adresse, et de visualiser une localisation par l’outil « Street View ». Plusieurs services offerts aux individus sont aussi dotés d’une interface SIG, comme la plateforme de vélos en libre-service BIXI, ou encore les sites immobiliers pour la vente ou la location de logement (Figure \@ref(fig:sigquotidien)). 
+
+```{r sigquotidien, fig.align='left', out.width = "70%",fig.show='hold', fig.link=c("Module1/images/1_GoogleMap.png", "Module1/images/1_Bixi.png", "Module1/images/1_DuProprio.png"), fig.cap='Exemples de SIG dans notre vie quotidienne. Google Map affiche les services autour d’une adresse. L’application BIXI permet de trouver les bornes et les vélos accessibles. Source: image récupérée le 6 décembre 2021 à https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/. L’outil d’affichage de DuProprio permet d’identifier les résidences à vendre dans un secteur donné. ',echo=FALSE}
+a1<-'Module1/images/1_GoogleMap.png'
+a2<-'Module1/images/1_Bixi.png'
+a3<-'Module1/images/1_DuProprio.png'
+m3 <-c(a1,a2,a3)
+knitr::include_graphics(rep(m3),1)
+```
+
+<br>
+
+Les SIG sont surtout de puissants outils pour visualiser et diffuser de l’information et sont de plus en plus utilisés pour faciliter la prise de décisions dans divers contextes. Nommons quelques exemples parmi les multiples domaines d’application des SIG : 
 
 * Logistique des transports : connaître l’état du réseau routier, les chantiers de construction, les accidents et le trafic, pour planifier des trajets ou des travaux futurs. 
-```{r sigexemplea, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleA.png", fig.cap='Suivi de l’état du réseau routier par Transport Québec (https://www.quebec511.info/fr/Carte/).',echo=FALSE}
+```{r sigexemplea, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleA.png", fig.cap='Suivi de l’état du réseau routier par Transport Québec. Source: https://www.quebec511.info/fr/Carte/.',echo=FALSE}
 a1<-'Module1/images/1_SIGexempleA.png'
 knitr::include_graphics(a1)
 ```
 <br>
 
 * Études sociodémographiques : cartographier des indices de défavorisation qui servent au gouvernement à répartir de façon équitable les ressources financières dédiées à l’éducation. 
-```{r sigexempleb, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleB.png", fig.cap='Atlas de défavorisation du Ministère de l’Éducation et de l’Enseignement supérieur du Québec (https://infogeo.education.gouv.qc.ca/public/Atlas_Defavorisation/).',echo=FALSE}
+```{r sigexempleb, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleB.png", fig.cap='Atlas de défavorisation du Ministère de l’Éducation et de l’Enseignement supérieur du Québec. Source:  https://infogeo.education.gouv.qc.ca/public/Atlas_Defavorisation/.',echo=FALSE}
 a2<-'Module1/images/1_SIGexempleB.png'
 knitr::include_graphics(a2)
 ```
 <br>
 
 * Évaluation des risques : identifier les risques d’inondation d’un secteur pour déterminer la couverture d’assurance requise pour une habitation.
-```{r sigexemplec, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleC.png", fig.cap='Cartographie interactive des zones inondables développée par le Ministère de l’Environnement et de la Lutte contre les changements climatiques du Québec (https://geoinondations.gouv.qc.ca/).',echo=FALSE}
+```{r sigexemplec, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleC.png", fig.cap='Cartographie interactive des zones inondables développée par le Ministère de l’Environnement et de la Lutte contre les changements climatiques du Québec. Source: https://geoinondations.gouv.qc.ca/.',echo=FALSE}
 a3<-'Module1/images/1_SIGexempleC.png'
 knitr::include_graphics(a3)
 ```
 <br>
 
 * Gestion des risques : surveiller les risques journaliers d’incendies de forêt pour déterminer les mesures préventives à adopter et les ressources nécessaires pour assumer la suppression de feux. 
-
-```{r sigexempled, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleD.png", fig.cap='Cartographie des risques d’incendies de forêt mise à jour quotidiennement par la Société de protection des forêts contre le feu (https://sopfeu.qc.ca/cartes/) (source : image récupérée de https://www.rcinet.ca/).',echo=FALSE}
+```{r sigexempled, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleD.png", fig.cap='Cartographie des risques d’incendies de forêt mise à jour quotidiennement par la Société de protection des forêts contre le feu (https://sopfeu.qc.ca/cartes/). Source : image récupérée de https://www.rcinet.ca/.',echo=FALSE}
 a4<-'Module1/images/1_SIGexempleD.png'
 knitr::include_graphics(a4)
 ```
 <br>
 
 * Gestion des ressources naturelles : cartographier la distribution des peuplements forestiers et leurs caractéristiques (composition essences, âge, sol, etc.) pour déterminer les futures récoltes de bois. 
-
-```{r sigexemplee, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleE.png", fig.cap='Cartographie des peuplements forestiers et de leurs caractéristiques par le Ministère des Forêts, de la Faune et des Parcs du Québec (https://www.foretouverte.gouv.qc.ca/).',echo=FALSE}
+```{r sigexemplee, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleE.png", fig.cap='Cartographie des peuplements forestiers et de leurs caractéristiques par le Ministère des Forêts, de la Faune et des Parcs du Québec. Source: https://www.foretouverte.gouv.qc.ca/.',echo=FALSE}
 a5<-'Module1/images/1_SIGexempleE.png'
 knitr::include_graphics(a5)
 ```
 <br>
 
 * Évaluation foncière : représenter les limites géographiques des cadastres et identifier la valeur des terrains et des bâtiments pour projeter les revenus municipaux provenant des taxes municipales ou pour préparer une vente immobilière. 
-
-```{r sigexemplef, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleF.png", fig.cap='Zonage et évaluation foncière de la municipalité de Mont-Laurier dans la MRC d’Antoine-Labelle (http://geo.mrc-antoine-labelle.qc.ca/sigimweb/).',echo=FALSE}
+```{r sigexemplef, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleF.png", fig.cap='Zonage et évaluation foncière de la municipalité de Mont-Laurier dans la MRC d’Antoine-Labelle (http://geo.mrc-antoine-labelle.qc.ca/sigimweb/).',echo=FALSE}
 a6<-'Module1/images/1_SIGexempleF.png'
 knitr::include_graphics(a6)
 ```
 <br>
 
 * Géomarketing : mener une étude de marcher qui évaluera comment la clientèle visée par une entreprise ainsi que les entreprises concurrentes sont distribuées dans le secteur géographique convoité. 
-```{r sigexempleg, fig.align='center', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleG.png", fig.cap='Géomarketing pour les études de marché (source : https://www.geopoint.pt/en/retalho/).',echo=FALSE}
+```{r sigexempleg, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleG.png", fig.cap='Géomarketing pour les études de marché. Source : https://www.geopoint.pt/en/retalho/.',echo=FALSE}
 a7<-'Module1/images/1_SIGexempleG.png'
 knitr::include_graphics(a7)
 ```
@@ -167,6 +182,53 @@ knitr::include_graphics(a7)
 
 
 #### La science des données {-}
+
+La science des données est un domaine pluridisciplinaire qui regroupe les méthodes scientifiques et l’infrastructure permettant d’extraire les connaissances d’ensembles de données. La science des données utilisent notamment les approches d’intelligence artificielle (tels l’apprentissage automatique et l’apprentissage profond) ainsi que l’infonuagique (p. ex. les serveurs, le stockage de données, et les logiciels disponibles via internet) pour dégager des tendances au sein de données volumineuses ou complexes et ainsi solutionner des problèmes diverses. 
+
+Les applications de la science des données se sont multipliées devant la disponibilité de données massives et le besoin de les analyser. Ces applications incluent maintenant des secteurs aussi variés que la santé, le commerce et l’astrophysique.
+
+Depuis les années 2010, nous observons une convergence entre la géomatique et la science des données.  En effets, les concepts et les outils développer dans ces domaines traditionnellement distincts sont mis à profit afin de pouvoir gérer, analyser et visualiser un nombre de grandissant de données spatiales. 
+
+L’augmentation fulgurante des données spatiales est associée à plusieurs avancées en technologie des capteurs et des communications [@Lee2015]. Ces développements ont permis de diversifier les appareils capables d’acquérir des données géoréférencées et de produire des appareils accessibles à tous et mobiles (penser à vos téléphones cellulaires!). Ces développements ont également permis de connecter en réseau les capteurs de données, et d’accroître la précision des mesures ainsi que leur suivi en temps réel. 
+
+Ces avancées technologiques ont donc suscité (et continuent de susciter) l’émergence de nouvelles applications reposant sur l’utilisation de données spatiales.  Par exemple, les données de géolocalisation, et même les messages sur les médias sociaux peuvent faciliter le travail des gouvernements lorsqu’ils doivent fournir efficacement une aide appropriée suivant des évènements tels des accidents. Dans le contexte de la pandémie de COVID-19, les données sur la distribution des cas ont servis, entre autres, à prendre des décisions sur les règles de confinement à adopter selon le nombre de cas par régions. 
+
+```{r datasciencecovid, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_CovidMap.PNG", fig.cap='Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : https://ressouces-fr-covid19canada.hub.arcgis.com/.',echo=FALSE}
+a8<-'Module1/images/1_CovidMap.PNG'
+knitr::include_graphics(a8)
+```
+<br>
+
+Dans ordre d'idées similaires, l’application [Alerte COVID](https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html)  du gouvernement canadien, qui a pour objectif de limiter la propagation de la maladie, permet aux abonnés d’être informés si une tierce personne ayant reçu un résultat positif s’est trouvée dans leur proximité dans les 14 derniers jours.
+
+
+En environnement les applications des données spatiales sont nombreuses. Par exemple, les colliers-GPS portés par des mammifères permettent de mieux comprendre le déplacement des individus appartenant à une espèce menacée et ainsi de mieux protéger leur habitat^[Allez jeter un coup d’œil au projet [Voyageur Wolf Project](https://www.voyageurswolfproject.org/animations), qui suit le déplacement de loups dans le nord du Minnesota grâce à des colliers GPS. On peut y voir des animations démontrant le déplacement d’individus de différentes meutes.].  
+
+```{r datasciencecaribou, fig.align='left', out.width = "70%",fig.show='hold', fig.link="Module1/images/1_Caribou.png", fig.cap='Carte illustrant les migrations printanières et automnales de caribous de la sous-population de la Rivière-aux-Feuilles dans le Nord du Québec. Chaque ligne représente le déplacement d’un individu suivi par satellite. Ces données ont été acquises aux cours des années 2009-2011 dans le cadre du projet [Caribou Ungava](https://www.caribou-ungava.ulaval.ca/accueil/). Source : Caribou Ungava, Photo : Steeve Côté. Images récupérées le 10 décembre 2021 à https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html.',echo=FALSE}
+a9<-'Module1/images/1_Caribou.png'
+knitr::include_graphics(a9)
+```
+
+<br>
+
+Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme [ebird](https://ebird.org/)  développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde auxquelles tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de mai 2021, ebird contenait plus d’un milliard d’obervations d’oiseaux soumises par environ 700 mille participants^[Source: https://ebird.org/news/global-big-day-2021-reaches-new-heights.].
+
+```{r datascienceebird, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_ebird.png", fig.cap='Carte illustrant la distribution du Roitelet à triple-bandeau produite à partir des données d’observation de ebird. Le mauve indique les lieux où l’espèce est présente à l’année, le rouge, durant la période de reproduction, le bleu, durant les périodes de non-reproduction, le jaune durant les saisons de pré- et post-reproduction, et le gris les lieux d’absence ou d’observations rares.  Source : https://ebird.org/science/status-and-trends/range-maps - Illustration © Hilary Burn/Lynx Edicions.',echo=FALSE}
+a10<-'Module1/images/1_ebird.png'
+knitr::include_graphics(a10)
+```
+<br>
+
+Les services basés sur la géolocalisation aussi sont de plus en plus important dans notre économie. L’industrie du commerce de détails, de la restauration, du tourisme, et du transport profitent tous d’applications géo-dépendantes. Pensez par exemple à Uber, Dashdoor, Trip Advisor et même les applications de rencontre comme Tinder. De tels services permettent, entre autres, de signaler des offres aux consommateurs en fonction de leur position. De plus, les données spatiales peuvent servir à identifier des intérêts locaux pour certains produits et ainsi permettre aux entreprises d’améliorer l’efficacité de leur chaîne d’approvisionnement. 
+
+```{r datascienceloghub, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_AppCommerciale.png", fig.cap='Carte illustrant la position des consommateurs et le nombre de ventes d’une entreprise commerciale en Espagne. Carte tirée du site web de la compagnie [Log-hub](log-hub.com)  offrant des services basés sur l’analyse de données spatiales pour améliorer les chaînes d’approvisionnement. Source : https://log-hub.com/my-maps-platform/.',echo=FALSE}
+a11<-'Module1/images/1_AppCommerciale.png'
+knitr::include_graphics(a11)
+```
+
+<br>
+
+Les utilisateurs des données spatiales se limitaient historiquement aux organismes gouvernementaux. Or, la multiplication des applications dans différents secteurs a augmenté le besoin pour des logiciels de visualisation et d’analyse de données spatiales et aussi pour une main d’œuvre qualifiée capable d’opérer ces outils.
 
 ### Les outils {#outils}
 
