@@ -118,10 +118,10 @@ Un SIG est composé d’un ordinateur, de données numériques, et d’un ou plu
 
 Les SIG font maintenant partie de notre vie quotidienne. Pensez par exemple à Google Map, un des SIG les plus utilisés. Ce dernier permet de calculer des itinéraires, de localiser des services près d’une adresse, et de visualiser une localisation par l’outil « Street View ». Plusieurs services offerts aux individus sont aussi dotés d’une interface SIG, comme la plateforme de vélos en libre-service BIXI, ou encore les sites immobiliers pour la vente ou la location de logement (Figure \@ref(fig:sigquotidien)). 
 
-```{r sigquotidien, fig.align='left', out.width = "70%",fig.show='hold', fig.link=c("Module1/images/1_GoogleMap.png", "Module1/images/1_Bixi.png", "Module1/images/1_DuProprio.png"), fig.cap='Exemples de SIG dans notre vie quotidienne. Google Map affiche les services autour d’une adresse. L’application BIXI permet de trouver les bornes et les vélos accessibles. Source: image récupérée le 6 décembre 2021 à https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/. L’outil d’affichage de DuProprio permet d’identifier les résidences à vendre dans un secteur donné. ',echo=FALSE}
+```{r sigquotidien, fig.align='left', out.width = "70%",fig.show='hold', fig.link=c("Module1/images/1_GoogleMap.png", "Module1/images/1_Bixi.png", "Module1/images/1_DuProprio.PNG"), fig.cap='Exemples de SIG dans notre vie quotidienne. Google Map affiche les services autour d’une adresse. L’application BIXI permet de trouver les bornes et les vélos accessibles. Source: image récupérée le 6 décembre 2021 à https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/. L’outil d’affichage de DuProprio permet d’identifier les résidences à vendre dans un secteur donné. ',echo=FALSE}
 a1<-'Module1/images/1_GoogleMap.png'
 a2<-'Module1/images/1_Bixi.png'
-a3<-'Module1/images/1_DuProprio.png'
+a3<-'Module1/images/1_DuProprio.PNG'
 m3 <-c(a1,a2,a3)
 knitr::include_graphics(rep(m3),1)
 ```
