@@ -193,8 +193,8 @@ L’augmentation fulgurante des données spatiales est associée à plusieurs av
 
 Ces avancées technologiques ont donc suscité (et continuent de susciter) l’émergence de nouvelles applications reposant sur l’utilisation de données spatiales.  Par exemple, les données de géolocalisation, et même les messages sur les médias sociaux peuvent faciliter le travail des gouvernements lorsqu’ils doivent fournir efficacement une aide appropriée suivant des évènements tels des accidents. Dans le contexte de la pandémie de COVID-19, les données sur la distribution des cas ont servis, entre autres, à prendre des décisions sur les règles de confinement à adopter selon le nombre de cas par régions. 
 
-```{r datasciencecovid, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_CovidMap.PNG", fig.cap='Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : https://ressouces-fr-covid19canada.hub.arcgis.com/.',echo=FALSE}
-a8<-'Module1/images/1_CovidMap.PNG'
+```{r datasciencecovid, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_CovidMap.png", fig.cap='Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : https://ressouces-fr-covid19canada.hub.arcgis.com/.',echo=FALSE}
+a8<-'Module1/images/1_CovidMap.png'
 knitr::include_graphics(a8)
 ```
 <br>
