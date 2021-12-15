@@ -230,13 +230,40 @@ knitr::include_graphics(a11)
 
 Les utilisateurs des données spatiales se limitaient historiquement aux organismes gouvernementaux. Or, la multiplication des applications dans différents secteurs a augmenté le besoin pour des logiciels de visualisation et d’analyse de données spatiales et aussi pour une main d’œuvre qualifiée capable d’opérer ces outils.
 
-### Les outils {#outils}
+### Les outils et logiciels de visualisation et d'analyse géo-spatiale {#outils}
 
-Les outils et logiciels de visualisation et d'analyse géospatiale
+Dans le cadre de ce cours, nous utiliserons le logiciel et langage de programmation R pour réaliser des tâches de visualisation et d’analyse de données spatiales. Or, il existe plusieurs autres logiciels et il est important de savoir où R se situe par rapport aux autres options disponibles dans ce paysage géo-spatial^[Le contenu de cette sous-section est adapté du cours [*Introduction to Geospatial Concepts : The Geospatial Landscape*](https://datacarpentry.org/organization-geospatial/04-geo-landscape/index.html) [@Data_Carpentry_IntroGeospatial] de l’organisme [Data Carpentry](https://datacarpentry.org/).  Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.]. 
 
-- Logiciels commerciaux
-- Logiciels ouverts (open-source)
-- Services d'infonuagique
+#### Les logiciels commerciaux {-}
+
+Il existe plusieurs logiciels commerciaux de géomatique. Ces logiciels sont relativement dispendieux et généralement seulement les entreprises qui offrent des services spécialisés en géomatique ou les ministères, certaines villes et les universités peuvent se procurer ces licences.
+
+* [ArcGIS]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-pro/overview) : est la plateforme principale de la compagnie [ESRI]( https://www.esri.ca/fr-ca/home) (Environmental Systems Research Institute). Créée en 1999 sous le nom ArcMap, cette application est maintenant vendue sous le nom ArcGIS Pro. ESRI offre également d’autres plateformes dont [ArcGIS Online](https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview), un logiciel de cartographie web, et [ArcGIS Developer]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-developer) pour les développeurs.
+* [MapInfo](https://www.precisely.com/fr/product/precisely-mapinfo/mapinfo-pro): est la plateforme de la compagnie [Precisely](https://www.precisely.com/fr/) (autrefois Pitney Bowes Software et MapInfo Corporation). Créée en 1995, c’est une des premières plateformes à avoir vu le jour. 
+* [Hexagon Geospatial Power Portfolio](https://www.hexagongeospatial.com/products/products): est une plateforme qui comprend divers outils géo-spatiaux dont [ERDAS](https://www.hexagongeospatial.com/products/power-portfolio/erdas-imagine) reconnu pour la manipulation d’images de télédétection. 
+* [Manifold](https://manifold.net/):  est une plateforme qui se démarque par sa rapidité de par son utilisation de traitements en parallèle et GPU.
+
+#### Les logiciels libres d’accès {-}
+
+Il existe une offre de plus en plus intéressante de logiciels libres d’accès. La [Fondation Open Source Geospatial]( https://www.osgeo.org/) (OSGeo), une organisation non-gouvernementale fondée en 2006, a pour objectif de soutenir et promouvoir le développement de codes et de logiciels libres en géomatique.  Elle chapeaute plusieurs [projets]( https://www.osgeo.org/projects/) comme des bibliothèques spécialisées, des applications SIG mobiles ou bureautiques, et des applications pour la gestion de données spatiales. Voici quelques exemples :
+
+* [QGIS](https://www.qgis.org/fr/site/): est une application SIG gratuite et de source libre. Elle est écrite en Python mais possède plusieurs interfaces écrite en R, dont [RQGIS]( https://rdrr.io/cran/RQGIS/).
+*	[GRASS GIS](https://grass.osgeo.org/): est un des projets fondateurs de l’OSGeo qu’on appelle communément GRASS (Geographic Resources Analysis Support System). Cette application libre permet la gestion, le traitement, l’analyse et la visualisation de données spatiales, ainsi que le traitement d’images et la modélisation. Elle est utilisée par des entreprises commerciales et dans les milieux universitaires et gouvernementaux. 
+*	[GDAL]( https://gdal.org/): pour Geospatial Data Abstraction Library est une bibliothèque qui permet de lire des données spatiales en formats vectoriel et matriciel^[Nous verrons les concepts de données vectorielles et matricielles au [Module 2](#base) portant sur les Modèles de données spatiales.]. Plusieurs logiciels, libres et commerciaux, utilisent cette bibliothèque dont QGIS, GRASS GIS, ArcGIS, Google Earth et aussi R.
+*	[PostGIS]( https://postgis.net/): est une extension pour les données spatiales de [PostgreSQL]( https://www.postgresql.org/), un système de source libre pour la gestion de base de données relationnelle et objet. 
+
+#### Les services d’infonuagique {-}
+
+Les services infonuagiques sont des services de stockage et de traitement de données externalisés sur des serveurs distants auxquels les utilisatrices et les utilisateurs peuvent accéder via internet.
+
+* [Google Earth Engine]( https://earthengine.google.com/): est une plateforme de calcul infonuagique de Google qui permet le traitement de données géo-spatiales. Celle-ci donne accès à un large catalogue d’images satellitaires (p. ex. de [Landsat]( https://landsat.gsfc.nasa.gov/) et [Sentinel-2]( https://sentinel.esa.int/web/sentinel/missions/sentinel-2)) et à la puissance de calcul requise pour les analyser. Google Earth Engine permet ainsi d’explorer les changements sur la surface de la Terre à l’échelle planétaire. Il a été utilisé pour visualiser l’évolution de diverses problématiques environnementales comme la perte de couvert forestier. Google Earth Engine est gratuit pour des utilisations académiques et de recherche et une version payante existe pour les utilisations commerciales. Une interface de programmation existe également pour les développeurs, [Earth Engine API]( https://developers.google.com/earth-engine/).
+* [ArcGIS Online]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview): est la plateforme web d’ArcGIS, le logiciel commercial présenté plus haut. Cette plateforme donne accès à des milliers de cartes. 
+* [PanGEO]( https://pangeo.io/): est une plateforme de source libre, et collaborative, pour le développement d’applications pour les analyses géo-spatiales à grande échelle. 
+* [Sepal]( https://sepal.io/): est une plateforme gratuite pour l’analyse d’images satellitaires qui repose sur Google Earth Engine et des logiciels de source libre comme Python, R. Sepal est un multiples outils qu’offre [OpenForis]( https://openforis.org/), un projet conçu par la [FAO]( https://www.fao.org/home/fr) (Organisation des Nations Unis pour l’alimentation et l’agriculture) pour permettre aux pays de faire le suivi de leurs ressources naturelles.
+* [Kepler]( https://kepler.gl/): est également une plateforme de source libre pour les analyse géo-spatiales à grande échelle. Elle est supportée par la compagnie [Uber]( https://eng.uber.com/keplergl/).
+* [Planet]( https://www.planet.com/markets/mapping/): est une plateforme commerciale pour les analyses géo-spatiales. 
+
+
 
 ### L'utilisation de R  {#outil_R}
 
