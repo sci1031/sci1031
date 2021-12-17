@@ -264,23 +264,40 @@ Les services infonuagiques sont des services de stockage et de traitement de don
 * [Planet]( https://www.planet.com/markets/mapping/): est une plateforme commerciale pour les analyses géo-spatiales. 
 
 
+#### Les langages de programmation pour l’analyse géospatiale {-}
 
-### L'utilisation de R  {#outil_R}
+La majorité des logiciels d’information géographique reposent sur des interfaces graphiques élaborées où les outils et les fonctions sont accessibles par des menus et des boutons. 
 
-L'utilisation de R en visualisation et analyse spatiale
+Or, le mode « pointer-cliquer» de ces interfaces n’est pas idéal lorsqu’on veut s’assurer que nos analyses soient facilement reproductibles – un aspect crucial de la recherche scientifique est en effet la reproductibilité. C’est pour cette raison que l’utilisation de langages de programmation pour réaliser des analyses et des visualisations de données spatiales est bénéfique et de plus en plus populaire.
 
-Les libraries essentielles:
+L’utilisation de lignes de commandes plutôt que d’interfaces graphiques permet également d’automatiser des tâches que l’on désire répéter plusieurs fois dans une analyse ou encore de réutiliser des blocs de code dans différents projets. De plus, un code se partage facilement et peut être ainsi amélioré par d'autres contributeurs ou contributrices.
 
--	dplyr
--	ggplot2
--	raster
--	rgdal
--	rasterVis
--	remotes
--	sf
--	sp
--	GISTools
+Il existe plusieurs bibliothèques géo-spatiales dans les langages de programmation à usage général comme C++ et Java. Cependant, la courbe d’apprentissage est grande pour ces langages et les efforts requis sont disproportionnés pour les usagers qui comptent utiliser leurs fonctionnalités de façon limitée seulement. 
 
+En revanche, les langages interprétés^[ Un langage de programmation interprété est un langage qui fait l’interprétation du code directement au moment de l’exécution sans exiger que l’utilisateur ou l’utilisatrice le compile préalablement. Allez voir cet article de [Wikipédia]( https://fr.wikipedia.org/wiki/Interpr%C3%A8te_(informatique)) pour en connaître davantage. 
+], comme R et Python, sont beaucoup plus simples à apprendre et à utiliser. Ces deux langages possèdent maintenant leur propre ensemble de bibliothèques d’analyse et de visualisation de données spatiales. Ce [site](https://gisgeography.com/python-libraries-gis-mapping/) documente les bibliothèques utiles en Python. 
+
+Dans le cadre de ce cours, nous utiliserons R en combinaison avec [RStudio]( https://www.rstudio.com/) qui est un environnement de développement (en anglais « integrated development environment », IDE). L’interface RStudio facilite et rend convivial l’utilisation de R. Elle permet, entre autre, de créer des fichiers de code d’extension *.R ou *.Rmd que vous pouvez réutiliser et modifier. 
+
+<br>
+
+### Les bibliothèques géo-spatiales de R {#outil_R}
+
+Il existe un nombre important de bibliothèques R (« packages » en anglais) qui se concentrent sur différents aspects de la manipulation, de l’analyse et de la visualisation de données spatiales. D’autres bibliothèques plus générales, comme `base R` et `ggplot2` peuvent aussi être utilisées sur des données spatiales pour accomplir certaines fonctions. 
+
+La communauté R est très active, de nouvelles bibliothèques sont régulièrement offertes alors les bibliothèques existantes sont mises à jour et améliorer constamment. Ceci est également vrai pour la « communauté R spatiale ». R étant un projet ouvert, tout le monde peut créer des bibliothèques, ou signalez des problèmes afin d’améliorer des bibliothèques existantes. Vous aussi!
+
+Vous trouverez sur le site de [CRAN]( https://cran.r-project.org/) (The Comprehensive R Archive Network) une page dédiée aux [bibliothèques R pour l’analyse géo-spatiale]( https://cran.r-project.org/web/views/Spatial.html).
+
+Voici quelques bibliothèques importantes que nous utiliserons dans ce cours :
+
+*	[`sf`]( https://r-spatial.github.io/sf/): bibliothèque incontournable offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux vectoriels de différentes classes. sf est relativement récente et est venue remplacer les bibliothèques `sp`, `rgeos` et les parties vectorielles de `rdgal`.
+*	[`raster`]( https://cran.r-project.org/web/packages/raster/index.html): bibliothèque offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux matriciels.  Notez que la bibliothèque [`terra`](https://rspatial.github.io/terra/reference/terra-package.html) remplacera peut-être `raster` dans les années à venir.
+*	[`spacetime`]( https://cran.r-project.org/web/packages/spacetime/index.html): bibliothèque offrant des fonctions pour manipuler des objets spatiaux-temporels. 
+*	[`mapview`]( https://r-spatial.github.io/mapview/): bibliothèque offrant des fonctions pour visualiser rapidement et de façon interactives des données spatiales.
+*	[`tmap`]( https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html) : bibliothèque offrant des fonctions plus flexibles pour visualiser des données spatiales. Elle utilise un style qui s’apparente à [`ggplot2`](https://ggplot2.tidyverse.org/).
+
+<br>
 
 ### La pensée géographique {#pensee_geo}
 
