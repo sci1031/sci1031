@@ -4,26 +4,38 @@ L'objectif principal de ce module est d'apprendre à manipuler des données vect
 
 À la fin de ce module vous saurez:
 
-- Ajouter de nouveaux attributs à des données vectorielles, et également supprimer ou éditer des attributs.
-- Filtrer des données vectorielles en se basant sur leurs attributs.
-- Joindre spatialement deux ensembles de données vectorielles.
-- Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
-- Combiner, aggréger et simplifier des objets vectoriels. 
-- Transformer la géométrie d'objets vectoriels.
-- Créer des zones tampons autour d'objets vectoriels.
-- Trouver le centroid et les coordonnées d'objets vectoriels.
-- Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
-- Confirmer des relations topologiques entre deux objets vectoriels.
-- Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
+>
+> - Ajouter de nouveaux attributs à des données vectorielles, et également supprimer ou éditer des attributs.
+> - Filtrer des données vectorielles en se basant sur leurs attributs.
+> - Joindre spatialement deux ensembles de données vectorielles.
+> - Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
+> - Combiner, aggréger et simplifier des objets vectoriels. 
+> - Transformer la géométrie d'objets vectoriels.
+> - Créer des zones tampons autour d'objets vectoriels.
+> - Trouver le centroid et les coordonnées d'objets vectoriels.
+> - Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
+> - Confirmer des relations topologiques entre deux objets vectoriels.
+>- Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
+>
 
+<br>
 
-Vous utiliserez les bibliothèques suivantes:
+```{r echo=FALSE, out.width='10%',fig.align='left'}
+knitr::include_graphics("Images/Icones_Bibliotheques.jpg")
+```
+
+#### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `sf`
 - `mapview`
 - `units`
 
-Vous apprendrez à utiliser les fonctions suivantes:
+
+```{r echo=FALSE, out.width='10%',fig.align='left'}
+knitr::include_graphics("Images/Icones_Fonctions.jpg")
+```
+
+#### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
 - `subset()`
 - `st_coordinates()`
@@ -38,6 +50,13 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `rowSums()`
 - `lengths()`
 - `st_is_longlat()`
+
+
+```{r echo=FALSE, out.width='10%',fig.align='left'}
+knitr::include_graphics("Images/Icones_Donnees.jpg")
+```
+
+#### Vous utiliserez ces données: {-}
 
 Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec (SÉPAQ).
 
@@ -84,6 +103,7 @@ Commençons par charger les bibliothèques requises pour lire les données spati
 library(sf)
 library(mapview)
 ```
+
 
 ```{r, echo = FALSE, eval=TRUE}
 library(leafsync)
