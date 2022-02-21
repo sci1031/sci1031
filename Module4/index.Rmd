@@ -66,8 +66,93 @@ library(mapview)
 
 
 Cette leçon est une introduction aux données spatiales vectorielles sous `R`. 
+
+La première section^[chapitre sur les données vectorielles du manuel [Geocomputation with R](https://bookdown.org/robinlovelace/geocompr/spatial-class.html) de Robin Lovelace, Jakub Nowosad et Jannes Muenchow] 
+
 Les trois premières sections porteront sur des données vectorielles en format *shapefile* puisque celles-ci sont couramment utilisées.
 La quatrième section vous familiarisera avec les données vectorielles en format *geodatabase* puisque celles-ci sont de plus en plus utilisées au sein de grandes organisations comme des ministères. 
+
+### Créer des données vectorielles
+
+#### Créer des géométries simples {-}
+
+Nous avons appris à la [leçon 2](#base) qu'il existe différents types de données vectorielles, dont les points, les lignes, et les polygones. La bibliothèque `sf` possède des fonctions pour créer ces géométries simples. 
+
+La fonction `st_point()` permet de transformer un vecteur numérique de coordonnées $(x,y)$ en une donnée vectorielle de type *point*. Par exemple
+
+```{r}
+p <- c(3,5)
+point <- st_point(p)
+point
+```
+<br>
+
+Remarquez que la classe de l'objet formé est `sfg`, ce qui signifie "simple feature geometries" :
+```{r}
+class(point_x)
+```
+<br>
+
+Pour créer des données vectorielles *multipoints*, nous devons d'abord créer une matrice contenant un ensemble de points, puis convertir cette matrice en utilisant la fonction `st_multipoint()`:
+
+```{r}
+M <- rbind( c(3,5), c(5,5), c(4,1), c(2,3))
+multi_point <- st_multipoint(M)
+multi_point
+```
+<br>
+
+Pour créer une *ligne*, nous devons également créer une matrice contenant les coordonnées des extrémités de la ligne. On convertie alors cette matrice avec la fonction `st_linestring()`:
+
+```{r}
+ligne <- st_linestring(M)
+ligne
+```
+<br>
+
+Un *polygone* se crée de façon similaire, cette fois en utilisant la fonction `st_polygon()`. Les coordonnées des extrémités du polygone doivent toutefois être définies dans une liste, et non une matrice. Il s'agit alors d'utiliser la fonction `list()` pour convertir une matrice en liste. 
+
+```{r}
+L <- list(rbind( c(3,5), c(5,5), c(4,1), c(2,3), c(3,5)))
+polygone <-st_polygon(L)
+polygone
+```
+<br>
+Noter que pour créer un polygone la première extrémité doit être identique à la dernière.
+<br>
+
+```{r}
+image des points, ligne, polygone.
+```
+
+Dans un même ordre d'idées, pour créer des *multi-lignes* ou des *multi-polygones* nous devons aussi recourrir à des listes où chaque élément de la liste correspond à une ligne ou à un polygone respectivement. 
+
+```{r}
+M1 <- rbind( c(3,5), c(5,5), c(4,1), c(2,3))
+M2 <- rbind( c(1,2), c(2,2), c(2,1))
+L  <- list(M1, M2)
+multi_ligne <- st_multilinestring(L)
+multi_ligne
+```
+<br>
+
+```{r}
+L1 <- list(rbind( c(3,5), c(5,5), c(4,1), c(2,3), c(3,5)))
+L2 <- list(rbind( c(1,2), c(2,2), c(2,1), c(1,2)))
+L  <- list(L1, L2)
+multi_polygone <- st_multipolygon(L)
+multi_polygone
+```
+<br>
+
+
+#### Attribuer un SCR {-}
+
+Nous venons d'apprendre les fonctions de base de la bibliothèque `sf` pour créer des géométries simples. Des données vectorielles doivent aussi être géoréférencées. Ceci signifie qu'on doit leur attribuer un datum et une projection. 
+
+```{r}
+multi_point <- CRS(multi_point, 26919)
+```
 
 
 ### Télécharger les données {#data_mod4}
