@@ -1584,6 +1584,7 @@ Notez que l'attribut "TRQ_NM_TER" de l'objet `parcs_nationaux` correspond au nom
 ```{r}
 parcs_nationaux$TRQ_NM_TER
 ```
+<br>
 
 ###### 4. Zones tampons autour des plus grandes municipalités {-}
 
@@ -1592,14 +1593,16 @@ Nous traçons maintenant une zone tampon (`POLYGON`) de 70&nbsp;km de rayon auto
 ```{r crs-top-villes}
 st_crs(top10_villes)$proj4string 
 ```
+<br>
 
-`+proj=longlat` atteste que la projection est en degré. Nous allons donc reprojeter l'objet `top10_villes` dans le système de coordonnées de référence NAD83 qui est métrique et dont le EPSG est 32198. NAD83 correspond système de coordonnées *Conique conforme de Lambert*.
+`+proj=longlat` atteste que la projection est en degré. Nous allons donc reprojeter l'objet `top10_villes` dans le système de coordonnées de référence NAD83 qui est métrique et dont le EPSG est 32198. NAD83 correspond au système de coordonnées *Conique conforme de Lambert*.
 
 ```{r transform-top-villes}
 top10_villes_lcc <- st_transform(top10_villes, crs = 32198)
 # On valide que les unités sont métriques (+units=m)
 st_crs(top10_villes_lcc)$proj4string 
 ```
+<br>
 
 Traçons à présent les zones tampon (*buffer*) autour des municipalités à l'aide de la fonction `st_buffer()` comme expliqué précédemment, et visualisons le résultat de cette opération
 
@@ -1620,11 +1623,13 @@ Nous allons utiliser la fonction `st_intersects()` pour déterminer quels parcs 
 ```{r interceptions-buffer-parcs}
 st_crs(top10_villes_buffer) == st_crs(parcs_nationaux)
 ```
+<br>
+
 Puisque la réponse est négative, transformons le SCR de l'objet `parcs_nationaux`.
 ```{r}
 parcs_nationaux_lcc = st_transform(parcs_nationaux, crs = st_crs(top10_villes_buffer))
 ```
-
+<br>
 
 Nous pouvons maintenant utiliser la fonction `st_intersects()`:
 
@@ -1643,6 +1648,8 @@ Par exemple, nous pouvons effectuer une sommation sur les lignes (zones tampons 
 ```{r top-villes-parcs}
 rowSums(st_intersects(x = top10_villes_buffer, y = parcs_nationaux_lcc, sparse = FALSE))
 ```
+<br>
+
 Consignons à présent ces valeurs dans une nouvelle colonne de la table d'attributs de l'objet `top10_villes`.
 
 ```{r top-villes-parcs2}
@@ -1650,7 +1657,7 @@ top10_villes$nbr_parcs <- rowSums(st_intersects(x = top10_villes_buffer, y = par
 
 top10_villes
 ```
-
+<br>
 
 
 ###### 7. Ville qui compte le plus grand nombre de parcs {-}
@@ -1749,7 +1756,7 @@ st_crs(Poly_Selection)$proj4string
 ```
 <br>
 
-`+proj=longlat` atteste que la projection est en degré. Reprojet l'objet dans le SCR NAD83 dont le EPSG est 32198&nbsp;:
+`+proj=longlat` atteste que la projection est en degré. Reprojeter l'objet dans le SCR NAD83 dont le EPSG est 32198&nbsp;:
 
 ```{r, warning = FALSE}
 Poly_Selection_nad83 <- st_transform(Poly_Selection, crs = 32198)

@@ -7,6 +7,7 @@ L'objectif principal de ce module est d'apprendre à lire, interpréter et visua
 À la fin de ce module vous saurez:
 
 >
+> - Créer un *shapefile* et comprendre sa structure.
 > - Lire un *shapefile*, explorer ses métadonnées et interpréter sa géométrie.
 > - Lire une *geodatabase*, et explorer ses couches.
 > - Visualiser des données vectorielles de type point, ligne et polygone.
@@ -34,7 +35,13 @@ install.packages(c('sf', 'rgdal', 'mapview', 'leafsync'))
 
 Vous apprendrez à utiliser les fonctions suivantes:
 
-- `st_read()`, `st_write()`
+- `st_point()`, `st_multipoint()`
+- `st_linestring()`, `st_multilinestring()`
+- `st_polygon()`, `st_multipolygon()`
+- `st_sfc()`
+- `st_sf()`
+- `st_read()`
+- `st_write()`
 - `st_geometry_type()`
 - `st_crs()`
 - `st_bbox()`
@@ -43,6 +50,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `latticeView()`
 - `as.factor()`
 - `levels()`
+- `class()`
 
 <br>
 
@@ -76,9 +84,9 @@ La quatrième section vous familiarisera avec les données vectorielles en forma
 
 #### Créer des géométries simples {-}
 
-Nous avons appris à la [leçon 2](#base) qu'il existe différents types de données vectorielles, dont les points, les lignes, et les polygones. La bibliothèque `sf` possède des fonctions pour créer ces géométries simples. 
+Nous avons appris à la [leçon 2](#base) que les données vectorielles peuvent prendre différentes géométries (point, ligne, polygone, etc.). La bibliothèque `sf` possède des fonctions pour créer ces géométries simples, c'est-à-dire pour créer des objects de la classe `sfg` (*simple feature geometry*).
 
-La fonction `st_point()` permet de transformer un vecteur numérique de coordonnées $(x,y)$ en une donnée vectorielle de type *point*. Par exemple
+La fonction `st_point()` permet de transformer un vecteur numérique représentant les coordonnées d'un point en un objet de type **point**. Par exemple,
 
 ```{r}
 p <- c(3,5)
@@ -87,13 +95,13 @@ point
 ```
 <br>
 
-Remarquez que la classe de l'objet formé est `sfg`, ce qui signifie "simple feature geometries" :
+Remarquez que la classe de l'objet formé est `sfg`:
 ```{r}
-class(point_x)
+class(point)
 ```
 <br>
 
-Pour créer des données vectorielles *multipoints*, nous devons d'abord créer une matrice contenant un ensemble de points, puis convertir cette matrice en utilisant la fonction `st_multipoint()`:
+La fonction `st_multipoint()` permet de créer une géométrie **multipoint**. Nous devons fournir à cette fonction une matrice où chaque rangée définie les coordonnées d'un des points:
 
 ```{r}
 M <- rbind( c(3,5), c(5,5), c(4,1), c(2,3))
@@ -102,7 +110,7 @@ multi_point
 ```
 <br>
 
-Pour créer une *ligne*, nous devons également créer une matrice contenant les coordonnées des extrémités de la ligne. On convertie alors cette matrice avec la fonction `st_linestring()`:
+La fonction `st_linestring()` permet de créer une *ligne*. Nous devons également lui fournir une matrice contenant les coordonnées des extrémités de la ligne. 
 
 ```{r}
 ligne <- st_linestring(M)
@@ -148,12 +156,137 @@ multi_polygone
 
 #### Attribuer un SCR {-}
 
-Nous venons d'apprendre les fonctions de base de la bibliothèque `sf` pour créer des géométries simples. Des données vectorielles doivent aussi être géoréférencées. Ceci signifie qu'on doit leur attribuer un datum et une projection. 
+Nous venons d'apprendre les fonctions de base de la bibliothèque `sf` pour créer des géométries simples. Or, les données vectorielles ne sont pas uniquement des géométries, ce sont des géométries géoréférencées. Ceci signifie qu'on doit attribuer aux géométries un datum et une projection. Pour ce faire, nous devons créer des objets de la classe `sfc`, c'est-à-dire *simple feature columns*. 
+
+Un objet `sfc` est une liste d'objets `sfg` qui permet, en plus, de contenir l'information relative au système de coordonnées de référence (SRC) utilisé. 
+
+La fonction `st_sfc()` permet de transformer un objet de classe `sfg` en un objet de classe `sfc`. Par exemple, transformons le point créer plus haut:
 
 ```{r}
-multi_point <- CRS(multi_point, 26919)
+point_sfc <- st_sfc(point)
+```
+<br>
+
+
+Alors que l'objet `point` contenait seulement la géométrie de l'objet:
+```{r}
+point
+```
+<br>
+
+L'objet `point_sfc` contient la géométrie de l'objet et il possède la structure pour définir le SCR (CRS en anglais), bien que pour l'instant ce dernier ne soit pas défini (valeur de NA):
+
+```{r}
+point_sfc
+```
+<br>
+
+La fonction `st_sfc()` peut être utilisée sur les autres géométries. Elle permet également de combiner des géométries. Par exemple:
+
+```{r}
+L1 <- list(rbind( c(3,5), c(5,5), c(4,1), c(2,3), c(3,5)))
+polygone1 <- st_polygon(L1)
+L2 <- list(rbind( c(1,2), c(2,2), c(2,1), c(1,2)))
+polygone2 <- st_polygon(L2)
+polygone_sfc <- st_sfc(polygone1, polygone2)
+polygone_sfc
+```
+<br>
+
+Pour connaître le SCR d'un object vectoriel, il s'agit d'utiliser la fonction `st_crs()` de la bibliothèque `st`:
+```{r}
+st_crs(polygone_sfc)
+```
+<br>
+
+Dans le cas présent, le SCR est indéfini.
+
+Il existe plusieurs façons de définir le SCR. La façon la plus simple est d'utiliser le code [EPSG](#code_epsg) associé au SCR que l'on désire utilisé. Par exemple, utilisons le EPSG 32198 correspondant au système de coordonnées **Conique conforme de Lambert** dans le datum NAD83 pour définir le CRS de `polygone_sfc`:
+
+```{r,  attr.output='style="max-height: 200px;"}
+polygone_sfc <- st_sfc(polygone1, polygone2, crs = 32198)
+st_crs(polygone_sfc)
 ```
 
+<br>
+
+Nous pouvons également utilisé la notation `proj4string`:
+```{r}
+st_crs(polygone_sfc)$proj4string
+```
+<br>
+
+```{r}
+st_sfc(point, crs = "+proj=lcc +lat_0=44 +lon_0=-68.5 
+                               +lat_1=60 +lat_2=46 
+                               +x_0=0 +y_0=0 +datum=NAD83 
+                               +units=m +no_defs")
+```
+<br>
+
+Ou encore référé au SCR d'un autre objet:
+
+```{r}
+st_sfc(point, crs = st_crs(polygone_sfc))
+```
+<br>
+
+#### Définir des attributs {-}
+
+Les attributs sont les variables non-géographiques permettant de décrire les données vectorielles. Les attributs peuvent, par exemple, correspondre au nom de chaque objet ou à d'autres caractéristiques qualitatives ou numériques.
+
+Les attributs sont répertoriés dans un objet de classe `data.frame`, qui est en quelque sorte une matrice dont les colonnes peuvent accueillir des données de différents types (numérique, charactère, logique, facteur, etc.).
+
+Afin de démontrer comment joindre des attibuts à des géométries géoréférencées, créons d'abord un objet `sfc` constitué de quatre points.
+```{r}
+# Créer quatre vecteurs numériques
+p1 <- c(3,5)
+p2 <- c(5,5)
+p3 <- c(4,1)
+p4 <- c(2,3)
+# Créer des géométries de type point
+point1 <- st_point(p1)
+point2 <- st_point(p2)
+point3 <- st_point(p3)
+point4 <- st_point(p4)
+# Créer un simple feature column 
+# et attribuer un SRC
+points_sfc <- st_sfc(point1,point2,point3,point4, crs = 32198)
+points_sfc
+```
+<br>
+
+Supposons que les points désignent des écoles primaires pouvant être publiques ou privées. Utilisons la fonction `data.frame()`, une fonction de base de `R` pour créer une table des attributs. 
+```{r}
+points_attribut <- data.frame(
+  nom = c("École A", "École B", "École C", "École D"),
+  nombre_eleve = c(403, 357, 280, 296),
+  ecole_publique = as.logical(1,1,0,1)
+)
+points_attribut
+```
+<br>
+
+Remarquer que chaque colonne est associée à un attribut de classe différente, comme le permet la classe `data.frame`.
+
+Pour associer cette table d'attributs à l'objet `points_sfc`, il s'agit d'utiliser la fonction `st_sf()` de la bilbiothèque `sf`:
+```{r}
+points_sf <- st_sf(points_sfc, points_attribut)
+points_sf
+```
+<br>
+
+L'objet `points_sf` résultant de cette opération contient deux classes:
+```{r}
+class(points_sf)
+```
+La composante de classe `sf` (pour *simple feature*) contient les attributs spatiaux des données tandis que la composante de classe `data.frame` contient les attributs non-spatiaux. 
+
+<!-- icone attention  -->
+Cette dualité est une caractéristique importante des objets de classe `sf`: ceux-ci sont essentiellement des `data.frames` avec une extension spatiale et nous pouvons ainsi les manipuler comme des `data.frames`. Nous reviendrons sur ce concept au [Module 7](#manip_vec) portant sur la manipulation de données vectorielles.
+
+
+<br>
 
 ### Télécharger les données {#data_mod4}
 
