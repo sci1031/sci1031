@@ -2,12 +2,17 @@
 # Données vectorielles {#vec}
 
 
-L'objectif principal de ce module est d'apprendre à lire, interpréter et visualiser des données vectorielles^[L’ensemble du matériel disponible dans ce module est adapté du cours *Introduction to Geospatial Raster and Vector Data with R* [@Data_Carpentry_IntroGeospatial] de l’organisme [Data Carpentry](https://datacarpentry.org/).  Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.]
+Cette leçon est une introduction aux données spatiales vectorielles sous `R`. L'objectif principal de ce module est d'apprendre à créer, lire, interpréter et visualiser des données vectorielles^[Le matériel pour ce cours est tiré du chapitre sur les données vectorielles du manuel [Geocomputation with R](https://bookdown.org/robinlovelace/geocompr/spatial-class.html) [@lovelace_geocomputation_2021] et du cours *Introduction to Geospatial Raster and Vector Data with R* [@Data_Carpentry_IntroGeospatial] de l’organisme [Data Carpentry](https://datacarpentry.org/). Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.]. 
+
+La section [4.1](#create_vec) expliquera comment créer des données vectorielles. Les sections [4.2-4.4](#read_vec)
+porteront sur des données vectorielles en format *shapefile* puisque celles-ci sont couramment utilisées.
+La section [4.5](#gdb) vous familiarisera avec les données vectorielles en format *geodatabase* puisque celles-ci sont de plus en plus utilisées au sein de grandes organisations comme des ministères. 
+
 
 À la fin de ce module vous saurez:
 
 >
-> - Créer un *shapefile* et comprendre sa structure.
+> - Créer des données vectorielles et comprendre leur structure.
 > - Lire un *shapefile*, explorer ses métadonnées et interpréter sa géométrie.
 > - Lire une *geodatabase*, et explorer ses couches.
 > - Visualiser des données vectorielles de type point, ligne et polygone.
@@ -73,18 +78,37 @@ library(mapview)
 ## Leçon {#lecon_vec}
 
 
-Cette leçon est une introduction aux données spatiales vectorielles sous `R`. 
+### Télécharger les données {#data_mod4}
 
-La première section^[chapitre sur les données vectorielles du manuel [Geocomputation with R](https://bookdown.org/robinlovelace/geocompr/spatial-class.html) de Robin Lovelace, Jakub Nowosad et Jannes Muenchow] 
+Dans les sections [4.2](#read_vec) à [4.5](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés: 
 
-Les trois premières sections porteront sur des données vectorielles en format *shapefile* puisque celles-ci sont couramment utilisées.
-La quatrième section vous familiarisera avec les données vectorielles en format *geodatabase* puisque celles-ci sont de plus en plus utilisées au sein de grandes organisations comme des ministères. 
+- `Montreal_Velo.zip`
+- `Donnees_Ouvertes_MEES.gbd.zip`
 
-### Créer des données vectorielles
+
+Dézipper chacun des deux dossiers. Le premier dossier, `Montreal_Velo` sera utilisé aux sections [4.2-4.4](#read_vec). Il contient les données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes. Il contient trois sous-dossiers: 
+
+- `accidents`
+- `pistes`
+- `terre`.
+
+Le deuxième dossier, `Donnees_Ouvertes_MEES.gbd` est la geodatabase du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec (MEES); nous l'utiliserons à la section [4.5](#gdb).
+
+
+
+### Créer des données vectorielles {#create_vec}
+
+Pour créer, lire et manipuler des données vectorielles, nous allons utiliser la librairie `sf`. Notez que la librairie `rgdal` se charge automatiquement lorsque `sf` se charge.
+
+```{r load-sf, eval = FALSE}
+library(sf)
+```
+<br>
+
 
 #### Créer des géométries simples {-}
 
-Nous avons appris à la [leçon 2](#base) que les données vectorielles peuvent prendre différentes géométries (point, ligne, polygone, etc.). La bibliothèque `sf` possède des fonctions pour créer ces géométries simples, c'est-à-dire pour créer des objects de la classe `sfg` (*simple feature geometry*).
+Nous avons appris à la [leçon 2](#base) que les données vectorielles peuvent avoir différentes géométries (point, ligne, polygone, etc.). La bibliothèque `sf` possède des fonctions pour créer ces géométries simples, c'est-à-dire pour créer des objects de la classe `sfg` (pour **simple feature geometry**).
 
 La fonction `st_point()` permet de transformer un vecteur numérique représentant les coordonnées d'un point en un objet de type **point**. Par exemple,
 
@@ -110,7 +134,7 @@ multi_point
 ```
 <br>
 
-La fonction `st_linestring()` permet de créer une *ligne*. Nous devons également lui fournir une matrice contenant les coordonnées des extrémités de la ligne. 
+La fonction `st_linestring()` permet de créer une **ligne**. Nous devons également lui fournir une matrice contenant les coordonnées des extrémités de la ligne. 
 
 ```{r}
 ligne <- st_linestring(M)
@@ -118,7 +142,7 @@ ligne
 ```
 <br>
 
-Un *polygone* se crée de façon similaire, cette fois en utilisant la fonction `st_polygon()`. Les coordonnées des extrémités du polygone doivent toutefois être définies dans une liste, et non une matrice. Il s'agit alors d'utiliser la fonction `list()` pour convertir une matrice en liste. 
+Un **polygone** se crée de façon similaire, cette fois en utilisant la fonction `st_polygon()`. Les coordonnées des extrémités du polygone doivent toutefois être définies dans une liste, et non une matrice. Il s'agit alors d'utiliser la fonction `list()` pour convertir une matrice en liste. 
 
 ```{r}
 L <- list(rbind( c(3,5), c(5,5), c(4,1), c(2,3), c(3,5)))
@@ -126,14 +150,20 @@ polygone <-st_polygon(L)
 polygone
 ```
 <br>
+
 Noter que pour créer un polygone la première extrémité doit être identique à la dernière.
 <br>
 
-```{r}
-image des points, ligne, polygone.
+```{r plotgeo, eval = TRUE, echo = FALSE, fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
+mapviewOptions(homebutton = FALSE)
+m_multi_point <- mapview(multi_point, homebutton =  FALSE)
+m_ligne <- mapview(ligne)
+m_polygone <-mapview(polygone)
+leafsync::latticeView(m_multi_point, m_ligne, m_polygone, ncol=3)
 ```
+<br>
 
-Dans un même ordre d'idées, pour créer des *multi-lignes* ou des *multi-polygones* nous devons aussi recourrir à des listes où chaque élément de la liste correspond à une ligne ou à un polygone respectivement. 
+Dans un même ordre d'idées, pour créer des **multi-lignes** ou des **multi-polygones** nous devons aussi recourrir à des listes où chaque élément de la liste correspond à une ligne ou à un polygone respectivement. 
 
 ```{r}
 M1 <- rbind( c(3,5), c(5,5), c(4,1), c(2,3))
@@ -156,7 +186,7 @@ multi_polygone
 
 #### Attribuer un SCR {-}
 
-Nous venons d'apprendre les fonctions de base de la bibliothèque `sf` pour créer des géométries simples. Or, les données vectorielles ne sont pas uniquement des géométries, ce sont des géométries géoréférencées. Ceci signifie qu'on doit attribuer aux géométries un datum et une projection. Pour ce faire, nous devons créer des objets de la classe `sfc`, c'est-à-dire *simple feature columns*. 
+Nous venons d'apprendre les fonctions de base de la bibliothèque `sf` pour créer des géométries simples. Or, les données vectorielles ne sont pas uniquement des géométries, ce sont des géométries géoréférencées. Ceci signifie qu'on doit attribuer aux géométries un datum et une projection. Pour ce faire, nous devons créer des objets de la classe `sfc`, c'est-à-dire **simple feature columns**. 
 
 Un objet `sfc` est une liste d'objets `sfg` qui permet, en plus, de contenir l'information relative au système de coordonnées de référence (SRC) utilisé. 
 
@@ -201,9 +231,9 @@ st_crs(polygone_sfc)
 
 Dans le cas présent, le SCR est indéfini.
 
-Il existe plusieurs façons de définir le SCR. La façon la plus simple est d'utiliser le code [EPSG](#code_epsg) associé au SCR que l'on désire utilisé. Par exemple, utilisons le EPSG 32198 correspondant au système de coordonnées **Conique conforme de Lambert** dans le datum NAD83 pour définir le CRS de `polygone_sfc`:
+Il existe plusieurs façons de définir le SCR. La façon la plus simple est d'utiliser le code [EPSG](#code_epsg) associé au SCR que l'on désire utilisé. Par exemple, utilisons le EPSG 32198 correspondant au système de coordonnées *conique conforme de Lambert* dans le datum NAD83 pour définir le CRS de `polygone_sfc`:
 
-```{r,  attr.output='style="max-height: 200px;"}
+```{r,  attr.output='style="max-height: 200px;"'}
 polygone_sfc <- st_sfc(polygone1, polygone2, crs = 32198)
 st_crs(polygone_sfc)
 ```
@@ -260,7 +290,7 @@ Supposons que les points désignent des écoles primaires pouvant être publique
 ```{r}
 points_attribut <- data.frame(
   nom = c("École A", "École B", "École C", "École D"),
-  nombre_eleve = c(403, 357, 280, 296),
+  nombre_eleves = c(403, 357, 280, 296),
   ecole_publique = as.logical(1,1,0,1)
 )
 points_attribut
@@ -280,7 +310,7 @@ L'objet `points_sf` résultant de cette opération contient deux classes:
 ```{r}
 class(points_sf)
 ```
-La composante de classe `sf` (pour *simple feature*) contient les attributs spatiaux des données tandis que la composante de classe `data.frame` contient les attributs non-spatiaux. 
+La composante de classe `sf` (pour **simple feature**) contient les attributs spatiaux des données tandis que la composante de classe `data.frame` contient les attributs non-spatiaux. 
 
 <!-- icone attention  -->
 Cette dualité est une caractéristique importante des objets de classe `sf`: ceux-ci sont essentiellement des `data.frames` avec une extension spatiale et nous pouvons ainsi les manipuler comme des `data.frames`. Nous reviendrons sur ce concept au [Module 7](#manip_vec) portant sur la manipulation de données vectorielles.
@@ -288,36 +318,12 @@ Cette dualité est une caractéristique importante des objets de classe `sf`: ce
 
 <br>
 
-### Télécharger les données {#data_mod4}
-
-Afin de faciliter le téléchargement des multiples données utilisées dans ce module, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés: 
-
-- `Montreal_Velo.zip`
-- `Donnees_Ouvertes_MEES.gbd.zip`
 
 
-Dézipper chacun des deux dossiers. Le premier dossier, `Montreal_Velo` contient les données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes. Il contient trois sous-dossiers: 
-
-- `accidents`
-- `pistes`
-- `terre`.
-
-Le deuxième dossier, `Donnees_Ouvertes_MEES.gbd` est la geodatabase du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec (MEES); nous l'utiliserons à la section [7.4](#gdb).
-
-
-
-### Lire un *shapefile* et interpréter sa géométrie
+### Lire un *shapefile* et interpréter sa géométrie {#read_vec}
 
 
 #### Lire les données {.unnumbered #lire-shp}
-
-Pour lire des données vectorielles contenues dans un fichier *shapefile*, nous allons utiliser la librairie `sf`. Notez que la librairie `rgdal` se charge automatiquement lorsque `sf` se charge.
-
-```{r load-sf, eval = FALSE}
-library(sf)
-```
-<br>
-
 
 Nous allons lire les trois *shapefiles* suivants :
 
@@ -906,5 +912,183 @@ Il serait intéressant de créer une nouvelle géodatabase pour sauvegarder les 
 ## Exercice {#ex_vec}
 
 
+Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#vec) de ce module.
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
 
+<br>
+
+### Question 1 {-}
+
+Créer une géométrie simple de type polygone qui a la forme d'un carré de 10 unités de long avec un trou en son centre qui a la forme d'un carré de 4 unités de long. 
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Définir deux matrices de coordonnées, une pour le grand et l'autre pour le petit carré.
+Les coordonnées exactes peuvent prendre n'importe quelles valeurs du moment que la taille de chaque carré respecte les dimensions demandées.
+
+```{r}
+matrice_carre_grand  <- rbind(c(1,1), c(1,11), c(11,11), c(11,1), c(1,1))
+matrice_carre_petit <- rbind(c(4,4),c(4,8),c(8,8),c(8,4),c(4,4))
+```
+<br>
+
+Créer une liste avec ces deux matrices et créer le polygone en utilisant la fonction `st_polygon()`
+
+```{r}
+polygone <- st_polygon(list(matrice_carre_grand, matrice_carre_petit))
+polygone
+```
+<br>
+
+Visualiser le polygone pour confirmer votre réponse:
+
+```{r}
+mapview(polygone)
+```
+
+<br>
+</p>
+</details> 
+
+<br>
+
+### Question 2 {-}
+
+**a)** Créer 3 géométries simples de type ligne en utilisant les matrices de coordonnées suivantes:
+```{r}
+matrice_ligne1 <- rbind(c(1,1), c(2,2), c(3,1), c(4,2), c(5,1), c(6,2), c(7,1))
+matrice_ligne2 <- rbind(c(1,5), c(3,3), c(7,5), c(3,5), c(4,4))
+matrice_ligne3 <- rbind(c(1,3), c(3,7), c(7,8), c(10,10))
+```
+
+<br>
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Utiliser la fonction `st_lignestring()` pour créer les 3 géométries simples de type ligne.
+```{r}
+ligne1 <- st_linestring(matrice_ligne1)
+ligne2 <- st_linestring(matrice_ligne2)
+ligne3 <- st_linestring(matrice_ligne3)
+```
+
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**b)** Définir une couche de données vectorielles comprenant ces 3 lignes, et lui attribuer la projection Web de Mercator.
+
+<br>
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Créer d'abord un objet `sfc`, c'est-à-dire une *simple feature column*, en utilisant la fonction `st_sfc()`:
+
+```{r}
+lignes <- st_sfc(ligne1, ligne2, ligne3)
+```
+<br>
+
+
+Ajouter maintenant le SCR demandé. La projection Web de Mercator possède le code EPSG 3857 (revoir le [Module 3](#code_epsg) pour trouver cette information).
+
+```{r}
+lignes <- st_sfc(ligne1, ligne2, ligne3, crs = 3857)
+lignes
+```
+
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**c)** Ajouter deux attributs à cette couche de données. Le premier attribut correspond à un nom de votre choix pour désigner chaque ligne, et le deuxième attribut correspond au nombre d'extrémités dans chaque ligne.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Créer une table d'attribut en utilisant la fonction `data.frame()`.
+
+```{r}
+lignes_att <- data.frame(
+  nom = c("Zigzag", "Tourbillon", "Tordu"),
+  nombre = c(nrow(matrice_ligne1), nrow(matrice_ligne2), nrow(matrice_ligne3))
+)
+lignes_att
+```
+<br>
+
+Créer un objet `sf`, c'est-à-dire un *simple feature*, en utilisant la fonction `st_sf()` pour unir la table d'attributs des lignes à leur composante spatiale.
+```{r}
+lignes_sf <- st_sf(lignes, lignes_att)
+lignes_sf
+```
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**d)**  Visualiser cette couche de données vectorielles. Assurez-vous d'avoir une légende identifiant chaque ligne par son nom.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Utiliser la fonction `mapview()` et spécifier que l'argument `z` correspond à l'attribut "nom" de l'objet `lignes_sf`.
+
+```{r}
+mapview(lignes_sf, z="nom", layer.name = "Nom des lignes")
+```
+
+<br>
+</p>
+</details> 
+
+<br>
+
+### Question 3 {-}
+
+```{r}
+library(spData) #install.packages("spData")
+data(nz)
+nz
+```
+Trouver la projection utilisée
+```{r}
+st_crs(nz)$proj4string
+st_crs(nz)$name
+```
+La projection est Mercator tran
+
+
+
+```{r}
+st_crs(nz)$proj4string
+st_crs(nz)$epsg
+#nz_lcc <- st_transform(nz, crs = 32198)
+#nz_nad83 <-  st_transform(nz, crs = 32188)
+nz_wgs84 <- st_transform(nz, crs = 4326)
+```
+```{r}
+m1 <- mapview(nz_wgs84,native.crs=TRUE)
+m2 <- mapview(nz)
+
+latticeView(m1,m2)
+```
 
