@@ -1069,12 +1069,87 @@ library(spData) #install.packages("spData")
 data(nz)
 nz
 ```
-Trouver la projection utilisée
+**a)**  Combien d'éléments spatiaux contient la couche `nz` et de quel type de géométrie sont ces éléments ?
+
+Pour répondre à cette question, nous pouvons simplement repérer l'information demandée dans l'affichage générale de l'objet `nz`
 ```{r}
-st_crs(nz)$proj4string
-st_crs(nz)$name
+nz
 ```
-La projection est Mercator tran
+<br>
+
+Nous pouvons y lire qu'il y a 16 éléments (*features*) et que la géométrie est de type multipolygone.
+Nous pouvons également trouver les réponses en utilisant les deux fonctions spécifiques suivantes:
+
+```{r}
+nrow(nz)
+```
+<br>
+
+Effectivement, `nz` étant un `data.frame`, nous pouvons utilisé les manipulations usuelles pour cette classe d'objet. Chaque élément dans un `data.frame` occupe une rangé. 
+
+
+```{r}
+st_geometry_type(nz)
+```
+La couche `nz` contient bien des multipolygones. 
+
+**b)**  Trouver le nombre d'attributs de `nz` et leur nom.
+
+Pour trouver le nombre d'attributs, nous pouvons nous référer à l'affichage général de `nz` qui nous informe que l'objet contient 6 attributs (ou champs, *fields* en anglais).
+
+Nous pouvons également utiliser la fonction `ncol()` qui donne le nombre de colonnes dans le `data.frame`.
+
+```{r}
+ncol(nz)
+```
+<br>
+
+L'objet `nz` contient bel et bien 7 colonnes. Cependant, la dernière colonne ne correspond à la géométrie de chaque élément de `nz` (qui est en fait, un attribut spatial). Ainsi, le nombre d'attribut est 6.
+
+Pour trouver le nom des attributs, nous pouvons encore s'appuyer sur le fait que `nz` est un `data.frame` et utiliser la fonction `names()`:
+```{r}
+names(nz)
+```
+<br>
+
+**c)**  Trouver le code EPSG, le nom et l'unité de mesure de la projection utilisée
+
+```{r}
+st_crs(nz)$epsg
+st_crs(nz)$Name
+st_crs(nz)$units
+```
+**d)**  Transformer la projection de `nz` pour la projection conique conforme de Lambert (LCC).
+
+La projection conique conforme de Lambert est donnée par le code EPSG 32198. 
+```{r}
+nz_lcc <- st_transform(nz, crs = 32198)
+```
+
+**e)** Chaque polygone de la couche `nz` correspond à une région. Visualiser la couche `nz` en illustrant chaque région avec une couleur différente.
+
+```{r}
+mapview(nz, zcol = "Name", layer.name = "Régions")
+```
+**f)** 
+
+```{r}
+nz_cities <- read.table("Module4/nz_cities.csv", sep = ",")
+capitales <- c("Auckland", "Whangarei", "Hamilton", "Whakatāne", "Gisborne", "Napier", "Stratford", "Palmerston North", "Wellington", "Richmond", "Nelson","Blenheim","Greymouth","Christchurch", "Dunedin", "Invercargill")
+
+nz_capitales <- nz_cities[nz_cities$V1 %in% capitales,]
+nz_capitales <- nz_capitales[,c("V1", "V2","V3")]
+names(nz_capitales) <- c("Capitales", "Lat", "Long" )
+coord_cap <- nz_capitales[, c("Lat","Long")]
+coord_cap_mat <- coord_cap
+names(coord_cap_mat) <- NULL
+coord_cap_mat <- as.matrix(coord_cap_mat, nrow = nrow(cap_coord), row.names = NULL)
+coord_cap_num <- as.numeric(coord_cap_mat)
+coord_cap_mat2 <- matrix(coord_cap_num, ncol = 2)
+
+#reconvert to dataframe to save as csv ??
+st_point() etc
+```
 
 
 
