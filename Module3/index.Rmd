@@ -309,7 +309,7 @@ knitr::include_graphics('Module3/images/3_LCC_Canada.png')
 <br>
 
 
-### Les codes EPSG
+### Les codes EPSG {#code_epsg}
 
 Le Comité de topographie et de positionnement (Surveying and Positionning Comittee) de l'Association internationale des producteurs de pétrole et de gaz (OGP), autrefois le European Petroleum Survey Group (EPSG), est une organisation scientifique liée à l’industrie pétrolière qui a mis en place une base de données répertoriant tous les systèmes de référence et les systèmes de coordonnées géographiques et projetés existants. Cette base de données, appelée le registre de codes **EPSG**, associe un code numérique à chaque système pour en faciliter l’identification et précise ses paramètres géodésiques et de projection. Vous pouvez consulter cette base de données [ici](https://www.epsg.org/).
 

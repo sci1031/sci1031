@@ -4,26 +4,38 @@ L'objectif principal de ce module est d'apprendre à manipuler des données vect
 
 À la fin de ce module vous saurez:
 
-- Ajouter de nouveaux attributs à des données vectorielles, et également supprimer ou éditer des attributs.
-- Filtrer des données vectorielles en se basant sur leurs attributs.
-- Joindre spatialement deux ensembles de données vectorielles.
-- Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
-- Combiner, aggréger et simplifier des objets vectoriels. 
-- Transformer la géométrie d'objets vectoriels.
-- Créer des zones tampons autour d'objets vectoriels.
-- Trouver le centroid et les coordonnées d'objets vectoriels.
-- Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
-- Confirmer des relations topologiques entre deux objets vectoriels.
-- Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
+>
+> - Ajouter de nouveaux attributs à des données vectorielles, et également supprimer ou éditer des attributs.
+> - Filtrer des données vectorielles en se basant sur leurs attributs.
+> - Joindre spatialement deux ensembles de données vectorielles.
+> - Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
+> - Combiner, aggréger et simplifier des objets vectoriels. 
+> - Transformer la géométrie d'objets vectoriels.
+> - Créer des zones tampons autour d'objets vectoriels.
+> - Trouver le centroid et les coordonnées d'objets vectoriels.
+> - Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
+> - Confirmer des relations topologiques entre deux objets vectoriels.
+>- Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
+>
 
+<br>
 
-Vous utiliserez les bibliothèques suivantes:
+```{r echo=FALSE, out.width='10%',fig.align='left'}
+knitr::include_graphics("Images/Icones_Bibliotheques.jpg")
+```
+
+#### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `sf`
 - `mapview`
 - `units`
 
-Vous apprendrez à utiliser les fonctions suivantes:
+
+```{r echo=FALSE, out.width='10%',fig.align='left'}
+knitr::include_graphics("Images/Icones_Fonctions.jpg")
+```
+
+#### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
 - `subset()`
 - `st_coordinates()`
@@ -38,6 +50,13 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `rowSums()`
 - `lengths()`
 - `st_is_longlat()`
+
+
+```{r echo=FALSE, out.width='10%',fig.align='left'}
+knitr::include_graphics("Images/Icones_Donnees.jpg")
+```
+
+#### Vous utiliserez ces données: {-}
 
 Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec (SÉPAQ).
 
@@ -84,6 +103,7 @@ Commençons par charger les bibliothèques requises pour lire les données spati
 library(sf)
 library(mapview)
 ```
+
 
 ```{r, echo = FALSE, eval=TRUE}
 library(leafsync)
@@ -1564,6 +1584,7 @@ Notez que l'attribut "TRQ_NM_TER" de l'objet `parcs_nationaux` correspond au nom
 ```{r}
 parcs_nationaux$TRQ_NM_TER
 ```
+<br>
 
 ###### 4. Zones tampons autour des plus grandes municipalités {-}
 
@@ -1572,14 +1593,16 @@ Nous traçons maintenant une zone tampon (`POLYGON`) de 70&nbsp;km de rayon auto
 ```{r crs-top-villes}
 st_crs(top10_villes)$proj4string 
 ```
+<br>
 
-`+proj=longlat` atteste que la projection est en degré. Nous allons donc reprojeter l'objet `top10_villes` dans le système de coordonnées de référence NAD83 qui est métrique et dont le EPSG est 32198. NAD83 correspond système de coordonnées *Conique conforme de Lambert*.
+`+proj=longlat` atteste que la projection est en degré. Nous allons donc reprojeter l'objet `top10_villes` dans le système de coordonnées de référence NAD83 qui est métrique et dont le EPSG est 32198. NAD83 correspond au système de coordonnées *Conique conforme de Lambert*.
 
 ```{r transform-top-villes}
 top10_villes_lcc <- st_transform(top10_villes, crs = 32198)
 # On valide que les unités sont métriques (+units=m)
 st_crs(top10_villes_lcc)$proj4string 
 ```
+<br>
 
 Traçons à présent les zones tampon (*buffer*) autour des municipalités à l'aide de la fonction `st_buffer()` comme expliqué précédemment, et visualisons le résultat de cette opération
 
@@ -1600,11 +1623,13 @@ Nous allons utiliser la fonction `st_intersects()` pour déterminer quels parcs 
 ```{r interceptions-buffer-parcs}
 st_crs(top10_villes_buffer) == st_crs(parcs_nationaux)
 ```
+<br>
+
 Puisque la réponse est négative, transformons le SCR de l'objet `parcs_nationaux`.
 ```{r}
 parcs_nationaux_lcc = st_transform(parcs_nationaux, crs = st_crs(top10_villes_buffer))
 ```
-
+<br>
 
 Nous pouvons maintenant utiliser la fonction `st_intersects()`:
 
@@ -1623,6 +1648,8 @@ Par exemple, nous pouvons effectuer une sommation sur les lignes (zones tampons 
 ```{r top-villes-parcs}
 rowSums(st_intersects(x = top10_villes_buffer, y = parcs_nationaux_lcc, sparse = FALSE))
 ```
+<br>
+
 Consignons à présent ces valeurs dans une nouvelle colonne de la table d'attributs de l'objet `top10_villes`.
 
 ```{r top-villes-parcs2}
@@ -1630,7 +1657,7 @@ top10_villes$nbr_parcs <- rowSums(st_intersects(x = top10_villes_buffer, y = par
 
 top10_villes
 ```
-
+<br>
 
 
 ###### 7. Ville qui compte le plus grand nombre de parcs {-}
@@ -1729,7 +1756,7 @@ st_crs(Poly_Selection)$proj4string
 ```
 <br>
 
-`+proj=longlat` atteste que la projection est en degré. Reprojet l'objet dans le SCR NAD83 dont le EPSG est 32198&nbsp;:
+`+proj=longlat` atteste que la projection est en degré. Reprojeter l'objet dans le SCR NAD83 dont le EPSG est 32198&nbsp;:
 
 ```{r, warning = FALSE}
 Poly_Selection_nad83 <- st_transform(Poly_Selection, crs = 32198)
