@@ -28,11 +28,11 @@ Vous utiliserez les bibliothèques suivantes:
 - `sf`
 - `rgdal`
 - `mapview`
-- `leafsync`
+- `spData`
 
 Installez ces librairies si vous ne les avez pas:
 ```{r, eval = FALSE}
-install.packages(c('sf', 'rgdal', 'mapview', 'leafsync'))
+install.packages(c('sf', 'rgdal', 'mapview', 'spData'))
 ```
 
 
@@ -45,6 +45,7 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `st_polygon()`, `st_multipolygon()`
 - `st_sfc()`
 - `st_sf()`
+- `st_as_sf()`
 - `st_read()`
 - `st_write()`
 - `st_geometry_type()`
@@ -65,13 +66,14 @@ Le premier ensemble contient des données *shapefile* relatives au réseau de pi
 
 Le second ensemble constitue une *géodatabase* contenant des données du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec relatives aux établissements d'enseignement sur le territoire québécois.
 
-Dans la section [exercice](#ex_vec), vous utiliserez XXXXX
+Dans la section [exercice](#ex_vec), vous utiliserez les données vectorielles `nz` disponibles dans la bibliothèque `spData`.
 
 ```{r load-libraries4, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
 library(rgdal)
 library(sf)
 library(mapview)
+library(leafsync)
 ```
 
 
@@ -80,10 +82,11 @@ library(mapview)
 
 ### Télécharger les données {#data_mod4}
 
-Dans les sections [4.2](#read_vec) à [4.5](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés: 
+Dans les sections [4.2](#read_vec) à [4.5](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés et un fichier `csv`: 
 
 - `Montreal_Velo.zip`
 - `Donnees_Ouvertes_MEES.gbd.zip`
+- `nz_capitales.csv`
 
 
 Dézipper chacun des deux dossiers. Le premier dossier, `Montreal_Velo` sera utilisé aux sections [4.2-4.4](#read_vec). Il contient les données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes. Il contient trois sous-dossiers: 
@@ -93,6 +96,8 @@ Dézipper chacun des deux dossiers. Le premier dossier, `Montreal_Velo` sera uti
 - `terre`.
 
 Le deuxième dossier, `Donnees_Ouvertes_MEES.gbd` est la geodatabase du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec (MEES); nous l'utiliserons à la section [4.5](#gdb).
+
+Le fichier `nz_capitales.csv` contient les coordonnées géographiques des capitales des régions administratives de la Nouvelle-Zélande; nous l'utiliserons à la section [exercice](#ex_vec) à la fin de ce module. 
 
 
 
@@ -155,8 +160,8 @@ Noter que pour créer un polygone la première extrémité doit être identique 
 <br>
 
 ```{r plotgeo, eval = TRUE, echo = FALSE, fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
-mapviewOptions(homebutton = FALSE)
-m_multi_point <- mapview(multi_point, homebutton =  FALSE)
+
+m_multi_point <- mapview(multi_point)
 m_ligne <- mapview(ligne)
 m_polygone <-mapview(polygone)
 leafsync::latticeView(m_multi_point, m_ligne, m_polygone, ncol=3)
@@ -291,7 +296,7 @@ Supposons que les points désignent des écoles primaires pouvant être publique
 points_attribut <- data.frame(
   nom = c("École A", "École B", "École C", "École D"),
   nombre_eleves = c(403, 357, 280, 296),
-  ecole_publique = as.logical(1,1,0,1)
+  ecole_publique = as.logical(1, 1, 0, 1)
 )
 points_attribut
 ```
@@ -318,6 +323,35 @@ Cette dualité est une caractéristique importante des objets de classe `sf`: ce
 
 <br>
 
+#### La fonction `st_as_sf()` {.unnumbered #fct_st_as_sf}
+
+La fonction `st_as_sf()` de la bibliothèque `sf` permet de créer un objet de classe `sf` à partir d'un objet d'une autre classe. En particulier, elle permet de convertir en un objet `sf` de type points un `data.frame` qui contient des colonnes donnant les coordonnées de chaque élément. 
+
+Donnons un exemple. Considérons le tableau suivant:
+
+```{r}
+point_df <- data.frame(
+  points = c("alpha" ,"beta" ,"gamma", "delta"),
+  x = c(10, 20, 30, 40),
+  y = c(25,  5, 15, 35)
+)
+```
+<br>
+
+Utilisons la fonction `st_as_sf()` avec l'argument `coords`.
+
+```{r}
+points_sf <- st_as_sf(point_df, coords = c("x","y"))
+points_sf
+```
+<br>
+
+Nous pouvons également définir un SCR en utilisant l'argument `crs`.
+```{r}
+points_sf <- st_as_sf(point_df, coords = c("x","y"), crs = 32182)
+points_sf
+```
+<br>
 
 
 ### Lire un *shapefile* et interpréter sa géométrie {#read_vec}
@@ -909,7 +943,7 @@ Il serait intéressant de créer une nouvelle géodatabase pour sauvegarder les 
 
 
 
-## Exercice {#ex_vec}
+## Exercices {#ex_vec}
 
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#vec) de ce module.
@@ -922,7 +956,7 @@ Bien que la réponse à chaque question soit disponible, il est **très importan
 Créer une géométrie simple de type polygone qui a la forme d'un carré de 10 unités de long avec un trou en son centre qui a la forme d'un carré de 4 unités de long. 
 
 <details>
-<summary> Réponse</summary>
+<summary> #### Réponse {-}</summary>
 <p>
 
 Définir deux matrices de coordonnées, une pour le grand et l'autre pour le petit carré.
@@ -963,9 +997,6 @@ matrice_ligne2 <- rbind(c(1,5), c(3,3), c(7,5), c(3,5), c(4,4))
 matrice_ligne3 <- rbind(c(1,3), c(3,7), c(7,8), c(10,10))
 ```
 
-<br>
-
-
 <details>
 <summary> Réponse</summary>
 <p>
@@ -986,7 +1017,6 @@ ligne3 <- st_linestring(matrice_ligne3)
 
 **b)** Définir une couche de données vectorielles comprenant ces 3 lignes, et lui attribuer la projection Web de Mercator.
 
-<br>
 
 <details>
 <summary> Réponse</summary>
@@ -1064,16 +1094,23 @@ mapview(lignes_sf, z="nom", layer.name = "Nom des lignes")
 
 ### Question 3 {-}
 
-Pour cette question, vous utiliserez les données vectorielles décrivant les régions administratives de la Nouvelle-Zélande. Ces données se nomment `nz` et sont disponibles dans la bibliothèque 
+Pour cette question, vous utiliserez les données vectorielles décrivant les régions administratives de la Nouvelle-Zélande. Ces données se nomment `nz` et sont disponibles dans la bibliothèque `spData`.
 
 ```{r}
-library(spData) #install.packages("spData")
+library(spData) 
 data(nz)
-nz
 ```
+<br>
+
+
 **a)**  Combien d'éléments spatiaux contient la couche `nz` et de quel type de géométrie sont ces éléments ?
 
-Pour répondre à cette question, nous pouvons simplement repérer l'information demandée dans l'affichage générale de l'objet `nz`
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Pour répondre à cette question, nous pouvons simplement repérer l'information demandée dans l'affichage général de l'objet `nz`
 ```{r}
 nz
 ```
@@ -1087,17 +1124,31 @@ nrow(nz)
 ```
 <br>
 
-Effectivement, `nz` étant un `data.frame`, nous pouvons utilisé les manipulations usuelles pour cette classe d'objet. Chaque élément dans un `data.frame` occupe une rangé. 
+Effectivement, `nz` étant un `data.frame`, nous pouvons utilisé les manipulations usuelles pour cette classe d'objet. Chaque élément dans un `data.frame` occupe une rangée. 
 
 
 ```{r}
 st_geometry_type(nz)
 ```
-La couche `nz` contient bien des multipolygones. 
+<br>
+
+Cette commande nous confirme que la couche `nz` contient bien des multipolygones. 
+
+
+<br>
+</p>
+</details> 
+
+<br>
 
 **b)**  Trouver le nombre d'attributs de `nz` et leur nom.
 
-Pour trouver le nombre d'attributs, nous pouvons nous référer à l'affichage général de `nz` qui nous informe que l'objet contient 6 attributs (ou champs, *fields* en anglais).
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Pour trouver le nombre d'attributs, nous pouvons nous référer à l'affichage général de `nz` (voir plus haut) qui nous informe que l'objet contient 6 attributs (ou champs, *fields* en anglais).
 
 Nous pouvons également utiliser la fonction `ncol()` qui donne le nombre de colonnes dans le `data.frame`.
 
@@ -1106,7 +1157,7 @@ ncol(nz)
 ```
 <br>
 
-L'objet `nz` contient bel et bien 7 colonnes. Cependant, la dernière colonne ne correspond à la géométrie de chaque élément de `nz` (qui est en fait, un attribut spatial). Ainsi, le nombre d'attribut est 6.
+L'objet `nz` contient bel et bien 7 colonnes. Cependant, la dernière colonne correspond à la géométrie de chaque élément de `nz` (qui est en fait, un attribut spatial). Ainsi, le nombre d'attribut est 6.
 
 Pour trouver le nom des attributs, nous pouvons encore s'appuyer sur le fait que `nz` est un `data.frame` et utiliser la fonction `names()`:
 ```{r}
@@ -1114,7 +1165,20 @@ names(nz)
 ```
 <br>
 
-**c)**  Trouver le code EPSG, le nom et l'unité de mesure de la projection utilisée
+
+</p>
+</details> 
+
+<br>
+
+**c)**  Trouver le code EPSG, le nom et l'unité de mesure de la projection utilisée.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Ces trois informations se trouvent en utilisant les fonctions suivantes: 
 
 ```{r}
 st_crs(nz)$epsg
@@ -1122,27 +1186,67 @@ st_crs(nz)$Name
 st_crs(nz)$units
 ```
 <br>
+
 La projection utilisée est le New Zealand Transverse Mercator 2000.
 NZGD 2000 réfère au datum utilisé, appelé le New Zealand Geodetic Datum. 
 
+<br>
+</p>
+</details> 
+
+<br>
 
 **d)**  Transformer la projection de `nz` pour la projection conique conforme de Lambert (LCC).
+
+<details>
+<summary> Réponse</summary>
+<p>
+
 
 La projection conique conforme de Lambert est donnée par le code EPSG 32198. 
 ```{r}
 nz_lcc <- st_transform(nz, crs = 32198)
 ```
 
+<br>
+
+Vérifions que notre transformation est correcte.
+
+```{r}
+st_crs(nz_lcc)$proj4string
+```
+<br>
+</p>
+</details> 
+
+<br>
+
 **e)** Chaque polygone de la couche `nz` correspond à une région. Visualiser la couche `nz` en illustrant chaque région avec une couleur différente.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
 
 ```{r}
 mapview(nz, zcol = "Name", layer.name = "Régions")
 ```
-**f)** Le fichier `nz_capitales.cvs` donne le nom et la localisation des capitales de chaque région de la Nouvelle-Zélande. Créer une carte illustrant les frontières des régions et la position de leur capitale respective.
+<br>
+</p>
+</details> 
+
+<br>
 
 
-Tout d'abord, vous devez importer le fichier `nz_capitales.cvs` dans votre session de travail `R`. Utilisant la fonction de base `read.table()` afin de stocker les coordonnées des capitales dans un object de classe `data.frame`.
+**f)** Importer le fichier `nz_capitales.cvs` contenu dans le dossier `Module4_donnees`. Ce fichier donne le nom et la localisation des capitales de chaque région de la Nouvelle-Zélande. Créer une carte illustrant les frontières des régions ainsi que la position de leur capitale respective.
 
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Tout d'abord, vous devez importer le fichier `nz_capitales.cvs` dans votre session de travail `R`. Utiliser la fonction de base `read.table()` afin de stocker les coordonnées des capitales dans un object de classe `data.frame`.
 
 
 ```{r fake-capnz, eval = FALSE}
@@ -1161,7 +1265,7 @@ nz_capitales
 
 Nous observons que les coordonnées sont en format longitude/latitude.
 
-Utilisons la fonction `st_as_sf()` pour transformer cette table de coordonnées en données vectorielles de type points. Puisque les coordonnées sont en format longitude/latitude, nous ne pouvons pas assigner un système de coordonnées projecté cartésien. Utilisons simplement le datum WGS 84 pour définir le SCR. Ce dernier est associé au code EPSG 4326.
+Utiliser la fonction `st_as_sf()` pour transformer cette table de coordonnées en données vectorielles de type points. Puisque les coordonnées sont en format longitude/latitude, nous ne pouvons pas assigner un système de coordonnées projecté cartésien. Utilisons simplement le datum WGS 84 pour définir le SCR. Ce dernier est associé au code EPSG 4326.
 
 ```{r}
 nz_capitales_points <- st_as_sf(x = nz_capitales, 
@@ -1171,7 +1275,7 @@ nz_capitales_points <- st_as_sf(x = nz_capitales,
 
 <br>
 
-Utilisons la fonction `mapview()` pour visualiser les polygones des régions et les points correspondants aux capitales de ces régions.
+Utiliser la fonction `mapview()` pour visualiser les polygones des régions et les points correspondants aux capitales de ces régions.
 
 ```{r}
 mapview(nz, col.regions = "blue", legend = FALSE) + mapview(nz_capitales_points)
@@ -1181,4 +1285,7 @@ mapview(nz, col.regions = "blue", legend = FALSE) + mapview(nz_capitales_points)
 
 Notez que nous n'avons pas besoin de nous assurer que les deux couches soient dans le même SCR puisque la fonction `mapview()` représente par défaut toutes données spatiales dans la projection Mercator Web.
 
-
+<br>
+</p>
+</details> 
+<br>
