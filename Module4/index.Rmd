@@ -1064,6 +1064,8 @@ mapview(lignes_sf, z="nom", layer.name = "Nom des lignes")
 
 ### Question 3 {-}
 
+Pour cette question, vous utiliserez les données vectorielles décrivant les régions administratives de la Nouvelle-Zélande. Ces données se nomment `nz` et sont disponibles dans la bibliothèque 
+
 ```{r}
 library(spData) #install.packages("spData")
 data(nz)
@@ -1119,6 +1121,11 @@ st_crs(nz)$epsg
 st_crs(nz)$Name
 st_crs(nz)$units
 ```
+<br>
+La projection utilisée est le New Zealand Transverse Mercator 2000.
+NZGD 2000 réfère au datum utilisé, appelé le New Zealand Geodetic Datum. 
+
+
 **d)**  Transformer la projection de `nz` pour la projection conique conforme de Lambert (LCC).
 
 La projection conique conforme de Lambert est donnée par le code EPSG 32198. 
@@ -1131,39 +1138,47 @@ nz_lcc <- st_transform(nz, crs = 32198)
 ```{r}
 mapview(nz, zcol = "Name", layer.name = "Régions")
 ```
-**f)** 
+**f)** Le fichier `nz_capitales.cvs` donne le nom et la localisation des capitales de chaque région de la Nouvelle-Zélande. Créer une carte illustrant les frontières des régions et la position de leur capitale respective.
 
-```{r}
-nz_cities <- read.table("Module4/nz_cities.csv", sep = ",")
-capitales <- c("Auckland", "Whangarei", "Hamilton", "Whakatāne", "Gisborne", "Napier", "Stratford", "Palmerston North", "Wellington", "Richmond", "Nelson","Blenheim","Greymouth","Christchurch", "Dunedin", "Invercargill")
 
-nz_capitales <- nz_cities[nz_cities$V1 %in% capitales,]
-nz_capitales <- nz_capitales[,c("V1", "V2","V3")]
-names(nz_capitales) <- c("Capitales", "Lat", "Long" )
-coord_cap <- nz_capitales[, c("Lat","Long")]
-coord_cap_mat <- coord_cap
-names(coord_cap_mat) <- NULL
-coord_cap_mat <- as.matrix(coord_cap_mat, nrow = nrow(cap_coord), row.names = NULL)
-coord_cap_num <- as.numeric(coord_cap_mat)
-coord_cap_mat2 <- matrix(coord_cap_num, ncol = 2)
+Tout d'abord, vous devez importer le fichier `nz_capitales.cvs` dans votre session de travail `R`. Utilisant la fonction de base `read.table()` afin de stocker les coordonnées des capitales dans un object de classe `data.frame`.
 
-#reconvert to dataframe to save as csv ??
-st_point() etc
+
+
+```{r fake-capnz, eval = FALSE}
+nom_du_fichier<-"D:/votrechemin/SCI1031/Module4/Module4_donnees/nz_capitales.csv"
+nz_capitales <- read.table(nom_du_fichier, header = TRUE, sep = ",")
+nz_capitales
+```
+
+```{r capnz, eval = TRUE, echo = FALSE, comment=""}
+nz_capitales <- read.table("Module4/Module4_donnees/nz_capitales.csv", header = TRUE, sep = ",")
+nz_capitales
 ```
 
 
+<br>
+
+Nous observons que les coordonnées sont en format longitude/latitude.
+
+Utilisons la fonction `st_as_sf()` pour transformer cette table de coordonnées en données vectorielles de type points. Puisque les coordonnées sont en format longitude/latitude, nous ne pouvons pas assigner un système de coordonnées projecté cartésien. Utilisons simplement le datum WGS 84 pour définir le SCR. Ce dernier est associé au code EPSG 4326.
 
 ```{r}
-st_crs(nz)$proj4string
-st_crs(nz)$epsg
-#nz_lcc <- st_transform(nz, crs = 32198)
-#nz_nad83 <-  st_transform(nz, crs = 32188)
-nz_wgs84 <- st_transform(nz, crs = 4326)
+nz_capitales_points <- st_as_sf(x = nz_capitales, 
+                        coords = c("Longitude", "Latitude"),
+                        crs = 4126)
 ```
-```{r}
-m1 <- mapview(nz_wgs84,native.crs=TRUE)
-m2 <- mapview(nz)
 
-latticeView(m1,m2)
+<br>
+
+Utilisons la fonction `mapview()` pour visualiser les polygones des régions et les points correspondants aux capitales de ces régions.
+
+```{r}
+mapview(nz, col.regions = "blue", legend = FALSE) + mapview(nz_capitales_points)
 ```
+
+<br>
+
+Notez que nous n'avons pas besoin de nous assurer que les deux couches soient dans le même SCR puisque la fonction `mapview()` représente par défaut toutes données spatiales dans la projection Mercator Web.
+
 
