@@ -28,11 +28,12 @@ Vous utiliserez les bibliothèques suivantes:
 - `sf`
 - `rgdal`
 - `mapview`
+- `leafsync`
 - `spData`
 
 Installez ces librairies si vous ne les avez pas:
 ```{r, eval = FALSE}
-install.packages(c('sf', 'rgdal', 'mapview', 'spData'))
+install.packages(c('sf', 'rgdal', 'mapview', 'leafsync', 'spData'))
 ```
 
 
@@ -156,16 +157,29 @@ polygone
 ```
 <br>
 
-Noter que pour créer un polygone la première extrémité doit être identique à la dernière.
+Noter que pour créer un polygone la première extrémité doit être identique à la dernière. 
 <br>
 
-```{r plotgeo, eval = TRUE, echo = FALSE, fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
+```{r plotgeo, eval = TRUE, echo = FALSE, fig.height=10, fig.width = 10,fig.show='hold',fig.align='center', fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
 
 m_multi_point <- mapview(multi_point)
 m_ligne <- mapview(ligne)
 m_polygone <-mapview(polygone)
 leafsync::latticeView(m_multi_point, m_ligne, m_polygone, ncol=3)
 ```
+
+```{r plotgeo2, eval = FALSE, echo = FALSE, fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
+M_df <- as.data.frame(M)
+M_points <- st_as_sf(M_df, coords = c("x","y"))
+ligne <- st_linestring(M)
+ligne
+
+```
+
+
+
+
+
 <br>
 
 Dans un même ordre d'idées, pour créer des **multi-lignes** ou des **multi-polygones** nous devons aussi recourrir à des listes où chaque élément de la liste correspond à une ligne ou à un polygone respectivement. 
@@ -620,7 +634,7 @@ image(1:n, 1, as.matrix(1:n), col=viridis(n), axes= FALSE, xlab = "", ylab = "",
 ```
 -->
 
-```{r  plot-viridis, echo = FALSE,  warning = FALSE, message = FALSE, eval = TRUE, asp = 1, fig.show='hold', fig.align='center', fig.cap="Palette viridis contenant 20 couleurs différentes"}
+```{r  plot-viridis, echo = FALSE,  warning = FALSE, message = FALSE, eval = TRUE, fig.height=0.2, fig.width = 10, fig.show='hold', fig.align='center', fig.cap="Palette viridis contenant 20 couleurs différentes"}
 library(viridis)
 library(munsell)
 library(colorspace)
@@ -702,7 +716,7 @@ library(leafsync)
 ```
 <br>
 
-Représentons mainteant les deux projections différentes en utilisant la fonction `latticeView()` de la bibliothèque `leafsync` (Fig \@ref(fig:plot-terre2)). Puisque cette fonction existe à la fois dans la bibliothèque `leafsync` et dans la bibliothèque `mapview` mais qu'elle est obsolète dans cette dernière, nous devons préciser que nous voulons la fonction latticeView()` de la bibliothèque `leafsync` en utilisant la notation suivante: `leafsync::latticeView`
+Représentons mainteant les deux projections différentes en utilisant la fonction `latticeView()` de la bibliothèque `leafsync`. Puisque cette fonction existe à la fois dans la bibliothèque `leafsync` et dans la bibliothèque `mapview` mais qu'elle est obsolète dans cette dernière, nous devons préciser que nous voulons la fonction latticeView()` de la bibliothèque `leafsync` en utilisant la notation suivante: `leafsync::latticeView`
 <!--   ```{r  echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Limites terrestres de l'île de Montréal selon les projections Mercartor (gauche) et Robinson (droit)"}
 map_mercator <- mapview(limites_terrestres, col.regions = "red")
 map_robinson <- mapview(limites_terrestres_rob)
@@ -710,7 +724,7 @@ leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
 ```
 -->
 
-```{r plot-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
+```{r plot-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.height=6, fig.width = 10,fig.show='hold',fig.align='center'}
 map_mercator <- mapview(limites_terrestres, legend = FALSE, col.regions = "red")
 map_robinson <- mapview(limites_terrestres_rob, legend = FALSE)
 Map <- leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
@@ -724,7 +738,7 @@ Map
 Nous remarquons que les deux cartes sont identiques (outre la couleur)! Comment cela est-ce possible sachant que nous venons de transformer la projection ? Ceci s'explique par le fait que la fonction `mapview()` représente par défaut toutes données spatiales dans la projection Pseudo-Mercator (ou Mercator Web), qui est la projection utilisée par l'application *OpenStreetMap*. Ainsi, la fonction `mapview` calcule elle-même le changement de projection avant de représenter des données spatiales. Pour conserver la projection originale il faut utiliser l'argument `native.crs=TRUE`.
 
 Représentons à nouveau les cartes des limites terrestres de la région de Montréal, cette fois en précisant que nous voulons conserver le CRS d'orgine.
-```{r plot-terre3, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Limites terrestres de l'île de Montréal selon les projections Web Mercartor (gauche), Mercator (centre) et Robinson (droit)"}
+```{r plot-terre3, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.height=6, fig.width = 10,fig.show='hold',fig.align='center', fig.cap="Limites terrestres de l'île de Montréal selon les projections Web Mercartor (gauche), Mercator (centre) et Robinson (droit)"}
 map_web <- mapview(limites_terrestres, col.regions = "red", legend = NULL, layer.name = "Mercator Web")
 map_mercator <- mapview(limites_terrestres, col.regions = "yellow", legend = NULL, layer.name = "Mercator", native.crs=TRUE)
 map_robinson <- mapview(limites_terrestres_rob, legend = NULL, layer.name = "Robinson", native.crs=TRUE)
@@ -886,6 +900,20 @@ map_pub_mtl
 Ici, nous avons utilisé l'argument `cex` pour diminuer la taille des points sur la carte (la taille par défaut est 6).
 En cliquant sur l'un ou l'autre des points vous obtiendrez l'ensemble des attributs propres à l'école sélectionnée.
 
+
+Nous pouvons également assigner des couleurs aux données vectorielles en fonction des valeurs d'un de ses attributs. Ceci est possible en utilisant l'argument `zcol` de la fonction `mapview()` et en lui assignant de nom de l'attribut que nous désirons illustrer. Utilisons, par exemple, l'attribut "TYPE_CS" qui indique la langue de la commission scolaire.
+
+```{r plot-ecoles-pub-mtl-cs, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques de la ville de Montréal par type de commissions scolaires."}
+mapview(ecoles_pub_Mtl, zcol = "TYPE_CS", cex = 2, layer.name = 'Commissions scolaires')
+```
+<br>
+
+De façon similaire, nous aurions pu représenter les écoles de l'île de Montréal selon le niveau d'enseignement qu'on y dispense. Cette information est donnée par l'attribut "ORDRE_ENS".
+```{r plot-ecoles-pub-mtl-ens, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques de la ville de Montréal selon le niveau d'enseignement."}
+mapview(ecoles_pub_Mtl, zcol = "ORDRE_ENS", cex = 2, layer.name = 'Enseignement')
+```
+
+
 <br>
 
 #### Visualisation de plusieurs couches d'une géodatabse {-}
@@ -956,7 +984,7 @@ Bien que la réponse à chaque question soit disponible, il est **très importan
 Créer une géométrie simple de type polygone qui a la forme d'un carré de 10 unités de long avec un trou en son centre qui a la forme d'un carré de 4 unités de long. 
 
 <details>
-<summary> #### Réponse {-}</summary>
+<summary> Réponse</summary>
 <p>
 
 Définir deux matrices de coordonnées, une pour le grand et l'autre pour le petit carré.
