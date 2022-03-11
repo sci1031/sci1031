@@ -21,6 +21,7 @@ La section [exercice](#ex_intro) est divisée en deux parties. La première part
 La deuxième partie constitue est une courte introduction au langage de programmation `R`. Vous y verrez les commandes et les fonctions de base. 
 
 
+
 ## Leçon {#lecon_intro}
 
 ### Les données spatiales d'hier à aujourd'hui {#hist}

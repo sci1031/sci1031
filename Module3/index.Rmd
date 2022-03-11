@@ -308,8 +308,49 @@ knitr::include_graphics('Module3/images/3_LCC_Canada.png')
 ```
 <br>
 
+### Représentation d'un SCR
 
-### Les codes EPSG {#code_epsg}
+Les données spatiales doivent toujours être accompagnées de l'information permettant de connaître le système de coordonnées de référence qui leur est associé. Ces métadonnées peuvent être représenter (ou encoder) de différentes façons. 
+
+#### Le Well-known text {-}
+
+Le format *Well-known text* (WKT) est une syntaxe standard utilisée pour représenter les données vectorielles et aussi les SCR des données vectorielles et matricielles. Ce format consiste en une série d'étiquette de la forme `[...]` associée à différentes informations relatives au SCR. Par exemple:
+
+```{r, echo=FALSE, warning=FALSE}
+library(sf)
+S <- st_read("Module4/data/Montreal_Velo/pistes/pistes_cyclables_type.shp")
+st_crs(S)
+```
+<br>
+
+#### La syntaxe PROJ4 {-}
+
+La syntaxe [PROJ4](https://proj.org/) consiste en une liste de paramètres précédés par le symbole `+`. Elle donne une représentation du CRS de façon beaucoup plus concise. Voici un exemple:
+
+```{r, echo=FALSE, warning=FALSE}
+st_crs(S)$proj4string
+```
+<br>
+
+Les paramètres principaux ont la signification suivante:
+
+* `+proj` : le nom de la projection
+* `+datum` : le nom du datum
+* `+ellps` : le nom de l'ellipsoïde
+* `+zone` : le numéro de la zone pour une projection UTM
+* `+lat_0` : la latitude de l'origine
+* `+lat_1` : la latitude du premier parallèle standard^[Souvenez-vous que pour une projection cylindrique ou conique, le plan intersecte le globe le long d'un ou de deux parallèles. Voir la [leçon 2]{#SRC}]
+* `+lat_2` : la latitude du deuxième parallèle standard
+* `+lon_0` : la longitude du méridien central
+* `+x_0` : le faux est (false easting; dans le cas de projection transverse comme UTM)
+* `+y_0` : le faux nord (false northing)
+* `+units` : les unités (mètres, degrés, etc.)
+* `+k_0`: facteur d'échelle
+
+Vous pouvez trouver d'autres paramètres [ici](https://proj.org/usage/projections.html).
+<br>
+
+#### Les codes EPSG {.unnumbered #code_epsg} 
 
 Le Comité de topographie et de positionnement (Surveying and Positionning Comittee) de l'Association internationale des producteurs de pétrole et de gaz (OGP), autrefois le European Petroleum Survey Group (EPSG), est une organisation scientifique liée à l’industrie pétrolière qui a mis en place une base de données répertoriant tous les systèmes de référence et les systèmes de coordonnées géographiques et projetés existants. Cette base de données, appelée le registre de codes **EPSG**, associe un code numérique à chaque système pour en faciliter l’identification et précise ses paramètres géodésiques et de projection. Vous pouvez consulter cette base de données [ici](https://www.epsg.org/).
 
@@ -326,6 +367,7 @@ Ou encore:
 - Le fuseau 2 de la projection MTM basé sur le NAD83 : 32182
 - La projection Web de Mercator : 3857.
 
+<br>
 
 ### Résumé
 

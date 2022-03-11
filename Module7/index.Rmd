@@ -15,27 +15,20 @@ L'objectif principal de ce module est d'apprendre à manipuler des données vect
 > - Trouver le centroid et les coordonnées d'objets vectoriels.
 > - Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
 > - Confirmer des relations topologiques entre deux objets vectoriels.
->- Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
+> - Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
 >
 
 <br>
 
-```{r echo=FALSE, out.width='10%',fig.align='left'}
-knitr::include_graphics("Images/Icones_Bibliotheques.jpg")
-```
-
-#### Vous utiliserez les bibliothèques suivantes: {-}
+Vous utiliserez les bibliothèques suivantes: 
 
 - `sf`
 - `mapview`
 - `units`
 
 
-```{r echo=FALSE, out.width='10%',fig.align='left'}
-knitr::include_graphics("Images/Icones_Fonctions.jpg")
-```
 
-#### Vous apprendrez à utiliser les fonctions suivantes: {-}
+Vous apprendrez à utiliser les fonctions suivantes: 
 
 - `subset()`
 - `st_coordinates()`
@@ -52,11 +45,7 @@ knitr::include_graphics("Images/Icones_Fonctions.jpg")
 - `st_is_longlat()`
 
 
-```{r echo=FALSE, out.width='10%',fig.align='left'}
-knitr::include_graphics("Images/Icones_Donnees.jpg")
-```
-
-#### Vous utiliserez ces données: {-}
+Vous utiliserez ces données: 
 
 Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec (SÉPAQ).
 
