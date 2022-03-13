@@ -6,7 +6,7 @@ Son objectif principal est d'apprendre à lire, interpréter et visualiser des
 données matricielles. Notez que la section [2.3 Raster
 data](https://bookdown.org/robinlovelace/geocompr/spatial-class.html#raster-data)
 du livre *Geocomputation with R* des auteurs Robin Lovelace, Jakub Nowosad, et
-Jannes Muenchow [@lovelace_geocomputation_2019] est un bon accompagnement à ce
+Jannes Muenchow [@lovelace_geocomputation_2021] est un bon accompagnement à ce
 module.
 
 
