@@ -14,7 +14,7 @@ on:
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 
 jobs:
-  R-CMD-check:
+  R-build-gitbook:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -31,7 +31,7 @@ jobs:
           
       - name: Build GitBook
         run: |-
-          Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
+          Rscript -e "options(bookdown.render.file_scope = FALSE, pandoc.stack.size = '2048m'); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
           
       - name: Deploy GitBook to gh-pages
         uses: peaceiris/actions-gh-pages@v3

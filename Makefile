@@ -8,7 +8,7 @@ pdf:
 	Rscript --quiet "bookdown::pdf_book"
 
 gitbook:
-	Rscript -e "options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
+	Rscript -e "options(bookdown.render.file_scope = FALSE, pandoc.stack.size = '2048m'); bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
 
 mod:
 	Rscript -e "$(render_chap)"
