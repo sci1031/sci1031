@@ -1006,7 +1006,7 @@ polygone
 
 Visualiser le polygone pour confirmer votre réponse:
 
-```{r}
+```{r mappoly, comment = FALSE}
 mapview(polygone)
 ```
 
@@ -1110,7 +1110,7 @@ lignes_sf
 
 Utiliser la fonction `mapview()` et spécifier que l'argument `z` correspond à l'attribut "nom" de l'objet `lignes_sf`.
 
-```{r}
+```{r maplignes, comment = FALSE}
 mapview(lignes_sf, z="nom", layer.name = "Nom des lignes")
 ```
 
@@ -1256,7 +1256,7 @@ st_crs(nz_lcc)$proj4string
 <p>
 
 
-```{r}
+```{r mapnz, comment = FALSE}
 mapview(nz, zcol = "Name", layer.name = "Régions")
 ```
 <br>
@@ -1305,7 +1305,7 @@ nz_capitales_points <- st_as_sf(x = nz_capitales,
 
 Utiliser la fonction `mapview()` pour visualiser les polygones des régions et les points correspondants aux capitales de ces régions.
 
-```{r}
+```{r mapnzcap, comment=FALSE}
 mapview(nz, col.regions = "blue", legend = FALSE) + mapview(nz_capitales_points)
 ```
 
