@@ -21,7 +21,6 @@ Imports:
   rasterVis,
   remotes,
   raster,
-  rosm,
   rgdal,
   rgeos,
   rosm,
@@ -32,3 +31,5 @@ Imports:
   svglite,
   tmap,
   webshot
+Remotes:
+  crsh/citr
