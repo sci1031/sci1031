@@ -53,8 +53,8 @@ Un regard sur les cartes anciennes du monde est révélateur de l’évolution d
 
 <br>
 
-```{r ptolemee, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Ptolemee.jpg', fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807). ", out.width = '50%'}
-knitr::include_graphics('Module1/images/1_Ptolemee.jpg', dpi=200)
+```{r ptolemee, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Ptolemee.png', fig.cap="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807). ", out.width = '50%'}
+knitr::include_graphics('Module1/images/1_Ptolemee.png', dpi=200)
 ```
 
 <br>
@@ -69,11 +69,11 @@ Pour ceux et celles intéressés aux cartes historiques, la figure \@ref(fig:evo
 
 <br>
 
-```{r evomtl, fig.align='left', out.width = "50%",fig.show='hold', fig.link=c("Module1/images/1_Montreal1556.png", "Module1/images/1_Montreal1645.png", "Module1/images/1_Montreal1758.png", "Module1/images/1_Montreal1843.tif", "Module1/images/1_Montreal1897.png", "Module1/images/1_Montreal1920.png", "Module1/images/1_Montreal1960.png", "Module1/images/1_Montreal1982.png"), fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
+```{r evomtl, fig.align='left', out.width = "50%",fig.show='hold', fig.link=c("Module1/images/1_Montreal1556.png", "Module1/images/1_Montreal1645.png", "Module1/images/1_Montreal1758.png", "Module1/images/1_Montreal1843.png", "Module1/images/1_Montreal1897.png", "Module1/images/1_Montreal1920.png", "Module1/images/1_Montreal1960.png", "Module1/images/1_Montreal1982.png"), fig.cap='Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/).',echo=FALSE}
 a1<-'Module1/images/1_Montreal1556.png'
 a2<-'Module1/images/1_Montreal1645.png'
 a3<-'Module1/images/1_Montreal1758.png'
-a4<-'Module1/images/1_Montreal1843.tif'
+a4<-'Module1/images/1_Montreal1843.png'
 a5<-'Module1/images/1_Montreal1897.png'
 a6<-'Module1/images/1_Montreal1920.png'
 a7<-'Module1/images/1_Montreal1960.png'
