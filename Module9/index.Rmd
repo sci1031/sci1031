@@ -1699,3 +1699,6 @@ Vous pouvez également sauvegarder cette animation en exécutant cette ligne de 
 saveGIF(anim_carte(mint_crop, 12), movie.name = "anim_mint.gif", ani.height = 500, ani.width = 500)
 ```
 
+<br>
+<br>
+<br>
