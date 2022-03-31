@@ -1375,7 +1375,7 @@ id
 ```
 <br>
 
-Notez que la fonction `apply()` calcule le maximum pour chacune des couches contenues dans `maxt_megantic`, alors que le fonction `which.max()` détermine l'indice la couche qui contient le maximum de ces maxima. 
+Notez que la fonction `apply()` calcule le maximum pour chacune des couches contenues dans `maxt_megantic`, alors que le fonction `which.max()` détermine l'indice de la couche qui contient le maximum de ces maxima. 
 
 C'est donc la couche `r id` qui contient ce maximum.
 
