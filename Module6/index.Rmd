@@ -3,24 +3,43 @@
 
 L'objectif principal de ce module est
 
-À la fin de ce module vous saurez:
+
+<br>
+
+
+###### À la fin de ce module vous saurez: {-}
+
+---
 
 -
 -
 -
 
-Vous utiliserez les librairies suivantes:
+---
+
+<div class="boite ico librairie gauche">
+###### Vous utiliserez les bibliothèques suivantes: {-}
+
+- `tmap`
+- `mapview`
+
+</div>
+
+<div class="boite ico fonctions gauche">
+###### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
 -
 -
 
-Vous apprendrez à utiliser les fonctions suivantes:
+</div>
 
--
--
+<div class="boite ico donnees gauche">
+###### Vous utiliserez les données suivantes: {-}
 
 Dans la section Leçon, vous utiliserez des données XYXYX
 Dans la section Exercice, vous utiliserez XXXXX
+
+</div>
 
 Importez l'[ensemble des données](https://github.com/sci1031/sci1031/tree/master/Module6/Donnees.zip) utilisées dans ce module.
 Sauvegardez le dossier compressé (`Donnees.zip`) dans votre répertoire de travail pour ce module, et dézippez-le.

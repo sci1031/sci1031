@@ -3,26 +3,36 @@
 
 Cette leçon porte sur la manipulation des données spatiales matricielles. 
 
-À la fin de ce module vous saurez:
-
-- Attribuer des catégories aux valeurs des cellules d'un *raster*.
-- Filtrer des cellules d'un *raster* selon leur valeur.
-- Filtrer des cellules d'un *raster* selon leurs coordonnées.
-- Découper un *raster* en utilisant un rectangle de délimitation.
-- Découper un *raster* en utilisant un objet vectoriel.
-- Combiner des *rasters* pour en former un seul.
-- Déterminer les coordonnées d'une cellule à partir de son indice. <!-- Devrait être ajouter au module 5?  -->
-- Déterminer l'objet spatial le plus proche d'un autre.
+<br>
 
 
-Vous utiliserez les bibliothèques suivantes:
+###### À la fin de ce module vous saurez: {-}
+
+---
+
+ - Attribuer des catégories aux valeurs des cellules d'un *raster*.
+ - Filtrer des cellules d'un *raster* selon leur valeur.
+ - Filtrer des cellules d'un *raster* selon leurs coordonnées.
+ - Découper un *raster* en utilisant un rectangle de délimitation.
+ - Découper un *raster* en utilisant un objet vectoriel.
+ - Combiner des *rasters* pour en former un seul.
+ - Déterminer les coordonnées d'une cellule à partir de son indice. <!-- Devrait être ajouter au module 5?  -->
+ - Déterminer l'objet spatial le plus proche d'un autre.
+
+---
+
+<div class="boite ico librairie gauche">
+###### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `mapview`
 - `raster`
 - `sf`
 - `elevatr`
 
-Vous apprendrez à utiliser les fonctions suivantes:
+</div>
+
+<div class="boite ico fonctions gauche">
+###### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
 - `reclassify()`
 - `crop()` `mask()`
@@ -48,12 +58,16 @@ De plus, vous utiliserez aussi des fonctions vues dans les modules précédents:
 - `st_polygon()`       <!-- À ajouter au module 4!  -->
 - `st_intersects()`
 
+</div>
 
+<div class="boite ico donnees gauche">
+###### Vous utiliserez les données suivantes: {-}
 
 Dans la section [Leçon](#lecon_mat_mani), vous utiliserez des données matricielles d'élévation pour le Québec, des données vectorielles des sentiers de randonnées de la SÉPAQ, ainsi que les limites de quatre parcs nationaux identifiés au [module 7](#manip_vec).
 
 Dans la section [Exercice](#ex_mat_manip), vous utiliserez <!-- A FAIRE -->
 
+</div>
 
 ## Leçon {#lecon_mat_mani}
 
@@ -75,6 +89,15 @@ Dans un second temps, cette leçon vous guidera dans la résolution d'une probl�
 <br>
 
 ### Télécharger les données {#data_mod8}
+
+
+<div class="boite ico donnees gauche"> 
+
+###### Les données {-} 
+
+<br>
+
+</div>
 
 Dans cette leçon, nous allons utiliser le modèle d'élévation numérique aussi appelé *Digital Elevation Model* (DEM). Cette couche d'information spatiale est produite par le gouvernement du Canada ([accessible sur ce portail](https://maps.canada.ca/czs/index-en.html)). Cette couche est une matrice de données (*raster*) contenant des valeurs d'élévation en mètres.
 

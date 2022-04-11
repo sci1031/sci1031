@@ -9,21 +9,28 @@ porteront sur des données vectorielles en format *shapefile* puisque celles-ci 
 La section [4.5](#gdb) vous familiarisera avec les données vectorielles en format *geodatabase* puisque celles-ci sont de plus en plus utilisées au sein de grandes organisations comme des ministères. 
 
 
-À la fin de ce module vous saurez:
+<br>
 
->
-> - Créer des données vectorielles et comprendre leur structure.
-> - Lire un *shapefile*, explorer ses métadonnées et interpréter sa géométrie.
-> - Lire une *geodatabase*, et explorer ses couches.
-> - Visualiser des données vectorielles de type point, ligne et polygone.
-> - Visualiser des données vectorielles par attribut.
-> - Visualiser plusieurs données vectorielles au sein d'une même figure.
-> - Transformer le système de coordonnées de référence de données vectorielles.
->
+
+###### À la fin de ce module vous saurez: {-}
+
+---
+
+
+ - Créer des données vectorielles et comprendre leur structure.
+ - Lire un *shapefile*, explorer ses métadonnées et interpréter sa géométrie.
+ - Lire une *geodatabase*, et explorer ses couches.
+ - Visualiser des données vectorielles de type point, ligne et polygone.
+ - Visualiser des données vectorielles par attribut.
+ - Visualiser plusieurs données vectorielles au sein d'une même figure.
+ - Transformer le système de coordonnées de référence de données vectorielles.
+
+---
 
 <br>
 
-Vous utiliserez les bibliothèques suivantes:
+<div class="boite ico librairie gauche">
+###### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `sf`
 - `rgdal`
@@ -36,10 +43,12 @@ Installez ces librairies si vous ne les avez pas:
 install.packages(c('sf', 'rgdal', 'mapview', 'leafsync', 'spData'))
 ```
 
+</div>
 
 <br>
 
-Vous apprendrez à utiliser les fonctions suivantes:
+<div class="boite ico fonctions gauche">
+###### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
 - `st_point()`, `st_multipoint()`
 - `st_linestring()`, `st_multilinestring()`
@@ -59,7 +68,10 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `levels()`
 - `class()`
 
-<br>
+</div>
+
+<div class="boite ico donnees gauche">
+###### Vous utiliserez les données suivantes: {-}
 
 Dans la section [leçon](#lecon_vec), vous utiliserez deux ensembles de données vectorielles. 
 
@@ -68,6 +80,8 @@ Le premier ensemble contient des données *shapefile* relatives au réseau de pi
 Le second ensemble constitue une *géodatabase* contenant des données du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec relatives aux établissements d'enseignement sur le territoire québécois.
 
 Dans la section [exercice](#ex_vec), vous utiliserez les données vectorielles `nz` disponibles dans la bibliothèque `spData`.
+
+</div>
 
 ```{r load-libraries4, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
 #library(raster)
@@ -82,6 +96,14 @@ library(leafsync)
 
 
 ### Télécharger les données {#data_mod4}
+
+<div class="boite ico donnees gauche"> 
+
+###### Les données {-} 
+
+<br>
+
+</div>
 
 Dans les sections [4.2](#read_vec) à [4.5](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés et un fichier `csv`: 
 

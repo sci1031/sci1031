@@ -10,24 +10,34 @@ Jannes Muenchow [@lovelace_geocomputation_2021] est un bon accompagnement à ce
 module.
 
 
-À la fin de ce module vous saurez:
+<br>
 
-- Créer et lire un *raster*.
-- Interpréter la géométrie d'un *raster*.
-- Comprendre la structure d'un *raster*.
-- Obtenir des statistiques simples sur les données contenues dans un *raster*.
-- Visualiser un *raster*.
-- Transformer le système de coordonnées de référence d'un *raster*.
-- Transformer la résolution d'un *raster*.
-- Lire et visualiser un *raster* multi-bande.
 
-Vous utiliserez les bibliothèques suivantes:
+###### À la fin de ce module vous saurez: {-}
+
+---
+
+ - Créer et lire un *raster*.
+ - Interpréter la géométrie d'un *raster*.
+ - Comprendre la structure d'un *raster*.
+ - Obtenir des statistiques simples sur les données contenues dans un *raster*.
+ - Visualiser un *raster*.
+ - Transformer le système de coordonnées de référence d'un *raster*.
+ - Transformer la résolution d'un *raster*.
+ - Lire et visualiser un *raster* multi-bande.
+
+---
+
+<div class="boite ico librairie gauche">
+###### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `raster`
 - `mapview`
 - `leafsync`
+</div>
 
-Vous apprendrez à utiliser les fonctions suivantes:
+<div class="boite ico fonctions gauche">
+###### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
 - `raster()`
 - `getValues()`
@@ -45,6 +55,10 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `viewRGB()`
 - `mapview()` et `latticeView()`, que vous connaissez déjà.
 
+</div>
+
+<div class="boite ico donnees gauche">
+###### Vous utiliserez les données suivantes: {-}
 
 Vous utiliserez aussi les fonctions suivantes, qui ne sont pas spécifiques aux données spatiales:
 
@@ -68,7 +82,7 @@ Le second ensemble contient des données spatiales satellites captées par Lands
 
 Dans la section [exercice](#ex_mat), vous utiliserez XXXXX
 
-
+</div>
 
 ## Leçon {#lecon_mat}
 
