@@ -137,7 +137,7 @@ parcs <- st_read(chemin_parcs)
 
 ```{r, echo = FALSE, warning = FALSE}
 #parcs<-st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
-parcs <- st_read("Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
+parcs <- st_read("Module8/Module8_donnees/parcs_sherbrooke/parcs_sherbrooke.shp")
 ```
 <br>
 
@@ -150,7 +150,7 @@ dem <- raster(chemin_dem)
 
 ```{r, echo = FALSE, warning = FALSE}
 #dem<-raster("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/DEM.tif")
-dem <- raster("Module8/data/DEM.tif")
+dem <- raster("Module8/Module8_donnees/DEM.tif")
 ```
 <br>
 
@@ -420,7 +420,15 @@ extent(dem_ma)
 
 Par exemple, le *raster* `dem` possède une seule couche, ainsi la liste retournée par la fonction `extract()` ne possède qu'un seul élément. Toutefois, cet élément est un vecteur de taille `r length(extract(dem, pol)[[1]])` listant la valeur de chacune des cellules extraites.
 
-```{r, warning = FALSE}
+```{r, echo = FALSE, eval = TRUE, warning = FALSE}
+dem_ex <- raster::extract(dem, pol)
+
+length(dem_ex[[1]])
+
+summary(dem_ex[[1]])
+```
+
+```{r, echo = TRUE, eval = FALSE}
 dem_ex <- extract(dem, pol)
 
 length(dem_ex[[1]])
