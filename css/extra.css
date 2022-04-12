@@ -215,7 +215,7 @@ blockquote {
   background-color: #C7D1D0;
   margin-bottom: 20px;
 }
-.boite.ico, img[src*=".svg"] {
+.boite.ico img[src*=".svg"] {
   width: 60px;
   height: 50px;
   margin-top: 50px;
