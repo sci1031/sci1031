@@ -22,9 +22,20 @@ p.caption {
   margin-top: 10px;
 }
 
-
 /* COMMUN */
-.separateur {
+.alignCentre {
+  text-align: center;
+}
+.pleineLargeur {
+  width: 100%;
+}
+.troisQuartLargeur {
+  width: 75%;
+}
+.demiLargeur {
+  width: 50%;
+}
+.separateurLargeur  {
   width: 90px;
   height: 5px;
   background: #486864;
@@ -108,6 +119,11 @@ blockquote {
   text-transform: uppercase;
   color: black !important;
   font-weight: bold;
+}
+.section h7 {
+  font-size: 16px !important;
+  line-height: 20px;
+  color: #A64907;
 }
 .section p {
   font-size: 15px !important;
@@ -204,7 +220,7 @@ blockquote {
   height: 50px;
   margin-top: 50px;
 }
-.boite.ico.gauche {
+.boite.ico.gauche, .boite.ico.droite {
   width: auto;
   height: auto;
   background-repeat: no-repeat;
@@ -216,8 +232,18 @@ blockquote {
     padding-left: 85px;
     padding-top: 15px;
   }
+  .boite.ico.droite {
+    background-size: 60px;
+    padding-right: 85px;
+    padding-top: 15px;
+    background-position: top right;
+    text-align: right;
+  }
+  .boite.ico.droite ul {
+   display: inline-block;
+  }
 }
-.boite.ico.gauche h1, .boite.ico.gauche h2, .boite.ico.gauche h3, .boite.ico.gauche h4, .boite.ico.gauche h5, .boite.ico.gauche h6 {
+.boite.ico.gauche h1, .boite.ico.gauche h2, .boite.ico.gauche h3, .boite.ico.gauche h4, .boite.ico.gauche h5, .boite.ico.gauche h6,  .boite.ico.gauche h7, .boite.ico.droite h1, .boite.ico.droite h2, .boite.ico.droite h3, .boite.ico.droite h4, .boite.ico.droite h5, .boite.ico.droite h6, .boite.ico.droite h7 {
   margin-top: 0px !important;
 }
 .boite.ico.librairie {
