@@ -2,33 +2,38 @@
 
 L'objectif principal de ce module est d'apprendre à manipuler des données vectorielles. 
 
-À la fin de ce module vous saurez:
-
->
-> - Ajouter de nouveaux attributs à des données vectorielles, et également supprimer ou éditer des attributs.
-> - Filtrer des données vectorielles en se basant sur leurs attributs.
-> - Joindre spatialement deux ensembles de données vectorielles.
-> - Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
-> - Combiner, aggréger et simplifier des objets vectoriels. 
-> - Transformer la géométrie d'objets vectoriels.
-> - Créer des zones tampons autour d'objets vectoriels.
-> - Trouver le centroid et les coordonnées d'objets vectoriels.
-> - Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
-> - Confirmer des relations topologiques entre deux objets vectoriels.
-> - Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
->
-
 <br>
 
-Vous utiliserez les bibliothèques suivantes: 
+
+###### À la fin de ce module vous saurez: {-}
+
+---
+
+ - Ajouter de nouveaux attributs à des données vectorielles, et également supprimer ou éditer des attributs.
+ - Filtrer des données vectorielles en se basant sur leurs attributs.
+ - Joindre spatialement deux ensembles de données vectorielles.
+ - Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
+ - Combiner, aggréger et simplifier des objets vectoriels. 
+ - Transformer la géométrie d'objets vectoriels.
+ - Créer des zones tampons autour d'objets vectoriels.
+ - Trouver le centroid et les coordonnées d'objets vectoriels.
+ - Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
+ - Confirmer des relations topologiques entre deux objets vectoriels.
+ - Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
+
+---
+
+
+<div class="boite ico librairie gauche">
+###### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `sf`
 - `mapview`
 - `units`
+</div>
 
-
-
-Vous apprendrez à utiliser les fonctions suivantes: 
+<div class="boite ico fonctions gauche">
+###### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
 - `subset()`
 - `st_coordinates()`
@@ -43,13 +48,16 @@ Vous apprendrez à utiliser les fonctions suivantes:
 - `rowSums()`
 - `lengths()`
 - `st_is_longlat()`
+</div>
 
-
-Vous utiliserez ces données: 
+<div class="boite ico donnees gauche">
+###### Vous utiliserez les données suivantes: {-}
 
 Dans la section [leçon](#lecon_manip_vec), vous utiliserez des données vectorielles portant sur les municipalités du Québec, sur les régions administratives du Québec et sur les parcs nationaux de la Société des établissements de plein air du Québec (SÉPAQ).
 
 Dans la section [exercices](#ex_map_vec), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
+
+</div>
 
 
 ## Leçon {#lecon_manip_vec}
@@ -66,17 +74,30 @@ Dans un second temps, cette leçon vous guidera dans la résolution d'une probl�
 > **Parmi les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux dans un rayon de 70 km&nbsp;? **
 >
 
+
 ### Télécharger les données {#data_mod7}
+
+<div class="boite ico donnees gauche"> 
+
+###### Les données {-} 
+
+<br>
+
+</div>
 
 Dans cette leçon, nous allons utiliser les données vectorielles relatives aux [municipalités](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives) et aux [régions administratives du Québec](https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs), ainsi qu'au réseau de la [Société des établissements de plein air du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000), la SÉPAQ. 
 
-Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module7_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier comprend trois sous-dossiers et un fichier *.csv*:
+
+Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module7_donnees.zip). 
+
+Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier comprend trois sous-dossiers et un fichier *.csv*:
 
 
 - `villes`,
 - `parcs.gdb`,
 - `regions_admin`,
 - `population.csv`.
+
 
 
 
@@ -621,6 +642,7 @@ names(GIM)<-c("Id", "Nom_reg", "geometry")
 # iles_poly
 # mapview(iles_poly)
 ```
+<br>
 
 Considérons le *shapefile* `GIM` contenant deux géométries: le polygone délimitant la Gaspésie et un polygone délimitant les Îles-de-la-Madeleine.
 
@@ -1283,13 +1305,19 @@ st_within(trait_mauve, B)
 st_within(trait_vert, B)
 ```
 
+
+
+<div class="boite ico important gauche">
+
+###### Terminons cette sous-section par une remarque importante: {-}
+
 <br>
 
-Terminons cette sous-section par une remarque importante: 
+</div>
 
->
-> La fonction [`st_join()`](#fct_join), vue plus, qui permet de faire une jointure spatiale entre deux objets vectoriels s'appuie, par défaut, sur la fonction de confirmation `st_intersects()`. En effet, la fonction `st_join(x,y)` identifie la présence d'une intersection entre les éléments de `x` et de `y` puis assigne les attributs de `y` aux éléments de `x` qui satisfont cette condition d'intersection. Par aileurs, il est possible d'utiliser la fonction `st_join()` en utilisant d'autres opérations topologiques de confirmation que celle par défaut. En effet, il est possible de définir un troisième argument, `join`, pour préciser une autre opération comme `st_contains`, `st_touches`, `st_overlaps` etc. 
->
+
+La fonction [`st_join()`](#fct_join), vue plus, qui permet de faire une jointure spatiale entre deux objets vectoriels s'appuie, par défaut, sur la fonction de confirmation `st_intersects()`. En effet, la fonction `st_join(x,y)` identifie la présence d'une intersection entre les éléments de `x` et de `y` puis assigne les attributs de `y` aux éléments de `x` qui satisfont cette condition d'intersection. Par aileurs, il est possible d'utiliser la fonction `st_join()` en utilisant d'autres opérations topologiques de confirmation que celle par défaut. En effet, il est possible de définir un troisième argument, `join`, pour préciser une autre opération comme `st_contains`, `st_touches`, `st_overlaps` etc. 
+
 
 Donnons un exemple. Pour chaque régions administratives du Québec, déterminons les régions qui lui sont adjacentes. Il s'agit ici d'utiliser la fonction `st_join()` avec la condition `st_touches`&nbsp;:
 
@@ -1517,6 +1545,7 @@ Nous devons filtrer l'objet `villes_pop` et sélectionner les 10 municipalités 
 ```{r}
 villes_pop <- villes_pop[order(villes_pop$population, decreasing = TRUE), ]
 ```
+<br>
 
 L'objet `villes_pop` est maintenant ordonné de manière décroissante en fonction de la taille de la population des municipalités. Ainsi, les 10 premières lignes de cet objet correspondent aux 10 municipalités les plus grandes du Québec. On peut donc assigner les 10 premières lignes à un nouvelle objet intitulé `top10_villes`:
 
@@ -1562,6 +1591,8 @@ parcs_nationaux <- st_read(chemin_parcs_nationaux, layer = "terpnq_s")
 parcs_nationaux <- st_read("Module7/Module7_donnees/parcs.gdb", layer = "terpnq_s") 
 
 ```
+<br>
+
 Visualisons les polygones de `parcs_nationaux`.
 
 ```{r vis-parcs}

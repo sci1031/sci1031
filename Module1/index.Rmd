@@ -7,17 +7,24 @@ source("bin/chunk-options.R")
 
 Ce module est une introduction au cours que vous vous apprêter à suivre. Dans la section [leçon](#lecon_intro), nous discuterons de l’évolution historique de la visualisation des données spatiales, des premières cartes jusqu’à l’avènement des systèmes d’information géographique. Nous ferons une revue des outils existants pour visualiser et analyser les données spatiales. Finalement, nous présenterons quelques concepts de base essentiels à l’étude des données spatiales.
 
-À la fin de ce module vous saurez :
+<br>
 
--	Comprendre les changements dans la représentation géographique au cours de l’histoire.
--	Définir ce qu’est la géomatique.
--	Décrire les propriétés générales des systèmes d’information géographique (SIG). 
--	Donner des exemples d’application des SIG.
--	Nommer des outils et logiciels de visualisation et d’analyse géospatiale.
--	Décrire les avantages offerts par le logiciel R.
--	Définir les concepts de bases dans l’étude des données spatiales : la résolution, l’étendue, le voisinage, les gradients, l’effet de bordure, etc. 
+###### À la fin de ce module vous saurez: {-}
+
+---
+
+ -	Comprendre les changements dans la représentation géographique au cours de l’histoire.
+ -	Définir ce qu’est la géomatique.
+ -	Décrire les propriétés générales des systèmes d’information géographique (SIG). 
+ -	Donner des exemples d’application des SIG.
+ -	Nommer des outils et logiciels de visualisation et d’analyse géospatiale.
+ -	Décrire les avantages offerts par le logiciel R.
+ -	Définir les concepts de bases dans l’étude des données spatiales : la résolution, l’étendue, le voisinage, les gradients, l’effet de bordure, etc. 
+
+---
 
 La section [exercice](#ex_intro) est divisée en deux parties. La première partie est une auto-évaluation constituée d’une série de questions corrigées. Cette évaluation vous permettra de vérifier votre compréhension des concepts enseignés dans ce module. 
+
 La deuxième partie constitue est une courte introduction au langage de programmation `R`. Vous y verrez les commandes et les fonctions de base. 
 
 

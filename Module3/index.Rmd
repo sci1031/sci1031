@@ -4,13 +4,20 @@
 
 Ce module porte sur les systèmes de coordonnées de référence (SRC). Nous avons vu dans le module 2 que l’intégration de couches de données spatiales différentes nécessite qu’elles soient définies selon le même système de référence spatiale. C’est-à-dire que le modèle mathématique utilisé pour représenter la position des données sur la surface de la Terre doit être le même pour les deux jeux de données. Dans ce module, nous définissons plusieurs concepts cartographiques pour bien comprendre l’importance du SRC dans la visualisation, la manipulation et l’analyse de données spatiales. 
 
-À la fin de ce module vous saurez :
+<br>
+
+
+###### À la fin de ce module vous saurez: {-}
+
+---
 
 -	Expliquer la différence entre un ellipsoïde local et un ellipsoïde global.
 -	Définir ce qu’est un datum et nommer des datums courants. 
 -	Expliquer la différence entre le système de coordonnées géographique et le système de coordonnées projeté.
 -	Définir les propriétés permettant de catégoriser les projections
 -	Nommer des projections courantes.
+
+---
 
 La section [exercice](#ex_SRC) est divisée en deux parties. 
 Dans un premier temps, vous réaliserez une auto-évaluation pour vérifier votre acquisition des connaissances enseignées dans ce module. 
