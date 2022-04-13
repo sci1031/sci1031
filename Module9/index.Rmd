@@ -3,16 +3,24 @@
 
 Manipuler le temps (les dates, les heures, les secondes, etc.) représente une compétence indispensable en science des données. Les données spatiales peuvent elles aussi être indexées sur le temps, c'est-à-dire se faire attribuer un indice de classification (une «coordonnée») temporelle. On parle alors de **données spatio-temporelles** qui sont donc des données doublement indexées : indexées sur le temps et indexées sur l'espace. L'objectif principal de ce module est justement de manipuler ce type de données, des séries de vecteurs temporellement ordonnées, et cela pour différentes échelles temporelles.
 
+<br>
 
-À la fin de ce module vous saurez&nbsp;:
+
+###### À la fin de ce module vous saurez: {-}
+
+---
 
 - Manipuler le temps et les dates.
 - Créer des animations simples qui montre l'évolution de données spatialisées dans le temps.
 - Utiliser les objets de classe `rasterStack`.
 - Écrire des fonctions simples et les utiliser pour structurer vos codes d'analyse `R`.
 
+---
 
-Vous utiliserez les bibliothèques suivantes&nbsp;:
+
+<div class="boite ico librairie gauche">
+###### Vous utiliserez les bibliothèques suivantes: {-}
+
 
 - `mapview`
 - `raster`
@@ -20,8 +28,12 @@ Vous utiliserez les bibliothèques suivantes&nbsp;:
 - `lubridate`
 - `animation`
 
+</div>
+
+<div class="boite ico fonctions gauche">
+###### Vous apprendrez à utiliser les fonctions suivantes: {-}
+
 <!-- Séparer entre nouvelles fonctions et anciennes  -->
-Vous apprendrez à utiliser les fonctions suivantes&nbsp;:
 
 - `hist()`
 - `sort()`, `table()`
@@ -36,12 +48,16 @@ Vous apprendrez à utiliser les fonctions suivantes&nbsp;:
 
 Et vous apprendrez aussi à créer vos propres fonctions avec `function()`.
 
+</div>
+
+<div class="boite ico donnees gauche">
+###### Vous utiliserez les données suivantes: {-}
 
 Dans la section [Leçon](#lecon_spatiotemp), vous utiliserez des données vectorielles de trajets de vélo dans la ville de Montréal ainsi que des données matricielles de températures et de précipitations dans le Parc national du Mont-Mégantic.
 
 Dans la section [Exercice](#ex_spatiotemp), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
 
-
+</div>
 
 ## Leçon {#lecon_spatiotemp}
 
@@ -54,6 +70,14 @@ Dans la seconde partie, vous étudierez l'évolution des températures et des pr
 
 
 ### Télécharger les données {#data_mod9}
+
+<div class="boite ico donnees gauche"> 
+
+###### Les données {-} 
+
+<br>
+
+</div>
 
 Les données vectorielles et matricielles utilisées dans ce module peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 9](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module9_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module9_donnees` pour ce module, et dézippez-le. Le dossier comprend quatre fichiers:
 
@@ -1375,7 +1399,7 @@ id
 ```
 <br>
 
-Notez que la fonction `apply()` calcule le maximum pour chacune des couches contenues dans `maxt_megantic`, alors que le fonction `which.max()` détermine l'indice la couche qui contient le maximum de ces maxima. 
+Notez que la fonction `apply()` calcule le maximum pour chacune des couches contenues dans `maxt_megantic`, alors que le fonction `which.max()` détermine l'indice de la couche qui contient le maximum de ces maxima. 
 
 C'est donc la couche `r id` qui contient ce maximum.
 

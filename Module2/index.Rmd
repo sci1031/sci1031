@@ -4,15 +4,21 @@
 
 Ce module s’intéresse à la façon dont nous représentons les phénomènes spatiaux se déroulant à la surface de la Terre par des données spatiales. Les objectifs principaux sont de connaître les propriétés des deux types de modèle de données spatiales, les données vectorielles et les données matricielles. 
 
-À la fin de ce module vous saurez :
+<br>
 
--	Définir les propriétés principales des données vectorielles.
--	Reconnaître des formats de fichier de données vectorielles.
--	Définir les propriétés principales des données matricielles.
--	Reconnaître des formats de fichier de données matricielles.
--	Comprendre ce qu’est une structure en couches.
 
- 
+###### À la fin de ce module vous saurez: {-}
+
+---
+
+ -	Définir les propriétés principales des données vectorielles.
+ -	Reconnaître des formats de fichier de données vectorielles.
+ -	Définir les propriétés principales des données matricielles.
+ -	Reconnaître des formats de fichier de données matricielles.
+ -	Comprendre ce qu’est une structure en couches.
+
+---
+
 
 La section [exercice](#ex_base) est divisée en deux parties. 
 Dans un premier temps, vous réaliserez une auto-évaluation pour vérifier votre acquisition des connaissances enseignées dans ce module. 

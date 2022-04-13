@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="50" viewBox="0 0 60 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fac330;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2.79px;
+      }
+    </style>
+  </defs>
+  <title>SCI1031_Icones</title>
+  <g id="Bibliothèque">
+    <g>
+      <rect class="cls-1" x="5.95" y="0.04" width="54.01" height="44.12" rx="3.35"/>
+      <rect class="cls-2" x="1.45" y="4.22" width="54.19" height="44.4" rx="3.46"/>
+      <g>
+        <rect x="12.91" y="10.89" width="4.24" height="27.83" rx="2.02"/>
+        <rect x="31.6" y="10.95" width="4.24" height="27.83" rx="2.02"/>
+        <path d="M21,38.66l-.18,0a2,2,0,0,1-1.46-2.45L25.27,13.1a2,2,0,0,1,2.47-1.45l.18,0a2,2,0,0,1,1.46,2.46L23.47,37.2A2,2,0,0,1,21,38.66Z"/>
+        <path d="M46.42,38.7l.19,0a2,2,0,0,0,1.46-2.46L42.15,13.15a2,2,0,0,0-2.46-1.46l-.18.05A2,2,0,0,0,38,14.19L44,37.25A2,2,0,0,0,46.42,38.7Z"/>
+      </g>
+    </g>
+  </g>
+</svg>
