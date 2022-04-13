@@ -319,7 +319,7 @@ Dans cette section, vous réviserez les commandes de base en `R`^[Le contenu de 
 
 #### Installer R 
 
-Nous possédez déjà `R` sur votre ordinateur? Nous recommandons tout de même d'installer la plus récente version afin d'avoir la version la plus à jour pour être compatible avec les bibliothèques qui seront utilisées dans le cours.
+Nous possédez déjà R sur votre ordinateur? Nous recommandons tout de même d'installer la plus récente version afin d'avoir la version la plus à jour pour être compatible avec les bibliothèques qui seront utilisées dans le cours.
 
 ####### Windows
 
@@ -336,7 +336,7 @@ Nous possédez déjà `R` sur votre ordinateur? Nous recommandons tout de même 
 
 #### Installer RStudio
 
-####### Vous avez déjà RStudio?
+###### Vous avez déjà RStudio? {-}
 
 Assurez-vous d'avoir la dernière version:
 
@@ -344,18 +344,112 @@ Assurez-vous d'avoir la dernière version:
 * Sélectionner l'option **Check for Updates**
 * Si vous n'avez pas la version la plus à jour, celle-ci vous sera proposée. 
 
-####### Vous n'avez pas RStudio?
+###### Vous n'avez pas RStudio? {-}
 
 * Aller sur la page de téléchargement de [RStudio](https://www.rstudio.com/products/rstudio/download/#download)
 * Télécharger et exécuter le fichier qui correspond à votre système d'opération, c'est-à-dire `*.exe` pour Windows et `*.dmg` pour macOS.
 
-####### Vous utilisez une autre plateforme que RStudio
+###### Vous utilisez une autre plateforme que RStudio ? {-}
 
 Si vous préférez *vraiment* un autre environnement de développement que RStudio, vous pouvez bien sûr l'utiliser. Aucun apprentissage dans ce cours est dépendant de RStudio. Toutefois, si, en cours de route, vous avez des questions liées à l'environnement que vous avez choisi d'utiliser, il n'est pas certain que la personne qui vous encadre sera en mesure de vous aider. 
 
+
+#### Apprivoiser RStudio
+
+Lorsque vous ouvrez RStudio pour la première fois, vous devriez voir une interface semblable à celle-ci (peut varier selon votre système d'exploitation):
+
+<br>
+```{r rstudio, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio.png', fig.cap="Interface RStudio. Source : @Douglas_IntroR_2022", out.width = '50%'}
+knitr::include_graphics('Module1/images/1_rstudio.png')
+```
+<br>
+
+La grande fenête à gauche est la **console** R. Vous pouvez y écrire des commandes R à éxécuter.
+
+La fenêtre supérieure à droite contient les onglets **Environment / History / Connections**:
+
+* Environment: contient les objets que vous avez créé ou chargez dans votre session R.
+* History: contient la liste des commandes que vous avez entrées dans la console `R. Cette fenêtre peut être utile pour retrouver des commandes que vous avez précédemment utilisées.
+* Connections: permet de se connecter à d'autres sources de données. 
+
+La fenêtre inférieur droite contient les onglets **Files / Plots / Packages / Help / Viewer**:
+
+* Files: contient la liste de tous les fichiers et les répertoires qui sont dans votre répertoire de travail (*working directory*) sur votre ordinateur.
+
+* Plots: contient toutes les figures crées au cours de votre session R. Vous pouvez agrandir la figure (*Zoom*) et la sauvegarder dans le format de votre choix (*Export*).
+
+* Packages: contient la liste de toutes les bibliothèques installées sur votre ordinateur. À partir de cet onglet vous pouvez installer des nouvelles bibliothèques ou mettre à jour vos bibliothèques actuelles en cliquant sur les boutons *Install* et *Update* respectivement.
+
+* Help: présente la documentation R pour une fonction recherchée.
+
+* Viewer: affiche des graphiques web générés par certaines bibliothèques.
+
+
+Vous pouvez personnaliser votre inferface RStudio de multiples façons. Par exemple aller dans le menu déroulant *Tool* au haut de l'écran et sélectionner *Global Options/Appearance* pour changer les couleurs de l'écran et du lettrage. Vous n'allez quand même pas garder cet écran blanc et cette écriture monochrome pendant les 15 semaines de cours ?!
+
+
+#### Créer un fichier R
+
+Bien qu'il soit possible d'utiliser R en rédigeant des commandes dans la console, une meilleure habitude de travail consiste à créer un fichier R (c-à-d un fichier d'extension `*.R`) qui contient une série de commandes successives à exécuter. 
+
+Un fichier R permet de conserver les commandes. Ainsi, vous pourrez répéter les commandes d'une session à une autre sans devoir les retaper dans la console. Un tel fichier permet également d'ajouter des commentaires pour préciser les opérations réalisées. Finalement, un fichier R permet de partager facilement son code avec autrui.
+
+Au cours de votre cheminement, si vous avez des questions ou des problèmes avec du code R, joignez un fichier R dans un courriel à la personne qui vous encadre. Il sera ainsi beaucoup plus facile de vous aider. 
+
+Pour créer un fichier R, aller dans le menu déroulant *File* au haut de l'écran et sélectionner *New File/R Script*:
+
+<br>
+```{r rscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_new_script.png', fig.cap="Créer un fichier R. Source : @Douglas_IntroR_2022", out.width = '50%'}
+knitr::include_graphics('Module1/images/1_new_script.png')
+```
+<br>
+
+Remarquer qu'une nouvelle fenêtre s'ouvre en haut à gauche de l'écran (appelée le panneau **Source**) et que la console se trouve maintenant en bas à gauche. 
+
+Pour exécuter une ligne de code dans un fichier R, vous n'avez qu'à placer votre curseur sur la ligne désirée et cliquer sur le bouton *Run*. Le résultat apparaitra dans la console. Vous pouvez également utiliser le raccourci *ctrl + enter* sous Windows ou *cmd + enter* sous Mac au lieu de cliquer sur *Run*. Pour exécuter l'ensemble des commandes contenues dans un fichier, cliquer sur *Source*.
+
+<br>
+```{r runscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio_run.png', fig.cap="Utiliser un fichier R. Source : @Douglas_IntroR_2022", out.width = '50%'}
+knitr::include_graphics('Module1/images/1_rstudio_run.png')
+```
+<br>
+
+Sauvegarder un fichier R en lui donnant un nom qui a du sens. Ce nom doit être **sans accent** et **sans espace**
+
+
 #### Les bibliothèques
 
-On appelle Les bibliothèques
+Une bibliothèque R, appellée "package" en anglais, est un ensemble de fonctions spécialisées créées par des experts ou des expertes dans un champ d'analyse précis. 
+
+Pour **installer** une bibliothèque dans R à même la console, il faut utiliser la fonction `install.packages()`. Par exemple, la ligne de commande suivante installe la bibliothèque `mapview`:
+
+```{r, eval = FALSE, echo = TRUE}
+install.packages("mapview")
+```
+<br>
+
+Pour **charger** une bibliothèque dans une session R, il faut utiliser la fonction `library()`. Par exemple, vous pouvez écrire la commande suivante dans la console ou encore dans un fichier R:
+
+```{r, eval = FALSE, echo = TRUE}
+library(mapview)
+```
+
+Il faut charger une bibliothèque à toute nouvelle session R.
+<br>
+
+#### Le répertoire de travail 
+
+Le répertoire de travail (*working directory* en anglais) est le dossier par défaut dans lequel R cherche les fichiers que vous téléchargerez au cours de votre session et inscrit tout fichier que vous sauvegarderez. 
+
+Pour choisir un répertoire, aller dans le menu déroulant *Session* au haut de l'écran et sélectionner *Set Working Directory/Choose Directory ...*. 
+
+Pour connaitre le répertoire de travail courrant, entrer la commande `getwd()` dans la console. Pour choisir un autre répertoire, il s'agit d'utiliser le commande `setwd()` en identifiant le chemin (*path*) vers le répertoire désiré:
+
+```{r, eval = FALSE, echo = TRUE}
+setwd()
+```
+
+Relative path
 
 ### Intro à R
 
