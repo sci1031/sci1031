@@ -182,7 +182,7 @@ polygone
 Noter que pour créer un polygone la première extrémité doit être identique à la dernière. 
 <br>
 
-```{r plotgeo, eval = TRUE, echo = FALSE, fig.height=10, fig.width = 10,fig.show='hold',fig.align='center', fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
+```{r plotgeo, eval = TRUE, echo = FALSE, fig.height=10, fig.width = 10,fig.show='hold',fig.align='center', dev = 'png', fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
 
 m_multi_point <- mapview(multi_point)
 m_ligne <- mapview(ligne)
@@ -190,7 +190,7 @@ m_polygone <-mapview(polygone)
 leafsync::latticeView(m_multi_point, m_ligne, m_polygone, ncol=3)
 ```
 
-```{r plotgeo2, eval = FALSE, echo = FALSE, fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
+```{r plotgeo2, eval = FALSE, echo = FALSE, dev = 'png', fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
 M_df <- as.data.frame(M)
 M_points <- st_as_sf(M_df, coords = c("x","y"))
 ligne <- st_linestring(M)
@@ -575,7 +575,7 @@ library(mapview)
 
 Dans un premier temps, visualisons les limites terrestres de la ville de Montréal.
 
-```{r plot-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
+```{r plot-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png'}
 mapview(limites_terrestres, col.regions = "white")
 ```
 <br>
@@ -589,7 +589,7 @@ Remarquez aussi la légende dans le coin supérieur gauche de la carte créée e
 
 Dans un deuxième temps, visualisons les pistes cyclables. Utilisons toujours la fonction `mapview()` et demandons que la couleur du trait des lignes soit verte foncée. Pour définir la couleur des lignes, nous utilisons l'argument `color` et non l'argument `col.regions`.
 
-```{r plot-velo, warning = FALSE, message = TRUE, fig.cap = "Pistes cyclables sur l'île de Montréal"}
+```{r plot-velo, warning = FALSE, message = TRUE, dev = 'png', fig.cap = "Pistes cyclables sur l'île de Montréal"}
 mapview(pistes_cyclables, color = "darkgreen")
 ```
 
@@ -604,7 +604,7 @@ Dans la carte des pistes cyclables, remarquez la légende apparue dans le coin s
 
 
 Finalement, visualisons les accidents de la route impliquant des bicyclettes.
-```{r plot-accidents, warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Accidents de la route avec cyclistes sur l'île de Montréal"}
+```{r plot-accidents, warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.cap="Accidents de la route avec cyclistes sur l'île de Montréal"}
 mapview(accidents_velo, color = "red", col.regions = "red", cex = 1, legend = NULL)
 ```
 
@@ -620,7 +620,7 @@ L'argument `cex`, quant à lui, indique la taille des cercles, la taille par dé
 #### Visualiser des données vectorielles par attribut {-}
 
 Lorsque nous avons affiché les métadonnées du *shapefile* `pistes_cyclables`, vous avez peut-être observé que ce dernier comprenait l'attribut `TYPE_VOIE` qui caractérise le type de pistes cyclables de chaque multiligne. Affichons les métadonnées à nouveau:
-```{r plot-voie0, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, attr.output='style="max-height: 200px;"'}
+```{r plot-voie0, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', attr.output='style="max-height: 200px;"'}
 pistes_cyclables
 ```
 <br>
@@ -638,7 +638,7 @@ Si vous ne connaissez pas la distinction entre ces types d'aménagement cyclable
 
 Dans la figure précédente illustrant les pistes cyclables, celles-ci étaient illustrées en vert peu importe leur type. Nous voulons maintenant représenter les six types de voie cyclable par six couleurs différentes. Un des avantages de la fonction `mapview()` est qu'elle est capable d'emblée de distinguer les différentes valeurs que peuvent prendre un attribut. Ainsi, nous pouvons simplement demander:
 
-```{r plot-voie2, warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Bandes cyclables sur l'île de Montréal"}
+```{r plot-voie2, warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.cap="Bandes cyclables sur l'île de Montréal"}
 mapview(pistes_cyclables)
 ```
 
@@ -656,7 +656,7 @@ image(1:n, 1, as.matrix(1:n), col=viridis(n), axes= FALSE, xlab = "", ylab = "",
 ```
 -->
 
-```{r  plot-viridis, echo = FALSE,  warning = FALSE, message = FALSE, eval = TRUE, fig.height=0.2, fig.width = 10, fig.show='hold', fig.align='center', fig.cap="Palette viridis contenant 20 couleurs différentes"}
+```{r  plot-viridis, echo = FALSE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', dev = 'png', fig.height=0.2, fig.width = 10, fig.show='hold', fig.align='center', fig.cap="Palette viridis contenant 20 couleurs différentes"}
 library(viridis)
 library(munsell)
 library(colorspace)
@@ -685,7 +685,7 @@ couleurs_voie <- c("black","goldenrod", "cornflowerblue", "darkcyan", "hotpink",
 
 Nous pouvons ajouter cet argument à la fonction `mapview()`:
 
-```{r plot-voie4, echo = TRUE, warning = FALSE, message = FALSE, fig.cap="Types de voie cyclable sur l'île de Montréal"}
+```{r plot-voie4, echo = TRUE, warning = FALSE, message = FALSE, dev = 'png', fig.cap="Types de voie cyclable sur l'île de Montréal"}
 mapview(pistes_cyclables, color=couleurs_voie, layer.name = "Types de pistes cyclables", lwd = 1 )
 ```
 <br>
@@ -701,7 +701,7 @@ Remarquez que nous avons changé le titre de la légende en utilisant l'argument
 
 Nous allons maintenant représenter les données vectorielles `limites terrestres`, `pistes_cyclables` et `accidents_velo` au sein d'une même figure. Il s'agit de définir individuellement chacune des cartes comme un objet `mapview` et de les additionner en utilisant l'opérateur `+`.
 
-```{r plot-all1, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Pistes cyclables et position des accidents routiers impliquant des bicyclettes sur l'île de Montréal"}
+```{r plot-all1, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.cap="Pistes cyclables et position des accidents routiers impliquant des bicyclettes sur l'île de Montréal"}
 map_limites_terrestres <- mapview(limites_terrestres, col.regions = "darkgray", legend = NULL)
 map_pistes_cyclables <- mapview(pistes_cyclables, color=couleurs_voie, 
                                layer.name = "Types de pistes cyclables", lwd = 1)
@@ -746,7 +746,7 @@ leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
 ```
 -->
 
-```{r plot-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.height=6, fig.width = 10,fig.show='hold',fig.align='center'}
+```{r plot-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.height=6, fig.width = 10,fig.show='hold',fig.align='center'}
 map_mercator <- mapview(limites_terrestres, legend = FALSE, col.regions = "red")
 map_robinson <- mapview(limites_terrestres_rob, legend = FALSE)
 Map <- leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
@@ -760,7 +760,7 @@ Map
 Nous remarquons que les deux cartes sont identiques (outre la couleur)! Comment cela est-ce possible sachant que nous venons de transformer la projection ? Ceci s'explique par le fait que la fonction `mapview()` représente par défaut toutes données spatiales dans la projection Pseudo-Mercator (ou Mercator Web), qui est la projection utilisée par l'application *OpenStreetMap*. Ainsi, la fonction `mapview` calcule elle-même le changement de projection avant de représenter des données spatiales. Pour conserver la projection originale il faut utiliser l'argument `native.crs=TRUE`.
 
 Représentons à nouveau les cartes des limites terrestres de la région de Montréal, cette fois en précisant que nous voulons conserver le CRS d'orgine.
-```{r plot-terre3, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.height=6, fig.width = 10,fig.show='hold',fig.align='center', fig.cap="Limites terrestres de l'île de Montréal selon les projections Web Mercartor (gauche), Mercator (centre) et Robinson (droit)"}
+```{r plot-terre3, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.height=6, fig.width = 10,fig.show='hold',fig.align='center', fig.cap="Limites terrestres de l'île de Montréal selon les projections Web Mercartor (gauche), Mercator (centre) et Robinson (droit)"}
 map_web <- mapview(limites_terrestres, col.regions = "red", legend = NULL, layer.name = "Mercator Web")
 map_mercator <- mapview(limites_terrestres, col.regions = "yellow", legend = NULL, layer.name = "Mercator", native.crs=TRUE)
 map_robinson <- mapview(limites_terrestres_rob, legend = NULL, layer.name = "Robinson", native.crs=TRUE)
@@ -847,7 +847,7 @@ Notez le système de coordonnées de référence: le datum WGS84 et la projectio
 Notez aussi que cette couche de la géodatabase possède la même structure que celle d'un *shapefile*.
 
 Nous pouvons visualiser la position des écoles publiques du Québec en utilisant la fonction `mapview()` de la bibliothèque `mapview`.
-```{r plot-ecoles-pub, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques du Québec"}
+```{r plot-ecoles-pub, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.cap="Les écoles publiques du Québec"}
 mapview(ecoles_pub)
 ```
 <br>
@@ -913,7 +913,7 @@ ecoles_pub_Mtl<- ecoles_pub[ecoles_pub$NOM_MUNCP_GDUNO_IMM == "Montréal",]
 Interprétons cette ligne de commande: elle utilise l'opérateur logique `==` pour sélectionner les écoles publiques de la municipalité de Montréal, ainsi que tous les autres attributs au sein de la couche `ecoles_pub`.
 
 Visualisons maintenant ce nouveau *shapefile* en utilisant la fonction `mapview()`.
-```{r plot-ecoles-pub-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques de la ville de Montréal"}
+```{r plot-ecoles-pub-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.cap="Les écoles publiques de la ville de Montréal"}
 map_pub_mtl<-mapview(ecoles_pub_Mtl, cex = 2)
 map_pub_mtl
 ```
@@ -925,13 +925,13 @@ En cliquant sur l'un ou l'autre des points vous obtiendrez l'ensemble des attrib
 
 Nous pouvons également assigner des couleurs aux données vectorielles en fonction des valeurs d'un de ses attributs. Ceci est possible en utilisant l'argument `zcol` de la fonction `mapview()` et en lui assignant de nom de l'attribut que nous désirons illustrer. Utilisons, par exemple, l'attribut "TYPE_CS" qui indique la langue de la commission scolaire.
 
-```{r plot-ecoles-pub-mtl-cs, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques de la ville de Montréal par type de commissions scolaires."}
+```{r plot-ecoles-pub-mtl-cs, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.cap="Les écoles publiques de la ville de Montréal par type de commissions scolaires."}
 mapview(ecoles_pub_Mtl, zcol = "TYPE_CS", cex = 2, layer.name = 'Commissions scolaires')
 ```
 <br>
 
 De façon similaire, nous aurions pu représenter les écoles de l'île de Montréal selon le niveau d'enseignement qu'on y dispense. Cette information est donnée par l'attribut "ORDRE_ENS".
-```{r plot-ecoles-pub-mtl-ens, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Les écoles publiques de la ville de Montréal selon le niveau d'enseignement."}
+```{r plot-ecoles-pub-mtl-ens, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.cap="Les écoles publiques de la ville de Montréal selon le niveau d'enseignement."}
 mapview(ecoles_pub_Mtl, zcol = "ORDRE_ENS", cex = 2, layer.name = 'Enseignement')
 ```
 
@@ -971,7 +971,7 @@ univ_Mtl <- univ[univ$NOM_MUNCP == "Montréal",]
 
 Nous pouvons visualiser chacun de ces nouveaux *shapefile* individuellement en utilisant la fonction `mapview()`, mais plus intéressant encore est de les visualiser ensemble au sein d'une même carte. Pour se faire nous créons d'abord des cartes individuelles.
 
-```{r plot-ecoles-each-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
+```{r plot-ecoles-each-mtl, echo = TRUE,  warning = FALSE, message = FALSE, dev = 'png', eval = TRUE}
 map_priv_mtl <- mapview(ecoles_priv_Mtl, color = "red", col.regions = "red", cex = 2)
 map_college_mtl <- mapview(college_Mtl, color = "green", col.regions = "green", cex = 4)
 map_univ_mtl <- mapview(univ_Mtl, color = "orange", col.regions = "orange", cex = 6)
@@ -979,7 +979,7 @@ map_univ_mtl <- mapview(univ_Mtl, color = "orange", col.regions = "orange", cex 
 <br>
 
 Remarquez que nous utilisons différentes tailles de points et différentes couleurs pour bien différencier le type d'institution dans la carte qui les combinera. La couleur du contour du point est donnée par l'argument `color` et celle de l'intérieur du point par l'argument `col.regions`. Nous combinons toutes les couches par une simple addition des cartes individuelles
-```{r plot-ecoles-all-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, fig.cap="Institutions d'enseignement à Montréal"}
+```{r plot-ecoles-all-mtl, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.cap="Institutions d'enseignement à Montréal"}
 map_pub_mtl + map_priv_mtl + map_college_mtl + map_univ_mtl
 ```
 <br>
@@ -1028,7 +1028,7 @@ polygone
 
 Visualiser le polygone pour confirmer votre réponse:
 
-```{r mappoly, comment = FALSE}
+```{r mappoly, dev = 'png', comment = FALSE}
 mapview(polygone)
 ```
 
@@ -1132,7 +1132,7 @@ lignes_sf
 
 Utiliser la fonction `mapview()` et spécifier que l'argument `z` correspond à l'attribut "nom" de l'objet `lignes_sf`.
 
-```{r maplignes, comment = FALSE}
+```{r maplignes, dev = 'png', comment = FALSE}
 mapview(lignes_sf, z="nom", layer.name = "Nom des lignes")
 ```
 
@@ -1278,7 +1278,7 @@ st_crs(nz_lcc)$proj4string
 <p>
 
 
-```{r mapnz, comment = FALSE}
+```{r mapnz, dev = 'png', comment = FALSE}
 mapview(nz, zcol = "Name", layer.name = "Régions")
 ```
 <br>
@@ -1327,7 +1327,7 @@ nz_capitales_points <- st_as_sf(x = nz_capitales,
 
 Utiliser la fonction `mapview()` pour visualiser les polygones des régions et les points correspondants aux capitales de ces régions.
 
-```{r mapnzcap, comment=FALSE}
+```{r mapnzcap, dev = 'png', comment=FALSE}
 mapview(nz, col.regions = "blue", legend = FALSE) + mapview(nz_capitales_points)
 ```
 
