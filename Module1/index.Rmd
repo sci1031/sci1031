@@ -321,14 +321,14 @@ Dans cette section, vous réviserez les commandes de base en `R`^[Le contenu de 
 
 Nous possédez déjà R sur votre ordinateur? Nous recommandons tout de même d'installer la plus récente version afin d'avoir la version la plus à jour pour être compatible avec les bibliothèques qui seront utilisées dans le cours.
 
-####### Windows
+####### Windows {-}
 
 * Aller sur le site [CRAN](https://cran.r-project.org/) et cliquer sur le lien **Download R for Windows**
 * Cliquer maintenant sur **install R for the first time**
 * Cliquer sur **Download R (numéro de la version) for Windows** pour télécharger le fichier `*.exe`
 * Exécuter le fichier `*.exe`
 
-####### MacOS 
+####### MacOS {-}
 
 * Aller sur le site [CRAN](https://cran.r-project.org/) et cliquer sur le lien **Download R for macOS**
 * Cliquer sur le lien compatible avec votre système d'opération pour télécharger le fichier `*.pkg`
@@ -433,27 +433,96 @@ Pour **charger** une bibliothèque dans une session R, il faut utiliser la fonct
 ```{r, eval = FALSE, echo = TRUE}
 library(mapview)
 ```
+<br>
 
 Il faut charger une bibliothèque à toute nouvelle session R.
 <br>
 
 #### Le répertoire de travail 
 
-Le répertoire de travail (*working directory* en anglais) est le dossier par défaut dans lequel R cherche les fichiers que vous téléchargerez au cours de votre session et inscrit tout fichier que vous sauvegarderez. 
+Le répertoire de travail (*working directory* en anglais) est le dossier par défaut dans lequel R cherche les fichiers que vous téléchargerez au cours de votre session et dans lequel R inscrit tout fichier que vous sauvegarderez. 
 
 Pour choisir un répertoire, aller dans le menu déroulant *Session* au haut de l'écran et sélectionner *Set Working Directory/Choose Directory ...*. 
 
 Pour connaitre le répertoire de travail courrant, entrer la commande `getwd()` dans la console. Pour choisir un autre répertoire, il s'agit d'utiliser le commande `setwd()` en identifiant le chemin (*path*) vers le répertoire désiré:
 
 ```{r, eval = FALSE, echo = TRUE}
-setwd()
+setwd("C:/Users/Elise/TELUQ/SCI1031/Module4/Module4_Donnees")
 ```
 
-Relative path
+<br>
+
+Vous pouvez ainsi écrire cette ligne de commande au début d'un fichier R pour préciser à R le répertoire de travail auquel le code contenu dans le fichier se rapporte.
+
+Toutefois, ce chemin est *absolu*. C'est-à-dire qu'il est propre à votre ordinateur seulement et à la façon dont vous avez structuré vos dossiers. Dans la perspective où vous serez amené à partager des fichiers de code R, il est préférable d'utiliser un chemin *relatif*. C'est-à-dire un chemin qui pointe vers un répertoire commun aux personnes qui utiliseront le même code. 
+
+Dans le cours, les lignes de code vous invitant à lire des fichiers de données utiliseront toujours un chemin relatif. Par exemple:
+
+```{r, eval = FALSE, echo = TRUE}
+donnees <- read.table("/Module4_Donnees/nz_capitales.csv", header = TRUE, sep = ",")
+```
+<br>
+
+Ce sera donc à vous de bien régler votre répertoire de travail afin que R trouve le dossier commun (`Module4_Donnees` pour le présent exemple).
+
 
 ### Intro à R
 
+#### Calculateur
 
+L'utilisation la plus simple qu'on peut faire de R est celle d'un calculateur. 
+R exécute des opérations arithmétiques et une foule de fonctions mathématiques. Par exemple,
+
+```{r}
+# addition
+2 + 2
+
+# multiplication
+2 * 8
+
+# R suit les conventions pour la priorité des opérations
+2 * 8 - 2
+2 * (8 - 2)
+
+# Le logarithme en base 2
+log(2)
+
+# Le logarithme en base 10
+log10(2)
+
+# Le carré ou autres puissances
+2^2
+3^8
+
+# La racine carrée
+sqrt(16)
+
+# pi
+pi
+```
+<br>
+
+#### Les objets
+
+Un objet en R est n'importe quelle entrée à laquelle on assigne un nom. Par exemple,
+
+```{r}
+mon_objet <- 1
+```
+
+
+#### Les types de données
+
+#### Les structures de données
+###### Les scalaires et les vecteurs {-}
+###### Les matrices et les arrays {-}
+###### Les listes {-}
+###### Les data frames {-}
+
+#### Importer et exporter des données
+
+###### Importer des données {-}
+###### Exporter des données {-}
 
 
 ### Partie 1 {#ex_intro_partie1}
