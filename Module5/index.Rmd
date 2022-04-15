@@ -156,7 +156,7 @@ crs(M)
 Il existe plusieurs fonctions permettant de visualiser les *rasters*.
 Nous pouvons simplement utiliser la fonction `plot()`.
 
-```{r, fig.dim = c(5, 5), fig.align='center', fig.cap="Visualisation du raster `M` avec la fonction `plot()`" }
+```{r, fig.dim = c(5, 5), fig.align='center', dev = 'png', fig.cap="Visualisation du raster `M` avec la fonction `plot()`" }
 plot(M)
 ```
 <br>
@@ -170,7 +170,7 @@ mapview(M)
 ```
 
 
-```{r,  echo = FALSE, eval = TRUE, warning = FALSE, fig.dim = c(5, 5), fig.cap="Visualisation du raster `M` avec la fonction `mapview()`"}
+```{r,  echo = FALSE, eval = TRUE, warning = FALSE, dev = 'png', fig.dim = c(5, 5), fig.cap="Visualisation du raster `M` avec la fonction `mapview()`"}
 library(mapview)
 m = mapview(M, homebutton = FALSE)
 m@map
@@ -214,7 +214,7 @@ M_logique
 Visualisons maintenant ce *raster* de type logique:
 
 
-```{r, echo = FALSE, eval = TRUE, warning = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, dev = 'png', fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
 #mp_ml <- mapview(M_logique)
 #mp_ml@map
 M_logique_numeric <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, 
@@ -280,7 +280,7 @@ Visualisons maintenant ce *raster* de type facteur:
 mapview(M_factor)
 ```
 
-```{r, warning = FALSE, echo = FALSE, fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
+```{r, warning = FALSE, echo = FALSE, dev = 'png', fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type facteur"}
 m = mapview(M_factor)
 m@map
 ```
@@ -435,7 +435,7 @@ cellStats(G, sum, na.rm = TRUE)
 <br>
 
 Nous pouvons également visualiser la distribution des valeurs contenues dans un *raster* en utilisant les fonctions `R` usuelles telles que `hist()` ou `boxplot`. Par exemple,
-```{r, fig.dim = c(5, 5), fig.align='center', fig.cap="Histogramme de la distribution des valeurs dans le raster G"}
+```{r, fig.dim = c(5, 5), fig.align='center', dev = 'png', fig.cap="Histogramme de la distribution des valeurs dans le raster G"}
 hist(G,
      main = "",
      xlab = "Valeurs",
@@ -446,7 +446,7 @@ hist(G,
 
 Ou encore,
 
-```{r, fig.dim = c(4, 4), fig.align='center', fig.cap="Valeur moyenne et intervalle de confiance du raster G"}
+```{r, fig.dim = c(4, 4), fig.align='center', dev = 'png', fig.cap="Valeur moyenne et intervalle de confiance du raster G"}
 boxplot(G,
         main = "",
         ylab = "Valeurs",
@@ -553,7 +553,7 @@ Vous remarquerez que l’exécution de la fonction `summary()` peut prendre plus
 
 Nous pouvons également visualiser l'histogramme des valeurs de température de surface.
 
-```{r, fig.dim = c(6, 5), fig.align='center', fig.cap = "Distribution des températures de surface dans la ville de Québec"}
+```{r, fig.dim = c(6, 5), fig.align='center', dev = 'png', fig.cap = "Distribution des températures de surface dans la ville de Québec"}
 hist(getValues(T_vdq),
      breaks = 10,
      main = "",
@@ -573,14 +573,14 @@ Nous allons visualiser la carte des températures de surface de la région de la
 Afin de situer plus facilement la région illustrée sur le territoire du Québec, nous allons demander d'ajouter la carte d'*OpenStreetMap*^[[OpenStreetMap](https://www.openstreetmap.org/) est un outil collaboratif et libre d'accès de cartographie en ligne.] comme carte de fonds.
 
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = TRUE, dev = 'png'}
 mapview(T_vdq,
         map.types = "OpenStreetMap",
         legend = TRUE,
         layer.name = 'ICU')
 ```
 
-```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec" }
+```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE, dev = 'png', fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec" }
 m <- mapview(T_vdq,
         map.types = "OpenStreetMap",
         legend = TRUE,
@@ -593,7 +593,7 @@ L'échelle de la légende indique des niveaux de température. Le niveau 1 corre
 
 Vous remarquerez que la résolution de cette carte n'est pas parfaite. En effet, par défaut, la fonction `mapview()` appliquée à un raster utilise 500 000 pixels. Pour que l'ensemble des pixels soient pris en compte, nous devons le préciser en définissant l'option `maxpixels`.
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = TRUE, dev = 'png'}
 mapview(T_vdq, maxpixels = ncell(T_vdq),
         map.types = "OpenStreetMap",
         legend = TRUE,
@@ -601,7 +601,7 @@ mapview(T_vdq, maxpixels = ncell(T_vdq),
 ```
 
 
-```{r, eval = TRUE, echo = FALSE, warning = FALSE, fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec (visualisation de tous les pixels)"  }
+```{r, eval = TRUE, echo = FALSE, warning = FALSE, dev = 'png', fig.dim = c(7, 7), fig.cap="Carte de la température de surface dans la ville de Québec (visualisation de tous les pixels)"  }
 m <- mapview(T_vdq, maxpixels = ncell(T_vdq),
         map.types = "OpenStreetMap",
         legend = TRUE,
@@ -618,7 +618,7 @@ Naturellement, le temps nécessaire pour générer la carte est alors plus long.
 
 Nous voulons maintenant nous concentrer sur une petite section de la carte de la région de la ville de Québec. Nous pouvons le faire en spécifiant les lignes et les colonnes qui nous intéressent dans le *raster*. Par exemple, choisissons une région carrée de 100 x 100 cellules dans le quartier Sainte-Foy.
 
-```{r map_T, eval = FALSE, echo = TRUE}
+```{r map_T, eval = FALSE, echo = TRUE, dev = 'png'}
 T <- T_vdq[1051:1150, 851:950, drop = FALSE]
 
 mapview(T,  map.types = "OpenStreetMap")
@@ -626,7 +626,7 @@ mapview(T,  map.types = "OpenStreetMap")
 
 
 
-```{r, eval = TRUE, echo = FALSE, warnings = FALSE, fig.cap="Carte de la température de surface dans le secteur de Sainte-Foy"}
+```{r, eval = TRUE, echo = FALSE, warnings = FALSE, dev = 'png', fig.cap="Carte de la température de surface dans le secteur de Sainte-Foy"}
 T <- T_vdq[1051:1150, 851:950, drop=FALSE]
 
 m = mapview(T,  map.types = "OpenStreetMap", homebutton = FALSE)
@@ -648,7 +648,7 @@ Pour augmenter la résolution d'un *raster* nous utilisons la fonction `aggregat
 
 Quelle valeur prendra alors une cellule de plus grande résolution? Par défaut, la cellule aura comme valeur la moyenne des valeurs des cellules groupées par l'agrégation. Par ailleurs, il est aussi possible de specifier d'autres fonctions pour calculer la valeur des cellules de plus grande résolution en utilisant l'option `fun`. Par exemple, nous pourrions choisir que la valeur agrégée corresponde à la valeur maximum des valeurs des cellules groupées.
 
-```{r, fig.dim = c(8, 8), fig.cap = "Cartes de différentes résolutions", eval = TRUE}
+```{r, fig.dim = c(8, 8), dev = 'png', fig.cap = "Cartes de différentes résolutions", eval = TRUE}
 T_fact4_moy <- aggregate(T, fact = 4)
 T_fact4_max <- aggregate(T, fact = 4, fun = 'max')
 T_fact8_moy <- aggregate(T, fact = 8)
@@ -726,7 +726,7 @@ T_mtm7 <- projectRaster(T_vdq, crs = proj_mtm7)
 
 Comparons les deux cartes utilisant des projections différentes:
 
-```{r, fig.cap = "Rasters de projections Québec Lambert et MTM"}
+```{r, fig.cap = "Rasters de projections Québec Lambert et MTM", dev = 'png'}
 par(mfrow = c(1,2))
 plot(T_vdq, main = "Québec Lambert", legend = FALSE)
 plot(T_mtm7, main = "MTM fuseau 7")
@@ -735,7 +735,7 @@ plot(T_mtm7, main = "MTM fuseau 7")
 
 Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
 
-```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM"}
+```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM", dev = 'png'}
 T_crop <- crop(T_vdq,extent(T_vdq,951,1150, 751,950))
 T_crop_mtm7 <- projectRaster(T_crop, crs = proj_mtm7)
 par(mfrow = c(1,2))
@@ -896,7 +896,7 @@ Nous avons ainsi créé un *raster* de classe `RasterStack`.
 
 Visualisons individuellement les bandes d'un *raster* multi-bande en utilisant la fonction `mapview()` de la bibliothèque `mapview`.
 
-```{r latticeView, collapse = TRUE, warning = FALSE, fig.height=10, fig.width = 10,fig.show='hold',fig.align='center', fig.cap="Carte pour chacune des bandes rouge, verte et bleue"}
+```{r latticeView, collapse = TRUE, warning = FALSE, fig.height=10, fig.width = 10,fig.show='hold',fig.align='center', fig.cap="Carte pour chacune des bandes rouge, verte et bleue", dev = 'png'}
 # Définissons une palette de gris de 256 tons différents
 mapviewOptions(raster.palette = gray.colors(256))
 
@@ -912,7 +912,7 @@ leafsync::latticeView(Map_SR, Map_SG, Map_SB, ncol = 3)
 
 Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `viewRGB()` de la librarie `mapview`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu.
 
-```{r viewRG, fig.cap = "Carte combinant les trois bandes de couleurs", warning = FALSE, message = FALSE}
+```{r viewRG, fig.cap = "Carte combinant les trois bandes de couleurs", warning = FALSE, message = FALSE, dev = 'png'}
 viewRGB(S_mult, r = 1, g = 2, b = 3)
 ```
 <br>
