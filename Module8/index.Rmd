@@ -156,7 +156,7 @@ dem <- raster("Module8/Module8_donnees/DEM.tif")
 
 Nous visualisons ensuite les deux objets spatiaux afin de valider l'importation en utilisant la fonction `mapview()`.
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, dev = 'png'}
 mapview(dem) + mapview(parcs, zcol = "TRQ_NM_")
 ```
 <br>
@@ -267,14 +267,14 @@ Notez que l'utilisation par défaut de la fonction `reclassify()` inclue la born
 
 Visualisons la nouvelle classification du domaine de valeurs du raster d'élévation `dem` à l'aide de la fonction `mapview()`:
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, dev = 'png'}
 mapview(nouvelles_classes_dem)
 ```
 <br>
 
 Notez que nous pouvons aussi utiliser `NA` pour exclure certaines cellules:
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, dev = 'png'}
 nouvelles_classes2 <- matrix(c(0, 250, NA, 250, 500, 2, 500, 1200, 3), nrow = 3, ncol = 3, byrow = TRUE)
 mapview(reclassify(dem, nouvelles_classes2))
 ```
@@ -316,7 +316,7 @@ dem_cr <- crop(dem, ext)
 
 La sortie est un *raster* (que nous appelons `dem_cr`) qui est recadré selon `ext`. Les cellules qui ne sont pas dans ce rectangle sont exclues.
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, dev = 'png'}
 mapview(dem_cr)
 ```
 <br>
@@ -333,7 +333,7 @@ extent(parcs[1,])
 
 Avant d'utiliser la fonction `crop()` nous avons besoin de re-projeter le *raster* `dem` dans le SCR des données vectorielles `parcs` (notez que nous pourrions aussi faire l'inverse). L'opération qui suit utilise de façon implicite l'étendue spatiale de `parcs[1, ]` pour rogner `dem_lcc`.
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, dev = 'png'}
 dem_lcc <- projectRaster(dem, crs = crs(parcs))
 dem_cr_p <- crop(dem_lcc, parcs[1, ])
 mapview(dem_cr_p)
@@ -367,7 +367,7 @@ pol <- st_as_sf(
 
 Notons que nous avons utilisé le même SCR que `dem`. Regardons ce à quoi ressemble le polygone que nous venons de créer.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, dev = 'png'}
 mapview(dem)+mapview(pol)
 ```
 <br>
@@ -382,7 +382,7 @@ mapview(dem_ma)
 
 La fonction `mask()` est dotée d'un argument `inverse` qui, s'il prend la valeur `TRUE`, permet de sélectionner toutes les cellules d'un *raster* qui sont à l'**extérieur** du polygone fourni:
 
-```{r mask_inv, warning = FALSE}
+```{r mask_inv, warning = FALSE, dev = 'png'}
 dem_ma_inv <- mask(dem, pol, inverse = TRUE)
 mapview(dem_ma_inv)
 ```
@@ -462,7 +462,7 @@ J'ai essayé avec no.initial.sync = FALSE, setView(zoom = 7), marche pas.
 --> 
 
 
-```{r merge, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%'}
+```{r merge, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png'}
 library(leaflet)
 library(leafsync)
 
@@ -505,7 +505,7 @@ dem_merge_ordre2 <- merge(dem_ma, dem_cr_plus)
 <br>
 
 
-```{r mergeordre, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%'}
+```{r mergeordre, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png'}
 
 map_ordre1 <- mapview(dem_merge_ordre1, legend = F)
 map_ordre2 <- mapview(dem_merge_ordre2, legend = F)
@@ -532,7 +532,7 @@ dem_mosaic_mean <- mosaic(dem_cr_plus, dem_ma, fun = mean)
 
 
 
-```{r mosaic, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%'}
+```{r mosaic, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png'}
 mapviewOptions(legend.pos="bottomleft", legend.opacity = 0.3)
 
 map_mosaic_min <- mapview(dem_mosaic_min, legend = F)
@@ -607,7 +607,7 @@ Pour les prochaines manipulations, nous utiliserons donc `dem_lcc` et `parcs`.
 
 Nous cherchons ensuite à filtrer les cellules du *raster* d'élévation `dem` pour extraire celles situées à l'intérieur des limites de l'un ou de l'autre des quatre parcs nationaux considérés. Le *shapefile* `parcs` contient justement les polygones déliminant les quatre parcs. Nous pouvons donc appliquer la fonction `mask()` au *raster* `dem` en utilisant directement le *shapefile* `parcs` en second argument. 
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, dev = 'png'}
 dem_parcs <- mask(dem_lcc, parcs)
 mapview(dem_parcs)
 ```
@@ -679,7 +679,7 @@ Remarquez que nous avons attribué à ce point le même SRC que celui du *raster
 En superposant, avec `mapview()`, les trois couches d'informations spatiales que nous venons de manipuler, nous pouvons repérer le parc dans lequel se trouve ce point d'élévation maximale. 
 
 
-```{r sommet, fig.cap = "En cliquant sur le polygone du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-Mégantic", warning = FALSE}
+```{r sommet, fig.cap = "En cliquant sur le polygone du parc contenant le point rouge (point d'élévation maximal), il est possible de constater que le point se retrouve dans le Parc national du Mont-Mégantic", warning = FALSE, dev = 'png'}
 map_point <- mapview(dem_parcs) + mapview(parcs, alpha = 0.01) + mapview(sf_point_max,  col.regions = "red")
 map_point@map
 ```
@@ -731,7 +731,7 @@ Nous allons nous placer dans la situation suivante&nbsp;: nous désirons faire u
 
 La figure \@ref(fig:proftopo) donne un exemple de profil topographique pour le sentier de la grande traversée dans le Parc national de la Gaspésie.
 
-```{r proftopo, fig.align = 'left', echo = FALSE, fig.cap = "Exemple de profil topographique: le sentier international des Appalaches [taille réelle](Module8/images/8_Profil_ex.png)", out.width = '100%'}
+```{r proftopo, fig.align = 'left', echo = FALSE, fig.cap = "Exemple de profil topographique: le sentier international des Appalaches [taille réelle](Module8/images/8_Profil_ex.png)", out.width = '100%', dev = 'png'}
 knitr::include_graphics('Module8/images/8_Profil_ex.png')
 ```
 
@@ -775,7 +775,7 @@ chemin_sentiers <- paste(chemin, "/sentiers_sepaq/Sentier_ete_l.shp", sep = "")
 sentiers <- st_read(chemin_parcs)
 ```
 
-```{r, echo = FALSE, warning = FALSE}
+```{r, echo = FALSE, warning = FALSE, dev = 'png'}
 sentiers <- st_read("Module8/data/sentiers_sepaq/Sentier_ete_l.shp")
 #sentiers <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/sentiers_sepaq/Sentier_ete_l.shp")
 mapview(sentiers)
@@ -860,7 +860,7 @@ La deuxième façon est d'utiliser un filtre spatial avec les limites du Parc na
 
 <!-- Je réalise que je n'ai pas montré cette approche de filtre au module 7  -->
 
-```{r sentier_megantic} 
+```{r sentier_megantic, dev = 'png'} 
 sentiers_megantic <- sentiers[parc_megantic, ]
 mapview(sentiers_megantic)
 ```
@@ -901,7 +901,7 @@ sentiers[st_nearest_feature(sf_point_max, sentiers),]
 
 Regardons où ce sentier se situe par rapport aux autres sentiers du parc&nbsp;:
 
-```{r}
+```{r, dev = 'png'}
 mapview(sentiers_megantic) + mapview(sentier_top, color="red")
 ```
 <br>
@@ -917,7 +917,7 @@ rando_sections <- subset(sentiers_megantic, Toponyme1 == "Sentier du Mont-Mégan
 
 Visualisons ensuite ces différentes portions en les colorant selon un identifiant `id`&nbsp;:
 
-```{r}
+```{r, dev = 'png'}
 rando_sections$id <- 1:5
 mapview(rando_sections, zcol = "id")
 ```
@@ -1057,7 +1057,7 @@ dist_parcourue <- cumsum(dist_pts)
 
 Nous pouvons finalement visualiser l'élévation (la deuxième colonne de `topo_elv[[1]][, 2]`) en fonction de la somme cumulée des distances, `dist_parcourue`. Remarquons que le vecteur `dist_parcourue` comprend un élément de moins que le vecteur `topo_elv[[1]][, 2]`. Ceci s'explique par le fait que `dist_pts`, à partir duquel nous calculons `dist_parcourue`, mesure la distance entre les points (c'est à dire des intervalles). Par conséquent, nous ajoutons la distance initiale de 0&nbsp;m au vecteur des distances parcourues.  
 
-```{r profile_topo, fig.width = 9.5}
+```{r profile_topo, fig.width = 9.5, dev = 'png'}
 plot(c(0, dist_parcourue), topo_elv[[1]][, 2], 
   main = "Profil topographique du Sentier du Mont-Mégantic", 
   xlab = "Distance depuis le sommet (en mètre)", 
@@ -1101,11 +1101,11 @@ parc_orford <- subset(parcs, TRQ_NM_== "Parc national du Mont-Orford")
 
 Filtrer le *raster* `dem_lcc` pour ne retenir que les cellules situées à l'intérieure du polygone délimitant les limites du parc du Mont-Orford
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, dev = 'png'}
 dem_orford <- mask(dem_lcc, parc_orford)
 mapview(dem_orford)
 ```
-```{r, warning=FALSE, echo=FALSE}
+```{r, warning=FALSE, echo=FALSE, dev = 'png'}
 dem_orford <- mask(dem_lcc, parc_orford)
 m <- mapview(dem_orford)
 m@map
@@ -1148,10 +1148,10 @@ pt_max_orford <- st_as_sf(coordmax_orford_df,
 
 Visualiser la carte du parc du Mont-Orford ainsi que le point d'élévalion maximale.
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, dev = 'png'}
 mapview(dem_orford) + mapview(pt_max_orford, col.regions="red")
 ```
-```{r, warning=FALSE,echo=FALSE}
+```{r, warning=FALSE,echo=FALSE, dev = 'png'}
 m <- mapview(dem_orford) + mapview(pt_max_orford, col.regions="red")
 m@map
 ```
@@ -1216,10 +1216,10 @@ dem_orford_quantile <- reclassify(dem_orford, classes_orford, rigth = FALSE)
 
 Confirmer visuellement la reclassification en utilisant la fonction `mapview()` 
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, dev = 'png'}
 mapview(dem_orford_quantile)
 ```
-```{r, warning=FALSE, echo=FALSE}
+```{r, warning=FALSE, echo=FALSE, dev = 'png'}
 m <-mapview(dem_orford_quantile)
 m@map
 ```
@@ -1246,10 +1246,10 @@ dem_orford_quantile
 <br>
 
 La classification est maintenant traitée comme une variable catégorique.
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, dev = 'png'}
 mapview(dem_orford_quantile)
 ```
-```{r, warning=FALSE, echo=FALSE}
+```{r, warning=FALSE, echo=FALSE, dev = 'png'}
 m <- mapview(dem_orford_quantile)
 m@map
 ```
@@ -1340,14 +1340,14 @@ pt_max_frontenac <- st_as_sf(coordmax_frontenac_df,
 
 Confirmer vos calculs en visualisant les points trouvés.
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, dev = 'png'}
 mapview(pt_max_orford, col.regions = "red") + 
   mapview(pt_max_megantic, col.regions = "blue") +
   mapview(pt_max_yamaska, col.regions = "green") +
   mapview(pt_max_frontenac, col.regions = "yellow")
 
 ```
-```{r, warning=FALSE, echol=FALSE}
+```{r, warning=FALSE, echol=FALSE, dev = 'png'}
 m <- mapview(pt_max_orford, col.regions = "red") + 
   mapview(pt_max_megantic, col.regions = "blue") +
   mapview(pt_max_yamaska, col.regions = "green") +
@@ -1370,7 +1370,7 @@ tampon_frontenac <- st_buffer(pt_max_frontenac, dist = 10e3)
 
 Filtrer le *raster* `dem_lcc` pour ne retenir que les cellules comprises à l'intérieur des zones tampons grâce à la fonction `mask()`.
 
-```{r}
+```{r, warning = FALSE}
 dem_tampon_orford <- mask(dem_lcc, tampon_orford)
 dem_tampon_megantic <- mask(dem_lcc, tampon_megantic)
 dem_tampon_yasmaka <- mask(dem_lcc, tampon_yamaska)
@@ -1381,7 +1381,7 @@ dem_tampon_frontenac <- mask(dem_lcc, tampon_frontenac)
 
 Combiner les quatre *raster* en un seul en utilisant la fonction `merge()`
 
-```{r}
+```{r, warning = FALSE}
 dem_tampon_max <- merge(dem_tampon_orford, 
                         merge(dem_tampon_megantic,
                               merge(dem_tampon_yasmaka, dem_tampon_frontenac)))
@@ -1393,11 +1393,11 @@ Noter que la fonction `merge()` s'utilise sur deux *rasters* à la fois. Il faut
 
 Visualiser le *raster* final contenant les quatre zones tampons:
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, warning = FALSE}
 mapview(dem_tampon_max)
 ```
 
-```{r, warning=FALSE, echo=FALSE}
+```{r, warning=FALSE, echo=FALSE, warning = FALSE}
 m <- mapview(dem_tampon_max)
 m@map
 ```

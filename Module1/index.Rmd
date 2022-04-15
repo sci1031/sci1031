@@ -312,31 +312,31 @@ Voici quelques bibliothèques importantes que nous utiliserons dans ce cours :
 
 ## Exercice {#ex_intro}
 
-Dans cette section, vous réviserez les commandes de base en `R`^[Le contenu de cette section est tiré, entre autres, du livre [An Introduction to R](https://intro2r.com/) [@Douglas_IntroR_2022]. Le reste du cours est dédié à l'apprentissage des bibliothèques et des fonctions pour manipuler, visualiser et analyser des données spatiales. Il est donc important de vous assurer de posséder les acquis de base en `R` pour poursuivre votre apprentissage vers des notions plus complexes.
+Dans cette section, vous réviserez les concepts de base pour utiliser R. Une grande partie du contenu de cette section  est tiré du livre numérique [An Introduction to R](https://intro2r.com/) [@Douglas_IntroR_2022]. Le cours SCI 1031 est dédié à l'apprentissage des bibliothèques et des fonctions pour manipuler, visualiser et analyser des données spatiales. Il est donc important de vous assurer de posséder les acquis de base en R pour poursuivre votre apprentissage vers des notions plus complexes.
 
 
 ### Démarrage
 
-#### Installer R 
+#### Installer R {-}
 
 Nous possédez déjà R sur votre ordinateur? Nous recommandons tout de même d'installer la plus récente version afin d'avoir la version la plus à jour pour être compatible avec les bibliothèques qui seront utilisées dans le cours.
 
-####### Windows {-}
+##### Windows {-}
 
 * Aller sur le site [CRAN](https://cran.r-project.org/) et cliquer sur le lien **Download R for Windows**
 * Cliquer maintenant sur **install R for the first time**
 * Cliquer sur **Download R (numéro de la version) for Windows** pour télécharger le fichier `*.exe`
 * Exécuter le fichier `*.exe`
 
-####### MacOS {-}
+##### MacOS {-}
 
 * Aller sur le site [CRAN](https://cran.r-project.org/) et cliquer sur le lien **Download R for macOS**
 * Cliquer sur le lien compatible avec votre système d'opération pour télécharger le fichier `*.pkg`
 * Double-cliquer sur le fichier `*.pkg`
 
-#### Installer RStudio
+#### Installer RStudio {-}
 
-###### Vous avez déjà RStudio? {-}
+##### Vous avez déjà RStudio? {-}
 
 Assurez-vous d'avoir la dernière version:
 
@@ -344,22 +344,22 @@ Assurez-vous d'avoir la dernière version:
 * Sélectionner l'option **Check for Updates**
 * Si vous n'avez pas la version la plus à jour, celle-ci vous sera proposée. 
 
-###### Vous n'avez pas RStudio? {-}
+##### Vous n'avez pas RStudio? {-}
 
 * Aller sur la page de téléchargement de [RStudio](https://www.rstudio.com/products/rstudio/download/#download)
 * Télécharger et exécuter le fichier qui correspond à votre système d'opération, c'est-à-dire `*.exe` pour Windows et `*.dmg` pour macOS.
 
-###### Vous utilisez une autre plateforme que RStudio ? {-}
+##### Vous utilisez une autre plateforme que RStudio ? {-}
 
 Si vous préférez *vraiment* un autre environnement de développement que RStudio, vous pouvez bien sûr l'utiliser. Aucun apprentissage dans ce cours est dépendant de RStudio. Toutefois, si, en cours de route, vous avez des questions liées à l'environnement que vous avez choisi d'utiliser, il n'est pas certain que la personne qui vous encadre sera en mesure de vous aider. 
 
 
-#### Apprivoiser RStudio
+#### Apprivoiser RStudio {-}
 
 Lorsque vous ouvrez RStudio pour la première fois, vous devriez voir une interface semblable à celle-ci (peut varier selon votre système d'exploitation):
 
 <br>
-```{r rstudio, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio.png', fig.cap="Interface RStudio. Source : @Douglas_IntroR_2022", out.width = '50%'}
+```{r rstudio, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio.png', fig.cap="Interface RStudio. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_rstudio.png')
 ```
 <br>
@@ -388,7 +388,7 @@ La fenêtre inférieur droite contient les onglets **Files / Plots / Packages / 
 Vous pouvez personnaliser votre inferface RStudio de multiples façons. Par exemple aller dans le menu déroulant *Tool* au haut de l'écran et sélectionner *Global Options/Appearance* pour changer les couleurs de l'écran et du lettrage. Vous n'allez quand même pas garder cet écran blanc et cette écriture monochrome pendant les 15 semaines de cours ?!
 
 
-#### Créer un fichier R
+#### Créer un fichier R {-}
 
 Bien qu'il soit possible d'utiliser R en rédigeant des commandes dans la console, une meilleure habitude de travail consiste à créer un fichier R (c-à-d un fichier d'extension `*.R`) qui contient une série de commandes successives à exécuter. 
 
@@ -399,7 +399,7 @@ Au cours de votre cheminement, si vous avez des questions ou des problèmes avec
 Pour créer un fichier R, aller dans le menu déroulant *File* au haut de l'écran et sélectionner *New File/R Script*:
 
 <br>
-```{r rscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_new_script.png', fig.cap="Créer un fichier R. Source : @Douglas_IntroR_2022", out.width = '50%'}
+```{r rscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_new_script.png', fig.cap="Créer un fichier R. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_new_script.png')
 ```
 <br>
@@ -409,7 +409,7 @@ Remarquer qu'une nouvelle fenêtre s'ouvre en haut à gauche de l'écran (appel�
 Pour exécuter une ligne de code dans un fichier R, vous n'avez qu'à placer votre curseur sur la ligne désirée et cliquer sur le bouton *Run*. Le résultat apparaitra dans la console. Vous pouvez également utiliser le raccourci *ctrl + enter* sous Windows ou *cmd + enter* sous Mac au lieu de cliquer sur *Run*. Pour exécuter l'ensemble des commandes contenues dans un fichier, cliquer sur *Source*.
 
 <br>
-```{r runscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio_run.png', fig.cap="Utiliser un fichier R. Source : @Douglas_IntroR_2022", out.width = '50%'}
+```{r runscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio_run.png', fig.cap="Utiliser un fichier R. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_rstudio_run.png')
 ```
 <br>
@@ -417,7 +417,7 @@ knitr::include_graphics('Module1/images/1_rstudio_run.png')
 Sauvegarder un fichier R en lui donnant un nom qui a du sens. Ce nom doit être **sans accent** et **sans espace**
 
 
-#### Les bibliothèques
+#### Les bibliothèques {-}
 
 Une bibliothèque R, appellée "package" en anglais, est un ensemble de fonctions spécialisées créées par des experts ou des expertes dans un champ d'analyse précis. 
 
@@ -438,7 +438,7 @@ library(mapview)
 Il faut charger une bibliothèque à toute nouvelle session R.
 <br>
 
-#### Le répertoire de travail 
+#### Le répertoire de travail {-}
 
 Le répertoire de travail (*working directory* en anglais) est le dossier par défaut dans lequel R cherche les fichiers que vous téléchargerez au cours de votre session et dans lequel R inscrit tout fichier que vous sauvegarderez. 
 
@@ -466,9 +466,9 @@ donnees <- read.table("/Module4_Donnees/nz_capitales.csv", header = TRUE, sep = 
 Ce sera donc à vous de bien régler votre répertoire de travail afin que R trouve le dossier commun (`Module4_Donnees` pour le présent exemple).
 
 
-### Intro à R
+### Intro à R 
 
-#### Calculateur
+#### La base {-}
 
 L'utilisation la plus simple qu'on peut faire de R est celle d'un calculateur. 
 R exécute des opérations arithmétiques et une foule de fonctions mathématiques. Par exemple,
@@ -502,21 +502,299 @@ pi
 ```
 <br>
 
-#### Les objets
+#### Les objets {-}
 
-Un objet en R est n'importe quelle entrée à laquelle on assigne un nom. Par exemple,
+Un objet en R est n'importe quelle entrée à laquelle on assigne un nom en utilisant l'opérateur d'assignation  `<-` . Par exemple,
 
 ```{r}
-mon_objet <- 1
+mon_objet <- 10
 ```
 
+<br>
 
-#### Les types de données
+Un objet peut être un chiffre, un vecteur, une chaine de caractères, ou même une structure plus complexe comme un graphique.
+Tout objet créé au cours d'une session R est affiché dans l'onglet *Environment* de la fenêtre supérieure droite de l'interface RStudio. 
 
-#### Les structures de données
-###### Les scalaires et les vecteurs {-}
-###### Les matrices et les arrays {-}
-###### Les listes {-}
+Un objet est logé dans la mémoire vive et vous pouvez l'utiliser pour des opérations futures.
+```{r}
+obj1 <- "J'aime le cours"
+obj2 <- "SCI 1031"
+paste(obj1, obj2)
+```
+<br>
+
+#### Les catégories de données {-}
+
+Dans le cadre de ce cours nous utiliserons quatre principales catégories ou classes de données supportées par R:
+
+
+* Numérique (*numeric* en anglais) est un nombre décimal ou un nombre entier.
+
+```{r}
+obj_num <- 10.3
+```
+<br>
+
+
+* Entier (*integer*): un nombre entier. Une donnée de catégorie entier ne peux jamais être décimale. Nous devons utiliser la fonction `as.integer()` pour créer un entier, sans quoi R lui attribuera la catégorie numérique.
+
+```{r}
+obj_ent <- as.integer(10)
+```
+<br>
+
+* Logique (*logical*): une donnée qui prend la valeur vrai (`TRUE`) ou faux (`FALSE`), ou encore la valeur `NA` lorsque la valeur d'une donnée est manquante.
+
+```{r}
+obj_log <- FALSE
+```
+<br>
+
+* Caractère (*character*): une chaine de un ou plusieurs caractères.
+```{r}
+obj_car <- "Yo!"
+```
+<br>
+
+Nous utiliserons également une catégorie particulière de données de type caractère qu'on appelle des facteurs (*factor*). Les facteurs désignent des données catégoriques qui possèdent un ensemble connu de valeurs possibles (niveaux - *levels*). Nous créons des données de type facteur avec la fonction `factor()`:
+```{r}
+obj_fac <- factor(c("Faible", "Modéré", "Élevé"))
+obj_fac
+```
+<br>
+
+La fonction `class()` permet de connaitre la catégorie d'une données.
+```{r}
+class(obj_num)
+class(obj_ent)
+class(obj_log)
+class(obj_car)
+class(obj_fac)
+```
+<br>
+
+
+Les fonctions `is.[nom de la catégorie]()` retournent la valeur `TRUE` si l'objet interrogé appartient à la catégorie précisée et `FALSE` autrement.
+
+```{r}
+is.integer(obj_num)
+is.integer(obj_ent)
+is.character(obj_log)
+```
+<br>
+
+Il est parfois utile de changer la classe d'un objet en utilisant la fonction `is.[nom de la catégorie]()`.
+
+```{r}
+# FALSE devient "FALSE"
+as.character(obj_log)
+
+# FALSE devient 0
+as.numeric(obj_log)
+
+# 10.3 devient 10
+as.integer(obj_num)
+```
+<br>
+
+
+
+#### Les structures de données {-}
+
+En plus de différentes catégories, il existe différentes structures de données. 
+
+##### Les scalaires et les vecteurs {-}
+
+Un vecteur est une séquence de données de même catégorie. Nous définissons un vecteur par l'expression `c(,)` où la virgule sépare les éléments de la séquence. 
+
+```{r}
+# Un vecteur de catégorie numérique
+vec_num <- c(9, 11, 4, 5)
+
+# Un vecteur de catégorie caractère
+vec_car <- c("bleu", "vert", "rouge")
+```
+<br>
+
+Un vecteur ne peut contenir des données de différentes catégories à l'exception d'une donnée de valeur `NA` qui est de catégorie logique et qui désigne l'absence de données.
+
+```{r}
+# R converti les nombres en caractère pour que les éléments
+# soient de même catégorie
+vec_mix <- c(9, 2, "bleu")
+vec_mix
+
+# NA conserve la catégorie des autres éléments
+vec_numNA <- c(9, 2, NA)
+vec_numNA
+
+vec_carNA <- c("bleu", NA, "rouge")
+vec_carNA
+```
+<br>
+
+La fonction `length()` donne le nombre d'éléments contenu dans un vecteur.
+```{r}
+length(vec_num)
+length(vec_car)
+```
+<br>
+
+Une donnée scalaire est un vecteur de longueur 1. 
+```{r}
+sca <- 3833
+length(sca)
+```
+<br>
+
+Pour accéder à des éléments particuliers d'un vecteur, nous utilisons l'expression `[]`.
+```{r}
+a <- c( 38, 33, 45, 26)
+
+# Le premier élément
+a[1]
+# Le troisième élément
+a[3]
+# Le premier et le troisième
+a[c(1,3)]
+```
+<br>
+
+```{r rscal_vec, fig.align='left', echo=FALSE, fig.link='Module1/images/1_scal_vec.png', fig.cap="Représentation d'un scalaire et d'un vecteur. Source : @Douglas_IntroR_2022 An introduction to R: [Data structures](https://intro2r.com/data-structures.html).", out.width = '50%'}
+knitr::include_graphics('Module1/images/1_scal_vec.png')
+```
+
+<br>
+
+##### Les matrices et les arrays {-}
+
+Une matrice est simplement un vecteur de deux dimensions, tandis qu'un *array* est une matrice pouvant avoir plus de deux dimensions. Tout comme un vecteur, une matrice et un *array* sont formés de données d'une même classe.
+
+```{r rmat_arr, fig.align='left', echo=FALSE, fig.link='Module1/images/1_mat_array.png', fig.cap="Représentation d'un scalaire et d'un vecteur. Source : @Douglas_IntroR_2022 An introduction to R: [Data structures](https://intro2r.com/data-structures.html).", out.width = '50%'}
+knitr::include_graphics('Module1/images/1_mat_array.png')
+```
+<br>
+
+Nous pouvons créer une matrice avec la fonction `matrix()`. Dans l'exemple ci-dessous les données de 1 à 12 sont structurées dans une matrice de 4 rangées qui est remplie en suivant les rangées.
+
+```{r}
+mat_ex1 <- matrix(1:12, nrow = 4, byrow = TRUE)
+mat_ex1
+```
+<br>
+
+Une matrice de structure différente mais avec les mêmes éléments.
+
+```{r}
+mat_ex2 <- matrix(1:12, nrow = 2)
+mat_ex2
+```
+<br>
+
+Remarquer que dans cet exemple, la matrice est remplie suivant les colonnes. 
+
+Nous pouvons aussi créer une matrice en combinant des vecteurs.
+```{r}
+vec1 <- 1:6
+vec2 <- 7:12
+
+# combinaison le long des colonnes
+mat_ex3 <- cbind(vec1, vec2)
+mat_ex3
+
+# combinaison le long des rangées
+mat_ex4 <- rbind(vec1, vec2)
+mat_ex4
+```
+<br>
+
+Pour créer un *array*, nous pouvons utiliser la fonction `array()` et définir ces dimensions avec l'argument `dim`.
+```{r}
+array_ex1 <- array(1:16, dim = c(2,4,2))
+array_ex1
+```
+<br>
+Cet *array* est constitué de deux matrices, chacune possédant 2 rangées et 4 colonnes. 
+
+La dimension d'une matrice ou d'un *array* se calcule avec la fonction `dim()`:
+```{r}
+dim(mat_ex1)
+dim(array_ex1)
+```
+<br>
+
+Il est parfois utile d'attribuer des noms aux colonnes et aux rangées d'une matrice ou d'un *array*. Ceci est possible avec les fonctions `colnames()` et `rownames()`:
+```{r}
+colnames(mat_ex1) <-  c("A","B","C")
+rownames(mat_ex1) <-  c("alpha", "beta", "gamma", "delta")
+mat_ex1
+```
+<br>
+
+Pour accéder à un élément particulier d'une matrice ou d'un *array* nous utilisons toujours l'expression `[]` mais cette fois la position de l'élément dans chaque dimension doit être précisée:
+```{r}
+# élément à la ligne 1, colonne 2
+mat_ex1[1,2]
+
+# élément à la ligne 2, colonne 1, 2e matrice
+array_ex1[2,1,2]
+```
+<br>
+
+##### Les listes {-}
+
+Une liste est un objet pouvant héberger des données de différentes classes. En fait, une liste peut également héberger des données de différentes structures. Nous définissons une liste par la fonction `list()` où chaque objet de la liste est séparé par une virgule. Voici un exemple: 
+
+```{r}
+list_ex1 <- list( matrix(1:6, nrow = 3), 
+                  c("bleu", "vert", "rouge"),
+                  c(FALSE, TRUE, FALSE, TRUE, FALSE))
+
+list_ex1
+```
+<br> 
+
+Nous pouvons assigner des noms à chaque objet de la liste en utilisant la fonction `names()`:
+```{r}
+names(list_ex1) <- c("quantite", "couleur", "resultat")
+list_ex1
+```
+<br>
+
+
+Ou encore au moment de définir la liste:
+```{r}
+list_ex2 <- list( frequence = matrix(1:6, nrow = 3), 
+                  saveur = c("bleu", "vert", "rouge"),
+                  verification = c(FALSE, TRUE, FALSE, TRUE, FALSE))
+
+list_ex2
+```
+<br>
+
+Pour accéder à un objet de la liste, nous devons utiliser l'expression `[[]]`, ou encore son nom précédé du symbole `$`.
+```{r}
+# Premier objet
+list_ex1[[1]]
+
+# objet couleur
+list_ex1$couleur
+```
+<br>
+
+Pour accéder à un élément particulier de la liste, il faut d'abord préciser sa position dans la liste, puis sa position dans l'objet.
+```{r}
+# Element sur la 3e ligne, 2e colonne du premier objet
+list_ex1[[1]][3,2]
+
+# Element 2 de l'objet couleur
+list_ex1$couleur[2]
+
+```
+<br>
+
+
+
 ###### Les data frames {-}
 
 #### Importer et exporter des données
