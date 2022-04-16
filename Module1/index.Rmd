@@ -359,7 +359,7 @@ Si vous préférez *vraiment* un autre environnement de développement que RStud
 Lorsque vous ouvrez RStudio pour la première fois, vous devriez voir une interface semblable à celle-ci (peut varier selon votre système d'exploitation):
 
 <br>
-```{r rstudio, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio.png', fig.cap="Interface RStudio. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '50%'}
+```{r rstudio, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio.png', fig.cap="Interface RStudio. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '80%'}
 knitr::include_graphics('Module1/images/1_rstudio.png')
 ```
 <br>
@@ -399,7 +399,7 @@ Au cours de votre cheminement, si vous avez des questions ou des problèmes avec
 Pour créer un fichier R, aller dans le menu déroulant *File* au haut de l'écran et sélectionner *New File/R Script*:
 
 <br>
-```{r rscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_new_script.png', fig.cap="Créer un fichier R. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '50%'}
+```{r rscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_new_script.png', fig.cap="Créer un fichier R. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '80%'}
 knitr::include_graphics('Module1/images/1_new_script.png')
 ```
 <br>
@@ -409,7 +409,7 @@ Remarquer qu'une nouvelle fenêtre s'ouvre en haut à gauche de l'écran (appel�
 Pour exécuter une ligne de code dans un fichier R, vous n'avez qu'à placer votre curseur sur la ligne désirée et cliquer sur le bouton *Run*. Le résultat apparaitra dans la console. Vous pouvez également utiliser le raccourci *ctrl + enter* sous Windows ou *cmd + enter* sous Mac au lieu de cliquer sur *Run*. Pour exécuter l'ensemble des commandes contenues dans un fichier, cliquer sur *Source*.
 
 <br>
-```{r runscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio_run.png', fig.cap="Utiliser un fichier R. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '50%'}
+```{r runscript, fig.align='left', echo=FALSE, fig.link='Module1/images/1_rstudio_run.png', fig.cap="Utiliser un fichier R. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html).", out.width = '80%'}
 knitr::include_graphics('Module1/images/1_rstudio_run.png')
 ```
 <br>
@@ -660,7 +660,7 @@ a[c(1,3)]
 ```
 <br>
 
-```{r rscal_vec, fig.align='left', echo=FALSE, fig.link='Module1/images/1_scal_vec.png', fig.cap="Représentation d'un scalaire et d'un vecteur. Source : @Douglas_IntroR_2022 An introduction to R: [Data structures](https://intro2r.com/data-structures.html).", out.width = '50%'}
+```{r rscalvec, fig.align='left', echo=FALSE, fig.link='Module1/images/1_scal_vec.png', fig.cap="Représentation d'un scalaire et d'un vecteur. Source : @Douglas_IntroR_2022 An introduction to R: [Data structures](https://intro2r.com/data-structures.html).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_scal_vec.png')
 ```
 
@@ -670,7 +670,7 @@ knitr::include_graphics('Module1/images/1_scal_vec.png')
 
 Une matrice est simplement un vecteur de deux dimensions, tandis qu'un *array* est une matrice pouvant avoir plus de deux dimensions. Tout comme un vecteur, une matrice et un *array* sont formés de données d'une même classe.
 
-```{r rmat_arr, fig.align='left', echo=FALSE, fig.link='Module1/images/1_mat_array.png', fig.cap="Représentation d'un scalaire et d'un vecteur. Source : @Douglas_IntroR_2022 An introduction to R: [Data structures](https://intro2r.com/data-structures.html).", out.width = '50%'}
+```{r rmatarr, fig.align='left', echo=FALSE, fig.link='Module1/images/1_mat_array.png', fig.cap="Représentation d'une matrice et d'un array. Source : @Douglas_IntroR_2022 An introduction to R: [Data structures](https://intro2r.com/data-structures.html).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_mat_array.png')
 ```
 <br>
@@ -794,16 +794,287 @@ list_ex1$couleur[2]
 <br>
 
 
+##### Les data frames {-}
 
-###### Les data frames {-}
+Un *data frame* est un tableau de données à deux dimensions, semblable à une matrice, mais pouvant contenir des données de différentes classes. Généralement chaque ligne du tableau correspond à une observation et chaque colonne à une variable mesurée. Les *data frames* sont similaires à un tableau Excel. Ils peuvent aussi être perçus comme une combinaison de vecteurs de même longueur.
 
-#### Importer et exporter des données
+Nous pouvons créer un *data frame* en utisant la fonction `data.frame()`:
+```{r}
+tab_ex1 <- data.frame(voiture = 1:5,
+                      marque = c("Hyundai", "Ford", "Toyota", "Hyundai", "Subaru"),
+                      couleur = c("Gris", "Rouge", "Bleu", "Noir", "Gris"))
 
-###### Importer des données {-}
-###### Exporter des données {-}
+tab_ex1
+
+```
+<br>
+
+Ou encore:
+```{r}
+nom <- c("Price", "Suzuki", "Gallagher", "Caufield", "Hoffman", "Dvorak", "Romanov")
+prenom <- c("Carey", "Nick", "Brendan", "Cole", "Mike", "Christian","Alexander")
+numero <- c("31","14","11","22","68","28","27")
+age <- c(34,22,29,21, 32, 26, 22)
+position <- factor(c("Gardien", "Centre", "Ailier droit", 
+                     "Ailier droit", "Centre","Ailier gauche", "Défenseur droit" ))
+buts <- c(NA, 19, 6,22, 11, 10, 3)
+
+tab_ex2 <- data.frame(nom, prenom, numero, age, position, buts)
+
+tab_ex2
+```
+<br>
+
+Nous pouvons accéder à une colonne particulière d'un *data frame* en utilisant l'expression `[, n]` où `n` est la position de la colonne ou en utilisant le nom de la colonne précédé du symbole `$`:
+```{r}
+tab_ex2[,3]
+tab_ex2$numero
+```
+<br>
+
+Pour accéder à une ligne particulière d'un *data frame*, nous pouvons utiliser l'expression `[m, ]` où `m` est la position de la ligne
+```{r}
+tab_ex2[4,]
+```
+
+<br>
+
+La fonction `str()` donne un résumé de la structure d'un *data frame* (le nom des variables, la classe des données, et leur valeur):
+```{r}
+str(tab_ex2)
+```
+<br>
+
+Parfois les *data frame* peuvent contenir beaucoup de variables et d'observations. Dans ces situations, il peut être utile d'utiliser les fonctions `head()` ou `tail()` qui retournent les 5 premières et les 5 dernières lignes du tableau respectivement.
+```{r}
+head(tab_ex2)
+```
+<br>
 
 
-### Partie 1 {#ex_intro_partie1}
+#### Importer et exporter des données {-}
+
+##### Importer des données {-}
+
+Dans le cadre de ce cours, vous serez amené à importer des fichiers de données en format `*.txt` ou `*.csv`. Ces deux formats peuvent être importés en utilisant la fonction `read.table()`. 
+
+```{r echo=TRUE, eval = FALSE}
+Tableau <- read.table(file = "NomDuFichier.txt", 
+                      header = TRUE, 
+                      sep = "\t", 
+                      dec = ",", 
+                      na.string = "S/O", 
+                      stringsAsFactors = TRUE)
+```
+<br>
+
+La fonction `read.table()` peut comprendre plusieurs arguments. Entre autres:
+
+* `file = `, indique le nom du fichier à importer.
+* `header = TRUE` ou `FALSE` précise si on importe ou non le nom des colonnes.
+* `sep = "\t"` ou `","` ou `""` précise comment les données sont séparées dans le fichier d'origine (où `\t` désigne la touche de tabulation (*tab*)). 
+* `dec = ","` ou `"."` précise comment la décimale est représentée dans le fichier d'orgine (p. ex. en français nous utilisons la virgule). 
+* `na.string = ` précise le symbole utilisé pour désigner les valeurs NA (p.ex. en français nous utilisons souvent l'expression "S/O" qui signifie sans objet)
+* `stringsAsFactors = TRUE` ou `FALSE` précise si les données de classe caractère sont importées en classe facteur. 
+
+
+D'autres fonctions similaires facilitent l'importation de fichiers `*.csv`. Ces fonctions sont des variantes de la fonction `read.table()` qui incluent certaines combinaisons d'arguments par défaut.
+
+```{r echo=TRUE, eval = FALSE}
+# Importer un fichier csv
+Tableau <- read.csv(file = "NomDuFichier.csv")
+
+# Importer un fichier csv avec dec = "," et sep = ";"
+Tableau <- read.csv2(file = "NomDuFichier.csv")
+
+# Importer un fichier avec sep = "\t"
+Tableau <- read.delim(file = "NomDuFichier.txt")
+
+```
+<br>
+
+Dans les modules futurs, nous verrons les fonctions R permettant d'importer des fichiers de données spatiales de différents formats.
+
+<br>
+
+##### Exporter des données {-}
+
+Similairement à la fonction `read.table()` pour lire les données, R dispose de la fonction `write.table()` pour exporter des données. Par exemple, nous pouvons exporter le *data frame* `tab_ex2` dans un fichier `*.txt`:
+
+```{r}
+write.table(tab_ex2, file = "JoueursCanadiens.txt", 
+            col.names = TRUE, 
+            row.names = FALSE, 
+            sep = "\t")
+```
+
+<br>
+
+Ou en format `*.csv`:
+```{r}
+write.table(tab_ex2, file = "JoueursCanadiens.csv", 
+            col.names = TRUE, 
+            row.names = FALSE, 
+            sep = ",")
+```
+<br>
+
+Nous pouvons également utiliser la fonction `write.csv()` pour exporter les données en format `*csv`
+```{r}
+write.csv(tab_ex1, file = "voitures.csv", row.names = FALSE)
+```
+<br>
+Dans ce cas, il n'est pas nécessaire les arguments `col.names = TRUE` et `sep = ","` sont pris par défaut, et il n'est donc pas nécessaire de les préciser.
+
+<br>
+
+#### Graphiques de base {-}
+
+##### Diagramme de dispersion {-}
+
+Nous utilisons la fonction `plot()` pour représenter une variable `y` en fonction d'une variable `x`:
+```{r, out.width = '60%'}
+x <- 1:10
+y <- x^2
+
+plot(x,y)
+```
+<br>
+
+Il est possible d'ajouter des arguments pour préciser:
+
+* le nom des axes: `xlab` et `ylab`
+* les limites des axes: `xlim` et `ylim`
+* le titre: `main`
+* la façon de lier les points: `type`
+* l'épaisseur du trait: `lwd`
+* le style du trait: `lty` 
+* le style des points: `pch`
+* la taille des points: `cex`
+* la couleur des points: `col`
+* et autres! 
+
+
+
+<br>
+
+```{r rplotarg, echo = FALSE, fig.align='center', echo=FALSE, fig.cap="Quelques arguments de la fonction `plot()` et les valeurs possibles. Source : [The R Graph Gallery](https://r-graph-gallery.com/6-graph-parameters-reminder.html).", dev = 'png',out.width = '80%'}
+# initialization
+par(mar=c(3,3,3,3))
+num <- 0 ; 
+num1 <- 0
+plot(0,0 , xlim=c(0,21) , ylim=c(0.5,6.5), col="white" , yaxt="n" , ylab="" , xlab="")
+ 
+#fill the graph
+for (i in seq(1,20)){
+  points(i,1 , pch=i , cex=3)
+  points(i,2 , col=i , pch=16 , cex=3)
+  points(i,3 , col="black" , pch=16 , cex=i*0.25)
+  
+  #lty
+  if(i %in% c(seq(1,18,3))){
+        num=num+1
+    points(c(i,i+2), c(4,4) , col="black" , lty=num , type="l" , lwd=2)
+        text(i+1.1 , 4.15 , num)
+        }
+  
+  #type and lwd 
+  if(i %in% c(seq(1,20,5))){
+    num1=num1+1
+    points(c(i,i+1,i+2,i+3), c(5,5,5,5) , col="black"  , type=c("p","l","b","o")[num1] , lwd=2)
+    text(i+1.1 , 5.2 , c("p","l","b","o")[num1] )
+    points(c(i,i+1,i+2,i+3), c(6,6,6,6) , col="black"  , type="l",  lwd=num1)
+    text(i+1.1 , 6.2 , num1 )
+ 
+    }
+  }
+ 
+#add axis
+axis(2, at = c(1,2,3,4,5,6), labels = c("pch" , "col" , "cex" , "lty", "type" , "lwd" ), 
+     tick = TRUE, col = "black", las = 1, cex.axis = 0.8)
+```
+<br>
+
+
+Personnalisons le graphique précédent en ajoutant des arguments:
+
+```{r, out.width = '60%'}
+
+plot(x,y,
+     main = "Croissance incroyable de ma plante",
+     xlab = "Jours",
+     ylab = "Taille (cm)",
+     xlim = c(0, 12),
+     ylim = c(0, 120),
+     type = "b",
+     lty = 3,
+     lwd = 1,
+     pch = 16,
+     col = "blue",
+     cex = 0.9)
+
+
+```
+<br>
+
+##### Histogramme
+
+Nous utilisons la fonction `hist()` pour produire un histogramme qui illustre le nombre ou la fréquence d'observation qui ont une certaines valeurs.
+
+```{r, out.width = '60%'}
+# générer 20 nombres aléatoires à partir d'une
+# distribution normale de moyenne 20 et de distribution standard 5 
+x <- rnorm(100, mean = 20, sd = 5)
+
+# histogramme
+hist(x)
+```
+<br>
+
+Comme pour la fonction `plot()`, nous pouvons améliorer l'apparence de l'histogramme par l'ajout d'arguments.
+
+```{r, out.width = '60%'}
+hist(x,
+     breaks = 10,
+     main = "",
+     xlab = "Valeurs",
+     ylab = "Fréquences",
+     col = "pink",
+     xlim = c(5, 40),
+     ylim = c(0, 35))
+```
+
+<br>
+
+L'argument `breaks` permet de réduire ou d'augmenter le nombre de bandes dans le diagramme. Le nombre de bandes ne sera probablement pas la valeur exacte que vous précisez mais respectera l'ordre de grandeur.
+
+<br>
+
+##### Diagramme à boîtes {-}
+
+Nous utilisons la fonction `boxplot()` pour créer un diagramme à boîtes (aussi appelé diagramme à moustaches). Un diagramme à boîtes est une bonne façon de voir comment les données sont distribuées autour de leur valeur médiane. 
+
+```{r, out.width = '60%'}
+# générer 20 nombres aléatoires à partir d'une
+# distribution normale de moyenne 20 et de distribution standard 5 
+x <- rnorm(100, mean = 20, sd = 5)
+
+# histogramme
+boxplot(x)
+```
+<br>
+
+Le trait horizonal foncé au centre correspond à la valeur médiane. La ligne supérieure de la boîte correspond au 75^ième^ percentile (3^ième^ quartile) et la ligne inférieure de la boîte au 25^ième^ percentile (1^er^ quartile) 
+
+Comme pour les autres types de graphique, nous pouvons personnaliser les diagrammes à boîtes en ajoutant des arguments à la fonction `boxplot()`
+
+```{r, out.width = '60%'}
+boxplot(tab_ex2$age,
+        ylab = "Âge des joueurs",
+        ylim = c(19, 36),
+        col = "violet")
+```
+<br>
 
 
 
