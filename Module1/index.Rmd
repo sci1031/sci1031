@@ -23,9 +23,7 @@ Ce module est une introduction au cours que vous vous apprêter à suivre. Dans 
 
 ---
 
-La section [exercice](#ex_intro) est divisée en deux parties. La première partie est une auto-évaluation constituée d’une série de questions corrigées. Cette évaluation vous permettra de vérifier votre compréhension des concepts enseignés dans ce module. 
-
-La deuxième partie constitue est une courte introduction au langage de programmation `R`. Vous y verrez les commandes et les fonctions de base. 
+La section [exercice](#ex_intro) est une brève introduction au logiciel R. Vous apprendrez à installer R et RStudio et vous vous familiariserez avec les notions importantes de l’environnement de travail R. Vous réviserez également les concepts et les fonctions de base pour utiliser R. Cette section se conclue par un petit exercice pour mettre en pratique les concepts R enseignés. 
 
 
 
@@ -312,10 +310,13 @@ Voici quelques bibliothèques importantes que nous utiliserons dans ce cours :
 
 ## Exercice {#ex_intro}
 
-Dans cette section, vous réviserez les concepts de base pour utiliser R. Une grande partie du contenu de cette section  est tiré du livre numérique [An Introduction to R](https://intro2r.com/) [@Douglas_IntroR_2022]. Le cours SCI 1031 est dédié à l'apprentissage des bibliothèques et des fonctions pour manipuler, visualiser et analyser des données spatiales. Il est donc important de vous assurer de posséder les acquis de base en R pour poursuivre votre apprentissage vers des notions plus complexes.
+Le cours SCI 1031 est dédié à l'apprentissage des bibliothèques et des fonctions pour manipuler, visualiser et analyser des données spatiales. Il est donc important de vous assurer de posséder les acquis de base en R pour poursuivre votre apprentissage vers des notions plus complexes.
 
+Cette section est divisée en trois parties. Dans la partie [Démarrage](#demarrage) vous apprendrez à installer R et RStudio et vous vous familiariserez avec les notions importantes de l'environnement de travail R. Dans la partie [Intro à R](#introR) vous réviserez les concepts et les fonctions de base pour utiliser R. Finalement, dans la partie [À vous de jouer!](#exo1), vous réaliserez un exercice pour mettre en pratique les concepts enseignés. 
 
-### Démarrage
+Une grande partie du contenu de cette section  est tiré du livre numérique [An Introduction to R](https://intro2r.com/) [@Douglas_IntroR_2022]. 
+
+### Démarrage {#demarrage}
 
 #### Installer R {-}
 
@@ -466,7 +467,7 @@ donnees <- read.table("/Module4_Donnees/nz_capitales.csv", header = TRUE, sep = 
 Ce sera donc à vous de bien régler votre répertoire de travail afin que R trouve le dossier commun (`Module4_Donnees` pour le présent exemple).
 
 
-### Intro à R 
+### Intro à R {#introR}
 
 #### La base {-}
 
@@ -1077,7 +1078,244 @@ boxplot(tab_ex2$age,
 <br>
 
 
+### À vous de jouer! {#exo1}
 
-### Partie 2 {#ex_intro_partie2}
+
+Dans cette section, vous allez mettre en pratique les concepts enseignés en utilisant des données sur les municipalités du Québec qui proviennent du [répertoire des municipalités du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/repertoire-des-municipalites-du-quebec/resource/19385b4e-5503-4330-9e59-f998f5918363). Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+
+<br>
+
+<div class="boite ico donnees gauche"> 
+
+###### Les données {-} 
+
+<br>
+
+</div>
+
+Télécharger le dossier [Module1_donnees.zip](adresse) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient le fichier *villes_qc.csv*.
 
 
+
+### Question 1 {-}
+
+**a)** Utiliser la fonction `read.csv` pour importer les données dans votre session de travail R. Nommer l'objet importer *villes*.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+villes <- read.csv("Module1/Module1_donnees/villes_qc.csv")
+```
+
+<br>
+
+</p>
+</details> 
+
+<br>
+
+**b)** Quelles sont les dimensions du *data frame* `villes` et comment se nomment ses attributs (c'est-à-dire le nom de ses colonnes)?
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Les dimensions sont données par la fonction `dim()`
+```{r}
+dim(villes)
+```
+<br>
+
+Le nom des attributs est donné par la fonction `names()`
+```{r}
+names(villes)
+```
+<br>
+
+Ces attributs correspondent:
+
+* Au nom de la municipalité ("munnom").
+* À la région administrative d'attache de la municipalité ("regadm").
+* À la taille de la population de la municipalité en 2021 ("mpopul").
+* À la superficie de la municipalité en km^2^ ("msuperf").
+<br>
+
+</p>
+</details> 
+
+<br>
+
+**c)** Utiliser la fonction `str()` pour produire un résumé du contenu du *data frame* `villes`. Déterminer à quelle classe appartient chaque attribut.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+str(villes)
+```
+<br>
+
+Nous constatons que "munnom" et "regadm" sont de classe caractère (*char*), "mpopul" de classe nombre entier (*int*), et "msuperf" de classe numérique (*num*). 
+
+<br>
+
+</p>
+</details> 
+
+<br>
+
+**d)** Transformer l'attribut "regadm" en facteur et déterminer son nombre de niveaux.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+La fonction `as.factor()` permet de transformer un attribut en classe facteur.
+```{r}
+villes$regadm <- as.factor(villes$regadm)
+```
+<br>
+
+Le nombre de niveau d'un objet de classe facteur est donné par la fonction `levels()`.
+
+```{r}
+levels(villes$regadm)
+```
+<br> 
+Nous observons qu'il y a 17 niveaux correspondants à chacune des régions administratives du Québec.
+
+<br>
+
+</p>
+</details> 
+
+<br>
+
+### Question 2 {-}
+
+**a)** Créer l'objet `Mtl` qui contient seulement les entrées du *data frame* `villes` pour la municipalité de Montréal.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Nous souhaitons créer un *data frame* comprenant seulement la ligne de `villes` pour laquelle l'attribut "munnon" prend la valeur "Montréal".  
+
+```{r}
+Mtl <- villes[villes$munnom=="Montréal",]
+Mtl
+```
+<br>
+
+Remarquer que l'expression `villes$munnom=="Montréal"` est un vecteur logique qui prend la valeur vrai (`TRUE`) lorsque le nom de municipalité est Montréal, et la valeur faux (`FALSE`) dans le cas contraire (c'est-à-dire pour les 1130 autres municipalités)
+
+```{r}
+length(villes$munnom=="Montréal")
+class(villes$munnom=="Montréal")
+```
+<br>
+
+</p>
+</details> 
+
+<br>
+
+**b)** Créer l'objet `villes_Outaouais` qui contient les entrées du *data frame* `villes` pour toutes les municipalités de la région administrative de l'Ouatouais.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Nous procédons de façon similaire à la question *2a*. Nous sélectionnons toutes les lignes de `villes` pour lesquelles l'attribut "regadm" prend la valeur "Outaouais (07)"
+
+```{r}
+villes_Outaouais <- villes[villes$regadm=="Outaouais (07)",]
+head(villes_Outaouais)
+```
+<br>
+
+</p>
+</details> 
+
+<br>
+
+### Question 3 {-}
+
+**a)** Créer un histogramme de la distibution de la population des villes du Québec comprenant une dizaine de bandes. Utiliser la fonction `log10()` pour représenter la taille des populations. Préciser les axes de votre graphique adéquatement.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Nous utilisons la fonction `hist()` avec l'argument `breaks = 10` pour produire un histogramme d'environ 10 bandes.
+
+```{r, out.width = '60%'}
+hist(villes$mpopul, breaks = 10 )
+```
+<br>
+
+Nous observons que la distribution de la taille des villes suit une loi de puissance. En effet, nous comptons beaucoup de villes avec une petite taille de population (plus de 1000 villes avec une population inférieure à 250 000 habitants) et peu de villes avec une très grande taille de population. 
+
+Dans cette situation, il est préférable d'illustrer le logarithme de la taille de la population. Cette distribution nous donne une meilleure appréciation de la variation dans la taille des villes.
+
+
+```{r, out.width = '60%'}
+hist(log10(villes$mpopul), breaks = 10 )
+```
+<br>
+
+Identifions correctement les axes.
+
+```{r, out.width = '60%'}
+hist(log10(villes$mpopul), breaks = 10, 
+     main = "",
+     xlab = "Nombre d'habitants",
+     ylab = "Nombre de villes",
+     col = "darkorange",
+     xlim = c(0, 7),
+     ylim = c(0, 400),
+     xaxt='n'  # ceci retire le nom des ticks sur l'axe x.
+     )
+
+# Pour aller un peu plus loin ...
+axis(side =1 , at = 0:7, 
+     labels = c("1","10","100","1000", 
+                expression(10^4) , expression(10^5), 
+                expression(10^6), expression(10^7)))
+```
+
+<br>
+
+</p>
+</details> 
+
+<br>
+
+
+**b)** Créer un diagramme à boîte pour représenter la superficie des villes de la région de l'Outaouais. 
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+
+```{r, out.width = '60%'}
+boxplot(villes_Outaouais$msuperf,
+        main = "Superficie des municipalités de l'Ouatouais",
+        ylab = expression(paste("Superficie (km"^"2",")")),
+        col = "deepskyblue"
+        )
+```
+<br>
+
+</p>
+</details> 
+
+<br>
