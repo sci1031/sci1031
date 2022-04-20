@@ -934,7 +934,7 @@ Dans ce cas, il n'est pas nécessaire les arguments `col.names = TRUE` et `sep =
 ##### Diagramme de dispersion {-}
 
 Nous utilisons la fonction `plot()` pour représenter une variable `y` en fonction d'une variable `x`:
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 x <- 1:10
 y <- x^2
 
@@ -959,7 +959,7 @@ Il est possible d'ajouter des arguments pour préciser:
 
 <br>
 
-```{r rplotarg, echo = FALSE, fig.align='center', echo=FALSE, fig.cap="Quelques arguments de la fonction `plot()` et les valeurs possibles. Source : [The R Graph Gallery](https://r-graph-gallery.com/6-graph-parameters-reminder.html).", dev = 'png',out.width = '80%'}
+```{r rplotarg, echo = FALSE, fig.align='center', echo=FALSE, fig.cap="Quelques arguments de la fonction `plot()` et les valeurs possibles. Source : [The R Graph Gallery](https://r-graph-gallery.com/6-graph-parameters-reminder.html).", dev = 'png',out.width = '80%', dev = 'png'}
 # initialization
 par(mar=c(3,3,3,3))
 num <- 0 ; 
@@ -999,7 +999,7 @@ axis(2, at = c(1,2,3,4,5,6), labels = c("pch" , "col" , "cex" , "lty", "type" , 
 
 Personnalisons le graphique précédent en ajoutant des arguments:
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 
 plot(x,y,
      main = "Croissance incroyable de ma plante",
@@ -1022,7 +1022,7 @@ plot(x,y,
 
 Nous utilisons la fonction `hist()` pour produire un histogramme qui illustre le nombre ou la fréquence d'observation qui ont une certaines valeurs.
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 # générer 20 nombres aléatoires à partir d'une
 # distribution normale de moyenne 20 et de distribution standard 5 
 x <- rnorm(100, mean = 20, sd = 5)
@@ -1034,7 +1034,7 @@ hist(x)
 
 Comme pour la fonction `plot()`, nous pouvons améliorer l'apparence de l'histogramme par l'ajout d'arguments.
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 hist(x,
      breaks = 10,
      main = "",
@@ -1055,7 +1055,7 @@ L'argument `breaks` permet de réduire ou d'augmenter le nombre de bandes dans l
 
 Nous utilisons la fonction `boxplot()` pour créer un diagramme à boîtes (aussi appelé diagramme à moustaches). Un diagramme à boîtes est une bonne façon de voir comment les données sont distribuées autour de leur valeur médiane. 
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 # générer 20 nombres aléatoires à partir d'une
 # distribution normale de moyenne 20 et de distribution standard 5 
 x <- rnorm(100, mean = 20, sd = 5)
@@ -1069,7 +1069,7 @@ Le trait horizonal foncé au centre correspond à la valeur médiane. La ligne s
 
 Comme pour les autres types de graphique, nous pouvons personnaliser les diagrammes à boîtes en ajoutant des arguments à la fonction `boxplot()`
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 boxplot(tab_ex2$age,
         ylab = "Âge des joueurs",
         ylim = c(19, 36),
@@ -1255,7 +1255,7 @@ head(villes_Outaouais)
 
 Nous utilisons la fonction `hist()` avec l'argument `breaks = 10` pour produire un histogramme d'environ 10 bandes.
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 hist(villes$mpopul, breaks = 10 )
 ```
 <br>
@@ -1265,14 +1265,14 @@ Nous observons que la distribution de la taille des villes suit une loi de puiss
 Dans cette situation, il est préférable d'illustrer le logarithme de la taille de la population. Cette distribution nous donne une meilleure appréciation de la variation dans la taille des villes.
 
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 hist(log10(villes$mpopul), breaks = 10 )
 ```
 <br>
 
 Identifions correctement les axes.
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 hist(log10(villes$mpopul), breaks = 10, 
      main = "",
      xlab = "Nombre d'habitants",
@@ -1306,7 +1306,7 @@ axis(side =1 , at = 0:7,
 
 
 
-```{r, out.width = '60%'}
+```{r, out.width = '60%', dev = 'png'}
 boxplot(villes_Outaouais$msuperf,
         main = "Superficie des municipalités de l'Ouatouais",
         ylab = expression(paste("Superficie (km"^"2",")")),
