@@ -1,10 +1,10 @@
 # Travaux notés {-}
 
-Le cours comprends 5 travaux notés et 1 examen à réaliser à la maison.  
-La feuille de route vous fourni les moments auxquels les travaux doivent être entrepris et remis.
+Le cours comprend trois (3) travaux notés (chacun 20%) et un examen final (40%).
 
-## Travail noté 1 {-}
-## Travail noté 2 {-}
-## Travail noté 3 {-}
-## Travail noté 4 {-}
-## Examen {-}
+La date de remise des travaux notés, telle que suggérée dans la [feuille de route](#route) est flexible: vous ne serez pas pénalisé si vous remettez votre travail après cette date. Toutefois, il est préférable d'espacer la remise des travaux pour pouvoir bénéficier d'une rétroaction de la part de la personne qui corrige. 
+
+Noter que vous devez faire l'examen au plus tard au cours de la dernière semaine. Il s'agit d'un examen à faire chez soi. L'examen dure 3 heures mais vous avez 3 jours (72 heures) pour remettre vos réponses à partir du moment où vous l'entamez. 
+
+Les consignes, les données à utiliser, et les gabarits de réponses pour les travaux notés et l'examen sont disponibles sur la [page web du cours](https://m2.teluq.ca/course/view.php?id=2164) sur le site de la TÉLUQ.
+Seuls les étudiants inscrits à la TÉLUQ ont accès aux évaluations. 
