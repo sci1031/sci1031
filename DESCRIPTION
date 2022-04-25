@@ -12,7 +12,7 @@ Imports:
   ggplot2,
   ggpubr,
   GISTools,
-  kableextra,
+  kableExtra,
   latex2exp,
   leafsync,
   lubridate,
