@@ -220,6 +220,17 @@ blockquote {
   height: 50px;
   margin-top: 50px;
 }
+.boite.photo img[src*=".jpg"] {
+  width: 200px;
+  height:200px;
+  margin-top: 200px;
+}
+.boite.photo.gauche {
+  width: auto;
+  height: auto;
+  background-repeat: no-repeat;
+  padding-top:200px;
+}
 .boite.ico.gauche, .boite.ico.droite {
   width: auto;
   height: auto;
@@ -242,8 +253,17 @@ blockquote {
   .boite.ico.droite ul {
    display: inline-block;
   }
+  .boite.photo.gauche {
+    background-size: 160px;
+    padding-left: 200px;
+    padding-top: 10px;
+    background-position: top left;
+    text-align: left;
+    display: inline-block;
+    float: left;
+  }
 }
-.boite.ico.gauche h1, .boite.ico.gauche h2, .boite.ico.gauche h3, .boite.ico.gauche h4, .boite.ico.gauche h5, .boite.ico.gauche h6,  .boite.ico.gauche h7, .boite.ico.droite h1, .boite.ico.droite h2, .boite.ico.droite h3, .boite.ico.droite h4, .boite.ico.droite h5, .boite.ico.droite h6, .boite.ico.droite h7 {
+.boite.ico.gauche h1, .boite.ico.gauche h2, .boite.ico.gauche h3, .boite.ico.gauche h4, .boite.ico.gauche h5, .boite.ico.gauche h6,  .boite.ico.gauche h7, .boite.ico.droite h1, .boite.ico.droite h2, .boite.ico.droite h3, .boite.ico.droite h4, .boite.ico.droite h5, .boite.ico.droite h6, .boite.ico.droite h7, .boite.photo.gauche h5 {
   margin-top: 0px !important;
 }
 .boite.ico.librairie {
@@ -258,6 +278,11 @@ blockquote {
 .boite.ico.important {
   background-image: url('../Images/Icone_Remarque-Importante.svg');
 }
+.boite.photo.elise {
+  background-image: url('../Images/Photo_moi.jpg');
+}
+
+
 
 /* TABLEAU */
 .tableau {

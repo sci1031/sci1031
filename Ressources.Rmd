@@ -1,16 +1,51 @@
 # Ressources R {-}
 
-## Guide général R {-}
+Vous trouverez ici des liens vers différentes ressources R. 
 
-## Les libraries R {-}
+#### Documentation générale R {-}
 
-## Guide R-Markdown {-}
+* Site officiel de R: [CRAN](https://cran.r-project.org/index.html)
+* [An introduction to R](https://intro2r.com/)
+* Forum de la [communauté RStudio](https://community.rstudio.com/)
+* [Introduction to R](https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html)
+* [R for Data Science](https://r4ds.had.co.nz/index.html)
 
-## Guide shiny app {-}
+<br>
 
-## Références R  {-}
+#### Documentation R-géospatial {-}
 
-###Les couleurs dans R {-}
+* [Geocomputation with R](https://bookdown.org/robinlovelace/geocompr/)
+* [Introduction to R for Geospatial Data](https://datacarpentry.org/r-intro-geospatial/)
+* [Intro to GIS and Spatial Analysis](https://mgimond.github.io/Spatial/index.html)
+* [Spatial Data Science with applications in R](https://keen-swartz-3146c4.netlify.app/)
+* [Spatial Data Science with R](https://rspatial.org/)
 
-###Les thèmes d'une carte {-}
+<br>
+
+#### Les bibliothèques R {-}
+
+* Outil de recherche des [bibliothèques de CRAN](https://www.rdocumentation.org/)
+* [`sf`](https://r-spatial.github.io/sf/articles/)
+* [`raster`](https://cran.r-project.org/web/packages/raster/index.html)
+* [`mapview`](https://r-spatial.github.io/mapview/)
+* [`tmap`](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html)
+* [`animation`](https://yihui.org/animation/)
+* [`lubridate`](https://lubridate.tidyverse.org/)
+
+<br>
+
+#### Documentation R-Markdown {-}
+
+* [Aide-mémoire](https://rmarkdown.rstudio.com/lesson-15.html)
+* [Syntaxe de base](https://www.markdownguide.org/basic-syntax/)
+* [Bookdown](https://bookdown.org/yihui/bookdown/)
+
+<br>
+
+#### Les couleurs dans R {-}
+
+* Document [pdf](https://web.archive.org/web/20121202022815/http://research.stowers-institute.org/efg/R/Color/Chart/ColorChart.pdf) des couleurs dans R.
+* [Liste](https://www.datanovia.com/en/blog/awesome-list-of-657-r-color-names/) des couleurs par leur nom. 
+* Les couleurs dans [`ggplot2`](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)
+* Palettes de couleurs [ColorBrewer](https://colorbrewer2.org/)
 

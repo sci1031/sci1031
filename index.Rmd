@@ -42,10 +42,17 @@ options("rgdal_show_exportToProj4_warnings"="none")
 
 ```
 
-#  Bienvenue! {-}
+# {-}
 
+<!--   # Bienvenue sur le site du cours SCI 1031! {-} -->
 
->> LE COURS EST PRÉSENTEMENT EN CONSTRUCTION: REVENEZ PLUS TARD!
+> Bienvenue sur le site du cours SCI 1031! L'entièreté du contenu du cours est disponible en accès libre sur ce site. 
+> Les évaluations sont disponibles sur le [site web](https://m2.teluq.ca/course/view.php?id=2164) de la TÉLUQ aux étudiantes et aux étudiants inscrits dans ce cours. 
+
+<br>
+
+> Avant de débuter le cours, familiarisez-vous avec la structure de ce site en utilisant le menu vertical à gauche. 
+> Lisez attentivement la section **Présentation** avant de vous plongez dans les apprentissages. 
 
 
 
