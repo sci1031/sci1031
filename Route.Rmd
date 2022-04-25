@@ -1,6 +1,6 @@
 # Feuille de route {.unnumbered #route}
 
-
+<!--
 ```{r route, echo = FALSE, warning = FALSE, out.width = '100%'}
 library(kableExtra)
 
@@ -36,4 +36,4 @@ kbl(data,"html", align = c("l",rep("c",15))) %>%
 
 ```
 
-
+-->
