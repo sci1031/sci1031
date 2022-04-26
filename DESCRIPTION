@@ -1,6 +1,6 @@
 Package: placeholder
 Type: Book
-Title: sci1031 
+Title: sci1031
 Version: 0.0.1
 Imports:
   bookdown,
@@ -12,6 +12,7 @@ Imports:
   ggplot2,
   ggpubr,
   GISTools,
+  kableExtra,
   latex2exp,
   leafsync,
   lubridate,
