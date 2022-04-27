@@ -20,7 +20,7 @@ Ce module s’intéresse à la façon dont nous représentons les phénomènes s
 ---
 
 
-La section [exercice](#ex_base) est divisée en deux parties. 
+La section [exercices](#ex_base) est divisée en deux parties. 
 Dans un premier temps, vous réaliserez une auto-évaluation pour vérifier votre acquisition des connaissances enseignées dans ce module. 
 
 Dans un second temps, vous apprendrez à utiliser R Markdown.
@@ -304,4 +304,4 @@ knitr::include_graphics('Module2/images/2_couches.png')
 
 La superposition de couches permet de visualiser les relations spatiales entre les données de différentes thématiques [@Auda2018]. Il est primordial que chaque couche de données utilise le même système de coordonnées de référence lorsqu’elles sont superposées. Le [module 3](#SRC) portera spécifiquement sur cette notion.
 
-## Exercice {#ex_base}
+## Exercices {#ex_base}

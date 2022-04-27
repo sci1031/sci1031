@@ -80,7 +80,7 @@ Le premier ensemble contient des données spatiales relatives aux îlots de chal
 Le second ensemble contient des données spatiales satellites captées par Landsat près de la ville de La Tuque en Mauricie.
 
 
-Dans la section [exercice](#ex_mat), vous utiliserez XXXXX
+<!--   Dans la section [exercices](#ex_mat), vous utiliserez XXXXX-->
 
 </div>
 
@@ -939,5 +939,7 @@ writeRaster(S_mult, filename, overwrite = TRUE)
 <br>
 
 
-## Exercice {#ex_mat}
+## Exercices {#ex_mat}
 
+
+>> Exercices à venir!

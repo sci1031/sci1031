@@ -105,7 +105,7 @@ library(leafsync)
 
 </div>
 
-Dans les sections [4.2](#read_vec) à [4.5](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/sci1031/sci1031/blob/master/Module4/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés et un fichier `csv`: 
+Dans les sections [4.2](#read_vec) à [4.5](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/sci1031/sci1031/raw/master/Module4/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés et un fichier `csv`: 
 
 - `Montreal_Velo.zip`
 - `Donnees_Ouvertes_MEES.gbd.zip`
@@ -120,7 +120,7 @@ Dézipper chacun des deux dossiers. Le premier dossier, `Montreal_Velo` sera uti
 
 Le deuxième dossier, `Donnees_Ouvertes_MEES.gbd` est la geodatabase du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec (MEES); nous l'utiliserons à la section [4.5](#gdb).
 
-Le fichier `nz_capitales.csv` contient les coordonnées géographiques des capitales des régions administratives de la Nouvelle-Zélande; nous l'utiliserons à la section [exercice](#ex_vec) à la fin de ce module. 
+Le fichier `nz_capitales.csv` contient les coordonnées géographiques des capitales des régions administratives de la Nouvelle-Zélande; nous l'utiliserons à la section [exercices](#ex_vec) à la fin de ce module. 
 
 
 

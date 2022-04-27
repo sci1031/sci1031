@@ -756,7 +756,7 @@ print(Map_inset, vp=viewport(0.67,0.17,width=0.3, height=0.3))
 ```
 
 
-### Cartes interactives avec tmap
+<!--   ### Cartes interactives avec tmap -->
 
-## Exercice
+## Exercices
 

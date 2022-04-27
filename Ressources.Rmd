@@ -1,4 +1,58 @@
-# Ressources R {-}
+# Ressources {-}
+
+### Travaux notés {-}
+
+Le cours comprend trois (3) travaux notés (chacun 20%) et un examen final (40%).
+
+La date de remise des travaux notés, telle que suggérée dans la [feuille de route](#route) est flexible: vous ne serez pas pénalisé si vous remettez votre travail après cette date. Toutefois, il est préférable d'espacer la remise des travaux pour pouvoir bénéficier d'une rétroaction de la part de la personne qui corrige. 
+
+Noter que vous devez faire l'examen au plus tard au cours de la dernière semaine. Il s'agit d'un examen à faire chez soi. L'examen dure 3 heures mais vous avez 3 jours (72 heures) pour remettre vos réponses à partir du moment où vous l'entamez. 
+
+Les consignes, les données à utiliser, et les gabarits de réponses pour les travaux notés et l'examen sont disponibles sur la [page web du cours](https://m2.teluq.ca/course/view.php?id=2164) sur le site de la TÉLUQ.
+Seuls les étudiants inscrits à la TÉLUQ ont accès aux évaluations. 
+
+
+### Données {-}
+
+
+#### Données du cours{-}
+
+Les liens suivants vous dirigerons directement vers les données utilisées pour chaque module
+
+<br>
+
+* [Module 1](https://github.com/sci1031/sci1031/raw/master/Module1/Module1_donnees.zip)
+* [Module 2](https://github.com/sci1031/sci1031/raw/master/Module2/Module2_donnees.zip)
+* [Module 3](https://github.com/sci1031/sci1031/raw/master/Module3/Module3_donnees.zip)
+* [Module 4](https://github.com/sci1031/sci1031/raw/master/Module4/Module4_donnees.zip)
+* [Module 5](https://github.com/sci1031/sci1031/raw/master/Module5/Module5_donnees.zip)
+* [Module 6](https://github.com/sci1031/sci1031/raw/master/Module6/Module6_donnees.zip)
+* [Module 7](https://github.com/sci1031/sci1031/raw/master/Module7/Module7_donnees.zip)
+* [Module 8](https://github.com/sci1031/sci1031/raw/master/Module8/Module8_donnees.zip)
+* [Module 9](https://github.com/sci1031/sci1031/raw/master/Module9/Module9_donnees.zip)
+
+<br>
+
+#### Autres sources {-}
+
+Cette rubrique répertorie différentes bases de données qui contiennent des données spatiales.   
+
+
+* [Données Québec](https://www.donneesquebec.ca/)
+* [Données ouvertes du Gouvernement du Canada](https://ouvert.canada.ca/fr/donnees-ouvertes)
+* [Répertoire de données spatiales de l'Université Laval](https://www.bibl.ulaval.ca/geostat/donnees_geospatiales/)
+* [Répertoire de données spatiales de l'Université Sherbrooke](https://www.usherbrooke.ca/biblio/trouver-des/donnees-geospatiales/ressources-par-themes)
+* [Répertoire de données spatiales de l'Université du Texas à Austin](https://geodata.lib.utexas.edu/catalog/facet/dc_subject_sm)
+* [Données de la Banque Mondiale](https://databank.worldbank.org/home.aspx)
+* [Données de la Commission Européenne sur l'urbanisation de la planète](https://ghsl.jrc.ec.europa.eu/index.php)  
+* [Données de déplacement UBER](https://movement.uber.com/?lang=en-CA)
+
+Vous êtes tombé sur une base de données intéressante qui ne figure pas plus bas? Partagez avec moi votre découverte et je l'ajouterai à cette liste.
+
+
+
+### Ressources R {-}
+
 
 Vous trouverez ici des liens vers différentes ressources R. 
 
@@ -49,3 +103,24 @@ Vous trouverez ici des liens vers différentes ressources R.
 * Les couleurs dans [`ggplot2`](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)
 * Palettes de couleurs [ColorBrewer](https://colorbrewer2.org/)
 
+
+
+```{r, child=if(knitr::is_latex_output()) '_knitr-options.Rmd'}
+```
+
+\backmatter
+
+`r if (knitr::is_html_output()) '
+### References {-}
+'`
+
+
+<div id="refs"></div>
+
+<!--   
+```{r}
+library(bibtex)
+read.bib("refs.bib")
+
+```
+-->

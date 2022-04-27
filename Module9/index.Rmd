@@ -55,7 +55,7 @@ Et vous apprendrez aussi à créer vos propres fonctions avec `function()`.
 
 Dans la section [Leçon](#lecon_spatiotemp), vous utiliserez des données vectorielles de trajets de vélo dans la ville de Montréal ainsi que des données matricielles de températures et de précipitations dans le Parc national du Mont-Mégantic.
 
-Dans la section [Exercice](#ex_spatiotemp), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
+Dans la section [Exercices](#ex_spatiotemp), vous mettrez en pratique les manipulations vues dans la leçon en utilisant les mêmes données. 
 
 </div>
 
@@ -79,7 +79,7 @@ Dans la seconde partie, vous étudierez l'évolution des températures et des pr
 
 </div>
 
-Les données vectorielles et matricielles utilisées dans ce module peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 9](https://github.com/elisefilotas/Donnees_spatiales/blob/master/Module9_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module9_donnees` pour ce module, et dézippez-le. Le dossier comprend quatre fichiers:
+Les données vectorielles et matricielles utilisées dans ce module peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 9](https://github.com/sci1031/sci1031/raw/master/Module9/Module9_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module9_donnees` pour ce module, et dézippez-le. Le dossier comprend quatre fichiers:
 
 
 - `maxt.nc`

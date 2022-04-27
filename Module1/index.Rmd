@@ -5,6 +5,15 @@
 source("bin/chunk-options.R")
 ```
 
+<!--  
+```{css, echo=FALSE}
+.watch-out {
+  background-color: #e6f2ff;
+  border: 1px solid grey;
+}
+```
+ -->
+
 Ce module est une introduction au cours que vous vous apprêter à suivre. Dans la section [leçon](#lecon_intro), nous discuterons de l’évolution historique de la visualisation des données spatiales, des premières cartes jusqu’à l’avènement des systèmes d’information géographique. Nous ferons une revue des outils existants pour visualiser et analyser les données spatiales. Finalement, nous présenterons quelques concepts de base essentiels à l’étude des données spatiales.
 
 <br>
@@ -308,7 +317,7 @@ Voici quelques bibliothèques importantes que nous utiliserons dans ce cours :
 ### La pensée géographique {#pensee_geo}
 
 
-## Exercice {#ex_intro}
+## Exercices {#ex_intro}
 
 Le cours SCI 1031 est dédié à l'apprentissage des bibliothèques et des fonctions pour manipuler, visualiser et analyser des données spatiales. Il est donc important de vous assurer de posséder les acquis de base en R pour poursuivre votre apprentissage vers des notions plus complexes.
 
@@ -474,7 +483,7 @@ Ce sera donc à vous de bien régler votre répertoire de travail afin que R tro
 L'utilisation la plus simple qu'on peut faire de R est celle d'un calculateur. 
 R exécute des opérations arithmétiques et une foule de fonctions mathématiques. Par exemple,
 
-```{r}
+```{r class.output = "codeout"}
 # addition
 2 + 2
 
@@ -1005,6 +1014,7 @@ plot(x,y,
      main = "Croissance incroyable de ma plante",
      xlab = "Jours",
      ylab = "Taille (cm)",
+     cex.lab = 1.5,
      xlim = c(0, 12),
      ylim = c(0, 120),
      type = "b",
@@ -1040,6 +1050,7 @@ hist(x,
      main = "",
      xlab = "Valeurs",
      ylab = "Fréquences",
+     cex.lab = 1.5,
      col = "pink",
      xlim = c(5, 40),
      ylim = c(0, 35))
@@ -1073,7 +1084,9 @@ Comme pour les autres types de graphique, nous pouvons personnaliser les diagram
 boxplot(tab_ex2$age,
         ylab = "Âge des joueurs",
         ylim = c(19, 36),
-        col = "violet")
+        col = "violet",
+        cex.lab = 1.5
+        )
 ```
 <br>
 
@@ -1093,7 +1106,7 @@ Dans cette section, vous allez mettre en pratique les concepts enseignés en uti
 
 </div>
 
-Télécharger le dossier [Module1_donnees.zip](adresse) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient le fichier *villes_qc.csv*.
+Télécharger le dossier [Module1_donnees.zip](https://github.com/sci1031/sci1031/raw/master/Module1/Module1_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient le fichier *villes_qc.csv*.
 
 
 
