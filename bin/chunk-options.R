@@ -6,7 +6,8 @@ library("knitr")
 opts_chunk$set(tidy = FALSE, comment = NA,
                fig.align = "center",
                fig.width = 7.5, fig.height = 7.5,
-               fig.retina = 2, cache = FALSE)
+               fig.retina = 2, cache = FALSE,
+               class.output = "codeout")
               
 
 # Add this

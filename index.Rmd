@@ -4,8 +4,7 @@ author:
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
 documentclass: krantz
-bibliography:
-  - refs.bib
+bibliography: refs.bib
 biblio-style: apalike
 link-citations: yes
 self_contained: false
@@ -16,7 +15,7 @@ fontsize: 12pt
 monofont: "Source Code Pro"
 monofontoptions: "Scale=0.7"
 site: bookdown::bookdown_site
-description: "Ceci est une première ébauche de la conception du cours SCI 1031."
+description: "Ce cours est une introduction à la visualisation et l'analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031."
 ---
 
 ```{r setup, include = FALSE}
@@ -46,15 +45,17 @@ options("rgdal_show_exportToProj4_warnings"="none")
 
 <!--   # Bienvenue sur le site du cours SCI 1031! {-} -->
 
-> Bienvenue sur le site du cours SCI 1031! L'entièreté du contenu du cours est disponible en accès libre sur ce site. 
-> Les évaluations sont disponibles sur le [site web](https://m2.teluq.ca/course/view.php?id=2164) de la TÉLUQ aux étudiantes et aux étudiants inscrits dans ce cours. 
+---
+
+Bienvenue sur le site du cours SCI 1031! L'entièreté du contenu du cours est disponible en accès libre sur ce site. 
+Les évaluations sont disponibles sur le [site web](https://m2.teluq.ca/course/view.php?id=2164) de la TÉLUQ aux étudiantes et aux étudiants inscrits dans ce cours. 
 
 <br>
 
-> Avant de débuter le cours, familiarisez-vous avec la structure de ce site en utilisant le menu vertical à gauche. 
-> Lisez attentivement la section **Présentation** avant de vous plongez dans les apprentissages. 
+Avant de débuter le cours, familiarisez-vous avec la structure de ce site en utilisant le menu vertical à gauche. 
+Lisez attentivement la section **Présentation** avant de vous plongez dans les apprentissages. 
 
-
+---
 
 
 ```{r include = FALSE}

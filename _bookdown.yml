@@ -8,4 +8,4 @@ language:
   eq: "EQUATION "
   ui:
     chapter_name: "Module "
-rmd_files: ["index.Rmd", "Presentation.Rmd", "Route.Rmd", "Ressources.Rmd", "Donnees.Rmd", "TravauxNotes.Rmd", "References.Rmd", "Credits.Rmd",  "Module1/index.Rmd", "Module2/index.Rmd", "Module3/index.Rmd", "Module4/index.Rmd", "Module5/index.Rmd", "Module6/index.Rmd", "Module7/index.Rmd", "Module8/index.Rmd", "Module9/index.Rmd"]
+rmd_files: ["index.Rmd", "Presentation.Rmd", "Ressources.Rmd", "Module1/index.Rmd", "Module2/index.Rmd", "Module3/index.Rmd", "Module4/index.Rmd", "Module5/index.Rmd", "Module6/index.Rmd", "Module7/index.Rmd", "Module8/index.Rmd", "Module9/index.Rmd"]
