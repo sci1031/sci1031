@@ -22,7 +22,7 @@ Ce module est une introduction au cours que vous vous apprêter à suivre. Dans 
 
 ---
 
- -	Comprendre les changements dans la représentation géographique au cours de l’histoire.
+ -	Décrire les changements dans la représentation géographique au cours de l’histoire.
  -	Définir ce qu’est la géomatique.
  -	Décrire les propriétés générales des systèmes d’information géographique (SIG). 
  -	Donner des exemples d’application des SIG.

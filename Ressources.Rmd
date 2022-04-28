@@ -111,7 +111,7 @@ Vous trouverez ici des liens vers différentes ressources R.
 \backmatter
 
 `r if (knitr::is_html_output()) '
-### References {-}
+### Références {-}
 '`
 
 
