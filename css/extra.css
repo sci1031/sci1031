@@ -13,7 +13,6 @@ p.caption {
   word-wrap: normal;
    margin: 0 0 0 0;
   padding: .85em 1em;
-  background: none !important; 
 }
 .leaflet-container {
   background: #ddd;
@@ -24,8 +23,8 @@ p.caption {
 
 /* Code chunk output*/
 .codeout {
-  background-color: #e6f2ff;
-  border: 1px solid grey;
+  background-color: #e7edf4 !important;
+  border: 2px solid #b3b3b3 !important;
 }
 
 /* COMMUN */
@@ -74,7 +73,7 @@ blockquote {
 }
 #header .author, #header .date {
   display: none;
-} 
+}
 #header .title .sigle {
   font-size: 20px;
   font-weight: 400;
