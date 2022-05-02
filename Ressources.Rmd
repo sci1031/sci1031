@@ -94,22 +94,28 @@ Vous trouverez ici des liens vers différentes ressources R.
 * [Syntaxe de base](https://www.markdownguide.org/basic-syntax/)
 * [Guide de référence](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pd)
 * [Livre d'astuces](https://bookdown.org/yihui/rmarkdown-cookbook/)
-* [Syntaxe Pandoc Markdown](https://www.jdbonjour.ch/cours/markdown-pandoc/) *en français*
+* [Syntaxe Pandoc Markdown](https://www.jdbonjour.ch/cours/markdown-pandoc/) (en français)
 
+<br>
 
 Utilisation de R Markdown pour la création de documents&nbsp;:
-    - [PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html)
-    - [HTML](https://bookdown.org/yihui/rmarkdown/html-document.html)
-    - [Word](https://bookdown.org/yihui/rmarkdown/word-document.html)
-    - [Tufte handout (Pdf)](https://bookdown.org/yihui/rmarkdown/tufte-handouts.html)
-    - [R Package Vignette (Html)](https://bookdown.org/yihui/rmarkdown/r-package-vignette.html)
+
+* [PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html)
+* [HTML](https://bookdown.org/yihui/rmarkdown/html-document.html)
+* [Word](https://bookdown.org/yihui/rmarkdown/word-document.html)
+* [Tufte handout (Pdf)](https://bookdown.org/yihui/rmarkdown/tufte-handouts.html)
+* [R Package Vignette (Html)](https://bookdown.org/yihui/rmarkdown/r-package-vignette.html)
+
+<br>
     
 Utilisation de R Markdown des présentations&nbsp;:
-    - [Beamer]https://bookdown.org/yihui/rmarkdown/beamer-presentation.html)
-    - [ioslide](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)
-    - [Slidy](https://bookdown.org/yihui/rmarkdown/slidy-presentation.html)
+
+* [Beamer](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html)
+* [ioslide](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)
+* [Slidy](https://bookdown.org/yihui/rmarkdown/slidy-presentation.html)
 
 Dérivés de R Markdown
+
 * [bookdown](https://bookdown.org/yihui/bookdown/)
 * [blogdown](https://bookdown.org/yihui/blogdown/)
 
