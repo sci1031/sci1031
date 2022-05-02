@@ -1,3 +1,4 @@
+
 # References {-}
 
 ```{r}
@@ -41,3 +42,4 @@ knitr::write_bib(pkgs, file = 'packages.bib', lib.loc = c(.libPaths(), '~/R-tmp'
 
 
 <div id="refs"></div>
+
