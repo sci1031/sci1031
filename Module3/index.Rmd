@@ -19,7 +19,7 @@ Ce module porte sur les systèmes de coordonnées de référence (SRC). Nous avo
 
 ---
 
-La section [exercice](#ex_SRC) est divisée en deux parties. 
+La section [exercices](#ex_SRC) est divisée en deux parties. 
 Dans un premier temps, vous réaliserez une auto-évaluation pour vérifier votre acquisition des connaissances enseignées dans ce module. 
 Dans un second temps, vous continuerez votre apprentissage de R Markdown.
 
@@ -391,4 +391,4 @@ Lorsqu’on représente des données spatiales par un système de coordonnées g
 Lorsqu’on combine des couches de données différentes, on doit s’assurer qu’elles s’appuient sur le même datum et la même projection. Si ce n’est pas le cas, on peut transformer le système de référence et le système de projection. Nous verrons comment procéder à ces transformations dans le [module 7](#manip_vec) et e [module 8](#manip_mat).
 
 
-## Exercice {#ex_SRC}
+## Exercices {#ex_SRC}

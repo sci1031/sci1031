@@ -3,6 +3,7 @@ bookdown::gitbook:
   css: [css/extra.css]
   toc_depth: 4
   split_by: section
+  split_bib: false
   highlight: tango
   config:
     toc:

@@ -1,17 +1,45 @@
-```{r, child=if(knitr::is_latex_output()) '_knitr-options.Rmd'}
+
+# References {-}
+
+```{r}
+# list cited packages
+pkgs <- c(
+  .packages(),
+  'bookdown',
+  'citr',
+  'dplyr',
+  'DT',
+  'e1071',
+  'formatR',
+  'ggplot2',
+  'ggpubr',
+  'GISTools',
+  'kableExtra',
+  'latex2exp',
+  'leafsync',
+  'lubridate',
+  'lwgeom',
+  'mapview',
+  'ncdf4',
+  'rasterVis',
+  'remotes',
+  'raster',
+  'rgdal',
+  'rgeos',
+  'rosm',
+  'sf',
+  'spacetime',
+  'spdep',
+  'stars',
+  'svglite',
+  'tmap',
+  'webshot'
+)
+
+# automatically create a bib database for R packages
+knitr::write_bib(pkgs, file = 'packages.bib', lib.loc = c(.libPaths(), '~/R-tmp'))
 ```
 
-\backmatter
-
-`r if (knitr::is_html_output()) '
-# References {-}
-'`
 
 <div id="refs"></div>
-
-<!--  --> 
-```{r echo=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c("knitr"), "refs.bib", width = 60)
-```
 
