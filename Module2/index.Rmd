@@ -19,12 +19,9 @@ Ce module s’intéresse à la façon dont nous représentons les phénomènes s
 
 ---
 
+À la section [Exercices](#ex_markdown1) vous suivrez la première partie d'une introduction à la bibliothèque `rmarkdown`. La deuxième partie de cette introduction aura lieu dans la section [Exercices du Module 3](#ex_markdown2). 
 
-La section [exercices](#ex_base) est divisée en deux parties. 
-Dans un premier temps, vous réaliserez une auto-évaluation pour vérifier votre acquisition des connaissances enseignées dans ce module. 
-
-Dans un second temps, vous apprendrez à utiliser R Markdown.
-
+R Markdown permet de créer des documents dynamiques de formats variés (dont HTML, PDF et Word) qui intègrent des morceaux de code R. Dans le cadre de ce cours, toutes vos évaluations devront être remises dans un fichier R Markdown. Cette section vous permet ainsi de vous familiarisez avec cette bibliothèque. 
 
 
 ## Leçon
@@ -304,4 +301,327 @@ knitr::include_graphics('Module2/images/2_couches.png')
 
 La superposition de couches permet de visualiser les relations spatiales entre les données de différentes thématiques [@Auda2018]. Il est primordial que chaque couche de données utilise le même système de coordonnées de référence lorsqu’elles sont superposées. Le [module 3](#SRC) portera spécifiquement sur cette notion.
 
-## Exercices {#ex_base}
+<br>
+
+## Exercices {#ex_markdown1}
+
+
+Cette section est une introduction à R Markdown qui passe en revue différents aspects techniques nécessaires à la bonne compréhension et utilisation de la biblothèque `rmarkdown`. 
+
+Cette introduction est divisée en deux parties. Vous ferez la première partie maintenant, au module 2, et la deuxième partie dans le section [Exercices](#ex_markdown2) du module 3. 
+
+
+La bibliothèque `rmarkdown` permet de créer des documents de formats variés (dont HTML, PDF et Word) avec un contenu R dynamique. C'est-à-dire des documents qui intègrent des morceaux de code R et ce qu'ils génèrent (p. ex. des figures et tableaux). Le code source de ce site web est lui-même un exemple d'application de cette bibliothèque! 
+
+R Markdown n'est pas un outil spécifique à la visualisation de données spatiales. Toutefois, puisqu'il constitue un outil d'édition, de visualisation et de diffusion fort pratique, nous l'utiliserons dans ce cours. En particulier, les évaluations devront être remises dans un fichier R Markdown `.Rmd`.
+
+À la fin de cette section vous saurez: 
+
+---
+
+ - Décrire en quoi consiste R Markdown;
+ - Décrire les liens entre R, Markdown et Pandoc;
+ - Utiliser la syntaxe Pandoc Markdown de base;
+ - Créer des documents dynamiques avec la bibliothèque `rmarkdown`. 
+ 
+---
+
+<br>
+<br>
+
+> Cette introduction à RMarkdown a été rédigée par Kevin Cazelles, collobateur clé à réalisation de ce cours. Kevin est un chercheur en écologie computationnelle et fervent utilisateur des outils pour la science ouverte. Allez voir ses travaux sur son site  <https://kevcaz.insileco.io/>  et son profil GitHub <https://github.com/KevCaz>.
+
+
+<br>
+
+
+
+### Introduction à R Markdown
+
+#### Bénéfices de R Markdown {-}
+
+Dans de nombreux milieux professionnels, à des fins de communication diverses,
+sont produits régulièrement des documents intégrant des analyses de données
+(tableaux, figures, tests statistiques, etc.). Pour créer de tels documents, il
+faut être en mesure de manipuler des données, de les analyser et de créer des figures
+pour les intégrer dans le document final. R est un
+langage de programmation qui répond à ces besoins avec un grand nombre de
+bibliothèques qui permettent de manipuler et traiter un spectre très large de données
+et de les visualiser efficacement. 
+
+Le langage R offre également la possibilité
+d'intégrer code et les produits du code (résultats de tests, tableaux, figures,
+etc.) directement dans un document qui est alors qualifié de dynamique. La
+bibliothèque la plus utilisée pour créer des documents dynamiques est 
+`rmarkdown`. En effet, elle permet l'intégration de R dans un document écrit avec Markdown et qui peut
+être converti en de nombreux formats de document (dont PDF, Word, HTML). 
+
+<br>
+
+#### Qu'est-ce que Markdown? {-}
+
+Markdown est un langage de balisage
+léger. C'est-à-dire un langage dans lequel on peut utiliser des ensembles de
+caractères spécifiques (des balises) pour délimiter une zone de texte pour
+laquelle un formatage associé (e.g. **text en gras**) est appliqué. 
+
+Markdown est aujourd'hui très répandu sur Internet. La syntaxe originale de Markdown est le
+fruit du travail de John Gruber[^wiki_gruber], programmeur, bloggeur et
+baladodiffuseur de Philadelphie en collaboration avec Aaron Swartz[^wiki_swartz] (lui même
+connu pour avoir participer à la création de [Creative Commons](https://creativecommons.org/) et son tragique
+destin qui fut l'objet d'un film). 
+
+Sur le site de John Gruber, "daringfireball",
+Markdown est décrit depuis décembre 2004 et on peut même y télécharger la
+version 1.0.1 (voir <http://daringfireball.net/projects/markdown>). L'idée de
+départ est simple et élégante&nbsp;: produire un langage léger qui simplifie les
+balises HTML utilisé par tous les sites Internet. L'idée n'est pas tant de
+remplacer le HTML mais plutôt d'en augmenter l'efficacité d'écriture et de fait,
+il est beaucoup plus rapide d'écrire en Markdown qui couvre les opérations de
+formatage les plus courantes (listes, hyperliens, etc.). Notons qu'il existe
+d'autres langages qui répondent aux mêmes objectifs, par exemple
+ReStructuredText[^wiki_rst].
+
+Après la publication de Markdown, John Gruber a cessé de travailler sur
+Markdown[^blog_badparent] et d'autres développeurs, sans doute séduits par le
+langage, ont proposé différentes additions syntaxiques. Il s'agissait surtout de
+lever certaines limitations tout en préservant l'esprit d'origine. Ci-dessous,
+en voici une liste non exhaustive de différentes variantes Markdown:
+
+ - [GitHub Flavored Markdown (GFM)](https://help.github.com/articles/github-flavored-markdown/)
+ - [Kramdown](http://kramdown.gettalong.org/syntax.HTML#math-blocks)
+ - [Markdown Extra](https://michelf.ca/projects/php-markdown/extra/)
+ - [Multi Markdow](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide#math-support)
+ - [Pandoc Markdown](http://pandoc.org/README.HTML#pandocs-markdown)
+
+Depuis 2014, CommonMark (<https://commonmark.org/>) propose
+une spécification (norme technique) pour Markdown de plus en plus
+utilisée[^goldmark]. Ceci signifie qu'en allant d'un outil à l'autre qui
+utilise cette spécification, il n'y a pas de questions à se poser quant à savoir
+ce qui marche ou non en terme de syntaxe (un problème parfois frustrant quand on
+utilise plusieurs outils qui utilisent différentes syntaxes Markdown), il
+suffit de se reporter à la spécification!
+
+<br>
+
+####  Qu'est-ce que Pandoc? {-}
+
+R Markdown (voir <http://rmarkdown.rstudio.com>)[^1] utilise [la variante Markdown de
+Pandoc](https://rmarkdown.rstudio.com/lesson-8.html)[^2]. 
+Pandoc, comme l'indique son site internet (voir <http://www.pandoc.org>) est un "convertisseur de document universel". 
+En une ligne de commande, Pandoc convertit un document d'un format donné en un document d'un autre
+format. Par exemple, Pandoc permet de passer d'un fichier `.tex` (LaTeX) à un
+fichier `.docx` (Word)! 
+
+La variante Markdown de Pandoc a été pensé pour rester
+fidèle à l'esprit originel de Markdown tout en incluant davantage d'éléments communs à différents formats de documents[^pmd]. Ainsi, un fichier R Markdown pourra être converti dans un grand nombre de formats grâce à l’utilisation de Pandoc. 
+
+Dans cette introduction, nous nous concentrerons sur la création de documents en format Word, PDF et
+HTML, mais que les possibilités offertes par `rmarkdown` sont plus vastes (voir la section [Ressources](#res_RMarkdown) du cours dédiée à la documentation R Markdown). 
+
+
+
+
+<!--  
+Pour rendre le document dynamique, R Markdown ajoute notamment les fonctionnalités de l'excellente
+bibliothèque [`knitr`](http://cran.r-project.org/web/packages/knitr/index.html) qui
+intègre du code R et ce qu'il produit. Le document dynamique en question pourra
+être converti dans un grand nombre de formats grâce à l'utilisation de
+[Pandoc](http://www.pandoc.org/installing.html). 
+ -->
+
+<br>
+
+### Utiliser un fichier RMarkdown
+
+#### Organisation générale {-}
+
+Un fichier R Markdown, dont l’extension est `.rmd` ou `.Rmd`, un fichier de texte brut qui contient trois types de langage.
+
+1. Un langage de programmation, R. Le fichier peut contentir des blocs de codes R utilisés pour présenter des opérations R, pour les exécuter, et pour afficher leur résultat. Ces blocs commencent et finissent par trois accents graves (*backtick* ou *backquote* en anglais): \` et les trois accents graves ouvrant le bloc sont suivis d'une accolade qui commence par r ou R, par exemple
+
+    ````markdown
+    `r ''````{R name, option1, option2}
+    # code R à exécuter
+    ```
+    ````
+
+    ou encore
+
+    ````markdown
+    `r ''````{r option1}
+    # code R à exécuter
+    ```
+    ````
+    
+    Ces blocs de code sont intégrés au document grâce aux fonctionnalités de la bibliothèque `knitr`[^knitr]. 
+    
+2. Un langage de balisage pour l'écriture du document, la variante syntaxique Pandoc de Markdown. 
+
+3. Un langage de sérialisation, YAML, pour personnaliser la mise en page du ou des documents produits. Il s'agit d'une entête (*Front Matter* en anglais) placée au début du document dans un bloc de trois tirets ( \-\-\- ) qui donne des indications sur les sorties à générer. 
+
+    ````markdown
+    ---
+    title: "R Notebook"
+    output: html_notebook
+    ---
+    ````
+ <br>       
+
+De plus, la variante syntaxique Pandoc de Markdown inclut les symboles mathématiques TeX[^wiki_TeX] pour facilité l'écriture, entre autres, des équations. En un sens c'est un quatrième langage que peut contenir un fichier R Markdown!
+
+
+Une fois le fichier R Markdown créé, il s'agit d'utiliser la fonction R `render()` pour appeler le fichier. R Markdown générera alors le ou les documents selon le format désiré.  
+
+<br>
+
+
+#### Installer R Markdown {-}
+
+Commençons par installer la bibliothèque `rmarkdown`:
+
+```{r eval = FALSE}
+install.packages('rmarkdown')
+```
+
+<br>
+
+Pour la production de document PDF, vous aurez besoin d'installer LaTeX. Si vous n'avez pas déjà LaTeX sur votre ordinateur, installer plutôt la bibliothèque `tinytex`[^tiny]:
+
+```{r eval = FALSE}
+install.packages('tinytex')
+tinytex::install_tinytex()  # installer TinyTeX
+```
+
+<br>
+
+#### Créer un fichier R Markdown {-}
+
+
+Créer un fichier R Markdown, c'est simplement créer un fichier dont l'extension
+est `.Rmd` ou `.rmd`, ce qui peut être fait avec n'importe quel éditeur de
+texte, ou de code, ou même en ligne de commande[^linux]. Dans R Studio, cela peut se faire en
+2 clics, comme illustré dans la marche à suivre ci-dessous. L’intérêt d'utiliser R
+Studio pour cette opération est que le fichier ainsi créé contient des
+indications relatives à l'utilisation du fichier en question.
+
+
+
+- **Première étape** : Utilisez l'icône de création de nouveaux fichiers (symbole + dans un cercle vert), et choissez R Markdown dans le menu vertical
+![Première étape.](Module2/images/open_rmd.png)
+<br>
+
+- **Deuxième étape** : Choisissez le format de sortie désiré (HTML, PDF ou Word), précisez le titre du document ainsi que votre nom, puis appuyez sur la touche OK.
+![Seconde étape.](Module2/images/open_rmd2.png)
+
+<br>
+
+- Un fichier contenant différentes instructions et exemples est généré. Sauvegardez le fichier créé en lui attribuant un nom.
+![](Module2/images/open_rmd3.png)
+
+<br>
+
+#### Spécifier les options YAML {-}
+
+
+L'entête YAML sert à spécifier différentes propriétés des documents à générer à
+partir du fichier `.Rmd` (par exemple, le titre, la date, les polices de caractères
+utilisées, ajout d'une table des matières, etc.) grâce à des gabarits (*templates* en anglais) utilisés par Pandoc.
+
+Lorsque vous créez un fichier `.Rmd` avec R Studio, une entête YAML est créée par défaut avec les champs: titre, auteur ou autrice, date et format de la sortie. 
+
+````markdown
+---
+title: "mondoc"
+author: "Kevin Cazelles"
+date: "30/04/2022"
+output: html_document
+---
+````
+
+<br>
+
+Les champs disponibles dépendent des gabarits utilisés qui sont spécifiques à un format donné, les champs par défaut varient
+ainsi d'un format à l'autre. 
+
+Pour un aperçu assez complet des options YAML
+utilisables dans un fichier R Markdown, rendez-vous à la dernière page du [guide de
+référence](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
+Notez qu'il est possible de créer ses propres gabarits et donc d'ajouter autant
+de champs que désiré. 
+
+
+Un champ donné peut contenir une chaîne de caractères, une date, des chiffres ou encore une liste:
+
+```yaml
+nomduchamp: [élément1, élément2]
+```
+<br>
+
+ou encore
+
+```yaml
+nomduchamp:
+    - élément1
+    - élément2
+```
+<br>
+
+On utilise l'indentation pour signifier la hiérarchie entre les différents éléments. <br>
+Les commentaires sont introduits par un "\#".
+
+
+Voici quelques champs utiles pour un format de sortie HTML:
+
+* `theme`: le thème Bootstrap[^boostrap] à utiliser pour l'apparence du document HTML. Les thèmes disponibles sont: `default`, `bootstrap`, `cerulean`, `cosmo`, `darkly`, `flatly`, `journal`, `lumen`, `paper`, `readable`, `sandstone`, `simplex`, `spacelab`, `united`, et `yeti`. Consultez la page de la bibliothèque [Bootswatch](https://bootswatch.com/3/) pour voir à quoi ces thèmes ressemblent. 
+
+
+
+* `highlight`: le style de la coloration syntaxique. Les styles disponibles sont: `default`, `tango`, `pygments`, `kate`, `monochrome`, `espresso`, `zenburn`, `haddock`, `breezedark`, et `textmate`. Vous trouverez [ici](https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/) quelques exemples de ces styles. 
+
+
+
+* `number_sections`: numéroter ou non les sections.
+
+
+
+* `toc`: inclure ou non une table des matières (*table of content* en anglais).
+* `toc_depth`: la profondeur de la table, c'est-à-dire, le niveau des titres apparaissant sur la table. 
+* `toc_float`: inclure ou non la table des matières en menu vertical visible à gauche sur le document HTML. Ce champ peut également être spécifié par une liste d'options: 
+   * `collapsed`: permettre ou non un menu de type accordéon qui se referme et se déploie.
+   * `smooth_scroll`: colorer ou non le titre d'une section dans le menu lors de la navigation sur la page.
+
+
+     
+   
+<!--* `abstract`: le texte d'un résumé apparaissant au début du document produit.-->
+
+#### Éditer le contenu du fichier R Markdown {-}
+
+#### Obtenir le document final (ou les documents finaux) {-}
+
+
+### Le variante Pandoc de Markdown
+
+
+
+
+
+[^wiki_gruber]: <https://en.wikipedia.org/wiki/John_Gruber>, consulté le 28 avril 2022.
+[^wiki_swartz]: <https://fr.wikipedia.org/wiki/Aaron_Swartz>, consulté le 28 avril 2022.
+[^wiki_rst]: <https://fr.wikipedia.org/wiki/ReStructuredText>, consulté le 28 avril 2022.
+[^blog_badparent]: <https://blog.codinghorror.com/responsible-open-source-code-parenting/>, consulté le le 28 avril 2022.
+[^goldmark]: Par example Goldmark, <https://github.com/yuin/goldmard>, un parser Markdown écrit en Go et utilisé par Hugo (un générateur de site très populaire), est compatible avec Common Mark.
+[^1]: La version 1 n'utilise pas Pandoc.
+[^2]: Pandoc est d'ailleurs capable de gérer différentes variantes de Markdown.
+[^pmd]: Voir <https://pandoc.org/MANUAL.html#pandocs-markdown>, consulté le 29 avril 2022.
+[^knitr]: Voir <https://yihui.org/knitr/)>, consulté le 29 avril 2022.
+[^wiki_TeX]: Voir <https://fr.wikibooks.org/wiki/LaTeX/%C3%89crire_des_math%C3%A9matiques>, consulté le 29 avril 2022.
+[^tiny]: Voir <https://yihui.org/tinytex/>, consulté le 29 avril 2022.
+[^linux]: Par example, si vous travaillez dans un environnement Linux, vous pouvez simplement entrer cette commande dans un terminal: ```
+$ echo "---\nauthor: VotreNom \n---" > mondoc.Rmd
+```
+[^boostrap]: Boostrap est une collection d'outils pour le design de page web. Voir: <https://fr.wikipedia.org/wiki/Bootstrap_(framework))>
+
+
+
