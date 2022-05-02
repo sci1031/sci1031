@@ -258,7 +258,7 @@ trajets$duree_s[1:10]
 Regardons maintenant les distributions de longueurs et de durées de trajets en dessinant un histogramme avec la fonction `hist()`. 
 
 
-```{r histo, fig.width = 9.5}
+```{r histo, fig.width = 9.5, dev = 'png'}
 
 par(mfrow = c(1, 2)) # figure à deux panneaux côte à côte
 
@@ -317,7 +317,7 @@ Notez que la fonction `order()` retourne l'indice de l'élément désiré, alors
 
 Nous pouvons visualiser ce trajet en utilisant la fonction `mapview()` de la bibliothèque `mapview()`.
 
-```{r}
+```{r, dev = 'png'}
 library(mapview)
 mapview(traj_rapide)
 ```
@@ -412,7 +412,7 @@ traj_juillet <- trajets[trajets$mois == 7, ]
 
 Enfin, visualisons le nombre de trajets par jour avec les fonctions `table()` et `barplot()` cette fois-ci. 
 
-```{r barplot_day, fig.width = 9.5}
+```{r barplot_day, fig.width = 9.5, dev = 'png'}
 barplot(
   table(traj_juillet$jour),
   xlab = "Jour de juillet",
@@ -423,7 +423,7 @@ barplot(
 C'est donc le 10 juillet que nous recensons le plus grand nombre de trajets.
 Nous allons même aller à l'échelle de l'heure et nous recommençons les étapes précédentes avec la fonction `hour()`. Au passage, mentionnons la bibliothèque [`hms`](https://CRAN.R-project.org/package=hms) pour manipuler les heures, minutes et secondes (nous ne l'utiliserons pas ici, mais elles pourraient vous être utile dans vos projets futurs).
 
-```{r traj_10juillet, fig.width = 9.5}
+```{r traj_10juillet, fig.width = 9.5, dev = 'png'}
 trajets$heure <- hour(trajets$start)
 traj_10juillet <- trajets[trajets$mois == 7 & trajets$jour == 10, ]
 barplot(
@@ -464,7 +464,7 @@ traj_long
 
 Regardons ce trajet&nbsp;:
 
-```{r}
+```{r, dev = 'png'}
 mapview(traj_long)
 ```
 <br>
@@ -533,7 +533,7 @@ Notons que sans l'étape (ii), `st_cast()` transformera chaque point en ligne ce
 
 Regardons cette section du trajet avec `mapview()`.
 
-```{r}
+```{r, dev = 'png'}
 mapview(lin) 
 ```
 <br>
@@ -556,7 +556,7 @@ st_length(lin)
 Visualisons maintenant cette section du trajet en utilisant la bibliothèque `tmap`. Dans le titre de la carte, indiquons la distance parcourue ainsi que le temps associé. Des objets de classe caractère peuvent être combinés (c'est-à-dire écrits l'un à la suite des autres sans espacement) en utilisant la fonction `R` `paste0()`. 
 
 
-```{r simple_map}
+```{r simple_map, dev = 'png'}
 library(tmap)
 tm_shape(lin, bbox = st_bbox(traj_long_pts)) + 
   tm_lines(lwd = 2, col = "#62852eaa") + 
@@ -674,14 +674,14 @@ visual <- function(traj_pts, n = 100, basemap = NULL) {
 
 Nous pouvons maintenant faire la carte pour le nombre de points désirés, avec un minimum de 2 et un maximum de `r nrow(traj_long_pts)` points. Pour faire la figure précédente nous utilisons le code suivant&nbsp;:
 
-```{r}
+```{r, dev = 'png'}
 visual(traj_long_pts, 2000)
 ```
 <br>
 
 L'avantage du travail précédent est que nous pouvons maintenant très facilement faire la même carte en appelant notre fonction et en changeant simplement la valeur de `n`, par exemple, nous pouvons faire la même carte avec les 4000 premiers points.
 
-```{r}
+```{r, dev = 'png'}
 visual(traj_long_pts, 4000)
 ```
 <br>
@@ -786,7 +786,7 @@ carte_fond
 
 Visualisons cette carte de fond avec les fonctionnalités de la library `tmap`:
 
-```{r}
+```{r, dev = 'png'}
 tm_shape(carte_fond) + tm_rgb()
 ```
 <br> 
@@ -1137,7 +1137,7 @@ Notons qu'ici, cette opération aurait aussi pu être réalisée en utilisant `g
 
 Comme pour les objets `rasters`, nous pouvons rapidement visualiser les objets `rasterStack` avec la fonction `plot()`.
 
-```{r plot_stack}
+```{r plot_stack, dev = 'png'}
 plot(mint)
 ```
 <br>
@@ -1145,21 +1145,21 @@ plot(mint)
 Par défaut, 16 couches sont affichées au maximum. Toutefois, il est possible d'augmenter ce nombre en modifiant la valeur de l'argument `maxnl`&nbsp;:
 
 
-```{r}
+```{r, dev = 'png'}
 plot(mint, maxnl = 25) 
 ```
 <br>
 
 Avec un grand nombre de cartes (au-delà de 10), il peut s'avérer difficile de visualiser correctement les données et il est parfois souhaitable de sélectionner les couches à inspecter. Par exemple, il est possible de visualiser les données des 4 derniers mois en sélectionnant les 4 dernières couches de `mint`.
 
-```{r}
+```{r, dev = 'png'}
 plot(mint[[117:120]]) 
 ```
 <br>
 
 Par défaut, le titre utilisé pour chaque carte correspond au nom des couches. Pour modifier les titres, nous pouvons renommer les couches en utilisant la fonction `names()`. Cela dit, il y a des contraintes sur les noms des couches (par exemple, les espaces blancs sont à éviter). Pour avoir un titre libre de ces contraintes, nous pouvons utiliser l'argument `main` dans la fonction `plot()` auquel nous donnons un vecteur contenant les titres souhaités.
 
-```{r}
+```{r, dev = 'png'}
 plot(mint[[117:120]], main = c("09/2016", "10/2016", "11/2016", "12/2016"))
 ```
 <br>
@@ -1291,7 +1291,7 @@ st_crs(parcs)$units
 
 Nous affichons maintenant, les deux objets&nbsp;: les limites du parc et les mêmes limites auxquelles une zone tampon de 5&nbsp;km a été ajoutée. 
 
-```{R}
+```{R, dev = 'png'}
 parc_buffer <- mapview(megantic, col.regions = "seagreen") + mapview(megantic_buf, col.regions = "lightgreen") 
 parc_buffer@map
 ```
@@ -1308,7 +1308,7 @@ Notez également, que nous nous sommes assurés que le *raster* utilisé pour cr
 
 Visualisons les quatres premières couches de `pcp_megantic`&nbsp;:
 
-```{R plot_pcp_megantic}
+```{R plot_pcp_megantic, dev = 'png'}
 plot(pcp_megantic[[1:4]])
 ```
 <br>
@@ -1330,7 +1330,7 @@ Rappelez-vous que l'argument 2 signifie que la fonction `mean()` est appliquée 
 
 
 Utilisons le vecteur `temps` créé plus tôt pour visualisons le changement dans les précipitations cumulées moyennes en fonction du temps&nbsp;:
-```{r mean_pcp_plot}
+```{r mean_pcp_plot, dev = 'png'}
 plot(temps, mean_pcp)
 ```
 <br>
@@ -1461,7 +1461,7 @@ Nous allons maintenant créer la figure. Celle-ci contiendra trois panneaux. Cha
 Pour illustrer les températures, nous utilisons des lignes et pour les précipitations nous utilisons des barres, ces réglages peuvent se faire avec l'argument `type` de la fonction `plot()`. Enfin comme l'axe des abscisses est identique pour les trois panneaux, nous ajoutons un titre seulement à cet axe, donc seulement pour le dernier panneau. 
 
 
-```{r profils, warning = FALSE, fig.height = 8}
+```{r profils, warning = FALSE, fig.height = 8, dev = 'png'}
 # figures de trois lignes et 1 seule colonne
 par(mfrow = c(3, 1), mar = c(4, 4, 1, 1))
 plot(getZ(mint), profil(mint, megantic_buf), 
@@ -1688,7 +1688,7 @@ fct_carte <- function(RS,t){
 <br>
 
 Par exemple, pour le premier mois, cette fonction affiche &nbsp;:
-```{r}
+```{r, dev = 'png'}
 # Par exemple cette fonction donne
 fct_carte(mint_region,3)
 ```
