@@ -299,7 +299,7 @@ ext
 Avec la fonction `plot()`, nous pouvons visualiser la partie du *raster* qui sera rognée. Notez que la fonction `mapview()` ne peut pas être utilisée pour visualiser des objets de classe `Extent`.
 
 
-```{r}
+```{r, dev = 'png'}
 plot(dem)
 plot(ext, add = TRUE) 
 ```
@@ -374,7 +374,7 @@ mapview(dem)+mapview(pol)
 
 La fonction `mask()` permet de sélectionner uniquement les cellules du *raster* `dem` qui sont à l'**intérieur** du polygone `pol` (passé en second argument): 
 
-```{r mask, warning = FALSE}
+```{r mask, warning = FALSE, dev = 'png'}
 dem_ma <- mask(dem, pol)
 mapview(dem_ma)
 ```
@@ -924,7 +924,7 @@ mapview(rando_sections, zcol = "id")
 <br>
 
 Changeons l'ordre des portions afin qu'elles suivent l'ordre selon lequel elles seront parcourues à partir du sommet jusqu'au pied de la montagne (c'est-à-dire de 1 à 5 plutôt que 5,1,2,3,4)&nbsp;:
-```{r}
+```{r, dev = 'png'}
 rando_sections <- rando_sections[c(5, 1:4),]
 rando_sections$id <-1:5
 mapview(rando_sections, zcol = "id")
@@ -1393,11 +1393,11 @@ Noter que la fonction `merge()` s'utilise sur deux *rasters* à la fois. Il faut
 
 Visualiser le *raster* final contenant les quatre zones tampons:
 
-```{r, warning=FALSE, eval=FALSE, warning = FALSE}
+```{r, warning=FALSE, eval=FALSE, warning = FALSE, dev = 'png'}
 mapview(dem_tampon_max)
 ```
 
-```{r, warning=FALSE, echo=FALSE, warning = FALSE}
+```{r, warning=FALSE, echo=FALSE, warning = FALSE,dev = 'png'}
 m <- mapview(dem_tampon_max)
 m@map
 ```

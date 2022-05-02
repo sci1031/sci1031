@@ -98,13 +98,13 @@ Expliquer chaque colonne
 #### tm_fill {-}
 remplir de façon homogène l'intérieur des limites d'un polygone
 
-```{r}
+```{r, dev = 'png'}
 tm_shape(Q)+ 
   tm_fill()
 ```
 
 #### Object tmap {-}
-```{r}
+```{r, dev = 'png'}
 map_Q<-tm_shape(Q)+ 
   tm_fill()
 
@@ -116,7 +116,7 @@ class(map_Q)
 #### Barre d'échelle et rose des vents {-}
 Ajout d'un barre d'échelle et d'une rose des vents.
 
-```{r}
+```{r, dev = 'png'}
 map_Q +   # la carte du Québec que nous avons créée plus haut
   # ajout d'une barre d'échelle
   tm_scale_bar(breaks = c(0,250,500),text.size = 0.8, position=c("right","bottom")) +
@@ -126,7 +126,7 @@ map_Q +   # la carte du Québec que nous avons créée plus haut
 
 
 Plusieurs options sont possibles. Utilisez `help(tm_scale_bar)` ou `help(tm_compass)` pour connaître les autres arguments possibles pour ces fonctions. Par exemple,
-```{r}
+```{r, dev = 'png'}
 map_Q +   
   tm_scale_bar(width = 2, position=c("right","bottom")) +
   tm_compass(type = "4star", size = 2, show.labels = 2, position = c("right", "top"))
@@ -141,7 +141,7 @@ Grid draws coordinates (in meter?) how is the x=0 determined?
 https://geocompr.github.io/post/2019/tmap-grid/
 
 The number of horizontal (x) and vertical (y) lines can be set using the n.x and n.y arguments. Importantly, tmap rounds coordinate values to equally spaced “round” values, so the number of actual labels may be slightly different than set with n.x and n.y.
-```{r}
+```{r, dev = 'png'}
 Q1<-tm_shape(Q)+tm_fill() + tm_grid(labels.size=0.5)
 Q2<-tm_shape(Q)+tm_fill() + tm_grid(col="yellow", lwd=3, n.x = 10, n.y = 4)
 #Q3<- tm_shape(Q)+ tm_grid(col="yellow", lwd=3, n.x = 3, n.y = 5 )+tm_fill()+tm_borders()
@@ -151,7 +151,7 @@ tmap_arrange(Q1,Q2)
 
 Donc c'est la meme chose mais graticule donne NSEW ?
 
-```{r}
+```{r, dev = 'png'}
 Q1<-tm_shape(Q)+tm_fill() + tm_grid()
 Q2<-tm_shape(Q)+tm_fill() + tm_grid(projection=4386) #4326  3857=pas capable ... 32610 idem
 Q3<-tm_shape(Q)+tm_fill() + tm_graticules()
@@ -159,7 +159,7 @@ tmap_arrange(Q2,Q3)
 
 ```
 
-```{r}
+```{r, dev = 'png'}
 Q1<-map_Q + tm_graticules()
 Q2<-tm_shape(Q)+ tm_graticules(col="blue")+tm_fill() 
 tmap_arrange(Q1,Q2)
@@ -167,7 +167,7 @@ tmap_arrange(Q1,Q2)
 
 
 #### Attribuer les crédits ou la source des données {-}
-```{r}
+```{r, dev = 'png'}
 map_Q + tm_credits("Données récupérées \ndu site donnéesquebec.ca", size = 0.6)
 ```
 
@@ -175,7 +175,7 @@ map_Q + tm_credits("Données récupérées \ndu site donnéesquebec.ca", size = 
 
 #### Identification des frontières des polygones {-}
 
-```{r}
+```{r, dev = 'png'}
 # frontiere des regions admin
 tm_shape(Q)+
   tm_borders()
@@ -183,7 +183,7 @@ tm_shape(Q)+
 
 
 
-```{r}
+```{r, dev = 'png'}
 # Quebec + frontiere
 tm_shape(Q)+
   tm_fill()+
@@ -191,7 +191,7 @@ tm_shape(Q)+
 ```
 
 
-```{r}
+```{r, dev = 'png'}
 
 # tm_polygons = tm_fill + tm_borders (condense into one signe function)
 tm_shape(Q)+
@@ -217,13 +217,13 @@ Rappel types de couleur
 #### Identification individuelle des polygones {-}
 Polygones de couleurs differentes.
 Il sait qu'on réfère à l'attribut désigné.
-```{r}
+```{r, dev = 'png'}
 tm_shape(Q)+tm_fill(col="NUM_REG", title = "Régions")
 ```
 
 On veut créer un autre shapefile uniquement pour la région de L'Ouatouais
 
-```{r}
+```{r, dev = 'png'}
 Q_Outaouais<-Q[Q$NOM_REG == "Outaouais",]
 tm_shape(Q_Outaouais)+tm_fill(col="blue", alpha = 0.4)
 ```
