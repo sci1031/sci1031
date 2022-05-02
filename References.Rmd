@@ -1,3 +1,17 @@
+```{r, child=if(knitr::is_latex_output()) '_knitr-options.Rmd'}
+```
+
+\backmatter
+
 `r if (knitr::is_html_output()) '
-# Références {-}
+# References {-}
 '`
+
+<div id="refs"></div>
+
+<!--  --> 
+```{r echo=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c("knitr"), "refs.bib", width = 60)
+```
+
