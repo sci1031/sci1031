@@ -307,7 +307,7 @@ blockquote {
   letter-spacing: 2px;
   font-family: arial;
   color: black;
-  border: 1px solid #000000 !important;
+/*  border: 1px solid #000000 !important;*/
 }
 .tableau table th {
   font-weight: 700;
