@@ -163,7 +163,7 @@ Les travaux corrigés seront remis au plus tard deux semaines suivant leur dép�
 library(kableExtra)
 
 
-data <- read.table("FeuilleRoute.csv", sep = ",", header = FALSE )
+data <- read.table("FeuilleRoute.csv", sep = ",", encoding="UTF-8", header = FALSE )
 colnames(data) <- NULL
 opts <- options(knitr.kable.NA = "", knitr.table.format = "simple")
 kbl(data,"html", align = c("l",rep("c",15))) %>% 
