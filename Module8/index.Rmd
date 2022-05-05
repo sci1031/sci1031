@@ -151,6 +151,7 @@ dem <- raster(chemin_dem)
 ```{r, echo = FALSE, warning = FALSE}
 #dem<-raster("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/DEM.tif")
 dem <- raster("Module8/Module8_donnees/DEM.tif")
+dem <- aggregate(dem, fact = 8, fun = max)
 ```
 <br>
 
