@@ -315,7 +315,7 @@ La bibliothèque `rmarkdown` permet de créer des documents de formats variés (
 
 R Markdown n'est pas un outil spécifique à la visualisation de données spatiales. Toutefois, puisqu'il constitue un outil d'édition, de visualisation et de diffusion fort pratique, nous l'utiliserons dans ce cours. En particulier, les évaluations devront être remises dans un fichier R Markdown `.Rmd`.
 
-À la fin de cette section vous saurez: 
+À la fin de cette introduction vous saurez: 
 
 ---
 
@@ -495,7 +495,7 @@ tinytex::install_tinytex()  # installer TinyTeX
 
 <br>
 
-#### Créer un fichier R Markdown {-}
+#### Créer un fichier R Markdown {.unnumbered #createmarkdownfile}
 
 
 Créer un fichier R Markdown, c'est simplement créer un fichier dont l'extension
@@ -528,7 +528,7 @@ L'entête YAML sert à spécifier différentes propriétés des documents à gé
 partir du fichier `.Rmd` (par exemple, le titre, la date, les polices de caractères
 utilisées, ajout d'une table des matières, etc.) grâce à des gabarits (*templates* en anglais) utilisés par Pandoc.
 
-Lorsque vous créez un fichier `.Rmd` avec R Studio, une entête YAML est créée par défaut avec les champs: titre, auteur ou autrice, date et format de la sortie. 
+Lorsque vous créez un fichier `.Rmd` avec R Studio, une entête YAML est créée par défaut avec les champs: titre, autrice ou auteur, date et format de la sortie. 
 
 ````markdown
 ---
@@ -542,14 +542,7 @@ output: html_document
 <br>
 
 Les champs disponibles dépendent des gabarits utilisés qui sont spécifiques à un format donné, les champs par défaut varient
-ainsi d'un format à l'autre. 
-
-Pour un aperçu assez complet des options YAML
-utilisables dans un fichier R Markdown, rendez-vous à la dernière page du [guide de
-référence](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
-Notez qu'il est possible de créer ses propres gabarits et donc d'ajouter autant
-de champs que désiré. 
-
+ainsi d'un format à l'autre. Notez qu'il est possible de créer ses propres gabarits et donc d'ajouter autant de champs que désiré. 
 
 Un champ donné peut contenir une chaîne de caractères, une date, des chiffres ou encore une liste:
 
@@ -570,8 +563,21 @@ nomduchamp:
 On utilise l'indentation pour signifier la hiérarchie entre les différents éléments. <br>
 Les commentaires sont introduits par un "\#".
 
+<br> 
 
-Voici quelques champs utiles pour un format de sortie HTML:
+Pour un aperçu assez complet des options YAML utilisables dans un fichier R Markdown, rendez-vous à la dernière page du [guide de
+référence](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
+
+
+Voici quelques exemples de champs valables pour les sorties HTML, PDF et docx:
+
+* `abstract`: le texte d'un résumé apparaissant au début du document produit. 
+* `description` : la description du contenu du fichier. celle-ci n'apparaîtra pas sur le document produit. Utiliser les guillemets pour un texte long ou avec des signes de ponctuation. 
+
+<br>
+
+
+Pour un document HTML, plusieurs champs additionnels sont utiles:
 
 * `theme`: le thème Bootstrap[^boostrap] à utiliser pour l'apparence du document HTML. Les thèmes disponibles sont: `default`, `bootstrap`, `cerulean`, `cosmo`, `darkly`, `flatly`, `journal`, `lumen`, `paper`, `readable`, `sandstone`, `simplex`, `spacelab`, `united`, et `yeti`. Consultez la page de la bibliothèque [Bootswatch](https://bootswatch.com/3/) pour voir à quoi ces thèmes ressemblent. 
 
@@ -591,20 +597,163 @@ Voici quelques champs utiles pour un format de sortie HTML:
    * `collapsed`: permettre ou non un menu de type accordéon qui se referme et se déploie.
    * `smooth_scroll`: colorer ou non le titre d'une section dans le menu lors de la navigation sur la page.
 
+* `fig_width`: la largeur des figures. 
 
-     
-   
-<!--* `abstract`: le texte d'un résumé apparaissant au début du document produit.-->
+* `fig_height`: la hauteur des figures.
+    
+* `fig_caption`: inclure ou non une légende aux figures.
+
+
+<br>
+
+Pour les documents PDF, les champs suivants peuvent être précisés:
+
+* `fontfamily`: la police de caractère.
+
+* `fontsize`: la taille des caractères.
+
+
+<br>
+
 
 #### Éditer le contenu du fichier R Markdown {-}
 
-#### Obtenir le document final (ou les documents finaux) {-}
+
+Le contenu principal d'un fichier R Markdown contient du texte et des blocs de code R.
+
+Le texte doit suivre la syntaxe Pandoc Markdown. Nous détaillerons cette [syntaxe](#pandocmarkdown) dans la deuxième partie de cette introduction à R Markdown, à la section [Exercices](#ex_markdown2) du Module 3.
+
+Les blocs de code R sont ce qui distinguent un fichier R Markdown d'un fichier Markdown. La façon dont le code R est intégré au document final est déterminé par une suite de paramètres. Ces paramètres contrôlent, par exemple, si le code est affiché, si le résultat est affiché, la position d'un graphique produit, etc. 
+Nous détaillerons également ces [paramètres](#blocsR) dans la deuxième partie de cette introduction à R Markdown.
+
+Lorsque vous créer un fichier R Markdown dans RStudio, un exemple est donné par défaut. Cet exemple contient du texte selon la syntaxe Pandoc de Markdown et du code R. 
+
+<br>
+
+#### Obtenir le document final {-}
 
 
-### Le variante Pandoc de Markdown
+Pour générer le document final à partir du fichier R Markdown, nous utilisons la fonction `render()` de la bibliothèque `rmarkdown`.  
+Il s'agit d'appeler le fichier `*.Rmd` en spécifiant le chemin vers son répertoire.
+
+```R
+render("chemin/ex_Rmardown.rmd")
+```
+<br>
+
+Nous pouvons ajouter l'argument `all` pour obtenir tous les documents (PDF, HTML, Word) pour lesquels une spécification YAML existe. 
+
+
+```R
+render("ex_Rmardown.rmd", "all")
+```
+<br>
+
+Avec RStudio, que nous utilisons dans ce cours, générer le document final peut se faire de façon encore plus simple.
+Il s'agit d'appuyer sur le bouton **Knit** en haut à gauche dans le menu horizontal du fichier R Markdown. Vous pouvez aussi choisir le format de la sortie dans le menu déroulant associé au bouton Knit : Knit to PDF, Knit to HTML, ou Knit to Word.
 
 
 
+### À vous de jouer ! {#exo2}
+
+
+#### Question 1 {-}
+
+Suivez la démarche présentée pour créer un fichier R Markdown en choisissant le format de sortie HTML ([rappel](#createmarkdownfile)). Préciser les champs de l'entête YAML selon les indications données. Ne modifier pas le contenu du fichier. Créer le document final.
+
+**a)**  
+
+
+````markdown
+---
+title: "Bonjour Markdown!"
+author: "Votre nom"
+date: "La date"
+abstract: "Ce document HTML constitue ma première tentative de modifier l'entête YAML d'un document R Markdown"
+description: "Eh bien, je pensais que ça serait plus difficile!"
+output: 
+  html_document:
+    theme: yeti
+    highlight: breezedark
+---
+````
+<br>
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1031/sci1031/raw/master/Module2/Question1a.html).  
+
+<br>
+
+</p>
+</details>
+
+<br>
+
+**b)** 
+
+````markdown
+---
+title: "Document HTML produit avec le thème darkly"
+author: "Votre nom"
+date: "la date"
+output:
+  html_document:
+    theme: darkly
+    toc: true
+    number_section: true
+---
+````
+<br>
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1031/sci1031/raw/master/Module2/Question1b.html).  
+
+<br>
+
+</p>
+</details>
+
+<br>
+
+#### Question 2 {-}
+
+Suivez la démarche présentée pour créer un fichier R Markdown en choisissant le format de sortie PDF ([rappel](#createmarkdownfile)). Préciser les champs de l'entête YAML selon les indications données. Ne modifier pas le contenu du fichier. Créer le document final.
+
+````markdown
+---
+title: "Mon premier document PDF produit avec R Markdown"
+author: "Votre nom"
+date: "La date"
+abstract: "Résumez toute votre vie depuis votre naissance jusqu'au moment où vous vous êtes incrit dans le cours SCI 1031!"
+output: 
+  pdf_document:
+    fig_width: 3
+    fig_height: 3
+    toc: true
+    number_section: true
+
+---
+````
+<br>
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1031/sci1031/raw/master/Module2/Question2.pdf).  
+
+<br>
+
+</p>
+</details>
+
+<br>
 
 
 [^wiki_gruber]: <https://en.wikipedia.org/wiki/John_Gruber>, consulté le 28 avril 2022.
