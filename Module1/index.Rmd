@@ -1110,7 +1110,7 @@ Télécharger le dossier [Module1_donnees.zip](https://github.com/sci1031/sci103
 
 
 
-### Question 1 {-}
+#### Question 1 {-}
 
 **a)** Utiliser la fonction `read.csv` pour importer les données dans votre session de travail R. Nommer l'objet importer *villes*.
 
@@ -1209,7 +1209,7 @@ Nous observons qu'il y a 17 niveaux correspondants à chacune des régions admin
 
 <br>
 
-### Question 2 {-}
+#### Question 2 {-}
 
 **a)** Créer l'objet `Mtl` qui contient seulement les entrées du *data frame* `villes` pour la municipalité de Montréal.
 
@@ -1257,7 +1257,7 @@ head(villes_Outaouais)
 
 <br>
 
-### Question 3 {-}
+#### Question 3 {-}
 
 **a)** Créer un histogramme de la distibution de la population des villes du Québec comprenant une dizaine de bandes. Utiliser la fonction `log10()` pour représenter la taille des populations. Préciser les axes de votre graphique adéquatement.
 
