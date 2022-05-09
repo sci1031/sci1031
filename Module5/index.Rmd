@@ -490,7 +490,7 @@ filename_rcrop = "Module5/data/Temp_vdq.tif"
 #filename_rcrop =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module5/data/Temp_vdq.tif"
 T_vdq <- raster(filename_rcrop)
 
-T_vdq
+#T_vdq <- aggregate(T_vdq, 5)
 ```
 
 <br>
@@ -808,7 +808,7 @@ Cette information nous précise que nous venons de lire une seule bande alors qu
 
 ```{r, warning = FALSE, message = FALSE}
 S_mult <- brick(filename)
-S_mult
+S_mult <-aggregate(S_mult,4)
 ```
 <br>
 
