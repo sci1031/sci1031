@@ -803,6 +803,11 @@ S
 ```
 <br>
 
+```{r}
+mapview(S)
+```
+
+
 Nous remarquons qu'une information supplémentaire est apparue dans le description du *raster*. Il s'agit de `band : 1 (of 3 bands)`.
 Cette information nous précise que nous venons de lire une seule bande alors que ces données matricielles en contiennent trois. Lorsque nous rencontrons un *raster* de plusieurs bandes, il faut plutôt utiliser la fonction `brick()` ou la fonction `stack()` de la bibliothèque `raster` pour lire l'ensemble des bandes.
 
