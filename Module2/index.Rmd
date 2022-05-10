@@ -683,7 +683,7 @@ output:
 <summary> Réponse</summary>
 <p>
 
-Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1031/sci1031/raw/master/Module2/Question1a.html).  
+Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1031/sci1031/raw/master/Module2/Question1a.png).  
 
 <br>
 
@@ -712,7 +712,7 @@ output:
 <summary> Réponse</summary>
 <p>
 
-Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1031/sci1031/raw/master/Module2/Question1b.html).  
+Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1031/sci1031/raw/master/Module2/Question1b.png).  
 
 <br>
 
