@@ -392,3 +392,438 @@ Lorsqu’on combine des couches de données différentes, on doit s’assurer qu
 
 
 ## Exercices {#ex_markdown2}
+
+
+Dans cette section nous poursuivons l'introduction à R Markdown entamée dans la section [Exercices](#ex_markdown1) du module 2.
+
+Rappelons les objectifs de cette introduction.
+
+---
+
+ - Décrire en quoi consiste R Markdown;
+ - Décrire les liens entre R, Markdown et Pandoc;
+ - Utiliser la syntaxe Pandoc Markdown de base;
+ - Créer des documents dynamiques avec la bibliothèque `rmarkdown`. 
+ 
+---
+
+<br>
+<br>
+
+> Cette introduction à RMarkdown a été rédigée par Kevin Cazelles, collobateur clé à réalisation de ce cours. Kevin est un chercheur en écologie computationnelle et fervent utilisateur des outils pour la science ouverte. Allez voir ses travaux sur son site  <https://kevcaz.insileco.io/>  et son profil GitHub <https://github.com/KevCaz>.
+
+
+<br>
+
+### Le variante Pandoc de Markdown {#pandocmarkdown}
+
+
+Dans cette partie, nous détaillons les éléments de formatage du texte proposés par
+la syntaxe Pandoc de Markdown^[Vous pouvez également consulter le [site de
+référence de Pandoc](http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html) et le résumé à la première page du [guide de référence R Markdown](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
+Pour une source en français, le guide 
+"Élaboration et conversion de documents avec Markdown et Pandoc"
+(<http://enacit1.epfl.ch/markdown-pandoc/>) écrit par Jean-Daniel Bonjour fournit un excellent tour d'horizon.]
+
+<br>
+
+#### Informations de départ {-}
+
+
+De façon générale, nous écrivons du texte dans un fichier R Markdown de la même façon que nous le ferions dans un document Word. Nous pouvons, par exemple, écrire des accents français sans problème.
+
+Pour créer des paragraphes ...
+
+- Certains symboles sont réservés au formatage du texte. Il s'agit des symboles \\, \&, \#, \$ et \[. Lorsque leur affichage est requis, c'est-à-dire lorsque nous désirons les utiliser dans notre texte, nous devons les faire précéder du caractère d'échappement qui est, pour Markdown, l'antislash&nbsp;: "\\". Par exemple, nous devons entrer &nbsp;:
+
+        
+        \\ \& \# \$ \[
+        
+
+  Pour obtenir&nbsp;: \\ \& \# \$ \[.
+
+- Pour rédiger des commentaires dans le texte qui ne seront pas affichés dans le document final, nous utilisons `<!--` devant le commentaire et `-->` après celui-ci.
+
+<!-- J'ajoute que certains sauts de ligne sont
+obligatoires pour obtenir la mise en page désirée (pour les notes de bas de page
+par exemple).-->
+
+
+
+
+
+
+#### Décoration du texte {-}
+
+- Pour écrire du *texte en italique*, vous avez deux possibilités&nbsp;:
+
+        
+        *le texte à mettre en italique*
+        _le texte à mettre en italique_
+        
+
+- Pour écrire du **texte en gras**, vous avez aussi deux possibilités&nbsp;:
+
+        
+        **le texte à mettre en gras**
+        __le texte à mettre en gras__
+        
+
+- Pour écrire du **_texte en gras et italique_**, utilisez&nbsp;:
+
+        
+        **le _texte en italique et en gras_**
+        
+
+- Pour obtenir un ~~texte rayé~~, entrez&nbsp;:
+
+        
+        ~~texte rayé~~
+        
+
+- Pour écrire un élément en ^exposant^, utilisez&nbsp;:
+
+        
+        ^texte en exposant^
+        
+
+- Pour écrire un élément en ~indice~, tapez&nbsp;:
+
+        
+        ~texte en indice~
+
+<br>
+
+Notez qu'il n'y a pas de balises pour le soulignement du texte. De manière
+générale, quand un élément de mise en page manque dans la syntaxe, il est
+toujours possible d'utiliser des commandes d'un langage. Par exemple, pour
+souligner dans un document qui sera produit en HTML, je peux utiliser `<u>texte
+souligné</u>` mais cela ne me permettra pas d'avoir un texte souligné en Word ou
+en PDF. De même que si j'utilise `\underline{texte souligné}` le texte sera
+souligné en PDF, mais pas en HTML ni en Word. 
+
+Procéder de la sorte n'est pas toujours souhaité car le document R Markdown perd en généralité, en ce sens où
+il  ne pourra pas être correctement généré dans tous les formats. Cela n'est
+cependant pas nécessairement un problème, par exemple, si vous souhaiteZ obtenir
+le document en un seul format, ce fonctionnement devient un atout puisque vous
+pouvez utiliser toute la gamme de mise en forme offert par le langage en question.
+
+
+
+#### Les titres {-}
+
+La façon la plus simple de désigner les titres dans un texte se fait par l'utilisation du symbole `#` (ATX heading). Un seul `#` désigne un titre de premier niveau, et nous utilisons un nombre croissant de `#` pour
+descendre dans l'arborescence des titres:
+
+```md
+# Un titre d'ordre 1
+## Un titre d'ordre 2
+### Un titre d'ordre 3
+```
+<br>
+
+Il est aussi possible d'utiliser une série de "=" en dessous des titres de
+premier niveau et une ligne de "-" en dessous des titres de niveau 2. Cette
+option a la qualité de permettre de repérer facilement les titres dans le code
+source.
+
+
+```md
+Un titre d'ordre 1
+==================
+Un titre d'ordre 2
+------------------
+### Un titre d'ordre 3
+```
+
+<br>
+
+#### Les listes {-}
+
+Les listes sont très intuitives en Markdown, alors qu'elles requièrent des
+balises un peu lourdes aussi bien en Latex qu'en HTML. Dans les exemples
+donnés, il faut toujours séparer le texte principal de la liste par des sauts
+de ligne. 
+
+<!--Aussi, il y a une différence de format-->
+
+
+##### Listes non numérotées {-}
+
+Pour obtenir une liste non numérotée, nous pouvons utiliser le symbole `*` &nbsp;:
+
+```md
+* objet 1,
+* objet 2,
+* objet 3.
+```
+<br>
+
+ou bien le symbole `+` &nbsp;:
+
+```md
++ objet 1,
++ objet 2,
++ objet 3.
+```
+<br>
+
+ou encore le symbole `-` &nbsp;:
+
+```md
+- objet 1,
+- objet 2,
+- objet 3.
+```
+<br>
+
+et même &nbsp;:
+
+```md
++ objet 1,
+* objet 2,
+- objet 3.
+```
+<br>
+
+Dans tous les cas, la liste produite s'affiche ainsi&nbsp;:
+
++ objet 1,
++ objet 2,
++ objet 3.       
+
+<br>
+
+##### Listes espacées {-}
+
+Pour produire une liste plus aérée, nous pouvons ajouter un espace entre les éléments de la liste. Lorsque le document produit est en HTML, ce formatage produit une balise paragraphe (c'est-à-dire que `<p> </p>` est ajouté). 
+
+```md
+* objet 1,
+
+* objet 2,
+
+* objet 3.
+```
+<br>
+
+devient:
+
+* objet 1,
+
+* objet 2,
+
+* objet 3.
+
+<br>
+
+##### Listes hiérarchisées {-}
+
+Pour créer des listes hiérarchisées, il s'agit d'utiliser une indentation de quatre espaces (ou une tabulation) entre chaque niveau. Par exemple, ceci: 
+
+
+```md
+- objet 1,
+    + machin 1
+        - chose 1
+        - chose 2
+    + machin 2
+- objet 2,
+- objet 3.
+```
+<br>
+
+Produit cette liste:
+
+- objet 1,
+    + machin 1
+        - chose 1
+        - chose 2
+    + machin 2
+- objet 2,
+- objet 3.
+
+<br>
+
+
+##### Listes avec du texte ou du code {-}
+
+Pour alterner des éléments d'une liste avec du texte ou du code, il faut utiliser des sauts de
+lignes avec l'indentation adéquate. Ainsi, avec les lignes suivantes&nbsp;:
+
+```md
+- élément 1&nbsp;:
+
+    Un petit texte qui pourrait expliciter ce qu'est l'élément 1.
+
+- machin 2:
+
+          for (i in 1:2) print(i)
+```
+<br>
+
+nous obtenons&nbsp;:
+
+
+- élément 1&nbsp;:
+
+    Un petit texte qui pourrait expliciter ce qu'est l'élément 1.
+
+- machin 2:
+
+      for (i in 1:2) print(i)
+
+<br>
+
+
+
+##### Listes numérotées {-}
+
+Pour créer une liste numérotée, il suffit de numéroté chaque élément de la liste. Par exemple: 
+
+```md
+1. machin 1,
+2. machin 2,
+3. machin 3.
+```
+<br>
+
+produit ceci: 
+
+1. machin 1,
+2. machin 2,
+3. machin 3.
+
+<br>
+
+Si les nombres ne sont pas écrits manière ordonnée, cela ne changera pas le
+résultat. Néanmoins, le premier nombre détermine le numéro de départ de la liste. En
+écrivant&nbsp;:
+
+```md
+3. machin 1,
+3. machin 2,
+3. machin 3,
+5. machin 4.
+```
+
+<br>
+
+nous obtenons:
+
+3. machin 1,
+3. machin 2,
+3. machin 3,
+5. machin 4.
+
+<br>
+
+Pour ne pas se soucier des numéros, il existe un style par défaut&nbsp;:
+
+```md
+#. machin 1,
+#. machin 2,
+#. machin 3.
+```
+<br>
+
+Nous retrouvons bien la première liste numérotée&nbsp;:
+
+#. machin 1,
+#. machin 2,
+#. machin 3.
+
+<br>
+
+
+Plusieurs styles de numérotation sont disponibles. Par exemple, en écrivant&nbsp;:
+
+```md
+ #) élément 1
+ #) élément 2
+ #) élément 3
+ (1) truc 1
+ (2) truc 2
+ (5) truc 3
+       i. machin 1
+       i. machin 2
+       i. machin 3
+```
+<br>
+
+nous obtenons&nbsp;:
+
+#) élément 1
+#) élément 2
+#) élément 3
+(1) truc 1
+(2) truc 2
+(5) truc 3
+      i. machin 1
+      i. machin 2
+      i. machin 3
+
+<br>
+
+Nous avons aussi la possibilité de mélanger les niveaux numérotés et les niveaux
+non-numérotés. Par exemple, cette liste
+
+```md
+1. machin 1,
+    1. machin 1.1,
+    2. machin 1.2,
+2. machin 2,
+    - machin 2.1,
+    - machin 2.2,
+    - machin 3,
+3. machin 4,
+4. machin 5.
+```
+
+<br>
+
+donne ceci &nbsp;:
+
+1. machin 1,
+    1. machin 1.1,
+    2. machin 1.2,
+2. machin 2,
+    - machin 2.1,
+    - machin 2.2,
+- machin 3,
+3. machin 4,
+4. machin 5.
+
+<br>
+
+Enfin, il possible de mettre manuellement fin à une liste en introduisant un
+commentaire entre les listes à séparer&nbsp;:
+
+```md
+	(1) truc 1
+	(2) truc 2
+	(3) truc 2b
+
+	<!-- end -->
+
+	(1) truc 3
+	(2) truc 4
+```
+
+ces lignes sont rendues ainsi&nbsp;:
+
+(1) truc 1
+(2) truc 2
+(3) truc 2b
+
+<!-- end -->
+
+(1) truc 3
+(2) truc 4
+
+
+
+
+
+### Les blocs de code R {#blocsR}
+
