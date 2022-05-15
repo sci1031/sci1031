@@ -27,11 +27,15 @@ R Markdown permet de créer des documents dynamiques de formats variés (dont HT
 ## Leçon
 
 
-Les phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout mais qui ne possèdent pas de frontières naturelles^[Repris de l'introduction aux données spatiales du site [Spatial Data Science](https://rspatial.org/raster/spatial/2-spatialdata.html).]. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes (\@ref(fig:vectomat)a). D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux (\@ref(fig:vectomat)b).
+Les phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout mais qui ne possèdent pas de frontières naturelles^[Repris de l'introduction aux données spatiales du site [Spatial Data Science](https://rspatial.org/raster/spatial/2-spatialdata.html).]. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes. D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux.
 
 <br>
-```{r vectomat, fig.align='left', echo=FALSE, fig.cap="Exemples de données vectorielles et matricielles : a) La carte délimitant les régions administratives du Québec est formée à partir de données vectorielles; b) La carte topographique du Québec (source : [https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/)](https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/))", out.width = '100%'}
-knitr::include_graphics('Module2/images/2_vecto_vs_mat.png')
+```{r vectomat, fig.align='left', echo=FALSE, fig.cap="Exemples de données vectorielles et matricielles. Gauche: La carte délimitant les régions administratives du Québec est formée à partir de données vectorielles. Droite: La carte topographique du Québec (source : [https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/)](https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/))", out.width = c('50%','50%'), fig.show = 'hold'}
+#knitr::include_graphics('Module2/images/2_vecto_vs_mat.png')
+a1<-'Module2/images/2_regionsadminQC.png'
+a2<-'Module2/images/2_elevationQC.png'
+m12 <- c(a1,a2)
+knitr::include_graphics(rep(m12),1)
 ```
 <br>
 
@@ -61,8 +65,8 @@ Les données vectorielles comprennent également des variables additionnelles ap
 Les **points** sont les données vectorielles les plus simples. Par exemple, un point pourrait représenter l’emplacement d’un restaurant dans une ville. Les attributs associés à ce point pourraient inclure les heures d’ouverture, sa spécialité culinaire, l’échelle de prix de son menu ou d’autres informations.
 
 <br>
-```{r multipoints, fig.align='left', echo=FALSE,fig.cap="L’emplacement des stations de vélo en libre partage, *Bixi*, dans un quartier de Montréal correspond à une géométrie multipoints. Source : https://secure.bixi.com/map/", out.width = '60%'}
-knitr::include_graphics('Module2/images/2_multipoints.PNG')
+```{r multipoints, fig.align='left', echo=FALSE,fig.cap="L’emplacement des stations de vélo en libre partage, *Bixi*, dans un quartier de Montréal correspond à une géométrie multipoints. Source : https://secure.bixi.com/map/.", out.width = '80%'}
+knitr::include_graphics('Module2/images/2_multipoints.jpg')
 ```
 <br>
 
@@ -71,8 +75,8 @@ Il est aussi possible de combiner plusieurs points ensemble dans une structure m
 La géométrie des **lignes** est plus complexe. Le terme ligne en analyse spatiale n’a pas la même définition que dans le langage usuel. Une ligne désigne un ensemble d’une seule ou de plusieurs polylignes (Figure \@ref(fig:multilignes)). Une polyligne, quant à elle, désigne une séquence de segments de droite reliés entre eux. Ainsi, en analyse spatiale, une seule ligne pourrait représenter le fleuve Saint-Laurent et l’ensemble de ces affluents (rivière des Outaouais, rivière Saint-Maurice, le Fjord du Saguenay, etc.). D’autre part, il serait aussi possible de définir plusieurs lignes – une pour chaque affluent, par exemple.
 
 <br>
-```{r multilignes, fig.align='left', echo=FALSE,fig.cap="Le réseau hydrologique du bassin de l’Amazone représente un exemple d’un ensemble de polylignes. Source : Wang et al. 2020.", out.width = '60%'}
-knitr::include_graphics('Module2/images/2_multilignes.png')
+```{r multilignes, fig.align='left', echo=FALSE,fig.cap="Le réseau hydrologique du bassin de l’Amazone représente un exemple d’un ensemble de polylignes. Source : Wang et al. 2020.", out.width = '50%'}
+knitr::include_graphics('Module2/images/2_multilignes.jpg')
 ```
 <br>
 
@@ -107,8 +111,11 @@ Les données vectorielles peuvent être stockées dans une grande variété de f
 Peu importe leur format, les données vectorielles sont toujours organisées selon une *base de données relationnelle*. Un identifiant désigne chaque objet spatial et l’associe à une géométrie et à un ou plusieurs attributs (Tableau \@ref(fig:baserelationnelle)).
 
 <br>
-```{r baserelationnelle, fig.align='left', echo=FALSE, fig.cap="Exemple d’une base de données relationnelle pour la carte des régions administratives du Québec (Figure \\@ref(fig:vectomat)a). Chaque objet vectoriel dans la carte correspond à une ligne dans la base de données où figurent les attributs qui lui sont associés", out.width = '100%'}
-knitr::include_graphics('Module2/images/2_baserelationnelle.png')
+```{r baserelationnelle, fig.align='left', echo=FALSE, fig.cap="Exemple d’une base de données relationnelle pour la carte des régions administratives du Québec (Figure \\@ref(fig:vectomat)). Chaque objet vectoriel dans la carte correspond à une ligne dans la base de données où figurent les attributs qui lui sont associés", out.width = c('55%','41%'), fig.show = 'hold'}
+a1<-'Module2/images/2_baserelationnelleA.png'
+a2<-'Module2/images/2_baserelationnelleB.png'
+m12 <- c(a1,a2)
+knitr::include_graphics(rep(m12),1)
 ```
 <br>
 
@@ -187,15 +194,18 @@ La valeur d’une cellule peut être continue (p. ex. l’élévation - voir Fig
 
 <br>
 ```{r raster, fig.align='left', echo=FALSE,fig.cap="Exemple de données matricielles associées à des classes de végétation obtenues à partir d’une image satellitaire. Figure inspirée de NEON neonscience.org/resources/series/introduction-working-raster-data-r", out.width = '100%'}
-knitr::include_graphics('Module2/images/2_raster.png')
+knitr::include_graphics('Module2/images/2_raster.jpg')
 ```
 <br>
 
 On peut utiliser une base de données relationnelle pour lier la valeur d’un pixel à l’attribut qu’il décrit (Figure  \@ref(fig:rastertable)). Contrairement aux données vectorielles où les polygones peuvent être associés à plusieurs attributs, une couche de données matricielles peut représenter un seul attribut.
 
 <br>
-```{r rastertable, fig.align='left', echo=FALSE,fig.cap="Exemple de table relationnelle pour les données vectorielles de la Figure ref(fig:raster). Une valeur numérique est associée à chaque couleur de l’image ainsi qu’à un attribut, ici le type de végétation", out.width = '80%'}
-knitr::include_graphics('Module2/images/2_raster_table.png')
+```{r rastertable, fig.align='center', echo=FALSE,fig.cap="Exemple de table relationnelle pour les données vectorielles de la Figure \\@ref(fig:raster). Une valeur numérique est associée à chaque couleur de l’image ainsi qu’à un attribut, ici le type de végétation.", out.width = c('45%','49%'), fig.show = 'hold'}
+a1<-'Module2/images/2_raster_tableB.png'
+a2<-'Module2/images/2_raster_tableC.png'
+m12 <- c(a1,a2)
+knitr::include_graphics(rep(m12),1)
 ```
 <br>
 
@@ -209,7 +219,7 @@ La **résolution** définie la précision avec laquelle nous pouvons discerner l
 
 <br>
 ```{r resolution, fig.align='left', echo=FALSE,fig.cap="Exemple du concept de résolution: plus la résolution est grande, plus la taille des cellules est petite. Dans cette figure, la résolution diminue de droite à gauche, et la taille des cellules augmente. Source de données: https://mern.gouv.qc.ca/nos-publications/spatiocarte-quebec/", out.width = '100%'}
-knitr::include_graphics('Module2/images/2_resolution.png')
+knitr::include_graphics('Module2/images/2_resolution.jpg')
 ```
 <br>
 
@@ -250,7 +260,7 @@ En combinant ces bandes, on peut recréer l’image (Figure \@ref(fig:3bands)). 
 
 <br>
 ```{r 3bands, fig.align='left', echo=FALSE,fig.cap="Image satellitaire de région de l’Estrie. Le raster multi-bande contient une bande de rouge, une bande de vert et une bande de bleu. L’image couleur s’obtient en combinant les trois bandes.  Source de données: https://mern.gouv.qc.ca/nos-publications/spatiocarte-quebec/", out.width = '100%'}
-knitr::include_graphics('Module2/images/2_3bands.png')
+knitr::include_graphics('Module2/images/2_3bands.jpg')
 ```
 <br>
 
@@ -295,7 +305,7 @@ Lorsque nous travaillons avec des données spatiales, il est fréquent de devoir
 
 <br>
 ```{r couches, fig.align='left', echo=FALSE,fig.cap="Représentation de données spatiales par la superposition de couches thématiques. Source: Esri. Image récupérée à https://desktop.arcgis.com/fr/arcmap/10.3/guide-books/map-projections/what-are-map-projections.htm", out.width = '80%'}
-knitr::include_graphics('Module2/images/2_couches.png')
+knitr::include_graphics('Module2/images/2_couches.jpg')
 ```
 <br>
 
