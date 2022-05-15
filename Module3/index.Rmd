@@ -432,17 +432,107 @@ Pour une source en français, le guide
 
 De façon générale, nous écrivons du texte dans un fichier R Markdown de la même façon que nous le ferions dans un document Word. Nous pouvons, par exemple, écrire des accents français sans problème.
 
-Pour créer des paragraphes ...
 
-- Certains symboles sont réservés au formatage du texte. Il s'agit des symboles \\, \&, \#, \$ et \[. Lorsque leur affichage est requis, c'est-à-dire lorsque nous désirons les utiliser dans notre texte, nous devons les faire précéder du caractère d'échappement qui est, pour Markdown, l'antislash&nbsp;: "\\". Par exemple, nous devons entrer &nbsp;:
+##### Les paragraphes {-}
 
-        
-        \\ \& \# \$ \[
-        
+Pour créer des paragraphes, il faut ajouter une ligne (ou plus) vide entre les paragraphes. 
+Ainsi, avec les lignes suivantes :
 
-  Pour obtenir&nbsp;: \\ \& \# \$ \[.
+```md
+Un datum est un système de référence qui détermine la position 
+d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport 
+au centre du globe, ainsi que son orientation. 
 
-- Pour rédiger des commentaires dans le texte qui ne seront pas affichés dans le document final, nous utilisons `<!--` devant le commentaire et `-->` après celui-ci.
+Les datums géocentriques sont associés à des ellipsoïdes 
+globaux. Ce sont des systèmes de référence terrestres globaux 
+dont l’origine correspond au centre de masse de la Terre.
+```
+<br>
+
+nous obtenons :
+
+
+<div class="boite emphase">
+
+Un datum est un système de référence qui détermine la position d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport au centre du globe, ainsi que son orientation. 
+
+Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre.
+
+</div>
+
+
+Notez qu'avec un simple retour à la ligne, aucun saut de ligne n'est inséré. Les paragraphes sont alors affichés bout à bout. Par exemple, ce texte:
+
+
+
+```md
+Un datum est un système de référence qui détermine la position 
+d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport 
+au centre du globe, ainsi que son orientation. 
+Les datums géocentriques sont associés à des ellipsoïdes 
+globaux. Ce sont des systèmes de référence terrestres globaux 
+dont l’origine correspond au centre de masse de la Terre.
+```
+<br>
+
+s'affiche comme ceci:
+
+<div class="boite emphase">
+
+Un datum est un système de référence qui détermine la position d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport au centre du globe, ainsi que son orientation. 
+Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre.
+</div>
+
+Il est cependant possible d'ajouter un retour à la ligne en utilisant un retour à la ligne et tabulation à la fin du premier paragraphe. Par exemple, ce texte:
+
+
+```md
+Un datum est un système de référence qui détermine la position 
+d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport 
+au centre du globe, ainsi que son orientation.          
+Les datums géocentriques sont associés à des ellipsoïdes 
+globaux. Ce sont des systèmes de référence terrestres globaux 
+dont l’origine correspond au centre de masse de la Terre.
+```
+<br>
+
+s'affiche comme ceci:
+
+<div class="boite emphase">
+
+Un datum est un système de référence qui détermine la position d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport au centre du globe, ainsi que son orientation.               
+Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre.
+</div>
+
+La seule différence entre cet exemple et l'exemple précédent est l'ajout d'une tabulation après
+"orientation.".
+
+<br>
+
+##### Les symboles réservés {-}
+
+
+Certains symboles sont réservés au formatage du texte. Lorsque leur affichage est requis, c'est-à-dire lorsque nous désirons les utiliser dans notre texte, nous devons les faire précéder du caractère d'échappement qui est, pour Markdown, l'antislash&nbsp;: "\\". 
+
+Par exemple, nous devons entrer &nbsp;:
+
+```md
+\\ \& \# \$ \[
+```
+<br>
+    
+Pour obtenir&nbsp;: 
+    
+<div class="boite emphase">
+
+\\ \& \# \$ \[
+
+</div> 
+  
+##### Les commentaires {-}
+
+
+Pour rédiger des commentaires dans le texte qui ne seront pas affichés dans le document final, nous utilisons `<!--` devant le commentaire et `-->` après celui-ci.
 
 <!-- J'ajoute que certains sauts de ligne sont
 obligatoires pour obtenir la mise en page désirée (pour les notes de bas de page
@@ -450,7 +540,7 @@ par exemple).-->
 
 
 
-
+<br>
 
 
 #### Décoration du texte {-}
@@ -588,9 +678,13 @@ et même &nbsp;:
 
 Dans tous les cas, la liste produite s'affiche ainsi&nbsp;:
 
+
+<div class="boite emphase">
+
 + objet 1,
 + objet 2,
-+ objet 3.       
++ objet 3.   
+</div>
 
 <br>
 
@@ -609,11 +703,15 @@ Pour produire une liste plus aérée, nous pouvons ajouter un espace entre les �
 
 devient:
 
+<div class="boite emphase">
+
 * objet 1,
 
 * objet 2,
 
 * objet 3.
+
+</div>
 
 <br>
 
@@ -633,7 +731,9 @@ Pour créer des listes hiérarchisées, il s'agit d'utiliser une indentation de 
 ```
 <br>
 
-Produit cette liste:
+produit cette liste:
+
+<div class="boite emphase">
 
 - objet 1,
     + machin 1
@@ -642,6 +742,8 @@ Produit cette liste:
     + machin 2
 - objet 2,
 - objet 3.
+
+</div>
 
 <br>
 
@@ -664,6 +766,7 @@ lignes avec l'indentation adéquate. Ainsi, avec les lignes suivantes&nbsp;:
 
 nous obtenons&nbsp;:
 
+<div class="boite emphase">
 
 - élément 1&nbsp;:
 
@@ -672,6 +775,8 @@ nous obtenons&nbsp;:
 - machin 2:
 
       for (i in 1:2) print(i)
+      
+</div>
 
 <br>
 
@@ -679,7 +784,7 @@ nous obtenons&nbsp;:
 
 ##### Listes numérotées {-}
 
-Pour créer une liste numérotée, il suffit de numéroté chaque élément de la liste. Par exemple: 
+Pour créer une liste numérotée, il suffit de numéroter chaque élément de la liste. Par exemple: 
 
 ```md
 1. machin 1,
@@ -690,9 +795,13 @@ Pour créer une liste numérotée, il suffit de numéroté chaque élément de l
 
 produit ceci: 
 
+<div class="boite emphase">
+
 1. machin 1,
 2. machin 2,
 3. machin 3.
+
+</div>
 
 <br>
 
@@ -711,10 +820,14 @@ résultat. Néanmoins, le premier nombre détermine le numéro de départ de la 
 
 nous obtenons:
 
+<div class="boite emphase">
+
 3. machin 1,
 3. machin 2,
 3. machin 3,
 5. machin 4.
+</div>
+
 
 <br>
 
@@ -729,9 +842,12 @@ Pour ne pas se soucier des numéros, il existe un style par défaut&nbsp;:
 
 Nous retrouvons bien la première liste numérotée&nbsp;:
 
+<div class="boite emphase">
+
 #. machin 1,
 #. machin 2,
 #. machin 3.
+</div>
 
 <br>
 
@@ -753,6 +869,8 @@ Plusieurs styles de numérotation sont disponibles. Par exemple, en écrivant&nb
 
 nous obtenons&nbsp;:
 
+<div class="boite emphase">
+
 #) élément 1
 #) élément 2
 #) élément 3
@@ -762,6 +880,7 @@ nous obtenons&nbsp;:
       i. machin 1
       i. machin 2
       i. machin 3
+</div>
 
 <br>
 
@@ -784,6 +903,7 @@ non-numérotés. Par exemple, cette liste
 
 donne ceci &nbsp;:
 
+<div class="boite emphase">
 1. machin 1,
     1. machin 1.1,
     2. machin 1.2,
@@ -793,6 +913,7 @@ donne ceci &nbsp;:
 - machin 3,
 3. machin 4,
 4. machin 5.
+</div>
 
 <br>
 
@@ -812,6 +933,8 @@ commentaire entre les listes à séparer&nbsp;:
 
 ces lignes sont rendues ainsi&nbsp;:
 
+<div class="boite emphase">
+
 (1) truc 1
 (2) truc 2
 (3) truc 2b
@@ -821,9 +944,239 @@ ces lignes sont rendues ainsi&nbsp;:
 (1) truc 3
 (2) truc 4
 
+</div>
+
+<br>
+
+#### Blocs de citation {-}
+
+Pour utiliser un bloc de citation (la balise "blockquote" en HTML), il suffit
+d'utiliser "\>" avant la citation. Ainsi les lignes suivantes&nbsp;:
+
+```.md
+> la citation est ajoutée comme ceci, elle nous donne une indentation adéquate
+pour une mise en page agréable dont le style peut être facilement travailler
+en HTML grâce au CSS.
+```
+<br>
+
+deviennent&nbsp;:
+
+<div class="boite emphase">
+
+> La citation est ajoutée comme ceci, elle nous donne une indentation adéquate pour une mise en page agréable dont le style peut être facilement travailler en HTML grâce au CSS.
+</div>
 
 
+Pour créer une hiérarchie dans les citations, nous ajoutons des "\>" &nbsp;:
+
+```.md
+> La citation de départ
+>
+>> une hiérarchie dans la citation
+```
+<br>
+
+ce qui donne&nbsp;:
+
+<div class="boite emphase">
+
+> La citation de départ
+>
+>> une hiérarchie dans la citation
+</div>
+
+<br>
+
+#### Les symboles matématiques {-}
+
+#### Les images {-}
+
+#### Les tableaux {-}
+
+#### Les réréfences {-}
+
+##### Les hyperliens {-}
+##### Les notes de bas de pages {-}
 
 
-### Les blocs de code R {#blocsR}
+### Intégration de R dans le document {#blocsR}
+
+L'intérêt du package `rmarkdown` est d'étendre la syntaxe Pandoc Markdown avec
+les fonctionnalités du [package knitr](http://cran.r-project.org/web/packages/knitr/index.html) pour insérer non
+seulement du code R mais aussi les sorties associées (sorties console et
+figures). Nous obtenons ainsi un document dynamique en ce sens que si les
+données associées et/ou le code R changent, le document évolue aussi. Cela
+permet, entre autres, de créer des rapports automatisés.
+
+
+Il y existe deux manières d'insérer des sorties R dans le document:
+
+1. directement dans le texte ("inline");
+2. en utilisant un bloc de code dédié.
+
+Pour inclure une sortie texte directement dans un paragraphe, nous utilisons &nbsp;:
+`` `r "\u0060r expression\u0060"` ``.    
+
+Par exemple, il est possible d'insérer l'heure et la date en utilisant la fonction R `Sys.time()`. Ainsi,
+l'utilisation de `` `r "\u0060r Sys.time()\u0060"` ``&nbsp; dans le texte affichera la sortie de cette fonction R, soit 
+`r Sys.time()`.
+
+
+Le reste de cette section se concentre sur les blocs de code R (appelés *code chunks* en anglais).
+Typiquement, l'utilisation d'un tel bloc de code ressemble à ceci&nbsp;:
+
+
+    `r ''````{r, idbloc, param1 = val1, param2 = val2}
+    ligne de code 1
+    ligne de code 2
+    ...
+    ligne de code n
+    ```
+<br>
+
+**idbloc** est le nom de l'identifiant que vous pouvez donner au bloc de code. Ceci permet de citer les blocs ou leurs sorties à l'intérieur du document. L'identifiant n'est pas obligatoire. En revanche, un identifiant donné ne peut être utilisé qu'une seule fois. 
+
+**param1 = val1** correspond à un paramètre permettant de préciser comment le code source sera affiché dans le document, ou comment la sortie du code sera affichée. Il existe un grand nombre de paramètres possibles. Ils permettent de mettre de l'avant certaines parties du code, et aussi de choisir finement les sorties R (figures, tables, etc.) à ajouter aux documents. L'ensemble des paramètres sont disponibles à l'URL suivante <https://yihui.org/knitr/options/>). 
+
+
+#### Les commentaires {-}
+
+Les commentaires sont introduits, comme dans R, sous la forme de lignes de
+codes commençant par un `#`. Débutons avec un exemple simple qui inclut un
+commentaire et une addition :
+
+    `r ''````{r, addition}
+    # une addition avec R.
+    2+3
+    ```
+<br>
+
+Notez que le terme "addition" qui suit "r" dans l'accolade est l'identifiant du morceau
+de code (la virgule entre les deux premiers éléments est facultative).
+
+Ce morceau de code s'affiche ainsi:
+```{r, addition}
+# une addition avec R.
+2+3
+```
+<br>
+
+Nous obtenons donc code R dans un environnement adéquate (voir la coloration
+du code) avec la sortie console associée, en l'occurrence, le résultat de
+l'addition.
+
+
+#### Modifier l'affichage du code source avec le paramètre `echo` {-}
+
+Prenons le bloc de code suivant.
+
+    `r ''```{r}
+    # une addition de variables avec R
+    a <- 2
+    b <- 3
+    a + b
+ 
+   ```
+<br>
+
+```{r}
+# une addition de variables avec R
+a <- 2
+b <- 3
+a + b
+```
+
+<br>
+
+Afin de ne pas afficher le code source dans un document (parce que nous souhaitement uniquement afficher la sortie produite par le code), il suffit d'utiliser le paramètre `echo =
+FALSE`, (`echo = TRUE` par défaut). Ainsi, le bloc de code `sanscode`
+
+
+    `r ''```{r sanscode, echo = FALSE}
+    # une addition de variables avec R
+    a <- 2
+    b <- 3
+    a + b
+    ```
+<br>
+nous donne:
+
+
+```{r sanscode, echo = FALSE}
+# une addition de variables avec R
+a <- 2
+b <- 3
+a + b
+```
+
+<br>
+
+Le paramètre `echo` peut aussi être utilisé pour choisir les lignes à montrer.
+Pour cela, nous utilisons un vecteur indiquant les positions des lignes à montrer.
+Par exemple, pour montrer uniquement les lignes 1 et 4, nous utilisons:
+
+    `r ''```{r code14, echo = c(1, 4)}
+    # une addition de variables avec R
+    a <- 2
+    b <- 3
+    a + b
+    ```
+<br>
+
+ce qui donne:
+
+```{r code14, echo = c(1, 4)}
+# une addition de variables avec R
+a <- 2
+b <- 3
+a + b
+```
+
+<br>
+
+<!--  
+
+Nous pouvons aussi choisir les lignes à ne pas montrer en utilisant des valeurs
+négatives. Ainsi, nous pouvons retirer les trois premières lignes du bloc de code:
+
+
+    `r ''```{r codesans13, echo = -c(1:3)}
+    # une addition de variables avec R
+    a <- 2
+    b <- 3
+    a + b
+    ```
+<br>
+
+ce qui donne:
+
+```{r codesans13, echo = -c(1:3)}
+# une addition de variables avec R
+a <- 2
+b <- 3
+a + b
+```
+
+<br>
+
+-->
+
+
+#### Modifier l'affichage des sorties {-}
+
+##### Le paramètre `comment` {-}
+
+##### Le paramètre `results` {-}
+
+##### Le paramètre `eval` {-}
+
+##### Choisir les messages retournés {-}
+
+#### Afficher des tableaux 
+
+#### Afficher des figures
+
+#### Afficher des images
+
 
