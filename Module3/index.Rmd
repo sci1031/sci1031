@@ -325,7 +325,7 @@ Le format *Well-known text* (WKT) est une syntaxe standard utilisée pour repré
 
 ```{r, echo=FALSE, warning=FALSE}
 library(sf)
-S <- st_read("Module4/data/Montreal_Velo/pistes/pistes_cyclables_type.shp")
+S <- st_read("Module4/Module4_donnees/Montreal_Velo/pistes/pistes_cyclables_type.shp")
 st_crs(S)
 ```
 <br>
