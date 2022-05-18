@@ -124,14 +124,8 @@ library(leafsync)
 
 Maintenant, allons lire le fichier *shapefile* de l'ensemble des municipalités du Québec en utilisant la fonction `st_read()` tel que vu dans le [module 4](#lire-shp).
 
-```{r load-villes, eval = FALSE}
-chemin <-"D:/votrechemin/SCI1031/Module7/Module7_donnees/"
-chemin_muni <- paste(chemin, "/villes/villes.shp", sep = "")
-municipalites <- st_read(chemin_muni)
-```
 
-```{r load-villes2, eval = TRUE, echo = FALSE}
-#municipalites <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/villes/villes.shp")
+```{r load-villes2}
 municipalites <- st_read("Module7/Module7_donnees/villes/villes.shp")
 ```
 
@@ -327,14 +321,7 @@ Par exemple, ajoutons à chacune des municipilatés contenues dans le *shapefile
 
 Nous allons d'abord importer ce fichier CSV dans `R` en utilisant la fonction `read.csv()`. Ensuite, nous sélectionnerons les colonnes pertinentes de ce tableau, et nous ajouterons ces informations aux attributs de l'objet spatial `villes`. 
 
-```{r load-pop, eval = FALSE}
-# On importe le fichier dans l'environnement de R
-chemin_pop <- paste(chemin, "villes/population.csv", sep = "", encoding="UTF-8")
-pop <- read.csv(chemin_pop)
-```
-
-```{r, eval = TRUE, echo = FALSE}
-#pop <- read.csv("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/villes/population.csv",encoding="UTF-8")
+```{r}
 pop <- read.csv("Module7/Module7_donnees/villes/population.csv",encoding="UTF-8")
 ```
 
@@ -399,14 +386,7 @@ La fonction `st_join()` de la bibliothèque `sf` permet de joindre à un *shapef
 
 Par exemple, importons le *shapefile* des régions administratives du Québec, disponible dans le dossier `Module7_données`, et réalisons une jointure entre cette couche et la couche `villes`.
 
-```{r load-reg, eval = FALSE}
-# On importe le fichier dans l'environnement de R
-chemin_reg <- paste(chemin, "regions_admin/regions_admin.shp", sep = "")
-regions <- st_read(chemin_reg)
-```
-
-```{r, eval = TRUE, echo = FALSE}
-#regions <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/regions_admin/regions_admin.shp")
+```{r}
 regions <- st_read("Module7/Module7_donnees/regions_admin/regions_admin.shp")
 ```
 
@@ -620,9 +600,8 @@ Remarquez que nous avons d'abord transformé l'objet spatial `regions` dans le s
 La fonction `st_combine()` de la bibliothèque `sf` sert à combiner des géométries afin d'en former une seule. Cette opération peut être utile lorsque nous souhaitons considérer plusieurs géométries comme formant un même objet spatial.
 
 ```{r, warning=FALSE, echo=FALSE, eval=TRUE}
-#reg_tourist <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/data/regions_touristiques/Shapefile/regn_tours_s250k_20160125.shp")
 
-reg_tourist <- st_read("Module7/data/regions_touristiques/Shapefile/regn_tours_s250k_20160125.shp")
+reg_tourist <- st_read("Module7/Module7_donnees/regions_touristiques/Shapefile/regn_tours_s250k_20160125.shp")
 
 #reg_tourist
 iles<-subset(reg_tourist, Nom_reg_to =="Îles-de-la-Madeleine")
@@ -1567,27 +1546,16 @@ La troisième étape consiste à charger la couche d'informations spatiales cont
 
 Comme vu dans le [module 4](#vec), les géodatabase permettent de contenir plusieurs couches vectorielles. Nous devons donc lire la géodatabase et explorer les différentes couches afin de déterminer celle qui correspond aux aires récréatives.
 
-```{r, eval = FALSE}
-chemin <-"D:/votrechemin/SCI1031/Module7/Module7_donnees/"
-chemin_parcs_nationaux <- paste(chemin, "/parcs.gdb", sep = "")
-st_layers(chemin_parcs_nationaux)
-```
-
-```{r list-layers, echo = FALSE, eval = TRUE}
-#st_layers("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/parcs.gdb") 
+```{r list-layers}
+ 
 st_layers("Module7/Module7_donnees/parcs.gdb") 
 
 ```
 
 Nous pouvons remarquer que les intitulés des différentes couches ne sont pas bien définis. Il faut donc prendre le temps de regarder la documentation accessible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000/resource/229322ef-eca2-4ae9-a511-ba599bc2745e). Ne vous inquiétez pas, je l'ai fait pour vous! En s'intéressant à la structure de données et à la nomenclature utilisée et décrite, nous pouvons déterminer que la couche `terpnq_s` correspond aux territoires des parc nationaux du Québec. Nous pouvons donc faire la lecture de la géodatabase avec la fonction `st_read()` en précisant cette couche à l'aide de l'argument `layer`.
 
-```{r load-parcs, eval = FALSE}
-chemin_parcs_nationaux <- paste(chemin, "/parcs.gdb", sep = "")
-parcs_nationaux <- st_read(chemin_parcs_nationaux, layer = "terpnq_s")
-```
+```{r load-parcs2}
 
-```{r load-parcs2, echo = FALSE}
-#parcs_nationaux <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module7/Module7_donnees/parcs.gdb", layer = "terpnq_s") 
 parcs_nationaux <- st_read("Module7/Module7_donnees/parcs.gdb", layer = "terpnq_s") 
 
 ```
