@@ -988,6 +988,7 @@ ce qui donne&nbsp;:
 
 <br>
 
+<!--
 #### Les symboles matématiques {-}
 
 #### Les images {-}
@@ -999,6 +1000,7 @@ ce qui donne&nbsp;:
 ##### Les hyperliens {-}
 ##### Les notes de bas de pages {-}
 
+-->
 
 ### Intégration de R dans le document {#blocsR}
 
@@ -1161,7 +1163,7 @@ a + b
 <br>
 
 -->
-
+<!--  
 
 #### Modifier l'affichage des sorties {-}
 
@@ -1178,5 +1180,8 @@ a + b
 #### Afficher des figures
 
 #### Afficher des images
+-->
 
+### À vous de jouer ! {#exo2}
 
+À venir
