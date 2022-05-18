@@ -403,46 +403,62 @@ Nous allons lire les trois *shapefiles* suivants :
 
 
 Dans un premier temps, nous allons ouvrir les données vectorielles de type polygone qui contiennent les limites terrestres de l'île de Montréal. Pour lire ces données nous utiliserons la fonction `st_read()` de la bibliothèque `sf`. Pour utiliser `st_read()` nous devons spécifier le chemin menant au fichier *shapefile* à lire.
-
+<!-- 
 ```{r fake-terre, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Module4_donnees/"
 nom_du_fichier <- paste(chemin, "Montreal_Velo/terre/terre_shp.shp", sep = "")
 limites_terrestres <- st_read(nom_du_fichier)
 ```
 
-```{r terre, eval = TRUE, echo = FALSE, comment=""}
-limites_terrestres <- st_read("Module4/data/Montreal_Velo/terre/terre_shp.shp")
+```{r , eval = TRUE, echo = FALSE, comment=""}
+limites_terrestres <- st_read("Module4/Module4_donnees/Montreal_Velo/terre/terre_shp.shp")
 ```
+-->
 
+```{r terre, comment=""}
+limites_terrestres <- st_read("Module4/Module4_donnees/Montreal_Velo/terre/terre_shp.shp")
+```
 <br>
 
 La fonction `st_read()` vous permet d'ores et déjà d'obtenir certaines informations sur la structure des données vectorielles que vous venez de lire: le type de géométrie (`Geometry type`), la dimension des données (`Dimension`), l’étendue spatiale des données (`Bounding box`), et le système de coordonnées projetées (`Projected CRS`). Nous explorerons ces propriétés en détails plus bas.
 
 Nous allons maintenant lire les données vectorielles de type ligne, en utilisant encore la fonction `st_read()`.
 
+<!-- 
 ```{r fake-pistes, eval = FALSE}
 chemin <-"D:/votrechemin/SCI1031/Module4/Module4_donnees/"
 nom_du_fichier<- paste(chemin, "Montreal_Velo/pistes/pistes_cyclables_type.shp", sep = "")
 pistes_cyclables <- st_read(nom_du_fichier)
 ```
 
-```{r pistes, eval = TRUE, echo = FALSE, comment=""}
-pistes_cyclables <- st_read("Module4/data/Montreal_Velo/pistes/pistes_cyclables_type.shp")
+```{r, eval = TRUE, echo = FALSE, comment=""}
+##pistes_cyclables <- st_read("Module4/data/Montreal_Velo/pistes/pistes_cyclables_type.shp")
 #pistes_cyclables$TYPE_VOIE = rep(1:5, length.out = 34)
+```
+-->
+
+```{r pistes, comment=""}
+pistes_cyclables <- st_read("Module4/Module4_donnees/Montreal_Velo/pistes/pistes_cyclables_type.shp")
 ```
 
 <br>
 
 Finalement, nous allons lire les données vectorielles de type point, en utilisant toujours la fonction `st_read()`.
 
+<!-- 
 ```{r fake-accidents, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Module4_donnees/"
 nom_du_fichier<- paste(chemin, "Montreal_Velo/accidents/accidents2018_Mtl_velo.shp", sep = "")
 pistes_cyclables <- st_read(nom_du_fichier)
 ```
 
+```{r , comment=""}
+##accidents_velo <- st_read("Module4/data/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp")
+```
+-->
+
 ```{r accidents, comment=""}
-accidents_velo <- st_read("Module4/data/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp")
+accidents_velo <- st_read("Module4/Module4_donnees/Montreal_Velo/accidents/accidents2018_Mtl_velo.shp")
 ```
 
 <br>
@@ -775,10 +791,10 @@ Map
 Remarquez que nous avons utilisé l'argument `ncol` dans la fonction `latticeview` pour spécifier le nombre de colonnes - c-à-d le nombre de panneaux verticaux qu'aura cette image. 
 
 Finalement, pour sauvegarder des données vectorielles, nous utilisons la fonction `st_write()` de la bibliothèque `st`, de la même façon que nous avons utilisé la fonction `st_read()` en début de leçon. Par exemple, sauvons les données `limites_terrestres_rob` que nous venons de créer.
-
-```{r save-terre2, echo = FALSE,  warning = FALSE, message = FALSE, eval = FALSE}
-nom_du_fichier<- paste(module, "/Montreal_Velo/terre/terre_rob_shp.shp", sep = "")
-st_write(limites_terrestres_rob,nom_du_fichier)
+<!--  
+```{r , echo = FALSE,  warning = FALSE, message = FALSE, eval = FALSE}
+#nom_du_fichier<- paste(module, "/Montreal_Velo/terre/terre_rob_shp.shp", sep = "")
+#st_write(limites_terrestres_rob,nom_du_fichier)
 ```
 
 ```{r fake-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = FALSE}
@@ -786,7 +802,13 @@ chemin<-"D:/votrechemin/SCI1031/Module4/Module4_donnees/"
 nom_du_fichier<- paste(chemin, "Montreal_Velo/terre/terre_rob_shp.shp", sep = "")
 st_write(limites_terrestres_rob,nom_du_fichier)
 ```
+ -->
 
+```{r save-terre2, echo = FALSE,  warning = FALSE, message = FALSE, eval = FALSE}
+# st_write(nom_objet, nom_fichier)
+st_write(limites_terrestres_rob,"Module4/Module4_donnees/Montreal_Velo/terre/terre_rob_shp.shp")
+```
+ 
 <br>
 
 ### Lire une géodatabase et explorer ses couches {#gdt}
@@ -807,16 +829,17 @@ La géodatabase `Donnees_Ouvertes_MEES.gdb` contient plusieurs couches de donné
 Pour lire et explorer une géodatabase, on continue à utiliser la bibliothèques `sf`. Chaque couche peut être lue individuellement en utilisant la fonction `st_read()`: `st_read("nom_de_la_geodatabase.gdb", layer = "nom_de_la_couche")`. Il est donc nécessaire de connaître d'abord les noms donnés aux couches composants la géodatabase - information qui nous est, pour l'instant, inconnue.
 
 Pour connaître les couches d'une géodatabase, nous utilisons la fonction `st_layers()`
-
+<!--
 ```{r fake-mees-layers, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Module4_donnees/"
 nom_du_fichier <- paste(chemin, "Donnees_Ouvertes_MEES.gdb", sep = "")
 couches_mees <- st_layers(nom_du_fichier)
 couches_mees
 ```
-
-```{r mees-layers, eval = TRUE, echo = FALSE}
-couches_mees <- st_layers("Module4/data/Donnees_Ouvertes_MEES.gdb")
+   -->
+   
+```{r mees-layers}
+couches_mees <- st_layers("Module4/Module4_donnees/Donnees_Ouvertes_MEES.gdb")
 couches_mees
 ```
 <br>
@@ -828,14 +851,20 @@ Les couches dont le nom commence par `CS_` contiennent des données vectorielles
 Les couches dont le nom commence par `PPS_` et `ES_` contiennent des données vectorielles relatives aux établissements d'enseignement primaire, secondaire et supérieure. Puisque chacun de ces établissements est identifié par une paire de coordonnées, ces données sont des points. 
 
 Lisons les données vectorielles de la couche `PPS_Public_Ecole` en utilisant la fonction `st_read()`. 
+<!--  
 ```{r fake_ecoles_pub, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Module4_donnees/"
 nom_du_fichier <- paste(chemin, "Donnees_Ouvertes_MEES.gdb", sep = "")
 ecoles_pub <- st_read(nom_du_fichier, layer = "PPS_Public_Ecole")
 ```
 
-```{r ecoles_pub, eval = TRUE, echo = FALSE}
-ecoles_pub <- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Public_Ecole")
+```{r , eval = TRUE, echo = FALSE}
+#ecoles_pub <- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Public_Ecole")
+```
+ -->
+ 
+ ```{r ecoles_pub}
+ecoles_pub <- st_read("Module4/Module4_donnees/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Public_Ecole")
 ```
 <br>
 
@@ -941,7 +970,7 @@ mapview(ecoles_pub_Mtl, zcol = "ORDRE_ENS", cex = 2, layer.name = 'Enseignement'
 #### Visualisation de plusieurs couches d'une géodatabse {-}
 
 Nous voulons visualiser d'autres types d'établissement d'enseignement donnés dans la géodatabase du Ministère de l'Éducation et de l'Enseignement supérieur du Québec. Choisissons les écoles privées, les établissements de niveau collégial (e.g. CÉGEP) et les universités. Pour se faire nous utilisons encore la fonction `st_read` en spécifiant le nom de la couche (`layer`) désirée.
-
+<!--  
 ```{r fake_autres_institutions, eval = FALSE}
 chemin<-"D:/votrechemin/SCI1031/Module4/Module4_donnees/"
 nom_du_fichier <- paste(chemin, "Donnees_Ouvertes_MEES.gdb", sep = "")
@@ -949,11 +978,12 @@ ecoles_priv <- st_read(nom_du_fichier, layer = "PPS_Prive_Etablissement")
 college<- st_read(nom_du_fichier, layer = "ES_Collegial")
 univ <- st_read(nom_du_fichier, layer = "ES_Universitaire")
 ```
-
-```{r autres-institutions, eval = TRUE, echo = FALSE, message = FALSE, results = FALSE}
-ecoles_priv <- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Prive_Etablissement")
-college<- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "ES_Collegial")
-univ <- st_read("Module4/data/Donnees_Ouvertes_MEES.gdb", layer = "ES_Universitaire")
+ -->
+ 
+```{r autres-institutions}
+ecoles_priv <- st_read("Module4/Module4_donnees/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Prive_Etablissement")
+college<- st_read("Module4/Module4_donnees/Donnees_Ouvertes_MEES.gdb", layer = "ES_Collegial")
+univ <- st_read("Module4/Module4_donnees/Donnees_Ouvertes_MEES.gdb", layer = "ES_Universitaire")
 ```
 <br>
 
@@ -1298,14 +1328,15 @@ mapview(nz, zcol = "Name", layer.name = "Régions")
 
 Tout d'abord, vous devez importer le fichier `nz_capitales.cvs` dans votre session de travail `R`. Utiliser la fonction de base `read.table()` afin de stocker les coordonnées des capitales dans un object de classe `data.frame`.
 
-
+<!--  
 ```{r fake-capnz, eval = FALSE}
 nom_du_fichier<-"D:/votrechemin/SCI1031/Module4/Module4_donnees/nz_capitales.csv"
 nz_capitales <- read.table(nom_du_fichier, header = TRUE, sep = ",")
 nz_capitales
 ```
-
-```{r capnz, eval = TRUE, echo = FALSE, comment=""}
+ -->
+ 
+```{r capnz}
 nz_capitales <- read.table("Module4/Module4_donnees/nz_capitales.csv", header = TRUE, sep = ",")
 nz_capitales
 ```
