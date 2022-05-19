@@ -128,17 +128,10 @@ st_write(tmp[1:400, names(tmp) != "liste_segments_jsonb"], "trip400.geojson")
 
 Nous pouvons maintenant utiliser la fonction `st_read()` de la bibliothèque `sf` pour lire le fichier simplifié `trip400.geojson` disponible dans le répertoire `Module9_donnees`&nbsp;:
 
-```{r, eval = FALSE}
-library(sf)
-chemin <- "D:/votrechemin/SCI1031/Module9/Module9_donnees/"
-chemin_trajet <- paste(chemin, "/trip400.geojson", sep = "")
-trajets <- st_read(chemin_trajet)
-```
 
 
-```{r read_trajet, echo = FALSE, message = FALSE}
+```{r read_trajet, message = FALSE}
 library(sf)
-#trajets <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module9/Donnees/trip400.geojson")
 
 trajets <- st_read("Module9/Module9_donnees/trip400.geojson")
 ```
@@ -1098,16 +1091,11 @@ mint_crop <- crop(mint, extent(c(-71.5, -71, 45, 45.5)))
 
 Pour les deux opérations suivantes nous allons utiliser les contours du Parc national de Frontenac qui est le premier élément de l'objet `parcs_sherbrooke` manipulé au [Module 8](#manip_mat) et disponible dans le répertoire `Module8_donnees`. 
 
-```{r, include = FALSE}
+```{r, warning = FALSE}
 # importer le raster parcs
-parcs <- st_read("Module8/data/parcs_sherbrooke") 
+parcs <- st_read("Module8/Module8_donnees/parcs_sherbrooke") 
 ```
 
-```{r, eval = FALSE}
-chemin <- "D:/votrechemin/SCI1031/Module8/Module8_donnees/"
-chemin_parcs <- paste(chemin, "/parcs_sherbrooke/parcs_sherbrooke.shp", sep = "")
-parcs <- st_read(chemin_parcs)
-```
 <br>
 
 Nous isolons d'abord les contours du Parc national de Frontenac (`parcs[1, ]`) puis nous créons le shapefile `frontenac` en utilisant la projection de `mint`. Ensuite, nous utilisons la fonction `mask()` pour isoler les cellules de `mint` qui sont dans les limites du parc `frontenac`, et cela, pour toutes les couches de `mint`. 
