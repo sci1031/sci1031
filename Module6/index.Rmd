@@ -82,15 +82,8 @@ Pour explorer les fonctions de cartographie offertes avec tmap nous utiliserons 
 La taille des populations des régions administratives provient de la Banque de données des statistiques officielles sur le Québec (https://bdso.gouv.qc.ca/), et les limites géographiques des régions proviennent du site Données Québec (https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs)
 
 
-```{r, eval = FALSE}
-chemin<-"D:/votrechemin/SCI1031/Module6/Donnees/"
-nom_du_fichier <- paste(chemin, "Population/QC_RegAdm_Pop.shp", sep = "")
-Q <- st_read(nom_du_fichier)
-```
-
-
-```{r, eval = TRUE, echo = FALSE}
-Q<-st_read("Module6/data/Population/QC_RegAdm_Pop.shp")
+```{r}
+Q<-st_read("Module6/Module6_donnees/Population/QC_RegAdm_Pop.shp")
 ```
 
 Expliquer chaque colonne
@@ -447,15 +440,8 @@ Importer les données
 Pas le réseau complet
 
 
-```{r, eval = FALSE}
-chemin<-"D:/votrechemin/SCI1031/Module6/Donnees/"
-nom_du_fichier <- paste(chemin, "Routes/QC_routes.shp", sep = "")
-R <- st_read(nom_du_fichier)
-```
-
-
-```{r, eval = TRUE, echo = FALSE}
-R<-st_read("Module6/data/Routes/QC_routes.shp")
+```{r}
+R<-st_read("Module6/Module6_donnees/Routes/QC_routes.shp")
 ```
 
 
@@ -493,15 +479,8 @@ tm_shape(Q)+
 #### Lire le shapefile avec les municiaplites du QC {-}
 
 
-```{r, eval = FALSE}
-chemin<-"D:/votrechemin/SCI1031/Module6/Donnees/"
-nom_du_fichier <- paste(chemin, "Villes/QC_coord_municipalites.shp", sep = "")
-V <- st_read(nom_du_fichier)
-```
-
-
-```{r, eval = TRUE, echo = FALSE}
-V<-st_read("Module6/data/Villes/QC_coord_municipalites.shp")
+```{r}
+V<-st_read("Module6/Module6_donnees/Villes/QC_coord_municipalites.shp")
 ```
 
 
@@ -540,20 +519,9 @@ library(raster)
 
 #### Importer les données d'élévation du QC  {-}
 
-```{r, eval = FALSE}
-chemin<-"D:/votrechemin/SCI1031/Module6/Donnees/"
-nom_du_fichier <- paste(chemin, "Elevation/QC_Elevation.tif", sep = "")
-E <- raster(nom_du_fichier)
+```{r}
+E<-raster("Module6/Module6_donnees/Elevation/QC_Elevation.tif")
 ```
-
-
-```{r, eval = TRUE, echo = FALSE}
-E<-raster("Module6/data/Elevation/QC_Elevation.tif")
-```
-
-
-
-
 
 Expliquer la fonction tm_raster
 
@@ -659,15 +627,8 @@ tmap_arrange(Q1,Q2,Q3)
 Lire les données: cas cumulés de COVID en date du 18 janvier 2021 par région socio-sanitaire.
 
 
-```{r, eval = FALSE}
-chemin<-"D:/votrechemin/SCI1031/Module6/Donnees/"
-nom_du_fichier <- paste(chemin, "COVID/QC_Covid_210118.shp", sep = "")
-Q_covid <- st_read(nom_du_fichier)
-```
-
-
-```{r, eval = TRUE, echo = FALSE}
-Q_covid <-st_read("Module6/data/COVID/QC_Covid_210118.shp")
+```{r}
+Q_covid <-st_read("Module6/Module6_donnees/COVID/QC_Covid_210118.shp")
 ```
 
 
