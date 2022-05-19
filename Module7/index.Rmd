@@ -601,7 +601,7 @@ La fonction `st_combine()` de la bibliothèque `sf` sert à combiner des géomé
 
 ```{r, warning=FALSE, echo=FALSE, eval=TRUE}
 
-reg_tourist <- st_read("Module7/Module7_donnees/regions_touristiques/Shapefile/regn_tours_s250k_20160125.shp")
+reg_tourist <- st_read("Module7/data/regions_touristiques/Shapefile/regn_tours_s250k_20160125.shp")
 
 #reg_tourist
 iles<-subset(reg_tourist, Nom_reg_to =="Îles-de-la-Madeleine")
