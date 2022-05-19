@@ -63,9 +63,8 @@ De plus, vous utiliserez aussi des fonctions vues dans les modules précédents:
 <div class="boite ico donnees gauche">
 ###### Vous utiliserez les données suivantes: {-}
 
-Dans la section [Leçon](#lecon_mat_mani), vous utiliserez des données matricielles d'élévation pour le Québec, des données vectorielles des sentiers de randonnées de la SÉPAQ, ainsi que les limites de quatre parcs nationaux identifiés au [module 7](#manip_vec).
+Dans la section [Leçon](#lecon_mat_mani) ainsi que dans la section [Exercices](#ex_mat_manip), vous utiliserez des données matricielles d'élévation pour le Québec, des données vectorielles des sentiers de randonnées de la SÉPAQ, ainsi que les limites de quatre parcs nationaux identifiés au [module 7](#manip_vec).
 
-Dans la section [Exercices](#ex_mat_manip), vous utiliserez <!-- A FAIRE -->
 
 </div>
 
@@ -129,29 +128,16 @@ library(mapview)
 
 Ensuite, nous utilisons la fonction `st_read()` pour importer le *shapefile* `parcs_sherbrooke` qui contient les quatre parcs se situant dans un rayon de 70&nbsp;km de la municipalité de Sherbrooke (voir la [problématique](#prob_mod7) du module 7). 
 
-```{r, eval = FALSE}
-chemin <- "D:/votrechemin/SCI1031/Module8/Module8_donnees/"
-chemin_parcs <- paste(chemin, "/parcs_sherbrooke/parcs_sherbrooke.shp", sep = "")
-parcs <- st_read(chemin_parcs)
-```
 
-```{r, echo = FALSE, warning = FALSE}
-#parcs<-st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/parcs_sherbrooke/parcs_sherbrooke.shp")
+```{r, warning = FALSE}
 parcs <- st_read("Module8/Module8_donnees/parcs_sherbrooke/parcs_sherbrooke.shp")
 ```
 <br>
 
 Enfin, nous importons la couche d'élévation `DEM` pour la région d'intérêt en utilisant la fonction `raster()`.
 
-```{r, eval = FALSE}
-chemin_dem <- paste(chemin, "/DEM.tif", sep = "")
-dem <- raster(chemin_dem)
-```
-
-```{r, echo = FALSE, warning = FALSE}
-#dem<-raster("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/DEM.tif")
+```{r, warning = FALSE}
 dem <- raster("Module8/Module8_donnees/DEM.tif")
-dem <- aggregate(dem, fact = 8, fun = max)
 ```
 <br>
 
@@ -770,15 +756,9 @@ parc_megantic <- parcs[st_intersects(parcs, sf_point_max, sparse = FALSE), ]
 
 Maintenant importons les données vectorielles pour tous les sentiers de la [SEPAQ](https://www.donneesquebec.ca/recherche/dataset/sentiers-estivaux). Ce *shapefile* se trouve dans le dossier `Module8_donnees` que vous avez téléchargé au début de la leçon&nbsp;:
 
-```{r, eval = FALSE}
-chemin <-"D:/votrechemin/SCI1031/Module8/Donnees/"
-chemin_sentiers <- paste(chemin, "/sentiers_sepaq/Sentier_ete_l.shp", sep = "")
-sentiers <- st_read(chemin_parcs)
-```
+```{r, warning = FALSE, dev = 'png'}
+sentiers <- st_read("Module8/Module8_donnees/sentiers_sepaq/Sentier_ete_l.shp")
 
-```{r, echo = FALSE, warning = FALSE, dev = 'png'}
-sentiers <- st_read("Module8/data/sentiers_sepaq/Sentier_ete_l.shp")
-#sentiers <- st_read("E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module8/data/sentiers_sepaq/Sentier_ete_l.shp")
 mapview(sentiers)
 ```
 <br>
@@ -802,7 +782,7 @@ elv_megantic <- get_elev_raster(parc_megantic, z = 13)
 
 ```{R, echo = FALSE}
 # writeRaster(ra_elv,  "megantic_elevation.grd")
-elv_megantic <- raster("Module8/data/megantic_elevation.grd")
+elv_megantic <- raster("Module8/Module8_donnees/megantic_elevation.grd")
 ```
 <br>
 
