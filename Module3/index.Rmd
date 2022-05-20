@@ -1182,6 +1182,6 @@ a + b
 #### Afficher des images
 -->
 
-### À vous de jouer ! {#exo2}
+### À vous de jouer ! {#exo3}
 
 À venir
