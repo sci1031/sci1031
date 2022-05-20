@@ -33,4 +33,5 @@ Imports:
   tmap,
   webshot
 Remotes:
-  crsh/citr
+  crsh/citr,
+  r-spatial/leafsync
