@@ -86,27 +86,48 @@ Le second ensemble contient des données spatiales satellites captées par Lands
 
 ## Leçon {#lecon_mat}
 
-Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un *raster*. Dans cette leçon, nous utiliserons les expressions «*raster*» et «données matricielles» de façon interchangeable.
 
-Commençons cette leçon en chargeant la bibliothèque `raster` dans notre session de travail `R`.
+### Télécharger les données {#data_mod5}
+
+<div class="boite ico donnees gauche"> 
+
+###### Les données {-} 
+
+<br>
+
+</div>
+
+Dans les sections [5.1.5](#read_mat) à [5.1.10](#read_mult) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 5](https://github.com/sci1031/sci1031/raw/master/Module5/Module5_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module5_donnees` pour ce module, et dézippez-le. Le dossier comprend deux fichiers `tif`: 
+
+- `Temp_vdq.tif`
+- `Landsat_LaTuque.tif`
+
+Les données matricielles `Temp_vdq.tif` présentent la température de surface sur le territoire de la ville de Québec.
+Le fichier `Landsat_LaTuque.tif` contient des données captées par le satellite Landsat sur une section du territoire de la Haute Mauricie, près de la ville de La Tuque.
+
+### Créer des données matricielles {#create_mat}
+
+Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un *raster*. Dans cette leçon, nous utiliserons les expressions «*raster*» et «données matricielles» de façon interchangeable. 
+
+Pour créer, lire et manipuler des données matricielles, nous allons utiliser la bibliothèque `raster`. Commençons par charger la bibliothèque `raster` dans notre session de travail `R`.
+
 ```{r}
 # Installez la bibliothèque si ce n'est pas déjà fait
 # install.packages("raster")
 # Chargez la bibliothèque
 library(raster)
 ```
+<br>
 
-
-### Créer un *raster* et comprendre sa structure
+#### Créer un raster simple et le visualiser {-}
 
 Au [module 2](#base), nous avons expliqué qu'un *raster* est formé de rectangles de même forme et de même dimension appelés cellules ou pixels. À chaque cellule de cette matrice correspond une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.
-
-#### Créer un *raster* simple et le visualiser {-}
 
 La fonction `raster()` de la bibliothèque `raster` permet de créer un *raster*. Par exemple:
 ```{r}
 M <- raster(nrows=8, ncols=8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
 ```
+<br>
 
 Où `nrows` et `ncols` correspondent respectivement au nombre de lignes et au nombre de colonnes du *raster* `M`, `xmn` et `xmx` correspondent respectivement aux coordonnées-x minimale et maximale du *raster*, `ymn` et `ymx` aux coordonnées-y minimale et maximale, et `vals` est un vecteur comprenant la valeur de chaque pixel du *raster*. Dans le cas présent, le *raster* `M` contient 64 pixels. Le premier pixel a la valeur 1, le deuxième pixel a la valeur 2 et ainsi de suite.
 
@@ -115,6 +136,7 @@ Voyons les informations données, lorsque nous appelons le *raster* `M` que nous
 ```{r check_M}
 M
 ```
+<br>
 
 Nous remarquons que des informations additionnelles apparaissent: `ncell` correspond au nombre de cellules (ou de pixels) dans le *raster*, `resolution` correspond à la résolution des pixels, `extent` correspond à l'étendue du *raster* définie par ses coordonnées maximales et minimales, et `crs` correspond aux paramètres du système de coordonnées de référence utilisé.
 
@@ -130,6 +152,7 @@ Ainsi, une façon équivalente de créer le *raster* `M` est:
 M <- raster(res = 0.5, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
 M
 ```
+<br>
 
 Dans cette notation, nous avons spécifié la résolution et non la dimension du *raster*.
 
@@ -183,7 +206,7 @@ Peu importe la fonction choisie, celle-ci transforme la valeur de chaque cellule
 Remarquez que le premier pixel, qui porte la valeur 1 dans le cas présent, se trouve en haut à gauche. Le dernier pixel, quant à lui, se trouve dans le coin inférieur droit. L'identité des pixels suit donc les lignes d'un *raster*.
 
 
-#### *Raster* de différents types de données {-}
+#### Raster de différents types de données {-}
 
 Les *rasters* peuvent prendre des valeurs de type discrètes (`integer`) et des nombres réelles (`numeric`).
 Ils peuvent également prendre des valeurs logiques (`logical`). Par exemple, remplaçons les valeurs discrètes du *raster* `M` défini plus haut par des valeurs logiques.
@@ -210,6 +233,7 @@ M_logique <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5,
 
 M_logique
 ```
+<br>
 
 Visualisons maintenant ce *raster* de type logique:
 
@@ -250,6 +274,8 @@ mois_hiver_facteur
 levels(mois_hiver_facteur)
 ```
 
+<br>
+
 Revenons maintenant aux *rasters*. Reprenons l'exemple du *raster* des multiples de 3. Nous allons le transformer en *raster* de type facteur.
 
 ```{r, warning = FALSE, message = FALSE}
@@ -288,7 +314,7 @@ m@map
 <br>
 
 
-#### Comprendre la structure d'un *raster* {-}
+### Comprendre la structure d'un raster 
 
 Les objets de type *raster* disposent d'une structure d'objet particulière. Si l'on veut accéder aux valeurs stockées, on doit procéder d'une certaine manière.
 
@@ -356,7 +382,7 @@ knitr::include_graphics('Module8/images/coordsPixel.png')
 ```
 <br>
 
-### Statistiques de base sur un *raster*
+### Statistiques de base sur un raster
 
 Voyons maintenant comment calculer des statistiques de base sur les valeurs contenues dans un *raster*.
 Tout d'abord, pour connaître l'ensemble des valeurs d'un *raster*, nous pouvons utiliser la fonction `getValues()`.
@@ -455,42 +481,22 @@ boxplot(G,
 <br>
 
 
-### Lire un *raster* et explorer son contenu
+### Lire un raster et explorer son contenu {#read_mat}
 
-Dans la section précédente, nous avons créé et manipulé des *rasters* très simples et peu volumineux. Dans cette section, nous manipulerons un *raster* plus substantiel, constitué de données réelles sur les îlots de chaleur urbains.
+Dans les sections précédentes, nous avons créé et manipulé des *rasters* très simples et peu volumineux. Dans cette section, nous manipulerons un *raster* plus substantiel, constitué de données réelles sur les îlots de chaleur urbains.
 
-Les îlots de chaleur urbains (ICU) sont des "zones urbaines où les températures sont plus chaudes que dans la région rurale voisine." [@SanteCanada2020] Les ICU amplifient les effets négatifs sur la santé humaine pendant les vagues de chaleur. Les ICU se produisent surtout dans les zones où les humains ont fortement altéré le couvert du sol, par exemple pour y aménager des infrastructures en béton (bâtiments, stationnement, route, etc.). L'absence de végétation, la présence de surfaces imperméables et non-réfléchissantes contribuent à la formation d'ICU [@SanteCanada2020].
-
-
-La température de surface mesurée sur les territoires urbains permet d'identifier la présence d’îlots de chaleur. Les étudiants.es intéressés à comprendre la méthodologie utilisée pour déterminer la température de surface à partir d'images satellitaires sont invités à consulter cette [note technique](Module5/Module5_ICU_NoteTechnique.pdf) produite par le Centre d'enseignement et de recherche en foresterie de Sainte-Foy inc.
-
-Les données sur les ICU pour l'ensemble du territoire québécois sont disponibles sur le site gouvernemental [Données Québec](https://www.donneesquebec.ca/recherche/fr/dataset/ilots-de-chaleur-fraicheur-urbains-et-temperature-de-surface) en format `GeoTIFF`. Puisque cette base de données spatiales est particulièrement volumineuse, nous allons travailler seulement avec les données matricielles relatives à la région de la ville de Québec.
+Les îlots de chaleur urbains (ICU) sont des "zones urbaines où les températures sont plus chaudes que dans la région rurale voisine" [@SanteCanada2020]. Les ICU amplifient les effets négatifs sur la santé humaine pendant les vagues de chaleur. Les ICU se produisent surtout dans les zones où les humains ont fortement altéré le couvert du sol, par exemple pour y aménager des infrastructures en béton (bâtiments, stationnement, route, etc.). L'absence de végétation, la présence de surfaces imperméables et non-réfléchissantes contribuent à la formation d'ICU [@SanteCanada2020].
 
 
-#### Importer les données {-}
+La température de surface mesurée sur les territoires urbains permet d'identifier la présence d’îlots de chaleur^[Si vous désirez comprendre la méthodologie utilisée pour déterminer la température de surface à partir d'images satellitaires, consulter cette [note technique](http://cerfo.qc.ca/identification-et-localisation-des-ilots-de-chaleur-et-de-fraicheur-pour-tout-le-quebec-urbain-cerfo-technote-2013-01/) produite par le Centre d'enseignement et de recherche en foresterie de Sainte-Foy inc.]. Les données sur les ICU pour l'ensemble du territoire québécois sont disponibles sur le site gouvernemental [Données Québec](https://www.donneesquebec.ca/recherche/fr/dataset/ilots-de-chaleur-fraicheur-urbains-et-temperature-de-surface) en format `GeoTIFF`. Puisque cette base de données spatiales est particulièrement volumineuse, nous allons travailler seulement avec les données matricielles relatives à la région de la ville de Québec.
 
-Dans un premier temps, téléchargez [les données d'ICU pour la région de la ville de Québec](https://github.com/sci1031/sci1031/tree/master/Module5/data/Temp_vdq.tif). Sauvegardez l'image `tif` dans votre répertoire de travail `Donnees` pour ce module.
 
 #### Lire les données {-}
 
 Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la bibliothèque `raster`.
 
-```{r fake-icu, eval = FALSE}
-chemin <- "D:/votrechemin/SCI1031/Module5/Donnees/"
-nom_du_fichier <- paste(chemin, "Temp_vdq.tif", sep = "")
-T_vdq <- raster(nom_du_fichier)
-
-T_vdq
-```
-
-
-```{r icu, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
-
-filename_rcrop = "Module5/data/Temp_vdq.tif"
-#filename_rcrop =  "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Structure_test/sci1031/Module5/data/Temp_vdq.tif"
-T_vdq <- raster(filename_rcrop)
-
-#T_vdq <- aggregate(T_vdq, 5)
+```{r icu, warning = FALSE, message = FALSE}
+T_vdq <- raster("Module5/Module5_donnees/Temp_vdq.tif")
 ```
 
 <br>
@@ -499,7 +505,7 @@ Nous pouvons d'emblée reconnaître les informations relatives à la dimension, 
 
 Nous pouvons également utiliser les fonctions `dim()`, `ncell()`, `res()`, `extent()`, `crs()`, et `cellStats(, range)` pour retrouver ces informations:
 
-```{r, collapse=TRUE}
+```{r}
 dim(T_vdq)
 
 ncell(T_vdq)
@@ -508,9 +514,13 @@ res(T_vdq)
 
 extent(T_vdq)
 
+cellStats(T_vdq, range)
+```
+<br>
+
+```{r}
 crs(T_vdq)
 
-cellStats(T_vdq, range)
 ```
 <br>
 
@@ -614,22 +624,22 @@ m@map
 Naturellement, le temps nécessaire pour générer la carte est alors plus long.
 
 
-#### Visualiser une section d'un *raster* {-}
+#### Visualiser une section d'un raster {-}
 
 Nous voulons maintenant nous concentrer sur une petite section de la carte de la région de la ville de Québec. Nous pouvons le faire en spécifiant les lignes et les colonnes qui nous intéressent dans le *raster*. Par exemple, choisissons une région carrée de 100 x 100 cellules dans le quartier Sainte-Foy.
 
 ```{r map_T, eval = FALSE, echo = TRUE, dev = 'png'}
-T <- T_vdq[1051:1150, 851:950, drop = FALSE]
+T_sec <- T_vdq[351:450, 351:450, drop = FALSE]
 
-mapview(T,  map.types = "OpenStreetMap")
+mapview(T_sec,  map.types = "OpenStreetMap")
 ```
 
 
 
 ```{r, eval = TRUE, echo = FALSE, warnings = FALSE, dev = 'png', fig.cap="Carte de la température de surface dans le secteur de Sainte-Foy"}
-T <- T_vdq[1051:1150, 851:950, drop=FALSE]
+T_sec <- T_vdq[351:450, 351:450, drop = FALSE]
 
-m = mapview(T,  map.types = "OpenStreetMap", homebutton = FALSE)
+m = mapview(T_sec,  map.types = "OpenStreetMap", homebutton = FALSE)
 m@map
 ```
 <br>
@@ -639,7 +649,7 @@ Notez que l'option `drop = FALSE` est importante car elle permet au nouvel objet
 Nous observons sur la carte que les températures les plus chaudes (pixels de couleur jaune) sont situées sur les grandes infrastructures bétonnées comme les axes routiers ainsi que les bâtiments et les stationnements (par exemple ceux de la Place Laurier et Sainte-Foy). D'autre part, les températures les plus fraîches (pixels de couleur mauve foncé) sont situés sur des zones boisées comme celles sur le campus de l'Université Laval.
 
 
-### Changer la résolution d'un *raster*
+### Changer la résolution d'un raster
 
 Il est possible d'augmenter la résolution d'un *raster*. Cela peut s’avérer utile lorsque la résolution de ce dernier est trop petite (c'est-à-dire que la résolution est fine) pour exécuter rapidement des calculs sur celui-ci. 
 Aussi, cela peut s'avérer utile lorsque nous devons travailler avec des *rasters* de résolution différente, il peut alors être nécessaire que tous les *rasters* aient la même résolution.
@@ -649,10 +659,10 @@ Pour augmenter la résolution d'un *raster* nous utilisons la fonction `aggregat
 Quelle valeur prendra alors une cellule de plus grande résolution? Par défaut, la cellule aura comme valeur la moyenne des valeurs des cellules groupées par l'agrégation. Par ailleurs, il est aussi possible de specifier d'autres fonctions pour calculer la valeur des cellules de plus grande résolution en utilisant l'option `fun`. Par exemple, nous pourrions choisir que la valeur agrégée corresponde à la valeur maximum des valeurs des cellules groupées.
 
 ```{r, fig.dim = c(8, 8), dev = 'png', fig.cap = "Cartes de différentes résolutions", eval = TRUE}
-T_fact4_moy <- aggregate(T, fact = 4)
-T_fact4_max <- aggregate(T, fact = 4, fun = 'max')
-T_fact8_moy <- aggregate(T, fact = 8)
-T_fact8_max <- aggregate(T, fact = 8, fun = 'max')
+T_fact4_moy <- aggregate(T_sec, fact = 4)
+T_fact4_max <- aggregate(T_sec, fact = 4, fun = 'max')
+T_fact8_moy <- aggregate(T_sec, fact = 8)
+T_fact8_max <- aggregate(T_sec, fact = 8, fun = 'max')
 
 
 mapviewOptions(basemaps = "OpenStreetMap")
@@ -736,7 +746,7 @@ plot(T_mtm7, main = "MTM fuseau 7")
 Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
 
 ```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM", dev = 'png'}
-T_crop <- crop(T_vdq,extent(T_vdq,951,1150, 751,950))
+T_crop <- crop(T_vdq,extent(T_vdq,651,750, 351,450))
 T_crop_mtm7 <- projectRaster(T_crop, crs = proj_mtm7)
 par(mfrow = c(1,2))
 plot(T_crop, main = "Québec Lambert", legend = FALSE)
@@ -752,25 +762,19 @@ Pour sélectionner une région précise dans un *raster*, nous avons utilisé la
 
 <br>
 
-### Sauvegarder un *raster*
+### Sauvegarder un raster
+
 Finalement, pour sauvegarder des données matricielles, nous utilisons la fonction `writeRaster()` de la bibliothèque `raster`. Par exemple, sauvons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
 
 
-```{r echo = FALSE, eval = FALSE}
-chemin <- "E:/ELF/Dropbox/TELUQ/ENSEIGNEMENT/Cours/SCI1031/Developpement/Module5/"
-nom_du_fichier <- paste(chemin, "ICU_vdq_MTM7.tif", sep = "")
-writeRaster(T_mtm7,nom_du_fichier)
-```
-
-```{r echo = TRUE, eval = FALSE}
-chemin <- "D:/votrechemin/SCI1031/Module5/Donnees/"
-nom_du_fichier<- paste(chemin, "ICU_vdq_MTM7.tif", sep = "")
+```{r, eval = FALSE}
+nom_du_fichier<- "Module5/Module5_donnees/ICU_vdq_MTM7.tif"
 writeRaster(T_mtm7,nom_du_fichier)
 ```
 
 <br>
 
-### Lire et visualiser des données matricielles multi-bande.
+### Lire et visualiser des données matricielles multi-bande {#read_mult}
 
 Les données matricielles peuvent contenir plusieurs couches, appelées aussi des bandes ou des canaux. C'est le cas des images de couleurs qui contiennent souvent trois bandes: une bande de rouge, une bande de vert et une bande de bleu. Dans cette section, nous apprendrons à lire et visualiser ce type de *raster* en utilisant des données satellitaires.
 
@@ -781,39 +785,22 @@ Sentinel-2 est une mission d'observation de la Terre de l'Agence spatiale europ�
 La résolution des images captées par Sentinel-2 est de 10&nbsp;m par 10&nbsp;m, et celle de Landsat est de 30&nbsp;m par 30&nbsp;m. Ces images permettent ainsi d'identifier la couverture du sol avec beaucoup de précisions. On les utilise alors pour décrire comment les milieux forestiers, agricoles, humides et anthropisés sont distribués sur le territoire et comment ils évoluent dans le temps. Ces images sont utilisées lors de la planification et l'aménagement du territoire et de ses ressources.
 
 
-#### Importer les données {-}
+#### Lire des données multi-bande {-}
 
-Nous allons maintenant visualiser des données satellitaires captées par Landsat sur une section du territoire de la Haute Mauricie, près de la ville de La Tuque. Dans un premier temps, téléchargez les [données](https://github.com/sci1031/sci1031/tree/master/Module5/data/Landsat_LaTuque.tif). Sauvegardez l'image `tif` dans votre répertoire de travail `Donnees` pour ce module.
+Nous allons maintenant lire le fichier `Landsat_LaTuque.tif` qui correspond aux données satellitaires captées par Landsat sur une section du territoire de la Haute Mauricie, près de la ville de La Tuque. Pour ce faire, nous utilisons la fonction `raster()` de la bibliothèque `raster':
 
-#### Lire les donnéées {-}
-
-Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la bibliothèque `raster'
-
-```{r, eval = FALSE}
-chemin <- "D:/votrechemin/SCI1031/Module5/Donnees/"
-nom_du_fichier <- paste(chemin, "Landsat_LaTuque.tif", sep = "")
-S <- raster(nom_du_fichier)
+```{r warning = FALSE}
+S <- raster("Module5/Module5_donnees/Landsat_LaTuque.tif")
 S
 ```
 
-```{r include = FALSE}
-filename <- "Module5/data/Landsat_LaTuque.tif"
-S <- raster(filename)
-S
-```
 <br>
-
-```{r}
-mapview(S)
-```
-
 
 Nous remarquons qu'une information supplémentaire est apparue dans le description du *raster*. Il s'agit de `band : 1 (of 3 bands)`.
 Cette information nous précise que nous venons de lire une seule bande alors que ces données matricielles en contiennent trois. Lorsque nous rencontrons un *raster* de plusieurs bandes, il faut plutôt utiliser la fonction `brick()` ou la fonction `stack()` de la bibliothèque `raster` pour lire l'ensemble des bandes.
 
 ```{r, warning = FALSE, message = FALSE}
-S_mult <- brick(filename)
-S_mult <-aggregate(S_mult,4)
+S_mult <- brick("Module5/Module5_donnees/Landsat_LaTuque.tif")
 ```
 <br>
 
@@ -832,9 +819,11 @@ SB <- S_mult$Landsat_LaTuque.3
 Par ailleurs, nous pouvons également lire chacune des bandes individuellement avec la fonction `raster()`:
 
 ```{r, collapse=TRUE, warning = FALSE, message = FALSE}
-SR <- raster(filename, band = 1) #lecture de la bande rouge
-SG <- raster(filename, band = 2) #lecture de la bande verte (green)
-SB <- raster(filename, band = 3) #lecture de la bande bleu
+nom_fichier <- "Module5/Module5_donnees/Landsat_LaTuque.tif"
+
+SR <- raster(nom_fichier, band = 1) #lecture de la bande rouge
+SG <- raster(nom_fichier, band = 2) #lecture de la bande verte (green)
+SB <- raster(nom_fichier, band = 3) #lecture de la bande bleu
 
 SR
 SG
@@ -897,7 +886,7 @@ R_stack
 Nous avons ainsi créé un *raster* de classe `RasterStack`.
 
 
-#### Visualiser un *raster* multi-bande {-}
+#### Visualiser un raster multi-bande {-}
 
 Visualisons individuellement les bandes d'un *raster* multi-bande en utilisant la fonction `mapview()` de la bibliothèque `mapview`.
 
@@ -922,25 +911,17 @@ viewRGB(S_mult, r = 1, g = 2, b = 3)
 ```
 <br>
 
-Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présents. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières.
-
-Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://github.com/sci1031/sci1031/tree/master/Module5/Module5_guide-mosaiques-Landsat.pdf) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].
+Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présents. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières^[Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://www.donneesquebec.ca/recherche/dataset/mosaique-landsat/resource/4e3cc78e-9448-400a-9d64-6ac05fd0b68d) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].].
 
 
-Finalement, pour sauvegarder un *raster* multi-bandes, nous pouvons encore utiliser la fonction `writeRaster()` de la bibliothèque `raster`.
+Finalement, pour sauvegarder un *raster* multi-bande, nous pouvons encore utiliser la fonction `writeRaster()` de la bibliothèque `raster`.
 
 
 ```{r  eval = FALSE, warning = FALSE, message = FALSE}
-chemin <- "D:/votrechemin/SCI1031/Module5/Donnees/"
-nom_du_fichier <- paste(chemin, "LaTuque-copie.tif", sep = "")
-writeRaster(S_mult, nom_du_fichier)
+writeRaster(S_mult, "Module5/Module5_donnees/LaTuque-copie.tif")
 ```
 
-```{r echo = FALSE, eval = FALSE}
-root = "Module5/data"
-filename<- paste(root, "/LaTuque-copie.tif", sep = "")
-writeRaster(S_mult, filename, overwrite = TRUE)
-```
+
 <br>
 
 
