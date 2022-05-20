@@ -105,20 +105,20 @@ library(leafsync)
 
 </div>
 
-Dans les sections [4.2](#read_vec) à [4.5](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/sci1031/sci1031/raw/master/Module4/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés et un fichier `csv`: 
+Dans les sections [4.1.3](#read_vec) à [4.1.6](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/sci1031/sci1031/raw/master/Module4/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés et un fichier `csv`: 
 
 - `Montreal_Velo.zip`
 - `Donnees_Ouvertes_MEES.gbd.zip`
 - `nz_capitales.csv`
 
 
-Dézipper chacun des deux dossiers. Le premier dossier, `Montreal_Velo` sera utilisé aux sections [4.2-4.4](#read_vec). Il contient les données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes. Il contient trois sous-dossiers: 
+Dézipper chacun des deux dossiers. Le premier dossier, `Montreal_Velo` sera utilisé aux sections [4.1.3-4.1.5](#read_vec). Il contient les données vectorielles relatives au réseau de pistes cyclables de la ville de Montréal et aux accidents routiers impliquant des bicyclettes. Il contient trois sous-dossiers: 
 
 - `accidents`
 - `pistes`
 - `terre`.
 
-Le deuxième dossier, `Donnees_Ouvertes_MEES.gbd` est la geodatabase du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec (MEES); nous l'utiliserons à la section [4.5](#gdb).
+Le deuxième dossier, `Donnees_Ouvertes_MEES.gbd` est la geodatabase du Ministère de l'Éducation et de l'Enseignement Supérieur du Québec (MEES); nous l'utiliserons à la section [4.1.6](#gdb).
 
 Le fichier `nz_capitales.csv` contient les coordonnées géographiques des capitales des régions administratives de la Nouvelle-Zélande; nous l'utiliserons à la section [exercices](#ex_vec) à la fin de ce module. 
 
@@ -126,7 +126,7 @@ Le fichier `nz_capitales.csv` contient les coordonnées géographiques des capit
 
 ### Créer des données vectorielles {#create_vec}
 
-Pour créer, lire et manipuler des données vectorielles, nous allons utiliser la librairie `sf`. Notez que la librairie `rgdal` se charge automatiquement lorsque `sf` se charge.
+Pour créer, lire et manipuler des données vectorielles, nous allons utiliser la bibliothèque `sf`. Notez que la bibliothèque `rgdal` se charge automatiquement lorsque `sf` se charge.
 
 ```{r load-sf, eval = FALSE}
 library(sf)
@@ -390,7 +390,7 @@ points_sf
 <br>
 
 
-### Lire un *shapefile* et interpréter sa géométrie {#read_vec}
+### Lire un shapefile et interpréter sa géométrie {#read_vec}
 
 
 #### Lire les données {.unnumbered #lire-shp}
@@ -434,7 +434,7 @@ accidents_velo <- st_read("Module4/Module4_donnees/Montreal_Velo/accidents/accid
 Remarquez que le type de géométrie (`Geometry type`) diffère pour les trois classes de données lues comme nous nous y attendions.
 <br>
 
-#### Explorer les métadonnées d’un *shapefile* {-}
+#### Explorer les métadonnées d’un shapefile {-}
 
 Les informations contenues dans un *shapefile* sont appelées des métadonnées. Nous sommes particulièrement intéressées aux métadonnées géospatiales.
 
@@ -547,7 +547,7 @@ accidents_velo
 ```
 <br>
 
-### Visualisation de *shapefiles* sous R
+### Visualisation de shapefiles sous R
 
 #### Visualisation avec la librairie Mapview {-}
 
@@ -681,7 +681,7 @@ Remarquez que nous avons changé le titre de la légende en utilisant l'argument
 
 <br>
 
-#### Visualiser plusieurs *shapefiles* {-}
+#### Visualiser plusieurs shapefiles {-}
 
 Nous allons maintenant représenter les données vectorielles `limites terrestres`, `pistes_cyclables` et `accidents_velo` au sein d'une même figure. Il s'agit de définir individuellement chacune des cartes comme un objet `mapview` et de les additionner en utilisant l'opérateur `+`.
 
