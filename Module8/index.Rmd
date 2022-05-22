@@ -102,7 +102,7 @@ Dans cette leçon, nous allons utiliser le modèle d'élévation numérique auss
 
 Nous allons également nous servir de la base de données vectorielles des sentiers de randonnées de la SÉPAQ ([source](https://www.donneesquebec.ca/recherche/fr/dataset/sentiers-estivaux)), ainsi que celle des parcs nationaux de la région de Sherbrooke identifiés au [module 7](#manip_vec).
 
-Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargée en cliquant sur un seul lien: [données pour le module 8](https://github.com/sci1031/sci1031/raw/master/Module8/Module8_donnees.zip). Une fois téléchargé, le dossier compressé (`zip`) doit être dézippé dans votre répertoire de travail. Le dossier `Module8_donnees` comprend deux sous-dossiers et un fichier:
+Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargée en cliquant sur un seul lien: [données pour le module 8](https://github.com/sci1031/data/raw/master/Module8_donnees.zip). Une fois téléchargé, le dossier compressé (`zip`) doit être dézippé dans votre répertoire de travail. Le dossier `Module8_donnees` comprend deux sous-dossiers et un fichier:
 
 - parcs_sherbrooke
 - DEM.tif
