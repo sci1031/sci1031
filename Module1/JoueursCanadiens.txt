@@ -1,0 +1,8 @@
+"nom"	"prenom"	"numero"	"age"	"position"	"buts"
+"Price"	"Carey"	"31"	34	"Gardien"	NA
+"Suzuki"	"Nick"	"14"	22	"Centre"	19
+"Gallagher"	"Brendan"	"11"	29	"Ailier droit"	6
+"Caufield"	"Cole"	"22"	21	"Ailier droit"	22
+"Hoffman"	"Mike"	"68"	32	"Centre"	11
+"Dvorak"	"Christian"	"28"	26	"Ailier gauche"	10
+"Romanov"	"Alexander"	"27"	22	"Défenseur droit"	3

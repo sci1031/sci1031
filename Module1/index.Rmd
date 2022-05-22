@@ -1106,7 +1106,7 @@ Dans cette section, vous allez mettre en pratique les concepts enseignés en uti
 
 </div>
 
-Télécharger le dossier [Module1_donnees.zip](https://github.com/sci1031/sci1031/raw/master/Module1/Module1_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient le fichier *villes_qc.csv*.
+Télécharger le dossier [Module1_donnees.zip](https://github.com/sci1031/data/raw/master/Module1_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient le fichier *villes_qc.csv*.
 
 
 

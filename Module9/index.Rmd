@@ -79,7 +79,7 @@ Dans la seconde partie, vous étudierez l'évolution des températures et des pr
 
 </div>
 
-Les données vectorielles et matricielles utilisées dans ce module peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 9](https://github.com/sci1031/sci1031/raw/master/Module9/Module9_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module9_donnees` pour ce module, et dézippez-le. Le dossier comprend quatre fichiers:
+Les données vectorielles et matricielles utilisées dans ce module peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 9](https://github.com/sci1031/data/raw/master/Module9_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module9_donnees` pour ce module, et dézippez-le. Le dossier comprend quatre fichiers:
 
 
 - `maxt.nc`

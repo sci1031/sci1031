@@ -1,7 +1,7 @@
 # Cartographie {#carto}
 
 
-L'objectif principal de ce module est
+Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le premier objectif est d'apprendre les principes fondamentaux de la cartographie. Le deuxième objectif est d'apprendre les fonctionnalités de la bibliothèque R `tmap` pour créer divers types de carte avec des données vectorielles et matricielles. 
 
 
 <br>
@@ -11,9 +11,16 @@ L'objectif principal de ce module est
 
 ---
 
--
--
--
+- Décrire les principes fondamentaux à respecter lors de la création d'une carte.
+- Identifier les éléments cartographiques indispensables et optionnels.
+- Décrire les types de cartes générale et thématique.
+- Définir la symbologie utilisée en cartographie. 
+- Comprendre le fonctionnement de base de la bibliothèque `tmap`.
+- Utiliser les fonctions de `tmap` pour ajouter des éléments cartographiques et ajuster la mise en page d'une carte.
+- Utiliser les fonctions de `tmap` pour cartographier des données vectorielles de type points, lignes et polygones.
+- Utiliser les fonctions de `tmap` pour cartographier des données matricielles.
+- Utiliser les fonctions de `tmap` pour créer des cartes avec symboles proportionnels et choroplèthes.
+- Utiliser les fonctions de `tmap` pour créer des cartes à panneaux multiples
 
 ---
 
@@ -22,190 +29,308 @@ L'objectif principal de ce module est
 
 - `tmap`
 - `mapview`
+- `tmaptools`
 
 </div>
 
 <div class="boite ico fonctions gauche">
 ###### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
--
--
+- `tm_shape()`
+- `tm_fill()`
+- `tm_scale_bar()`
+- `tm_compass()`
+- `tm_grid()`
+- `tm_graticules()`
+- `tm_credits()`
+- `tmap_arrange()`
+- `tm_borders()`
+- `tm_polygons()`
+- `tm_layout()`
+- `tm_style()`
+- `tm_text()`
+- `tm_lines()`
+- `tm_markers()`
+- `tm_raster()`
+- `tm_legend()`
+- `tm_symbols()`
+- `tm_bubbles()`
+- `tm_facets()`
+
 
 </div>
 
 <div class="boite ico donnees gauche">
 ###### Vous utiliserez les données suivantes: {-}
 
-Dans la section Leçon, vous utiliserez des données XYXYX
-Dans la section Exercice, vous utiliserez XXXXX
+Dans la section [leçon](#lecon_carto), vous utiliserez cinq ensembles de données différents. Quatre ensembles sont formés de données vectorielles. Il s'agit de données sur les régions administratives du Québec et la taille de leur population (polygones), des routes du Québec (lignes), des municipalités du Québec (points), et des cas de COVID dans les régions socio-sanitaires du Québec (polygones). L'ensemble de données matricielles correspond à des données d'élévation sur tout le territoire québécois.
+
+Dans la section [exercice](#ex_carto), vous utiliserez des données disponibles dans les bibliothèques `tmap` et `spData`.
 
 </div>
 
-Importez l'[ensemble des données](https://github.com/sci1031/sci1031/tree/master/Module6/Donnees.zip) utilisées dans ce module.
-Sauvegardez le dossier compressé (`Donnees.zip`) dans votre répertoire de travail pour ce module, et dézippez-le.
-Le dossier `Donnees` comprend cinq sous-dossiers:
+
+
+## Leçon {lecon_carto}
+
+
+### Télécharger les données {#data_mod6}
+
+<div class="boite ico donnees gauche"> 
+
+###### Les données {-} 
+
+<br>
+
+</div>
+
+
+Importez l'[ensemble des données](https://github.com/sci1031/data/raw/master/Module6_donnees.zip) utilisées dans ce module.
+Sauvegardez le dossier compressé (`Module6_donnees.zip`) dans votre répertoire de travail pour ce module, et dézippez-le.
+Ce dossier comprend lui-même cinq sous-dossiers que vous devez également dézipper:
+
 - `COVID`
 - `Elevation`
 - `Population`
 - `Routes`
 - `Villes`
 
+<br>
+
+Nous utiliserons ces données à partir de la section [6.1.3](#basetmap). Commençons d'abord par une introduction sur les principes de bases de la cartographie.
 
 
+### Principes de base en cartographie 
+
+### Cartes statiques avec tmap {#basetmap}
+
+Il existe plusieurs bibliothèques R permettant de visualiser des données spatiales. La bibliothèque `mapview`, que nous avons déjà utilisée, en est un exemple. La bibliothèque `ggplot2`, que vous connaissez peut-être, permet de créer des cartes qui peuvent être peaufinées par l'utilisation de fonctions des bibliothèques `sf` et `ggspatial`^[Consulter ce [site](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html) pour en apprendre davantage sur la cartographie avec `ggplot2`]. Dans le cadre de ce cours, nous nous concentrerons sur la bibliothèque `tmap` et l'apprentissage de ses fonctions principales.
+
+Nous avons choisi `tmap` parce que cette bibliothèque est relativement simple à utiliser et que ses fonctions sont intuitives. Le fonctionnement de `tmap` est très similaire à celui de la bibliothèque `ggplot2` qui est fort populaire pour la visualisation de données de toutes sortes. Si vous connaissez déjà `ggplot2`, alors l'apprentissage de `tmap` vous sera familié. Si vous ne connaissez pas `ggplot2`, vous pourriez être amenés à l'utiliser dans le futur, et dans ce cas votre connaissance de `tmap` vous sera utile. 
+
+De façon générale, nous utilisons `tmap` pour cartographier des données spatiales de la façon suivante:
+
+```{r, eval = FALSE}
+tm_shape(DonneesSpatiales) + tm_fonction1() + tm_fonction2() + ...
+```
+<br>
+
+La fonction `tm_shape()` est suivi d'une ou de plusieurs fonctions qui précisent les objets ou les attributs des données à cartographier ainsi que les éléments cartographiques à ajouter et la mise en page souhaitée. 
+
+Télécharger la bibliothèque `tmap`:
+
+```{r, eval = FALSE}
+install.packages("tmap")
+```
 
 
-
-
-## Leçon
-
-### Principes de base en cartographie
-
-### Cartes statiques avec tmap
-Il y a d'autres bibliothèques mais nous étudierons tmap.
-Voilà pourquoi: 
-
+Chargez `tmap` dans votre session de travail R ainsi que les bibliothèques `sf` et `raster` dont nous aurons besoin pour lire et manipuler les données vectorielles et matricielles respectivement:
 
 ```{r}
-library(sf)
 library(tmap)
+library(sf)
+library(raster)
 ```
 
+##### Données sur les régions administratives du Québec {-}
 
-### Fonctionnement de base de tmap
+Pour débuter notre exploration des fonctions de cartographie offertes avec `tmap` nous utiliserons les données vectorielles sur les limites des régions administratives du Québec ainsi que la taille de leur population. La taille des populations des régions administratives provient de la Banque de données des statistiques officielles sur le Québec (https://bdso.gouv.qc.ca/), et les limites géographiques des régions proviennent du site Données Québec (https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs).
 
-Fonctionnement général: tm_shape(données spatiales) + les autres choses qu'on veut faire.
-
-Pour explorer les fonctions de cartographie offertes avec tmap nous utiliserons les données vectorielles sur les limites des régions administratives du Québec ainsi que la taille de leur population.
-
-
-#### Données sur les régions administratives {-}
-La taille des populations des régions administratives provient de la Banque de données des statistiques officielles sur le Québec (https://bdso.gouv.qc.ca/), et les limites géographiques des régions proviennent du site Données Québec (https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs)
-
+Utiliser la fonction `st_read()` de la bibliothèque `sf` pour lire le *shapefile* `QC_RegAdm_Pop.shp` contenu dans le dossier `Population`:
 
 ```{r}
-Q<-st_read("Module6/Module6_donnees/Population/QC_RegAdm_Pop.shp")
+Q <- st_read("Module6/Module6_donnees/Population/QC_RegAdm_Pop.shp")
 ```
 
-Expliquer chaque colonne
+<br>
 
-#### tm_fill {-}
-remplir de façon homogène l'intérieur des limites d'un polygone
+Observer la structure et les attributs du *shapefile* `Q`. Celui-ci contient 17 multipolygones, un pour chacune des régions administratives du territoire québécois. De plus, `Q` contient 18 attributs:
 
-```{r, dev = 'png'}
+- `NUM_REG`: le numéro associé à la région administrative,
+- `NOM_REG`: le nom de la région administrative,
+- `AREA_REG`: la superficie de la région,
+- `ATot_T`: la population totale en 2019 dans la région,
+- `ATot_H` / `ATot_F`: le nombre total d'hommes et de femmes dans la région,
+- `A0.14_T` / `A0.14_H` /  `A0.14_F`: la pop
+
+
+#### tm_fill {.unnumbered #fct_tmfill}
+
+La fonction `tm_fill()` permet de remplir de façon homogène l'intérieur des limites d'un polygone. Elle s'applique donc aux données vectorielles de type polygone, et on l'ajoute à la donction `tm_shape()`.
+
+```{r, dev = 'png', fig.height=6}
 tm_shape(Q)+ 
   tm_fill()
 ```
+<br>
 
 #### Object tmap {-}
+
+La bibliothèque `tmap` comprend sa propre classe d'objets:
+
 ```{r, dev = 'png'}
-map_Q<-tm_shape(Q)+ 
-  tm_fill()
+map_Q <- tm_shape(Q)+ 
+             tm_fill()
 
 class(map_Q)
 ```
+<br>
+En créant un objet `tmap`, la carte est seulement affichée lorsqu'on appelle l'objet. 
+La création d'objet `tmap` est utile car, comme nous le verrons, elle permet de constituer une carte de base à laquelle nous pouvons ajouter des éléments cartographiques.
+
 
 ### Spécificités cartographiques
 
 #### Barre d'échelle et rose des vents {-}
-Ajout d'un barre d'échelle et d'une rose des vents.
 
-```{r, dev = 'png'}
+L'ajout d'un barre d'échelle et d'une rose des vents, se fait par l'utilisation des fonctions `tm_scale_bar()` et `tm_compass()` respectivement:
+
+```{r, dev = 'png',fig.height=6}
 map_Q +   # la carte du Québec que nous avons créée plus haut
   # ajout d'une barre d'échelle
-  tm_scale_bar(breaks = c(0,250,500),text.size = 0.8, position=c("right","bottom")) +
+  tm_scale_bar(breaks = c(0,250,500),
+               text.size = 0.8, 
+               position=c("right","bottom")) +
   # ajout d'une rose des vents
-  tm_compass(type = "arrow", position = c("right", "top"))
+  tm_compass(type = "arrow", 
+             position = c("right", "top"))
 ```
+<br>
 
+où l'argument `break` précise les divisions sur la barre d'échelle, `text.size` la taille du texte sous la barre, et `position` la position de la barre sur la carte (gauche ou droite, haut ou bas).
 
-Plusieurs options sont possibles. Utilisez `help(tm_scale_bar)` ou `help(tm_compass)` pour connaître les autres arguments possibles pour ces fonctions. Par exemple,
-```{r, dev = 'png'}
+Plusieurs options d'arguments sont possibles. Utilisez `help(tm_scale_bar)` ou `help(tm_compass)` pour connaître les autres arguments possibles pour ces fonctions. Par exemple,
+```{r, dev = 'png',fig.height=6}
 map_Q +   
-  tm_scale_bar(width = 2, position=c("right","bottom")) +
-  tm_compass(type = "4star", size = 2, show.labels = 2, position = c("right", "top"))
+  tm_scale_bar(width = 2, 
+               position=c("right","bottom")) +
+  tm_compass(type = "4star",
+             size = 2, 
+             show.labels = 2, 
+             position = c("right", "top"))
 ```
-
+<br>
 
 #### Grille et graticules {-}
 
-Grid draws coordinates (in meter?) how is the x=0 determined? 
 
+La fonction `tm_grid()` ajoute une grille à la carte selon le système de coordonnées projetées des données. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées projetée Conique conforme de Lambert (epsg:32198) qui est métrique. 
 
-https://geocompr.github.io/post/2019/tmap-grid/
+La fonction `tm_graticules` ajoute les lignes de longitude et de latitude du système de coordonnées géographiques, c'est-à-dire non-projetées. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées géographiques du Datum North Américain de 1983 (NAD83, espg:4269).
 
-The number of horizontal (x) and vertical (y) lines can be set using the n.x and n.y arguments. Importantly, tmap rounds coordinate values to equally spaced “round” values, so the number of actual labels may be slightly different than set with n.x and n.y.
-```{r, dev = 'png'}
-Q1<-tm_shape(Q)+tm_fill() + tm_grid(labels.size=0.5)
-Q2<-tm_shape(Q)+tm_fill() + tm_grid(col="yellow", lwd=3, n.x = 10, n.y = 4)
-#Q3<- tm_shape(Q)+ tm_grid(col="yellow", lwd=3, n.x = 3, n.y = 5 )+tm_fill()+tm_borders()
+```{r, dev = 'png', fig.height=6}
+Q1 <- map_Q + tm_grid()
+
+Q2 <- map_Q + tm_graticules()
+
 tmap_arrange(Q1,Q2)
 ```
+<br> 
+
+Remarquer l'usage de la fonction `tmap_arrange()` pour afficher des cartes côte-à-côte.
+
+Plusieurs options d'arguments existent pour les fonctions `tm_grid()` et `tm_graticules()`. Par exemple, il est possible de préciser le nombre de divisions sur l'axe des *x* (`n.x`) et sur l'axe des *y* (`n.y`)^[Noter que le nombre de divisions créé par `tmap` est approximativement celui demandé car `tmap` crée des divisions uniformément espacées situées sur des coordonnées de valeurs entières.], l'épaisseur du trait (`lwd`), la couleur (`col`) ou encore la taille de l'écriture (`labels.size`).
+
 
 
 Donc c'est la meme chose mais graticule donne NSEW ?
 
-```{r, dev = 'png'}
-Q1<-tm_shape(Q)+tm_fill() + tm_grid()
-Q2<-tm_shape(Q)+tm_fill() + tm_grid(projection=4386) #4326  3857=pas capable ... 32610 idem
-Q3<-tm_shape(Q)+tm_fill() + tm_graticules()
-tmap_arrange(Q2,Q3)
+```{r, dev = 'png', fig.height=6}
+Q1 <- map_Q + tm_grid(labels.size=0.5, 
+                      col="yellow", 
+                      lwd=3, 
+                      n.x = 10, n.y = 4)
 
-```
+Q2 <- map_Q + tm_graticules(labels.col = "darkblue", 
+                            alpha = 0.3, 
+                            labels.cardinal = FALSE)
 
-```{r, dev = 'png'}
-Q1<-map_Q + tm_graticules()
-Q2<-tm_shape(Q)+ tm_graticules(col="blue")+tm_fill() 
 tmap_arrange(Q1,Q2)
 ```
+<br>
 
 
 #### Attribuer les crédits ou la source des données {-}
-```{r, dev = 'png'}
-map_Q + tm_credits("Données récupérées \ndu site donnéesquebec.ca", size = 0.6)
+
+Il faut utiliser la fonction `tm_credits()` pour ajouter à la carte une mention sur la source des données, ou toute autre information comme l'auteur ou l'autrice de la carte et son organisation d'attache. Par défaut, la mention apparaît dans le coin inférieur droit.
+
+```{r, dev = 'png', fig.height=6}
+map_Q + 
+  tm_credits("Données récupérées \nsur le site donneesquebec.ca", 
+             size = 0.6)
 ```
 
-### Les polygones
+<br>
+
+### Cartographier des polygones
+
+Nous avons vu que la fonction `tm_fill()` s'utilise pour représenter des données vectorielles de type polygone. Cette fonction illustre l'intérieur des limites d'un polygone. Or, il existe d'autres fonctions utiles, notamment pour illustrer les frontières des polygones ou chaque polygone individuellement. 
 
 #### Identification des frontières des polygones {-}
 
-```{r, dev = 'png'}
+La fonction `tm_borders()` permet d'illustrer les frontières des polygones:
+
+```{r, dev = 'png', fig.height=6}
 # frontiere des regions admin
-tm_shape(Q)+
+tm_shape(Q) +
   tm_borders()
 ```
+<br>
 
 
+La fonction `tm_borders()` peut s'utiliser conjointement avec la fonction `tm_fill()`:
 
-```{r, dev = 'png'}
+```{r, dev = 'png', fig.height=6}
 # Quebec + frontiere
-tm_shape(Q)+
-  tm_fill()+
+tm_shape(Q) +
+  tm_fill() +
   tm_borders()
 ```
+<br>
 
+Par ailleurs, la fonction `tm_polygons()` est équivalente l'utilisation conjointe de `tm_borders()` et `tm_fill()`:
 
-```{r, dev = 'png'}
-
-# tm_polygons = tm_fill + tm_borders (condense into one signe function)
-tm_shape(Q)+
-tm_polygons()
+```{r, dev = 'png', fig.height=6}
+# tm_polygons = tm_fill + tm_borders 
+tm_shape(Q) +
+   tm_polygons()
 
 ```
+
+<br>
 
 ##### Paramètres esthétiques {-}
-```{r, dev = 'png'}
-# un peu d'esthetique: Figure 8.3 de Lovelace
-Q1 <- tm_shape(Q)+tm_fill(col="green")
-Q2 <- tm_shape(Q)+tm_fill(col="green", alpha = 0.4) #color transparency
-Q3 <- tm_shape(Q)+tm_borders(col="green")
-Q4 <- tm_shape(Q)+tm_borders(col="pink", lwd = 4) #line width
-Q5 <- tm_shape(Q)+tm_borders(col="blue", lty = 2) #line type
-Q6 <- tm_shape(Q)+tm_fill(col="blue", alpha = 0.3) + tm_borders(col="black")
+
+Les fonctions `tm_borders()` et `tm_fill()` possèdent plusieurs arguments pour ajuster l'apparence de la carte. Voici des exemples:
+
+```{r, dev = 'png', fig.cap="Cette figure est inspirée de la [figure 9.3](https://geocompr.robinlovelace.net/adv-map.html) du livre Geocomputation with R [@lovelace_geocomputation_2021]."}
+
+# couleur des polygones 
+Q1 <- tm_shape(Q) + tm_fill(col="green")
+
+# transparence
+Q2 <- tm_shape(Q) + tm_fill(col="green", alpha = 0.4)
+
+# couleur des frontières
+Q3 <- tm_shape(Q) + tm_borders(col="green")
+
+# épaisseur du trait
+Q4 <- tm_shape(Q) + tm_borders(col="pink", lwd = 4) 
+
+# type de trait
+Q5 <- tm_shape(Q) + tm_borders(col="blue", lty = 2) 
+
+# couleur des polygones et des frontières
+Q6 <- tm_shape(Q) + tm_fill(col="blue", alpha = 0.3) + 
+  tm_borders(col="black")
+
 tmap_arrange(Q1,Q2,Q3,Q4,Q5,Q6)
 ```
 
-Images des types de lignes
+<!--   Images des types de lignes
 Rappel types de couleur
+-->
+
 
 #### Identification individuelle des polygones {-}
 Polygones de couleurs differentes.
@@ -237,9 +362,10 @@ tmap_arrange(Q12,Q34)
 ### Mise en page
 
 
-La fonction `tm_layout` permet d'ajuster la mise en page d'une carte et différents éléments de son esthétique. Pour découvrir l'ensemble des arguments possibles tapez la commande `help(tm_layout)` (ou `?tm_layout`) dans votre console `R`. Certains des arguments utiles sont:
+La fonction `tm_layout` permet d'ajuster la mise en page d'une carte et différents éléments de son esthétique. Pour découvrir l'ensemble des arguments possibles tapez la commande `help(tm_layout)` (ou `?tm_layout`) dans votre console R. Plusieurs des arguments utiles sont présentés ci-dessous.
 
 #### Titre, cadre et couleur du fond {-}
+
 * L'ajout d'un titre (`title`), la taille de ce dernier (`title.size`) et sa position (`title.position`).
 * La présence ou l'absence d'un cadre (`frame`) et l'épaisseur du trait de celui-ci (`frame.lw`).
 * La taille des marges extérieures au cadre (`outer.margins = c(Haut,Droit,Bas,Gauche)` où `Haut`, `Droit`, `Bas`, `Gauche` sont des chiffres entre 0 (pas de marge) et 1 (marge complète)).
