@@ -730,11 +730,18 @@ install.packages("animation")
 <br>
 
 Nous pouvons maintenant utiliser `saveGIF()`.
-
+<!--
 ```R
 library(animation)
 saveGIF(anim(traj_long_pts, 20, NULL), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
 ```
+-->
+
+```{r, eval = FALSE}
+library(animation)
+saveGIF(anim(traj_long_pts, 20, NULL), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
+```
+
    
 <!-- ![](Module9/images/anim1.gif)-->
 
@@ -787,12 +794,19 @@ tm_shape(carte_fond) + tm_rgb()
 
 
 Maintenant, répétons notre animation en remplaçant la valeur `NULL` de l'argument `basemap` par la carte de fond.
-
+<!--
 ```R
 saveGIF(anim(traj_long_pts, 20, tm_shape(carte_fond) + tm_rgb()), 
    movie.name = "anim2.gif", ani.height = 500, ani.width = 500)
 
 ```
+-->
+
+```{r, eval = FALSE}
+saveGIF(anim(traj_long_pts, 20, tm_shape(carte_fond) + tm_rgb()), 
+   movie.name = "anim2.gif", ani.height = 500, ani.width = 500)
+```
+
    
 <!--![](Module9/images/anim2.gif)-->
 
