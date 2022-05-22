@@ -171,6 +171,7 @@ blockquote {
 .book .book-header.presentation {
   background-image: url(../Images/Back_Presentation.jpg);
 }
+/*  
 .book .book-header.m1 {
   background-image: url(../Images/Back_M1.jpg);
 }
@@ -195,7 +196,7 @@ blockquote {
 .book .book-header.m8 {
   background-image: url(../Images/Back_M8.jpg);
 }
-
+*/
 /* Deux colonnes */
 .deuxCols {
   border: 1px solid black;
