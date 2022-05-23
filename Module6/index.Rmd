@@ -28,8 +28,7 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 ###### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `tmap`
-- `mapview`
-- `tmaptools`
+- `grid`
 
 </div>
 
@@ -56,6 +55,8 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 - `tm_symbols()`
 - `tm_bubbles()`
 - `tm_facets()`
+- `viewport()`
+- `print()`
 
 
 </div>
@@ -146,14 +147,16 @@ Q <- st_read("Module6/Module6_donnees/Population/QC_RegAdm_Pop.shp")
 
 <br>
 
-Observer la structure et les attributs du *shapefile* `Q`. Celui-ci contient 17 multipolygones, un pour chacune des régions administratives du territoire québécois. De plus, `Q` contient 18 attributs:
+Observer la structure et les attributs du *shapefile* `Q`. Celui-ci contient 17 multipolygones, un pour chacune des régions administratives du territoire québécois. De plus, `Q` contient 8 attributs:
 
 - `NUM_REG`: le numéro associé à la région administrative,
 - `NOM_REG`: le nom de la région administrative,
 - `AREA_REG`: la superficie de la région,
-- `ATot_T`: la population totale en 2019 dans la région,
-- `ATot_H` / `ATot_F`: le nombre total d'hommes et de femmes dans la région,
-- `A0.14_T` / `A0.14_H` /  `A0.14_F`: la pop
+- `Pop_tot`: la population totale en 2019 dans la région,
+- `Pop_0_14`: la population agée de 0 à 14 ans,
+- `Pop_15_24`: la population agée de 15 à 24 ans,
+- `Pop_25_64`: la population agée de 25 à 64 ans,
+- `Pop_65_`: la population agée de 65 ans et plus.
 
 
 #### Intérieur des polygones {-}
@@ -267,7 +270,7 @@ Dans le cas ci-dessus, l'attribut illustré (`NUM_REG`) est catégorique et dist
 
 Nous pouvons aussi choisir d'illustrer un seul des polygones d'un *shapefile*. Dans un tel cas, nous devons isoler le polygone désiré et n'illustrer que ce dernier avec la fonction `tm_shape()`. Par exemple, isolons le polygone correspondant à la région de l'Outaouais: 
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = 'png', fig.height=4}
 Q_Outaouais <- Q[Q$NOM_REG == "Outaouais",]
 tm_shape(Q_Outaouais) + tm_fill(col="blue", alpha = 0.4)
 ```
@@ -276,7 +279,7 @@ tm_shape(Q_Outaouais) + tm_fill(col="blue", alpha = 0.4)
 Nous pouvons également vouloir mettre l'emphase sur un polygone en particulier, en assignant une couleur seulement à celui-ci, tout en cartographiant l'ensemble des polygones. Dans ce cas, nous pouvons utiliser le caractère additif des objets `tmap`. Nous créons un premier objet représentant l'ensemble des polygones et nous lui additionnons un deuxième objet représentant le polygone que nous souhaitons mettre en évidence.
 
 
-```{r, dev = 'png'}
+```{r, dev = 'png', fig.height=6}
 # Une option
 Q1 <- tm_shape(Q) + tm_borders(col="black")
 Q2 <- tm_shape(Q_Outaouais) + tm_fill(col="blue", alpha = 0.4)
@@ -431,54 +434,54 @@ Voici quelques exemples de mise en page de la légende:
 
 ```{r eval = FALSE, echo = TRUE}
 
-Q1 <- tm_shape(Q) + 
-  tm_polygons(col="NOM_REG") + 
+tm_shape(Q) + 
+  tm_polygons(col = "NOM_REG") + 
   tm_layout(legend.show = FALSE)
 
-Q2 <- tm_shape(Q) + 
-  tm_fill(col="NOM_REG", title = "Régions administratives") + 
-  tm_layout(legend.outside = TRUE)
+tm_shape(Q) +
+  tm_polygons(col = "NUM_REG", title = "Régions administratives", 
+              legend.is.portrait = FALSE) + 
+  tm_layout(frame = FALSE, legend.outside = TRUE, 
+            legend.outside.position = "bottom", 
+            legend.outside.size = 0.15, 
+            legend.text.size = 0.75)
 
 
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png'}
 Q1 <- tm_shape(Q) + 
-  tm_polygons(col="NOM_REG") + 
+  tm_polygons(col = "NOM_REG") + 
   tm_layout(legend.show = FALSE)
 
-Q2 <- tm_shape(Q) + 
-  tm_fill(col="NOM_REG", title = "Régions administratives") + 
-  tm_layout(legend.outside = TRUE)
+Q3 <- tm_shape(Q) +
+  tm_polygons(col = "NUM_REG", title = "Régions administratives", legend.is.portrait=FALSE) + 
+  tm_layout(frame = FALSE, legend.outside = TRUE, 
+            legend.outside.position = "bottom", 
+            legend.outside.size = 0.15, 
+            legend.text.size = 0.75)
 
-tmap_arrange(Q1,Q2)
+tmap_arrange(Q1,Q3)
 ```
 
 <br>
 
 ```{r eval = FALSE, echo = TRUE}
-Q3 <- tm_shape(Q) +
-  tm_polygons(col="NUM_REG", title = "Régions administratives", legend.is.portrait=FALSE) + 
-  tm_layout(frame = FALSE, legend.outside = TRUE, 
-            legend.outside.position = "bottom", 
-            legend.outside.size = 0.15, 
-            legend.text.size=0.75)
+tm_shape(Q) + 
+  tm_fill(col = "NOM_REG", title = "Régions administratives") + 
+  tm_layout(legend.outside = TRUE)
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png',fig.height=6 }
-Q3 <- tm_shape(Q) +
-  tm_polygons(col="NUM_REG", title = "Régions administratives", legend.is.portrait=FALSE) + 
-  tm_layout(frame = FALSE, legend.outside = TRUE, 
-            legend.outside.position = "bottom", 
-            legend.outside.size = 0.15, 
-            legend.text.size=0.75)
+tm_shape(Q) + 
+  tm_fill(col="NOM_REG", title = "Régions administratives") + 
+  tm_layout(legend.outside = TRUE)
 
-Q3
 ```
 <br>
 
 ```{r eval = FALSE, echo = TRUE}
-Q4 <- tm_shape(Q) + 
+tm_shape(Q) + 
   tm_fill(col="NOM_REG", title = "Régions administratives") + 
   tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE, 
             legend.outside.position = "left", 
@@ -490,7 +493,7 @@ Q4 <- tm_shape(Q) +
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png', fig.height=6 }
-Q4 <- tm_shape(Q) + 
+tm_shape(Q) + 
   tm_fill(col="NOM_REG", title = "Régions administratives") + 
   tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE, 
             legend.outside.position = "left", 
@@ -498,7 +501,7 @@ Q4 <- tm_shape(Q) +
             legend.title.fontface = 2, 
             legend.title.color = "lightpink", 
             legend.text.color = "white")
-Q4
+
 ```
 <br>
 
@@ -864,9 +867,9 @@ tm_shape(E) + tm_raster(n = 10,
 <br>
 
 
-Par défaut, la palette de couleur utilisée est la palette séquentielle `YlOrBr` de ColorBrewer (de jaune à brun en passant par orange). Or, nous pouvons changer la palette de couleur. Utilisons, par exemple, la fonction `colorRampPalette()` pour créer notre propre palette de couleur. 
+Par défaut, la palette de couleur utilisée est la palette séquentielle `YlOrBr` de [ColorBrewer](https://colorbrewer2.org/) (de jaune à brun en passant par orange). Or, nous pouvons changer la palette de couleur. Utilisons, par exemple, la fonction `colorRampPalette()` pour créer notre propre palette de couleur. 
 
-```{r, dev = 'png', warning = FALSE}
+```{r, dev = 'png', warning = FALSE, fig.height=6}
 
 pal.elevation = colorRampPalette( c("midnightblue","forestgreen",
                                     "darkolivegreen4","burlywood", 
@@ -879,81 +882,201 @@ tm_shape(E) + tm_raster(n = 10,
                         colorNA = "beige" ) +
               tm_legend(outside = TRUE, hist.width = 3)
 ```
+<br>
 
-Jouer avec la distribution des classes
+Il existe différentes façons de former des classes de valeur à partir de la distribution. L'argument `style` de la fonction `tm_raster()` permet de choisir une méthode parmi plusieurs dont les suivantes:
 
-```{r, dev = 'png', warning = FALSE}
-format_carte<-tm_layout(frame = FALSE, legend.position = c(0.67,0.04), legend.title.size = 0.8, legend.format=c(text.align="right"),legend.bg.color = "white", legend.frame = "black")
-Efixed<-tm_shape(E)+
-  tm_raster(title = "Élévation(m)",palette=pal.elevation(10),  style="fixed", breaks = c(0,100,200,300,400,500,600,700,800,900,1000,1600))+
-  format_carte
-Equant<-tm_shape(E)+
-  tm_raster(title = "Élévation(m)",palette=pal.elevation(10),  style="quantile")+format_carte
+- `"fixed"`: crée des classes de valeurs selon notre propre choix. Ces classes doivent être définies dans un  vecteur assigné à l'argument `breaks`.
+- `"equal"`: divise les valeurs en `n` classes. Ceci est la méthode par défaut. 
+- `"pretty"`: choisi automatiquement le nombre de classes qui permet de distinguer les valeurs dans un rendu esthétique. 
+- `"quantile"`: divise les valeurs en quantiles. 
+- `"jenks"`: utilise l'algorithme de Jenks pour déterminer le nombre optimal de classes.
+
+Visualisons à nouveau la carte des données d'élévation en utilisant un style "fixed" et un style "quantile":
+
+```{r, dev = 'png', warning = FALSE, fig.height=6 }
+# définir la mise en page pour les deux cartes
+format_carte <- tm_layout(frame = FALSE, 
+                          legend.position = c(0.67,0.04), 
+                          legend.title.size = 0.8, 
+                          legend.format=c(text.align="right"),
+                          legend.bg.color = "white", 
+                          legend.frame = "black")
+
+# style fixed.
+Efixed <- tm_shape(E) + 
+            tm_raster(title = "Élévation(m)",
+                      palette = pal.elevation(10),  
+                      style = "fixed", 
+                      breaks = c(0,100,200,300,400,500,600,700,800,900,1000,1600)) +
+            format_carte
+
+# style quantile
+Equant <- tm_shape(E) +
+            tm_raster(title = "Élévation(m)", 
+                      palette=pal.elevation(10),  
+                      style="quantile") +
+            format_carte
+
+
 tmap_arrange(Efixed,Equant)
 ```
 
+<br>
+
 ### Carte avec symboles proportionnels
 
-#### tm_symboles {-}
-```{r, warning = FALSE, dev = 'png'}
-tm_shape(Q)+
-  tm_polygons(col="NUM_REG", legend.show=FALSE) + 
+Dans des cartes thématiques, il est souvent utile de représentées certains attributs par des symboles proportionnels. Les fonctions `tm_symbols()` et `tm_bubbles()` de la bibliothèque `tmap` sont utiles pour réaliser ce type de cartes.
+
+
+###### Fonction tm_symbols() {-}
+
+La fonction `tm_symbols()` est similaire à la fonction `tm_dots()` mais ne s'utilise pas nécessairement avec des données vectorielles de type points. En particulier, elle permet de représenter la valeur d'attribut d'un polygone en affichant un symbole dont la taille ou la couleur est proportionnelle à cette valeur. 
+
+En guise d'exemple, reprenons les données sur les régions administratives du Québec pour lesquelles nous connaissons la taille de la population. Nous pouvons illustrer les régions par un cercle dont le diamètre est proportionnel à la taille de sa population. Il s'agit d'attribuer à l'argument `size`, le nom de l'attribut que nous souhaitons représenter. 
+
+
+```{r, warning = FALSE, dev = 'png', fig.height=6 }
+tm_shape(Q) + 
+  tm_polygons(col="NUM_REG", legend.show = FALSE) + 
   tm_style("bw") +
-  #tm_layout("Population des régions administratives")+
-  tm_symbols(col="black", size = "ATot_T", legend.size.show = TRUE, legend.size.is.portrait = TRUE, title.size = "Population")
+  tm_symbols(col = "black", 
+             size = "Pop_tot", 
+             legend.size.show = TRUE, 
+             legend.size.is.portrait = TRUE, 
+             title.size = "Population")
 ```
-Note: lorsqu'on veut la legende de certains elements seulement, on met FALSE dans celle qu'on veut pas.
-Par defaut le symbole est 21, mais on peut mettre autres choses.
-http://www.sthda.com/french/wiki/ggplot2-types-de-points-logiciel-r-et-visualisation-de-donnees
+<br>
+
+Par défaut, le symbole utilisé est un point. Le point correspond au symbole `shape = 21`. Nous pouvons toutefois utiliser d'autres symboles comme le carré (`shape = 15`), ou le repère géographique (`shape = marker_icon()`). Vous pouvez même importer vos propres symboles. 
+
+```{r, warning = FALSE, dev = 'png', fig.height=6 }
+carte_base <- tm_shape(Q) + 
+                  tm_polygons(col="NUM_REG", legend.show = FALSE) + 
+                  tm_style("bw") 
+
+carte_carre <- carte_base + 
+                 tm_symbols(shape = 15,
+                            col = "red", 
+                            size = "Pop_tot", 
+                            legend.size.show = TRUE, 
+                            legend.size.is.portrait = TRUE, 
+                            title.size = "Population")
+
+carte_marqueur <- carte_base + 
+                 tm_symbols(shape = marker_icon(),
+                            border.col = NULL, 
+                            size = "Pop_tot", 
+                            legend.size.show = TRUE, 
+                            legend.size.is.portrait = TRUE, 
+                            title.size = "Population")
+
+tmap_arrange(carte_carre, carte_marqueur)
+```
+
+<br>
 
 
-##### Mettre deux légendes
+##### Représenter deux légendes {-}
 
-```{r, warning = FALSE, dev = 'png'}
-tm_shape(Q)+tm_polygons(col="NOM_REG",  palette="Set1", border.col = "darkgrey", title ="Régions administratives") + 
-    tm_symbols(size = "ATot_T", border.col = "grey", col="black", scale = 2, legend.size.show = TRUE, legend.size.is.portrait = FALSE, sizes.legend.labels = c("500","1000","1500","2000","2500"), title.size ="Population (en milliers)")+
-tm_layout(frame = FALSE, legend.outside = TRUE, legend.stack = "vertical", legend.title.fontface = "bold" ) 
+Lorsque nous utilisons des symboles proportionnels, nous devons souvent avoir plus d'une légende. Par exemple, dans les cartes précédentes, nous avions seulement une légende se rapportant à la taille des populations mais aucune légende pour identifier les régions. Pour ajouter deux légendes (ou plus), nous devons utiliser la fonction `tm_layout()` avec l'argument `legend.stack` qui précise si les légendes seront disposées de façon verticale ou horizontale. 
+
+```{r, warning = FALSE, dev = 'png', fig.height = 6}
+tm_shape(Q) + 
+  tm_polygons(col="NOM_REG",  
+              palette="Set1", 
+              border.col = "darkgrey", 
+              title ="Régions administratives") + 
+   tm_symbols(size = "Pop_tot", 
+              border.col = "grey", 
+              col="black", 
+              scale = 2, 
+              legend.size.show = TRUE, 
+              legend.size.is.portrait = FALSE, 
+              sizes.legend.labels = c("500","1000","1500","2000","2500"), 
+              title.size ="Population (en milliers)") +
+    tm_layout(frame = FALSE, 
+              legend.outside = TRUE, 
+              legend.stack = "vertical", 
+              legend.title.fontface = "bold" ) 
 
                                
 ```
 
-#### tm_bubbles {-}
-Bubbles: rayon et couleur
+<br> 
 
-FAire le calcul du ratio d'enfant. 
+
+###### Fonction tm_bubbles() {-}
+
+La fonction `tm_bubbles()` est similaire à la fonction `tm_symbols()` et s'utilise lorsqu'on souhaite seulement représenter des symboles sous forme de cercle/point. Cette fonction est pratique lorsque nous voulons représenter deux attributs avec un symbole: le premier attribut est représenté par la taille du cercle et le second attribut par sa couleur.
+
+Utilisons à nouveau les données sur la taille des populations des régions administratives. Par exemple, représentons chaque région par un cercle dont le diamètre est proportionnel à la taille totale de sa population (comme nous l'avons fait plus haut). De plus, colorons chaque cercle en fonction de la proportion d'enfants (individus agés entre 0 et 14 ans) dans sa population. 
+
+Tout d'abord, nous devons calculer la proportion d'enfants dans chaque région. Pour le moment, nous connaissons seulement le nombre d'enfants (`A0.14_T`). Créons un nouvel attribut pour le *shapefile* Q:
+
 ```{r}
-Q$Pop_prop_enfant<-Q$A0.14_T/Q$ATot_T
+Q$Pop_prop_enfant <- Q$Pop_0_14/Q$Pop_tot
 ```
+<br>
 
+Utilisons maintenant la fonction `tm_bubbles()` en définissant l'argument `size` par l'attribut `"ATot_T"`, et l'argument `col` par l'attribut `"Pop_prop_enfant"`:
 
-```{r, warning = FALSE, dev = 'png'}
-tm_shape(Q)+
-  tm_polygons(col="NUM_REG", legend.show=FALSE, palette = "Greys") + 
-  #tm_layout("Population des régions administratives")+
-#tm_bubbles(size ="Pop_prop_enfant", sizes.legend=seq(0.1, 0.27, by=0.02), col= "ATot_T" , style = "quantile", legend.size.show = TRUE, legend.size.is.portrait = TRUE)
-  tm_bubbles(size = "ATot_T" , col= "Pop_prop_enfant" , style = "quantile", scale = 2,  border.col = "black", border.lwd
- = .5,legend.size.show = TRUE, legend.size.is.portrait = FALSE, title.size ="Population (en milliers)", title.col = "Proportion d'enfants (0-14 ans)", sizes.legend.labels = c("500","1000","1500","2000","2500"))+
-#tm_layout(frame = FALSE, legend.outside = TRUE, legend.outside.position = "bottom", legend.stack = "horizontal") 
-  tm_layout(frame = FALSE, legend.outside = TRUE, legend.title.size =1)
+```{r, warning = FALSE, dev = 'png', fig.height = 6}
+tm_shape(Q) +
+  tm_polygons(col = "NUM_REG", 
+              legend.show = FALSE, 
+              palette = "Greys") + 
+   tm_bubbles(size = "Pop_tot" , 
+              col = "Pop_prop_enfant", 
+              style = "quantile", 
+              scale = 2,  
+              border.col = "black", 
+              border.lwd = .5,
+              legend.size.show = TRUE, 
+              legend.size.is.portrait = FALSE, 
+              title.size ="Population (en milliers)", 
+              title.col = "Proportion d'enfants (0-14 ans)", 
+              sizes.legend.labels = c("500","1000","1500","2000","2500"))+
+    tm_layout(frame = FALSE, 
+              legend.outside = TRUE, 
+              legend.title.size = 1)
 ```
+<br>
+L'argument `style` est utilisé pour définir les classes de couleurs. Ici, nous avons choisi une classification en quantile. Noter que nous pouvons définir un titre pour la légende des tailles (`title.size`) et un titre pour la légende des couleurs (`title.col`). 
+
+Remarquer que cette figure nous permet d'observer que la proportion d'enfants au Nunavik est très grande malgré que la taille de la population soit petite. 
+
 
 ### Cartes Choroplèthes
 
 
-Expliquer breaks et n. (comme pour raster)
-```{r, warning = FALSE, dev = 'png'}
+Les cartes choroplèthes sont utilisées pour représenter des données vectorielles de type polygone en assignant une couleur à chaque polygone en fonction de la valeur d'un de ces attributs. 
 
-Q1 = tm_shape(Q)+tm_polygons(col="Pop_prop_enfant")
-#Q2 = tm_shape(Q)+tm_polygons(col="Pop_prop_enfant", breaks = seq(0.1, 0.3, by=0.02))
-Q2 = tm_shape(Q)+tm_polygons(col="Pop_prop_enfant", breaks = c(0.1, 0.14, 0.15, 0.16, 0.18, 0.3))
-Q3 = tm_shape(Q)+tm_polygons(col="Pop_prop_enfant", n=2)
+Pour créer des cartes choroplèthes, nous utilisons l'argument `col` de la fonction `tm_polygons()`. L'assignation des couleurs se fait de la même façon que pour `tm_raster()` et `tm_bubbles()` en définissant des classes de valeur d'attribut.
 
-tmap_arrange(Q1,Q2,Q3)
+Créons des cartes choroplèthes de la proportion d'enfants dans les régions administratives en utilisant différentes classifications de couleurs. 
+
+```{r, warning = FALSE, dev = 'png', fig.height = 6}
+
+# Par defaut, nous avons 4 classes
+Qdefaut <- tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant")
+
+# style fixed.
+Qfixed <- tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant", 
+                                    style = "fixed", 
+                                    breaks = c(0.1, 0.14, 0.15, 0.16, 0.18, 0.3))
+
+# style quantile 
+Qquant = tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant", 
+                                   style = "quantile")
+
+tmap_arrange(Qdefaut,Qfixed,Qquant)
 
 
 ```
+<br>
 
-
+<!--  
 #### Données COVID {-}
 
 Lire les données: cas cumulés de COVID en date du 18 janvier 2021 par région socio-sanitaire.
@@ -998,10 +1121,6 @@ tmap_arrange(Q_quantile,Q_jenks,Q_pretty)
 C'est souvent en regardant la distribution des données qu'on peut déterminer la meilleure classification pour représenter nos données
 EXEMPLE DE MELANIE ou alors faire ça au début.
 
-
-### Cartes à panneau multiple
-Qu'est-ce qu'un facet?
-
 Représenter chaque region individuellement
 ```{r, warning = FALSE, dev = 'png'}
 tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", legend.is.portrait = FALSE)+
@@ -1010,46 +1129,121 @@ tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", legend.is.port
 
 ```
 
-Il est possible de jouer avec les couleurs, le font, le cadre des panels en utilisant les argument panel.label.size, fontface, bg.color de la fonction tm_layout
-https://rdrr.io/cran/tmap/man/tm_layout.html.
+ -->
+
+### Cartes à panneaux multiples
+
+
+###### Fonction `tm_facets()` {-}
+
+
+Il est parfois utile illustrer des polygones côte-à-côte afin de faciliter la comparaison d'un de leurs attributs. On appelle les cartes des polygones individuellement représentés des *panneaux*.
+
+Pour créer une carte à panneaux multiples, nous utilisons d'abord la fonction `tm_polygons()` pour représenter chaque polygone selon la méthode de notre choix (par exemple selon une représentation choroplèthe d'un des attributs). Ensuite, nous ajoutons la fonction `tm_facets()` pour préciser la disposition des panneaux (arguments `nrow` ou `ncol`) ainsi que l'attribut utilisé (la *facette*) pour distinguer chaque panneau (argument `by`). 
+
+Représentons à nouveau les polygones des régions administratives selon la proportion d'enfants dans leur population mais cette fois en créant une carte à panneaux multiples:
+
+```{r, warning = FALSE, dev = 'png'}
+tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant",  
+                          style = "quantile") +
+                 tm_facets(by = "NOM_REG", 
+                           nrow = 5,  
+                           scale.factor = 5) +
+                 tm_layout(panel.label.height = 2, 
+                           panel.label.size = 0.9, 
+                           legend.show = FALSE)
+```
+<br>
+
+L'argument `scale.factor` détermine la mise à l'échelle du texte par rapport à la mise à l'échelle des polygones. Les polygones ont été réduits de taille pour entrer dans leur panneau, toutefois nous souhaitons que le titre apparaissant dans la partie supérieure du panneau ne soit pas réduit autant.  
+
+Il est possible de modifier la police du texte, sa couleur, la couleur de fond des panneaux, le cadre des panneaux, et plus, en utilisant les arguments de la fonction `tm_layout()`.  
+
 
 
 ### Cartes avec encadré
 
-Prenons une section de la carte d'élévation autour de la région de l'Outaouais
+Il est parfois nécessaire d'accompagner une carte par une autre carte de taille moindre circonscrite dans un encadré sur ou en marge de la carte principale. Ceci est le cas, par exemple, lorsque nous souhaitons préciser la localisation de la carte principale dans une région plus grande.
+
+###### Bibliothèque `grid` {-}
+
+Pour réaliser une carte avec un encadré, nous devons utiliser la bibliothèque `grid`. Commençons par installer cette bibliothèque:
+
+```{r, eval = FALSE, echo = TRUE}
+install.packages("grid")
+```
+<br>
+
+En guise d'exemple, considérons une section du *raster* d'élévation `E` correspondant à la région de l'Outaouais. Vous n'avez pas besoin de comprendre les opérations ci-dessous car nous les apprendrons dans les modules 7 et 8.
+
 ```{r}
-# Boite basee sur les limites de Q_Outaouais
-rectangle<-extent(-719204,-479847,182366,454979)
+# Isoler le polygone de l'Outaouais
+Q_Outaouais <- subset(Q, NOM_REG == "Outaouais")
 
-# Utiliser ce rectangle pour sélectionner une région à l'intérieur de la carte d'élévation
-G<-crop(E,rectangle)
+# Découper le raster E selon l'étendue de Q_Outaouais
+E_Outaouais <- crop(E, extent(Q_Outaouais))
 
-# Transformer les contours de ce rectangle en polygone grâce à la bibliothèque tmaptools
-library(tmaptools)
-Gpoly<-bb_poly(G)
-
+# Créer un mask 
+E_Outaouais <- mask(E_Outaouais, Q_Outaouais)
 ```
 
-```{r, warning = FALSE, dev = 'png'}
-format_carte<-tm_layout(frame = FALSE, legend.position = c(0.74,0.32), legend.title.size = 0.8, legend.bg.color = "white", legend.frame = "black")
+<br>
 
+
+Créons d'abord une carte des données d'élévation pour la région de l'Outaouais. Cette carte consituera notre carte principale.
+```{r}
 # Définir la carte principale
-Map_raster<-tm_shape(G)+tm_raster(title = "Élévation (m)", palette= pal.elevation(5))+format_carte+
-tm_scale_bar(position=c("left","bottom"), text.size = 0.8) 
+carte_princ <- tm_shape(E_Outaouais) + 
+                tm_raster(title = "Élévation (m)", 
+                          palette = pal.elevation(5)) + 
+                tm_scale_bar(position = c("left","bottom"), 
+                             text.size = 0.6) 
 
-# Définir l'encadré où le rectangle est superposé à la carte générale du Québec
-Map_inset<-tm_shape(Q)+tm_polygons()+
-  tm_shape(Gpoly)+tm_borders(lw=2, col="red")
-
-# Utilisation de la fonction viewport de la bibliothèque grid
-library(grid)
-Map_raster
-print(Map_inset, vp=viewport(0.67,0.17,width=0.3, height=0.3))
-
+# Mise en page de la carte                
+format_carte <- tm_layout(frame = FALSE, 
+                          legend.outside = TRUE,
+                          legend.outside.position = "right",
+                          legend.title.size = 0.8, 
+                          legend.bg.color = "white", 
+                          legend.frame = "black")
 ```
+<br>
+
+
+Créons maintenant une carte du Québec qui délimite la région de l'Outaouais par des frontières de couleur rouge. Cette carte sera l'encadré à insérer sur la carte principale.
+
+```{r}
+# Définir la carte encadré
+carte_cadre <- tm_shape(Q) + 
+                  tm_borders(col = "black") + 
+               tm_shape(Q_Outaouais) + 
+                  tm_borders(lw=2, col="red")
+```
+
+<br>
+
+Nous pouvons enfin combiner les deux cartes ensembles. Il s'agit d'afficher la carte principale et d'ajouter la carte encadré en utilisant la fonction `print()`. 
+
+En particulier, nous utilisons la fonction `viewport()` de la bibliothèque `grid` qui permet de définir la position de la carte encadré sur la carte ainsi que sa taille.
+
+```{r, warning = FALSE, dev = 'png', fig.height = 6}
+library(grid)
+carte_princ + format_carte
+print(carte_cadre, vp = viewport(0.72, 0.42, width = 0.4, height = 0.4))
+```
+<br>
+
+Les chiffres (0.72,0.42) correspondent aux coordonnées (x,y) de la position de la carte encadrée sur la carte principale (où (0,0) est le coin inférieur gauche de la carte principale, et (1,1) est le coin supérieur droit).
+
+Les arguments `width` et `height` sont des nombres entre 0 et 1. Ceux-ci correspondent au facteur par lequel nous souhaitons réduire la largeur et la hauteur de la carte encadrée. 
+
+
+
 
 
 <!--   ### Cartes interactives avec tmap -->
 
 ## Exercices
 
+
+À venir!
