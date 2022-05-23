@@ -911,7 +911,7 @@ Dans les modules futurs, nous verrons les fonctions R permettant d'importer des 
 
 Similairement à la fonction `read.table()` pour lire les données, R dispose de la fonction `write.table()` pour exporter des données. Par exemple, nous pouvons exporter le *data frame* `tab_ex2` dans un fichier `*.txt`:
 
-```{r}
+```{r, eval = FALSE}
 write.table(tab_ex2, file = "JoueursCanadiens.txt",
             col.names = TRUE,
             row.names = FALSE,
@@ -921,7 +921,7 @@ write.table(tab_ex2, file = "JoueursCanadiens.txt",
 <br>
 
 Ou en format `*.csv`:
-```{r}
+```{r, eval = FALSE}
 write.table(tab_ex2, file = "JoueursCanadiens.csv",
             col.names = TRUE,
             row.names = FALSE,
@@ -930,7 +930,7 @@ write.table(tab_ex2, file = "JoueursCanadiens.csv",
 <br>
 
 Nous pouvons également utiliser la fonction `write.csv()` pour exporter les données en format `*csv`
-```{r}
+```{r, eval = FALSE}
 write.csv(tab_ex1, file = "voitures.csv", row.names = FALSE)
 ```
 <br>

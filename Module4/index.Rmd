@@ -182,7 +182,7 @@ polygone
 Noter que pour créer un polygone la première extrémité doit être identique à la dernière. 
 <br>
 
-```{r plotgeo, eval = TRUE, echo = FALSE, fig.height=10, fig.width = 10,fig.show='hold',fig.align='center', dev = 'png', fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
+```{r plotgeo, eval = TRUE, echo = FALSE, fig.height=5, fig.show='hold',fig.align='center', dev = 'png', fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
 
 m_multi_point <- mapview(multi_point)
 m_ligne <- mapview(ligne)
@@ -730,7 +730,7 @@ leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
 ```
 -->
 
-```{r plot-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.height=6, fig.width = 10,fig.show='hold',fig.align='center'}
+```{r plot-terre2, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.height=6, fig.show='hold',fig.align='center'}
 map_mercator <- mapview(limites_terrestres, legend = FALSE, col.regions = "red")
 map_robinson <- mapview(limites_terrestres_rob, legend = FALSE)
 Map <- leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
@@ -744,7 +744,7 @@ Map
 Nous remarquons que les deux cartes sont identiques (outre la couleur)! Comment cela est-ce possible sachant que nous venons de transformer la projection ? Ceci s'explique par le fait que la fonction `mapview()` représente par défaut toutes données spatiales dans la projection Pseudo-Mercator (ou Mercator Web), qui est la projection utilisée par l'application *OpenStreetMap*. Ainsi, la fonction `mapview` calcule elle-même le changement de projection avant de représenter des données spatiales. Pour conserver la projection originale il faut utiliser l'argument `native.crs=TRUE`.
 
 Représentons à nouveau les cartes des limites terrestres de la région de Montréal, cette fois en précisant que nous voulons conserver le CRS d'orgine.
-```{r plot-terre3, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.height=6, fig.width = 10,fig.show='hold',fig.align='center', fig.cap="Limites terrestres de l'île de Montréal selon les projections Web Mercartor (gauche), Mercator (centre) et Robinson (droit)"}
+```{r plot-terre3, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE, dev = 'png', fig.height=6, fig.show='hold',fig.align='center', fig.cap="Limites terrestres de l'île de Montréal selon les projections Web Mercartor (gauche), Mercator (centre) et Robinson (droit)"}
 map_web <- mapview(limites_terrestres, col.regions = "red", legend = NULL, layer.name = "Mercator Web")
 map_mercator <- mapview(limites_terrestres, col.regions = "yellow", legend = NULL, layer.name = "Mercator", native.crs=TRUE)
 map_robinson <- mapview(limites_terrestres_rob, legend = NULL, layer.name = "Robinson", native.crs=TRUE)
