@@ -728,31 +728,7 @@ tm_shape(Q) +
 ```
 <br>
 
-<!--  C'est compliqué et le rendu est laid. Peut-être en exercices avec un autre fichier de données moins dense. Ou un crop de celui-ci.
 
-Nous pouvons aussi utiliser l'argument `lwd`  pour spécifier l'épaisseur des traits selon la catégorie de routes.
-
-```{r}
-# créons une palette de trois couleurs
-#pal.col<-c("red","darkgoldenrod4","darkslateblue")
-Ro$Taille <- as.numeric(Ro$ClsRte)
-#Ro$Taille <- as.factor(Ro$Taille)
-
-#tm_shape(Q) +
-#  tm_fill() +
-tm_shape(Ro) +
-  tm_lines(
-           lwd = "Taille",
-           legend.lwd.reverse = TRUE,
-           lwd.legend = c(3,2,1),
-           legend.lwd.is.portrait =  TRUE,
-           scale = 3,
-           lwd.legend.labels = c("Autoroute", "Nationale", "Régionale"),
-           title.lwd = "Types de route"
-           )
-```
-
- -->
 
 ### Les points
 
