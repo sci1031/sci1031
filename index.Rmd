@@ -56,7 +56,17 @@ Avant de débuter le cours, familiarisez-vous avec la structure de ce site en ut
 Lisez attentivement la section **Présentation** avant de vous plongez dans les apprentissages. 
 
 ---
+<br>
 
+<div class="boite emphase">
+
+Ce cours a été créé avec la bibliothèque R [bookdown](https://bookdown.org/). Le code source est en accès libre sur github: [https://github.com/sci1031/sci1031](https://github.com/sci1031/sci1031).
+
+Noter que ce site constitue la version 0.0 du cours SCI 1031. Vous êtes donc les premières et les premiers à en faire la lecture! Vous trouvez des coquilles, des fautes d'orthographe, des hyperliens brisés, des nuances mal expliquées, des erreurs de code? Écrivez-moi un [courriel](#contact) sympathique et je serai heureuse de faire les modifications nécessaires. 
+
+</div>
+
+<br>
 
 ```{r include = FALSE}
 # automatically create a bib database for R packages

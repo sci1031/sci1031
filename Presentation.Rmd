@@ -230,7 +230,7 @@ Vous êtes autorisé à copier, distribuer et communiquer le matériel contenu s
 <br>
 <br>
 
-### Contact {-}
+### Contact {.unnumbered #contact}
 
 <br>
 
