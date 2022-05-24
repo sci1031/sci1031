@@ -54,7 +54,7 @@ Le  **géoïde** est un modèle de la Terre qui tient compte de l’effet du cha
 
 <br>
 ```{r geoide, fig.align='left', echo=FALSE,fig.cap="Le géoïde. a) La forme irrégulière du géoïde avec des bosses et de creux créer par le champ gravitationnel agissant de façon inégale sur la Terre (source : Bezdek et Sebera 2013). b) Le géoïde coïncide avec le niveau moyen des océans et se distingue de l’ellipsoïde (figure adaptée de [USGS](earthquake.usgs.gov)).", out.width = '100%'}
-knitr::include_graphics('Module3/images/3_geoide.png')
+knitr::include_graphics('Module3/images/3_geoide.jpg')
 ```
 <br>
 
@@ -66,7 +66,7 @@ Nous pouvons distinguer deux types d’ellipsoïdes utilisés en cartographie. L
 
 <br>
 ```{r ellipsoides, fig.align='left', echo=FALSE,fig.cap="Ellipsoïdes global et local. Un ellipsoïde global épouse mieux la forme globale du géoïde, tandis qu’un ellipsoïde local épouse mieux la forme du géoïde localement dans la région indiquée par la flèche noire. Figure adaptée de @Knippers2009.", out.width = '50%'}
-knitr::include_graphics('Module3/images/3_ellipses.png')
+knitr::include_graphics('Module3/images/3_ellipses.jpg')
 ```
 <br>
 
@@ -82,7 +82,7 @@ Les principaux systèmes de référence globaux utilisés présentement à trave
 
 <br>
 ```{r datum, fig.align='left', echo=FALSE,fig.cap="Datums globaux. L’origine de l’ellipsoïde WGS84 se trouve au centre de masse de la Terre. L’origine de l’ellipsoïde GRS80 se trouve à environ 2 m de l’origine de l’ellipsoïde WGS84. L’ellipsoïde Clarke 1866 se trouve à environ 236 m de celle du WGS84. Le datum local NAD27 qui a précédé le NAD83 (voir plus bas) était basé sur l’ellipsoïde Clarke 1866. Figure adaptée du National Oceanic and Atmospheric Administration, source : https://vdatum.noaa.gov/docs/datums.html", out.width = '50%'}
-knitr::include_graphics('Module3/images/3_globaldatum.png')
+knitr::include_graphics('Module3/images/3_globaldatum.jpg')
 ```
 <br>
 
@@ -105,7 +105,7 @@ Le système de référence utilisé en Amérique du Nord est le North American D
 
 <br>
 ```{r bornes, fig.align='left', echo=FALSE,fig.cap="Réseau de repères terrestres. Gauche : un repère du Réseau de base canadien (RBC) situé en Saskatchewan. Droite : un repère du Réseau géodésique de grande précision (RGP) au Québec. Certains repères du RGP font partie du RBC. (source : www.waymarking.com)", out.width = '60%'}
-knitr::include_graphics('Module3/images/3_bornes.png')
+knitr::include_graphics('Module3/images/3_bornes.jpg')
 ```
 <br>
 
@@ -115,7 +115,7 @@ Le SCRS est un quadrillage tridimensionnel (latitude, longitude et élévation) 
 
 <br>
 ```{r SCRS, fig.align='left', echo=FALSE,fig.cap="Comparaison entre le NAD83 et le SCRS. Les points rouges sont la localisation de repères selon le SCRS et les lignes bleues représentent les erreurs (décalages) produites par le NAD83 sur ces localisations. Figure tirée de @Craymer2006.", out.width = '80%'}
-knitr::include_graphics('Module3/images/3_SCRS.png')
+knitr::include_graphics('Module3/images/3_SCRS.jpg')
 ```
 <br>
 
@@ -128,7 +128,7 @@ Le **système de coordonnées géographique** représente la Terre comme une sph
 
 <br>
 ```{r philambda, fig.align='left', echo=FALSE,fig.cap="Le système de coordonnées géographique. Les points à la surface de la Terre sont définis par les coordonnées sphériques ($\\phi$,$\\lambda$) associées à la longitude (ligne mauve) et à la latitude (ligne bleue foncée) respectivement. Le point rouge possède les coordonnées ($\\phi$,$\\lambda$) = (50$^{\\circ}$ E, 40$^{\\circ}$ N). La ligne jaune représente le méridien principal. Source : Esri, image récupérée à https://desktop.arcgis.com/fr/arcmap/10.3/guide-books/map-projections/geographic-coordinate-system.htm", out.width = '60%'}
-knitr::include_graphics('Module3/images/3_philambda.png')
+knitr::include_graphics('Module3/images/3_philambda.jpg')
 ```
 <br>
 
@@ -140,7 +140,7 @@ Le système géographique forme ce que l’on appelle un graticule sur la surfac
 
 <br>
 ```{r graticule, fig.align='left', echo=FALSE,fig.cap="Graticule. Les parallèles et les méridiens forment un graticule. Source : Esri, image récupérée à https://desktop.arcgis.com/fr/arcmap/10.3/guide-books/map-projections/about-geographic-coordinate-systems.htm", out.width = '90%'}
-knitr::include_graphics('Module3/images/3_graticule.png')
+knitr::include_graphics('Module3/images/3_graticule.jpg')
 ```
 <br>
 
@@ -171,7 +171,7 @@ On distingue trois classes principales de transformation pour créer un système
 
 <br>
 ```{r classes, fig.align='left', echo=FALSE,fig.cap="Classes de projection: cylindrique (gauche), conique (centre) et azimutale (droite). Toutes les projections illustrées utilisent un plan de projection qui est tangent à la surface de la Terre. Source : Esri. Image adaptée d’illustrations récupérées à https://desktop.arcgis.com/en/arcmap/10.3/guide-books/map-projections/projection-types.htm", out.width = '90%'}
-knitr::include_graphics('Module3/images/3_classeprojection.png')
+knitr::include_graphics('Module3/images/3_classeprojection.jpg')
 ```
 <br>
 
@@ -188,7 +188,7 @@ Notez qu’il n’y a pas de distorsion au point ou à la ligne d’intersection
 
 <br>
 ```{r intersection, fig.align='left', echo=FALSE,fig.cap="Plans de projection sécants avec le globe. Illustrations pour les classes de projection cylindrique (gauche), conique (centre) et azimutale (droit). Source : Esri. Image adaptée d’illustrations récupérées à https://desktop.arcgis.com/en/arcmap/10.3/guide-books/map-projections/projection-types.htm", out.width = '90%'}
-knitr::include_graphics('Module3/images/3_secante.png')
+knitr::include_graphics('Module3/images/3_secante.jpg')
 ```
 <br>
 
@@ -205,7 +205,7 @@ Le plan de projection peut être positionné selon trois différentes orientatio
 
 <br>
 ```{r orientation, fig.align='left', echo=FALSE,fig.cap="Orientations du plan de projection. Orientation transversale (gauche), aussi appelée équatoriale pour la projection azimutale, et orientation oblique (droit). Source : Esri. Image adaptée d’illustrations récupérées à https://desktop.arcgis.com/en/arcmap/10.3/guide-books/map-projections/projection-types.htm", out.width ='60%'}
-knitr::include_graphics('Module3/images/3_orientation.png')
+knitr::include_graphics('Module3/images/3_orientation.jpg')
 ```
 <br>
 
@@ -226,7 +226,7 @@ Il existe plus de deux cent projections distinctes créées au cours de l’Hist
 
 <br>
 ```{r projections, fig.align='left', echo=FALSE,fig.cap="Sélection de 12 projections.  L’ensemble des cartes est tiré du site : https://map-projections.net/", out.width = '90%'}
-knitr::include_graphics('Module3/images/3_projections.png')
+knitr::include_graphics('Module3/images/3_projections.jpg')
 ```
 <br>
 
@@ -238,7 +238,7 @@ L’indicatrice de Tissot permet d’illustrer les déformations produites par u
 
 <br>
 ```{r tissot, fig.align='left', echo=FALSE,fig.cap="Indicatrice de Tissot pour les 12 projections de la figure \\@ref(fig:projections).  L’ensemble des cartes est tiré du site : https://map-projections.net/", out.width = '90%'}
-knitr::include_graphics('Module3/images/3_tissot.png')
+knitr::include_graphics('Module3/images/3_tissot.jpg')
 ```
 <br>
 
@@ -252,7 +252,7 @@ La projection de Mercator fût originalement conçue pour la navigation puisqu�
 
 <br>
 ```{r Mercator, fig.align='left', echo=FALSE,fig.cap="Projection de Mercator. À gauche, on observe que les méridiens sont équidistants tandis que les parallèles s’écartent en se dirigeant vers les pôles (source : Tobias Jung, https://map-projections.net/). À droite, on observe que la superficie réelle du Groenland (en mauve) est similaire à celle de l’Algérie (source : https://thetruesize.com/", out.width = '90%'}
-knitr::include_graphics('Module3/images/3_Mercator.png')
+knitr::include_graphics('Module3/images/3_Mercator.jpg')
 ```
 <br>
 
@@ -265,7 +265,7 @@ La **projection Transverse universelle de Mercator** (en anglais Universal Trans
 
 <br>
 ```{r UTM, fig.align='left', echo=FALSE,fig.cap="Projection transverse universelle de Mercator. Gauche : le globe est découpé en tranches de 6$^{\\circ}$, 3$^{\\circ}$ de part et d’autre d’un méridien central (source : https://www.swisstopo.admin.ch/). Droite : La surface entière de la Terre est représentée par 60 zones (source : https://www.icsm.gov.au/). ", out.width = '90%'}
-knitr::include_graphics('Module3/images/3_UTM.png')
+knitr::include_graphics('Module3/images/3_UTM.jpg')
 ```
 <br>
 
@@ -285,7 +285,7 @@ Le Canada s’étend de la zone 7 à la zone 22, alors que le Québec couvre les
 
 <br>
 ```{r UTMQuebec, fig.align='left', echo=FALSE,fig.cap="Projection Universelle Transverse de Mercator au Québec. Source: @Lapointe2005", out.width = '50%'}
-knitr::include_graphics('Module3/images/3_UTM_Quebec.png')
+knitr::include_graphics('Module3/images/3_UTM_Quebec.jpg')
 ```
 <br>
 
@@ -293,7 +293,7 @@ Pour réduire les problèmes liés aux déformations associées au système UTM,
 
 <br>
 ```{r MTMQuebec, fig.align='left', echo=FALSE,fig.cap="Projection Mercator Transverse Modifiée au Québec. Source: @Lapointe2005", out.width = '50%'}
-knitr::include_graphics('Module3/images/3_MTM_Quebec.png')
+knitr::include_graphics('Module3/images/3_MTM_Quebec.jpg')
 ```
 <br>
 
@@ -303,7 +303,7 @@ La **projection conique conforme de Lambert** (LCC) conserve, comme son nom l’
 
 <br>
 ```{r LCC, fig.align='left', echo=FALSE,fig.cap="Projection conique conforme de Lambert. Source : United States Geological Survey, récupérée sur Wikipedia", out.width = '60%'}
-knitr::include_graphics('Module3/images/3_LCC.png')
+knitr::include_graphics('Module3/images/3_LCC.jpg')
 ```
 <br>
 
@@ -311,7 +311,7 @@ La position des parallèles standards varie selon la région du globe représent
 
 <br>
 ```{r LCCCanada, fig.align='left', echo=FALSE,fig.cap="Un exemple de projection conique de Lambert. La carte des résultats des élections fédérales canadiennes de 2019. Source : Élections Canada.", out.width = '60%'}
-knitr::include_graphics('Module3/images/3_LCC_Canada.png')
+knitr::include_graphics('Module3/images/3_LCC_Canada.jpg')
 ```
 <br>
 
@@ -382,7 +382,7 @@ La figure ci-dessous (Figure \@ref(fig:Resume)) résume les étapes du processus
 
 <br>
 ```{r Resume, fig.align='left', echo=FALSE,fig.cap="Résumé. Les étapes du processus pour définir un système de coordonnées géographique et un système de coordonnées projeté. Source : la figure utilise des pictogrammes créés par T. Grajecta (Noun Project)", out.width = '80%'}
-knitr::include_graphics('Module3/images/3_resume.png')
+knitr::include_graphics('Module3/images/3_resume.jpg')
 ```
 <br>
 
