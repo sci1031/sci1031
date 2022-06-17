@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>À propos du cours | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
+  <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="À propos du cours | SCI 1031 Visualisation et analyse de données spatiales sous R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="À propos du cours | SCI 1031 Visualisation et analyse de données spatiales sous R" />
+  
+  <meta name="twitter:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  
+
+
+
+<meta name="date" content="2022-06-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="ressources.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/M_ea6924-1/data_stars_M50b9c6.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/M_logique_numeric_3cef82-1/data_stars_M_logique_numeric687e1f.txt"></script>
+<script src="libs/M_factor_073da6-1/data_stars_M_factor36429e.txt"></script>
+<script src="libs/ICU_238cb6-1/data_stars_ICU749e2f.txt"></script>
+<script src="libs/ICU_a52436-1/data_stars_ICU9281da.txt"></script>
+<script src="libs/T_sec_c81ea2-1/data_stars_T_sec34c72b.txt"></script>
+<script src="libs/T_fact4_moy_b1fd3a-1/data_stars_T_fact4_moy952ed3.txt"></script>
+<script src="libs/T_fact4_max_6e5fd1-1/data_stars_T_fact4_max49d051.txt"></script>
+<script src="libs/T_fact8_moy_3ad501-1/data_stars_T_fact8_moy9280de.txt"></script>
+<script src="libs/T_fact8_max_629501-1/data_stars_T_fact8_maxf1ab8c.txt"></script>
+<script src="libs/SR_0158ec-1/data_stars_SR0cd39a.txt"></script>
+<script src="libs/SG_3dc47e-1/data_stars_SG983f7a.txt"></script>
+<script src="libs/SB_835b02-1/data_stars_SB16ace2.txt"></script>
+<script src="libs/dem_5cdf8b-1/data_stars_dem5e4c96.txt"></script>
+<script src="libs/nouvelles_classes_dem_3a4b76-1/data_stars_nouvelles_classes_demd59be3.txt"></script>
+<script src="libs/reclassify(dem, nouvelles_classes2)_5ed6b2-1/data_stars_reclassifydemnouvelles_classes287c462.txt"></script>
+<script src="libs/dem_cr_901dce-1/data_stars_dem_cr3e08b5.txt"></script>
+<script src="libs/dem_cr_p_1fbc65-1/data_stars_dem_cr_pc4b3f1.txt"></script>
+<script src="libs/dem_2ac158-1/data_stars_dem47dc69.txt"></script>
+<script src="libs/dem_ma_180763-1/data_stars_dem_ma65d09b.txt"></script>
+<script src="libs/dem_ma_inv_89eb1a-1/data_stars_dem_ma_inv8a3c5f.txt"></script>
+<script src="libs/dem_ma_127d60-1/data_stars_dem_ma4eb275.txt"></script>
+<script src="libs/dem_ma_inv_c1a359-1/data_stars_dem_ma_inva407cd.txt"></script>
+<script src="libs/dem_merge_ad0673-1/data_stars_dem_merge6027ed.txt"></script>
+<script src="libs/dem_merge_ordre1_835db0-1/data_stars_dem_merge_ordre1c1765a.txt"></script>
+<script src="libs/dem_merge_ordre2_e379d2-1/data_stars_dem_merge_ordre2db4c98.txt"></script>
+<script src="libs/dem_mosaic_min_6f1abd-1/data_stars_dem_mosaic_min52f90e.txt"></script>
+<script src="libs/dem_mosaic_max_76982e-1/data_stars_dem_mosaic_max6301b7.txt"></script>
+<script src="libs/dem_mosaic_mean_b9852a-1/data_stars_dem_mosaic_meanea09d3.txt"></script>
+<script src="libs/dem_parcs_504c73-1/data_stars_dem_parcse85439.txt"></script>
+<script src="libs/dem_parcs_c3b85e-1/data_stars_dem_parcs5b03f9.txt"></script>
+<script src="libs/dem_orford_b91f70-1/data_stars_dem_orford83421c.txt"></script>
+<script src="libs/dem_orford_e12c09-1/data_stars_dem_orfordad40b2.txt"></script>
+<script src="libs/dem_orford_quantile_b9ad1f-1/data_stars_dem_orford_quantile85a94e.txt"></script>
+<script src="libs/dem_orford_quantile_30d4a7-1/data_stars_dem_orford_quantile690f34.txt"></script>
+<script src="libs/dem_tampon_max_57f3c6-1/data_stars_dem_tampon_max0ef8a1.txt"></script>
+<script src="libs/X1_d25b38-1/data_stars_X13fc4e9.txt"></script>
+<script src="libs/X2_3c6492-1/data_stars_X2395a10.txt"></script>
+<script src="libs/X3_1c9d02-1/data_stars_X3b80d57.txt"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/extra.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">TELUQ -  SCI 1031.</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="part"><span><b>I SCI 1031</b></span></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html"><i class="fa fa-check"></i>À propos du cours</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#présentation"><i class="fa fa-check"></i>Présentation</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#pourquoi-suivre-ce-cours"><i class="fa fa-check"></i>Pourquoi suivre ce cours ?</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#pourquoi-r"><i class="fa fa-check"></i>Pourquoi R ?</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#objectifs"><i class="fa fa-check"></i>Objectifs</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#contenu-sommaire"><i class="fa fa-check"></i>Contenu sommaire</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#fonctionnement-du-cours"><i class="fa fa-check"></i>Fonctionnement du cours</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#travaux-notés"><i class="fa fa-check"></i>Travaux notés</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#rétroaction"><i class="fa fa-check"></i>Rétroaction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#route"><i class="fa fa-check"></i>Feuille de route</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#crédits"><i class="fa fa-check"></i>Crédits</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#équipe"><i class="fa fa-check"></i>Équipe</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#reproduction-du-contenu"><i class="fa fa-check"></i>Reproduction du contenu</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#contact"><i class="fa fa-check"></i>Contact</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html"><i class="fa fa-check"></i>Ressources</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#travaux-notés-1"><i class="fa fa-check"></i>Travaux notés</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#données"><i class="fa fa-check"></i>Données</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#données-du-cours"><i class="fa fa-check"></i>Données du cours</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#autres-sources"><i class="fa fa-check"></i>Autres sources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#ressources-r"><i class="fa fa-check"></i>Ressources R</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#documentation-générale-r"><i class="fa fa-check"></i>Documentation générale R</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#documentation-r-géospatial"><i class="fa fa-check"></i>Documentation R-géospatial</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#les-bibliothèques-r"><i class="fa fa-check"></i>Les bibliothèques R</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#res_RMarkdown"><i class="fa fa-check"></i>Documentation R-Markdown</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#les-couleurs-dans-r"><i class="fa fa-check"></i>Les couleurs dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#références"><i class="fa fa-check"></i>Références</a></li>
+</ul></li>
+<li class="part"><span><b>II Apprentissage</b></span></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="lecon_intro.html"><a href="lecon_intro.html"><i class="fa fa-check"></i><b>1.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="lecon_intro.html"><a href="lecon_intro.html#hist"><i class="fa fa-check"></i><b>1.1.1</b> Les données spatiales d’hier à aujourd’hui</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-cartes-anciennes"><i class="fa fa-check"></i>Les cartes anciennes</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#la-géomatique"><i class="fa fa-check"></i>La géomatique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#la-science-des-données"><i class="fa fa-check"></i>La science des données</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1.2" data-path="lecon_intro.html"><a href="lecon_intro.html#outils"><i class="fa fa-check"></i><b>1.1.2</b> Les outils et logiciels de visualisation et d’analyse géo-spatiale</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-logiciels-commerciaux"><i class="fa fa-check"></i>Les logiciels commerciaux</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-logiciels-libres-daccès"><i class="fa fa-check"></i>Les logiciels libres d’accès</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-services-dinfonuagique"><i class="fa fa-check"></i>Les services d’infonuagique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-langages-de-programmation-pour-lanalyse-géospatiale"><i class="fa fa-check"></i>Les langages de programmation pour l’analyse géospatiale</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1.3" data-path="lecon_intro.html"><a href="lecon_intro.html#outil_R"><i class="fa fa-check"></i><b>1.1.3</b> Les bibliothèques géo-spatiales de R</a></li>
+<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="ex_intro.html"><a href="ex_intro.html"><i class="fa fa-check"></i><b>1.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="ex_intro.html"><a href="ex_intro.html#demarrage"><i class="fa fa-check"></i><b>1.2.1</b> Démarrage</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#installer-r"><i class="fa fa-check"></i>Installer R</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#installer-rstudio"><i class="fa fa-check"></i>Installer RStudio</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#apprivoiser-rstudio"><i class="fa fa-check"></i>Apprivoiser RStudio</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#créer-un-fichier-r"><i class="fa fa-check"></i>Créer un fichier R</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-bibliothèques"><i class="fa fa-check"></i>Les bibliothèques</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#le-répertoire-de-travail"><i class="fa fa-check"></i>Le répertoire de travail</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.2" data-path="ex_intro.html"><a href="ex_intro.html#introR"><i class="fa fa-check"></i><b>1.2.2</b> Intro à R</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#la-base"><i class="fa fa-check"></i>La base</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-objets"><i class="fa fa-check"></i>Les objets</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-catégories-de-données"><i class="fa fa-check"></i>Les catégories de données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-structures-de-données"><i class="fa fa-check"></i>Les structures de données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#importer-et-exporter-des-données"><i class="fa fa-check"></i>Importer et exporter des données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#graphiques-de-base"><i class="fa fa-check"></i>Graphiques de base</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.3" data-path="ex_intro.html"><a href="ex_intro.html#exo1"><i class="fa fa-check"></i><b>1.2.3</b> À vous de jouer!</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-1"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-2"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-3"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="base.html"><a href="base.html"><i class="fa fa-check"></i><b>2</b> Modèles de données spatiales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="leçon.html"><a href="leçon.html"><i class="fa fa-check"></i><b>2.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="leçon.html"><a href="leçon.html#les-données-vectorielles"><i class="fa fa-check"></i><b>2.1.1</b> Les données vectorielles</a></li>
+<li class="chapter" data-level="2.1.2" data-path="leçon.html"><a href="leçon.html#les-données-matricielles"><i class="fa fa-check"></i><b>2.1.2</b> Les données matricielles</a></li>
+<li class="chapter" data-level="2.1.3" data-path="leçon.html"><a href="leçon.html#structure-en-couches"><i class="fa fa-check"></i><b>2.1.3</b> Structure en couches</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="ex_markdown1.html"><a href="ex_markdown1.html"><i class="fa fa-check"></i><b>2.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ex_markdown1.html"><a href="ex_markdown1.html#introduction-à-r-markdown"><i class="fa fa-check"></i><b>2.2.1</b> Introduction à R Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#bénéfices-de-r-markdown"><i class="fa fa-check"></i>Bénéfices de R Markdown</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#quest-ce-que-markdown"><i class="fa fa-check"></i>Qu’est-ce que Markdown?</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#quest-ce-que-pandoc"><i class="fa fa-check"></i>Qu’est-ce que Pandoc?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.2" data-path="ex_markdown1.html"><a href="ex_markdown1.html#utiliser-un-fichier-rmarkdown"><i class="fa fa-check"></i><b>2.2.2</b> Utiliser un fichier RMarkdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#organisation-générale"><i class="fa fa-check"></i>Organisation générale</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#installer-r-markdown"><i class="fa fa-check"></i>Installer R Markdown</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#createmarkdownfile"><i class="fa fa-check"></i>Créer un fichier R Markdown</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#spécifier-les-options-yaml"><i class="fa fa-check"></i>Spécifier les options YAML</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#éditer-le-contenu-du-fichier-r-markdown"><i class="fa fa-check"></i>Éditer le contenu du fichier R Markdown</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#obtenir-le-document-final"><i class="fa fa-check"></i>Obtenir le document final</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.3" data-path="ex_markdown1.html"><a href="ex_markdown1.html#exo2"><i class="fa fa-check"></i><b>2.2.3</b> À vous de jouer !</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#question-1-1"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#question-2-1"><i class="fa fa-check"></i>Question 2</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="SRC.html"><a href="SRC.html"><i class="fa fa-check"></i><b>3</b> Systèmes de coordonnées de référence</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="leçon-1.html"><a href="leçon-1.html"><i class="fa fa-check"></i><b>3.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-géodésiques"><i class="fa fa-check"></i><b>3.1.1</b> Les systèmes géodésiques</a></li>
+<li class="chapter" data-level="3.1.2" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-de-coordonnées"><i class="fa fa-check"></i><b>3.1.2</b> Les systèmes de coordonnées</a></li>
+<li class="chapter" data-level="3.1.3" data-path="leçon-1.html"><a href="leçon-1.html#les-projections"><i class="fa fa-check"></i><b>3.1.3</b> Les projections</a></li>
+<li class="chapter" data-level="3.1.4" data-path="leçon-1.html"><a href="leçon-1.html#projections-couramment-utilisées"><i class="fa fa-check"></i><b>3.1.4</b> Projections couramment utilisées</a></li>
+<li class="chapter" data-level="3.1.5" data-path="leçon-1.html"><a href="leçon-1.html#représentation-dun-scr"><i class="fa fa-check"></i><b>3.1.5</b> Représentation d’un SCR</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#le-well-known-text"><i class="fa fa-check"></i>Le Well-known text</a></li>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#la-syntaxe-proj4"><i class="fa fa-check"></i>La syntaxe PROJ4</a></li>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#code_epsg"><i class="fa fa-check"></i>Les codes EPSG</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1.6" data-path="leçon-1.html"><a href="leçon-1.html#résumé"><i class="fa fa-check"></i><b>3.1.6</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html"><i class="fa fa-check"></i><b>3.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="ex_markdown2.html"><a href="ex_markdown2.html#pandocmarkdown"><i class="fa fa-check"></i><b>3.2.1</b> Le variante Pandoc de Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#informations-de-départ"><i class="fa fa-check"></i>Informations de départ</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#décoration-du-texte"><i class="fa fa-check"></i>Décoration du texte</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-titres"><i class="fa fa-check"></i>Les titres</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-listes-1"><i class="fa fa-check"></i>Les listes</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocs-de-citation"><i class="fa fa-check"></i>Blocs de citation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocsR"><i class="fa fa-check"></i><b>3.2.2</b> Intégration de R dans le document</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-commentaires-1"><i class="fa fa-check"></i>Les commentaires</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo"><i class="fa fa-check"></i>Modifier l’affichage du code source avec le paramètre <code>echo</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.3" data-path="ex_markdown2.html"><a href="ex_markdown2.html#exo3"><i class="fa fa-check"></i><b>3.2.3</b> À vous de jouer !</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vec.html"><a href="vec.html"><i class="fa fa-check"></i><b>4</b> Données vectorielles</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="lecon_vec.html"><a href="lecon_vec.html"><i class="fa fa-check"></i><b>4.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="lecon_vec.html"><a href="lecon_vec.html#data_mod4"><i class="fa fa-check"></i><b>4.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="4.1.2" data-path="lecon_vec.html"><a href="lecon_vec.html#create_vec"><i class="fa fa-check"></i><b>4.1.2</b> Créer des données vectorielles</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#créer-des-géométries-simples"><i class="fa fa-check"></i>Créer des géométries simples</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#attribuer-un-scr"><i class="fa fa-check"></i>Attribuer un SCR</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#définir-des-attributs"><i class="fa fa-check"></i>Définir des attributs</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#fct_st_as_sf"><i class="fa fa-check"></i>La fonction <code>st_as_sf()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.3" data-path="lecon_vec.html"><a href="lecon_vec.html#read_vec"><i class="fa fa-check"></i><b>4.1.3</b> Lire un shapefile et interpréter sa géométrie</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#lire-shp"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#explorer-les-métadonnées-dun-shapefile"><i class="fa fa-check"></i>Explorer les métadonnées d’un shapefile</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.4" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-de-shapefiles-sous-r"><i class="fa fa-check"></i><b>4.1.4</b> Visualisation de shapefiles sous R</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-avec-la-librairie-mapview"><i class="fa fa-check"></i>Visualisation avec la librairie Mapview</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualiser-des-données-vectorielles-par-attribut"><i class="fa fa-check"></i>Visualiser des données vectorielles par attribut</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualiser-plusieurs-shapefiles"><i class="fa fa-check"></i>Visualiser plusieurs shapefiles</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.5" data-path="lecon_vec.html"><a href="lecon_vec.html#reprojection-de-données-vectorielles-sous-r"><i class="fa fa-check"></i><b>4.1.5</b> Reprojection de données vectorielles sous R</a></li>
+<li class="chapter" data-level="4.1.6" data-path="lecon_vec.html"><a href="lecon_vec.html#gdt"><i class="fa fa-check"></i><b>4.1.6</b> Lire une géodatabase et explorer ses couches</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#lire-les-données"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#explorer-les-attributs-dune-couche"><i class="fa fa-check"></i>Explorer les attributs d’une couche</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#sélection-dun-sous-ensemble-de-données"><i class="fa fa-check"></i>Sélection d’un sous-ensemble de données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-de-plusieurs-couches-dune-géodatabse"><i class="fa fa-check"></i>Visualisation de plusieurs couches d’une géodatabse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="ex_vec.html"><a href="ex_vec.html"><i class="fa fa-check"></i><b>4.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-1-2"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-2-2"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-3-1"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mat.html"><a href="mat.html"><i class="fa fa-check"></i><b>5</b> Données matricielles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="lecon_mat.html"><a href="lecon_mat.html"><i class="fa fa-check"></i><b>5.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="lecon_mat.html"><a href="lecon_mat.html#data_mod5"><i class="fa fa-check"></i><b>5.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="5.1.2" data-path="lecon_mat.html"><a href="lecon_mat.html#create_mat"><i class="fa fa-check"></i><b>5.1.2</b> Créer des données matricielles</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#créer-un-raster-simple-et-le-visualiser"><i class="fa fa-check"></i>Créer un raster simple et le visualiser</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#raster-de-différents-types-de-données"><i class="fa fa-check"></i>Raster de différents types de données</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.3" data-path="lecon_mat.html"><a href="lecon_mat.html#comprendre-la-structure-dun-raster"><i class="fa fa-check"></i><b>5.1.3</b> Comprendre la structure d’un raster</a></li>
+<li class="chapter" data-level="5.1.4" data-path="lecon_mat.html"><a href="lecon_mat.html#statistiques-de-base-sur-un-raster"><i class="fa fa-check"></i><b>5.1.4</b> Statistiques de base sur un raster</a></li>
+<li class="chapter" data-level="5.1.5" data-path="lecon_mat.html"><a href="lecon_mat.html#read_mat"><i class="fa fa-check"></i><b>5.1.5</b> Lire un raster et explorer son contenu</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#lire-les-données-1"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#explorer-les-statistiques-de-base"><i class="fa fa-check"></i>Explorer les statistiques de base</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.6" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-les-données-matricielles-avec-mapview"><i class="fa fa-check"></i><b>5.1.6</b> Visualiser les données matricielles avec mapview()</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-une-section-dun-raster"><i class="fa fa-check"></i>Visualiser une section d’un raster</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.7" data-path="lecon_mat.html"><a href="lecon_mat.html#changer-la-résolution-dun-raster"><i class="fa fa-check"></i><b>5.1.7</b> Changer la résolution d’un raster</a></li>
+<li class="chapter" data-level="5.1.8" data-path="lecon_mat.html"><a href="lecon_mat.html#changer-la-projection-dun-raster"><i class="fa fa-check"></i><b>5.1.8</b> Changer la projection d’un <em>raster</em></a></li>
+<li class="chapter" data-level="5.1.9" data-path="lecon_mat.html"><a href="lecon_mat.html#sauvegarder-un-raster"><i class="fa fa-check"></i><b>5.1.9</b> Sauvegarder un raster</a></li>
+<li class="chapter" data-level="5.1.10" data-path="lecon_mat.html"><a href="lecon_mat.html#read_mult"><i class="fa fa-check"></i><b>5.1.10</b> Lire et visualiser des données matricielles multi-bande</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#lire-des-données-multi-bande"><i class="fa fa-check"></i>Lire des données multi-bande</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#rasterbrick-et-rasterstack"><i class="fa fa-check"></i>RasterBrick et RasterStack</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-un-raster-multi-bande"><i class="fa fa-check"></i>Visualiser un raster multi-bande</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="ex_mat.html"><a href="ex_mat.html"><i class="fa fa-check"></i><b>5.2</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="carto.html"><a href="carto.html"><i class="fa fa-check"></i><b>6</b> Cartographie</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="lecon_carto.html"><a href="lecon_carto.html"><i class="fa fa-check"></i><b>6.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="lecon_carto.html"><a href="lecon_carto.html#data_mod6"><i class="fa fa-check"></i><b>6.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="6.1.2" data-path="lecon_carto.html"><a href="lecon_carto.html#principes-de-base-en-cartographie"><i class="fa fa-check"></i><b>6.1.2</b> Principes de base en cartographie</a></li>
+<li class="chapter" data-level="6.1.3" data-path="lecon_carto.html"><a href="lecon_carto.html#basetmap"><i class="fa fa-check"></i><b>6.1.3</b> Cartes statiques avec tmap</a></li>
+<li class="chapter" data-level="6.1.4" data-path="lecon_carto.html"><a href="lecon_carto.html#les-polygones"><i class="fa fa-check"></i><b>6.1.4</b> Les polygones</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#intérieur-des-polygones"><i class="fa fa-check"></i>Intérieur des polygones</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#objet-tmap"><i class="fa fa-check"></i>Objet tmap</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#frontières-des-polygones"><i class="fa fa-check"></i>Frontières des polygones</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#attributs-des-polygones"><i class="fa fa-check"></i>Attributs des polygones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.5" data-path="lecon_carto.html"><a href="lecon_carto.html#spécificités-cartographiques"><i class="fa fa-check"></i><b>6.1.5</b> Spécificités cartographiques</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#barre-déchelle-et-rose-des-vents"><i class="fa fa-check"></i>Barre d’échelle et rose des vents</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#grille-et-graticules"><i class="fa fa-check"></i>Grille et graticules</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#attribuer-les-crédits-ou-la-source-des-données"><i class="fa fa-check"></i>Attribuer les crédits ou la source des données</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.6" data-path="lecon_carto.html"><a href="lecon_carto.html#mise-en-page"><i class="fa fa-check"></i><b>6.1.6</b> Mise en page</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#titre-cadre-et-couleur-du-fond"><i class="fa fa-check"></i>Titre, cadre et couleur du fond</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#légende"><i class="fa fa-check"></i>Légende</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#ajustement-des-couleurs"><i class="fa fa-check"></i>Ajustement des couleurs</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#styles-prédéfinis"><i class="fa fa-check"></i>Styles prédéfinis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.7" data-path="lecon_carto.html"><a href="lecon_carto.html#écriture-sur-une-carte"><i class="fa fa-check"></i><b>6.1.7</b> Écriture sur une carte</a></li>
+<li class="chapter" data-level="6.1.8" data-path="lecon_carto.html"><a href="lecon_carto.html#les-lignes"><i class="fa fa-check"></i><b>6.1.8</b> Les lignes</a></li>
+<li class="chapter" data-level="6.1.9" data-path="lecon_carto.html"><a href="lecon_carto.html#les-points"><i class="fa fa-check"></i><b>6.1.9</b> Les points</a></li>
+<li class="chapter" data-level="6.1.10" data-path="lecon_carto.html"><a href="lecon_carto.html#données-matricielles"><i class="fa fa-check"></i><b>6.1.10</b> Données matricielles</a></li>
+<li class="chapter" data-level="6.1.11" data-path="lecon_carto.html"><a href="lecon_carto.html#carte-avec-symboles-proportionnels"><i class="fa fa-check"></i><b>6.1.11</b> Carte avec symboles proportionnels</a></li>
+<li class="chapter" data-level="6.1.12" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a></li>
+<li class="chapter" data-level="6.1.13" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-à-panneaux-multiples"><i class="fa fa-check"></i><b>6.1.13</b> Cartes à panneaux multiples</a></li>
+<li class="chapter" data-level="6.1.14" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-avec-encadré"><i class="fa fa-check"></i><b>6.1.14</b> Cartes avec encadré</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="exercices.html"><a href="exercices.html"><i class="fa fa-check"></i><b>6.2</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="manip_vec.html"><a href="manip_vec.html"><i class="fa fa-check"></i><b>7</b> Manipulation de données vectorielles</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html"><i class="fa fa-check"></i><b>7.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#data_mod7"><i class="fa fa-check"></i><b>7.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="7.1.2" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-de-base"><i class="fa fa-check"></i><b>7.1.2</b> Opérations de base</a>
+<ul>
+<li class="chapter" data-level="7.1.2.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#importer-et-visualiser-les-données"><i class="fa fa-check"></i><b>7.1.2.1</b> Importer et visualiser les données</a></li>
+<li class="chapter" data-level="7.1.2.2" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-sur-les-attributs-des-données-vectorielles"><i class="fa fa-check"></i><b>7.1.2.2</b> Opérations sur les attributs des données vectorielles</a></li>
+<li class="chapter" data-level="7.1.2.3" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-spatiales-sur-les-données-vectorielles"><i class="fa fa-check"></i><b>7.1.2.3</b> Opérations spatiales sur les données vectorielles</a></li>
+</ul></li>
+<li class="chapter" data-level="7.1.3" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#prob_mod7"><i class="fa fa-check"></i><b>7.1.3</b> Problématique à résoudre</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ex_map_vec.html"><a href="ex_map_vec.html"><i class="fa fa-check"></i><b>7.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-1-3"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-2-3"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-3-2"><i class="fa fa-check"></i>Question 3</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-4"><i class="fa fa-check"></i>Question 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="manip_mat.html"><a href="manip_mat.html"><i class="fa fa-check"></i><b>8</b> Manipulation de données matricielles</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html"><i class="fa fa-check"></i><b>8.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#data_mod8"><i class="fa fa-check"></i><b>8.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="8.1.2" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#opération-de-bases"><i class="fa fa-check"></i><b>8.1.2</b> Opération de bases</a>
+<ul>
+<li class="chapter" data-level="8.1.2.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#importer-et-visualiser-les-données-1"><i class="fa fa-check"></i><b>8.1.2.1</b> Importer et visualiser les données</a></li>
+<li class="chapter" data-level="8.1.2.2" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#filtrer-les-cellules-dun-raster"><i class="fa fa-check"></i><b>8.1.2.2</b> Filtrer les cellules d’un <em>raster</em></a></li>
+<li class="chapter" data-level="8.1.2.3" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#combiner-des-rasters"><i class="fa fa-check"></i><b>8.1.2.3</b> Combiner des <em>rasters</em></a></li>
+</ul></li>
+<li class="chapter" data-level="8.1.3" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#prob_mod8"><i class="fa fa-check"></i><b>8.1.3</b> Problématique à résoudre</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#résolution-de-la-question-1"><i class="fa fa-check"></i>Résolution de la question 1</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#résolution-de-la-question-2"><i class="fa fa-check"></i>Résolution de la question 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html"><i class="fa fa-check"></i><b>8.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-1-4"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-2-4"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-3-3"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="spatiotemp.html"><a href="spatiotemp.html"><i class="fa fa-check"></i><b>9</b> Données spatiotemporelles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html"><i class="fa fa-check"></i><b>9.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#data_mod9"><i class="fa fa-check"></i><b>9.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="9.1.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#données-spatiotemporelles-vectorielles"><i class="fa fa-check"></i><b>9.1.2</b> Données spatiotemporelles vectorielles</a>
+<ul>
+<li class="chapter" data-level="9.1.2.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#importer-les-données-1"><i class="fa fa-check"></i><b>9.1.2.1</b> Importer les données</a></li>
+<li class="chapter" data-level="9.1.2.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#vitesse-moyenne-des-trajets"><i class="fa fa-check"></i><b>9.1.2.2</b> Vitesse moyenne des trajets</a></li>
+<li class="chapter" data-level="9.1.2.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#période-de-lannée-préférée"><i class="fa fa-check"></i><b>9.1.2.3</b> Période de l’année préférée</a></li>
+<li class="chapter" data-level="9.1.2.4" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#animation-du-trajet-le-plus-long"><i class="fa fa-check"></i><b>9.1.2.4</b> Animation du trajet le plus long</a></li>
+</ul></li>
+<li class="chapter" data-level="9.1.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#données-spatiotemporelles-matricielles"><i class="fa fa-check"></i><b>9.1.3</b> Données spatiotemporelles matricielles</a>
+<ul>
+<li class="chapter" data-level="9.1.3.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#importer-les-données-2"><i class="fa fa-check"></i><b>9.1.3.1</b> Importer les données</a></li>
+<li class="chapter" data-level="9.1.3.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#les-objets-rasterstack"><i class="fa fa-check"></i><b>9.1.3.2</b> Les objets rasterStack</a></li>
+<li class="chapter" data-level="9.1.3.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#mois-de-plus-faible-pluviométrie"><i class="fa fa-check"></i><b>9.1.3.3</b> Mois de plus faible pluviométrie</a></li>
+<li class="chapter" data-level="9.1.3.4" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#points-les-plus-chauds"><i class="fa fa-check"></i><b>9.1.3.4</b> Points les plus chauds</a></li>
+<li class="chapter" data-level="9.1.3.5" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#profils-de-temperatures-et-de-precipitations"><i class="fa fa-check"></i><b>9.1.3.5</b> Profils de temperatures et de precipitations</a></li>
+<li class="chapter" data-level="9.1.3.6" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#animations"><i class="fa fa-check"></i><b>9.1.3.6</b> Animations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ex_spatiotemp.html"><a href="ex_spatiotemp.html"><i class="fa fa-check"></i><b>9.2</b> Exercice</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_spatiotemp.html"><a href="ex_spatiotemp.html#question-1-5"><i class="fa fa-check"></i>Question 1</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCI 1031 Visualisation et analyse de données spatiales sous R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="à-propos-du-cours" class="section level1 unnumbered hasAnchor" number="">
+<h1>À propos du cours<a href="à-propos-du-cours.html#à-propos-du-cours" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="présentation" class="section level3 unnumbered hasAnchor" number="">
+<h3>Présentation<a href="à-propos-du-cours.html#présentation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Comme son nom l’indique, le cours SCI1031 porte sur la visualisation et l’analyse de données spatiales avec le langage de programmation et logiciel libre R.</p>
+<div id="pourquoi-suivre-ce-cours" class="section level4 unnumbered hasAnchor" number="">
+<h4>Pourquoi suivre ce cours ?<a href="à-propos-du-cours.html#pourquoi-suivre-ce-cours" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’intérêt du cours SCI 1031 est lié plusieurs aspects. Tout d’abord, nos sociétés sont confrontées à une incroyable augmentation des données spatiales. C’est-à-dire des données qui possèdent une composante spatiale, comme des coordonnées géographiques.</p>
+<p>Pensons, par exemple, aux données de télédétection récoltées par des satellites et des véhicules aériens télépilotés (drones). Ou encore, aux données échantillonnées par des technologies de notre vie quotidienne qui sont munis d’un système de géo-positionnement par satellite (GPS!) intégré comme les téléphones intelligents, les caméras, et les tablettes.</p>
+<p>Cet accroissement des données spatiales est interrelié avec une explosion d’applications qui dépendent des données spatiales et qui en génèrent dans des domaines aussi variés que le marketing, l’évaluation des risques par les compagnies d’assurances, la logistique des réseaux de transports, et les études d’impact environnementaux.</p>
+<p>Ainsi, cette effervescence des données spatiales et de leurs applications entrainement nécessairement une hausse de la demande pour des compétences spécialisées dans la manipulation, la visualisation et l’analyse de données spatiales.</p>
+<p>L’objectif général du cours SCI 1031 est donc de permettre aux étudiantes et aux étudiants de développer ces compétences essentielles pour traiter les données spatiales, tant dans leurs études que sur le marché de l’emploi.</p>
+</div>
+<div id="pourquoi-r" class="section level4 unnumbered hasAnchor" number="">
+<h4>Pourquoi R ?<a href="à-propos-du-cours.html#pourquoi-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>R<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> est un logiciel libre et un langage de programmation qui offre un environnement riche permettant de réaliser une multitude de tâches incluant des calculs statistiques, des graphiques scientifiques, de la manipulation de bases de données, et de la modélisation.</p>
+<p>R est devenu un outil incontournable en sciences des données. La communauté R est constituée non seulement d’utilisatrices et d’utilisateurs, mais aussi de créatrices et de créateurs. Ceux-ci améliorent constamment les capacités de R par le développement de nouvelles fonctionnalités et de bibliothèques spécialisées qui deviennent accessibles à toute la communauté.</p>
+<p>Dans les dernières années, plusieurs expertes et experts de l’analyse et de la visualisation de données spatiales se sont affairés à bâtir des bibliothèques simples et efficaces destinées aux traitements des données spatiales. Ces bibliothèques sont mise-à-jour continuellement alors que d’autres bibliothèques voient le jour pour répondre à des nouveaux besoins.</p>
+<p>Un avantage indéniable à utiliser R, en comparaison aux autres outils de visualisation de données spatiales, est sa grande flexibilité. L’abondance des bibliothèques permet d’utiliser R pour accomplir des opérations diverses. Il est ainsi possible de produire des cartes géographiques de grande qualité avec R et de faire des analyses statistiques spatiales très poussées. Tout cela sans changer de logiciel et en conservant la même syntaxe générale.</p>
+</div>
+<div id="objectifs" class="section level4 unnumbered hasAnchor" number="">
+<h4>Objectifs<a href="à-propos-du-cours.html#objectifs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Voici ce que vous serez en mesure de faire à la fin du cours SCI 1031:</p>
+<ul>
+<li>Identifier les concepts fondamentaux propres à la représentation spatiale.</li>
+<li>Décrire les types de données spatiales et leurs caractéristiques.</li>
+<li>Appliquer l’usage d’opérateurs spatiaux de base à la réalisation d’analyses spatiales simples.</li>
+<li>Créer une carte thématique respectant les règles cartographiques.</li>
+<li>Appliquer les fonctions de base des principales librairies R destinées à la manipulation, la visualisation et l’analyse de données spatiales.</li>
+<li>Représenter des données spatiotemporelles.</li>
+</ul>
+</div>
+<div id="contenu-sommaire" class="section level4 unnumbered hasAnchor" number="">
+<h4>Contenu sommaire<a href="à-propos-du-cours.html#contenu-sommaire" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Le cours est divisé en 9 modules:</p>
+<p><strong>Module 1 : Introduction </strong>
+<br>
+Ce module donne un aperçu de l’évolution historique dans la représentation des données spatiales, des premières cartes jusqu’à l’avènement des systèmes d’information géographiques. Il fait une revue des outils existants pour visualiser et analyser les données spatiales. Il présente aussi les concepts essentiels à l’étude des données spatiales.</p>
+<p><strong>Module 2 : Modèles de données spatiales</strong>
+<br>
+Ce module s’intéresse à la façon dont nous représentons les phénomènes spatiaux se déroulant à la surface de la Terre par des données spatiales. Il présente les propriétés des deux types de modèle de données spatiales: les données vectorielles et les données matricielles.</p>
+<p><strong>Module 3 : Systèmes de coordonnées de référence</strong>
+<br>
+Ce module porte sur les systèmes de coordonnées de référence. Il explique les concepts mathématiques et cartographiques pour représenter la position des données sur la surface de la Terre.</p>
+<p><strong>Module 4 : Données vectorielles</strong>
+<br>
+Ce module se veut une introduction à la bibliothèque R <code>sf</code>. Il présente les fonctions de base pour lire, interpréter et visualiser des données vectorielles.</p>
+<p><strong>Module 5 : Données matricielles</strong>
+<br>
+Ce module se veut une introduction à la bibliothèque R <code>raster</code>. Il présente les fonctions de base pour lire, interpréter et visualiser des données matricielles.</p>
+<p><strong>Module 6 : Cartographie</strong>
+<br>
+Ce module explique les principes essentiels de la cartographie, des informations indispensables comme la légende, jusqu’au choix des couleurs. Il présente les fonctions de la bibliothèque R <code>tmap</code> pour créer des projets cartographiques.</p>
+<p><strong>Module 7 : Manipulation de données vectorielles</strong>
+<br>
+Ce module présente les fonctions R pour manipuler les attributs de données vectorielles et faire des opérations spatiales sur ces données comme faire des jointures spatiales ou trouver l’intersection entre des données.</p>
+<p><strong>Module 8 : Manipulation de données matricielles</strong>
+<br>
+Ce module présente les fonctions R pour filtrer les valeurs des données matricielles et faire des opérations spatiales sur ces données tel que découper un <em>raster</em>.</p>
+<p><strong>Module 9 : Données spatiotemporelles</strong>
+<br>
+Ce module explique comment manipuler des données spatiales qui possèdent une dimension temporelle. Il présente certaines fonctions des bibliothèques R <code>lubridate</code> et <code>animation</code>.
+<br></p>
+</div>
+<div id="fonctionnement-du-cours" class="section level4 unnumbered hasAnchor" number="">
+<h4>Fonctionnement du cours<a href="à-propos-du-cours.html#fonctionnement-du-cours" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="organisation-des-modules" class="section level5 unnumbered hasAnchor" number="">
+<h5>Organisation des modules<a href="à-propos-du-cours.html#organisation-des-modules" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Le cours s’échelonne sur 15 semaines. La <a href="à-propos-du-cours.html#route">feuille de route</a> constitue un guide pour vous aider à répartir vos apprentissages tout au long de votre cheminement.</p>
+<p>Les modules sont tous divisés en deux parties: une partie <em>Leçon</em> et une partie <em>Exercices</em>.</p>
+<p><strong>Pour les modules 1, 2, et 3</strong></p>
+<ul>
+<li>La partie <em>Leçon</em> comprend des apprentissages théoriques. Vous apprendrez les concepts de base propres aux données géospatiales. Ces apprentissages sont essentiels avant de se lancer dans l’apprentissage des fonctions R spécifiques à la manipulation, l’analyse et la visualisation de données spatiales.</li>
+<li>La partie <em>Exercices</em> comprend une révision des bases de R (module 1) et une introduction à RMarkdown (module 2 et 3). Vous serez également amenés à mettre en pratique ces apprentissages en répondant à quelques questions.</li>
+</ul>
+<p><strong>Pour les modules 4, 5, 6, 7, 8, et 9</strong></p>
+<ul>
+<li>La partie <em>Leçon</em> comprend des apprentissages théoriques et aussi pratiques: vous serez guidé dans l’utilisation de fonctions R et dans la résolution de problèmes.</li>
+<li>La partie <em>Exercices</em> comprend des questions pour mettre en pratique vos apprentissages. Bien que les réponses aux questions soient disponibles, il est important de tenter d’y répondre par vous-mêmes. Les questions des travaux notés et de l’examen sont très semblables à celles des parties <em>Exercices</em>.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="apprentissage-de-r" class="section level5 unnumbered hasAnchor" number="">
+<h5>Apprentissage de R<a href="à-propos-du-cours.html#apprentissage-de-r" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Il est important d’organiser sur votre ordinateur un environnement de travail optimal pour faciliter vos apprentissages. Il est fortement recommandé de créer un répertoire, par exemple <code>SCI1031</code>, dédié exclusivement à ce cours. Dans ce répertoire, créé également un répertoire pour chacun des neuf modules du cours (p. ex. <code>Module1</code>, <code>Module2</code>, …, <code>Module9</code>).</p>
+<p>À chaque module du cours, vous serez amené à utiliser des données sur lesquelles vous pratiquerez des opérations R. Ces données seront fournies dans un dossier zippé à télécharger (<code>Module1_donnees.zip</code>, <code>Module2_donnees.zip</code>, …, <code>Module9_donnees.zip</code>). Sauvegarder le dossier de données dans le répertoire correspondant à son module sur votre ordinateur.</p>
+<p>Il est également recommandé de vous créer un fichier R (ou Rmd) pour chaque module (p.ex. <code>Mod1.R</code>, <code>Mod2.R</code>, …, <code>Mod9.R</code>) dans lequel vous pourrez copier-coller les opérations R enseignées. Vous pourrez ainsi vous exercer à utiliser ces opérations et vous assurer de comprendre leur fonctionnement. Il facile de copier les blocs de codes R à partir de la page web en utilisant le bouton dédié à cette fin dans le coin supérieur droit de chaque bloc.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:copypaste"></span>
+<a href="Images/Pres_copypaste.png" target="_blank"><img src="Images/Pres_copypaste.png" alt="Le bouton supérieur droit vous permet de copier facilement un bloc de codes R." width="80%" /></a>
+<p class="caption">
+Figure 0.1: Le bouton supérieur droit vous permet de copier facilement un bloc de codes R.
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="travaux-notés" class="section level4 unnumbered hasAnchor" number="">
+<h4>Travaux notés<a href="à-propos-du-cours.html#travaux-notés" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Le cours comprend trois (3) travaux notés (chacun 20%) et un examen final (40%).</p>
+<p>La date de remise des travaux notés, telle que suggérée dans la <a href="à-propos-du-cours.html#route">feuille de route</a> est flexible: vous ne serez pas pénalisé si vous remettez votre travail après cette date. Toutefois, il est préférable d’espacer la remise des travaux pour pouvoir bénéficier d’une rétroaction de la part de la personne qui corrige.</p>
+<p>Noter que vous devez faire l’examen au plus tard au cours de la dernière semaine. Il s’agit d’un examen à faire chez soi. L’examen dure 3 heures mais vous avez 3 jours (72 heures) pour remettre vos réponses à partir du moment où vous l’entamez.</p>
+<p>Les consignes, les données à utiliser, et les gabarits de réponses pour les travaux notés et l’examen sont disponibles sur la <a href="https://m2.teluq.ca/course/view.php?id=2164">page web du cours</a> sur le site de la TÉLUQ.
+Seuls les étudiants inscrits à la TÉLUQ ont accès aux évaluations.</p>
+<p><br></p>
+</div>
+<div id="rétroaction" class="section level4 unnumbered hasAnchor" number="">
+<h4>Rétroaction<a href="à-propos-du-cours.html#rétroaction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Le mode de communication le plus efficace pour rejoindre la personne qui vous encadre est le courriel. Si cela s’avère nécessaire une rencontre zoom ou un appel téléphonique pourront être planifiés.</p>
+<p>Le sujet de votre courriel doit contenir le sigle du cours. De plus, vous devez clairement vous identifier dans votre courriel: nom, prénom, numéro d’étudiant. La personne qui vous encadre, encadre beaucoup d’étudiantes et d’étudiants, et cela dans plusieurs cours!</p>
+<p>Si votre courriel comporte une question sur une ou des opérations R qui vous causent problème, vous devez absolument inclure toutes les commandes R depuis l’importation des données jusqu’au problème rencontré. Il est recommandé d’envoyer un fichier R avec vos commandes pour faciliter l’intervention de la personne qui vous encadre.</p>
+<p>Sauf exception (en cas de maladie, de vacances ou de déplacements dans le cadre de travaux de recherche) vous recevrez une réponse à votre courriel dans les 48h.
+Les travaux corrigés seront remis au plus tard deux semaines suivant leur dépôt mais généralement dans un délai d’une semaine.
+<br></p>
+</div>
+</div>
+<div id="route" class="section level3 unnumbered hasAnchor" number="">
+<h3>Feuille de route<a href="à-propos-du-cours.html#route" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+Modules
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="15">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+Semaines
+</div>
+</th>
+</tr>
+<tr>
+<th style="empty-cells: hide;" colspan="1">
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+1
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+2
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+3
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+4
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+5
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+6
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+7
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+8
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+9
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+10
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+11
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+12
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+13
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+14
+</div>
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+15
+</div>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 1
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+Introduction
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 2
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+La représentation spatiale
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 3
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+Systèmes de coordonnées de référence
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 4
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+Données vectorielles
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 5
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+Données matricielles
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+Travail noté 1: 20 %
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+X
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 6
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+Cartographie
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+Travail noté 2: 20 %
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+X
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 7
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+Opérations sur les données vectorielles
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 8
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+Opérations sur les données matricielles
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+Travail noté 3: 20 %
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+X
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;font-size: 12px;">
+Module 9
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-weight: bold;font-size: 12px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;font-size: 12px;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-size: 10px;border-bottom: 1px solid black">
+Opérations sur les données spatio-temporelles
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightgrey !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-size: 10px;border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;border-right:1px solid black;border-left:1px solid black;width: 5cm; font-weight: bold;color: red !important;font-size: 13px;">
+Examen: 40 %
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: white !important;font-weight: bold;color: red !important;font-size: 13px;">
+</td>
+<td style="text-align:center;background-color: white !important;border-right:1px solid black;min-width: 0.3cm; max-width: 0.3cm; background-color: lightpink !important;font-weight: bold;color: red !important;font-size: 13px;">
+X
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div id="crédits" class="section level3 unnumbered hasAnchor" number="">
+<h3>Crédits<a href="à-propos-du-cours.html#crédits" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="équipe" class="section level4 unnumbered hasAnchor" number="">
+<h4>Équipe<a href="à-propos-du-cours.html#équipe" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>Direction pédagogique, conception et rédaction:</strong> Élise Filotas</p>
+<p><strong>Soutien à la conception:</strong> Kevin Cazelles et Steve Vissault</p>
+<p><br></p>
+<p><strong>Direction multi-média:</strong> Mathieu Corriveau et Élodie Bussières</p>
+<p><strong>Conception graphique: </strong> Marie-Sol Lapointe</p>
+<p><strong>Intégration: </strong> Elise Filotas, Kevin Cazelles et Simon Gaudreau</p>
+<p><br></p>
+</div>
+<div id="reproduction-du-contenu" class="section level4 unnumbered hasAnchor" number="">
+<h4>Reproduction du contenu<a href="à-propos-du-cours.html#reproduction-du-contenu" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Vous êtes autorisé à copier, distribuer et communiquer le matériel contenu sur ce site selon la licence Creative Commons Attribution-NonCommercial 4.0 International (<a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>).</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /></p>
+<p><br>
+<br>
+<br>
+<br>
+<br></p>
+</div>
+</div>
+<div id="contact" class="section level3 unnumbered hasAnchor" number="">
+<h3>Contact<a href="à-propos-du-cours.html#contact" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><br></p>
+<div id="élise-filotas" class="section level6 unnumbered hasAnchor boite photo elise gauche" number="">
+<h6>Élise Filotas<a href="à-propos-du-cours.html#élise-filotas" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>Je suis professeure au Département Science et technologie de la TELUQ en écologie quantitative et je suis responsable du cours SCI 1031.
+<br>
+Vous pouvez me rejoindre à l’adresse suivante: <a href="mailto:elise.filotas@teluq.ca" class="email">elise.filotas@teluq.ca</a></p>
+<p>Consultez mon <a href="http://elisefilotas.ca/fr/maison/">site web</a> pour en savoir plus sur ma recherche.</p>
+<p><br>
+<br>
+<br>
+<br></p>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br></p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>R est soutenu par le <em>R Core Team</em> et la <em>R Foundation for Statistical Computing</em>: <a href="www.r-project.org">www.r-project.org</a><a href="à-propos-du-cours.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ressources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Cours_SpatialR.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true,
+"edit": "https://github.com/sci1031/sci1031/edit/master/%s"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

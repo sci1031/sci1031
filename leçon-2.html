@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
+  <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R" />
+  
+  <meta name="twitter:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  
+
+
+
+<meta name="date" content="2022-05-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="carto.html"/>
+<link rel="next" href="exercices.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/M_96d834-1/data_stars_Mf9801b.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/M_logique_numeric_032e15-1/data_stars_M_logique_numerice82cd3.txt"></script>
+<script src="libs/M_factor_da72f3-1/data_stars_M_factoracf524.txt"></script>
+<script src="libs/ICU_0837c4-1/data_stars_ICU3b0891.txt"></script>
+<script src="libs/ICU_c3ebf2-1/data_stars_ICU421089.txt"></script>
+<script src="libs/T_a5d1e8-1/data_stars_Tb351f2.txt"></script>
+<script src="libs/T_fact4_moy_f54a23-1/data_stars_T_fact4_moy9acfe1.txt"></script>
+<script src="libs/T_fact4_max_7c1623-1/data_stars_T_fact4_maxed0b6f.txt"></script>
+<script src="libs/T_fact8_moy_edb5f1-1/data_stars_T_fact8_moy8caef2.txt"></script>
+<script src="libs/T_fact8_max_a2c957-1/data_stars_T_fact8_maxb2ed40.txt"></script>
+<script src="libs/SR_f47ea1-1/data_stars_SR084365.txt"></script>
+<script src="libs/SG_a593bc-1/data_stars_SG061bf9.txt"></script>
+<script src="libs/SB_46e8cd-1/data_stars_SBf8719e.txt"></script>
+<script src="libs/dem_e910a7-1/data_stars_dem93b0f8.txt"></script>
+<script src="libs/nouvelles_classes_dem_cfa943-1/data_stars_nouvelles_classes_dem57436a.txt"></script>
+<script src="libs/reclassify(dem, nouvelles_classes2)_3da12e-1/data_stars_reclassifydemnouvelles_classes23f6a9c.txt"></script>
+<script src="libs/dem_cr_4fc923-1/data_stars_dem_cref417d.txt"></script>
+<script src="libs/dem_cr_p_3278ed-1/data_stars_dem_cr_p1734b0.txt"></script>
+<script src="libs/dem_f07319-1/data_stars_demd70be9.txt"></script>
+<script src="libs/dem_ma_6e45c8-1/data_stars_dem_ma318d97.txt"></script>
+<script src="libs/dem_ma_inv_de416c-1/data_stars_dem_ma_inv79f405.txt"></script>
+<script src="libs/dem_ma_689a4b-1/data_stars_dem_mac950a2.txt"></script>
+<script src="libs/dem_ma_inv_60bd7c-1/data_stars_dem_ma_inv7ca691.txt"></script>
+<script src="libs/dem_merge_4360b7-1/data_stars_dem_mergef6971d.txt"></script>
+<script src="libs/dem_merge_ordre1_3c856d-1/data_stars_dem_merge_ordre1b273a8.txt"></script>
+<script src="libs/dem_merge_ordre2_936c27-1/data_stars_dem_merge_ordre2d9a5cf.txt"></script>
+<script src="libs/dem_mosaic_min_14a90b-1/data_stars_dem_mosaic_minc0ab87.txt"></script>
+<script src="libs/dem_mosaic_max_321b57-1/data_stars_dem_mosaic_maxc596e0.txt"></script>
+<script src="libs/dem_mosaic_mean_c53af7-1/data_stars_dem_mosaic_mean1f4e78.txt"></script>
+<script src="libs/dem_parcs_df28c9-1/data_stars_dem_parcs8cf07e.txt"></script>
+<script src="libs/dem_parcs_87d516-1/data_stars_dem_parcs10f96b.txt"></script>
+<script src="libs/dem_orford_5c0a4f-1/data_stars_dem_orford65f37a.txt"></script>
+<script src="libs/dem_orford_059cb6-1/data_stars_dem_orfordfc30a5.txt"></script>
+<script src="libs/dem_orford_quantile_6fc7b8-1/data_stars_dem_orford_quantile2cd01f.txt"></script>
+<script src="libs/dem_orford_quantile_5a1607-1/data_stars_dem_orford_quantile61d450.txt"></script>
+<script src="libs/dem_tampon_max_e524da-1/data_stars_dem_tampon_max8f7065.txt"></script>
+<script src="libs/X1_13b528-1/data_stars_X10cd9e2.txt"></script>
+<script src="libs/X2_8b3ce4-1/data_stars_X2ce9732.txt"></script>
+<script src="libs/X3_f30ab8-1/data_stars_X328be41.txt"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/extra.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">TELUQ -  SCI 1031.</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="part"><span><b>I SCI 1031</b></span></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html"><i class="fa fa-check"></i>À propos du cours</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#présentation"><i class="fa fa-check"></i>Présentation</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#pourquoi-suivre-ce-cours"><i class="fa fa-check"></i>Pourquoi suivre ce cours ?</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#pourquoi-r"><i class="fa fa-check"></i>Pourquoi R ?</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#objectifs"><i class="fa fa-check"></i>Objectifs</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#contenu-sommaire"><i class="fa fa-check"></i>Contenu sommaire</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#fonctionnement-du-cours"><i class="fa fa-check"></i>Fonctionnement du cours</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#travaux-notés"><i class="fa fa-check"></i>Travaux notés</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#rétroaction"><i class="fa fa-check"></i>Rétroaction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#route"><i class="fa fa-check"></i>Feuille de route</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#crédits"><i class="fa fa-check"></i>Crédits</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#équipe"><i class="fa fa-check"></i>Équipe</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#reproduction-du-contenu"><i class="fa fa-check"></i>Reproduction du contenu</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#contact"><i class="fa fa-check"></i>Contact</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html"><i class="fa fa-check"></i>Ressources</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#travaux-notés-1"><i class="fa fa-check"></i>Travaux notés</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#données"><i class="fa fa-check"></i>Données</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#données-du-cours"><i class="fa fa-check"></i>Données du cours</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#autres-sources"><i class="fa fa-check"></i>Autres sources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#ressources-r"><i class="fa fa-check"></i>Ressources R</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#documentation-générale-r"><i class="fa fa-check"></i>Documentation générale R</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#documentation-r-géospatial"><i class="fa fa-check"></i>Documentation R-géospatial</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#les-bibliothèques-r"><i class="fa fa-check"></i>Les bibliothèques R</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#documentation-r-markdown"><i class="fa fa-check"></i>Documentation R-Markdown</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#les-couleurs-dans-r"><i class="fa fa-check"></i>Les couleurs dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#references"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="part"><span><b>II Apprentissage</b></span></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="lecon_intro.html"><a href="lecon_intro.html"><i class="fa fa-check"></i><b>1.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="lecon_intro.html"><a href="lecon_intro.html#hist"><i class="fa fa-check"></i><b>1.1.1</b> Les données spatiales d’hier à aujourd’hui</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-cartes-anciennes"><i class="fa fa-check"></i>Les cartes anciennes</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#la-géomatique"><i class="fa fa-check"></i>La géomatique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#la-science-des-données"><i class="fa fa-check"></i>La science des données</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1.2" data-path="lecon_intro.html"><a href="lecon_intro.html#outils"><i class="fa fa-check"></i><b>1.1.2</b> Les outils et logiciels de visualisation et d’analyse géo-spatiale</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-logiciels-commerciaux"><i class="fa fa-check"></i>Les logiciels commerciaux</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-logiciels-libres-daccès"><i class="fa fa-check"></i>Les logiciels libres d’accès</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-services-dinfonuagique"><i class="fa fa-check"></i>Les services d’infonuagique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-langages-de-programmation-pour-lanalyse-géospatiale"><i class="fa fa-check"></i>Les langages de programmation pour l’analyse géospatiale</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1.3" data-path="lecon_intro.html"><a href="lecon_intro.html#outil_R"><i class="fa fa-check"></i><b>1.1.3</b> Les bibliothèques géo-spatiales de R</a></li>
+<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="ex_intro.html"><a href="ex_intro.html"><i class="fa fa-check"></i><b>1.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="ex_intro.html"><a href="ex_intro.html#demarrage"><i class="fa fa-check"></i><b>1.2.1</b> Démarrage</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#installer-r"><i class="fa fa-check"></i>Installer R</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#installer-rstudio"><i class="fa fa-check"></i>Installer RStudio</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#apprivoiser-rstudio"><i class="fa fa-check"></i>Apprivoiser RStudio</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#créer-un-fichier-r"><i class="fa fa-check"></i>Créer un fichier R</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-bibliothèques"><i class="fa fa-check"></i>Les bibliothèques</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#le-répertoire-de-travail"><i class="fa fa-check"></i>Le répertoire de travail</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.2" data-path="ex_intro.html"><a href="ex_intro.html#introR"><i class="fa fa-check"></i><b>1.2.2</b> Intro à R</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#la-base"><i class="fa fa-check"></i>La base</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-objets"><i class="fa fa-check"></i>Les objets</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-catégories-de-données"><i class="fa fa-check"></i>Les catégories de données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-structures-de-données"><i class="fa fa-check"></i>Les structures de données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#importer-et-exporter-des-données"><i class="fa fa-check"></i>Importer et exporter des données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#graphiques-de-base"><i class="fa fa-check"></i>Graphiques de base</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.3" data-path="ex_intro.html"><a href="ex_intro.html#exo1"><i class="fa fa-check"></i><b>1.2.3</b> À vous de jouer!</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-1"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-2"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-3"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="base.html"><a href="base.html"><i class="fa fa-check"></i><b>2</b> Modèles de données spatiales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="leçon.html"><a href="leçon.html"><i class="fa fa-check"></i><b>2.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="leçon.html"><a href="leçon.html#les-données-vectorielles"><i class="fa fa-check"></i><b>2.1.1</b> Les données vectorielles</a></li>
+<li class="chapter" data-level="2.1.2" data-path="leçon.html"><a href="leçon.html#les-données-matricielles"><i class="fa fa-check"></i><b>2.1.2</b> Les données matricielles</a></li>
+<li class="chapter" data-level="2.1.3" data-path="leçon.html"><a href="leçon.html#structure-en-couches"><i class="fa fa-check"></i><b>2.1.3</b> Structure en couches</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="ex_base.html"><a href="ex_base.html"><i class="fa fa-check"></i><b>2.2</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="SRC.html"><a href="SRC.html"><i class="fa fa-check"></i><b>3</b> Systèmes de coordonnées de référence</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="leçon-1.html"><a href="leçon-1.html"><i class="fa fa-check"></i><b>3.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-géodésiques"><i class="fa fa-check"></i><b>3.1.1</b> Les systèmes géodésiques</a></li>
+<li class="chapter" data-level="3.1.2" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-de-coordonnées"><i class="fa fa-check"></i><b>3.1.2</b> Les systèmes de coordonnées</a></li>
+<li class="chapter" data-level="3.1.3" data-path="leçon-1.html"><a href="leçon-1.html#les-projections"><i class="fa fa-check"></i><b>3.1.3</b> Les projections</a></li>
+<li class="chapter" data-level="3.1.4" data-path="leçon-1.html"><a href="leçon-1.html#projections-couramment-utilisées"><i class="fa fa-check"></i><b>3.1.4</b> Projections couramment utilisées</a></li>
+<li class="chapter" data-level="3.1.5" data-path="leçon-1.html"><a href="leçon-1.html#représentation-dun-scr"><i class="fa fa-check"></i><b>3.1.5</b> Représentation d’un SCR</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#le-well-known-text"><i class="fa fa-check"></i>Le Well-known text</a></li>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#la-syntaxe-proj4"><i class="fa fa-check"></i>La syntaxe PROJ4</a></li>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#code_epsg"><i class="fa fa-check"></i>Les codes EPSG</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1.6" data-path="leçon-1.html"><a href="leçon-1.html#résumé"><i class="fa fa-check"></i><b>3.1.6</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="ex_SRC.html"><a href="ex_SRC.html"><i class="fa fa-check"></i><b>3.2</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vec.html"><a href="vec.html"><i class="fa fa-check"></i><b>4</b> Données vectorielles</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="lecon_vec.html"><a href="lecon_vec.html"><i class="fa fa-check"></i><b>4.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="lecon_vec.html"><a href="lecon_vec.html#data_mod4"><i class="fa fa-check"></i><b>4.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="4.1.2" data-path="lecon_vec.html"><a href="lecon_vec.html#create_vec"><i class="fa fa-check"></i><b>4.1.2</b> Créer des données vectorielles</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#créer-des-géométries-simples"><i class="fa fa-check"></i>Créer des géométries simples</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#attribuer-un-scr"><i class="fa fa-check"></i>Attribuer un SCR</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#définir-des-attributs"><i class="fa fa-check"></i>Définir des attributs</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#fct_st_as_sf"><i class="fa fa-check"></i>La fonction <code>st_as_sf()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.3" data-path="lecon_vec.html"><a href="lecon_vec.html#read_vec"><i class="fa fa-check"></i><b>4.1.3</b> Lire un <em>shapefile</em> et interpréter sa géométrie</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#lire-shp"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#explorer-les-métadonnées-dun-shapefile"><i class="fa fa-check"></i>Explorer les métadonnées d’un <em>shapefile</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.4" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-de-shapefiles-sous-r"><i class="fa fa-check"></i><b>4.1.4</b> Visualisation de <em>shapefiles</em> sous R</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-avec-la-librairie-mapview"><i class="fa fa-check"></i>Visualisation avec la librairie Mapview</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualiser-des-données-vectorielles-par-attribut"><i class="fa fa-check"></i>Visualiser des données vectorielles par attribut</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualiser-plusieurs-shapefiles"><i class="fa fa-check"></i>Visualiser plusieurs <em>shapefiles</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.5" data-path="lecon_vec.html"><a href="lecon_vec.html#reprojection-de-données-vectorielles-sous-r"><i class="fa fa-check"></i><b>4.1.5</b> Reprojection de données vectorielles sous R</a></li>
+<li class="chapter" data-level="4.1.6" data-path="lecon_vec.html"><a href="lecon_vec.html#gdt"><i class="fa fa-check"></i><b>4.1.6</b> Lire une géodatabase et explorer ses couches</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#lire-les-données"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#explorer-les-attributs-dune-couche"><i class="fa fa-check"></i>Explorer les attributs d’une couche</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#sélection-dun-sous-ensemble-de-données"><i class="fa fa-check"></i>Sélection d’un sous-ensemble de données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-de-plusieurs-couches-dune-géodatabse"><i class="fa fa-check"></i>Visualisation de plusieurs couches d’une géodatabse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="ex_vec.html"><a href="ex_vec.html"><i class="fa fa-check"></i><b>4.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-1-1"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-2-1"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-3-1"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mat.html"><a href="mat.html"><i class="fa fa-check"></i><b>5</b> Données matricielles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="lecon_mat.html"><a href="lecon_mat.html"><i class="fa fa-check"></i><b>5.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="lecon_mat.html"><a href="lecon_mat.html#créer-un-raster-et-comprendre-sa-structure"><i class="fa fa-check"></i><b>5.1.1</b> Créer un <em>raster</em> et comprendre sa structure</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#créer-un-raster-simple-et-le-visualiser"><i class="fa fa-check"></i>Créer un <em>raster</em> simple et le visualiser</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#raster-de-différents-types-de-données"><i class="fa fa-check"></i><em>Raster</em> de différents types de données</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#comprendre-la-structure-dun-raster"><i class="fa fa-check"></i>Comprendre la structure d’un <em>raster</em></a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.2" data-path="lecon_mat.html"><a href="lecon_mat.html#statistiques-de-base-sur-un-raster"><i class="fa fa-check"></i><b>5.1.2</b> Statistiques de base sur un <em>raster</em></a></li>
+<li class="chapter" data-level="5.1.3" data-path="lecon_mat.html"><a href="lecon_mat.html#lire-un-raster-et-explorer-son-contenu"><i class="fa fa-check"></i><b>5.1.3</b> Lire un <em>raster</em> et explorer son contenu</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#importer-les-données"><i class="fa fa-check"></i>Importer les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#lire-les-données-1"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#explorer-les-statistiques-de-base"><i class="fa fa-check"></i>Explorer les statistiques de base</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.4" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-les-données-matricielles-avec-mapview"><i class="fa fa-check"></i><b>5.1.4</b> Visualiser les données matricielles avec mapview()</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-une-section-dun-raster"><i class="fa fa-check"></i>Visualiser une section d’un <em>raster</em></a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.5" data-path="lecon_mat.html"><a href="lecon_mat.html#changer-la-résolution-dun-raster"><i class="fa fa-check"></i><b>5.1.5</b> Changer la résolution d’un <em>raster</em></a></li>
+<li class="chapter" data-level="5.1.6" data-path="lecon_mat.html"><a href="lecon_mat.html#changer-la-projection-dun-raster"><i class="fa fa-check"></i><b>5.1.6</b> Changer la projection d’un <em>raster</em></a></li>
+<li class="chapter" data-level="5.1.7" data-path="lecon_mat.html"><a href="lecon_mat.html#sauvegarder-un-raster"><i class="fa fa-check"></i><b>5.1.7</b> Sauvegarder un <em>raster</em></a></li>
+<li class="chapter" data-level="5.1.8" data-path="lecon_mat.html"><a href="lecon_mat.html#lire-et-visualiser-des-données-matricielles-multi-bande."><i class="fa fa-check"></i><b>5.1.8</b> Lire et visualiser des données matricielles multi-bande.</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#importer-les-données-1"><i class="fa fa-check"></i>Importer les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#lire-les-donnéées"><i class="fa fa-check"></i>Lire les donnéées</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#rasterbrick-et-rasterstack"><i class="fa fa-check"></i>RasterBrick et RasterStack</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-un-raster-multi-bande"><i class="fa fa-check"></i>Visualiser un <em>raster</em> multi-bande</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="ex_mat.html"><a href="ex_mat.html"><i class="fa fa-check"></i><b>5.2</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="carto.html"><a href="carto.html"><i class="fa fa-check"></i><b>6</b> Cartographie</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="leçon-2.html"><a href="leçon-2.html"><i class="fa fa-check"></i><b>6.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="leçon-2.html"><a href="leçon-2.html#principes-de-base-en-cartographie"><i class="fa fa-check"></i><b>6.1.1</b> Principes de base en cartographie</a></li>
+<li class="chapter" data-level="6.1.2" data-path="leçon-2.html"><a href="leçon-2.html#cartes-statiques-avec-tmap"><i class="fa fa-check"></i><b>6.1.2</b> Cartes statiques avec tmap</a></li>
+<li class="chapter" data-level="6.1.3" data-path="leçon-2.html"><a href="leçon-2.html#fonctionnement-de-base-de-tmap"><i class="fa fa-check"></i><b>6.1.3</b> Fonctionnement de base de tmap</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#données-sur-les-régions-administratives"><i class="fa fa-check"></i>Données sur les régions administratives</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#tm_fill"><i class="fa fa-check"></i>tm_fill</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#object-tmap"><i class="fa fa-check"></i>Object tmap</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.4" data-path="leçon-2.html"><a href="leçon-2.html#spécificités-cartographiques"><i class="fa fa-check"></i><b>6.1.4</b> Spécificités cartographiques</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#barre-déchelle-et-rose-des-vents"><i class="fa fa-check"></i>Barre d’échelle et rose des vents</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#grille-et-graticules"><i class="fa fa-check"></i>Grille et graticules</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#attribuer-les-crédits-ou-la-source-des-données"><i class="fa fa-check"></i>Attribuer les crédits ou la source des données</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.5" data-path="leçon-2.html"><a href="leçon-2.html#les-polygones"><i class="fa fa-check"></i><b>6.1.5</b> Les polygones</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#identification-des-frontières-des-polygones"><i class="fa fa-check"></i>Identification des frontières des polygones</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#identification-individuelle-des-polygones"><i class="fa fa-check"></i>Identification individuelle des polygones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.6" data-path="leçon-2.html"><a href="leçon-2.html#mise-en-page"><i class="fa fa-check"></i><b>6.1.6</b> Mise en page</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#titre-cadre-et-couleur-du-fond"><i class="fa fa-check"></i>Titre, cadre et couleur du fond</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#légende"><i class="fa fa-check"></i>Légende</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#ajustement-des-couleurs"><i class="fa fa-check"></i>Ajustement des couleurs</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#styles-prédéfinis"><i class="fa fa-check"></i>Styles prédéfinis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.7" data-path="leçon-2.html"><a href="leçon-2.html#écriture-sur-une-carte"><i class="fa fa-check"></i><b>6.1.7</b> Écriture sur une carte</a></li>
+<li class="chapter" data-level="6.1.8" data-path="leçon-2.html"><a href="leçon-2.html#les-lignes"><i class="fa fa-check"></i><b>6.1.8</b> Les lignes</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#données-sur-le-réseau-routier-du-qc"><i class="fa fa-check"></i>Données sur le réseau routier du QC</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.9" data-path="leçon-2.html"><a href="leçon-2.html#les-points"><i class="fa fa-check"></i><b>6.1.9</b> Les points</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#lire-le-shapefile-avec-les-municiaplites-du-qc"><i class="fa fa-check"></i>Lire le shapefile avec les municiaplites du QC</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#représentation-par-des-points"><i class="fa fa-check"></i>Représentation par des points</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#représentation-par-des-marqueurs"><i class="fa fa-check"></i>Représentation par des marqueurs</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.10" data-path="leçon-2.html"><a href="leçon-2.html#données-matricielles"><i class="fa fa-check"></i><b>6.1.10</b> Données matricielles</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#importer-les-données-délévation-du-qc"><i class="fa fa-check"></i>Importer les données d’élévation du QC</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.11" data-path="leçon-2.html"><a href="leçon-2.html#carte-avec-symboles-proportionnels"><i class="fa fa-check"></i><b>6.1.11</b> Carte avec symboles proportionnels</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#tm_symboles"><i class="fa fa-check"></i>tm_symboles</a></li>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#tm_bubbles"><i class="fa fa-check"></i>tm_bubbles</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.12" data-path="leçon-2.html"><a href="leçon-2.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-2.html"><a href="leçon-2.html#données-covid"><i class="fa fa-check"></i>Données COVID</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.13" data-path="leçon-2.html"><a href="leçon-2.html#cartes-à-panneau-multiple"><i class="fa fa-check"></i><b>6.1.13</b> Cartes à panneau multiple</a></li>
+<li class="chapter" data-level="6.1.14" data-path="leçon-2.html"><a href="leçon-2.html#cartes-avec-encadré"><i class="fa fa-check"></i><b>6.1.14</b> Cartes avec encadré</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="exercices.html"><a href="exercices.html"><i class="fa fa-check"></i><b>6.2</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="manip_vec.html"><a href="manip_vec.html"><i class="fa fa-check"></i><b>7</b> Manipulation de données vectorielles</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html"><i class="fa fa-check"></i><b>7.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#data_mod7"><i class="fa fa-check"></i><b>7.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="7.1.2" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-de-base"><i class="fa fa-check"></i><b>7.1.2</b> Opérations de base</a>
+<ul>
+<li class="chapter" data-level="7.1.2.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#importer-et-visualiser-les-données"><i class="fa fa-check"></i><b>7.1.2.1</b> Importer et visualiser les données</a></li>
+<li class="chapter" data-level="7.1.2.2" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-sur-les-attributs-des-données-vectorielles"><i class="fa fa-check"></i><b>7.1.2.2</b> Opérations sur les attributs des données vectorielles</a></li>
+<li class="chapter" data-level="7.1.2.3" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-spatiales-sur-les-données-vectorielles"><i class="fa fa-check"></i><b>7.1.2.3</b> Opérations spatiales sur les données vectorielles</a></li>
+</ul></li>
+<li class="chapter" data-level="7.1.3" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#prob_mod7"><i class="fa fa-check"></i><b>7.1.3</b> Problématique à résoudre</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ex_map_vec.html"><a href="ex_map_vec.html"><i class="fa fa-check"></i><b>7.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-1-2"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-2-2"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-3-2"><i class="fa fa-check"></i>Question 3</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-4"><i class="fa fa-check"></i>Question 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="manip_mat.html"><a href="manip_mat.html"><i class="fa fa-check"></i><b>8</b> Manipulation de données matricielles</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html"><i class="fa fa-check"></i><b>8.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#data_mod8"><i class="fa fa-check"></i><b>8.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="8.1.2" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#opération-de-bases"><i class="fa fa-check"></i><b>8.1.2</b> Opération de bases</a>
+<ul>
+<li class="chapter" data-level="8.1.2.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#importer-et-visualiser-les-données-1"><i class="fa fa-check"></i><b>8.1.2.1</b> Importer et visualiser les données</a></li>
+<li class="chapter" data-level="8.1.2.2" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#filtrer-les-cellules-dun-raster"><i class="fa fa-check"></i><b>8.1.2.2</b> Filtrer les cellules d’un <em>raster</em></a></li>
+<li class="chapter" data-level="8.1.2.3" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#combiner-des-rasters"><i class="fa fa-check"></i><b>8.1.2.3</b> Combiner des <em>rasters</em></a></li>
+</ul></li>
+<li class="chapter" data-level="8.1.3" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#prob_mod8"><i class="fa fa-check"></i><b>8.1.3</b> Problématique à résoudre</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#résolution-de-la-question-1"><i class="fa fa-check"></i>Résolution de la question 1</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#résolution-de-la-question-2"><i class="fa fa-check"></i>Résolution de la question 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html"><i class="fa fa-check"></i><b>8.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-1-3"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-2-3"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-3-3"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="spatiotemp.html"><a href="spatiotemp.html"><i class="fa fa-check"></i><b>9</b> Données spatiotemporelles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html"><i class="fa fa-check"></i><b>9.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#data_mod9"><i class="fa fa-check"></i><b>9.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="9.1.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#données-spatiotemporelles-vectorielles"><i class="fa fa-check"></i><b>9.1.2</b> Données spatiotemporelles vectorielles</a>
+<ul>
+<li class="chapter" data-level="9.1.2.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#importer-les-données-3"><i class="fa fa-check"></i><b>9.1.2.1</b> Importer les données</a></li>
+<li class="chapter" data-level="9.1.2.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#vitesse-moyenne-des-trajets"><i class="fa fa-check"></i><b>9.1.2.2</b> Vitesse moyenne des trajets</a></li>
+<li class="chapter" data-level="9.1.2.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#période-de-lannée-préférée"><i class="fa fa-check"></i><b>9.1.2.3</b> Période de l’année préférée</a></li>
+<li class="chapter" data-level="9.1.2.4" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#animation-du-trajet-le-plus-long"><i class="fa fa-check"></i><b>9.1.2.4</b> Animation du trajet le plus long</a></li>
+</ul></li>
+<li class="chapter" data-level="9.1.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#données-spatiotemporelles-matricielles"><i class="fa fa-check"></i><b>9.1.3</b> Données spatiotemporelles matricielles</a>
+<ul>
+<li class="chapter" data-level="9.1.3.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#importer-les-données-4"><i class="fa fa-check"></i><b>9.1.3.1</b> Importer les données</a></li>
+<li class="chapter" data-level="9.1.3.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#les-objets-rasterstack"><i class="fa fa-check"></i><b>9.1.3.2</b> Les objets rasterStack</a></li>
+<li class="chapter" data-level="9.1.3.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#mois-de-plus-faible-pluviométrie"><i class="fa fa-check"></i><b>9.1.3.3</b> Mois de plus faible pluviométrie</a></li>
+<li class="chapter" data-level="9.1.3.4" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#points-les-plus-chauds"><i class="fa fa-check"></i><b>9.1.3.4</b> Points les plus chauds</a></li>
+<li class="chapter" data-level="9.1.3.5" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#profils-de-temperatures-et-de-precipitations"><i class="fa fa-check"></i><b>9.1.3.5</b> Profils de temperatures et de precipitations</a></li>
+<li class="chapter" data-level="9.1.3.6" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#animations"><i class="fa fa-check"></i><b>9.1.3.6</b> Animations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ex_spatiotemp.html"><a href="ex_spatiotemp.html"><i class="fa fa-check"></i><b>9.2</b> Exercice</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_spatiotemp.html"><a href="ex_spatiotemp.html#question-1-4"><i class="fa fa-check"></i>Question 1</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCI 1031 Visualisation et analyse de données spatiales sous R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="leçon-2" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Leçon<a href="leçon-2.html#leçon-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="principes-de-base-en-cartographie" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Principes de base en cartographie<a href="leçon-2.html#principes-de-base-en-cartographie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="cartes-statiques-avec-tmap" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Cartes statiques avec tmap<a href="leçon-2.html#cartes-statiques-avec-tmap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il y a d’autres bibliothèques mais nous étudierons tmap.
+Voilà pourquoi:</p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="leçon-2.html#cb440-1" aria-hidden="true"></a><span class="kw">library</span>(sf)</span>
+<span id="cb440-2"><a href="leçon-2.html#cb440-2" aria-hidden="true"></a><span class="kw">library</span>(tmap)</span></code></pre></div>
+</div>
+<div id="fonctionnement-de-base-de-tmap" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Fonctionnement de base de tmap<a href="leçon-2.html#fonctionnement-de-base-de-tmap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Fonctionnement général: tm_shape(données spatiales) + les autres choses qu’on veut faire.</p>
+<p>Pour explorer les fonctions de cartographie offertes avec tmap nous utiliserons les données vectorielles sur les limites des régions administratives du Québec ainsi que la taille de leur population.</p>
+<div id="données-sur-les-régions-administratives" class="section level4 unnumbered hasAnchor" number="">
+<h4>Données sur les régions administratives<a href="leçon-2.html#données-sur-les-régions-administratives" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La taille des populations des régions administratives provient de la Banque de données des statistiques officielles sur le Québec (<a href="https://bdso.gouv.qc.ca/" class="uri">https://bdso.gouv.qc.ca/</a>), et les limites géographiques des régions proviennent du site Données Québec (<a href="https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs" class="uri">https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs</a>)</p>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="leçon-2.html#cb441-1" aria-hidden="true"></a>chemin&lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module6/Donnees/&quot;</span></span>
+<span id="cb441-2"><a href="leçon-2.html#cb441-2" aria-hidden="true"></a>nom_du_fichier &lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;Population/QC_RegAdm_Pop.shp&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb441-3"><a href="leçon-2.html#cb441-3" aria-hidden="true"></a>Q &lt;-<span class="st"> </span><span class="kw">st_read</span>(nom_du_fichier)</span></code></pre></div>
+<pre class="codeout"><code>Reading layer `QC_RegAdm_Pop&#39; from data source 
+  `/home/kc/git/inSileco/sci1031/Module6/data/Population/QC_RegAdm_Pop.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 17 features and 18 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -830300 ymin: 118000 xmax: 783300 ymax: 2091000
+Projected CRS: NAD83 / Quebec Lambert</code></pre>
+<p>Expliquer chaque colonne</p>
+</div>
+<div id="tm_fill" class="section level4 unnumbered hasAnchor" number="">
+<h4>tm_fill<a href="leçon-2.html#tm_fill" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>remplir de façon homogène l’intérieur des limites d’un polygone</p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="leçon-2.html#cb443-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="st"> </span></span>
+<span id="cb443-2"><a href="leçon-2.html#cb443-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-169-1.svg" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="object-tmap" class="section level4 unnumbered hasAnchor" number="">
+<h4>Object tmap<a href="leçon-2.html#object-tmap" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="leçon-2.html#cb444-1" aria-hidden="true"></a>map_Q&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="st"> </span></span>
+<span id="cb444-2"><a href="leçon-2.html#cb444-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>()</span>
+<span id="cb444-3"><a href="leçon-2.html#cb444-3" aria-hidden="true"></a></span>
+<span id="cb444-4"><a href="leçon-2.html#cb444-4" aria-hidden="true"></a><span class="kw">class</span>(map_Q)</span></code></pre></div>
+<pre class="codeout"><code>[1] &quot;tmap&quot;</code></pre>
+</div>
+</div>
+<div id="spécificités-cartographiques" class="section level3 hasAnchor" number="6.1.4">
+<h3><span class="header-section-number">6.1.4</span> Spécificités cartographiques<a href="leçon-2.html#spécificités-cartographiques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="barre-déchelle-et-rose-des-vents" class="section level4 unnumbered hasAnchor" number="">
+<h4>Barre d’échelle et rose des vents<a href="leçon-2.html#barre-déchelle-et-rose-des-vents" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Ajout d’un barre d’échelle et d’une rose des vents.</p>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="leçon-2.html#cb446-1" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st">   </span><span class="co"># la carte du Québec que nous avons créée plus haut</span></span>
+<span id="cb446-2"><a href="leçon-2.html#cb446-2" aria-hidden="true"></a><span class="st">  </span><span class="co"># ajout d&#39;une barre d&#39;échelle</span></span>
+<span id="cb446-3"><a href="leçon-2.html#cb446-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_scale_bar</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">250</span>,<span class="dv">500</span>),<span class="dt">text.size =</span> <span class="fl">0.8</span>, <span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;right&quot;</span>,<span class="st">&quot;bottom&quot;</span>)) <span class="op">+</span></span>
+<span id="cb446-4"><a href="leçon-2.html#cb446-4" aria-hidden="true"></a><span class="st">  </span><span class="co"># ajout d&#39;une rose des vents</span></span>
+<span id="cb446-5"><a href="leçon-2.html#cb446-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_compass</span>(<span class="dt">type =</span> <span class="st">&quot;arrow&quot;</span>, <span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;top&quot;</span>))</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-171-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<p>Plusieurs options sont possibles. Utilisez <code>help(tm_scale_bar)</code> ou <code>help(tm_compass)</code> pour connaître les autres arguments possibles pour ces fonctions. Par exemple,</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="leçon-2.html#cb447-1" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st">   </span></span>
+<span id="cb447-2"><a href="leçon-2.html#cb447-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_scale_bar</span>(<span class="dt">width =</span> <span class="dv">2</span>, <span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;right&quot;</span>,<span class="st">&quot;bottom&quot;</span>)) <span class="op">+</span></span>
+<span id="cb447-3"><a href="leçon-2.html#cb447-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_compass</span>(<span class="dt">type =</span> <span class="st">&quot;4star&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">show.labels =</span> <span class="dv">2</span>, <span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;top&quot;</span>))</span></code></pre></div>
+<pre><code>Scale bar width set to 0.25 of the map width</code></pre>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-172-1.svg" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="grille-et-graticules" class="section level4 unnumbered hasAnchor" number="">
+<h4>Grille et graticules<a href="leçon-2.html#grille-et-graticules" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Grid draws coordinates (in meter?) how is the x=0 determined?</p>
+<p><a href="https://geocompr.github.io/post/2019/tmap-grid/" class="uri">https://geocompr.github.io/post/2019/tmap-grid/</a></p>
+<p>The number of horizontal (x) and vertical (y) lines can be set using the n.x and n.y arguments. Importantly, tmap rounds coordinate values to equally spaced “round” values, so the number of actual labels may be slightly different than set with n.x and n.y.</p>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="leçon-2.html#cb449-1" aria-hidden="true"></a>Q1&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>() <span class="op">+</span><span class="st"> </span><span class="kw">tm_grid</span>(<span class="dt">labels.size=</span><span class="fl">0.5</span>)</span>
+<span id="cb449-2"><a href="leçon-2.html#cb449-2" aria-hidden="true"></a>Q2&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>() <span class="op">+</span><span class="st"> </span><span class="kw">tm_grid</span>(<span class="dt">col=</span><span class="st">&quot;yellow&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">n.x =</span> <span class="dv">10</span>, <span class="dt">n.y =</span> <span class="dv">4</span>)</span>
+<span id="cb449-3"><a href="leçon-2.html#cb449-3" aria-hidden="true"></a><span class="co">#Q3&lt;- tm_shape(Q)+ tm_grid(col=&quot;yellow&quot;, lwd=3, n.x = 3, n.y = 5 )+tm_fill()+tm_borders()</span></span>
+<span id="cb449-4"><a href="leçon-2.html#cb449-4" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q1,Q2)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-173-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<p>Donc c’est la meme chose mais graticule donne NSEW ?</p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="leçon-2.html#cb450-1" aria-hidden="true"></a>Q1&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>() <span class="op">+</span><span class="st"> </span><span class="kw">tm_grid</span>()</span>
+<span id="cb450-2"><a href="leçon-2.html#cb450-2" aria-hidden="true"></a>Q2&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>() <span class="op">+</span><span class="st"> </span><span class="kw">tm_grid</span>(<span class="dt">projection=</span><span class="dv">4386</span>) <span class="co">#4326  3857=pas capable ... 32610 idem</span></span>
+<span id="cb450-3"><a href="leçon-2.html#cb450-3" aria-hidden="true"></a>Q3&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>() <span class="op">+</span><span class="st"> </span><span class="kw">tm_graticules</span>()</span>
+<span id="cb450-4"><a href="leçon-2.html#cb450-4" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q2,Q3)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-174-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="leçon-2.html#cb451-1" aria-hidden="true"></a>Q1&lt;-map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_graticules</span>()</span>
+<span id="cb451-2"><a href="leçon-2.html#cb451-2" aria-hidden="true"></a>Q2&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="st"> </span><span class="kw">tm_graticules</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)<span class="op">+</span><span class="kw">tm_fill</span>() </span>
+<span id="cb451-3"><a href="leçon-2.html#cb451-3" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q1,Q2)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-175-1.svg" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="attribuer-les-crédits-ou-la-source-des-données" class="section level4 unnumbered hasAnchor" number="">
+<h4>Attribuer les crédits ou la source des données<a href="leçon-2.html#attribuer-les-crédits-ou-la-source-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="leçon-2.html#cb452-1" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_credits</span>(<span class="st">&quot;Données récupérées </span><span class="ch">\n</span><span class="st">du site donnéesquebec.ca&quot;</span>, <span class="dt">size =</span> <span class="fl">0.6</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-176-1.svg" width="720" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="les-polygones" class="section level3 hasAnchor" number="6.1.5">
+<h3><span class="header-section-number">6.1.5</span> Les polygones<a href="leçon-2.html#les-polygones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="identification-des-frontières-des-polygones" class="section level4 unnumbered hasAnchor" number="">
+<h4>Identification des frontières des polygones<a href="leçon-2.html#identification-des-frontières-des-polygones" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="leçon-2.html#cb453-1" aria-hidden="true"></a><span class="co"># frontiere des regions admin</span></span>
+<span id="cb453-2"><a href="leçon-2.html#cb453-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span></span>
+<span id="cb453-3"><a href="leçon-2.html#cb453-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_borders</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-177-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="leçon-2.html#cb454-1" aria-hidden="true"></a><span class="co"># Quebec + frontiere</span></span>
+<span id="cb454-2"><a href="leçon-2.html#cb454-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span></span>
+<span id="cb454-3"><a href="leçon-2.html#cb454-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>()<span class="op">+</span></span>
+<span id="cb454-4"><a href="leçon-2.html#cb454-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_borders</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-178-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="leçon-2.html#cb455-1" aria-hidden="true"></a><span class="co"># tm_polygons = tm_fill + tm_borders (condense into one signe function)</span></span>
+<span id="cb455-2"><a href="leçon-2.html#cb455-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span></span>
+<span id="cb455-3"><a href="leçon-2.html#cb455-3" aria-hidden="true"></a><span class="kw">tm_polygons</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-179-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<div id="paramètres-esthétiques" class="section level5 unnumbered hasAnchor" number="">
+<h5>Paramètres esthétiques<a href="leçon-2.html#paramètres-esthétiques" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="leçon-2.html#cb456-1" aria-hidden="true"></a><span class="co"># un peu d&#39;esthetique: Figure 8.3 de Lovelace</span></span>
+<span id="cb456-2"><a href="leçon-2.html#cb456-2" aria-hidden="true"></a>Q1 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb456-3"><a href="leçon-2.html#cb456-3" aria-hidden="true"></a>Q2 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>) <span class="co">#color transparency</span></span>
+<span id="cb456-4"><a href="leçon-2.html#cb456-4" aria-hidden="true"></a>Q3 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb456-5"><a href="leçon-2.html#cb456-5" aria-hidden="true"></a>Q4 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;pink&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>) <span class="co">#line width</span></span>
+<span id="cb456-6"><a href="leçon-2.html#cb456-6" aria-hidden="true"></a>Q5 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>) <span class="co">#line type</span></span>
+<span id="cb456-7"><a href="leçon-2.html#cb456-7" aria-hidden="true"></a>Q6 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb456-8"><a href="leçon-2.html#cb456-8" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q1,Q2,Q3,Q4,Q5,Q6)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-180-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>Images des types de lignes
+Rappel types de couleur</p>
+</div>
+</div>
+<div id="identification-individuelle-des-polygones" class="section level4 unnumbered hasAnchor" number="">
+<h4>Identification individuelle des polygones<a href="leçon-2.html#identification-individuelle-des-polygones" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Polygones de couleurs differentes.
+Il sait qu’on réfère à l’attribut désigné.</p>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="leçon-2.html#cb457-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Régions&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-181-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<p>On veut créer un autre shapefile uniquement pour la région de L’Ouatouais</p>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="leçon-2.html#cb458-1" aria-hidden="true"></a>Q_Outaouais&lt;-Q[Q<span class="op">$</span>NOM_REG <span class="op">==</span><span class="st"> &quot;Outaouais&quot;</span>,]</span>
+<span id="cb458-2"><a href="leçon-2.html#cb458-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q_Outaouais)<span class="op">+</span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-182-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="leçon-2.html#cb459-1" aria-hidden="true"></a>Q1&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb459-2"><a href="leçon-2.html#cb459-2" aria-hidden="true"></a>Q2&lt;-<span class="kw">tm_shape</span>(Q_Outaouais)<span class="op">+</span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>)</span>
+<span id="cb459-3"><a href="leçon-2.html#cb459-3" aria-hidden="true"></a>Q12&lt;-Q1<span class="op">+</span>Q2</span>
+<span id="cb459-4"><a href="leçon-2.html#cb459-4" aria-hidden="true"></a></span>
+<span id="cb459-5"><a href="leçon-2.html#cb459-5" aria-hidden="true"></a>Q3&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>()</span>
+<span id="cb459-6"><a href="leçon-2.html#cb459-6" aria-hidden="true"></a>Q4&lt;-<span class="kw">tm_shape</span>(Q_Outaouais)<span class="op">+</span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb459-7"><a href="leçon-2.html#cb459-7" aria-hidden="true"></a>Q34&lt;-Q3<span class="op">+</span>Q4</span>
+<span id="cb459-8"><a href="leçon-2.html#cb459-8" aria-hidden="true"></a></span>
+<span id="cb459-9"><a href="leçon-2.html#cb459-9" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q12,Q34)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-183-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="mise-en-page" class="section level3 hasAnchor" number="6.1.6">
+<h3><span class="header-section-number">6.1.6</span> Mise en page<a href="leçon-2.html#mise-en-page" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La fonction <code>tm_layout</code> permet d’ajuster la mise en page d’une carte et différents éléments de son esthétique. Pour découvrir l’ensemble des arguments possibles tapez la commande <code>help(tm_layout)</code> (ou <code>?tm_layout</code>) dans votre console <code>R</code>. Certains des arguments utiles sont:</p>
+<div id="titre-cadre-et-couleur-du-fond" class="section level4 unnumbered hasAnchor" number="">
+<h4>Titre, cadre et couleur du fond<a href="leçon-2.html#titre-cadre-et-couleur-du-fond" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>L’ajout d’un titre (<code>title</code>), la taille de ce dernier (<code>title.size</code>) et sa position (<code>title.position</code>).</li>
+<li>La présence ou l’absence d’un cadre (<code>frame</code>) et l’épaisseur du trait de celui-ci (<code>frame.lw</code>).</li>
+<li>La taille des marges extérieures au cadre (<code>outer.margins = c(Haut,Droit,Bas,Gauche)</code> où <code>Haut</code>, <code>Droit</code>, <code>Bas</code>, <code>Gauche</code> sont des chiffres entre 0 (pas de marge) et 1 (marge complète)).</li>
+<li>La couleur du fond de la carte (<code>bg.color</code>) et de l’espace à l’extérieure du cadre (<code>outer.bg.color</code>).</li>
+</ul>
+<p>Voici quelques exemples de mise en page qui utilisent ces arguments.</p>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="leçon-2.html#cb460-1" aria-hidden="true"></a>map_Q &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>()<span class="op">+</span><span class="kw">tm_borders</span>()</span>
+<span id="cb460-2"><a href="leçon-2.html#cb460-2" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">title =</span> <span class="st">&quot;Carte du Québec&quot;</span>, <span class="dt">title.size =</span><span class="fl">0.8</span>, <span class="dt">title.position =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>,<span class="st">&quot;top&quot;</span>))</span>
+<span id="cb460-3"><a href="leçon-2.html#cb460-3" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb460-4"><a href="leçon-2.html#cb460-4" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">bg.color =</span> <span class="st">&quot;aquamarine&quot;</span>, <span class="dt">scale =</span> <span class="dv">2</span>)</span>
+<span id="cb460-5"><a href="leçon-2.html#cb460-5" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">frame.lwd =</span> <span class="dv">2</span>, <span class="dt">outer.margins =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>,<span class="dv">0</span>, <span class="fl">0.2</span>), <span class="dt">outer.bg.color=</span><span class="st">&quot;lavender&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-185-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="légende" class="section level4 unnumbered hasAnchor" number="">
+<h4>Légende<a href="leçon-2.html#légende" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La fonction <code>tm_layout()</code> permet aussi de configurer l’apparence de la légende. Certains des arguments utiles sont:</p>
+<ul>
+<li>La présence, ou non, d’une légende, (<code>legend.show</code> - par défaut la légende est affichée).</li>
+<li>L’option de placer la légende à l’extérieur du cadre de la figure (<code>legend.outside</code>).</li>
+<li>La position de la légende à l’intérieur (<code>legend.position</code>) ou à l’extérieur (<code>legend.outside.position</code>) du cadre. Par défaut,la légende est placée dans le coin où il y a le plus d’espace.</li>
+<li>L’option d’un mettre un cadre autour de la légende (<code>legend.frame</code>) et de contrôler pour l’épaisseur du trait (<code>legend.frame.lwd</code>) et pour la couleur de fond de la légende (<code>legend.bg.color</code>)</li>
+<li>La police de caractère (<code>legend.title.fontfamily</code>), la taille des caractères (<code>legend.title.fontface</code>), et la couleur (<code>legend.title.color</code>) du texte et du titre de la légende.</li>
+</ul>
+<p>Voici quelques exemples de mise en page de la légende:</p>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="leçon-2.html#cb461-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb461-2"><a href="leçon-2.html#cb461-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NOM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb461-3"><a href="leçon-2.html#cb461-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb461-4"><a href="leçon-2.html#cb461-4" aria-hidden="true"></a></span>
+<span id="cb461-5"><a href="leçon-2.html#cb461-5" aria-hidden="true"></a>Q2 =<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb461-6"><a href="leçon-2.html#cb461-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;NOM_REG&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Régions administratives&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb461-7"><a href="leçon-2.html#cb461-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">legend.outside =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb461-8"><a href="leçon-2.html#cb461-8" aria-hidden="true"></a></span>
+<span id="cb461-9"><a href="leçon-2.html#cb461-9" aria-hidden="true"></a>Q4=<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span></span>
+<span id="cb461-10"><a href="leçon-2.html#cb461-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Régions administratives&quot;</span>, <span class="dt">legend.is.portrait=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb461-11"><a href="leçon-2.html#cb461-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb461-12"><a href="leçon-2.html#cb461-12" aria-hidden="true"></a>            <span class="dt">legend.outside.position =</span> <span class="st">&quot;bottom&quot;</span>, </span>
+<span id="cb461-13"><a href="leçon-2.html#cb461-13" aria-hidden="true"></a>            <span class="dt">legend.outside.size =</span> <span class="fl">0.15</span>, </span>
+<span id="cb461-14"><a href="leçon-2.html#cb461-14" aria-hidden="true"></a>            <span class="dt">legend.text.size=</span><span class="fl">0.75</span>)</span>
+<span id="cb461-15"><a href="leçon-2.html#cb461-15" aria-hidden="true"></a></span>
+<span id="cb461-16"><a href="leçon-2.html#cb461-16" aria-hidden="true"></a>Q3 =<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb461-17"><a href="leçon-2.html#cb461-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;NOM_REG&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Régions administratives&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb461-18"><a href="leçon-2.html#cb461-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">bg.color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb461-19"><a href="leçon-2.html#cb461-19" aria-hidden="true"></a>            <span class="dt">legend.outside.position =</span> <span class="st">&quot;left&quot;</span>, </span>
+<span id="cb461-20"><a href="leçon-2.html#cb461-20" aria-hidden="true"></a>            <span class="dt">legend.title.fontfamily =</span> <span class="st">&quot;serif&quot;</span>, </span>
+<span id="cb461-21"><a href="leçon-2.html#cb461-21" aria-hidden="true"></a>            <span class="dt">legend.title.fontface =</span> <span class="dv">2</span>, </span>
+<span id="cb461-22"><a href="leçon-2.html#cb461-22" aria-hidden="true"></a>            <span class="dt">legend.title.color =</span> <span class="st">&quot;lightpink&quot;</span>, </span>
+<span id="cb461-23"><a href="leçon-2.html#cb461-23" aria-hidden="true"></a>            <span class="dt">legend.text.color =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
+<pre><code>Some legend labels were too wide. These labels have been resized to 0.66, 0.65, 0.47, 0.55. Increase legend.width (argument of tm_layout) to make the legend wider and therefore the labels larger.</code></pre>
+<pre><code>Legend labels were too wide. Therefore, legend.text.size has been set to 0.47. Increase legend.width (argument of tm_layout) to make the legend wider and therefore the labels larger.</code></pre>
+<pre><code>Some legend labels were too wide. These labels have been resized to 0.66, 0.65, 0.47, 0.55. Increase legend.width (argument of tm_layout) to make the legend wider and therefore the labels larger.</code></pre>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-187-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ajustement-des-couleurs" class="section level4 unnumbered hasAnchor" number="">
+<h4>Ajustement des couleurs<a href="leçon-2.html#ajustement-des-couleurs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>e plus, la fonction tm_layout permet d’ajuster les couleurs présentes dans la carte:</p>
+<ul>
+<li>L’argument <code>aes.color</code> défini la couleur de remplissage des polygones, des frontières, du texte, etc.</li>
+<li>L’argument <code>saturation</code> défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées. Il est aussi possible de données des valeurs négatives.</li>
+<li>L’argument <code>sepia.intensity</code> est un nombre entre 0 et 1 qui défini le niveau de “chaleur” des couleurs. Plus sa valeur est grande, plus les couleurs ont une teinte jaune voir brune. La valeur par défaut est 0.</li>
+<li>L’argument <code>aes.palette</code> permet de changer la palette de couleurs utilisées. La librarie tmap utilise les palettes de couleurs de <a href="https://colorbrewer2.org/">Color Brewer</a>. Dans le cas d’attributs catégoriques (comme le nom de régions) la palette utilisée par défaut se nomme <code>Set3</code>, mais il est possible de choisir d’autres paletters parmi celles-ci: <code>Accent</code>, <code>Dark2</code>, <code>Paired</code>, <code>Pastel1</code>, <code>Pastel2</code>, <code>Set1</code>, et <code>Set2</code>. Nous reviendrons sur le sujet des palettes un peu plus loin dans cete leçon.</li>
+</ul>
+<p>Voici quelques exemples de modification des couleurs:</p>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="leçon-2.html#cb465-1" aria-hidden="true"></a>Q1 =<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>() <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">aes.color =</span> <span class="kw">c</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>,<span class="dt">borders=</span><span class="st">&quot;darkgreen&quot;</span>))</span>
+<span id="cb465-2"><a href="leçon-2.html#cb465-2" aria-hidden="true"></a>Q2 =<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb465-3"><a href="leçon-2.html#cb465-3" aria-hidden="true"></a>                                                        <span class="dt">aes.color =</span> <span class="kw">c</span>(<span class="dt">borders=</span><span class="st">&quot;white&quot;</span>),</span>
+<span id="cb465-4"><a href="leçon-2.html#cb465-4" aria-hidden="true"></a>                                                        <span class="dt">saturation =</span> <span class="dv">0</span>)</span>
+<span id="cb465-5"><a href="leçon-2.html#cb465-5" aria-hidden="true"></a>Q3 =<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb465-6"><a href="leçon-2.html#cb465-6" aria-hidden="true"></a>                                                        <span class="dt">sepia.intensity =</span> <span class="fl">0.5</span>)</span>
+<span id="cb465-7"><a href="leçon-2.html#cb465-7" aria-hidden="true"></a>Q4 =<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb465-8"><a href="leçon-2.html#cb465-8" aria-hidden="true"></a>                                                        <span class="dt">aes.palette =</span> <span class="kw">list</span>(<span class="dt">cat =</span> <span class="st">&quot;Accent&quot;</span>))</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-189-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="styles-prédéfinis" class="section level4 unnumbered hasAnchor" number="">
+<h4>Styles prédéfinis<a href="leçon-2.html#styles-prédéfinis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La librarie tmap contient des styles prédéfinis qu’on appelle avec la fonction <code>tm_style</code> et qui permettent de ne pas avoir à définir individuellement des arguments de la fonction <code>tm_layout</code>.</p>
+<p>Voici quelques uns de ces styles prédéfinis.</p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="leçon-2.html#cb466-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb466-2"><a href="leçon-2.html#cb466-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;classic&quot;</span>) <span class="op">+</span></span>
+<span id="cb466-3"><a href="leçon-2.html#cb466-3" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb466-4"><a href="leçon-2.html#cb466-4" aria-hidden="true"></a></span>
+<span id="cb466-5"><a href="leçon-2.html#cb466-5" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb466-6"><a href="leçon-2.html#cb466-6" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;bw&quot;</span>) <span class="op">+</span></span>
+<span id="cb466-7"><a href="leçon-2.html#cb466-7" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb466-8"><a href="leçon-2.html#cb466-8" aria-hidden="true"></a></span>
+<span id="cb466-9"><a href="leçon-2.html#cb466-9" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span></span>
+<span id="cb466-10"><a href="leçon-2.html#cb466-10" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;cobalt&quot;</span>) <span class="op">+</span></span>
+<span id="cb466-11"><a href="leçon-2.html#cb466-11" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb466-12"><a href="leçon-2.html#cb466-12" aria-hidden="true"></a>                                            </span>
+<span id="cb466-13"><a href="leçon-2.html#cb466-13" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb466-14"><a href="leçon-2.html#cb466-14" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="op">+</span><span class="st">                             </span></span>
+<span id="cb466-15"><a href="leçon-2.html#cb466-15" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>) </span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-191-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p>Vous remarquerez que le style <code>col_blind</code> utilise une palette de couleur permettant aux personnes daltoniennes de pouvoir différencier les polygones de couleurs différentes.</p>
+</div>
+</div>
+<div id="écriture-sur-une-carte" class="section level3 hasAnchor" number="6.1.7">
+<h3><span class="header-section-number">6.1.7</span> Écriture sur une carte<a href="leçon-2.html#écriture-sur-une-carte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Attention tm_text() ne donne pas les bonnes info ici:<a href="https://www.rdocumentation.org/packages/tmap/versions/0.7/topics/tm_text" class="uri">https://www.rdocumentation.org/packages/tmap/versions/0.7/topics/tm_text</a>
+Il faut aller ici: <a href="https://rdrr.io/cran/tmap/man/tm_text.html" class="uri">https://rdrr.io/cran/tmap/man/tm_text.html</a></p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="leçon-2.html#cb467-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb467-2"><a href="leçon-2.html#cb467-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="op">+</span><span class="st">                             </span></span>
+<span id="cb467-3"><a href="leçon-2.html#cb467-3" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>)<span class="op">+</span></span>
+<span id="cb467-4"><a href="leçon-2.html#cb467-4" aria-hidden="true"></a><span class="co">#tm_shape(Q)+</span></span>
+<span id="cb467-5"><a href="leçon-2.html#cb467-5" aria-hidden="true"></a><span class="st">  </span><span class="co">#tm_polygons(col=&quot;NUM_REG&quot;,palette=&quot;&quot;, alpha=0.5, legend.show=FALSE) + </span></span>
+<span id="cb467-6"><a href="leçon-2.html#cb467-6" aria-hidden="true"></a><span class="st">  </span><span class="co">#tm_layout(frame = FALSE)+</span></span>
+<span id="cb467-7"><a href="leçon-2.html#cb467-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_text</span>(<span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">size =</span> <span class="fl">0.6</span>,<span class="dt">fontface=</span><span class="st">&quot;bold&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-192-1.png" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="leçon-2.html#cb468-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span></span>
+<span id="cb468-2"><a href="leçon-2.html#cb468-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>()<span class="op">+</span></span>
+<span id="cb468-3"><a href="leçon-2.html#cb468-3" aria-hidden="true"></a><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">aes.color =</span> <span class="kw">c</span>(<span class="dt">fill=</span><span class="st">&quot;black&quot;</span>,<span class="dt">borders=</span><span class="st">&quot;white&quot;</span>),<span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, <span class="dt">legend.text.size =</span> <span class="fl">0.8</span>)<span class="op">+</span></span>
+<span id="cb468-4"><a href="leçon-2.html#cb468-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_text</span>(<span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">col=</span> <span class="st">&quot;NOM_REG&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;Paired&quot;</span>, <span class="dt">size =</span> <span class="fl">0.8</span>, <span class="dt">fontface=</span><span class="st">&quot;bold&quot;</span>, <span class="dt">legend.col.show =</span> <span class="ot">TRUE</span>, <span class="dt">title.col =</span> <span class="st">&quot;Régions administratives&quot;</span>,<span class="dt">auto.placement=</span><span class="ot">TRUE</span>, <span class="dt">just=</span><span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-193-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="les-lignes" class="section level3 hasAnchor" number="6.1.8">
+<h3><span class="header-section-number">6.1.8</span> Les lignes<a href="leçon-2.html#les-lignes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="données-sur-le-réseau-routier-du-qc" class="section level4 unnumbered hasAnchor" number="">
+<h4>Données sur le réseau routier du QC<a href="leçon-2.html#données-sur-le-réseau-routier-du-qc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Importer les données
+Pas le réseau complet</p>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="leçon-2.html#cb469-1" aria-hidden="true"></a>chemin&lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module6/Donnees/&quot;</span></span>
+<span id="cb469-2"><a href="leçon-2.html#cb469-2" aria-hidden="true"></a>nom_du_fichier &lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;Routes/QC_routes.shp&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb469-3"><a href="leçon-2.html#cb469-3" aria-hidden="true"></a>R &lt;-<span class="st"> </span><span class="kw">st_read</span>(nom_du_fichier)</span></code></pre></div>
+<pre class="codeout"><code>Reading layer `QC_routes&#39; from data source 
+  `/home/kc/git/inSileco/sci1031/Module6/data/Routes/QC_routes.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 56804 features and 9 fields
+Geometry type: LINESTRING
+Dimension:     XY
+Bounding box:  xmin: -822900 ymin: 118000 xmax: 526100 ymax: 983200
+Projected CRS: NAD83 / Quebec Lambert</code></pre>
+<p>On superpose les deux shapefiles.
+Chaque fois qu’on ajouter une tm_shape(Données) les fonctions tm_ qui suivent s’appliquent à ces Données et non aux données antérieures</p>
+<p>Probablement plus lent car le fichier est lourd.</p>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="leçon-2.html#cb471-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>()<span class="op">+</span></span>
+<span id="cb471-2"><a href="leçon-2.html#cb471-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_shape</span>(R)<span class="op">+</span><span class="kw">tm_lines</span>(<span class="dt">col=</span><span class="st">&quot;brown&quot;</span>) <span class="op">+</span></span>
+<span id="cb471-3"><a href="leçon-2.html#cb471-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">title =</span> <span class="st">&quot;Réseau routier&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-196-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>Ce shapefile comprends en fait trois type de routes.</p>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="leçon-2.html#cb472-1" aria-hidden="true"></a>R<span class="op">$</span>ClsRte&lt;-<span class="kw">as.factor</span>(R<span class="op">$</span>ClsRte)</span>
+<span id="cb472-2"><a href="leçon-2.html#cb472-2" aria-hidden="true"></a><span class="kw">levels</span>(R<span class="op">$</span>ClsRte)</span></code></pre></div>
+<pre class="codeout"><code>[1] &quot;Autoroute&quot; &quot;Nationale&quot; &quot;Régionale&quot;</code></pre>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="leçon-2.html#cb474-1" aria-hidden="true"></a>pal.col&lt;-<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;darkgoldenrod4&quot;</span>,<span class="st">&quot;darkslateblue&quot;</span>)</span>
+<span id="cb474-2"><a href="leçon-2.html#cb474-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span></span>
+<span id="cb474-3"><a href="leçon-2.html#cb474-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>()<span class="op">+</span></span>
+<span id="cb474-4"><a href="leçon-2.html#cb474-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_shape</span>(R)<span class="op">+</span></span>
+<span id="cb474-5"><a href="leçon-2.html#cb474-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_lines</span>(<span class="dt">col=</span><span class="st">&quot;ClsRte&quot;</span>, <span class="dt">palette=</span>pal.col, <span class="dt">title.col =</span> <span class="st">&quot;Types de route&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-198-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="les-points" class="section level3 hasAnchor" number="6.1.9">
+<h3><span class="header-section-number">6.1.9</span> Les points<a href="leçon-2.html#les-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="lire-le-shapefile-avec-les-municiaplites-du-qc" class="section level4 unnumbered hasAnchor" number="">
+<h4>Lire le shapefile avec les municiaplites du QC<a href="leçon-2.html#lire-le-shapefile-avec-les-municiaplites-du-qc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="leçon-2.html#cb475-1" aria-hidden="true"></a>chemin&lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module6/Donnees/&quot;</span></span>
+<span id="cb475-2"><a href="leçon-2.html#cb475-2" aria-hidden="true"></a>nom_du_fichier &lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;Villes/QC_coord_municipalites.shp&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb475-3"><a href="leçon-2.html#cb475-3" aria-hidden="true"></a>V &lt;-<span class="st"> </span><span class="kw">st_read</span>(nom_du_fichier)</span></code></pre></div>
+<pre class="codeout"><code>Reading layer `QC_coord_municipalites&#39; from data source `/home/kc/git/inSileco/sci1031/Module6/data/Villes/QC_coord_municipalites.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 15 features and 1 field
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -78.91 ymin: 45.41 xmax: -64.47 ymax: 62.41
+Geodetic CRS:  NAD83</code></pre>
+</div>
+<div id="représentation-par-des-points" class="section level4 unnumbered hasAnchor" number="">
+<h4>Représentation par des points<a href="leçon-2.html#représentation-par-des-points" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="leçon-2.html#cb477-1" aria-hidden="true"></a><span class="co"># en dots</span></span>
+<span id="cb477-2"><a href="leçon-2.html#cb477-2" aria-hidden="true"></a></span>
+<span id="cb477-3"><a href="leçon-2.html#cb477-3" aria-hidden="true"></a>Q1&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>()<span class="op">+</span></span>
+<span id="cb477-4"><a href="leçon-2.html#cb477-4" aria-hidden="true"></a><span class="kw">tm_shape</span>(V)<span class="op">+</span><span class="kw">tm_dots</span>(<span class="dt">col=</span><span class="st">&quot;Mncplts&quot;</span>, <span class="dt">palette=</span><span class="st">&quot;Paired&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)<span class="op">+</span></span>
+<span id="cb477-5"><a href="leçon-2.html#cb477-5" aria-hidden="true"></a><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, <span class="dt">title =</span> <span class="st">&quot;Municipalités&quot;</span>, <span class="dt">legend.title.color =</span> <span class="ot">NA</span>, <span class="dt">legend.text.size =</span> <span class="fl">0.8</span>)</span>
+<span id="cb477-6"><a href="leçon-2.html#cb477-6" aria-hidden="true"></a>Q1</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-201-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="représentation-par-des-marqueurs" class="section level4 unnumbered hasAnchor" number="">
+<h4>Représentation par des marqueurs<a href="leçon-2.html#représentation-par-des-marqueurs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Toujours bleu</p>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="leçon-2.html#cb478-1" aria-hidden="true"></a><span class="co">#en markers</span></span>
+<span id="cb478-2"><a href="leçon-2.html#cb478-2" aria-hidden="true"></a></span>
+<span id="cb478-3"><a href="leçon-2.html#cb478-3" aria-hidden="true"></a>Q3&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_fill</span>()<span class="op">+</span></span>
+<span id="cb478-4"><a href="leçon-2.html#cb478-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_shape</span>(V)<span class="op">+</span><span class="kw">tm_markers</span>(<span class="dt">size=</span><span class="fl">0.5</span>)<span class="op">+</span></span>
+<span id="cb478-5"><a href="leçon-2.html#cb478-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_text</span>(<span class="st">&quot;Mncplts&quot;</span>, <span class="dt">size =</span> <span class="fl">0.6</span>, <span class="dt">auto.placement=</span><span class="ot">TRUE</span>)<span class="op">+</span></span>
+<span id="cb478-6"><a href="leçon-2.html#cb478-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">inner.margins =</span> <span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>))</span>
+<span id="cb478-7"><a href="leçon-2.html#cb478-7" aria-hidden="true"></a></span>
+<span id="cb478-8"><a href="leçon-2.html#cb478-8" aria-hidden="true"></a>Q3 </span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-202-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="données-matricielles" class="section level3 hasAnchor" number="6.1.10">
+<h3><span class="header-section-number">6.1.10</span> Données matricielles<a href="leçon-2.html#données-matricielles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Loader la librairie raster</p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="leçon-2.html#cb479-1" aria-hidden="true"></a><span class="kw">library</span>(raster)</span></code></pre></div>
+<div id="importer-les-données-délévation-du-qc" class="section level4 unnumbered hasAnchor" number="">
+<h4>Importer les données d’élévation du QC<a href="leçon-2.html#importer-les-données-délévation-du-qc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="leçon-2.html#cb480-1" aria-hidden="true"></a>chemin&lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module6/Donnees/&quot;</span></span>
+<span id="cb480-2"><a href="leçon-2.html#cb480-2" aria-hidden="true"></a>nom_du_fichier &lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;Elevation/QC_Elevation.tif&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb480-3"><a href="leçon-2.html#cb480-3" aria-hidden="true"></a>E &lt;-<span class="st"> </span><span class="kw">raster</span>(nom_du_fichier)</span></code></pre></div>
+<p>Expliquer la fonction tm_raster</p>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="leçon-2.html#cb481-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(E)<span class="op">+</span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation (m)&quot;</span>,<span class="dt">legend.hist =</span> <span class="ot">TRUE</span>)<span class="op">+</span></span>
+<span id="cb481-2"><a href="leçon-2.html#cb481-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_legend</span>(<span class="dt">outside =</span> <span class="ot">TRUE</span>, <span class="dt">hist.width =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-206-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>Nous pouvons changer la palette de couleur (quelle est cette palette par défaut au fait?), et décider du nombre de classes. Il faut expliquer que c’est approximatif.</p>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="leçon-2.html#cb482-1" aria-hidden="true"></a><span class="co">#pal.elevation = colorRampPalette( c(&quot;midnightblue&quot;,&quot;royalblue4&quot;,&quot;darkolivegreen4&quot;,&quot;burlywood&quot;, &quot;chocolate4&quot;))</span></span>
+<span id="cb482-2"><a href="leçon-2.html#cb482-2" aria-hidden="true"></a>pal.elevation =<span class="st"> </span><span class="kw">colorRampPalette</span>( <span class="kw">c</span>(<span class="st">&quot;midnightblue&quot;</span>,<span class="st">&quot;forestgreen&quot;</span>,<span class="st">&quot;darkolivegreen4&quot;</span>,<span class="st">&quot;burlywood&quot;</span>, <span class="st">&quot;chocolate4&quot;</span>))</span>
+<span id="cb482-3"><a href="leçon-2.html#cb482-3" aria-hidden="true"></a><span class="co">#pal.elevation = colorRampPalette( c(&quot;midnightblue&quot;,&quot;darkolivegreen4&quot;,&quot;burlywood&quot;, &quot;chocolate4&quot;))</span></span>
+<span id="cb482-4"><a href="leçon-2.html#cb482-4" aria-hidden="true"></a></span>
+<span id="cb482-5"><a href="leçon-2.html#cb482-5" aria-hidden="true"></a></span>
+<span id="cb482-6"><a href="leçon-2.html#cb482-6" aria-hidden="true"></a><span class="co">#Erose = tm_shape(E)+tm_raster(title = &quot;Classes d&#39;élévation&quot;, palette= pal.elevation(4), legend.hist = TRUE,colorNA = &quot;pink&quot; )+</span></span>
+<span id="cb482-7"><a href="leçon-2.html#cb482-7" aria-hidden="true"></a>  <span class="co">#tm_legend(outside = TRUE, hist.width = 3)</span></span>
+<span id="cb482-8"><a href="leçon-2.html#cb482-8" aria-hidden="true"></a><span class="kw">tm_shape</span>(E)<span class="op">+</span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation&quot;</span>, <span class="dt">n=</span><span class="dv">10</span>,<span class="dt">palette=</span> <span class="kw">pal.elevation</span>(<span class="dv">10</span>), <span class="dt">legend.hist =</span> <span class="ot">TRUE</span>, <span class="dt">colorNA =</span> <span class="st">&quot;pink&quot;</span> )<span class="op">+</span></span>
+<span id="cb482-9"><a href="leçon-2.html#cb482-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_legend</span>(<span class="dt">outside =</span> <span class="ot">TRUE</span>, <span class="dt">hist.width =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-207-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>Jouer avec la distribution des classes</p>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="leçon-2.html#cb483-1" aria-hidden="true"></a>format_carte&lt;-<span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.67</span>,<span class="fl">0.04</span>), <span class="dt">legend.title.size =</span> <span class="fl">0.8</span>, <span class="dt">legend.format=</span><span class="kw">c</span>(<span class="dt">text.align=</span><span class="st">&quot;right&quot;</span>),<span class="dt">legend.bg.color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">legend.frame =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb483-2"><a href="leçon-2.html#cb483-2" aria-hidden="true"></a>Efixed&lt;-<span class="kw">tm_shape</span>(E)<span class="op">+</span></span>
+<span id="cb483-3"><a href="leçon-2.html#cb483-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation(m)&quot;</span>,<span class="dt">palette=</span><span class="kw">pal.elevation</span>(<span class="dv">10</span>),  <span class="dt">style=</span><span class="st">&quot;fixed&quot;</span>, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">300</span>,<span class="dv">400</span>,<span class="dv">500</span>,<span class="dv">600</span>,<span class="dv">700</span>,<span class="dv">800</span>,<span class="dv">900</span>,<span class="dv">1000</span>,<span class="dv">1600</span>))<span class="op">+</span></span>
+<span id="cb483-4"><a href="leçon-2.html#cb483-4" aria-hidden="true"></a><span class="st">  </span>format_carte</span>
+<span id="cb483-5"><a href="leçon-2.html#cb483-5" aria-hidden="true"></a>Equant&lt;-<span class="kw">tm_shape</span>(E)<span class="op">+</span></span>
+<span id="cb483-6"><a href="leçon-2.html#cb483-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation(m)&quot;</span>,<span class="dt">palette=</span><span class="kw">pal.elevation</span>(<span class="dv">10</span>),  <span class="dt">style=</span><span class="st">&quot;quantile&quot;</span>)<span class="op">+</span>format_carte</span>
+<span id="cb483-7"><a href="leçon-2.html#cb483-7" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Efixed,Equant)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-208-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="carte-avec-symboles-proportionnels" class="section level3 hasAnchor" number="6.1.11">
+<h3><span class="header-section-number">6.1.11</span> Carte avec symboles proportionnels<a href="leçon-2.html#carte-avec-symboles-proportionnels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="tm_symboles" class="section level4 unnumbered hasAnchor" number="">
+<h4>tm_symboles<a href="leçon-2.html#tm_symboles" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="leçon-2.html#cb484-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span></span>
+<span id="cb484-2"><a href="leçon-2.html#cb484-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">legend.show=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb484-3"><a href="leçon-2.html#cb484-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_style</span>(<span class="st">&quot;bw&quot;</span>) <span class="op">+</span></span>
+<span id="cb484-4"><a href="leçon-2.html#cb484-4" aria-hidden="true"></a><span class="st">  </span><span class="co">#tm_layout(&quot;Population des régions administratives&quot;)+</span></span>
+<span id="cb484-5"><a href="leçon-2.html#cb484-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_symbols</span>(<span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">size =</span> <span class="st">&quot;ATot_T&quot;</span>, <span class="dt">legend.size.show =</span> <span class="ot">TRUE</span>, <span class="dt">legend.size.is.portrait =</span> <span class="ot">TRUE</span>, <span class="dt">title.size =</span> <span class="st">&quot;Population&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-209-1.png" width="720" style="display: block; margin: auto;" />
+Note: lorsqu’on veut la legende de certains elements seulement, on met FALSE dans celle qu’on veut pas.
+Par defaut le symbole est 21, mais on peut mettre autres choses.
+<a href="http://www.sthda.com/french/wiki/ggplot2-types-de-points-logiciel-r-et-visualisation-de-donnees" class="uri">http://www.sthda.com/french/wiki/ggplot2-types-de-points-logiciel-r-et-visualisation-de-donnees</a></p>
+<div id="mettre-deux-légendes" class="section level5 hasAnchor" number="6.1.11.0.1">
+<h5><span class="header-section-number">6.1.11.0.1</span> Mettre deux légendes<a href="leçon-2.html#mettre-deux-légendes" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="leçon-2.html#cb485-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NOM_REG&quot;</span>,  <span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>, <span class="dt">border.col =</span> <span class="st">&quot;darkgrey&quot;</span>, <span class="dt">title =</span><span class="st">&quot;Régions administratives&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb485-2"><a href="leçon-2.html#cb485-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">tm_symbols</span>(<span class="dt">size =</span> <span class="st">&quot;ATot_T&quot;</span>, <span class="dt">border.col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">scale =</span> <span class="dv">2</span>, <span class="dt">legend.size.show =</span> <span class="ot">TRUE</span>, <span class="dt">legend.size.is.portrait =</span> <span class="ot">FALSE</span>, <span class="dt">sizes.legend.labels =</span> <span class="kw">c</span>(<span class="st">&quot;500&quot;</span>,<span class="st">&quot;1000&quot;</span>,<span class="st">&quot;1500&quot;</span>,<span class="st">&quot;2000&quot;</span>,<span class="st">&quot;2500&quot;</span>), <span class="dt">title.size =</span><span class="st">&quot;Population (en milliers)&quot;</span>)<span class="op">+</span></span>
+<span id="cb485-3"><a href="leçon-2.html#cb485-3" aria-hidden="true"></a><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, <span class="dt">legend.stack =</span> <span class="st">&quot;vertical&quot;</span>, <span class="dt">legend.title.fontface =</span> <span class="st">&quot;bold&quot;</span> ) </span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-210-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="tm_bubbles" class="section level4 unnumbered hasAnchor" number="">
+<h4>tm_bubbles<a href="leçon-2.html#tm_bubbles" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Bubbles: rayon et couleur</p>
+<p>FAire le calcul du ratio d’enfant.</p>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="leçon-2.html#cb486-1" aria-hidden="true"></a>Q<span class="op">$</span>Pop_prop_enfant&lt;-Q<span class="op">$</span>A0<span class="fl">.14</span>_T<span class="op">/</span>Q<span class="op">$</span>ATot_T</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="leçon-2.html#cb487-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span></span>
+<span id="cb487-2"><a href="leçon-2.html#cb487-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">legend.show=</span><span class="ot">FALSE</span>, <span class="dt">palette =</span> <span class="st">&quot;Greys&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb487-3"><a href="leçon-2.html#cb487-3" aria-hidden="true"></a><span class="st">  </span><span class="co">#tm_layout(&quot;Population des régions administratives&quot;)+</span></span>
+<span id="cb487-4"><a href="leçon-2.html#cb487-4" aria-hidden="true"></a><span class="co">#tm_bubbles(size =&quot;Pop_prop_enfant&quot;, sizes.legend=seq(0.1, 0.27, by=0.02), col= &quot;ATot_T&quot; , style = &quot;quantile&quot;, legend.size.show = TRUE, legend.size.is.portrait = TRUE)</span></span>
+<span id="cb487-5"><a href="leçon-2.html#cb487-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_bubbles</span>(<span class="dt">size =</span> <span class="st">&quot;ATot_T&quot;</span> , <span class="dt">col=</span> <span class="st">&quot;Pop_prop_enfant&quot;</span> , <span class="dt">style =</span> <span class="st">&quot;quantile&quot;</span>, <span class="dt">scale =</span> <span class="dv">2</span>,  <span class="dt">border.col =</span> <span class="st">&quot;black&quot;</span>, border.lwd</span>
+<span id="cb487-6"><a href="leçon-2.html#cb487-6" aria-hidden="true"></a> =<span class="st"> </span><span class="fl">.5</span>,<span class="dt">legend.size.show =</span> <span class="ot">TRUE</span>, <span class="dt">legend.size.is.portrait =</span> <span class="ot">FALSE</span>, <span class="dt">title.size =</span><span class="st">&quot;Population (en milliers)&quot;</span>, <span class="dt">title.col =</span> <span class="st">&quot;Proportion d&#39;enfants (0-14 ans)&quot;</span>, <span class="dt">sizes.legend.labels =</span> <span class="kw">c</span>(<span class="st">&quot;500&quot;</span>,<span class="st">&quot;1000&quot;</span>,<span class="st">&quot;1500&quot;</span>,<span class="st">&quot;2000&quot;</span>,<span class="st">&quot;2500&quot;</span>))<span class="op">+</span></span>
+<span id="cb487-7"><a href="leçon-2.html#cb487-7" aria-hidden="true"></a><span class="co">#tm_layout(frame = FALSE, legend.outside = TRUE, legend.outside.position = &quot;bottom&quot;, legend.stack = &quot;horizontal&quot;) </span></span>
+<span id="cb487-8"><a href="leçon-2.html#cb487-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, <span class="dt">legend.title.size =</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-212-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="cartes-choroplèthes" class="section level3 hasAnchor" number="6.1.12">
+<h3><span class="header-section-number">6.1.12</span> Cartes Choroplèthes<a href="leçon-2.html#cartes-choroplèthes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Expliquer breaks et n. (comme pour raster)</p>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="leçon-2.html#cb488-1" aria-hidden="true"></a>Q1 =<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;Pop_prop_enfant&quot;</span>)</span>
+<span id="cb488-2"><a href="leçon-2.html#cb488-2" aria-hidden="true"></a><span class="co">#Q2 = tm_shape(Q)+tm_polygons(col=&quot;Pop_prop_enfant&quot;, breaks = seq(0.1, 0.3, by=0.02))</span></span>
+<span id="cb488-3"><a href="leçon-2.html#cb488-3" aria-hidden="true"></a>Q2 =<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;Pop_prop_enfant&quot;</span>, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.14</span>, <span class="fl">0.15</span>, <span class="fl">0.16</span>, <span class="fl">0.18</span>, <span class="fl">0.3</span>))</span>
+<span id="cb488-4"><a href="leçon-2.html#cb488-4" aria-hidden="true"></a>Q3 =<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;Pop_prop_enfant&quot;</span>, <span class="dt">n=</span><span class="dv">2</span>)</span>
+<span id="cb488-5"><a href="leçon-2.html#cb488-5" aria-hidden="true"></a></span>
+<span id="cb488-6"><a href="leçon-2.html#cb488-6" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q1,Q2,Q3)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-213-1.png" width="720" style="display: block; margin: auto;" /></p>
+<div id="données-covid" class="section level4 unnumbered hasAnchor" number="">
+<h4>Données COVID<a href="leçon-2.html#données-covid" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Lire les données: cas cumulés de COVID en date du 18 janvier 2021 par région socio-sanitaire.</p>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="leçon-2.html#cb489-1" aria-hidden="true"></a>chemin&lt;-<span class="st">&quot;D:/votrechemin/SCI1031/Module6/Donnees/&quot;</span></span>
+<span id="cb489-2"><a href="leçon-2.html#cb489-2" aria-hidden="true"></a>nom_du_fichier &lt;-<span class="st"> </span><span class="kw">paste</span>(chemin, <span class="st">&quot;COVID/QC_Covid_210118.shp&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb489-3"><a href="leçon-2.html#cb489-3" aria-hidden="true"></a>Q_covid &lt;-<span class="st"> </span><span class="kw">st_read</span>(nom_du_fichier)</span></code></pre></div>
+<pre class="codeout"><code>Reading layer `QC_Covid_210118&#39; from data source 
+  `/home/kc/git/inSileco/sci1031/Module6/data/COVID/QC_Covid_210118.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 16 features and 3 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -830300 ymin: 118000 xmax: 783300 ymax: 2091000
+Projected CRS: NAD83 / Quebec Lambert</code></pre>
+<p>Comme pour la proportion d’enfants, on veut la densité de cas: la proportion de cas par rapport à la population totale d’une région socio-sanitaire</p>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="leçon-2.html#cb491-1" aria-hidden="true"></a>Q_covid<span class="op">$</span>prop_cas&lt;-(Q_covid<span class="op">$</span>Cs_cmls)<span class="op">/</span>(Q_covid<span class="op">$</span>ATot_T)</span></code></pre></div>
+<p>Comparaison nombre vs proportion</p>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="leçon-2.html#cb492-1" aria-hidden="true"></a>Q_nombre&lt;-<span class="kw">tm_shape</span>(Q_covid)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;Cs_cmls&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Nombre de cas&quot;</span>)</span>
+<span id="cb492-2"><a href="leçon-2.html#cb492-2" aria-hidden="true"></a></span>
+<span id="cb492-3"><a href="leçon-2.html#cb492-3" aria-hidden="true"></a>Q_prop&lt;-<span class="kw">tm_shape</span>(Q_covid)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;prop_cas&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Proportion de cas&quot;</span>)</span>
+<span id="cb492-4"><a href="leçon-2.html#cb492-4" aria-hidden="true"></a></span>
+<span id="cb492-5"><a href="leçon-2.html#cb492-5" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q_nombre,Q_prop)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-217-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>Expliquer le sens de chaque style.
+Voir: <a href="https://bookdown.org/nicohahn/making_maps_with_r5/docs/tmap.html#static-maps-with-tmap" class="uri">https://bookdown.org/nicohahn/making_maps_with_r5/docs/tmap.html#static-maps-with-tmap</a></p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="leçon-2.html#cb493-1" aria-hidden="true"></a>format_carte &lt;-<span class="kw">tm_layout</span>(<span class="dt">legend.text.size =</span> <span class="fl">0.55</span>)</span>
+<span id="cb493-2"><a href="leçon-2.html#cb493-2" aria-hidden="true"></a></span>
+<span id="cb493-3"><a href="leçon-2.html#cb493-3" aria-hidden="true"></a>Q_quantile&lt;-<span class="kw">tm_shape</span>(Q_covid)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;prop_cas&quot;</span>, <span class="dt">style =</span> <span class="st">&quot;quantile&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Quantile&quot;</span>)<span class="op">+</span>format_carte</span>
+<span id="cb493-4"><a href="leçon-2.html#cb493-4" aria-hidden="true"></a>Q_jenks&lt;-<span class="kw">tm_shape</span>(Q_covid)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;prop_cas&quot;</span>, <span class="dt">style =</span> <span class="st">&quot;jenks&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Jenks&quot;</span>)<span class="op">+</span>format_carte</span>
+<span id="cb493-5"><a href="leçon-2.html#cb493-5" aria-hidden="true"></a>Q_pretty&lt;-<span class="kw">tm_shape</span>(Q_covid) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;prop_cas&quot;</span>, <span class="dt">style =</span> <span class="st">&quot;pretty&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Pretty&quot;</span>)<span class="op">+</span>format_carte</span>
+<span id="cb493-6"><a href="leçon-2.html#cb493-6" aria-hidden="true"></a></span>
+<span id="cb493-7"><a href="leçon-2.html#cb493-7" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q_quantile,Q_jenks,Q_pretty)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-218-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>C’est souvent en regardant la distribution des données qu’on peut déterminer la meilleure classification pour représenter nos données
+EXEMPLE DE MELANIE ou alors faire ça au début.</p>
+</div>
+</div>
+<div id="cartes-à-panneau-multiple" class="section level3 hasAnchor" number="6.1.13">
+<h3><span class="header-section-number">6.1.13</span> Cartes à panneau multiple<a href="leçon-2.html#cartes-à-panneau-multiple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Qu’est-ce qu’un facet?</p>
+<p>Représenter chaque region individuellement</p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="leçon-2.html#cb494-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q_covid)<span class="op">+</span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;prop_cas&quot;</span>, <span class="dt">style =</span> <span class="st">&quot;quantile&quot;</span>, <span class="dt">legend.is.portrait =</span> <span class="ot">FALSE</span>)<span class="op">+</span></span>
+<span id="cb494-2"><a href="leçon-2.html#cb494-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_facets</span>(<span class="dt">by=</span><span class="st">&quot;NOM_REG&quot;</span>, <span class="dt">nrow =</span><span class="dv">4</span>,  <span class="dt">scale.factor =</span> <span class="dv">5</span>)<span class="op">+</span></span>
+<span id="cb494-3"><a href="leçon-2.html#cb494-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">panel.label.height=</span><span class="dv">2</span>, <span class="dt">panel.label.size =</span> <span class="fl">0.9</span>, <span class="dt">legend.show =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-219-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>Il est possible de jouer avec les couleurs, le font, le cadre des panels en utilisant les argument panel.label.size, fontface, bg.color de la fonction tm_layout
+<a href="https://rdrr.io/cran/tmap/man/tm_layout.html" class="uri">https://rdrr.io/cran/tmap/man/tm_layout.html</a>.</p>
+</div>
+<div id="cartes-avec-encadré" class="section level3 hasAnchor" number="6.1.14">
+<h3><span class="header-section-number">6.1.14</span> Cartes avec encadré<a href="leçon-2.html#cartes-avec-encadré" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Prenons une section de la carte d’élévation autour de la région de l’Outaouais</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="leçon-2.html#cb495-1" aria-hidden="true"></a><span class="co"># Boite basee sur les limites de Q_Outaouais</span></span>
+<span id="cb495-2"><a href="leçon-2.html#cb495-2" aria-hidden="true"></a>rectangle&lt;-<span class="kw">extent</span>(<span class="op">-</span><span class="dv">719204</span>,<span class="op">-</span><span class="dv">479847</span>,<span class="dv">182366</span>,<span class="dv">454979</span>)</span>
+<span id="cb495-3"><a href="leçon-2.html#cb495-3" aria-hidden="true"></a></span>
+<span id="cb495-4"><a href="leçon-2.html#cb495-4" aria-hidden="true"></a><span class="co"># Utiliser ce rectangle pour sélectionner une région à l&#39;intérieur de la carte d&#39;élévation</span></span>
+<span id="cb495-5"><a href="leçon-2.html#cb495-5" aria-hidden="true"></a>G&lt;-<span class="kw">crop</span>(E,rectangle)</span>
+<span id="cb495-6"><a href="leçon-2.html#cb495-6" aria-hidden="true"></a></span>
+<span id="cb495-7"><a href="leçon-2.html#cb495-7" aria-hidden="true"></a><span class="co"># Transformer les contours de ce rectangle en polygone grâce à la bibliothèque tmaptools</span></span>
+<span id="cb495-8"><a href="leçon-2.html#cb495-8" aria-hidden="true"></a><span class="kw">library</span>(tmaptools)</span>
+<span id="cb495-9"><a href="leçon-2.html#cb495-9" aria-hidden="true"></a>Gpoly&lt;-<span class="kw">bb_poly</span>(G)</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="leçon-2.html#cb496-1" aria-hidden="true"></a>format_carte&lt;-<span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.74</span>,<span class="fl">0.32</span>), <span class="dt">legend.title.size =</span> <span class="fl">0.8</span>, <span class="dt">legend.bg.color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">legend.frame =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb496-2"><a href="leçon-2.html#cb496-2" aria-hidden="true"></a></span>
+<span id="cb496-3"><a href="leçon-2.html#cb496-3" aria-hidden="true"></a><span class="co"># Définir la carte principale</span></span>
+<span id="cb496-4"><a href="leçon-2.html#cb496-4" aria-hidden="true"></a>Map_raster&lt;-<span class="kw">tm_shape</span>(G)<span class="op">+</span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation (m)&quot;</span>, <span class="dt">palette=</span> <span class="kw">pal.elevation</span>(<span class="dv">5</span>))<span class="op">+</span>format_carte<span class="op">+</span></span>
+<span id="cb496-5"><a href="leçon-2.html#cb496-5" aria-hidden="true"></a><span class="kw">tm_scale_bar</span>(<span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;left&quot;</span>,<span class="st">&quot;bottom&quot;</span>), <span class="dt">text.size =</span> <span class="fl">0.8</span>) </span>
+<span id="cb496-6"><a href="leçon-2.html#cb496-6" aria-hidden="true"></a></span>
+<span id="cb496-7"><a href="leçon-2.html#cb496-7" aria-hidden="true"></a><span class="co"># Définir l&#39;encadré où le rectangle est superposé à la carte générale du Québec</span></span>
+<span id="cb496-8"><a href="leçon-2.html#cb496-8" aria-hidden="true"></a>Map_inset&lt;-<span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="kw">tm_polygons</span>()<span class="op">+</span></span>
+<span id="cb496-9"><a href="leçon-2.html#cb496-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_shape</span>(Gpoly)<span class="op">+</span><span class="kw">tm_borders</span>(<span class="dt">lw=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb496-10"><a href="leçon-2.html#cb496-10" aria-hidden="true"></a></span>
+<span id="cb496-11"><a href="leçon-2.html#cb496-11" aria-hidden="true"></a><span class="co"># Utilisation de la fonction viewport de la bibliothèque grid</span></span>
+<span id="cb496-12"><a href="leçon-2.html#cb496-12" aria-hidden="true"></a><span class="kw">library</span>(grid)</span>
+<span id="cb496-13"><a href="leçon-2.html#cb496-13" aria-hidden="true"></a>Map_raster</span>
+<span id="cb496-14"><a href="leçon-2.html#cb496-14" aria-hidden="true"></a><span class="kw">print</span>(Map_inset, <span class="dt">vp=</span><span class="kw">viewport</span>(<span class="fl">0.67</span>,<span class="fl">0.17</span>,<span class="dt">width=</span><span class="fl">0.3</span>, <span class="dt">height=</span><span class="fl">0.3</span>))</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-221-1.svg" width="720" style="display: block; margin: auto;" /></p>
+<!--   ### Cartes interactives avec tmap -->
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="carto.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercices.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Cours_SpatialR.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true,
+"edit": "https://github.com/sci1031/sci1031/edit/master/%s"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

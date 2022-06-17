@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
+  <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R" />
+  
+  <meta name="twitter:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
+  
+
+
+
+<meta name="date" content="2022-06-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="carto.html"/>
+<link rel="next" href="exercices.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/M_ea6924-1/data_stars_M50b9c6.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/M_logique_numeric_3cef82-1/data_stars_M_logique_numeric687e1f.txt"></script>
+<script src="libs/M_factor_073da6-1/data_stars_M_factor36429e.txt"></script>
+<script src="libs/ICU_238cb6-1/data_stars_ICU749e2f.txt"></script>
+<script src="libs/ICU_a52436-1/data_stars_ICU9281da.txt"></script>
+<script src="libs/T_sec_c81ea2-1/data_stars_T_sec34c72b.txt"></script>
+<script src="libs/T_fact4_moy_b1fd3a-1/data_stars_T_fact4_moy952ed3.txt"></script>
+<script src="libs/T_fact4_max_6e5fd1-1/data_stars_T_fact4_max49d051.txt"></script>
+<script src="libs/T_fact8_moy_3ad501-1/data_stars_T_fact8_moy9280de.txt"></script>
+<script src="libs/T_fact8_max_629501-1/data_stars_T_fact8_maxf1ab8c.txt"></script>
+<script src="libs/SR_0158ec-1/data_stars_SR0cd39a.txt"></script>
+<script src="libs/SG_3dc47e-1/data_stars_SG983f7a.txt"></script>
+<script src="libs/SB_835b02-1/data_stars_SB16ace2.txt"></script>
+<script src="libs/dem_5cdf8b-1/data_stars_dem5e4c96.txt"></script>
+<script src="libs/nouvelles_classes_dem_3a4b76-1/data_stars_nouvelles_classes_demd59be3.txt"></script>
+<script src="libs/reclassify(dem, nouvelles_classes2)_5ed6b2-1/data_stars_reclassifydemnouvelles_classes287c462.txt"></script>
+<script src="libs/dem_cr_901dce-1/data_stars_dem_cr3e08b5.txt"></script>
+<script src="libs/dem_cr_p_1fbc65-1/data_stars_dem_cr_pc4b3f1.txt"></script>
+<script src="libs/dem_2ac158-1/data_stars_dem47dc69.txt"></script>
+<script src="libs/dem_ma_180763-1/data_stars_dem_ma65d09b.txt"></script>
+<script src="libs/dem_ma_inv_89eb1a-1/data_stars_dem_ma_inv8a3c5f.txt"></script>
+<script src="libs/dem_ma_127d60-1/data_stars_dem_ma4eb275.txt"></script>
+<script src="libs/dem_ma_inv_c1a359-1/data_stars_dem_ma_inva407cd.txt"></script>
+<script src="libs/dem_merge_ad0673-1/data_stars_dem_merge6027ed.txt"></script>
+<script src="libs/dem_merge_ordre1_835db0-1/data_stars_dem_merge_ordre1c1765a.txt"></script>
+<script src="libs/dem_merge_ordre2_e379d2-1/data_stars_dem_merge_ordre2db4c98.txt"></script>
+<script src="libs/dem_mosaic_min_6f1abd-1/data_stars_dem_mosaic_min52f90e.txt"></script>
+<script src="libs/dem_mosaic_max_76982e-1/data_stars_dem_mosaic_max6301b7.txt"></script>
+<script src="libs/dem_mosaic_mean_b9852a-1/data_stars_dem_mosaic_meanea09d3.txt"></script>
+<script src="libs/dem_parcs_504c73-1/data_stars_dem_parcse85439.txt"></script>
+<script src="libs/dem_parcs_c3b85e-1/data_stars_dem_parcs5b03f9.txt"></script>
+<script src="libs/dem_orford_b91f70-1/data_stars_dem_orford83421c.txt"></script>
+<script src="libs/dem_orford_e12c09-1/data_stars_dem_orfordad40b2.txt"></script>
+<script src="libs/dem_orford_quantile_b9ad1f-1/data_stars_dem_orford_quantile85a94e.txt"></script>
+<script src="libs/dem_orford_quantile_30d4a7-1/data_stars_dem_orford_quantile690f34.txt"></script>
+<script src="libs/dem_tampon_max_57f3c6-1/data_stars_dem_tampon_max0ef8a1.txt"></script>
+<script src="libs/X1_d25b38-1/data_stars_X13fc4e9.txt"></script>
+<script src="libs/X2_3c6492-1/data_stars_X2395a10.txt"></script>
+<script src="libs/X3_1c9d02-1/data_stars_X3b80d57.txt"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/extra.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">TELUQ -  SCI 1031.</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="part"><span><b>I SCI 1031</b></span></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html"><i class="fa fa-check"></i>À propos du cours</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#présentation"><i class="fa fa-check"></i>Présentation</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#pourquoi-suivre-ce-cours"><i class="fa fa-check"></i>Pourquoi suivre ce cours ?</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#pourquoi-r"><i class="fa fa-check"></i>Pourquoi R ?</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#objectifs"><i class="fa fa-check"></i>Objectifs</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#contenu-sommaire"><i class="fa fa-check"></i>Contenu sommaire</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#fonctionnement-du-cours"><i class="fa fa-check"></i>Fonctionnement du cours</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#travaux-notés"><i class="fa fa-check"></i>Travaux notés</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#rétroaction"><i class="fa fa-check"></i>Rétroaction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#route"><i class="fa fa-check"></i>Feuille de route</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#crédits"><i class="fa fa-check"></i>Crédits</a>
+<ul>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#équipe"><i class="fa fa-check"></i>Équipe</a></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#reproduction-du-contenu"><i class="fa fa-check"></i>Reproduction du contenu</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html#contact"><i class="fa fa-check"></i>Contact</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html"><i class="fa fa-check"></i>Ressources</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#travaux-notés-1"><i class="fa fa-check"></i>Travaux notés</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#données"><i class="fa fa-check"></i>Données</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#données-du-cours"><i class="fa fa-check"></i>Données du cours</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#autres-sources"><i class="fa fa-check"></i>Autres sources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#ressources-r"><i class="fa fa-check"></i>Ressources R</a>
+<ul>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#documentation-générale-r"><i class="fa fa-check"></i>Documentation générale R</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#documentation-r-géospatial"><i class="fa fa-check"></i>Documentation R-géospatial</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#les-bibliothèques-r"><i class="fa fa-check"></i>Les bibliothèques R</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#res_RMarkdown"><i class="fa fa-check"></i>Documentation R-Markdown</a></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#les-couleurs-dans-r"><i class="fa fa-check"></i>Les couleurs dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ressources.html"><a href="ressources.html#références"><i class="fa fa-check"></i>Références</a></li>
+</ul></li>
+<li class="part"><span><b>II Apprentissage</b></span></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="lecon_intro.html"><a href="lecon_intro.html"><i class="fa fa-check"></i><b>1.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="lecon_intro.html"><a href="lecon_intro.html#hist"><i class="fa fa-check"></i><b>1.1.1</b> Les données spatiales d’hier à aujourd’hui</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-cartes-anciennes"><i class="fa fa-check"></i>Les cartes anciennes</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#la-géomatique"><i class="fa fa-check"></i>La géomatique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#la-science-des-données"><i class="fa fa-check"></i>La science des données</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1.2" data-path="lecon_intro.html"><a href="lecon_intro.html#outils"><i class="fa fa-check"></i><b>1.1.2</b> Les outils et logiciels de visualisation et d’analyse géo-spatiale</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-logiciels-commerciaux"><i class="fa fa-check"></i>Les logiciels commerciaux</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-logiciels-libres-daccès"><i class="fa fa-check"></i>Les logiciels libres d’accès</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-services-dinfonuagique"><i class="fa fa-check"></i>Les services d’infonuagique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-langages-de-programmation-pour-lanalyse-géospatiale"><i class="fa fa-check"></i>Les langages de programmation pour l’analyse géospatiale</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1.3" data-path="lecon_intro.html"><a href="lecon_intro.html#outil_R"><i class="fa fa-check"></i><b>1.1.3</b> Les bibliothèques géo-spatiales de R</a></li>
+<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="ex_intro.html"><a href="ex_intro.html"><i class="fa fa-check"></i><b>1.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="ex_intro.html"><a href="ex_intro.html#demarrage"><i class="fa fa-check"></i><b>1.2.1</b> Démarrage</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#installer-r"><i class="fa fa-check"></i>Installer R</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#installer-rstudio"><i class="fa fa-check"></i>Installer RStudio</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#apprivoiser-rstudio"><i class="fa fa-check"></i>Apprivoiser RStudio</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#créer-un-fichier-r"><i class="fa fa-check"></i>Créer un fichier R</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-bibliothèques"><i class="fa fa-check"></i>Les bibliothèques</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#le-répertoire-de-travail"><i class="fa fa-check"></i>Le répertoire de travail</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.2" data-path="ex_intro.html"><a href="ex_intro.html#introR"><i class="fa fa-check"></i><b>1.2.2</b> Intro à R</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#la-base"><i class="fa fa-check"></i>La base</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-objets"><i class="fa fa-check"></i>Les objets</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-catégories-de-données"><i class="fa fa-check"></i>Les catégories de données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#les-structures-de-données"><i class="fa fa-check"></i>Les structures de données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#importer-et-exporter-des-données"><i class="fa fa-check"></i>Importer et exporter des données</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#graphiques-de-base"><i class="fa fa-check"></i>Graphiques de base</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.3" data-path="ex_intro.html"><a href="ex_intro.html#exo1"><i class="fa fa-check"></i><b>1.2.3</b> À vous de jouer!</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-1"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-2"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_intro.html"><a href="ex_intro.html#question-3"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="base.html"><a href="base.html"><i class="fa fa-check"></i><b>2</b> Modèles de données spatiales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="leçon.html"><a href="leçon.html"><i class="fa fa-check"></i><b>2.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="leçon.html"><a href="leçon.html#les-données-vectorielles"><i class="fa fa-check"></i><b>2.1.1</b> Les données vectorielles</a></li>
+<li class="chapter" data-level="2.1.2" data-path="leçon.html"><a href="leçon.html#les-données-matricielles"><i class="fa fa-check"></i><b>2.1.2</b> Les données matricielles</a></li>
+<li class="chapter" data-level="2.1.3" data-path="leçon.html"><a href="leçon.html#structure-en-couches"><i class="fa fa-check"></i><b>2.1.3</b> Structure en couches</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="ex_markdown1.html"><a href="ex_markdown1.html"><i class="fa fa-check"></i><b>2.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ex_markdown1.html"><a href="ex_markdown1.html#introduction-à-r-markdown"><i class="fa fa-check"></i><b>2.2.1</b> Introduction à R Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#bénéfices-de-r-markdown"><i class="fa fa-check"></i>Bénéfices de R Markdown</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#quest-ce-que-markdown"><i class="fa fa-check"></i>Qu’est-ce que Markdown?</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#quest-ce-que-pandoc"><i class="fa fa-check"></i>Qu’est-ce que Pandoc?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.2" data-path="ex_markdown1.html"><a href="ex_markdown1.html#utiliser-un-fichier-rmarkdown"><i class="fa fa-check"></i><b>2.2.2</b> Utiliser un fichier RMarkdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#organisation-générale"><i class="fa fa-check"></i>Organisation générale</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#installer-r-markdown"><i class="fa fa-check"></i>Installer R Markdown</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#createmarkdownfile"><i class="fa fa-check"></i>Créer un fichier R Markdown</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#spécifier-les-options-yaml"><i class="fa fa-check"></i>Spécifier les options YAML</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#éditer-le-contenu-du-fichier-r-markdown"><i class="fa fa-check"></i>Éditer le contenu du fichier R Markdown</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#obtenir-le-document-final"><i class="fa fa-check"></i>Obtenir le document final</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.3" data-path="ex_markdown1.html"><a href="ex_markdown1.html#exo2"><i class="fa fa-check"></i><b>2.2.3</b> À vous de jouer !</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#question-1-1"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown1.html"><a href="ex_markdown1.html#question-2-1"><i class="fa fa-check"></i>Question 2</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="SRC.html"><a href="SRC.html"><i class="fa fa-check"></i><b>3</b> Systèmes de coordonnées de référence</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="leçon-1.html"><a href="leçon-1.html"><i class="fa fa-check"></i><b>3.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-géodésiques"><i class="fa fa-check"></i><b>3.1.1</b> Les systèmes géodésiques</a></li>
+<li class="chapter" data-level="3.1.2" data-path="leçon-1.html"><a href="leçon-1.html#les-systèmes-de-coordonnées"><i class="fa fa-check"></i><b>3.1.2</b> Les systèmes de coordonnées</a></li>
+<li class="chapter" data-level="3.1.3" data-path="leçon-1.html"><a href="leçon-1.html#les-projections"><i class="fa fa-check"></i><b>3.1.3</b> Les projections</a></li>
+<li class="chapter" data-level="3.1.4" data-path="leçon-1.html"><a href="leçon-1.html#projections-couramment-utilisées"><i class="fa fa-check"></i><b>3.1.4</b> Projections couramment utilisées</a></li>
+<li class="chapter" data-level="3.1.5" data-path="leçon-1.html"><a href="leçon-1.html#représentation-dun-scr"><i class="fa fa-check"></i><b>3.1.5</b> Représentation d’un SCR</a>
+<ul>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#le-well-known-text"><i class="fa fa-check"></i>Le Well-known text</a></li>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#la-syntaxe-proj4"><i class="fa fa-check"></i>La syntaxe PROJ4</a></li>
+<li class="chapter" data-level="" data-path="leçon-1.html"><a href="leçon-1.html#code_epsg"><i class="fa fa-check"></i>Les codes EPSG</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1.6" data-path="leçon-1.html"><a href="leçon-1.html#résumé"><i class="fa fa-check"></i><b>3.1.6</b> Résumé</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html"><i class="fa fa-check"></i><b>3.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="ex_markdown2.html"><a href="ex_markdown2.html#pandocmarkdown"><i class="fa fa-check"></i><b>3.2.1</b> Le variante Pandoc de Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#informations-de-départ"><i class="fa fa-check"></i>Informations de départ</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#décoration-du-texte"><i class="fa fa-check"></i>Décoration du texte</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-titres"><i class="fa fa-check"></i>Les titres</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-listes-1"><i class="fa fa-check"></i>Les listes</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocs-de-citation"><i class="fa fa-check"></i>Blocs de citation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocsR"><i class="fa fa-check"></i><b>3.2.2</b> Intégration de R dans le document</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-commentaires-1"><i class="fa fa-check"></i>Les commentaires</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo"><i class="fa fa-check"></i>Modifier l’affichage du code source avec le paramètre <code>echo</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.2.3" data-path="ex_markdown2.html"><a href="ex_markdown2.html#exo3"><i class="fa fa-check"></i><b>3.2.3</b> À vous de jouer !</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vec.html"><a href="vec.html"><i class="fa fa-check"></i><b>4</b> Données vectorielles</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="lecon_vec.html"><a href="lecon_vec.html"><i class="fa fa-check"></i><b>4.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="lecon_vec.html"><a href="lecon_vec.html#data_mod4"><i class="fa fa-check"></i><b>4.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="4.1.2" data-path="lecon_vec.html"><a href="lecon_vec.html#create_vec"><i class="fa fa-check"></i><b>4.1.2</b> Créer des données vectorielles</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#créer-des-géométries-simples"><i class="fa fa-check"></i>Créer des géométries simples</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#attribuer-un-scr"><i class="fa fa-check"></i>Attribuer un SCR</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#définir-des-attributs"><i class="fa fa-check"></i>Définir des attributs</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#fct_st_as_sf"><i class="fa fa-check"></i>La fonction <code>st_as_sf()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.3" data-path="lecon_vec.html"><a href="lecon_vec.html#read_vec"><i class="fa fa-check"></i><b>4.1.3</b> Lire un shapefile et interpréter sa géométrie</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#lire-shp"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#explorer-les-métadonnées-dun-shapefile"><i class="fa fa-check"></i>Explorer les métadonnées d’un shapefile</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.4" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-de-shapefiles-sous-r"><i class="fa fa-check"></i><b>4.1.4</b> Visualisation de shapefiles sous R</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-avec-la-librairie-mapview"><i class="fa fa-check"></i>Visualisation avec la librairie Mapview</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualiser-des-données-vectorielles-par-attribut"><i class="fa fa-check"></i>Visualiser des données vectorielles par attribut</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualiser-plusieurs-shapefiles"><i class="fa fa-check"></i>Visualiser plusieurs shapefiles</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1.5" data-path="lecon_vec.html"><a href="lecon_vec.html#reprojection-de-données-vectorielles-sous-r"><i class="fa fa-check"></i><b>4.1.5</b> Reprojection de données vectorielles sous R</a></li>
+<li class="chapter" data-level="4.1.6" data-path="lecon_vec.html"><a href="lecon_vec.html#gdt"><i class="fa fa-check"></i><b>4.1.6</b> Lire une géodatabase et explorer ses couches</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#lire-les-données"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#explorer-les-attributs-dune-couche"><i class="fa fa-check"></i>Explorer les attributs d’une couche</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#sélection-dun-sous-ensemble-de-données"><i class="fa fa-check"></i>Sélection d’un sous-ensemble de données</a></li>
+<li class="chapter" data-level="" data-path="lecon_vec.html"><a href="lecon_vec.html#visualisation-de-plusieurs-couches-dune-géodatabse"><i class="fa fa-check"></i>Visualisation de plusieurs couches d’une géodatabse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="ex_vec.html"><a href="ex_vec.html"><i class="fa fa-check"></i><b>4.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-1-2"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-2-2"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_vec.html"><a href="ex_vec.html#question-3-1"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mat.html"><a href="mat.html"><i class="fa fa-check"></i><b>5</b> Données matricielles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="lecon_mat.html"><a href="lecon_mat.html"><i class="fa fa-check"></i><b>5.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="lecon_mat.html"><a href="lecon_mat.html#data_mod5"><i class="fa fa-check"></i><b>5.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="5.1.2" data-path="lecon_mat.html"><a href="lecon_mat.html#create_mat"><i class="fa fa-check"></i><b>5.1.2</b> Créer des données matricielles</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#créer-un-raster-simple-et-le-visualiser"><i class="fa fa-check"></i>Créer un raster simple et le visualiser</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#raster-de-différents-types-de-données"><i class="fa fa-check"></i>Raster de différents types de données</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.3" data-path="lecon_mat.html"><a href="lecon_mat.html#comprendre-la-structure-dun-raster"><i class="fa fa-check"></i><b>5.1.3</b> Comprendre la structure d’un raster</a></li>
+<li class="chapter" data-level="5.1.4" data-path="lecon_mat.html"><a href="lecon_mat.html#statistiques-de-base-sur-un-raster"><i class="fa fa-check"></i><b>5.1.4</b> Statistiques de base sur un raster</a></li>
+<li class="chapter" data-level="5.1.5" data-path="lecon_mat.html"><a href="lecon_mat.html#read_mat"><i class="fa fa-check"></i><b>5.1.5</b> Lire un raster et explorer son contenu</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#lire-les-données-1"><i class="fa fa-check"></i>Lire les données</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#explorer-les-statistiques-de-base"><i class="fa fa-check"></i>Explorer les statistiques de base</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.6" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-les-données-matricielles-avec-mapview"><i class="fa fa-check"></i><b>5.1.6</b> Visualiser les données matricielles avec mapview()</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-une-section-dun-raster"><i class="fa fa-check"></i>Visualiser une section d’un raster</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1.7" data-path="lecon_mat.html"><a href="lecon_mat.html#changer-la-résolution-dun-raster"><i class="fa fa-check"></i><b>5.1.7</b> Changer la résolution d’un raster</a></li>
+<li class="chapter" data-level="5.1.8" data-path="lecon_mat.html"><a href="lecon_mat.html#changer-la-projection-dun-raster"><i class="fa fa-check"></i><b>5.1.8</b> Changer la projection d’un <em>raster</em></a></li>
+<li class="chapter" data-level="5.1.9" data-path="lecon_mat.html"><a href="lecon_mat.html#sauvegarder-un-raster"><i class="fa fa-check"></i><b>5.1.9</b> Sauvegarder un raster</a></li>
+<li class="chapter" data-level="5.1.10" data-path="lecon_mat.html"><a href="lecon_mat.html#read_mult"><i class="fa fa-check"></i><b>5.1.10</b> Lire et visualiser des données matricielles multi-bande</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#lire-des-données-multi-bande"><i class="fa fa-check"></i>Lire des données multi-bande</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#rasterbrick-et-rasterstack"><i class="fa fa-check"></i>RasterBrick et RasterStack</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat.html"><a href="lecon_mat.html#visualiser-un-raster-multi-bande"><i class="fa fa-check"></i>Visualiser un raster multi-bande</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="ex_mat.html"><a href="ex_mat.html"><i class="fa fa-check"></i><b>5.2</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="carto.html"><a href="carto.html"><i class="fa fa-check"></i><b>6</b> Cartographie</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="lecon_carto.html"><a href="lecon_carto.html"><i class="fa fa-check"></i><b>6.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="lecon_carto.html"><a href="lecon_carto.html#data_mod6"><i class="fa fa-check"></i><b>6.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="6.1.2" data-path="lecon_carto.html"><a href="lecon_carto.html#principes-de-base-en-cartographie"><i class="fa fa-check"></i><b>6.1.2</b> Principes de base en cartographie</a></li>
+<li class="chapter" data-level="6.1.3" data-path="lecon_carto.html"><a href="lecon_carto.html#basetmap"><i class="fa fa-check"></i><b>6.1.3</b> Cartes statiques avec tmap</a></li>
+<li class="chapter" data-level="6.1.4" data-path="lecon_carto.html"><a href="lecon_carto.html#les-polygones"><i class="fa fa-check"></i><b>6.1.4</b> Les polygones</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#intérieur-des-polygones"><i class="fa fa-check"></i>Intérieur des polygones</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#objet-tmap"><i class="fa fa-check"></i>Objet tmap</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#frontières-des-polygones"><i class="fa fa-check"></i>Frontières des polygones</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#attributs-des-polygones"><i class="fa fa-check"></i>Attributs des polygones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.5" data-path="lecon_carto.html"><a href="lecon_carto.html#spécificités-cartographiques"><i class="fa fa-check"></i><b>6.1.5</b> Spécificités cartographiques</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#barre-déchelle-et-rose-des-vents"><i class="fa fa-check"></i>Barre d’échelle et rose des vents</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#grille-et-graticules"><i class="fa fa-check"></i>Grille et graticules</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#attribuer-les-crédits-ou-la-source-des-données"><i class="fa fa-check"></i>Attribuer les crédits ou la source des données</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.6" data-path="lecon_carto.html"><a href="lecon_carto.html#mise-en-page"><i class="fa fa-check"></i><b>6.1.6</b> Mise en page</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#titre-cadre-et-couleur-du-fond"><i class="fa fa-check"></i>Titre, cadre et couleur du fond</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#légende"><i class="fa fa-check"></i>Légende</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#ajustement-des-couleurs"><i class="fa fa-check"></i>Ajustement des couleurs</a></li>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#styles-prédéfinis"><i class="fa fa-check"></i>Styles prédéfinis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1.7" data-path="lecon_carto.html"><a href="lecon_carto.html#écriture-sur-une-carte"><i class="fa fa-check"></i><b>6.1.7</b> Écriture sur une carte</a></li>
+<li class="chapter" data-level="6.1.8" data-path="lecon_carto.html"><a href="lecon_carto.html#les-lignes"><i class="fa fa-check"></i><b>6.1.8</b> Les lignes</a></li>
+<li class="chapter" data-level="6.1.9" data-path="lecon_carto.html"><a href="lecon_carto.html#les-points"><i class="fa fa-check"></i><b>6.1.9</b> Les points</a></li>
+<li class="chapter" data-level="6.1.10" data-path="lecon_carto.html"><a href="lecon_carto.html#données-matricielles"><i class="fa fa-check"></i><b>6.1.10</b> Données matricielles</a></li>
+<li class="chapter" data-level="6.1.11" data-path="lecon_carto.html"><a href="lecon_carto.html#carte-avec-symboles-proportionnels"><i class="fa fa-check"></i><b>6.1.11</b> Carte avec symboles proportionnels</a></li>
+<li class="chapter" data-level="6.1.12" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a></li>
+<li class="chapter" data-level="6.1.13" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-à-panneaux-multiples"><i class="fa fa-check"></i><b>6.1.13</b> Cartes à panneaux multiples</a></li>
+<li class="chapter" data-level="6.1.14" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-avec-encadré"><i class="fa fa-check"></i><b>6.1.14</b> Cartes avec encadré</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="exercices.html"><a href="exercices.html"><i class="fa fa-check"></i><b>6.2</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="manip_vec.html"><a href="manip_vec.html"><i class="fa fa-check"></i><b>7</b> Manipulation de données vectorielles</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html"><i class="fa fa-check"></i><b>7.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#data_mod7"><i class="fa fa-check"></i><b>7.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="7.1.2" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-de-base"><i class="fa fa-check"></i><b>7.1.2</b> Opérations de base</a>
+<ul>
+<li class="chapter" data-level="7.1.2.1" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#importer-et-visualiser-les-données"><i class="fa fa-check"></i><b>7.1.2.1</b> Importer et visualiser les données</a></li>
+<li class="chapter" data-level="7.1.2.2" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-sur-les-attributs-des-données-vectorielles"><i class="fa fa-check"></i><b>7.1.2.2</b> Opérations sur les attributs des données vectorielles</a></li>
+<li class="chapter" data-level="7.1.2.3" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#opérations-spatiales-sur-les-données-vectorielles"><i class="fa fa-check"></i><b>7.1.2.3</b> Opérations spatiales sur les données vectorielles</a></li>
+</ul></li>
+<li class="chapter" data-level="7.1.3" data-path="lecon_manip_vec.html"><a href="lecon_manip_vec.html#prob_mod7"><i class="fa fa-check"></i><b>7.1.3</b> Problématique à résoudre</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ex_map_vec.html"><a href="ex_map_vec.html"><i class="fa fa-check"></i><b>7.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-1-3"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-2-3"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-3-2"><i class="fa fa-check"></i>Question 3</a></li>
+<li class="chapter" data-level="" data-path="ex_map_vec.html"><a href="ex_map_vec.html#question-4"><i class="fa fa-check"></i>Question 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="manip_mat.html"><a href="manip_mat.html"><i class="fa fa-check"></i><b>8</b> Manipulation de données matricielles</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html"><i class="fa fa-check"></i><b>8.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#data_mod8"><i class="fa fa-check"></i><b>8.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="8.1.2" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#opération-de-bases"><i class="fa fa-check"></i><b>8.1.2</b> Opération de bases</a>
+<ul>
+<li class="chapter" data-level="8.1.2.1" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#importer-et-visualiser-les-données-1"><i class="fa fa-check"></i><b>8.1.2.1</b> Importer et visualiser les données</a></li>
+<li class="chapter" data-level="8.1.2.2" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#filtrer-les-cellules-dun-raster"><i class="fa fa-check"></i><b>8.1.2.2</b> Filtrer les cellules d’un <em>raster</em></a></li>
+<li class="chapter" data-level="8.1.2.3" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#combiner-des-rasters"><i class="fa fa-check"></i><b>8.1.2.3</b> Combiner des <em>rasters</em></a></li>
+</ul></li>
+<li class="chapter" data-level="8.1.3" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#prob_mod8"><i class="fa fa-check"></i><b>8.1.3</b> Problématique à résoudre</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#résolution-de-la-question-1"><i class="fa fa-check"></i>Résolution de la question 1</a></li>
+<li class="chapter" data-level="" data-path="lecon_mat_mani.html"><a href="lecon_mat_mani.html#résolution-de-la-question-2"><i class="fa fa-check"></i>Résolution de la question 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html"><i class="fa fa-check"></i><b>8.2</b> Exercices</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-1-4"><i class="fa fa-check"></i>Question 1</a></li>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-2-4"><i class="fa fa-check"></i>Question 2</a></li>
+<li class="chapter" data-level="" data-path="ex_mat_manip.html"><a href="ex_mat_manip.html#question-3-3"><i class="fa fa-check"></i>Question 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="spatiotemp.html"><a href="spatiotemp.html"><i class="fa fa-check"></i><b>9</b> Données spatiotemporelles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html"><i class="fa fa-check"></i><b>9.1</b> Leçon</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#data_mod9"><i class="fa fa-check"></i><b>9.1.1</b> Télécharger les données</a></li>
+<li class="chapter" data-level="9.1.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#données-spatiotemporelles-vectorielles"><i class="fa fa-check"></i><b>9.1.2</b> Données spatiotemporelles vectorielles</a>
+<ul>
+<li class="chapter" data-level="9.1.2.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#importer-les-données-1"><i class="fa fa-check"></i><b>9.1.2.1</b> Importer les données</a></li>
+<li class="chapter" data-level="9.1.2.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#vitesse-moyenne-des-trajets"><i class="fa fa-check"></i><b>9.1.2.2</b> Vitesse moyenne des trajets</a></li>
+<li class="chapter" data-level="9.1.2.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#période-de-lannée-préférée"><i class="fa fa-check"></i><b>9.1.2.3</b> Période de l’année préférée</a></li>
+<li class="chapter" data-level="9.1.2.4" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#animation-du-trajet-le-plus-long"><i class="fa fa-check"></i><b>9.1.2.4</b> Animation du trajet le plus long</a></li>
+</ul></li>
+<li class="chapter" data-level="9.1.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#données-spatiotemporelles-matricielles"><i class="fa fa-check"></i><b>9.1.3</b> Données spatiotemporelles matricielles</a>
+<ul>
+<li class="chapter" data-level="9.1.3.1" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#importer-les-données-2"><i class="fa fa-check"></i><b>9.1.3.1</b> Importer les données</a></li>
+<li class="chapter" data-level="9.1.3.2" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#les-objets-rasterstack"><i class="fa fa-check"></i><b>9.1.3.2</b> Les objets rasterStack</a></li>
+<li class="chapter" data-level="9.1.3.3" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#mois-de-plus-faible-pluviométrie"><i class="fa fa-check"></i><b>9.1.3.3</b> Mois de plus faible pluviométrie</a></li>
+<li class="chapter" data-level="9.1.3.4" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#points-les-plus-chauds"><i class="fa fa-check"></i><b>9.1.3.4</b> Points les plus chauds</a></li>
+<li class="chapter" data-level="9.1.3.5" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#profils-de-temperatures-et-de-precipitations"><i class="fa fa-check"></i><b>9.1.3.5</b> Profils de temperatures et de precipitations</a></li>
+<li class="chapter" data-level="9.1.3.6" data-path="lecon_spatiotemp.html"><a href="lecon_spatiotemp.html#animations"><i class="fa fa-check"></i><b>9.1.3.6</b> Animations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ex_spatiotemp.html"><a href="ex_spatiotemp.html"><i class="fa fa-check"></i><b>9.2</b> Exercice</a>
+<ul>
+<li class="chapter" data-level="" data-path="ex_spatiotemp.html"><a href="ex_spatiotemp.html#question-1-5"><i class="fa fa-check"></i>Question 1</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCI 1031 Visualisation et analyse de données spatiales sous R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lecon_carto" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Leçon<a href="lecon_carto.html#lecon_carto" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data_mod6" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Télécharger les données<a href="lecon_carto.html#data_mod6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="les-données-3" class="section level6 unnumbered hasAnchor boite ico donnees gauche" number="">
+<h6>Les données<a href="lecon_carto.html#les-données-3" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p><br></p>
+</div>
+<p>Importez l’<a href="https://github.com/sci1031/data/raw/master/Module6_donnees.zip">ensemble des données</a> utilisées dans ce module.
+Sauvegardez le dossier compressé (<code>Module6_donnees.zip</code>) dans votre répertoire de travail pour ce module, et dézippez-le.
+Ce dossier comprend lui-même cinq sous-dossiers que vous devez également dézipper:</p>
+<ul>
+<li><code>COVID</code></li>
+<li><code>Elevation</code></li>
+<li><code>Population</code></li>
+<li><code>Routes</code></li>
+<li><code>Villes</code></li>
+</ul>
+<p><br></p>
+<p>Nous utiliserons ces données à partir de la section <a href="lecon_carto.html#basetmap">6.1.3</a>. Commençons d’abord par une introduction sur les principes de bases de la cartographie.</p>
+</div>
+<div id="principes-de-base-en-cartographie" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Principes de base en cartographie<a href="lecon_carto.html#principes-de-base-en-cartographie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="basetmap" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Cartes statiques avec tmap<a href="lecon_carto.html#basetmap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il existe plusieurs bibliothèques R permettant de visualiser des données spatiales. La bibliothèque <code>mapview</code>, que nous avons déjà utilisée, en est un exemple. La bibliothèque <code>ggplot2</code>, que vous connaissez peut-être, permet de créer des cartes qui peuvent être peaufinées par l’utilisation de fonctions des bibliothèques <code>sf</code> et <code>ggspatial</code><a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a>. Dans le cadre de ce cours, nous nous concentrerons sur la bibliothèque <code>tmap</code> et l’apprentissage de ses fonctions principales.</p>
+<p>Nous avons choisi <code>tmap</code> parce que cette bibliothèque est relativement simple à utiliser et que ses fonctions sont intuitives. Le fonctionnement de <code>tmap</code> est très similaire à celui de la bibliothèque <code>ggplot2</code> qui est fort populaire pour la visualisation de données de toutes sortes. Si vous connaissez déjà <code>ggplot2</code>, alors l’apprentissage de <code>tmap</code> vous sera familié. Si vous ne connaissez pas <code>ggplot2</code>, vous pourriez être amenés à l’utiliser dans le futur, et dans ce cas votre connaissance de <code>tmap</code> vous sera utile.</p>
+<p>De façon générale, nous utilisons <code>tmap</code> pour cartographier des données spatiales de la façon suivante:</p>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="lecon_carto.html#cb506-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(DonneesSpatiales) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fonction1</span>() <span class="op">+</span><span class="st"> </span><span class="kw">tm_fonction2</span>() <span class="op">+</span><span class="st"> </span>...</span></code></pre></div>
+<p><br></p>
+<p>La fonction <code>tm_shape()</code> est suivi d’une ou de plusieurs fonctions qui précisent les objets ou les attributs des données à cartographier ainsi que les éléments cartographiques à ajouter et la mise en page souhaitée.</p>
+<p>Télécharger la bibliothèque <code>tmap</code>:</p>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="lecon_carto.html#cb507-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;tmap&quot;</span>)</span></code></pre></div>
+<p>Chargez <code>tmap</code> dans votre session de travail R ainsi que les bibliothèques <code>sf</code> et <code>raster</code> dont nous aurons besoin pour lire et manipuler les données vectorielles et matricielles respectivement:</p>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="lecon_carto.html#cb508-1" aria-hidden="true"></a><span class="kw">library</span>(tmap)</span>
+<span id="cb508-2"><a href="lecon_carto.html#cb508-2" aria-hidden="true"></a><span class="kw">library</span>(sf)</span>
+<span id="cb508-3"><a href="lecon_carto.html#cb508-3" aria-hidden="true"></a><span class="kw">library</span>(raster)</span></code></pre></div>
+</div>
+<div id="les-polygones" class="section level3 hasAnchor" number="6.1.4">
+<h3><span class="header-section-number">6.1.4</span> Les polygones<a href="lecon_carto.html#les-polygones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="données-sur-les-régions-administratives-du-québec" class="section level5 unnumbered hasAnchor" number="">
+<h5>Données sur les régions administratives du Québec<a href="lecon_carto.html#données-sur-les-régions-administratives-du-québec" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Pour débuter notre exploration des fonctions de cartographie offertes avec <code>tmap</code> nous utiliserons les données vectorielles sur les limites des régions administratives du Québec ainsi que la taille de leur population. La taille des populations des régions administratives provient de la Banque de données des statistiques officielles sur le Québec (<a href="https://bdso.gouv.qc.ca/" class="uri">https://bdso.gouv.qc.ca/</a>), et les limites géographiques des régions proviennent du site Données Québec (<a href="https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs" class="uri">https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs</a>).</p>
+<p>Utiliser la fonction <code>st_read()</code> de la bibliothèque <code>sf</code> pour lire le <em>shapefile</em> <code>QC_RegAdm_Pop.shp</code> contenu dans le dossier <code>Population</code>:</p>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="lecon_carto.html#cb509-1" aria-hidden="true"></a>Q &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;Module6/Module6_donnees/Population/QC_RegAdm_Pop.shp&quot;</span>)</span></code></pre></div>
+<pre class="codeout"><code>Reading layer `QC_RegAdm_Pop&#39; from data source 
+  `/home/kc/git/inSileco/sci1031/Module6/Module6_donnees/Population/QC_RegAdm_Pop.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 17 features and 8 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -830300 ymin: 118000 xmax: 783300 ymax: 2091000
+Projected CRS: NAD83 / Quebec Lambert</code></pre>
+<p><br></p>
+<p>Observer la structure et les attributs du <em>shapefile</em> <code>Q</code>. Celui-ci contient 17 multipolygones, un pour chacune des régions administratives du territoire québécois. De plus, <code>Q</code> contient 8 attributs:</p>
+<ul>
+<li><code>NUM_REG</code>: le numéro associé à la région administrative,</li>
+<li><code>NOM_REG</code>: le nom de la région administrative,</li>
+<li><code>AREA_REG</code>: la superficie de la région,</li>
+<li><code>Pop_tot</code>: la population totale en 2019 dans la région,</li>
+<li><code>Pop_0_14</code>: la population agée de 0 à 14 ans,</li>
+<li><code>Pop_15_24</code>: la population agée de 15 à 24 ans,</li>
+<li><code>Pop_25_64</code>: la population agée de 25 à 64 ans,</li>
+<li><code>Pop_65_</code>: la population agée de 65 ans et plus.</li>
+</ul>
+</div>
+<div id="intérieur-des-polygones" class="section level4 unnumbered hasAnchor" number="">
+<h4>Intérieur des polygones<a href="lecon_carto.html#intérieur-des-polygones" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="fct_tmfill" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_fill<a href="lecon_carto.html#fct_tmfill" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>Créons tout d’abord une carte simple du <em>shapefile</em> Q que nous venons de charger. La fonction <code>tm_fill()</code> permet de remplir de façon homogène l’intérieur des limites d’un polygone. Elle s’applique donc aux données vectorielles de type polygone, et on l’ajoute à la donction <code>tm_shape()</code>.</p>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="lecon_carto.html#cb511-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="st"> </span></span>
+<span id="cb511-2"><a href="lecon_carto.html#cb511-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-171-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+</div>
+<div id="objet-tmap" class="section level4 unnumbered hasAnchor" number="">
+<h4>Objet tmap<a href="lecon_carto.html#objet-tmap" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La bibliothèque <code>tmap</code> comprend sa propre classe d’objets:</p>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="lecon_carto.html#cb512-1" aria-hidden="true"></a>map_Q &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q)<span class="op">+</span><span class="st"> </span></span>
+<span id="cb512-2"><a href="lecon_carto.html#cb512-2" aria-hidden="true"></a><span class="st">             </span><span class="kw">tm_fill</span>()</span>
+<span id="cb512-3"><a href="lecon_carto.html#cb512-3" aria-hidden="true"></a></span>
+<span id="cb512-4"><a href="lecon_carto.html#cb512-4" aria-hidden="true"></a><span class="kw">class</span>(map_Q)</span></code></pre></div>
+<pre class="codeout"><code>[1] &quot;tmap&quot;</code></pre>
+<p><br>
+En créant un objet <code>tmap</code>, la carte est seulement affichée lorsqu’on appelle l’objet.
+La création d’objet <code>tmap</code> est utile car, comme nous le verrons, elle permet de constituer une carte de base à laquelle nous pouvons ajouter des éléments cartographiques.</p>
+</div>
+<div id="frontières-des-polygones" class="section level4 unnumbered hasAnchor" number="">
+<h4>Frontières des polygones<a href="lecon_carto.html#frontières-des-polygones" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="fonction-tm_borders" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_borders()<a href="lecon_carto.html#fonction-tm_borders" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La fonction <code>tm_borders()</code> permet d’illustrer les frontières des polygones:</p>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="lecon_carto.html#cb514-1" aria-hidden="true"></a><span class="co"># frontiere des regions admin</span></span>
+<span id="cb514-2"><a href="lecon_carto.html#cb514-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span></span>
+<span id="cb514-3"><a href="lecon_carto.html#cb514-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_borders</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-173-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>La fonction <code>tm_borders()</code> peut s’utiliser conjointement avec la fonction <code>tm_fill()</code>:</p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="lecon_carto.html#cb515-1" aria-hidden="true"></a><span class="co"># Quebec + frontiere</span></span>
+<span id="cb515-2"><a href="lecon_carto.html#cb515-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span></span>
+<span id="cb515-3"><a href="lecon_carto.html#cb515-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>() <span class="op">+</span></span>
+<span id="cb515-4"><a href="lecon_carto.html#cb515-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_borders</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-174-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+<div id="fonction-tm_polygons" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_polygons()<a href="lecon_carto.html#fonction-tm_polygons" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>Par ailleurs, la fonction <code>tm_polygons()</code> est équivalente l’utilisation conjointe de <code>tm_borders()</code> et <code>tm_fill()</code>:</p>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="lecon_carto.html#cb516-1" aria-hidden="true"></a><span class="co"># tm_polygons = tm_fill + tm_borders </span></span>
+<span id="cb516-2"><a href="lecon_carto.html#cb516-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span></span>
+<span id="cb516-3"><a href="lecon_carto.html#cb516-3" aria-hidden="true"></a><span class="st">   </span><span class="kw">tm_polygons</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-175-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+<div id="paramètres-esthétiques" class="section level5 unnumbered hasAnchor" number="">
+<h5>Paramètres esthétiques<a href="lecon_carto.html#paramètres-esthétiques" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Les fonctions <code>tm_borders()</code> et <code>tm_fill()</code> possèdent plusieurs arguments pour ajuster l’apparence de la carte. Voici des exemples:</p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="lecon_carto.html#cb517-1" aria-hidden="true"></a><span class="co"># couleur des polygones </span></span>
+<span id="cb517-2"><a href="lecon_carto.html#cb517-2" aria-hidden="true"></a>Q1 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb517-3"><a href="lecon_carto.html#cb517-3" aria-hidden="true"></a></span>
+<span id="cb517-4"><a href="lecon_carto.html#cb517-4" aria-hidden="true"></a><span class="co"># transparence</span></span>
+<span id="cb517-5"><a href="lecon_carto.html#cb517-5" aria-hidden="true"></a>Q2 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;green&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>)</span>
+<span id="cb517-6"><a href="lecon_carto.html#cb517-6" aria-hidden="true"></a></span>
+<span id="cb517-7"><a href="lecon_carto.html#cb517-7" aria-hidden="true"></a><span class="co"># couleur des frontières</span></span>
+<span id="cb517-8"><a href="lecon_carto.html#cb517-8" aria-hidden="true"></a>Q3 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb517-9"><a href="lecon_carto.html#cb517-9" aria-hidden="true"></a></span>
+<span id="cb517-10"><a href="lecon_carto.html#cb517-10" aria-hidden="true"></a><span class="co"># épaisseur du trait</span></span>
+<span id="cb517-11"><a href="lecon_carto.html#cb517-11" aria-hidden="true"></a>Q4 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;pink&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>) </span>
+<span id="cb517-12"><a href="lecon_carto.html#cb517-12" aria-hidden="true"></a></span>
+<span id="cb517-13"><a href="lecon_carto.html#cb517-13" aria-hidden="true"></a><span class="co"># type de trait</span></span>
+<span id="cb517-14"><a href="lecon_carto.html#cb517-14" aria-hidden="true"></a>Q5 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>) </span>
+<span id="cb517-15"><a href="lecon_carto.html#cb517-15" aria-hidden="true"></a></span>
+<span id="cb517-16"><a href="lecon_carto.html#cb517-16" aria-hidden="true"></a><span class="co"># couleur des polygones et des frontières</span></span>
+<span id="cb517-17"><a href="lecon_carto.html#cb517-17" aria-hidden="true"></a>Q6 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb517-18"><a href="lecon_carto.html#cb517-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb517-19"><a href="lecon_carto.html#cb517-19" aria-hidden="true"></a></span>
+<span id="cb517-20"><a href="lecon_carto.html#cb517-20" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q1,Q2,Q3,Q4,Q5,Q6)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-176"></span>
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-176-1.png" alt="Cette figure est inspirée de la [figure 9.3](https://geocompr.robinlovelace.net/adv-map.html) du livre Geocomputation with R [@lovelace_geocomputation_2021]." width="720" />
+<p class="caption">
+Figure 6.1: Cette figure est inspirée de la <a href="https://geocompr.robinlovelace.net/adv-map.html">figure 9.3</a> du livre Geocomputation with R <span class="citation">(Lovelace, Nowosad, and Muenchow <a href="ressources.html#ref-lovelace_geocomputation_2021" role="doc-biblioref">2021</a>)</span>.
+</p>
+</div>
+<p><br></p>
+<!--   Images des types de lignes
+Rappel types de couleur
+-->
+</div>
+</div>
+<div id="attributs-des-polygones" class="section level4 unnumbered hasAnchor" number="">
+<h4>Attributs des polygones<a href="lecon_carto.html#attributs-des-polygones" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La création de cartes, à partir de données vectorielles de type polygone, nécessite parfois de colorer individuellement les polygones.
+Par exemple, la couleur d’un polygone peut représenter la valeur d’un de ses attributs. Dans ce cas, nous utilisons la fonction <code>tm_fill()</code> en associat à l’argument <code>col</code> le nom de l`attribut que nous désirons illustrer.</p>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="lecon_carto.html#cb518-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Régions&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-177-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br>
+Dans le cas ci-dessus, l’attribut illustré (<code>NUM_REG</code>) est catégorique et distinct pour chaque polygone.</p>
+<p>Nous pouvons aussi choisir d’illustrer un seul des polygones d’un <em>shapefile</em>. Dans un tel cas, nous devons isoler le polygone désiré et n’illustrer que ce dernier avec la fonction <code>tm_shape()</code>. Par exemple, isolons le polygone correspondant à la région de l’Outaouais:</p>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="lecon_carto.html#cb519-1" aria-hidden="true"></a>Q_Outaouais &lt;-<span class="st"> </span>Q[Q<span class="op">$</span>NOM_REG <span class="op">==</span><span class="st"> &quot;Outaouais&quot;</span>,]</span>
+<span id="cb519-2"><a href="lecon_carto.html#cb519-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q_Outaouais) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-178-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Nous pouvons également vouloir mettre l’emphase sur un polygone en particulier, en assignant une couleur seulement à celui-ci, tout en cartographiant l’ensemble des polygones. Dans ce cas, nous pouvons utiliser le caractère additif des objets <code>tmap</code>. Nous créons un premier objet représentant l’ensemble des polygones et nous lui additionnons un deuxième objet représentant le polygone que nous souhaitons mettre en évidence.</p>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="lecon_carto.html#cb520-1" aria-hidden="true"></a><span class="co"># Une option</span></span>
+<span id="cb520-2"><a href="lecon_carto.html#cb520-2" aria-hidden="true"></a>Q1 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb520-3"><a href="lecon_carto.html#cb520-3" aria-hidden="true"></a>Q2 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q_Outaouais) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>)</span>
+<span id="cb520-4"><a href="lecon_carto.html#cb520-4" aria-hidden="true"></a>Q12 &lt;-<span class="st"> </span>Q1 <span class="op">+</span><span class="st"> </span>Q2</span>
+<span id="cb520-5"><a href="lecon_carto.html#cb520-5" aria-hidden="true"></a></span>
+<span id="cb520-6"><a href="lecon_carto.html#cb520-6" aria-hidden="true"></a><span class="co"># Une autre option</span></span>
+<span id="cb520-7"><a href="lecon_carto.html#cb520-7" aria-hidden="true"></a>Q3 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>()</span>
+<span id="cb520-8"><a href="lecon_carto.html#cb520-8" aria-hidden="true"></a>Q4 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q_Outaouais) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb520-9"><a href="lecon_carto.html#cb520-9" aria-hidden="true"></a>Q34 &lt;-<span class="st"> </span>Q3 <span class="op">+</span><span class="st"> </span>Q4</span>
+<span id="cb520-10"><a href="lecon_carto.html#cb520-10" aria-hidden="true"></a></span>
+<span id="cb520-11"><a href="lecon_carto.html#cb520-11" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q12,Q34)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-179-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Remarquer l’usage de la fonction <code>tmap_arrange()</code> pour afficher des cartes côte-à-côte.</p>
+</div>
+</div>
+<div id="spécificités-cartographiques" class="section level3 hasAnchor" number="6.1.5">
+<h3><span class="header-section-number">6.1.5</span> Spécificités cartographiques<a href="lecon_carto.html#spécificités-cartographiques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="barre-déchelle-et-rose-des-vents" class="section level4 unnumbered hasAnchor" number="">
+<h4>Barre d’échelle et rose des vents<a href="lecon_carto.html#barre-déchelle-et-rose-des-vents" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="fonctions-tm_scale_bar-et-tm_compass" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonctions tm_scale_bar() et tm_compass<a href="lecon_carto.html#fonctions-tm_scale_bar-et-tm_compass" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>L’ajout d’un barre d’échelle et d’une rose des vents, se fait par l’utilisation des fonctions <code>tm_scale_bar()</code> et <code>tm_compass()</code> respectivement:</p>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="lecon_carto.html#cb521-1" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st">   </span><span class="co"># la carte du Québec que nous avons créée plus haut</span></span>
+<span id="cb521-2"><a href="lecon_carto.html#cb521-2" aria-hidden="true"></a><span class="st">  </span><span class="co"># ajout d&#39;une barre d&#39;échelle</span></span>
+<span id="cb521-3"><a href="lecon_carto.html#cb521-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_scale_bar</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">250</span>,<span class="dv">500</span>),</span>
+<span id="cb521-4"><a href="lecon_carto.html#cb521-4" aria-hidden="true"></a>               <span class="dt">text.size =</span> <span class="fl">0.8</span>, </span>
+<span id="cb521-5"><a href="lecon_carto.html#cb521-5" aria-hidden="true"></a>               <span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;right&quot;</span>,<span class="st">&quot;bottom&quot;</span>)) <span class="op">+</span></span>
+<span id="cb521-6"><a href="lecon_carto.html#cb521-6" aria-hidden="true"></a><span class="st">  </span><span class="co"># ajout d&#39;une rose des vents</span></span>
+<span id="cb521-7"><a href="lecon_carto.html#cb521-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_compass</span>(<span class="dt">type =</span> <span class="st">&quot;arrow&quot;</span>, </span>
+<span id="cb521-8"><a href="lecon_carto.html#cb521-8" aria-hidden="true"></a>             <span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;top&quot;</span>))</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-180-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>où l’argument <code>break</code> précise les divisions sur la barre d’échelle, <code>text.size</code> la taille du texte sous la barre, et <code>position</code> la position de la barre sur la carte (gauche ou droite, haut ou bas).</p>
+<p>Plusieurs options d’arguments sont possibles. Utilisez <code>help(tm_scale_bar)</code> ou <code>help(tm_compass)</code> pour connaître les autres arguments possibles pour ces fonctions. Par exemple,</p>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="lecon_carto.html#cb522-1" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st">   </span></span>
+<span id="cb522-2"><a href="lecon_carto.html#cb522-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_scale_bar</span>(<span class="dt">width =</span> <span class="dv">2</span>, </span>
+<span id="cb522-3"><a href="lecon_carto.html#cb522-3" aria-hidden="true"></a>               <span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;right&quot;</span>,<span class="st">&quot;bottom&quot;</span>)) <span class="op">+</span></span>
+<span id="cb522-4"><a href="lecon_carto.html#cb522-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_compass</span>(<span class="dt">type =</span> <span class="st">&quot;4star&quot;</span>,</span>
+<span id="cb522-5"><a href="lecon_carto.html#cb522-5" aria-hidden="true"></a>             <span class="dt">size =</span> <span class="dv">2</span>, </span>
+<span id="cb522-6"><a href="lecon_carto.html#cb522-6" aria-hidden="true"></a>             <span class="dt">show.labels =</span> <span class="dv">2</span>, </span>
+<span id="cb522-7"><a href="lecon_carto.html#cb522-7" aria-hidden="true"></a>             <span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;top&quot;</span>))</span></code></pre></div>
+<pre><code>Scale bar width set to 0.25 of the map width</code></pre>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-181-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+</div>
+<div id="grille-et-graticules" class="section level4 unnumbered hasAnchor" number="">
+<h4>Grille et graticules<a href="lecon_carto.html#grille-et-graticules" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="fonctions-tm_grid-et-tm_borders" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonctions tm_grid() et tm_borders()<a href="lecon_carto.html#fonctions-tm_grid-et-tm_borders" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La fonction <code>tm_grid()</code> ajoute une grille à la carte selon le système de coordonnées projetées des données. Dans le cas présent, le <em>shapefile</em> <code>Q</code> est exprimé dans le système de coordonnées projetée Conique conforme de Lambert (epsg:32198) qui est métrique.</p>
+<p>La fonction <code>tm_graticules</code> ajoute les lignes de longitude et de latitude du système de coordonnées géographiques, c’est-à-dire non-projetées. Dans le cas présent, le <em>shapefile</em> <code>Q</code> est exprimé dans le système de coordonnées géographiques du Datum North Américain de 1983 (NAD83, espg:4269).</p>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="lecon_carto.html#cb524-1" aria-hidden="true"></a>Q1 &lt;-<span class="st"> </span>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_grid</span>()</span>
+<span id="cb524-2"><a href="lecon_carto.html#cb524-2" aria-hidden="true"></a></span>
+<span id="cb524-3"><a href="lecon_carto.html#cb524-3" aria-hidden="true"></a>Q2 &lt;-<span class="st"> </span>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_graticules</span>()</span>
+<span id="cb524-4"><a href="lecon_carto.html#cb524-4" aria-hidden="true"></a></span>
+<span id="cb524-5"><a href="lecon_carto.html#cb524-5" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q1,Q2)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-182-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Plusieurs options d’arguments existent pour les fonctions <code>tm_grid()</code> et <code>tm_graticules()</code>. Par exemple, il est possible de préciser le nombre de divisions sur l’axe des <em>x</em> (<code>n.x</code>) et sur l’axe des <em>y</em> (<code>n.y</code>)<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a>, l’épaisseur du trait (<code>lwd</code>), la couleur (<code>col</code>) ou encore la taille de l’écriture (<code>labels.size</code>).</p>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="lecon_carto.html#cb525-1" aria-hidden="true"></a>Q1 &lt;-<span class="st"> </span>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_grid</span>(<span class="dt">labels.size=</span><span class="fl">0.5</span>, </span>
+<span id="cb525-2"><a href="lecon_carto.html#cb525-2" aria-hidden="true"></a>                      <span class="dt">col=</span><span class="st">&quot;yellow&quot;</span>, </span>
+<span id="cb525-3"><a href="lecon_carto.html#cb525-3" aria-hidden="true"></a>                      <span class="dt">lwd=</span><span class="dv">3</span>, </span>
+<span id="cb525-4"><a href="lecon_carto.html#cb525-4" aria-hidden="true"></a>                      <span class="dt">n.x =</span> <span class="dv">10</span>, <span class="dt">n.y =</span> <span class="dv">4</span>)</span>
+<span id="cb525-5"><a href="lecon_carto.html#cb525-5" aria-hidden="true"></a></span>
+<span id="cb525-6"><a href="lecon_carto.html#cb525-6" aria-hidden="true"></a>Q2 &lt;-<span class="st"> </span>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_graticules</span>(<span class="dt">labels.col =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
+<span id="cb525-7"><a href="lecon_carto.html#cb525-7" aria-hidden="true"></a>                            <span class="dt">alpha =</span> <span class="fl">0.3</span>, </span>
+<span id="cb525-8"><a href="lecon_carto.html#cb525-8" aria-hidden="true"></a>                            <span class="dt">labels.cardinal =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb525-9"><a href="lecon_carto.html#cb525-9" aria-hidden="true"></a></span>
+<span id="cb525-10"><a href="lecon_carto.html#cb525-10" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q1,Q2)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-183-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+</div>
+<div id="attribuer-les-crédits-ou-la-source-des-données" class="section level4 unnumbered hasAnchor" number="">
+<h4>Attribuer les crédits ou la source des données<a href="lecon_carto.html#attribuer-les-crédits-ou-la-source-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="fonction-tm_credits" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_credits()<a href="lecon_carto.html#fonction-tm_credits" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>Il faut utiliser la fonction <code>tm_credits()</code> pour ajouter à la carte une mention sur la source des données, ou toute autre information comme l’auteur ou l’autrice de la carte et son organisation d’attache. Par défaut, la mention apparaît dans le coin inférieur droit.</p>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="lecon_carto.html#cb526-1" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span></span>
+<span id="cb526-2"><a href="lecon_carto.html#cb526-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_credits</span>(<span class="st">&quot;Données récupérées </span><span class="ch">\n</span><span class="st">sur le site donneesquebec.ca&quot;</span>, </span>
+<span id="cb526-3"><a href="lecon_carto.html#cb526-3" aria-hidden="true"></a>             <span class="dt">size =</span> <span class="fl">0.6</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-184-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="mise-en-page" class="section level3 hasAnchor" number="6.1.6">
+<h3><span class="header-section-number">6.1.6</span> Mise en page<a href="lecon_carto.html#mise-en-page" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fonction-tm_layout" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_layout()<a href="lecon_carto.html#fonction-tm_layout" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La fonction <code>tm_layout</code> permet d’ajuster la mise en page d’une carte et différents éléments de son esthétique. Pour découvrir l’ensemble des arguments possibles tapez la commande <code>help(tm_layout)</code> (ou <code>?tm_layout</code>) dans votre console R. Plusieurs des arguments utiles sont présentés ci-dessous.</p>
+</div>
+<div id="titre-cadre-et-couleur-du-fond" class="section level4 unnumbered hasAnchor" number="">
+<h4>Titre, cadre et couleur du fond<a href="lecon_carto.html#titre-cadre-et-couleur-du-fond" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>L’ajout d’un titre (<code>title</code>), la taille de ce dernier (<code>title.size</code>) et sa position (<code>title.position</code>).</li>
+<li>La présence ou l’absence d’un cadre (<code>frame</code>) et l’épaisseur du trait de celui-ci (<code>frame.lw</code>).</li>
+<li>La taille des marges extérieures au cadre: <code>outer.margins = c(Haut,Droit,Bas,Gauche)</code> où <code>Haut</code>, <code>Droit</code>, <code>Bas</code>, <code>Gauche</code> sont des chiffres entre 0 (pas de marge) et 1 (marge complète).</li>
+<li>La couleur du fond de la carte (<code>bg.color</code>) et de l’espace à l’extérieure du cadre (<code>outer.bg.color</code>).</li>
+</ul>
+<p>Voici quelques exemples de mise en page qui utilisent ces arguments.</p>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="lecon_carto.html#cb527-1" aria-hidden="true"></a><span class="co"># Création d&#39;une carte générale</span></span>
+<span id="cb527-2"><a href="lecon_carto.html#cb527-2" aria-hidden="true"></a>map_Q &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>() <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>()</span>
+<span id="cb527-3"><a href="lecon_carto.html#cb527-3" aria-hidden="true"></a></span>
+<span id="cb527-4"><a href="lecon_carto.html#cb527-4" aria-hidden="true"></a><span class="co"># Différentes options de mise en page</span></span>
+<span id="cb527-5"><a href="lecon_carto.html#cb527-5" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">title =</span> <span class="st">&quot;Carte du Québec&quot;</span>, <span class="dt">title.size =</span><span class="fl">0.8</span>, <span class="dt">title.position =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>,<span class="st">&quot;top&quot;</span>))</span>
+<span id="cb527-6"><a href="lecon_carto.html#cb527-6" aria-hidden="true"></a></span>
+<span id="cb527-7"><a href="lecon_carto.html#cb527-7" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb527-8"><a href="lecon_carto.html#cb527-8" aria-hidden="true"></a></span>
+<span id="cb527-9"><a href="lecon_carto.html#cb527-9" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">bg.color =</span> <span class="st">&quot;aquamarine&quot;</span>, <span class="dt">scale =</span> <span class="dv">2</span>)</span>
+<span id="cb527-10"><a href="lecon_carto.html#cb527-10" aria-hidden="true"></a></span>
+<span id="cb527-11"><a href="lecon_carto.html#cb527-11" aria-hidden="true"></a>map_Q <span class="op">+</span><span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">frame.lwd =</span> <span class="dv">2</span>, <span class="dt">outer.margins =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>,<span class="dv">0</span>, <span class="fl">0.2</span>), <span class="dt">outer.bg.color=</span><span class="st">&quot;lavender&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-186-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+<div id="légende" class="section level4 unnumbered hasAnchor" number="">
+<h4>Légende<a href="lecon_carto.html#légende" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La fonction <code>tm_layout()</code> permet aussi de configurer l’apparence de la légende. Certains des arguments utiles sont:</p>
+<ul>
+<li>La présence, ou non, d’une légende (<code>legend.show</code>). Par défaut la légende est affichée.</li>
+<li>L’option de placer la légende à l’extérieur du cadre de la figure (<code>legend.outside</code>).</li>
+<li>La position de la légende à l’intérieur (<code>legend.position</code>) ou à l’extérieur (<code>legend.outside.position</code>) du cadre. Par défaut,la légende est placée dans le coin où il y a le plus d’espace.</li>
+<li>L’option de mettre un cadre autour de la légende (<code>legend.frame</code>) et de définir l’épaisseur du trait (<code>legend.frame.lwd</code>) et la couleur de fond de la légende (<code>legend.bg.color</code>)</li>
+<li>La police de caractère (<code>legend.title.fontfamily</code>), la taille des caractères (<code>legend.title.fontface</code>), et la couleur (<code>legend.title.color</code>) du texte et du titre de la légende.</li>
+</ul>
+<p>Voici quelques exemples de mise en page de la légende:</p>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="lecon_carto.html#cb528-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb528-2"><a href="lecon_carto.html#cb528-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;NOM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb528-3"><a href="lecon_carto.html#cb528-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb528-4"><a href="lecon_carto.html#cb528-4" aria-hidden="true"></a></span>
+<span id="cb528-5"><a href="lecon_carto.html#cb528-5" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span></span>
+<span id="cb528-6"><a href="lecon_carto.html#cb528-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Régions administratives&quot;</span>, </span>
+<span id="cb528-7"><a href="lecon_carto.html#cb528-7" aria-hidden="true"></a>              <span class="dt">legend.is.portrait =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb528-8"><a href="lecon_carto.html#cb528-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb528-9"><a href="lecon_carto.html#cb528-9" aria-hidden="true"></a>            <span class="dt">legend.outside.position =</span> <span class="st">&quot;bottom&quot;</span>, </span>
+<span id="cb528-10"><a href="lecon_carto.html#cb528-10" aria-hidden="true"></a>            <span class="dt">legend.outside.size =</span> <span class="fl">0.15</span>, </span>
+<span id="cb528-11"><a href="lecon_carto.html#cb528-11" aria-hidden="true"></a>            <span class="dt">legend.text.size =</span> <span class="fl">0.75</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-188-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="lecon_carto.html#cb529-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb529-2"><a href="lecon_carto.html#cb529-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>(<span class="dt">col =</span> <span class="st">&quot;NOM_REG&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Régions administratives&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb529-3"><a href="lecon_carto.html#cb529-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">legend.outside =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-190-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="lecon_carto.html#cb530-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb530-2"><a href="lecon_carto.html#cb530-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>(<span class="dt">col=</span><span class="st">&quot;NOM_REG&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Régions administratives&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb530-3"><a href="lecon_carto.html#cb530-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">bg.color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb530-4"><a href="lecon_carto.html#cb530-4" aria-hidden="true"></a>            <span class="dt">legend.outside.position =</span> <span class="st">&quot;left&quot;</span>, </span>
+<span id="cb530-5"><a href="lecon_carto.html#cb530-5" aria-hidden="true"></a>            <span class="dt">legend.title.fontfamily =</span> <span class="st">&quot;serif&quot;</span>, </span>
+<span id="cb530-6"><a href="lecon_carto.html#cb530-6" aria-hidden="true"></a>            <span class="dt">legend.title.fontface =</span> <span class="dv">2</span>, </span>
+<span id="cb530-7"><a href="lecon_carto.html#cb530-7" aria-hidden="true"></a>            <span class="dt">legend.title.color =</span> <span class="st">&quot;lightpink&quot;</span>, </span>
+<span id="cb530-8"><a href="lecon_carto.html#cb530-8" aria-hidden="true"></a>            <span class="dt">legend.text.color =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-192-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<!--   
+
+
+```
+Some legend labels were too wide. These labels have been resized to 0.66, 0.65, 0.47, 0.55. Increase legend.width (argument of tm_layout) to make the legend wider and therefore the labels larger.
+```
+
+```
+Legend labels were too wide. Therefore, legend.text.size has been set to 0.47. Increase legend.width (argument of tm_layout) to make the legend wider and therefore the labels larger.
+```
+
+```
+Some legend labels were too wide. These labels have been resized to 0.66, 0.65, 0.47, 0.55. Increase legend.width (argument of tm_layout) to make the legend wider and therefore the labels larger.
+```
+
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-193-1.png" width="720" style="display: block; margin: auto;" />
+
+-->
+</div>
+<div id="ajustement-des-couleurs" class="section level4 unnumbered hasAnchor" number="">
+<h4>Ajustement des couleurs<a href="lecon_carto.html#ajustement-des-couleurs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>De plus, la fonction tm_layout permet d’ajuster les couleurs présentes dans la carte:</p>
+<ul>
+<li>L’argument <code>aes.color</code> défini la couleur de remplissage des polygones, des frontières, du texte, etc.</li>
+<li>L’argument <code>saturation</code> défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées. Il est aussi possible de données des valeurs négatives.</li>
+<li>L’argument <code>sepia.intensity</code> est un nombre entre 0 et 1 qui défini le niveau de “chaleur” des couleurs. Plus sa valeur est grande, plus les couleurs ont une teinte jaune voir brune. La valeur par défaut est 0.</li>
+<li>L’argument <code>aes.palette</code> permet de changer la palette de couleurs utilisées. La librarie <code>tmap</code> utilise les palettes de couleurs de <a href="https://colorbrewer2.org/">Color Brewer</a>. Dans le cas d’attributs catégoriques (comme le nom de régions) la palette utilisée par défaut se nomme <code>Set3</code>, mais il est possible de choisir d’autres palettes parmi celles-ci: <code>Accent</code>, <code>Dark2</code>, <code>Paired</code>, <code>Pastel1</code>, <code>Pastel2</code>, <code>Set1</code>, et <code>Set2</code>. Nous reviendrons sur le sujet des palettes un peu plus loin dans cete leçon.</li>
+</ul>
+<p>Voici quelques exemples de modification des couleurs:</p>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="lecon_carto.html#cb531-1" aria-hidden="true"></a>Q1 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb531-2"><a href="lecon_carto.html#cb531-2" aria-hidden="true"></a><span class="st">                    </span><span class="kw">tm_layout</span>(<span class="dt">aes.color =</span> <span class="kw">c</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>,<span class="dt">borders=</span><span class="st">&quot;darkgreen&quot;</span>))</span>
+<span id="cb531-3"><a href="lecon_carto.html#cb531-3" aria-hidden="true"></a></span>
+<span id="cb531-4"><a href="lecon_carto.html#cb531-4" aria-hidden="true"></a>Q2 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb531-5"><a href="lecon_carto.html#cb531-5" aria-hidden="true"></a><span class="st">                    </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb531-6"><a href="lecon_carto.html#cb531-6" aria-hidden="true"></a>                              <span class="dt">aes.color =</span> <span class="kw">c</span>(<span class="dt">borders=</span><span class="st">&quot;white&quot;</span>),</span>
+<span id="cb531-7"><a href="lecon_carto.html#cb531-7" aria-hidden="true"></a>                              <span class="dt">saturation =</span> <span class="dv">0</span>)</span>
+<span id="cb531-8"><a href="lecon_carto.html#cb531-8" aria-hidden="true"></a></span>
+<span id="cb531-9"><a href="lecon_carto.html#cb531-9" aria-hidden="true"></a>Q3 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb531-10"><a href="lecon_carto.html#cb531-10" aria-hidden="true"></a><span class="st">                    </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb531-11"><a href="lecon_carto.html#cb531-11" aria-hidden="true"></a>                              <span class="dt">sepia.intensity =</span> <span class="fl">0.5</span>)</span>
+<span id="cb531-12"><a href="lecon_carto.html#cb531-12" aria-hidden="true"></a></span>
+<span id="cb531-13"><a href="lecon_carto.html#cb531-13" aria-hidden="true"></a>Q4 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb531-14"><a href="lecon_carto.html#cb531-14" aria-hidden="true"></a><span class="st">                    </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb531-15"><a href="lecon_carto.html#cb531-15" aria-hidden="true"></a>                              <span class="dt">aes.palette =</span> <span class="kw">list</span>(<span class="dt">cat =</span> <span class="st">&quot;Accent&quot;</span>))</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-195-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="styles-prédéfinis" class="section level4 unnumbered hasAnchor" number="">
+<h4>Styles prédéfinis<a href="lecon_carto.html#styles-prédéfinis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="fonction-tm_style" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_style()<a href="lecon_carto.html#fonction-tm_style" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La librarie <code>tmap</code> contient des styles prédéfinis qu’on appelle avec la fonction <code>tm_style</code> et qui permettent de ne pas avoir à définir individuellement des arguments de la fonction <code>tm_layout</code>.</p>
+<p>Voici quelques uns de ces styles prédéfinis.</p>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="lecon_carto.html#cb532-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb532-2"><a href="lecon_carto.html#cb532-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;classic&quot;</span>) <span class="op">+</span></span>
+<span id="cb532-3"><a href="lecon_carto.html#cb532-3" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb532-4"><a href="lecon_carto.html#cb532-4" aria-hidden="true"></a></span>
+<span id="cb532-5"><a href="lecon_carto.html#cb532-5" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb532-6"><a href="lecon_carto.html#cb532-6" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;bw&quot;</span>) <span class="op">+</span></span>
+<span id="cb532-7"><a href="lecon_carto.html#cb532-7" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb532-8"><a href="lecon_carto.html#cb532-8" aria-hidden="true"></a></span>
+<span id="cb532-9"><a href="lecon_carto.html#cb532-9" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span></span>
+<span id="cb532-10"><a href="lecon_carto.html#cb532-10" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;cobalt&quot;</span>) <span class="op">+</span></span>
+<span id="cb532-11"><a href="lecon_carto.html#cb532-11" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb532-12"><a href="lecon_carto.html#cb532-12" aria-hidden="true"></a>                                            </span>
+<span id="cb532-13"><a href="lecon_carto.html#cb532-13" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb532-14"><a href="lecon_carto.html#cb532-14" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="op">+</span><span class="st">                             </span></span>
+<span id="cb532-15"><a href="lecon_carto.html#cb532-15" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>) </span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-197-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p>Vous remarquerez que le style <code>col_blind</code> utilise une palette de couleur permettant aux personnes daltoniennes de pouvoir différencier les polygones de couleurs différentes.</p>
+</div>
+</div>
+</div>
+<div id="écriture-sur-une-carte" class="section level3 hasAnchor" number="6.1.7">
+<h3><span class="header-section-number">6.1.7</span> Écriture sur une carte<a href="lecon_carto.html#écriture-sur-une-carte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fonction-tm_text" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_text()<a href="lecon_carto.html#fonction-tm_text" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<!-- 
+Attention tm_text() ne donne pas les bonnes info ici:https://www.rdocumentation.org/packages/tmap/versions/0.7/topics/tm_text
+Il faut aller ici: https://rdrr.io/cran/tmap/man/tm_text.html
+  -->
+<p>La fonction <code>tm_text()</code> permet d’écrire sur chaque polygone la valeur d’un de ses attributs.
+Par exemple, nous pouvons ajouter le numéro de la région administrative sur chaque polygone:</p>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="lecon_carto.html#cb533-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb533-2"><a href="lecon_carto.html#cb533-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb533-3"><a href="lecon_carto.html#cb533-3" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>)<span class="op">+</span></span>
+<span id="cb533-4"><a href="lecon_carto.html#cb533-4" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_text</span>(<span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">size =</span> <span class="fl">0.6</span>, <span class="dt">fontface=</span><span class="st">&quot;bold&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-198-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Ou encore:</p>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="lecon_carto.html#cb534-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>() <span class="op">+</span></span>
+<span id="cb534-2"><a href="lecon_carto.html#cb534-2" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_layout</span>(<span class="dt">aes.color =</span> <span class="kw">c</span>(<span class="dt">fill=</span><span class="st">&quot;black&quot;</span>,<span class="dt">borders=</span><span class="st">&quot;white&quot;</span>),</span>
+<span id="cb534-3"><a href="lecon_carto.html#cb534-3" aria-hidden="true"></a>                          <span class="dt">bg.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb534-4"><a href="lecon_carto.html#cb534-4" aria-hidden="true"></a>                          <span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb534-5"><a href="lecon_carto.html#cb534-5" aria-hidden="true"></a>                          <span class="dt">legend.bg.color =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb534-6"><a href="lecon_carto.html#cb534-6" aria-hidden="true"></a>                          <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb534-7"><a href="lecon_carto.html#cb534-7" aria-hidden="true"></a>                          <span class="dt">legend.text.size =</span> <span class="fl">0.8</span>,</span>
+<span id="cb534-8"><a href="lecon_carto.html#cb534-8" aria-hidden="true"></a>                          <span class="dt">legend.text.color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb534-9"><a href="lecon_carto.html#cb534-9" aria-hidden="true"></a>                          <span class="dt">legend.title.color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb534-10"><a href="lecon_carto.html#cb534-10" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_text</span>(<span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">col=</span> <span class="st">&quot;NOM_REG&quot;</span>, </span>
+<span id="cb534-11"><a href="lecon_carto.html#cb534-11" aria-hidden="true"></a>                        <span class="dt">palette =</span> <span class="st">&quot;Paired&quot;</span>, </span>
+<span id="cb534-12"><a href="lecon_carto.html#cb534-12" aria-hidden="true"></a>                        <span class="dt">size =</span> <span class="fl">0.8</span>, <span class="dt">fontface=</span><span class="st">&quot;bold&quot;</span>, </span>
+<span id="cb534-13"><a href="lecon_carto.html#cb534-13" aria-hidden="true"></a>                        <span class="dt">legend.col.show =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb534-14"><a href="lecon_carto.html#cb534-14" aria-hidden="true"></a>                        <span class="dt">title.col =</span> <span class="st">&quot;Régions administratives&quot;</span>,</span>
+<span id="cb534-15"><a href="lecon_carto.html#cb534-15" aria-hidden="true"></a>                        <span class="dt">auto.placement=</span><span class="ot">TRUE</span>, </span>
+<span id="cb534-16"><a href="lecon_carto.html#cb534-16" aria-hidden="true"></a>                        <span class="dt">just=</span><span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-199-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+</div>
+<div id="les-lignes" class="section level3 hasAnchor" number="6.1.8">
+<h3><span class="header-section-number">6.1.8</span> Les lignes<a href="lecon_carto.html#les-lignes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="données-sur-le-réseau-routier-du-québec" class="section level5 unnumbered hasAnchor" number="">
+<h5>Données sur le réseau routier du Québec<a href="lecon_carto.html#données-sur-le-réseau-routier-du-québec" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Pour explorer les options d’affichage de données vectorielles de types ligne et multiligne, nous utilisons le <em>shapefile</em> du réseau des routes du Québec. Chargeons ces données dans notre session de travail R avec la fonction <code>st_read()</code>:</p>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="lecon_carto.html#cb535-1" aria-hidden="true"></a>Ro &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;Module6/Module6_donnees/Routes/QC_routes.shp&quot;</span>)</span></code></pre></div>
+<pre class="codeout"><code>Reading layer `QC_routes&#39; from data source 
+  `/home/kc/git/inSileco/sci1031/Module6/Module6_donnees/Routes/QC_routes.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 223 features and 2 fields
+Geometry type: MULTILINESTRING
+Dimension:     XY
+Bounding box:  xmin: -822900 ymin: 118000 xmax: 526000 ymax: 983200
+Projected CRS: NAD83 / Quebec Lambert</code></pre>
+<p><br></p>
+<p>Observer la structure et les attributs du <em>shapefile</em> <code>Ro</code>. Celui-ci contient 223 multilignes et 2 attributs autres que la géométrie:</p>
+<ul>
+<li><code>NoRte</code>: le numéro de la route,</li>
+<li><code>ClsRte</code>: la classe de la route.</li>
+</ul>
+<p>En particulier, il existe trois classes possibles de route:</p>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="lecon_carto.html#cb537-1" aria-hidden="true"></a>Ro<span class="op">$</span>ClsRte &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Ro<span class="op">$</span>ClsRte)</span>
+<span id="cb537-2"><a href="lecon_carto.html#cb537-2" aria-hidden="true"></a><span class="kw">levels</span>(Ro<span class="op">$</span>ClsRte)</span></code></pre></div>
+<pre class="codeout"><code>[1] &quot;Autoroute&quot; &quot;Nationale&quot; &quot;Régionale&quot;</code></pre>
+<p><br></p>
+<div id="fonction-tm_lines" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_lines()<a href="lecon_carto.html#fonction-tm_lines" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La bibliothèque <code>tmap</code> possède une fonction particulière pour illustrer des objects vectoriels de type ligne et multigne. Il s’agit de la fonction <code>tm_lines()</code>. Celle-ci doit être ajouter à la fonction <code>tm_shape(L)</code> où <code>L</code> est un <em>shapefile</em> contenant des objets de géométrie ligne ou multiligne.</p>
+<p>Illustrons les multilignes du <em>shapefile</em> <code>Ro</code>:</p>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="lecon_carto.html#cb539-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Ro) <span class="op">+</span><span class="st"> </span><span class="kw">tm_lines</span>()</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-202-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Pour superposer la carte des routes sur la carte du Québec, nous utilisons la propriété additive des objets <code>tmap</code>.</p>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="lecon_carto.html#cb540-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>() <span class="op">+</span></span>
+<span id="cb540-2"><a href="lecon_carto.html#cb540-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_shape</span>(Ro) <span class="op">+</span><span class="st"> </span><span class="kw">tm_lines</span>(<span class="dt">col=</span><span class="st">&quot;brown&quot;</span>) <span class="op">+</span></span>
+<span id="cb540-3"><a href="lecon_carto.html#cb540-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">title =</span> <span class="st">&quot;Réseau routier&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-203-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Notez que chaque fois qu’on ajoute un nouvel ensemble de données à cartographier en utilisant <code>tm_shape(nouvelles_donnees)</code>, les fonctions <code>tm_fonctions()</code> qui suivent s’appliquent à ces nouvelles données et non aux données antérieures.</p>
+<p>Pour représenter différemment les objets de type ligne en fonction de la valeur d’un de leur attribut, nous pouvons utiliser l’argument <code>col</code> dans la fonction <code>tm_lines</code>:</p>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="lecon_carto.html#cb541-1" aria-hidden="true"></a><span class="co"># créons une palette de trois couleurs</span></span>
+<span id="cb541-2"><a href="lecon_carto.html#cb541-2" aria-hidden="true"></a>pal.col&lt;-<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;darkgoldenrod4&quot;</span>,<span class="st">&quot;darkslateblue&quot;</span>)</span>
+<span id="cb541-3"><a href="lecon_carto.html#cb541-3" aria-hidden="true"></a></span>
+<span id="cb541-4"><a href="lecon_carto.html#cb541-4" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span></span>
+<span id="cb541-5"><a href="lecon_carto.html#cb541-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_fill</span>() <span class="op">+</span></span>
+<span id="cb541-6"><a href="lecon_carto.html#cb541-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_shape</span>(Ro) <span class="op">+</span></span>
+<span id="cb541-7"><a href="lecon_carto.html#cb541-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_lines</span>(<span class="dt">col =</span> <span class="st">&quot;ClsRte&quot;</span>, </span>
+<span id="cb541-8"><a href="lecon_carto.html#cb541-8" aria-hidden="true"></a>           <span class="dt">palette =</span> pal.col, </span>
+<span id="cb541-9"><a href="lecon_carto.html#cb541-9" aria-hidden="true"></a>           <span class="dt">title.col =</span> <span class="st">&quot;Types de route&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-204-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+</div>
+</div>
+<div id="les-points" class="section level3 hasAnchor" number="6.1.9">
+<h3><span class="header-section-number">6.1.9</span> Les points<a href="lecon_carto.html#les-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="coordonnées-des-municipalités-du-québec" class="section level5 unnumbered hasAnchor" number="">
+<h5>Coordonnées des municipalités du Québec<a href="lecon_carto.html#coordonnées-des-municipalités-du-québec" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Pour explorer les options d’affichage de données vectorielles de types point et multipoint, nous utilisons le <em>shapefile</em> des coordonnées géographiques de quelques municipalités du Québec. Chargeons ces données dans notre session de travail R avec la fonction <code>st_read()</code>:</p>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="lecon_carto.html#cb542-1" aria-hidden="true"></a>V &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;Module6/Module6_donnees/Villes/QC_coord_municipalites.shp&quot;</span>)</span></code></pre></div>
+<pre class="codeout"><code>Reading layer `QC_coord_municipalites&#39; from data source `/home/kc/git/inSileco/sci1031/Module6/Module6_donnees/Villes/QC_coord_municipalites.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 15 features and 1 field
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -78.91 ymin: 45.41 xmax: -64.47 ymax: 62.41
+Geodetic CRS:  NAD83</code></pre>
+<p><br></p>
+<p>Ce <em>shapefile</em> compte 15 objets de type point et un seul attribut (<code>Mncplts</code>) correspondant au nom de la municipalité qui lui est associée.</p>
+<p>La bibliothèque <code>tmap</code> comprend plusieurs fonctions permettant de représenter des données de type point. Familiarisons-nous d’abord avec les fonctions <code>tm_dots()</code> et <code>tm_markers()</code>. Nous verrons plus loin les fonctions <code>tm_bubbles()</code> et <code>tm_symbols()</code>.</p>
+<div id="fonction-tm_dots" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_dots()<a href="lecon_carto.html#fonction-tm_dots" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La fonction <code>tm_dots()</code> fonctionne de façon similaire aux fonctions <code>tm_polygons()</code> et <code>tm_lines()</code>. Il suffit de l’ajouté à la fonction <code>tm_shape(P)</code> où <code>P</code> est un <em>shapefile</em> de types point ou multipoint.</p>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="lecon_carto.html#cb544-1" aria-hidden="true"></a><span class="co"># Juste les points</span></span>
+<span id="cb544-2"><a href="lecon_carto.html#cb544-2" aria-hidden="true"></a>Q1 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(V) <span class="op">+</span><span class="st"> </span><span class="kw">tm_dots</span>()</span>
+<span id="cb544-3"><a href="lecon_carto.html#cb544-3" aria-hidden="true"></a></span>
+<span id="cb544-4"><a href="lecon_carto.html#cb544-4" aria-hidden="true"></a><span class="co"># Les points et la carte du QC</span></span>
+<span id="cb544-5"><a href="lecon_carto.html#cb544-5" aria-hidden="true"></a>Q2 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>) <span class="op">+</span></span>
+<span id="cb544-6"><a href="lecon_carto.html#cb544-6" aria-hidden="true"></a><span class="st">      </span><span class="kw">tm_shape</span>(V) <span class="op">+</span><span class="st"> </span><span class="kw">tm_dots</span>(<span class="dt">col =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</span>
+<span id="cb544-7"><a href="lecon_carto.html#cb544-7" aria-hidden="true"></a></span>
+<span id="cb544-8"><a href="lecon_carto.html#cb544-8" aria-hidden="true"></a><span class="co"># </span></span>
+<span id="cb544-9"><a href="lecon_carto.html#cb544-9" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Q1,Q2)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-206-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Nous pouvons également définir la couleur des points en fonction de la valeur de leur attribut.</p>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="lecon_carto.html#cb545-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>() <span class="op">+</span></span>
+<span id="cb545-2"><a href="lecon_carto.html#cb545-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(V) <span class="op">+</span><span class="st"> </span><span class="kw">tm_dots</span>(<span class="dt">col =</span> <span class="st">&quot;Mncplts&quot;</span>, </span>
+<span id="cb545-3"><a href="lecon_carto.html#cb545-3" aria-hidden="true"></a>                      <span class="dt">palette =</span> <span class="st">&quot;Paired&quot;</span>, </span>
+<span id="cb545-4"><a href="lecon_carto.html#cb545-4" aria-hidden="true"></a>                      <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb545-5"><a href="lecon_carto.html#cb545-5" aria-hidden="true"></a><span class="st">              </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb545-6"><a href="lecon_carto.html#cb545-6" aria-hidden="true"></a>                        <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb545-7"><a href="lecon_carto.html#cb545-7" aria-hidden="true"></a>                        <span class="dt">title =</span> <span class="st">&quot;Municipalités&quot;</span>, </span>
+<span id="cb545-8"><a href="lecon_carto.html#cb545-8" aria-hidden="true"></a>                        <span class="dt">legend.title.color =</span> <span class="ot">NA</span>, </span>
+<span id="cb545-9"><a href="lecon_carto.html#cb545-9" aria-hidden="true"></a>                        <span class="dt">legend.text.size =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-207-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+</div>
+<div id="fonction-tm_markers" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_markers()<a href="lecon_carto.html#fonction-tm_markers" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La fonction <code>tm_markers()</code> représente les points par le symbole de repère géographique:</p>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="lecon_carto.html#cb546-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>() <span class="op">+</span></span>
+<span id="cb546-2"><a href="lecon_carto.html#cb546-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(V) <span class="op">+</span><span class="st"> </span><span class="kw">tm_markers</span>(<span class="dt">size =</span> <span class="fl">0.5</span>, </span>
+<span id="cb546-3"><a href="lecon_carto.html#cb546-3" aria-hidden="true"></a>                         <span class="dt">text =</span> <span class="st">&quot;Mncplts&quot;</span>, </span>
+<span id="cb546-4"><a href="lecon_carto.html#cb546-4" aria-hidden="true"></a>                         <span class="dt">text.size =</span> <span class="fl">0.8</span>, </span>
+<span id="cb546-5"><a href="lecon_carto.html#cb546-5" aria-hidden="true"></a>                         <span class="dt">text.just =</span> <span class="st">&quot;top&quot;</span>) <span class="op">+</span></span>
+<span id="cb546-6"><a href="lecon_carto.html#cb546-6" aria-hidden="true"></a><span class="st">              </span><span class="kw">tm_layout</span>(<span class="dt">inner.margins =</span> <span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>))</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-208-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>La fonction <code>tm_markers()</code> permet d’ajouter du texte facilement sur les repères et contient des arguments similaires à la fonction <code>tm_text()</code>.</p>
+</div>
+</div>
+</div>
+<div id="données-matricielles" class="section level3 hasAnchor" number="6.1.10">
+<h3><span class="header-section-number">6.1.10</span> Données matricielles<a href="lecon_carto.html#données-matricielles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="données-délévation-du-québec" class="section level5 unnumbered hasAnchor" number="">
+<h5>Données d’élévation du Québec<a href="lecon_carto.html#données-délévation-du-québec" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Pour explorer les options d’affichage de données matricielles, nous utilisons un <em>raster</em> représentant le relief du territoire québecois sous forme d’une matrice d’élévation. Chargeons ces données dans notre session de travail R avec la fonction <code>raster()</code>. Nous devons prélablement charger la bibliothèque <code>raster</code>:</p>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="lecon_carto.html#cb547-1" aria-hidden="true"></a><span class="kw">library</span>(raster)</span>
+<span id="cb547-2"><a href="lecon_carto.html#cb547-2" aria-hidden="true"></a></span>
+<span id="cb547-3"><a href="lecon_carto.html#cb547-3" aria-hidden="true"></a>E &lt;-<span class="st"> </span><span class="kw">raster</span>(<span class="st">&quot;Module6/Module6_donnees/Elevation/QC_Elevation.tif&quot;</span>)</span></code></pre></div>
+<p><br></p>
+<p>Le <em>raster</em> <code>E</code> est une matrice de 810612 cellules, et chacune de ces cellules a une résolution d’environ 2 km par 2 km. La valeur maximale d’élévation est de 1592 m.</p>
+<div id="fonction-tm_raster" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_raster()<a href="lecon_carto.html#fonction-tm_raster" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La fonction <code>tm_raster()</code> de la bibliothèque <code>tmap</code> permet de visualiser les <em>rasters</em> en assignant des couleurs différentes pour des classes de valeurs différentes. L’argument <code>n</code> sert à préciser le nombre approximatif de classes à utiliser.</p>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="lecon_carto.html#cb548-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(E) <span class="op">+</span><span class="st"> </span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation (m)&quot;</span>)</span>
+<span id="cb548-2"><a href="lecon_carto.html#cb548-2" aria-hidden="true"></a><span class="kw">tm_shape</span>(E) <span class="op">+</span><span class="st"> </span><span class="kw">tm_raster</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">title =</span> <span class="st">&quot;Élévation (m)&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-211-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Il est possible d’afficher en légende un histogramme illustrant la distribution des valeurs. Par exemple:</p>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="lecon_carto.html#cb549-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(E) <span class="op">+</span><span class="st"> </span><span class="kw">tm_raster</span>(<span class="dt">n =</span> <span class="dv">10</span>,</span>
+<span id="cb549-2"><a href="lecon_carto.html#cb549-2" aria-hidden="true"></a>                        <span class="dt">title =</span> <span class="st">&quot;Élévation (m)&quot;</span>,</span>
+<span id="cb549-3"><a href="lecon_carto.html#cb549-3" aria-hidden="true"></a>                        <span class="dt">legend.hist =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
+<span id="cb549-4"><a href="lecon_carto.html#cb549-4" aria-hidden="true"></a><span class="st">              </span><span class="kw">tm_legend</span>(<span class="dt">outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb549-5"><a href="lecon_carto.html#cb549-5" aria-hidden="true"></a>                        <span class="dt">hist.width =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-212-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Par défaut, la palette de couleur utilisée est la palette séquentielle <code>YlOrBr</code> de <a href="https://colorbrewer2.org/">ColorBrewer</a> (de jaune à brun en passant par orange). Or, nous pouvons changer la palette de couleur. Utilisons, par exemple, la fonction <code>colorRampPalette()</code> pour créer notre propre palette de couleur.</p>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="lecon_carto.html#cb550-1" aria-hidden="true"></a>pal.elevation =<span class="st"> </span><span class="kw">colorRampPalette</span>( <span class="kw">c</span>(<span class="st">&quot;midnightblue&quot;</span>,<span class="st">&quot;forestgreen&quot;</span>,</span>
+<span id="cb550-2"><a href="lecon_carto.html#cb550-2" aria-hidden="true"></a>                                    <span class="st">&quot;darkolivegreen4&quot;</span>,<span class="st">&quot;burlywood&quot;</span>, </span>
+<span id="cb550-3"><a href="lecon_carto.html#cb550-3" aria-hidden="true"></a>                                    <span class="st">&quot;chocolate4&quot;</span>))</span>
+<span id="cb550-4"><a href="lecon_carto.html#cb550-4" aria-hidden="true"></a></span>
+<span id="cb550-5"><a href="lecon_carto.html#cb550-5" aria-hidden="true"></a><span class="kw">tm_shape</span>(E) <span class="op">+</span><span class="st"> </span><span class="kw">tm_raster</span>(<span class="dt">n =</span> <span class="dv">10</span>, </span>
+<span id="cb550-6"><a href="lecon_carto.html#cb550-6" aria-hidden="true"></a>                        <span class="dt">title =</span> <span class="st">&quot;Élévation&quot;</span>, </span>
+<span id="cb550-7"><a href="lecon_carto.html#cb550-7" aria-hidden="true"></a>                        <span class="dt">palette =</span> <span class="kw">pal.elevation</span>(<span class="dv">10</span>), </span>
+<span id="cb550-8"><a href="lecon_carto.html#cb550-8" aria-hidden="true"></a>                        <span class="dt">legend.hist =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb550-9"><a href="lecon_carto.html#cb550-9" aria-hidden="true"></a>                        <span class="dt">colorNA =</span> <span class="st">&quot;beige&quot;</span> ) <span class="op">+</span></span>
+<span id="cb550-10"><a href="lecon_carto.html#cb550-10" aria-hidden="true"></a><span class="st">              </span><span class="kw">tm_legend</span>(<span class="dt">outside =</span> <span class="ot">TRUE</span>, <span class="dt">hist.width =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-213-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Il existe différentes façons de former des classes de valeur à partir de la distribution. L’argument <code>style</code> de la fonction <code>tm_raster()</code> permet de choisir une méthode parmi plusieurs dont les suivantes:</p>
+<ul>
+<li><code>"fixed"</code>: crée des classes de valeurs selon notre propre choix. Ces classes doivent être définies dans un vecteur assigné à l’argument <code>breaks</code>.</li>
+<li><code>"equal"</code>: divise les valeurs en <code>n</code> classes. Ceci est la méthode par défaut.</li>
+<li><code>"pretty"</code>: choisi automatiquement le nombre de classes qui permet de distinguer les valeurs dans un rendu esthétique.</li>
+<li><code>"quantile"</code>: divise les valeurs en quantiles.</li>
+<li><code>"jenks"</code>: utilise l’algorithme de Jenks pour déterminer le nombre optimal de classes.</li>
+</ul>
+<p>Visualisons à nouveau la carte des données d’élévation en utilisant un style “fixed” et un style “quantile”:</p>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="lecon_carto.html#cb551-1" aria-hidden="true"></a><span class="co"># définir la mise en page pour les deux cartes</span></span>
+<span id="cb551-2"><a href="lecon_carto.html#cb551-2" aria-hidden="true"></a>format_carte &lt;-<span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb551-3"><a href="lecon_carto.html#cb551-3" aria-hidden="true"></a>                          <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.67</span>,<span class="fl">0.04</span>), </span>
+<span id="cb551-4"><a href="lecon_carto.html#cb551-4" aria-hidden="true"></a>                          <span class="dt">legend.title.size =</span> <span class="fl">0.8</span>, </span>
+<span id="cb551-5"><a href="lecon_carto.html#cb551-5" aria-hidden="true"></a>                          <span class="dt">legend.format=</span><span class="kw">c</span>(<span class="dt">text.align=</span><span class="st">&quot;right&quot;</span>),</span>
+<span id="cb551-6"><a href="lecon_carto.html#cb551-6" aria-hidden="true"></a>                          <span class="dt">legend.bg.color =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb551-7"><a href="lecon_carto.html#cb551-7" aria-hidden="true"></a>                          <span class="dt">legend.frame =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb551-8"><a href="lecon_carto.html#cb551-8" aria-hidden="true"></a></span>
+<span id="cb551-9"><a href="lecon_carto.html#cb551-9" aria-hidden="true"></a><span class="co"># style fixed.</span></span>
+<span id="cb551-10"><a href="lecon_carto.html#cb551-10" aria-hidden="true"></a>Efixed &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(E) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb551-11"><a href="lecon_carto.html#cb551-11" aria-hidden="true"></a><span class="st">            </span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation(m)&quot;</span>,</span>
+<span id="cb551-12"><a href="lecon_carto.html#cb551-12" aria-hidden="true"></a>                      <span class="dt">palette =</span> <span class="kw">pal.elevation</span>(<span class="dv">10</span>),  </span>
+<span id="cb551-13"><a href="lecon_carto.html#cb551-13" aria-hidden="true"></a>                      <span class="dt">style =</span> <span class="st">&quot;fixed&quot;</span>, </span>
+<span id="cb551-14"><a href="lecon_carto.html#cb551-14" aria-hidden="true"></a>                      <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">300</span>,<span class="dv">400</span>,<span class="dv">500</span>,<span class="dv">600</span>,<span class="dv">700</span>,<span class="dv">800</span>,<span class="dv">900</span>,<span class="dv">1000</span>,<span class="dv">1600</span>)) <span class="op">+</span></span>
+<span id="cb551-15"><a href="lecon_carto.html#cb551-15" aria-hidden="true"></a><span class="st">            </span>format_carte</span>
+<span id="cb551-16"><a href="lecon_carto.html#cb551-16" aria-hidden="true"></a></span>
+<span id="cb551-17"><a href="lecon_carto.html#cb551-17" aria-hidden="true"></a><span class="co"># style quantile</span></span>
+<span id="cb551-18"><a href="lecon_carto.html#cb551-18" aria-hidden="true"></a>Equant &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(E) <span class="op">+</span></span>
+<span id="cb551-19"><a href="lecon_carto.html#cb551-19" aria-hidden="true"></a><span class="st">            </span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation(m)&quot;</span>, </span>
+<span id="cb551-20"><a href="lecon_carto.html#cb551-20" aria-hidden="true"></a>                      <span class="dt">palette=</span><span class="kw">pal.elevation</span>(<span class="dv">10</span>),  </span>
+<span id="cb551-21"><a href="lecon_carto.html#cb551-21" aria-hidden="true"></a>                      <span class="dt">style=</span><span class="st">&quot;quantile&quot;</span>) <span class="op">+</span></span>
+<span id="cb551-22"><a href="lecon_carto.html#cb551-22" aria-hidden="true"></a><span class="st">            </span>format_carte</span>
+<span id="cb551-23"><a href="lecon_carto.html#cb551-23" aria-hidden="true"></a></span>
+<span id="cb551-24"><a href="lecon_carto.html#cb551-24" aria-hidden="true"></a></span>
+<span id="cb551-25"><a href="lecon_carto.html#cb551-25" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Efixed,Equant)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-214-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="carte-avec-symboles-proportionnels" class="section level3 hasAnchor" number="6.1.11">
+<h3><span class="header-section-number">6.1.11</span> Carte avec symboles proportionnels<a href="lecon_carto.html#carte-avec-symboles-proportionnels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans des cartes thématiques, il est souvent utile de représentées certains attributs par des symboles proportionnels. Les fonctions <code>tm_symbols()</code> et <code>tm_bubbles()</code> de la bibliothèque <code>tmap</code> sont utiles pour réaliser ce type de cartes.</p>
+<div id="fonction-tm_symbols" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_symbols()<a href="lecon_carto.html#fonction-tm_symbols" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La fonction <code>tm_symbols()</code> est similaire à la fonction <code>tm_dots()</code> mais ne s’utilise pas nécessairement avec des données vectorielles de type points. En particulier, elle permet de représenter la valeur d’attribut d’un polygone en affichant un symbole dont la taille ou la couleur est proportionnelle à cette valeur.</p>
+<p>En guise d’exemple, reprenons les données sur les régions administratives du Québec pour lesquelles nous connaissons la taille de la population. Nous pouvons illustrer les régions par un cercle dont le diamètre est proportionnel à la taille de sa population. Il s’agit d’attribuer à l’argument <code>size</code>, le nom de l’attribut que nous souhaitons représenter.</p>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="lecon_carto.html#cb552-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb552-2"><a href="lecon_carto.html#cb552-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">legend.show =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb552-3"><a href="lecon_carto.html#cb552-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_style</span>(<span class="st">&quot;bw&quot;</span>) <span class="op">+</span></span>
+<span id="cb552-4"><a href="lecon_carto.html#cb552-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_symbols</span>(<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb552-5"><a href="lecon_carto.html#cb552-5" aria-hidden="true"></a>             <span class="dt">size =</span> <span class="st">&quot;Pop_tot&quot;</span>, </span>
+<span id="cb552-6"><a href="lecon_carto.html#cb552-6" aria-hidden="true"></a>             <span class="dt">legend.size.show =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb552-7"><a href="lecon_carto.html#cb552-7" aria-hidden="true"></a>             <span class="dt">legend.size.is.portrait =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb552-8"><a href="lecon_carto.html#cb552-8" aria-hidden="true"></a>             <span class="dt">title.size =</span> <span class="st">&quot;Population&quot;</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-215-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Par défaut, le symbole utilisé est un point. Le point correspond au symbole <code>shape = 21</code>. Nous pouvons toutefois utiliser d’autres symboles comme le carré (<code>shape = 15</code>), ou le repère géographique (<code>shape = marker_icon()</code>). Vous pouvez même importer vos propres symboles.</p>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="lecon_carto.html#cb553-1" aria-hidden="true"></a>carte_base &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb553-2"><a href="lecon_carto.html#cb553-2" aria-hidden="true"></a><span class="st">                  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NUM_REG&quot;</span>, <span class="dt">legend.show =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb553-3"><a href="lecon_carto.html#cb553-3" aria-hidden="true"></a><span class="st">                  </span><span class="kw">tm_style</span>(<span class="st">&quot;bw&quot;</span>) </span>
+<span id="cb553-4"><a href="lecon_carto.html#cb553-4" aria-hidden="true"></a></span>
+<span id="cb553-5"><a href="lecon_carto.html#cb553-5" aria-hidden="true"></a>carte_carre &lt;-<span class="st"> </span>carte_base <span class="op">+</span><span class="st"> </span></span>
+<span id="cb553-6"><a href="lecon_carto.html#cb553-6" aria-hidden="true"></a><span class="st">                 </span><span class="kw">tm_symbols</span>(<span class="dt">shape =</span> <span class="dv">15</span>,</span>
+<span id="cb553-7"><a href="lecon_carto.html#cb553-7" aria-hidden="true"></a>                            <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, </span>
+<span id="cb553-8"><a href="lecon_carto.html#cb553-8" aria-hidden="true"></a>                            <span class="dt">size =</span> <span class="st">&quot;Pop_tot&quot;</span>, </span>
+<span id="cb553-9"><a href="lecon_carto.html#cb553-9" aria-hidden="true"></a>                            <span class="dt">legend.size.show =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb553-10"><a href="lecon_carto.html#cb553-10" aria-hidden="true"></a>                            <span class="dt">legend.size.is.portrait =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb553-11"><a href="lecon_carto.html#cb553-11" aria-hidden="true"></a>                            <span class="dt">title.size =</span> <span class="st">&quot;Population&quot;</span>)</span>
+<span id="cb553-12"><a href="lecon_carto.html#cb553-12" aria-hidden="true"></a></span>
+<span id="cb553-13"><a href="lecon_carto.html#cb553-13" aria-hidden="true"></a>carte_marqueur &lt;-<span class="st"> </span>carte_base <span class="op">+</span><span class="st"> </span></span>
+<span id="cb553-14"><a href="lecon_carto.html#cb553-14" aria-hidden="true"></a><span class="st">                 </span><span class="kw">tm_symbols</span>(<span class="dt">shape =</span> <span class="kw">marker_icon</span>(),</span>
+<span id="cb553-15"><a href="lecon_carto.html#cb553-15" aria-hidden="true"></a>                            <span class="dt">border.col =</span> <span class="ot">NULL</span>, </span>
+<span id="cb553-16"><a href="lecon_carto.html#cb553-16" aria-hidden="true"></a>                            <span class="dt">size =</span> <span class="st">&quot;Pop_tot&quot;</span>, </span>
+<span id="cb553-17"><a href="lecon_carto.html#cb553-17" aria-hidden="true"></a>                            <span class="dt">legend.size.show =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb553-18"><a href="lecon_carto.html#cb553-18" aria-hidden="true"></a>                            <span class="dt">legend.size.is.portrait =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb553-19"><a href="lecon_carto.html#cb553-19" aria-hidden="true"></a>                            <span class="dt">title.size =</span> <span class="st">&quot;Population&quot;</span>)</span>
+<span id="cb553-20"><a href="lecon_carto.html#cb553-20" aria-hidden="true"></a></span>
+<span id="cb553-21"><a href="lecon_carto.html#cb553-21" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(carte_carre, carte_marqueur)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-216-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br></p>
+</div>
+<div id="représenter-deux-légendes" class="section level5 unnumbered hasAnchor" number="">
+<h5>Représenter deux légendes<a href="lecon_carto.html#représenter-deux-légendes" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Lorsque nous utilisons des symboles proportionnels, nous devons souvent avoir plus d’une légende. Par exemple, dans les cartes précédentes, nous avions seulement une légende se rapportant à la taille des populations mais aucune légende pour identifier les régions. Pour ajouter deux légendes (ou plus), nous devons utiliser la fonction <code>tm_layout()</code> avec l’argument <code>legend.stack</code> qui précise si les légendes seront disposées de façon verticale ou horizontale.</p>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="lecon_carto.html#cb554-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb554-2"><a href="lecon_carto.html#cb554-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;NOM_REG&quot;</span>,  </span>
+<span id="cb554-3"><a href="lecon_carto.html#cb554-3" aria-hidden="true"></a>              <span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>, </span>
+<span id="cb554-4"><a href="lecon_carto.html#cb554-4" aria-hidden="true"></a>              <span class="dt">border.col =</span> <span class="st">&quot;darkgrey&quot;</span>, </span>
+<span id="cb554-5"><a href="lecon_carto.html#cb554-5" aria-hidden="true"></a>              <span class="dt">title =</span><span class="st">&quot;Régions administratives&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb554-6"><a href="lecon_carto.html#cb554-6" aria-hidden="true"></a><span class="st">   </span><span class="kw">tm_symbols</span>(<span class="dt">size =</span> <span class="st">&quot;Pop_tot&quot;</span>, </span>
+<span id="cb554-7"><a href="lecon_carto.html#cb554-7" aria-hidden="true"></a>              <span class="dt">border.col =</span> <span class="st">&quot;grey&quot;</span>, </span>
+<span id="cb554-8"><a href="lecon_carto.html#cb554-8" aria-hidden="true"></a>              <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, </span>
+<span id="cb554-9"><a href="lecon_carto.html#cb554-9" aria-hidden="true"></a>              <span class="dt">scale =</span> <span class="dv">2</span>, </span>
+<span id="cb554-10"><a href="lecon_carto.html#cb554-10" aria-hidden="true"></a>              <span class="dt">legend.size.show =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb554-11"><a href="lecon_carto.html#cb554-11" aria-hidden="true"></a>              <span class="dt">legend.size.is.portrait =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb554-12"><a href="lecon_carto.html#cb554-12" aria-hidden="true"></a>              <span class="dt">sizes.legend.labels =</span> <span class="kw">c</span>(<span class="st">&quot;500&quot;</span>,<span class="st">&quot;1000&quot;</span>,<span class="st">&quot;1500&quot;</span>,<span class="st">&quot;2000&quot;</span>,<span class="st">&quot;2500&quot;</span>), </span>
+<span id="cb554-13"><a href="lecon_carto.html#cb554-13" aria-hidden="true"></a>              <span class="dt">title.size =</span><span class="st">&quot;Population (en milliers)&quot;</span>) <span class="op">+</span></span>
+<span id="cb554-14"><a href="lecon_carto.html#cb554-14" aria-hidden="true"></a><span class="st">    </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb554-15"><a href="lecon_carto.html#cb554-15" aria-hidden="true"></a>              <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb554-16"><a href="lecon_carto.html#cb554-16" aria-hidden="true"></a>              <span class="dt">legend.stack =</span> <span class="st">&quot;vertical&quot;</span>, </span>
+<span id="cb554-17"><a href="lecon_carto.html#cb554-17" aria-hidden="true"></a>              <span class="dt">legend.title.fontface =</span> <span class="st">&quot;bold&quot;</span> ) </span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-217-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<div id="fonction-tm_bubbles" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction tm_bubbles()<a href="lecon_carto.html#fonction-tm_bubbles" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>La fonction <code>tm_bubbles()</code> est similaire à la fonction <code>tm_symbols()</code> et s’utilise lorsqu’on souhaite seulement représenter des symboles sous forme de cercle/point. Cette fonction est pratique lorsque nous voulons représenter deux attributs avec un symbole: le premier attribut est représenté par la taille du cercle et le second attribut par sa couleur.</p>
+<p>Utilisons à nouveau les données sur la taille des populations des régions administratives. Par exemple, représentons chaque région par un cercle dont le diamètre est proportionnel à la taille totale de sa population (comme nous l’avons fait plus haut). De plus, colorons chaque cercle en fonction de la proportion d’enfants (individus agés entre 0 et 14 ans) dans sa population.</p>
+<p>Tout d’abord, nous devons calculer la proportion d’enfants dans chaque région. Pour le moment, nous connaissons seulement le nombre d’enfants (<code>A0.14_T</code>). Créons un nouvel attribut pour le <em>shapefile</em> Q:</p>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="lecon_carto.html#cb555-1" aria-hidden="true"></a>Q<span class="op">$</span>Pop_prop_enfant &lt;-<span class="st"> </span>Q<span class="op">$</span>Pop_<span class="dv">0</span>_<span class="dv">14</span><span class="op">/</span>Q<span class="op">$</span>Pop_tot</span></code></pre></div>
+<p><br></p>
+<p>Utilisons maintenant la fonction <code>tm_bubbles()</code> en définissant l’argument <code>size</code> par l’attribut <code>"ATot_T"</code>, et l’argument <code>col</code> par l’attribut <code>"Pop_prop_enfant"</code>:</p>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="lecon_carto.html#cb556-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span></span>
+<span id="cb556-2"><a href="lecon_carto.html#cb556-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;NUM_REG&quot;</span>, </span>
+<span id="cb556-3"><a href="lecon_carto.html#cb556-3" aria-hidden="true"></a>              <span class="dt">legend.show =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb556-4"><a href="lecon_carto.html#cb556-4" aria-hidden="true"></a>              <span class="dt">palette =</span> <span class="st">&quot;Greys&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb556-5"><a href="lecon_carto.html#cb556-5" aria-hidden="true"></a><span class="st">   </span><span class="kw">tm_bubbles</span>(<span class="dt">size =</span> <span class="st">&quot;Pop_tot&quot;</span> , </span>
+<span id="cb556-6"><a href="lecon_carto.html#cb556-6" aria-hidden="true"></a>              <span class="dt">col =</span> <span class="st">&quot;Pop_prop_enfant&quot;</span>, </span>
+<span id="cb556-7"><a href="lecon_carto.html#cb556-7" aria-hidden="true"></a>              <span class="dt">style =</span> <span class="st">&quot;quantile&quot;</span>, </span>
+<span id="cb556-8"><a href="lecon_carto.html#cb556-8" aria-hidden="true"></a>              <span class="dt">scale =</span> <span class="dv">2</span>,  </span>
+<span id="cb556-9"><a href="lecon_carto.html#cb556-9" aria-hidden="true"></a>              <span class="dt">border.col =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb556-10"><a href="lecon_carto.html#cb556-10" aria-hidden="true"></a>              <span class="dt">border.lwd =</span> <span class="fl">.5</span>,</span>
+<span id="cb556-11"><a href="lecon_carto.html#cb556-11" aria-hidden="true"></a>              <span class="dt">legend.size.show =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb556-12"><a href="lecon_carto.html#cb556-12" aria-hidden="true"></a>              <span class="dt">legend.size.is.portrait =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb556-13"><a href="lecon_carto.html#cb556-13" aria-hidden="true"></a>              <span class="dt">title.size =</span><span class="st">&quot;Population (en milliers)&quot;</span>, </span>
+<span id="cb556-14"><a href="lecon_carto.html#cb556-14" aria-hidden="true"></a>              <span class="dt">title.col =</span> <span class="st">&quot;Proportion d&#39;enfants (0-14 ans)&quot;</span>, </span>
+<span id="cb556-15"><a href="lecon_carto.html#cb556-15" aria-hidden="true"></a>              <span class="dt">sizes.legend.labels =</span> <span class="kw">c</span>(<span class="st">&quot;500&quot;</span>,<span class="st">&quot;1000&quot;</span>,<span class="st">&quot;1500&quot;</span>,<span class="st">&quot;2000&quot;</span>,<span class="st">&quot;2500&quot;</span>))<span class="op">+</span></span>
+<span id="cb556-16"><a href="lecon_carto.html#cb556-16" aria-hidden="true"></a><span class="st">    </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb556-17"><a href="lecon_carto.html#cb556-17" aria-hidden="true"></a>              <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb556-18"><a href="lecon_carto.html#cb556-18" aria-hidden="true"></a>              <span class="dt">legend.title.size =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-219-1.png" width="720" style="display: block; margin: auto;" />
+<br>
+L’argument <code>style</code> est utilisé pour définir les classes de couleurs. Ici, nous avons choisi une classification en quantile. Noter que nous pouvons définir un titre pour la légende des tailles (<code>title.size</code>) et un titre pour la légende des couleurs (<code>title.col</code>).</p>
+<p>Remarquer que cette figure nous permet d’observer que la proportion d’enfants au Nunavik est très grande malgré que la taille de la population soit petite.</p>
+</div>
+</div>
+</div>
+<div id="cartes-choroplèthes" class="section level3 hasAnchor" number="6.1.12">
+<h3><span class="header-section-number">6.1.12</span> Cartes Choroplèthes<a href="lecon_carto.html#cartes-choroplèthes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les cartes choroplèthes sont utilisées pour représenter des données vectorielles de type polygone en assignant une couleur à chaque polygone en fonction de la valeur d’un de ces attributs.</p>
+<p>Pour créer des cartes choroplèthes, nous utilisons l’argument <code>col</code> de la fonction <code>tm_polygons()</code>. L’assignation des couleurs se fait de la même façon que pour <code>tm_raster()</code> et <code>tm_bubbles()</code> en définissant des classes de valeur d’attribut.</p>
+<p>Créons des cartes choroplèthes de la proportion d’enfants dans les régions administratives en utilisant différentes classifications de couleurs.</p>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="lecon_carto.html#cb557-1" aria-hidden="true"></a><span class="co"># Par defaut, nous avons 4 classes</span></span>
+<span id="cb557-2"><a href="lecon_carto.html#cb557-2" aria-hidden="true"></a>Qdefaut &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;Pop_prop_enfant&quot;</span>)</span>
+<span id="cb557-3"><a href="lecon_carto.html#cb557-3" aria-hidden="true"></a></span>
+<span id="cb557-4"><a href="lecon_carto.html#cb557-4" aria-hidden="true"></a><span class="co"># style fixed.</span></span>
+<span id="cb557-5"><a href="lecon_carto.html#cb557-5" aria-hidden="true"></a>Qfixed &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;Pop_prop_enfant&quot;</span>, </span>
+<span id="cb557-6"><a href="lecon_carto.html#cb557-6" aria-hidden="true"></a>                                    <span class="dt">style =</span> <span class="st">&quot;fixed&quot;</span>, </span>
+<span id="cb557-7"><a href="lecon_carto.html#cb557-7" aria-hidden="true"></a>                                    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.14</span>, <span class="fl">0.15</span>, <span class="fl">0.16</span>, <span class="fl">0.18</span>, <span class="fl">0.3</span>))</span>
+<span id="cb557-8"><a href="lecon_carto.html#cb557-8" aria-hidden="true"></a></span>
+<span id="cb557-9"><a href="lecon_carto.html#cb557-9" aria-hidden="true"></a><span class="co"># style quantile </span></span>
+<span id="cb557-10"><a href="lecon_carto.html#cb557-10" aria-hidden="true"></a>Qquant =<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;Pop_prop_enfant&quot;</span>, </span>
+<span id="cb557-11"><a href="lecon_carto.html#cb557-11" aria-hidden="true"></a>                                   <span class="dt">style =</span> <span class="st">&quot;quantile&quot;</span>)</span>
+<span id="cb557-12"><a href="lecon_carto.html#cb557-12" aria-hidden="true"></a></span>
+<span id="cb557-13"><a href="lecon_carto.html#cb557-13" aria-hidden="true"></a><span class="kw">tmap_arrange</span>(Qdefaut,Qfixed,Qquant)</span></code></pre></div>
+<pre><code>Legend labels were too wide. The labels have been resized to 0.6, 0.6, 0.6, 0.6, 0.6. Increase legend.width (argument of tm_layout) to make the legend wider and therefore the labels larger.</code></pre>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-220-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<!--  
+#### Données COVID {-}
+
+Lire les données: cas cumulés de COVID en date du 18 janvier 2021 par région socio-sanitaire.
+
+
+
+```r
+Q_covid <-st_read("Module6/Module6_donnees/COVID/QC_Covid_210118.shp")
+```
+
+```{.codeout}
+Reading layer `QC_Covid_210118' from data source 
+  `/home/kc/git/inSileco/sci1031/Module6/Module6_donnees/COVID/QC_Covid_210118.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 16 features and 3 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -830300 ymin: 118000 xmax: 783300 ymax: 2091000
+Projected CRS: NAD83 / Quebec Lambert
+```
+
+
+
+
+Comme pour la proportion d'enfants, on veut la densité de cas: la proportion de cas par rapport à la population totale d'une région socio-sanitaire
+
+```r
+Q_covid$prop_cas<-(Q_covid$Cs_cmls)/(Q_covid$ATot_T)
+```
+
+
+Comparaison nombre vs proportion
+
+```r
+Q_nombre<-tm_shape(Q_covid)+tm_polygons(col="Cs_cmls", title = "Nombre de cas")
+
+Q_prop<-tm_shape(Q_covid)+tm_polygons(col="prop_cas", title = "Proportion de cas")
+
+tmap_arrange(Q_nombre,Q_prop)
+```
+
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-223-1.png" width="720" style="display: block; margin: auto;" />
+
+
+Expliquer le sens de chaque style.
+Voir: https://bookdown.org/nicohahn/making_maps_with_r5/docs/tmap.html#static-maps-with-tmap
+
+```r
+format_carte <-tm_layout(legend.text.size = 0.55)
+
+Q_quantile<-tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", title = "Quantile")+format_carte
+Q_jenks<-tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "jenks", title = "Jenks")+format_carte
+Q_pretty<-tm_shape(Q_covid) + tm_polygons(col="prop_cas", style = "pretty", title = "Pretty")+format_carte
+
+tmap_arrange(Q_quantile,Q_jenks,Q_pretty)
+```
+
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-224-1.png" width="720" style="display: block; margin: auto;" />
+
+C'est souvent en regardant la distribution des données qu'on peut déterminer la meilleure classification pour représenter nos données
+EXEMPLE DE MELANIE ou alors faire ça au début.
+
+Représenter chaque region individuellement
+
+```r
+tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", legend.is.portrait = FALSE)+
+  tm_facets(by="NOM_REG", nrow =4,  scale.factor = 5)+
+  tm_layout(panel.label.height=2, panel.label.size = 0.9, legend.show = FALSE)
+```
+
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-225-1.png" width="720" style="display: block; margin: auto;" />
+
+ -->
+</div>
+<div id="cartes-à-panneaux-multiples" class="section level3 hasAnchor" number="6.1.13">
+<h3><span class="header-section-number">6.1.13</span> Cartes à panneaux multiples<a href="lecon_carto.html#cartes-à-panneaux-multiples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fonction-tm_facets" class="section level6 unnumbered hasAnchor" number="">
+<h6>Fonction <code>tm_facets()</code><a href="lecon_carto.html#fonction-tm_facets" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>Il est parfois utile illustrer des polygones côte-à-côte afin de faciliter la comparaison d’un de leurs attributs. On appelle les cartes des polygones individuellement représentés des <em>panneaux</em>.</p>
+<p>Pour créer une carte à panneaux multiples, nous utilisons d’abord la fonction <code>tm_polygons()</code> pour représenter chaque polygone selon la méthode de notre choix (par exemple selon une représentation choroplèthe d’un des attributs). Ensuite, nous ajoutons la fonction <code>tm_facets()</code> pour préciser la disposition des panneaux (arguments <code>nrow</code> ou <code>ncol</code>) ainsi que l’attribut utilisé (la <em>facette</em>) pour distinguer chaque panneau (argument <code>by</code>).</p>
+<p>Représentons à nouveau les polygones des régions administratives selon la proportion d’enfants dans leur population mais cette fois en créant une carte à panneaux multiples:</p>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="lecon_carto.html#cb559-1" aria-hidden="true"></a><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;Pop_prop_enfant&quot;</span>,  </span>
+<span id="cb559-2"><a href="lecon_carto.html#cb559-2" aria-hidden="true"></a>                          <span class="dt">style =</span> <span class="st">&quot;quantile&quot;</span>) <span class="op">+</span></span>
+<span id="cb559-3"><a href="lecon_carto.html#cb559-3" aria-hidden="true"></a><span class="st">                 </span><span class="kw">tm_facets</span>(<span class="dt">by =</span> <span class="st">&quot;NOM_REG&quot;</span>, </span>
+<span id="cb559-4"><a href="lecon_carto.html#cb559-4" aria-hidden="true"></a>                           <span class="dt">nrow =</span> <span class="dv">5</span>,  </span>
+<span id="cb559-5"><a href="lecon_carto.html#cb559-5" aria-hidden="true"></a>                           <span class="dt">scale.factor =</span> <span class="dv">5</span>) <span class="op">+</span></span>
+<span id="cb559-6"><a href="lecon_carto.html#cb559-6" aria-hidden="true"></a><span class="st">                 </span><span class="kw">tm_layout</span>(<span class="dt">panel.label.height =</span> <span class="dv">2</span>, </span>
+<span id="cb559-7"><a href="lecon_carto.html#cb559-7" aria-hidden="true"></a>                           <span class="dt">panel.label.size =</span> <span class="fl">0.9</span>, </span>
+<span id="cb559-8"><a href="lecon_carto.html#cb559-8" aria-hidden="true"></a>                           <span class="dt">legend.show =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-226-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>L’argument <code>scale.factor</code> détermine la mise à l’échelle du texte par rapport à la mise à l’échelle des polygones. Les polygones ont été réduits de taille pour entrer dans leur panneau, toutefois nous souhaitons que le titre apparaissant dans la partie supérieure du panneau ne soit pas réduit autant.</p>
+<p>Il est possible de modifier la police du texte, sa couleur, la couleur de fond des panneaux, le cadre des panneaux, et plus, en utilisant les arguments de la fonction <code>tm_layout()</code>.</p>
+</div>
+</div>
+<div id="cartes-avec-encadré" class="section level3 hasAnchor" number="6.1.14">
+<h3><span class="header-section-number">6.1.14</span> Cartes avec encadré<a href="lecon_carto.html#cartes-avec-encadré" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il est parfois nécessaire d’accompagner une carte par une autre carte de taille moindre circonscrite dans un encadré sur ou en marge de la carte principale. Ceci est le cas, par exemple, lorsque nous souhaitons préciser la localisation de la carte principale dans une région plus grande.</p>
+<div id="bibliothèque-grid" class="section level6 unnumbered hasAnchor" number="">
+<h6>Bibliothèque <code>grid</code><a href="lecon_carto.html#bibliothèque-grid" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>Pour réaliser une carte avec un encadré, nous devons utiliser la bibliothèque <code>grid</code>. Commençons par installer cette bibliothèque:</p>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="lecon_carto.html#cb560-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;grid&quot;</span>)</span></code></pre></div>
+<p><br></p>
+<p>En guise d’exemple, considérons une section du <em>raster</em> d’élévation <code>E</code> correspondant à la région de l’Outaouais. Vous n’avez pas besoin de comprendre les opérations ci-dessous car nous les apprendrons dans les modules 7 et 8.</p>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="lecon_carto.html#cb561-1" aria-hidden="true"></a><span class="co"># Isoler le polygone de l&#39;Outaouais</span></span>
+<span id="cb561-2"><a href="lecon_carto.html#cb561-2" aria-hidden="true"></a>Q_Outaouais &lt;-<span class="st"> </span><span class="kw">subset</span>(Q, NOM_REG <span class="op">==</span><span class="st"> &quot;Outaouais&quot;</span>)</span>
+<span id="cb561-3"><a href="lecon_carto.html#cb561-3" aria-hidden="true"></a></span>
+<span id="cb561-4"><a href="lecon_carto.html#cb561-4" aria-hidden="true"></a><span class="co"># Découper le raster E selon l&#39;étendue de Q_Outaouais</span></span>
+<span id="cb561-5"><a href="lecon_carto.html#cb561-5" aria-hidden="true"></a>E_Outaouais &lt;-<span class="st"> </span><span class="kw">crop</span>(E, <span class="kw">extent</span>(Q_Outaouais))</span>
+<span id="cb561-6"><a href="lecon_carto.html#cb561-6" aria-hidden="true"></a></span>
+<span id="cb561-7"><a href="lecon_carto.html#cb561-7" aria-hidden="true"></a><span class="co"># Créer un mask </span></span>
+<span id="cb561-8"><a href="lecon_carto.html#cb561-8" aria-hidden="true"></a>E_Outaouais &lt;-<span class="st"> </span><span class="kw">mask</span>(E_Outaouais, Q_Outaouais)</span></code></pre></div>
+<p><br></p>
+<p>Créons d’abord une carte des données d’élévation pour la région de l’Outaouais. Cette carte consituera notre carte principale.</p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="lecon_carto.html#cb562-1" aria-hidden="true"></a><span class="co"># Définir la carte principale</span></span>
+<span id="cb562-2"><a href="lecon_carto.html#cb562-2" aria-hidden="true"></a>carte_princ &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(E_Outaouais) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb562-3"><a href="lecon_carto.html#cb562-3" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_raster</span>(<span class="dt">title =</span> <span class="st">&quot;Élévation (m)&quot;</span>, </span>
+<span id="cb562-4"><a href="lecon_carto.html#cb562-4" aria-hidden="true"></a>                          <span class="dt">palette =</span> <span class="kw">pal.elevation</span>(<span class="dv">5</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb562-5"><a href="lecon_carto.html#cb562-5" aria-hidden="true"></a><span class="st">                </span><span class="kw">tm_scale_bar</span>(<span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>,<span class="st">&quot;bottom&quot;</span>), </span>
+<span id="cb562-6"><a href="lecon_carto.html#cb562-6" aria-hidden="true"></a>                             <span class="dt">text.size =</span> <span class="fl">0.6</span>) </span>
+<span id="cb562-7"><a href="lecon_carto.html#cb562-7" aria-hidden="true"></a></span>
+<span id="cb562-8"><a href="lecon_carto.html#cb562-8" aria-hidden="true"></a><span class="co"># Mise en page de la carte                </span></span>
+<span id="cb562-9"><a href="lecon_carto.html#cb562-9" aria-hidden="true"></a>format_carte &lt;-<span class="st"> </span><span class="kw">tm_layout</span>(<span class="dt">frame =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb562-10"><a href="lecon_carto.html#cb562-10" aria-hidden="true"></a>                          <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb562-11"><a href="lecon_carto.html#cb562-11" aria-hidden="true"></a>                          <span class="dt">legend.outside.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb562-12"><a href="lecon_carto.html#cb562-12" aria-hidden="true"></a>                          <span class="dt">legend.title.size =</span> <span class="fl">0.8</span>, </span>
+<span id="cb562-13"><a href="lecon_carto.html#cb562-13" aria-hidden="true"></a>                          <span class="dt">legend.bg.color =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb562-14"><a href="lecon_carto.html#cb562-14" aria-hidden="true"></a>                          <span class="dt">legend.frame =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<p><br></p>
+<p>Créons maintenant une carte du Québec qui délimite la région de l’Outaouais par des frontières de couleur rouge. Cette carte sera l’encadré à insérer sur la carte principale.</p>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="lecon_carto.html#cb563-1" aria-hidden="true"></a><span class="co"># Définir la carte encadré</span></span>
+<span id="cb563-2"><a href="lecon_carto.html#cb563-2" aria-hidden="true"></a>carte_cadre &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(Q) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb563-3"><a href="lecon_carto.html#cb563-3" aria-hidden="true"></a><span class="st">                  </span><span class="kw">tm_borders</span>(<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb563-4"><a href="lecon_carto.html#cb563-4" aria-hidden="true"></a><span class="st">               </span><span class="kw">tm_shape</span>(Q_Outaouais) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb563-5"><a href="lecon_carto.html#cb563-5" aria-hidden="true"></a><span class="st">                  </span><span class="kw">tm_borders</span>(<span class="dt">lw=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><br></p>
+<p>Nous pouvons enfin combiner les deux cartes ensembles. Il s’agit d’afficher la carte principale et d’ajouter la carte encadré en utilisant la fonction <code>print()</code>.</p>
+<p>En particulier, nous utilisons la fonction <code>viewport()</code> de la bibliothèque <code>grid</code> qui permet de définir la position de la carte encadré sur la carte ainsi que sa taille.</p>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="lecon_carto.html#cb564-1" aria-hidden="true"></a><span class="kw">library</span>(grid)</span>
+<span id="cb564-2"><a href="lecon_carto.html#cb564-2" aria-hidden="true"></a>carte_princ <span class="op">+</span><span class="st"> </span>format_carte</span>
+<span id="cb564-3"><a href="lecon_carto.html#cb564-3" aria-hidden="true"></a><span class="kw">print</span>(carte_cadre, <span class="dt">vp =</span> <span class="kw">viewport</span>(<span class="fl">0.72</span>, <span class="fl">0.42</span>, <span class="dt">width =</span> <span class="fl">0.4</span>, <span class="dt">height =</span> <span class="fl">0.4</span>))</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-231-1.png" width="720" style="display: block; margin: auto;" />
+<br></p>
+<p>Les chiffres (0.72,0.42) correspondent aux coordonnées (x,y) de la position de la carte encadrée sur la carte principale (où (0,0) est le coin inférieur gauche de la carte principale, et (1,1) est le coin supérieur droit).</p>
+<p>Les arguments <code>width</code> et <code>height</code> sont des nombres entre 0 et 1. Ceux-ci correspondent au facteur par lequel nous souhaitons réduire la largeur et la hauteur de la carte encadrée.</p>
+<!--   ### Cartes interactives avec tmap -->
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="34">
+<li id="fn34"><p>Consulter ce <a href="https://r-spatial.org/r/2018/10/25/ggplot2-sf.html">site</a> pour en apprendre davantage sur la cartographie avec <code>ggplot2</code><a href="lecon_carto.html#fnref34" class="footnote-back">↩︎</a></p></li>
+<li id="fn35"><p>Noter que le nombre de divisions créé par <code>tmap</code> est approximativement celui demandé car <code>tmap</code> crée des divisions uniformément espacées situées sur des coordonnées de valeurs entières.<a href="lecon_carto.html#fnref35" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="carto.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercices.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Cours_SpatialR.pdf", "pdf"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true,
+"edit": "https://github.com/sci1031/sci1031/edit/master/%s"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
