@@ -436,25 +436,25 @@
 <line x1='269.36' y1='466.56' x2='269.36' y2='473.76' style='stroke-width: 0.75;' />
 <line x1='368.77' y1='466.56' x2='368.77' y2='473.76' style='stroke-width: 0.75;' />
 <line x1='468.18' y1='466.56' x2='468.18' y2='473.76' style='stroke-width: 0.75;' />
-<text x='70.54' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='169.95' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.20px' lengthAdjust='spacingAndGlyphs'>10000</text>
-<text x='269.36' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.20px' lengthAdjust='spacingAndGlyphs'>20000</text>
-<text x='368.77' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.20px' lengthAdjust='spacingAndGlyphs'>30000</text>
-<text x='468.18' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.20px' lengthAdjust='spacingAndGlyphs'>40000</text>
+<text x='70.54' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='169.95' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>10000</text>
+<text x='269.36' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>20000</text>
+<text x='368.77' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>30000</text>
+<text x='468.18' y='492.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>40000</text>
 <line x1='59.04' y1='456.16' x2='59.04' y2='96.16' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='456.16' x2='51.84' y2='456.16' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='366.16' x2='51.84' y2='366.16' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='276.16' x2='51.84' y2='276.16' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='186.16' x2='51.84' y2='186.16' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='96.16' x2='51.84' y2='96.16' style='stroke-width: 0.75;' />
-<text transform='translate(41.76,456.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text transform='translate(41.76,366.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.20px' lengthAdjust='spacingAndGlyphs'>10000</text>
-<text transform='translate(41.76,276.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.20px' lengthAdjust='spacingAndGlyphs'>20000</text>
-<text transform='translate(41.76,186.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.20px' lengthAdjust='spacingAndGlyphs'>30000</text>
-<text transform='translate(41.76,96.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.20px' lengthAdjust='spacingAndGlyphs'>40000</text>
+<text transform='translate(41.76,456.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text transform='translate(41.76,366.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>10000</text>
+<text transform='translate(41.76,276.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>20000</text>
+<text transform='translate(41.76,186.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>30000</text>
+<text transform='translate(41.76,96.16) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>40000</text>
 <polygon points='59.04,466.56 509.76,466.56 509.76,59.04 59.04,59.04 ' style='stroke-width: 0.75;' />
-<text x='284.40' y='521.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='183.62px' lengthAdjust='spacingAndGlyphs'>distance - colonne 'length' (m)</text>
-<text transform='translate(12.96,262.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='211.50px' lengthAdjust='spacingAndGlyphs'>distance - fonction 'st_length()' (m)</text>
+<text x='284.40' y='521.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='159.34px' lengthAdjust='spacingAndGlyphs'>distance - colonne 'length' (m)</text>
+<text transform='translate(12.96,262.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='183.34px' lengthAdjust='spacingAndGlyphs'>distance - fonction 'st_length()' (m)</text>
 </g>
 <g clip-path='url(#cpNTkuMDR8NTA5Ljc2fDU5LjA0fDQ2Ni41Ng==)'>
 <line x1='59.04' y1='466.58' x2='509.76' y2='58.52' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
