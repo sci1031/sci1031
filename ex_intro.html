@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.2 Exercices | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.2 Exercices | SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -20,9 +20,10 @@
   <meta name="twitter:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
   
 
+<meta name="author" content="" />
 
 
-<meta name="date" content="2022-05-24" />
+<meta name="date" content="2022-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,66 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.0/leaflet.js"></script>
-<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.0/leaflet-providers-plugin.js"></script>
-<script src="libs/M_42f70b-1/data_stars_Me0c5db.txt"></script>
-<script src="libs/joda-0.0.1/joda.js"></script>
-<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric_b5d749-1/data_stars_M_logique_numericf86413.txt"></script>
-<script src="libs/M_factor_08ba2e-1/data_stars_M_factor2073c1.txt"></script>
-<script src="libs/ICU_158c6a-1/data_stars_ICUc2f819.txt"></script>
-<script src="libs/ICU_3d2afe-1/data_stars_ICU21085c.txt"></script>
-<script src="libs/T_sec_27f935-1/data_stars_T_secf950be.txt"></script>
-<script src="libs/T_fact4_moy_0e1694-1/data_stars_T_fact4_moyface28.txt"></script>
-<script src="libs/T_fact4_max_34951d-1/data_stars_T_fact4_maxabc734.txt"></script>
-<script src="libs/T_fact8_moy_6da058-1/data_stars_T_fact8_moy2f9c06.txt"></script>
-<script src="libs/T_fact8_max_ea1fd6-1/data_stars_T_fact8_maxfd7658.txt"></script>
-<script src="libs/SR_58dc94-1/data_stars_SRdb4920.txt"></script>
-<script src="libs/SG_e8a5f7-1/data_stars_SG176059.txt"></script>
-<script src="libs/SB_df573c-1/data_stars_SBabef30.txt"></script>
-<script src="libs/dem_41ad92-1/data_stars_dem2695ad.txt"></script>
-<script src="libs/nouvelles_classes_dem_2b3d7a-1/data_stars_nouvelles_classes_demcd0a81.txt"></script>
-<script src="libs/reclassify(dem, nouvelles_classes2)_0679dc-1/data_stars_reclassifydemnouvelles_classes29f7bea.txt"></script>
-<script src="libs/dem_cr_716e04-1/data_stars_dem_crb1f740.txt"></script>
-<script src="libs/dem_cr_p_dacf91-1/data_stars_dem_cr_p58de91.txt"></script>
-<script src="libs/dem_fa45b0-1/data_stars_dem7cd902.txt"></script>
-<script src="libs/dem_ma_93a084-1/data_stars_dem_maa0958e.txt"></script>
-<script src="libs/dem_ma_inv_76d129-1/data_stars_dem_ma_inv7b6af4.txt"></script>
-<script src="libs/dem_ma_458072-1/data_stars_dem_ma9e85fc.txt"></script>
-<script src="libs/dem_ma_inv_a62340-1/data_stars_dem_ma_inva90e8b.txt"></script>
-<script src="libs/dem_merge_072634-1/data_stars_dem_merge31f085.txt"></script>
-<script src="libs/dem_merge_ordre1_8142b9-1/data_stars_dem_merge_ordre1e815ca.txt"></script>
-<script src="libs/dem_merge_ordre2_70e48f-1/data_stars_dem_merge_ordre25067ac.txt"></script>
-<script src="libs/dem_mosaic_min_964df8-1/data_stars_dem_mosaic_mine84159.txt"></script>
-<script src="libs/dem_mosaic_max_fab873-1/data_stars_dem_mosaic_maxfc8437.txt"></script>
-<script src="libs/dem_mosaic_mean_bead0f-1/data_stars_dem_mosaic_mean8f3a74.txt"></script>
-<script src="libs/dem_parcs_ce7f81-1/data_stars_dem_parcs56317f.txt"></script>
-<script src="libs/dem_parcs_fbae52-1/data_stars_dem_parcsf7e1a5.txt"></script>
-<script src="libs/dem_orford_71ec6f-1/data_stars_dem_orford61fae9.txt"></script>
-<script src="libs/dem_orford_8db4f1-1/data_stars_dem_orforda4fb27.txt"></script>
-<script src="libs/dem_orford_quantile_76b045-1/data_stars_dem_orford_quantileef9a67.txt"></script>
-<script src="libs/dem_orford_quantile_c7f308-1/data_stars_dem_orford_quantile90e148.txt"></script>
-<script src="libs/dem_tampon_max_b631a9-1/data_stars_dem_tampon_max4bdaf2.txt"></script>
-<script src="libs/X1_3826fe-1/data_stars_X145a18d.txt"></script>
-<script src="libs/X2_4c8126-1/data_stars_X29e60dc.txt"></script>
-<script src="libs/X3_5312da-1/data_stars_X3465219.txt"></script>
 
 
 <style type="text/css">
@@ -216,7 +157,7 @@ div.csl-indent {
 <li><a href="./">TELUQ -  SCI 1031.</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#section"></a></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
 <li class="part"><span><b>I SCI 1031</b></span></li>
 <li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html"><i class="fa fa-check"></i>À propos du cours</a>
 <ul>
@@ -275,7 +216,15 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-langages-de-programmation-pour-lanalyse-géospatiale"><i class="fa fa-check"></i>Les langages de programmation pour l’analyse géospatiale</a></li>
 </ul></li>
 <li class="chapter" data-level="1.1.3" data-path="lecon_intro.html"><a href="lecon_intro.html#outil_R"><i class="fa fa-check"></i><b>1.1.3</b> Les bibliothèques géo-spatiales de R</a></li>
-<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a></li>
+<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#échelle-spatiale"><i class="fa fa-check"></i>Échelle spatiale</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#échelle-cartographique"><i class="fa fa-check"></i>Échelle cartographique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#distance"><i class="fa fa-check"></i>Distance</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#contiguïté"><i class="fa fa-check"></i>Contiguïté</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#interaction"><i class="fa fa-check"></i>Interaction</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#voisinage"><i class="fa fa-check"></i>Voisinage</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="ex_intro.html"><a href="ex_intro.html"><i class="fa fa-check"></i><b>1.2</b> Exercices</a>
 <ul>
@@ -360,15 +309,31 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#informations-de-départ"><i class="fa fa-check"></i>Informations de départ</a></li>
 <li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#décoration-du-texte"><i class="fa fa-check"></i>Décoration du texte</a></li>
 <li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-titres"><i class="fa fa-check"></i>Les titres</a></li>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-listes-1"><i class="fa fa-check"></i>Les listes</a></li>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocs-de-citation"><i class="fa fa-check"></i>Blocs de citation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocsR"><i class="fa fa-check"></i><b>3.2.2</b> Intégration de R dans le document</a>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html"><i class="fa fa-check"></i><b>3.3</b> Un titre d’ordre 2</a>
 <ul>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-commentaires-1"><i class="fa fa-check"></i>Les commentaires</a></li>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo"><i class="fa fa-check"></i>Modifier l’affichage du code source avec le paramètre <code>echo</code></a></li>
+<li class="chapter" data-level="3.3.1" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#un-titre-dordre-3"><i class="fa fa-check"></i><b>3.3.1</b> Un titre d’ordre 3</a></li>
+<li class="chapter" data-level="3.3.2" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#un-titre-dordre-3-1"><i class="fa fa-check"></i><b>3.3.2</b> Un titre d’ordre 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-listes-1"><i class="fa fa-check"></i>Les listes</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#blocs-de-citation"><i class="fa fa-check"></i>Blocs de citation</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-symboles-matématiques"><i class="fa fa-check"></i>Les symboles matématiques</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-images"><i class="fa fa-check"></i>Les images</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-tableaux"><i class="fa fa-check"></i>Les tableaux</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-réréfences"><i class="fa fa-check"></i>Les réréfences</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2.3" data-path="ex_markdown2.html"><a href="ex_markdown2.html#exo3"><i class="fa fa-check"></i><b>3.2.3</b> À vous de jouer !</a></li>
+<li class="chapter" data-level="3.3.3" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#blocsR"><i class="fa fa-check"></i><b>3.3.3</b> Intégration de R dans le document</a>
+<ul>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-commentaires-1"><i class="fa fa-check"></i>Les commentaires</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo"><i class="fa fa-check"></i>Modifier l’affichage du code source avec le paramètre <code>echo</code></a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#modifier-laffichage-des-sorties"><i class="fa fa-check"></i>Modifier l’affichage des sorties</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#modifier-le-mode-devaluation-du-code"><i class="fa fa-check"></i>Modifier le mode d’evaluation du code</a></li>
+<li class="chapter" data-level="3.3.3.1" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#afficher-des-tableaux"><i class="fa fa-check"></i><b>3.3.3.1</b> Afficher des tableaux</a></li>
+<li class="chapter" data-level="3.3.3.2" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#afficher-des-figures"><i class="fa fa-check"></i><b>3.3.3.2</b> Afficher des figures</a></li>
+<li class="chapter" data-level="3.3.3.3" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#afficher-des-images"><i class="fa fa-check"></i><b>3.3.3.3</b> Afficher des images</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3.4" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#exo3"><i class="fa fa-check"></i><b>3.3.4</b> À vous de jouer !</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vec.html"><a href="vec.html"><i class="fa fa-check"></i><b>4</b> Données vectorielles</a>
@@ -475,7 +440,10 @@ div.csl-indent {
 <li class="chapter" data-level="6.1.9" data-path="lecon_carto.html"><a href="lecon_carto.html#les-points"><i class="fa fa-check"></i><b>6.1.9</b> Les points</a></li>
 <li class="chapter" data-level="6.1.10" data-path="lecon_carto.html"><a href="lecon_carto.html#données-matricielles"><i class="fa fa-check"></i><b>6.1.10</b> Données matricielles</a></li>
 <li class="chapter" data-level="6.1.11" data-path="lecon_carto.html"><a href="lecon_carto.html#carte-avec-symboles-proportionnels"><i class="fa fa-check"></i><b>6.1.11</b> Carte avec symboles proportionnels</a></li>
-<li class="chapter" data-level="6.1.12" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a></li>
+<li class="chapter" data-level="6.1.12" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#données-covid"><i class="fa fa-check"></i>Données COVID</a></li>
+</ul></li>
 <li class="chapter" data-level="6.1.13" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-à-panneaux-multiples"><i class="fa fa-check"></i><b>6.1.13</b> Cartes à panneaux multiples</a></li>
 <li class="chapter" data-level="6.1.14" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-avec-encadré"><i class="fa fa-check"></i><b>6.1.14</b> Cartes avec encadré</a></li>
 </ul></li>
@@ -577,7 +545,7 @@ div.csl-indent {
 <h2><span class="header-section-number">1.2</span> Exercices<a href="ex_intro.html#ex_intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Le cours SCI 1031 est dédié à l’apprentissage des bibliothèques et des fonctions pour manipuler, visualiser et analyser des données spatiales. Il est donc important de vous assurer de posséder les acquis de base en R pour poursuivre votre apprentissage vers des notions plus complexes.</p>
 <p>Cette section est divisée en trois parties. Dans la partie <a href="ex_intro.html#demarrage">Démarrage</a> vous apprendrez à installer R et RStudio et vous vous familiariserez avec les notions importantes de l’environnement de travail R. Dans la partie <a href="ex_intro.html#introR">Intro à R</a> vous réviserez les concepts et les fonctions de base pour utiliser R. Finalement, dans la partie <a href="ex_intro.html#exo1">À vous de jouer!</a>, vous réaliserez un exercice pour mettre en pratique les concepts enseignés.</p>
-<p>Une grande partie du contenu de cette section est tiré du livre numérique <a href="https://intro2r.com/">An Introduction to R</a> <span class="citation">(<a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">Douglas et al. 2022</a>)</span>.</p>
+<p>Une grande partie du contenu de cette section est tiré du livre numérique <a href="https://intro2r.com/">An Introduction to R</a> <span class="citation">(<a href="ex_spatiotemp.html#ref-Douglas_IntroR_2022" role="doc-biblioref">Douglas et al. 2022</a>)</span>.</p>
 <div id="demarrage" class="section level3 hasAnchor" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Démarrage<a href="ex_intro.html#demarrage" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="installer-r" class="section level4 unnumbered hasAnchor">
@@ -631,7 +599,7 @@ div.csl-indent {
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:rstudio"></span>
 <a href="Module1/images/1_rstudio.jpg" target="_blank"><img src="Module1/images/1_rstudio.jpg" alt="Interface RStudio. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html)." width="80%" /></a>
 <p class="caption">
-Figure 1.20: Interface RStudio. Source : <span class="citation"><a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">Douglas et al.</a> (<a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/rstudio_orient.html">RStudio orientation</a>.
+FIGURE 1.22: Interface RStudio. Source : <span class="citation">Douglas et al. (<a href="ex_spatiotemp.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/rstudio_orient.html">RStudio orientation</a>.
 </p>
 </div>
 <p><br></p>
@@ -662,7 +630,7 @@ Figure 1.20: Interface RStudio. Source : <span class="citation"><a href="ressour
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:rscript"></span>
 <a href="Module1/images/1_new_script.jpg" target="_blank"><img src="Module1/images/1_new_script.jpg" alt="Créer un fichier R. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html)." width="80%" /></a>
 <p class="caption">
-Figure 1.21: Créer un fichier R. Source : <span class="citation"><a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">Douglas et al.</a> (<a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/rstudio_orient.html">RStudio orientation</a>.
+FIGURE 1.23: Créer un fichier R. Source : <span class="citation">Douglas et al. (<a href="ex_spatiotemp.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/rstudio_orient.html">RStudio orientation</a>.
 </p>
 </div>
 <p><br></p>
@@ -672,7 +640,7 @@ Figure 1.21: Créer un fichier R. Source : <span class="citation"><a href="resso
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:runscript"></span>
 <a href="Module1/images/1_rstudio_run.png" target="_blank"><img src="Module1/images/1_rstudio_run.png" alt="Utiliser un fichier R. Source : @Douglas_IntroR_2022 An introduction to R: [RStudio orientation](https://intro2r.com/rstudio_orient.html)." width="80%" /></a>
 <p class="caption">
-Figure 1.22: Utiliser un fichier R. Source : <span class="citation"><a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">Douglas et al.</a> (<a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/rstudio_orient.html">RStudio orientation</a>.
+FIGURE 1.24: Utiliser un fichier R. Source : <span class="citation">Douglas et al. (<a href="ex_spatiotemp.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/rstudio_orient.html">RStudio orientation</a>.
 </p>
 </div>
 <p><br></p>
@@ -724,10 +692,10 @@ R exécute des opérations arithmétiques et une foule de fonctions mathématiqu
 <pre class="codeout"><code>[1] 12</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ex_intro.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Le logarithme en base 2</span></span>
 <span id="cb13-2"><a href="ex_intro.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">2</span>)</span></code></pre></div>
-<pre class="codeout"><code>[1] 0.6931</code></pre>
+<pre class="codeout"><code>[1] 0.6931472</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ex_intro.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Le logarithme en base 10</span></span>
 <span id="cb15-2"><a href="ex_intro.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="dv">2</span>)</span></code></pre></div>
-<pre class="codeout"><code>[1] 0.301</code></pre>
+<pre class="codeout"><code>[1] 0.30103</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ex_intro.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Le carré ou autres puissances</span></span>
 <span id="cb17-2"><a href="ex_intro.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre class="codeout"><code>[1] 4</code></pre>
@@ -738,7 +706,7 @@ R exécute des opérations arithmétiques et une foule de fonctions mathématiqu
 <pre class="codeout"><code>[1] 4</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="ex_intro.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pi</span></span>
 <span id="cb23-2"><a href="ex_intro.html#cb23-2" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
-<pre class="codeout"><code>[1] 3.142</code></pre>
+<pre class="codeout"><code>[1] 3.141593</code></pre>
 <p><br></p>
 </div>
 <div id="les-objets" class="section level4 unnumbered hasAnchor">
@@ -869,7 +837,7 @@ Levels: Élevé Faible Modéré</code></pre>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:rscalvec"></span>
 <a href="Module1/images/1_scal_vec.png" target="_blank"><img src="Module1/images/1_scal_vec.png" alt="Représentation d'un scalaire et d'un vecteur. Source : @Douglas_IntroR_2022 An introduction to R: [Data structures](https://intro2r.com/data-structures.html)." width="50%" /></a>
 <p class="caption">
-Figure 1.23: Représentation d’un scalaire et d’un vecteur. Source : <span class="citation"><a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">Douglas et al.</a> (<a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/data-structures.html">Data structures</a>.
+FIGURE 1.25: Représentation d’un scalaire et d’un vecteur. Source : <span class="citation">Douglas et al. (<a href="ex_spatiotemp.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/data-structures.html">Data structures</a>.
 </p>
 </div>
 <p><br></p>
@@ -880,7 +848,7 @@ Figure 1.23: Représentation d’un scalaire et d’un vecteur. Source : <span c
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:rmatarr"></span>
 <a href="Module1/images/1_mat_array.png" target="_blank"><img src="Module1/images/1_mat_array.png" alt="Représentation d'une matrice et d'un array. Source : @Douglas_IntroR_2022 An introduction to R: [Data structures](https://intro2r.com/data-structures.html)." width="50%" /></a>
 <p class="caption">
-Figure 1.24: Représentation d’une matrice et d’un array. Source : <span class="citation"><a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">Douglas et al.</a> (<a href="ressources.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/data-structures.html">Data structures</a>.
+FIGURE 1.26: Représentation d’une matrice et d’un array. Source : <span class="citation">Douglas et al. (<a href="ex_spatiotemp.html#ref-Douglas_IntroR_2022" role="doc-biblioref">2022</a>)</span> An introduction to R: <a href="https://intro2r.com/data-structures.html">Data structures</a>.
 </p>
 </div>
 <p><br></p>
@@ -1170,7 +1138,7 @@ Dans ce cas, il n’est pas nécessaire les arguments <code>col.names = TRUE</co
 <span id="cb128-2"><a href="ex_intro.html#cb128-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
 <span id="cb128-3"><a href="ex_intro.html#cb128-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb128-4"><a href="ex_intro.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y)</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-48-1.png" width="60%" style="display: block; margin: auto;" />
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-45-1.png" width="60%" style="display: block; margin: auto;" />
 <br></p>
 <p>Il est possible d’ajouter des arguments pour préciser:</p>
 <ul>
@@ -1189,7 +1157,7 @@ Dans ce cas, il n’est pas nécessaire les arguments <code>col.names = TRUE</co
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:rplotarg"></span>
 <img src="Cours_SpatialR_files/figure-html/rplotarg-1.png" alt="Quelques arguments de la fonction `plot()` et les valeurs possibles. Source : [The R Graph Gallery](https://r-graph-gallery.com/6-graph-parameters-reminder.html)." width="80%" />
 <p class="caption">
-Figure 1.25: Quelques arguments de la fonction <code>plot()</code> et les valeurs possibles. Source : <a href="https://r-graph-gallery.com/6-graph-parameters-reminder.html">The R Graph Gallery</a>.
+FIGURE 1.27: Quelques arguments de la fonction <code>plot()</code> et les valeurs possibles. Source : <a href="https://r-graph-gallery.com/6-graph-parameters-reminder.html">The R Graph Gallery</a>.
 </p>
 </div>
 <p><br></p>
@@ -1207,7 +1175,7 @@ Figure 1.25: Quelques arguments de la fonction <code>plot()</code> et les valeur
 <span id="cb129-11"><a href="ex_intro.html#cb129-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>,</span>
 <span id="cb129-12"><a href="ex_intro.html#cb129-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
 <span id="cb129-13"><a href="ex_intro.html#cb129-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">0.9</span>)</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-49-1.png" width="60%" style="display: block; margin: auto;" />
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-46-1.png" width="60%" style="display: block; margin: auto;" />
 <br></p>
 </div>
 <div id="histogramme" class="section level5 hasAnchor" number="1.2.2.0.1">
@@ -1219,7 +1187,7 @@ Figure 1.25: Quelques arguments de la fonction <code>plot()</code> et les valeur
 <span id="cb130-4"><a href="ex_intro.html#cb130-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb130-5"><a href="ex_intro.html#cb130-5" aria-hidden="true" tabindex="-1"></a><span class="co"># histogramme</span></span>
 <span id="cb130-6"><a href="ex_intro.html#cb130-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-50-1.png" width="60%" style="display: block; margin: auto;" />
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-47-1.png" width="60%" style="display: block; margin: auto;" />
 <br></p>
 <p>Comme pour la fonction <code>plot()</code>, nous pouvons améliorer l’apparence de l’histogramme par l’ajout d’arguments.</p>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="ex_intro.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x,</span>
@@ -1231,7 +1199,7 @@ Figure 1.25: Quelques arguments de la fonction <code>plot()</code> et les valeur
 <span id="cb131-7"><a href="ex_intro.html#cb131-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;pink&quot;</span>,</span>
 <span id="cb131-8"><a href="ex_intro.html#cb131-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">40</span>),</span>
 <span id="cb131-9"><a href="ex_intro.html#cb131-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">35</span>))</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-51-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-48-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p><br></p>
 <p>L’argument <code>breaks</code> permet de réduire ou d’augmenter le nombre de bandes dans le diagramme. Le nombre de bandes ne sera probablement pas la valeur exacte que vous précisez mais respectera l’ordre de grandeur.</p>
 <p><br></p>
@@ -1245,7 +1213,7 @@ Figure 1.25: Quelques arguments de la fonction <code>plot()</code> et les valeur
 <span id="cb132-4"><a href="ex_intro.html#cb132-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb132-5"><a href="ex_intro.html#cb132-5" aria-hidden="true" tabindex="-1"></a><span class="co"># histogramme</span></span>
 <span id="cb132-6"><a href="ex_intro.html#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(x)</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-52-1.png" width="60%" style="display: block; margin: auto;" />
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-49-1.png" width="60%" style="display: block; margin: auto;" />
 <br></p>
 <p>Le trait horizonal foncé au centre correspond à la valeur médiane. La ligne supérieure de la boîte correspond au 75<sup>ième</sup> percentile (3<sup>ième</sup> quartile) et la ligne inférieure de la boîte au 25<sup>ième</sup> percentile (1<sup>er</sup> quartile)</p>
 <p>Comme pour les autres types de graphique, nous pouvons personnaliser les diagrammes à boîtes en ajoutant des arguments à la fonction <code>boxplot()</code></p>
@@ -1255,7 +1223,7 @@ Figure 1.25: Quelques arguments de la fonction <code>plot()</code> et les valeur
 <span id="cb133-4"><a href="ex_intro.html#cb133-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;violet&quot;</span>,</span>
 <span id="cb133-5"><a href="ex_intro.html#cb133-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> <span class="fl">1.5</span></span>
 <span id="cb133-6"><a href="ex_intro.html#cb133-6" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-53-1.png" width="60%" style="display: block; margin: auto;" />
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-50-1.png" width="60%" style="display: block; margin: auto;" />
 <br></p>
 </div>
 </div>
@@ -1336,22 +1304,14 @@ Réponse
 <p><br></p>
 <p>Le nombre de niveau d’un objet de classe facteur est donné par la fonction <code>levels()</code>.</p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="ex_intro.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(villes<span class="sc">$</span>regadm)</span></code></pre></div>
-<pre class="codeout"><code> [1] &quot;Abitibi-Témiscamingue (08)&quot;         
- [2] &quot;Bas-Saint-Laurent (01)&quot;             
- [3] &quot;Capitale-Nationale (03)&quot;            
- [4] &quot;Centre-du-Québec (17)&quot;              
- [5] &quot;Chaudière-Appalaches (12)&quot;          
- [6] &quot;Côte-Nord (09)&quot;                     
- [7] &quot;Estrie (05)&quot;                        
- [8] &quot;Gaspésie--Îles-de-la-Madeleine (11)&quot;
- [9] &quot;Lanaudière (14)&quot;                    
-[10] &quot;Laurentides (15)&quot;                   
-[11] &quot;Laval (13)&quot;                         
-[12] &quot;Mauricie (04)&quot;                      
-[13] &quot;Montérégie (16)&quot;                    
-[14] &quot;Montréal (06)&quot;                      
-[15] &quot;Nord-du-Québec (10)&quot;                
-[16] &quot;Outaouais (07)&quot;                     
+<pre class="codeout"><code> [1] &quot;Abitibi-Témiscamingue (08)&quot;          &quot;Bas-Saint-Laurent (01)&quot;             
+ [3] &quot;Capitale-Nationale (03)&quot;             &quot;Centre-du-Québec (17)&quot;              
+ [5] &quot;Chaudière-Appalaches (12)&quot;           &quot;Côte-Nord (09)&quot;                     
+ [7] &quot;Estrie (05)&quot;                         &quot;Gaspésie--Îles-de-la-Madeleine (11)&quot;
+ [9] &quot;Lanaudière (14)&quot;                     &quot;Laurentides (15)&quot;                   
+[11] &quot;Laval (13)&quot;                          &quot;Mauricie (04)&quot;                      
+[13] &quot;Montérégie (16)&quot;                     &quot;Montréal (06)&quot;                      
+[15] &quot;Nord-du-Québec (10)&quot;                 &quot;Outaouais (07)&quot;                     
 [17] &quot;Saguenay--Lac-Saint-Jean (02)&quot;      </code></pre>
 <p><br>
 Nous observons qu’il y a 17 niveaux correspondants à chacune des régions administratives du Québec.</p>
@@ -1368,7 +1328,7 @@ Nous observons qu’il y a 17 niveaux correspondants à chacune des régions adm
 Réponse
 </summary>
 <p>
-<p>Nous souhaitons créer un <em>data frame</em> comprenant seulement la ligne de <code>villes</code> pour laquelle l’attribut “munnon” prend la valeur “Montréal.”</p>
+<p>Nous souhaitons créer un <em>data frame</em> comprenant seulement la ligne de <code>villes</code> pour laquelle l’attribut “munnon” prend la valeur “Montréal”.</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="ex_intro.html#cb144-1" aria-hidden="true" tabindex="-1"></a>Mtl <span class="ot">&lt;-</span> villes[villes<span class="sc">$</span>munnom<span class="sc">==</span><span class="st">&quot;Montréal&quot;</span>,]</span>
 <span id="cb144-2"><a href="ex_intro.html#cb144-2" aria-hidden="true" tabindex="-1"></a>Mtl</span></code></pre></div>
 <pre class="codeout"><code>      munnom        regadm  mpopul msuperf
@@ -1414,12 +1374,12 @@ Réponse
 <p>
 <p>Nous utilisons la fonction <code>hist()</code> avec l’argument <code>breaks = 10</code> pour produire un histogramme d’environ 10 bandes.</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="ex_intro.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(villes<span class="sc">$</span>mpopul, <span class="at">breaks =</span> <span class="dv">10</span> )</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-63-1.png" width="60%" style="display: block; margin: auto;" />
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-60-1.png" width="60%" style="display: block; margin: auto;" />
 <br></p>
 <p>Nous observons que la distribution de la taille des villes suit une loi de puissance. En effet, nous comptons beaucoup de villes avec une petite taille de population (plus de 1000 villes avec une population inférieure à 250 000 habitants) et peu de villes avec une très grande taille de population.</p>
 <p>Dans cette situation, il est préférable d’illustrer le logarithme de la taille de la population. Cette distribution nous donne une meilleure appréciation de la variation dans la taille des villes.</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="ex_intro.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">log10</span>(villes<span class="sc">$</span>mpopul), <span class="at">breaks =</span> <span class="dv">10</span> )</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-64-1.png" width="60%" style="display: block; margin: auto;" />
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-61-1.png" width="60%" style="display: block; margin: auto;" />
 <br></p>
 <p>Identifions correctement les axes.</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="ex_intro.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">log10</span>(villes<span class="sc">$</span>mpopul), <span class="at">breaks =</span> <span class="dv">10</span>,</span>
@@ -1437,7 +1397,7 @@ Réponse
 <span id="cb154-13"><a href="ex_intro.html#cb154-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;10&quot;</span>,<span class="st">&quot;100&quot;</span>,<span class="st">&quot;1000&quot;</span>,</span>
 <span id="cb154-14"><a href="ex_intro.html#cb154-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">expression</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">4</span>) , <span class="fu">expression</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">5</span>),</span>
 <span id="cb154-15"><a href="ex_intro.html#cb154-15" aria-hidden="true" tabindex="-1"></a>                <span class="fu">expression</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>), <span class="fu">expression</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>)))</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-65-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-62-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </p>
 </details>
@@ -1453,7 +1413,7 @@ Réponse
 <span id="cb155-3"><a href="ex_intro.html#cb155-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;Superficie (km&quot;</span><span class="sc">^</span><span class="st">&quot;2&quot;</span>,<span class="st">&quot;)&quot;</span>)),</span>
 <span id="cb155-4"><a href="ex_intro.html#cb155-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;deepskyblue&quot;</span></span>
 <span id="cb155-5"><a href="ex_intro.html#cb155-5" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-66-1.png" width="60%" style="display: block; margin: auto;" />
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-63-1.png" width="60%" style="display: block; margin: auto;" />
 <br></p>
 </p>
 </details>
@@ -1525,20 +1485,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

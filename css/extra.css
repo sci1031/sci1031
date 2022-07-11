@@ -225,6 +225,11 @@ blockquote {
   background-color: #C7D1D0;
   margin-bottom: 20px;
 }
+.boite.demo{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #C7D1D0;
+}
 .boite.ico img[src*=".svg"] {
   width: 60px;
   height: 50px;

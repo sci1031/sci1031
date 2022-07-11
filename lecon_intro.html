@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -20,9 +20,10 @@
   <meta name="twitter:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
   
 
+<meta name="author" content="" />
 
 
-<meta name="date" content="2022-05-24" />
+<meta name="date" content="2022-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,66 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.0/leaflet.js"></script>
-<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.0/leaflet-providers-plugin.js"></script>
-<script src="libs/M_42f70b-1/data_stars_Me0c5db.txt"></script>
-<script src="libs/joda-0.0.1/joda.js"></script>
-<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric_b5d749-1/data_stars_M_logique_numericf86413.txt"></script>
-<script src="libs/M_factor_08ba2e-1/data_stars_M_factor2073c1.txt"></script>
-<script src="libs/ICU_158c6a-1/data_stars_ICUc2f819.txt"></script>
-<script src="libs/ICU_3d2afe-1/data_stars_ICU21085c.txt"></script>
-<script src="libs/T_sec_27f935-1/data_stars_T_secf950be.txt"></script>
-<script src="libs/T_fact4_moy_0e1694-1/data_stars_T_fact4_moyface28.txt"></script>
-<script src="libs/T_fact4_max_34951d-1/data_stars_T_fact4_maxabc734.txt"></script>
-<script src="libs/T_fact8_moy_6da058-1/data_stars_T_fact8_moy2f9c06.txt"></script>
-<script src="libs/T_fact8_max_ea1fd6-1/data_stars_T_fact8_maxfd7658.txt"></script>
-<script src="libs/SR_58dc94-1/data_stars_SRdb4920.txt"></script>
-<script src="libs/SG_e8a5f7-1/data_stars_SG176059.txt"></script>
-<script src="libs/SB_df573c-1/data_stars_SBabef30.txt"></script>
-<script src="libs/dem_41ad92-1/data_stars_dem2695ad.txt"></script>
-<script src="libs/nouvelles_classes_dem_2b3d7a-1/data_stars_nouvelles_classes_demcd0a81.txt"></script>
-<script src="libs/reclassify(dem, nouvelles_classes2)_0679dc-1/data_stars_reclassifydemnouvelles_classes29f7bea.txt"></script>
-<script src="libs/dem_cr_716e04-1/data_stars_dem_crb1f740.txt"></script>
-<script src="libs/dem_cr_p_dacf91-1/data_stars_dem_cr_p58de91.txt"></script>
-<script src="libs/dem_fa45b0-1/data_stars_dem7cd902.txt"></script>
-<script src="libs/dem_ma_93a084-1/data_stars_dem_maa0958e.txt"></script>
-<script src="libs/dem_ma_inv_76d129-1/data_stars_dem_ma_inv7b6af4.txt"></script>
-<script src="libs/dem_ma_458072-1/data_stars_dem_ma9e85fc.txt"></script>
-<script src="libs/dem_ma_inv_a62340-1/data_stars_dem_ma_inva90e8b.txt"></script>
-<script src="libs/dem_merge_072634-1/data_stars_dem_merge31f085.txt"></script>
-<script src="libs/dem_merge_ordre1_8142b9-1/data_stars_dem_merge_ordre1e815ca.txt"></script>
-<script src="libs/dem_merge_ordre2_70e48f-1/data_stars_dem_merge_ordre25067ac.txt"></script>
-<script src="libs/dem_mosaic_min_964df8-1/data_stars_dem_mosaic_mine84159.txt"></script>
-<script src="libs/dem_mosaic_max_fab873-1/data_stars_dem_mosaic_maxfc8437.txt"></script>
-<script src="libs/dem_mosaic_mean_bead0f-1/data_stars_dem_mosaic_mean8f3a74.txt"></script>
-<script src="libs/dem_parcs_ce7f81-1/data_stars_dem_parcs56317f.txt"></script>
-<script src="libs/dem_parcs_fbae52-1/data_stars_dem_parcsf7e1a5.txt"></script>
-<script src="libs/dem_orford_71ec6f-1/data_stars_dem_orford61fae9.txt"></script>
-<script src="libs/dem_orford_8db4f1-1/data_stars_dem_orforda4fb27.txt"></script>
-<script src="libs/dem_orford_quantile_76b045-1/data_stars_dem_orford_quantileef9a67.txt"></script>
-<script src="libs/dem_orford_quantile_c7f308-1/data_stars_dem_orford_quantile90e148.txt"></script>
-<script src="libs/dem_tampon_max_b631a9-1/data_stars_dem_tampon_max4bdaf2.txt"></script>
-<script src="libs/X1_3826fe-1/data_stars_X145a18d.txt"></script>
-<script src="libs/X2_4c8126-1/data_stars_X29e60dc.txt"></script>
-<script src="libs/X3_5312da-1/data_stars_X3465219.txt"></script>
 
 
 <style type="text/css">
@@ -216,7 +157,7 @@ div.csl-indent {
 <li><a href="./">TELUQ -  SCI 1031.</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#section"></a></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
 <li class="part"><span><b>I SCI 1031</b></span></li>
 <li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html"><i class="fa fa-check"></i>À propos du cours</a>
 <ul>
@@ -275,7 +216,15 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-langages-de-programmation-pour-lanalyse-géospatiale"><i class="fa fa-check"></i>Les langages de programmation pour l’analyse géospatiale</a></li>
 </ul></li>
 <li class="chapter" data-level="1.1.3" data-path="lecon_intro.html"><a href="lecon_intro.html#outil_R"><i class="fa fa-check"></i><b>1.1.3</b> Les bibliothèques géo-spatiales de R</a></li>
-<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a></li>
+<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#échelle-spatiale"><i class="fa fa-check"></i>Échelle spatiale</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#échelle-cartographique"><i class="fa fa-check"></i>Échelle cartographique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#distance"><i class="fa fa-check"></i>Distance</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#contiguïté"><i class="fa fa-check"></i>Contiguïté</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#interaction"><i class="fa fa-check"></i>Interaction</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#voisinage"><i class="fa fa-check"></i>Voisinage</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="ex_intro.html"><a href="ex_intro.html"><i class="fa fa-check"></i><b>1.2</b> Exercices</a>
 <ul>
@@ -360,15 +309,31 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#informations-de-départ"><i class="fa fa-check"></i>Informations de départ</a></li>
 <li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#décoration-du-texte"><i class="fa fa-check"></i>Décoration du texte</a></li>
 <li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-titres"><i class="fa fa-check"></i>Les titres</a></li>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-listes-1"><i class="fa fa-check"></i>Les listes</a></li>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocs-de-citation"><i class="fa fa-check"></i>Blocs de citation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocsR"><i class="fa fa-check"></i><b>3.2.2</b> Intégration de R dans le document</a>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html"><i class="fa fa-check"></i><b>3.3</b> Un titre d’ordre 2</a>
 <ul>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-commentaires-1"><i class="fa fa-check"></i>Les commentaires</a></li>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo"><i class="fa fa-check"></i>Modifier l’affichage du code source avec le paramètre <code>echo</code></a></li>
+<li class="chapter" data-level="3.3.1" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#un-titre-dordre-3"><i class="fa fa-check"></i><b>3.3.1</b> Un titre d’ordre 3</a></li>
+<li class="chapter" data-level="3.3.2" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#un-titre-dordre-3-1"><i class="fa fa-check"></i><b>3.3.2</b> Un titre d’ordre 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-listes-1"><i class="fa fa-check"></i>Les listes</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#blocs-de-citation"><i class="fa fa-check"></i>Blocs de citation</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-symboles-matématiques"><i class="fa fa-check"></i>Les symboles matématiques</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-images"><i class="fa fa-check"></i>Les images</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-tableaux"><i class="fa fa-check"></i>Les tableaux</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-réréfences"><i class="fa fa-check"></i>Les réréfences</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2.3" data-path="ex_markdown2.html"><a href="ex_markdown2.html#exo3"><i class="fa fa-check"></i><b>3.2.3</b> À vous de jouer !</a></li>
+<li class="chapter" data-level="3.3.3" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#blocsR"><i class="fa fa-check"></i><b>3.3.3</b> Intégration de R dans le document</a>
+<ul>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#les-commentaires-1"><i class="fa fa-check"></i>Les commentaires</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo"><i class="fa fa-check"></i>Modifier l’affichage du code source avec le paramètre <code>echo</code></a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#modifier-laffichage-des-sorties"><i class="fa fa-check"></i>Modifier l’affichage des sorties</a></li>
+<li class="chapter" data-level="" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#modifier-le-mode-devaluation-du-code"><i class="fa fa-check"></i>Modifier le mode d’evaluation du code</a></li>
+<li class="chapter" data-level="3.3.3.1" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#afficher-des-tableaux"><i class="fa fa-check"></i><b>3.3.3.1</b> Afficher des tableaux</a></li>
+<li class="chapter" data-level="3.3.3.2" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#afficher-des-figures"><i class="fa fa-check"></i><b>3.3.3.2</b> Afficher des figures</a></li>
+<li class="chapter" data-level="3.3.3.3" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#afficher-des-images"><i class="fa fa-check"></i><b>3.3.3.3</b> Afficher des images</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3.4" data-path="un-titre-dordre-2.html"><a href="un-titre-dordre-2.html#exo3"><i class="fa fa-check"></i><b>3.3.4</b> À vous de jouer !</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vec.html"><a href="vec.html"><i class="fa fa-check"></i><b>4</b> Données vectorielles</a>
@@ -475,7 +440,10 @@ div.csl-indent {
 <li class="chapter" data-level="6.1.9" data-path="lecon_carto.html"><a href="lecon_carto.html#les-points"><i class="fa fa-check"></i><b>6.1.9</b> Les points</a></li>
 <li class="chapter" data-level="6.1.10" data-path="lecon_carto.html"><a href="lecon_carto.html#données-matricielles"><i class="fa fa-check"></i><b>6.1.10</b> Données matricielles</a></li>
 <li class="chapter" data-level="6.1.11" data-path="lecon_carto.html"><a href="lecon_carto.html#carte-avec-symboles-proportionnels"><i class="fa fa-check"></i><b>6.1.11</b> Carte avec symboles proportionnels</a></li>
-<li class="chapter" data-level="6.1.12" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a></li>
+<li class="chapter" data-level="6.1.12" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#données-covid"><i class="fa fa-check"></i>Données COVID</a></li>
+</ul></li>
 <li class="chapter" data-level="6.1.13" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-à-panneaux-multiples"><i class="fa fa-check"></i><b>6.1.13</b> Cartes à panneaux multiples</a></li>
 <li class="chapter" data-level="6.1.14" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-avec-encadré"><i class="fa fa-check"></i><b>6.1.14</b> Cartes avec encadré</a></li>
 </ul></li>
@@ -586,7 +554,7 @@ div.csl-indent {
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:nippur"></span>
 <a href="Module1/images/1_Nippur.jpg" target="_blank"><img src="Module1/images/1_Nippur.jpg" alt="La carte de Nippur tracée sur une tablette d’argile. Source : [Mary Harrsch](https://www.flickr.com/photos/mharrsch/19212374832/)." width="50%" /></a>
 <p class="caption">
-Figure 1.1: La carte de Nippur tracée sur une tablette d’argile. Source : <a href="https://www.flickr.com/photos/mharrsch/19212374832/">Mary Harrsch</a>.
+FIGURE 1.1: La carte de Nippur tracée sur une tablette d’argile. Source : <a href="https://www.flickr.com/photos/mharrsch/19212374832/">Mary Harrsch</a>.
 </p>
 </div>
 <p><br></p>
@@ -595,7 +563,7 @@ Figure 1.1: La carte de Nippur tracée sur une tablette d’argile. Source : <a 
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:hecatee"></span>
 <a href="Module1/images/1_Hecatee.jpg" target="_blank"><img src="Module1/images/1_Hecatee.jpg" alt="Une reconstitution de la carte du monde d’Hétacée. Source : [Arnaud, P. (2009). *Les cartes antiques*. L'archéotherma](http://www.archeothema.com/numero/les-cartes-antiques.htm)." width="50%" /></a>
 <p class="caption">
-Figure 1.2: Une reconstitution de la carte du monde d’Hétacée. Source : <a href="http://www.archeothema.com/numero/les-cartes-antiques.htm">Arnaud, P. (2009). <em>Les cartes antiques</em>. L’archéotherma</a>.
+FIGURE 1.2: Une reconstitution de la carte du monde d’Hétacée. Source : <a href="http://www.archeothema.com/numero/les-cartes-antiques.htm">Arnaud, P. (2009). <em>Les cartes antiques</em>. L’archéotherma</a>.
 </p>
 </div>
 <p><br></p>
@@ -604,14 +572,14 @@ Figure 1.2: Une reconstitution de la carte du monde d’Hétacée. Source : <a h
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:ptolemee"></span>
 <a href="Module1/images/1_Ptolemee.jpg" target="_blank"><img src="Module1/images/1_Ptolemee.jpg" alt="La carte du monde de [Claude Ptolémée](https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e). Cet astronome, mathématicien et géographe grec du 1^er^ siècle est l’auteur du [Manuel de géographie](https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)). La carte illustrée ci-dessus a été reconstituée par le cartographe [Nicolaus Germanus](https://en.wikipedia.org/wiki/Nicolaus_Germanus) en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: [https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807](https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807). " width="50%" /></a>
 <p class="caption">
-Figure 1.3: La carte du monde de <a href="https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e">Claude Ptolémée</a>. Cet astronome, mathématicien et géographe grec du 1<sup>er</sup> siècle est l’auteur du <a href="https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)">Manuel de géographie</a>. La carte illustrée ci-dessus a été reconstituée par le cartographe <a href="https://en.wikipedia.org/wiki/Nicolaus_Germanus">Nicolaus Germanus</a> en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: <a href="https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807">https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807</a>.
+FIGURE 1.3: La carte du monde de <a href="https://fr.wikipedia.org/wiki/Claude_Ptol%C3%A9m%C3%A9e">Claude Ptolémée</a>. Cet astronome, mathématicien et géographe grec du 1<sup>er</sup> siècle est l’auteur du <a href="https://fr.wikipedia.org/wiki/G%C3%A9ographie_(Ptol%C3%A9m%C3%A9e)">Manuel de géographie</a>. La carte illustrée ci-dessus a été reconstituée par le cartographe <a href="https://en.wikipedia.org/wiki/Nicolaus_Germanus">Nicolaus Germanus</a> en 1467, qui s’est intéressé à moderniser et vulgariser les travaux de Ptolémée. Source: <a href="https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807">https://archives.fbi.gov/archives/news/stories/2007/november/stolenmaps_110807</a>.
 </p>
 </div>
 <p><br></p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:munster"></span>
 <a href="Module1/images/1_Munster.jpg" target="_blank"><img src="Module1/images/1_Munster.jpg" alt="Carte du nouveau monde de [Sebastien Münster](https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster). Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre *Cosmographia Universalis* a produit cette carte en 1552. Source : [https://digital.library.yorku.ca/islandora/object/yul:1153586](https://digital.library.yorku.ca/islandora/object/yul:1153586)." width="50%" /></a>
 <p class="caption">
-Figure 1.4: Carte du nouveau monde de <a href="https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster">Sebastien Münster</a>. Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre <em>Cosmographia Universalis</em> a produit cette carte en 1552. Source : <a href="https://digital.library.yorku.ca/islandora/object/yul:1153586">https://digital.library.yorku.ca/islandora/object/yul:1153586</a>.
+FIGURE 1.4: Carte du nouveau monde de <a href="https://fr.wikipedia.org/wiki/Sebastian_M%C3%BCnster">Sebastien Münster</a>. Ce cartographe, astronome et mathématicien allemand, connu, entre autres pour son œuvre <em>Cosmographia Universalis</em> a produit cette carte en 1552. Source : <a href="https://digital.library.yorku.ca/islandora/object/yul:1153586">https://digital.library.yorku.ca/islandora/object/yul:1153586</a>.
 </p>
 </div>
 <p><br></p>
@@ -620,7 +588,7 @@ Figure 1.4: Carte du nouveau monde de <a href="https://fr.wikipedia.org/wiki/Seb
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:evomtl"></span>
 <a href="Module1/images/1_Montreal1556.png" target="_blank"><img src="Module1/images/1_Montreal1556.jpg" alt="Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/)." width="50%" /></a><a href="Module1/images/1_Montreal1645.jpg" target="_blank"><img src="Module1/images/1_Montreal1645.jpg" alt="Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/)." width="50%" /></a><a href="Module1/images/1_Montreal1758.png" target="_blank"><img src="Module1/images/1_Montreal1758.jpg" alt="Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/)." width="50%" /></a><a href="Module1/images/1_Montreal1843.jpg" target="_blank"><img src="Module1/images/1_Montreal1843.jpg" alt="Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/)." width="50%" /></a><a href="Module1/images/1_Montreal1897.png" target="_blank"><img src="Module1/images/1_Montreal1897.jpg" alt="Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/)." width="50%" /></a><a href="Module1/images/1_Montreal1920.jpg" target="_blank"><img src="Module1/images/1_Montreal1920.jpg" alt="Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/)." width="50%" /></a><a href="Module1/images/1_Montreal1960.png" target="_blank"><img src="Module1/images/1_Montreal1960.jpg" alt="Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/)." width="50%" /></a><a href="Module1/images/1_Montreal1982.jpg" target="_blank"><img src="Module1/images/1_Montreal1982.jpg" alt="Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: [Archives Montréal](https://archivesdemontreal.ica-atom.org/)." width="50%" /></a>
 <p class="caption">
-Figure 1.5: Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: <a href="https://archivesdemontreal.ica-atom.org/">Archives Montréal</a>.
+FIGURE 1.5: Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920, 1960, et 1982 (dans l’ordre allant de gauche à droite et de haut en bas). Sources: <a href="https://archivesdemontreal.ica-atom.org/">Archives Montréal</a>.
 </p>
 </div>
 <p><br></p>
@@ -631,7 +599,7 @@ Figure 1.5: Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920,
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:cholera"></span>
 <a href="Module1/images/1_Cholera.jpg" target="_blank"><img src="Module1/images/1_Cholera.jpg" alt="Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source: [Wikipedia](https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg)." width="50%" /></a>
 <p class="caption">
-Figure 1.6: Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source: <a href="https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg">Wikipedia</a>.
+FIGURE 1.6: Reconstitution de la carte de l’épidémie de cholera créée par John Snow. Chaque barre rouge représente une personne infectée. Les pompes à eau sont illustrées en vert. Source: <a href="https://fr.wikipedia.org/wiki/Fichier:Dr._John_Snow_Cholera_Map.svg">Wikipedia</a>.
 </p>
 </div>
 <p><br></p>
@@ -639,13 +607,13 @@ Figure 1.6: Reconstitution de la carte de l’épidémie de cholera créée par 
 <div id="la-géomatique" class="section level4 unnumbered hasAnchor">
 <h4>La géomatique<a href="lecon_intro.html#la-géomatique" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>L’arrivée de l’informatique et des données numériques viennent transformer la cartographie traditionnelle et la façon de traiter l’information géographique. Dans les années 1960, le terme « géomatique », qui est une contraction entre les mots géographie et informatique, est proposé pour désigner cette nouvelle discipline.</p>
-<p>On définit la géomatique comme « l’ensemble des connaissances et technologies nécessaires à la production et au traitement des données numériques décrivant le territoire, ses ressources ou tout autre objet ou phénomène ayant une position géographique. »<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>On définit la géomatique comme « l’ensemble des connaissances et technologies nécessaires à la production et au traitement des données numériques décrivant le territoire, ses ressources ou tout autre objet ou phénomène ayant une position géographique. »<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>En effet, les géographes ou autres utilisateurs de données spatiales doivent maintenant composer avec des données numériques diverses acquises par la photographie aérienne et satellitaire, les outils topographiques électroniques ou munis de GPS, la numérisation de documents papiers, etc.</p>
 <p>De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multi-sources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales (Figure <a href="lecon_intro.html#fig:sigelements">1.7</a>).</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigelements"></span>
 <a href="Module1/images/1_SIGelements.jpg" target="_blank"><img src="Module1/images/1_SIGelements.jpg" alt="Les différents éléments qui composent un SIG. Source: image récupérée le 6 décembre 2021 à https://bookdown.org/tep/gisbooklet/introduction-to-gis.html." width="80%" /></a>
 <p class="caption">
-Figure 1.7: Les différents éléments qui composent un SIG. Source: image récupérée le 6 décembre 2021 à <a href="https://bookdown.org/tep/gisbooklet/introduction-to-gis.html" class="uri">https://bookdown.org/tep/gisbooklet/introduction-to-gis.html</a>.
+FIGURE 1.7: Les différents éléments qui composent un SIG. Source: image récupérée le 6 décembre 2021 à <a href="https://bookdown.org/tep/gisbooklet/introduction-to-gis.html" class="uri">https://bookdown.org/tep/gisbooklet/introduction-to-gis.html</a>.
 </p>
 </div>
 <p><br></p>
@@ -654,7 +622,7 @@ Figure 1.7: Les différents éléments qui composent un SIG. Source: image récu
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigquotidien"></span>
 <a href="Module1/images/1_GoogleMap.png" target="_blank"><img src="Module1/images/1_GoogleMap.png" alt="Exemples de SIG dans notre vie quotidienne. Google Map affiche les services autour d’une adresse. L’application BIXI permet de trouver les bornes et les vélos accessibles. Source: image récupérée le 6 décembre 2021 à https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/. L’outil d’affichage de DuProprio permet d’identifier les résidences à vendre dans un secteur donné. " width="70%" /></a><a href="Module1/images/1_Bixi.jpg" target="_blank"><img src="Module1/images/1_Bixi.jpg" alt="Exemples de SIG dans notre vie quotidienne. Google Map affiche les services autour d’une adresse. L’application BIXI permet de trouver les bornes et les vélos accessibles. Source: image récupérée le 6 décembre 2021 à https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/. L’outil d’affichage de DuProprio permet d’identifier les résidences à vendre dans un secteur donné. " width="70%" /></a><a href="Module1/images/1_DuProprio.jpg" target="_blank"><img src="Module1/images/1_DuProprio.jpg" alt="Exemples de SIG dans notre vie quotidienne. Google Map affiche les services autour d’une adresse. L’application BIXI permet de trouver les bornes et les vélos accessibles. Source: image récupérée le 6 décembre 2021 à https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/. L’outil d’affichage de DuProprio permet d’identifier les résidences à vendre dans un secteur donné. " width="70%" /></a>
 <p class="caption">
-Figure 1.8: Exemples de SIG dans notre vie quotidienne. Google Map affiche les services autour d’une adresse. L’application BIXI permet de trouver les bornes et les vélos accessibles. Source: image récupérée le 6 décembre 2021 à <a href="https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/" class="uri">https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/</a>. L’outil d’affichage de DuProprio permet d’identifier les résidences à vendre dans un secteur donné.
+FIGURE 1.8: Exemples de SIG dans notre vie quotidienne. Google Map affiche les services autour d’une adresse. L’application BIXI permet de trouver les bornes et les vélos accessibles. Source: image récupérée le 6 décembre 2021 à <a href="https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/" class="uri">https://journaldesvoisins.com/nouvelles-stations-bixi-dans-ahuntsic-cartierville/</a>. L’outil d’affichage de DuProprio permet d’identifier les résidences à vendre dans un secteur donné.
 </p>
 </div>
 <p><br></p>
@@ -664,7 +632,7 @@ Figure 1.8: Exemples de SIG dans notre vie quotidienne. Google Map affiche les s
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigexemplea"></span>
 <a href="Module1/images/1_SIGexempleA.jpg" target="_blank"><img src="Module1/images/1_SIGexempleA.jpg" alt="Suivi de l’état du réseau routier par Transport Québec. Source: https://www.quebec511.info/fr/Carte/." width="80%" /></a>
 <p class="caption">
-Figure 1.9: Suivi de l’état du réseau routier par Transport Québec. Source: <a href="https://www.quebec511.info/fr/Carte/" class="uri">https://www.quebec511.info/fr/Carte/</a>.
+FIGURE 1.9: Suivi de l’état du réseau routier par Transport Québec. Source: <a href="https://www.quebec511.info/fr/Carte/" class="uri">https://www.quebec511.info/fr/Carte/</a>.
 </p>
 </div>
 <p><br></p></li>
@@ -672,7 +640,7 @@ Figure 1.9: Suivi de l’état du réseau routier par Transport Québec. Source:
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigexempleb"></span>
 <a href="Module1/images/1_SIGexempleB.jpg" target="_blank"><img src="Module1/images/1_SIGexempleB.jpg" alt="Atlas de défavorisation du Ministère de l’Éducation et de l’Enseignement supérieur du Québec. Source:  https://infogeo.education.gouv.qc.ca/public/Atlas_Defavorisation/." width="80%" /></a>
 <p class="caption">
-Figure 1.10: Atlas de défavorisation du Ministère de l’Éducation et de l’Enseignement supérieur du Québec. Source: <a href="https://infogeo.education.gouv.qc.ca/public/Atlas_Defavorisation/" class="uri">https://infogeo.education.gouv.qc.ca/public/Atlas_Defavorisation/</a>.
+FIGURE 1.10: Atlas de défavorisation du Ministère de l’Éducation et de l’Enseignement supérieur du Québec. Source: <a href="https://infogeo.education.gouv.qc.ca/public/Atlas_Defavorisation/" class="uri">https://infogeo.education.gouv.qc.ca/public/Atlas_Defavorisation/</a>.
 </p>
 </div>
 <p><br></p></li>
@@ -680,7 +648,7 @@ Figure 1.10: Atlas de défavorisation du Ministère de l’Éducation et de l’
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigexemplec"></span>
 <a href="Module1/images/1_SIGexempleC.jpg" target="_blank"><img src="Module1/images/1_SIGexempleC.jpg" alt="Cartographie interactive des zones inondables développée par le Ministère de l’Environnement et de la Lutte contre les changements climatiques du Québec. Source: https://geoinondations.gouv.qc.ca/." width="80%" /></a>
 <p class="caption">
-Figure 1.11: Cartographie interactive des zones inondables développée par le Ministère de l’Environnement et de la Lutte contre les changements climatiques du Québec. Source: <a href="https://geoinondations.gouv.qc.ca/" class="uri">https://geoinondations.gouv.qc.ca/</a>.
+FIGURE 1.11: Cartographie interactive des zones inondables développée par le Ministère de l’Environnement et de la Lutte contre les changements climatiques du Québec. Source: <a href="https://geoinondations.gouv.qc.ca/" class="uri">https://geoinondations.gouv.qc.ca/</a>.
 </p>
 </div>
 <p><br></p></li>
@@ -688,7 +656,7 @@ Figure 1.11: Cartographie interactive des zones inondables développée par le M
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigexempled"></span>
 <a href="Module1/images/1_SIGexempleD.jpg" target="_blank"><img src="Module1/images/1_SIGexempleD.jpg" alt="Cartographie des risques d’incendies de forêt mise à jour quotidiennement par la Société de protection des forêts contre le feu (https://sopfeu.qc.ca/cartes/). Source : image récupérée de https://www.rcinet.ca/." width="80%" /></a>
 <p class="caption">
-Figure 1.12: Cartographie des risques d’incendies de forêt mise à jour quotidiennement par la Société de protection des forêts contre le feu (<a href="https://sopfeu.qc.ca/cartes/" class="uri">https://sopfeu.qc.ca/cartes/</a>). Source : image récupérée de <a href="https://www.rcinet.ca/" class="uri">https://www.rcinet.ca/</a>.
+FIGURE 1.12: Cartographie des risques d’incendies de forêt mise à jour quotidiennement par la Société de protection des forêts contre le feu (<a href="https://sopfeu.qc.ca/cartes/" class="uri">https://sopfeu.qc.ca/cartes/</a>). Source : image récupérée de <a href="https://www.rcinet.ca/" class="uri">https://www.rcinet.ca/</a>.
 </p>
 </div>
 <p><br></p></li>
@@ -696,7 +664,7 @@ Figure 1.12: Cartographie des risques d’incendies de forêt mise à jour quoti
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigexemplee"></span>
 <a href="Module1/images/1_SIGexempleE.jpg" target="_blank"><img src="Module1/images/1_SIGexempleE.jpg" alt="Cartographie des peuplements forestiers et de leurs caractéristiques par le Ministère des Forêts, de la Faune et des Parcs du Québec. Source: https://www.foretouverte.gouv.qc.ca/." width="80%" /></a>
 <p class="caption">
-Figure 1.13: Cartographie des peuplements forestiers et de leurs caractéristiques par le Ministère des Forêts, de la Faune et des Parcs du Québec. Source: <a href="https://www.foretouverte.gouv.qc.ca/" class="uri">https://www.foretouverte.gouv.qc.ca/</a>.
+FIGURE 1.13: Cartographie des peuplements forestiers et de leurs caractéristiques par le Ministère des Forêts, de la Faune et des Parcs du Québec. Source: <a href="https://www.foretouverte.gouv.qc.ca/" class="uri">https://www.foretouverte.gouv.qc.ca/</a>.
 </p>
 </div>
 <p><br></p></li>
@@ -704,7 +672,7 @@ Figure 1.13: Cartographie des peuplements forestiers et de leurs caractéristiqu
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigexemplef"></span>
 <a href="Module1/images/1_SIGexempleF.jpg" target="_blank"><img src="Module1/images/1_SIGexempleF.jpg" alt="Zonage et évaluation foncière de la municipalité de Mont-Laurier dans la MRC d’Antoine-Labelle (http://geo.mrc-antoine-labelle.qc.ca/sigimweb/)." width="80%" /></a>
 <p class="caption">
-Figure 1.14: Zonage et évaluation foncière de la municipalité de Mont-Laurier dans la MRC d’Antoine-Labelle (<a href="http://geo.mrc-antoine-labelle.qc.ca/sigimweb/" class="uri">http://geo.mrc-antoine-labelle.qc.ca/sigimweb/</a>).
+FIGURE 1.14: Zonage et évaluation foncière de la municipalité de Mont-Laurier dans la MRC d’Antoine-Labelle (<a href="http://geo.mrc-antoine-labelle.qc.ca/sigimweb/" class="uri">http://geo.mrc-antoine-labelle.qc.ca/sigimweb/</a>).
 </p>
 </div>
 <p><br></p></li>
@@ -712,7 +680,7 @@ Figure 1.14: Zonage et évaluation foncière de la municipalité de Mont-Laurier
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigexempleg"></span>
 <a href="Module1/images/1_SIGexempleG.png" target="_blank"><img src="Module1/images/1_SIGexempleG.png" alt="Géomarketing pour les études de marché. Source : https://www.geopoint.pt/en/retalho/." width="80%" /></a>
 <p class="caption">
-Figure 1.15: Géomarketing pour les études de marché. Source : <a href="https://www.geopoint.pt/en/retalho/" class="uri">https://www.geopoint.pt/en/retalho/</a>.
+FIGURE 1.15: Géomarketing pour les études de marché. Source : <a href="https://www.geopoint.pt/en/retalho/" class="uri">https://www.geopoint.pt/en/retalho/</a>.
 </p>
 </div>
 <p><br></p></li>
@@ -723,29 +691,29 @@ Figure 1.15: Géomarketing pour les études de marché. Source : <a href="https:
 <p>La science des données est un domaine pluridisciplinaire qui regroupe les méthodes scientifiques et l’infrastructure permettant d’extraire les connaissances d’ensembles de données. La science des données utilisent notamment les approches d’intelligence artificielle (tels l’apprentissage automatique et l’apprentissage profond) ainsi que l’infonuagique (p. ex. les serveurs, le stockage de données, et les logiciels disponibles via internet) pour dégager des tendances au sein de données volumineuses ou complexes et ainsi solutionner des problèmes diverses.</p>
 <p>Les applications de la science des données se sont multipliées devant la disponibilité de données massives et le besoin de les analyser. Ces applications incluent maintenant des secteurs aussi variés que la santé, le commerce et l’astrophysique.</p>
 <p>Depuis les années 2010, nous observons une convergence entre la géomatique et la science des données. En effets, les concepts et les outils développer dans ces domaines traditionnellement distincts sont mis à profit afin de pouvoir gérer, analyser et visualiser un nombre de grandissant de données spatiales.</p>
-<p>L’augmentation fulgurante des données spatiales est associée à plusieurs avancées en technologie des capteurs et des communications <span class="citation">(<a href="ressources.html#ref-Lee2015" role="doc-biblioref">Lee and Kang 2015</a>)</span>. Ces développements ont permis de diversifier les appareils capables d’acquérir des données géoréférencées et de produire des appareils accessibles à tous et mobiles (penser à vos téléphones cellulaires!). Ces développements ont également permis de connecter en réseau les capteurs de données, et d’accroître la précision des mesures ainsi que leur suivi en temps réel.</p>
+<p>L’augmentation fulgurante des données spatiales est associée à plusieurs avancées en technologie des capteurs et des communications <span class="citation">(<a href="ex_spatiotemp.html#ref-Lee2015" role="doc-biblioref">Lee and Kang 2015</a>)</span>. Ces développements ont permis de diversifier les appareils capables d’acquérir des données géoréférencées et de produire des appareils accessibles à tous et mobiles (penser à vos téléphones cellulaires!). Ces développements ont également permis de connecter en réseau les capteurs de données, et d’accroître la précision des mesures ainsi que leur suivi en temps réel.</p>
 <p>Ces avancées technologiques ont donc suscité (et continuent de susciter) l’émergence de nouvelles applications reposant sur l’utilisation de données spatiales. Par exemple, les données de géolocalisation, et même les messages sur les médias sociaux peuvent faciliter le travail des gouvernements lorsqu’ils doivent fournir efficacement une aide appropriée suivant des évènements tels des accidents. Dans le contexte de la pandémie de COVID-19, les données sur la distribution des cas ont servis, entre autres, à prendre des décisions sur les règles de confinement à adopter selon le nombre de cas par régions.</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:datasciencecovid"></span>
 <a href="Module1/images/1_CovidMap.jpg" target="_blank"><img src="Module1/images/1_CovidMap.jpg" alt="Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : https://ressouces-fr-covid19canada.hub.arcgis.com/." width="80%" /></a>
 <p class="caption">
-Figure 1.16: Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : <a href="https://ressouces-fr-covid19canada.hub.arcgis.com/" class="uri">https://ressouces-fr-covid19canada.hub.arcgis.com/</a>.
+FIGURE 1.16: Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : <a href="https://ressouces-fr-covid19canada.hub.arcgis.com/" class="uri">https://ressouces-fr-covid19canada.hub.arcgis.com/</a>.
 </p>
 </div>
 <p><br></p>
 <p>Dans ordre d’idées similaires, l’application <a href="https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html">Alerte COVID</a> du gouvernement canadien, qui a pour objectif de limiter la propagation de la maladie, permet aux abonnés d’être informés si une tierce personne ayant reçu un résultat positif s’est trouvée dans leur proximité dans les 14 derniers jours.</p>
-<p>En environnement les applications des données spatiales sont nombreuses. Par exemple, les colliers-GPS portés par des mammifères permettent de mieux comprendre le déplacement des individus appartenant à une espèce menacée et ainsi de mieux protéger leur habitat<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>En environnement les applications des données spatiales sont nombreuses. Par exemple, les colliers-GPS portés par des mammifères permettent de mieux comprendre le déplacement des individus appartenant à une espèce menacée et ainsi de mieux protéger leur habitat<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:datasciencecaribou"></span>
 <a href="Module1/images/1_Caribou.jpg" target="_blank"><img src="Module1/images/1_Caribou.jpg" alt="Carte illustrant les migrations printanières et automnales de caribous de la sous-population de la Rivière-aux-Feuilles dans le Nord du Québec. Chaque ligne représente le déplacement d’un individu suivi par satellite. Ces données ont été acquises aux cours des années 2009-2011 dans le cadre du projet [Caribou Ungava](https://www.caribou-ungava.ulaval.ca/accueil/). Source : Caribou Ungava, Photo : Steeve Côté. Images récupérées le 10 décembre 2021 à https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html." width="70%" /></a>
 <p class="caption">
-Figure 1.17: Carte illustrant les migrations printanières et automnales de caribous de la sous-population de la Rivière-aux-Feuilles dans le Nord du Québec. Chaque ligne représente le déplacement d’un individu suivi par satellite. Ces données ont été acquises aux cours des années 2009-2011 dans le cadre du projet <a href="https://www.caribou-ungava.ulaval.ca/accueil/">Caribou Ungava</a>. Source : Caribou Ungava, Photo : Steeve Côté. Images récupérées le 10 décembre 2021 à <a href="https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html" class="uri">https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html</a>.
+FIGURE 1.17: Carte illustrant les migrations printanières et automnales de caribous de la sous-population de la Rivière-aux-Feuilles dans le Nord du Québec. Chaque ligne représente le déplacement d’un individu suivi par satellite. Ces données ont été acquises aux cours des années 2009-2011 dans le cadre du projet <a href="https://www.caribou-ungava.ulaval.ca/accueil/">Caribou Ungava</a>. Source : Caribou Ungava, Photo : Steeve Côté. Images récupérées le 10 décembre 2021 à <a href="https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html" class="uri">https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html</a>.
 </p>
 </div>
 <p><br></p>
-<p>Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme <a href="https://ebird.org/">ebird</a> développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde auxquelles tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de mai 2021, ebird contenait plus d’un milliard d’obervations d’oiseaux soumises par environ 700 mille participants<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
+<p>Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme <a href="https://ebird.org/">ebird</a> développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde auxquelles tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de mai 2021, ebird contenait plus d’un milliard d’obervations d’oiseaux soumises par environ 700 mille participants<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:datascienceebird"></span>
 <a href="Module1/images/1_ebird.jpg" target="_blank"><img src="Module1/images/1_ebird.jpg" alt="Carte illustrant la distribution du Roitelet à triple-bandeau produite à partir des données d’observation de ebird. Le mauve indique les lieux où l’espèce est présente à l’année, le rouge, durant la période de reproduction, le bleu, durant les périodes de non-reproduction, le jaune durant les saisons de pré- et post-reproduction, et le gris les lieux d’absence ou d’observations rares.  Source : https://ebird.org/science/status-and-trends/range-maps - Illustration © Hilary Burn/Lynx Edicions." width="80%" /></a>
 <p class="caption">
-Figure 1.18: Carte illustrant la distribution du Roitelet à triple-bandeau produite à partir des données d’observation de ebird. Le mauve indique les lieux où l’espèce est présente à l’année, le rouge, durant la période de reproduction, le bleu, durant les périodes de non-reproduction, le jaune durant les saisons de pré- et post-reproduction, et le gris les lieux d’absence ou d’observations rares. Source : <a href="https://ebird.org/science/status-and-trends/range-maps" class="uri">https://ebird.org/science/status-and-trends/range-maps</a> - Illustration © Hilary Burn/Lynx Edicions.
+FIGURE 1.18: Carte illustrant la distribution du Roitelet à triple-bandeau produite à partir des données d’observation de ebird. Le mauve indique les lieux où l’espèce est présente à l’année, le rouge, durant la période de reproduction, le bleu, durant les périodes de non-reproduction, le jaune durant les saisons de pré- et post-reproduction, et le gris les lieux d’absence ou d’observations rares. Source : <a href="https://ebird.org/science/status-and-trends/range-maps" class="uri">https://ebird.org/science/status-and-trends/range-maps</a> - Illustration © Hilary Burn/Lynx Edicions.
 </p>
 </div>
 <p><br></p>
@@ -753,7 +721,7 @@ Figure 1.18: Carte illustrant la distribution du Roitelet à triple-bandeau prod
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:datascienceloghub"></span>
 <a href="Module1/images/1_AppCommerciale.jpg" target="_blank"><img src="Module1/images/1_AppCommerciale.jpg" alt="Carte illustrant la position des consommateurs et le nombre de ventes d’une entreprise commerciale en Espagne. Carte tirée du site web de la compagnie [Log-hub](log-hub.com)  offrant des services basés sur l’analyse de données spatiales pour améliorer les chaînes d’approvisionnement. Source : https://log-hub.com/my-maps-platform/." width="80%" /></a>
 <p class="caption">
-Figure 1.19: Carte illustrant la position des consommateurs et le nombre de ventes d’une entreprise commerciale en Espagne. Carte tirée du site web de la compagnie <a href="log-hub.com">Log-hub</a> offrant des services basés sur l’analyse de données spatiales pour améliorer les chaînes d’approvisionnement. Source : <a href="https://log-hub.com/my-maps-platform/" class="uri">https://log-hub.com/my-maps-platform/</a>.
+FIGURE 1.19: Carte illustrant la position des consommateurs et le nombre de ventes d’une entreprise commerciale en Espagne. Carte tirée du site web de la compagnie <a href="log-hub.com">Log-hub</a> offrant des services basés sur l’analyse de données spatiales pour améliorer les chaînes d’approvisionnement. Source : <a href="https://log-hub.com/my-maps-platform/" class="uri">https://log-hub.com/my-maps-platform/</a>.
 </p>
 </div>
 <p><br></p>
@@ -762,7 +730,7 @@ Figure 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 </div>
 <div id="outils" class="section level3 hasAnchor" number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> Les outils et logiciels de visualisation et d’analyse géo-spatiale<a href="lecon_intro.html#outils" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Dans le cadre de ce cours, nous utiliserons le logiciel et langage de programmation R pour réaliser des tâches de visualisation et d’analyse de données spatiales. Or, il existe plusieurs autres logiciels et il est important de savoir où R se situe par rapport aux autres options disponibles dans ce paysage géo-spatial<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
+<p>Dans le cadre de ce cours, nous utiliserons le logiciel et langage de programmation R pour réaliser des tâches de visualisation et d’analyse de données spatiales. Or, il existe plusieurs autres logiciels et il est important de savoir où R se situe par rapport aux autres options disponibles dans ce paysage géo-spatial<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
 <div id="les-logiciels-commerciaux" class="section level4 unnumbered hasAnchor">
 <h4>Les logiciels commerciaux<a href="lecon_intro.html#les-logiciels-commerciaux" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Il existe plusieurs logiciels commerciaux de géomatique. Ces logiciels sont relativement dispendieux et généralement seulement les entreprises qui offrent des services spécialisés en géomatique ou les ministères, certaines villes et les universités peuvent se procurer ces licences.</p>
@@ -779,7 +747,7 @@ Figure 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 <ul>
 <li><a href="https://www.qgis.org/fr/site/">QGIS</a>: est une application SIG gratuite et de source libre. Elle est écrite en Python mais possède plusieurs interfaces écrite en R, dont <a href="https://rdrr.io/cran/RQGIS/">RQGIS</a>.</li>
 <li><a href="https://grass.osgeo.org/">GRASS GIS</a>: est un des projets fondateurs de l’OSGeo qu’on appelle communément GRASS (Geographic Resources Analysis Support System). Cette application libre permet la gestion, le traitement, l’analyse et la visualisation de données spatiales, ainsi que le traitement d’images et la modélisation. Elle est utilisée par des entreprises commerciales et dans les milieux universitaires et gouvernementaux.</li>
-<li><a href="https://gdal.org/">GDAL</a>: pour Geospatial Data Abstraction Library est une bibliothèque qui permet de lire des données spatiales en formats vectoriel et matriciel<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. Plusieurs logiciels, libres et commerciaux, utilisent cette bibliothèque dont QGIS, GRASS GIS, ArcGIS, Google Earth et aussi R.</li>
+<li><a href="https://gdal.org/">GDAL</a>: pour Geospatial Data Abstraction Library est une bibliothèque qui permet de lire des données spatiales en formats vectoriel et matriciel<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. Plusieurs logiciels, libres et commerciaux, utilisent cette bibliothèque dont QGIS, GRASS GIS, ArcGIS, Google Earth et aussi R.</li>
 <li><a href="https://postgis.net/">PostGIS</a>: est une extension pour les données spatiales de <a href="https://www.postgresql.org/">PostgreSQL</a>, un système de source libre pour la gestion de base de données relationnelle et objet.</li>
 </ul>
 </div>
@@ -801,7 +769,7 @@ Figure 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 <p>Or, le mode « pointer-cliquer» de ces interfaces n’est pas idéal lorsqu’on veut s’assurer que nos analyses soient facilement reproductibles – un aspect crucial de la recherche scientifique est en effet la reproductibilité. C’est pour cette raison que l’utilisation de langages de programmation pour réaliser des analyses et des visualisations de données spatiales est bénéfique et de plus en plus populaire.</p>
 <p>L’utilisation de lignes de commandes plutôt que d’interfaces graphiques permet également d’automatiser des tâches que l’on désire répéter plusieurs fois dans une analyse ou encore de réutiliser des blocs de code dans différents projets. De plus, un code se partage facilement et peut être ainsi amélioré par d’autres contributeurs ou contributrices.</p>
 <p>Il existe plusieurs bibliothèques géo-spatiales dans les langages de programmation à usage général comme C++ et Java. Cependant, la courbe d’apprentissage est grande pour ces langages et les efforts requis sont disproportionnés pour les usagers qui comptent utiliser leurs fonctionnalités de façon limitée seulement.</p>
-<p>En revanche, les langages interprétés<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, comme R et Python, sont beaucoup plus simples à apprendre et à utiliser. Ces deux langages possèdent maintenant leur propre ensemble de bibliothèques d’analyse et de visualisation de données spatiales. Ce <a href="https://gisgeography.com/python-libraries-gis-mapping/">site</a> documente les bibliothèques utiles en Python.</p>
+<p>En revanche, les langages interprétés<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>, comme R et Python, sont beaucoup plus simples à apprendre et à utiliser. Ces deux langages possèdent maintenant leur propre ensemble de bibliothèques d’analyse et de visualisation de données spatiales. Ce <a href="https://gisgeography.com/python-libraries-gis-mapping/">site</a> documente les bibliothèques utiles en Python.</p>
 <p>Dans le cadre de ce cours, nous utiliserons R en combinaison avec <a href="https://www.rstudio.com/">RStudio</a> qui est un environnement de développement (en anglais « integrated development environment », IDE). L’interface RStudio facilite et rend convivial l’utilisation de R. Elle permet, entre autre, de créer des fichiers de code d’extension <em>.R ou </em>.Rmd que vous pouvez réutiliser et modifier.</p>
 <p><br></p>
 </div>
@@ -823,17 +791,66 @@ Figure 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 </div>
 <div id="pensee_geo" class="section level3 hasAnchor" number="1.1.4">
 <h3><span class="header-section-number">1.1.4</span> La pensée géographique<a href="lecon_intro.html#pensee_geo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nous allons conclure ce module en définissant certains concepts essentiels à l’étude des phénomènes spatiaux.</p>
+<div id="échelle-spatiale" class="section level4 unnumbered hasAnchor">
+<h4>Échelle spatiale<a href="lecon_intro.html#échelle-spatiale" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Le terme échelle spatiale réfère à deux concepts : l’<em>étendue physique</em> d’un phénomène spatial (Figure <a href="lecon_intro.html#fig:etendue">1.20</a>) et la <em>résolution</em> (Figure <a href="lecon_intro.html#fig:resolutiondef">1.21</a>), c’est-à-dire la taille de l’unité de mesure, ou encore la précision, avec la laquelle on étudie ce phénomène <span class="citation">(<a href="ex_spatiotemp.html#ref-dale_fortin_2014" role="doc-biblioref">Dale and Fortin 2014</a>)</span>.</p>
+<p><br></p>
+<div class="figure" style="text-align: left"><span style="display:block;" id="fig:etendue"></span>
+<a href="Module1/images/1_Etendue.jpg" target="_blank"><img src="Module1/images/1_Etendue.jpg" alt="L’étendue physique d’un phénomène spatial." width="90%" /></a>
+<p class="caption">
+FIGURE 1.20: L’étendue physique d’un phénomène spatial.
+</p>
+</div>
+<p><br></p>
+<div class="figure" style="text-align: left"><span style="display:block;" id="fig:resolutiondef"></span>
+<a href="Module1/images/1_Resolution.jpg" target="_blank"><img src="Module1/images/1_Resolution.jpg" alt="La résolution à laquelle on observe un phénomène spatial." width="100%" /></a>
+<p class="caption">
+FIGURE 1.21: La résolution à laquelle on observe un phénomène spatial.
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="échelle-cartographique" class="section level4 unnumbered hasAnchor">
+<h4>Échelle cartographique<a href="lecon_intro.html#échelle-cartographique" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Sur une carte géographique, l’échelle représente le rapport entre une distance mesurée sur la carte et cette distance mesurée sur la Terre <span class="citation">(<a href="ex_spatiotemp.html#ref-TurnerGardner_2015" role="doc-biblioref">Turner and Garder 2015</a>)</span>. On exprime généralement l’échelle par une fraction. Par exemple, 1/10 000, signifie qu’un cm sur la carte représente 10 000 cm sur le terrain (ou 10 m). Alors que 1/1 000 000 signifie qu’un cm sur la carte représente 1 000 000 cm sur le terrain (soit 1 km). Ainsi, plus l’échelle cartographique est petite, plus la résolution est grossière. Inversement, plus l’échelle cartographique est grande, plus la résolution est fine.</p>
+<p><br></p>
+</div>
+<div id="distance" class="section level4 unnumbered hasAnchor">
+<h4>Distance<a href="lecon_intro.html#distance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La distance est généralement décrite comme la distance à vol d’oiseau entre deux entités spatiales d’intérêt. Dans ce cas, on la calculera par la distance Euclidienne (équation). Cependant, il faut savoir que le concept de distance peut parfois intégrer des facteurs liés à la capacité de se déplacer d’un point à l’autre <span class="citation">(<a href="ex_spatiotemp.html#ref-OSullivanUnwin_2010" role="doc-biblioref">O’Sullivan and Unwin 2010</a>)</span>. Par exemple, la distance entre deux villes, accessibles par voie terrestre, réfère généralement à la distance du trajet parcouru en suivant les routes qui séparent les deux villes. Cette distance sera bien différente de la distance Euclidienne. Lorsque vous utilisez Google Maps pour calculer un itinéraire, vous savez que la distance du trajet dépendra également du moyen de locomotion choisi.</p>
+<p>De façon similaire, la distance parcourue par un animal dépendra du trajet utilisé pour éviter des obstacles ou des conditions environnementales peu favorables (p. exemple l’absence de couvert forestier).</p>
+<p>Finalement, pour le calcul de grandes distances, il peut être nécessaire de considérer la courbure de la surface terrestre. Dans de telles situations la distance Euclidienne doit être remplacée par une équation plus complexe.</p>
+<p><br></p>
+</div>
+<div id="contiguïté" class="section level4 unnumbered hasAnchor">
+<h4>Contiguïté<a href="lecon_intro.html#contiguïté" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La contiguïté, aussi appelée l’adjacence, indique la proximité de deux ou plusieurs objets spatiaux. C’est, en quelque sorte, une mesure binaire de distance : l’objet A est près, oui ou non, de l’objet B <span class="citation">(<a href="ex_spatiotemp.html#ref-OSullivanUnwin_2010" role="doc-biblioref">O’Sullivan and Unwin 2010</a>)</span>. La contiguïté est donc un concept relatif à la façon dont on détermine si un objet est proche d’un autre. Par exemple, deux pays qui partagent une même frontière pourront être qualifiés de contiguës. Dans d’autres cas, nous pourrions considérer une distance maximale fixe (p. ex. 50 km) et déterminer que tous les objets (p.ex. des villes) séparés par une distance moindre que la distance fixée sont contiguës. Nous pourrions également déterminer que les cinq (ou un autre nombre fixe) objets les plus proches d’un autre sont contiguës peu importe la distance qui les sépare.</p>
+<p><br></p>
+</div>
+<div id="interaction" class="section level4 unnumbered hasAnchor">
+<h4>Interaction<a href="lecon_intro.html#interaction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’interaction spatiale entre deux objets repose également sur le concept de distance. Elle exprime la notion intuitive que tous les objets sont en interaction mais ceux qui sont proches ont plus de chance d’interagir que ceux qui sont distants. On réfère à cette notion comme étant la « première loi » de la géographie et on l’attribut au géographe Waldo Tobler. En anglais, cette loi s’énonce ainsi : « Everything is related to everything, but near things are more related than distant things » <span class="citation">(<a href="ex_spatiotemp.html#ref-Tobler_1970" role="doc-biblioref">Tobler 1970</a>)</span>.</p>
+<p>L’interaction entre deux objets se mesure généralement par une fonction allant de 0 (aucune interaction) à 1 (interaction maximale). Cette fonction est inversement proportionnelle à la distance séparant les deux objets de sorte que plus la distance est petite plus l’interaction est forte <span class="citation">(<a href="ex_spatiotemp.html#ref-OSullivanUnwin_2010" role="doc-biblioref">O’Sullivan and Unwin 2010</a>)</span>. D’autres facteurs peuvent influencer la façon dont on mesure l’interaction comme la taille des objets.</p>
+<p>L’interaction est étroitement liée aux concepts de dépendance spatiale et d’autocorrélation spatiale <span class="citation">(<a href="ex_spatiotemp.html#ref-dale_fortin_2014" role="doc-biblioref">Dale and Fortin 2014</a>)</span>. La dépendance spatiale est l’absence d’indépendance entre des objets rapprochés. Puisque l’assomption d’indépendance des données est requise pour réaliser de nombreux tests statistiques paramétriques il est important de pouvoir déterminer la présence de dépendance spatiale. L’autocorrélation spatiale réfère à la corrélation spatiale entre les valeurs d’une même variable. Par exemple, la température à un emplacement sera corrélée avec la température à des emplacements voisins. Il existe différentes mesures pour déterminer la dépendance et l’autocorrélation spatiale. Dans le cadre de ce cours, nous n’aborderons pas ces mesures plus poussées d’analyse spatiale.</p>
+<p><br></p>
+</div>
+<div id="voisinage" class="section level4 unnumbered hasAnchor">
+<h4>Voisinage<a href="lecon_intro.html#voisinage" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Le voisinage est aussi un concept relatif qui peut se décrire de différentes façons. Un voisinage peut être défini en fonction d’un objet spatial particulier. Le voisinage est alors constitué des objets spatiaux qui sont adjacents à l’objet spatial d’intérêt. Par exemple, les cadastres limitrophes d’une propriété donnée, ou encore les bâtiments dans un rayon de 500 m autour d’une borne fontaine. Un voisinage peut aussi prendre un sens qui s’apparente à la notion de quartier. Un voisinage est alors défini comme une région qui entoure des objets spatiaux similaires, et qui se distincte d’autres régions qui circonscrivent également des objets similaires.</p>
+<p><br></p>
+</div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="2">
-<li id="fn2"><p>Définition donnée par le Département des sciences géomatiques de l’Université Laval - <a href="https://www.scg.ulaval.ca/la-geomatique-cest-quoi" class="uri">https://www.scg.ulaval.ca/la-geomatique-cest-quoi</a>, consultée le 11 novembre 2021<a href="lecon_intro.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Allez jeter un coup d’œil au projet <a href="https://www.voyageurswolfproject.org/animations">Voyageur Wolf Project</a>, qui suit le déplacement de loups dans le nord du Minnesota grâce à des colliers GPS. On peut y voir des animations démontrant le déplacement d’individus de différentes meutes.<a href="lecon_intro.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>Source: <a href="https://ebird.org/news/global-big-day-2021-reaches-new-heights" class="uri">https://ebird.org/news/global-big-day-2021-reaches-new-heights</a>.<a href="lecon_intro.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Le contenu de cette sous-section est adapté du cours <a href="https://datacarpentry.org/organization-geospatial/04-geo-landscape/index.html"><em>Introduction to Geospatial Concepts : The Geospatial Landscape</em></a> <span class="citation">(<a href="ressources.html#ref-Data_Carpentry_IntroGeospatial" role="doc-biblioref">Wasser et al. (consulté le 1er mars 2020)</a>)</span> de l’organisme <a href="https://datacarpentry.org/">Data Carpentry</a>. Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.<a href="lecon_intro.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>Nous verrons les concepts de données vectorielles et matricielles au <a href="base.html#base">Module 2</a> portant sur les Modèles de données spatiales.<a href="lecon_intro.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p> Un langage de programmation interprété est un langage qui fait l’interprétation du code directement au moment de l’exécution sans exiger que l’utilisateur ou l’utilisatrice le compile préalablement. Allez voir cet article de <a href="https://fr.wikipedia.org/wiki/Interpr%C3%A8te_(informatique)">Wikipédia</a> pour en connaître davantage.<a href="lecon_intro.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<ol start="1">
+<li id="fn1"><p>Définition donnée par le Département des sciences géomatiques de l’Université Laval - <a href="https://www.scg.ulaval.ca/la-geomatique-cest-quoi" class="uri">https://www.scg.ulaval.ca/la-geomatique-cest-quoi</a>, consultée le 11 novembre 2021<a href="lecon_intro.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Allez jeter un coup d’œil au projet <a href="https://www.voyageurswolfproject.org/animations">Voyageur Wolf Project</a>, qui suit le déplacement de loups dans le nord du Minnesota grâce à des colliers GPS. On peut y voir des animations démontrant le déplacement d’individus de différentes meutes.<a href="lecon_intro.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Source: <a href="https://ebird.org/news/global-big-day-2021-reaches-new-heights" class="uri">https://ebird.org/news/global-big-day-2021-reaches-new-heights</a>.<a href="lecon_intro.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Le contenu de cette sous-section est adapté du cours <a href="https://datacarpentry.org/organization-geospatial/04-geo-landscape/index.html"><em>Introduction to Geospatial Concepts : The Geospatial Landscape</em></a> <span class="citation">(<a href="ex_spatiotemp.html#ref-Data_Carpentry_IntroGeospatial" role="doc-biblioref">Wasser et al. (consulté le 1er mars 2020)</a>)</span> de l’organisme <a href="https://datacarpentry.org/">Data Carpentry</a>. Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.<a href="lecon_intro.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Nous verrons les concepts de données vectorielles et matricielles au <a href="base.html#base">Module 2</a> portant sur les Modèles de données spatiales.<a href="lecon_intro.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p> Un langage de programmation interprété est un langage qui fait l’interprétation du code directement au moment de l’exécution sans exiger que l’utilisateur ou l’utilisatrice le compile préalablement. Allez voir cet article de <a href="https://fr.wikipedia.org/wiki/Interpr%C3%A8te_(informatique)">Wikipédia</a> pour en connaître davantage.<a href="lecon_intro.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -898,20 +915,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

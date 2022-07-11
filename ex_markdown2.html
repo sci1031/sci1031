@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.2 Exercices | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.2 Exercices | SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -20,9 +20,10 @@
   <meta name="twitter:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
   
 
+<meta name="author" content="" />
 
 
-<meta name="date" content="2022-05-24" />
+<meta name="date" content="2022-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,66 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.0/leaflet.js"></script>
-<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.0/leaflet-providers-plugin.js"></script>
-<script src="libs/M_42f70b-1/data_stars_Me0c5db.txt"></script>
-<script src="libs/joda-0.0.1/joda.js"></script>
-<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric_b5d749-1/data_stars_M_logique_numericf86413.txt"></script>
-<script src="libs/M_factor_08ba2e-1/data_stars_M_factor2073c1.txt"></script>
-<script src="libs/ICU_158c6a-1/data_stars_ICUc2f819.txt"></script>
-<script src="libs/ICU_3d2afe-1/data_stars_ICU21085c.txt"></script>
-<script src="libs/T_sec_27f935-1/data_stars_T_secf950be.txt"></script>
-<script src="libs/T_fact4_moy_0e1694-1/data_stars_T_fact4_moyface28.txt"></script>
-<script src="libs/T_fact4_max_34951d-1/data_stars_T_fact4_maxabc734.txt"></script>
-<script src="libs/T_fact8_moy_6da058-1/data_stars_T_fact8_moy2f9c06.txt"></script>
-<script src="libs/T_fact8_max_ea1fd6-1/data_stars_T_fact8_maxfd7658.txt"></script>
-<script src="libs/SR_58dc94-1/data_stars_SRdb4920.txt"></script>
-<script src="libs/SG_e8a5f7-1/data_stars_SG176059.txt"></script>
-<script src="libs/SB_df573c-1/data_stars_SBabef30.txt"></script>
-<script src="libs/dem_41ad92-1/data_stars_dem2695ad.txt"></script>
-<script src="libs/nouvelles_classes_dem_2b3d7a-1/data_stars_nouvelles_classes_demcd0a81.txt"></script>
-<script src="libs/reclassify(dem, nouvelles_classes2)_0679dc-1/data_stars_reclassifydemnouvelles_classes29f7bea.txt"></script>
-<script src="libs/dem_cr_716e04-1/data_stars_dem_crb1f740.txt"></script>
-<script src="libs/dem_cr_p_dacf91-1/data_stars_dem_cr_p58de91.txt"></script>
-<script src="libs/dem_fa45b0-1/data_stars_dem7cd902.txt"></script>
-<script src="libs/dem_ma_93a084-1/data_stars_dem_maa0958e.txt"></script>
-<script src="libs/dem_ma_inv_76d129-1/data_stars_dem_ma_inv7b6af4.txt"></script>
-<script src="libs/dem_ma_458072-1/data_stars_dem_ma9e85fc.txt"></script>
-<script src="libs/dem_ma_inv_a62340-1/data_stars_dem_ma_inva90e8b.txt"></script>
-<script src="libs/dem_merge_072634-1/data_stars_dem_merge31f085.txt"></script>
-<script src="libs/dem_merge_ordre1_8142b9-1/data_stars_dem_merge_ordre1e815ca.txt"></script>
-<script src="libs/dem_merge_ordre2_70e48f-1/data_stars_dem_merge_ordre25067ac.txt"></script>
-<script src="libs/dem_mosaic_min_964df8-1/data_stars_dem_mosaic_mine84159.txt"></script>
-<script src="libs/dem_mosaic_max_fab873-1/data_stars_dem_mosaic_maxfc8437.txt"></script>
-<script src="libs/dem_mosaic_mean_bead0f-1/data_stars_dem_mosaic_mean8f3a74.txt"></script>
-<script src="libs/dem_parcs_ce7f81-1/data_stars_dem_parcs56317f.txt"></script>
-<script src="libs/dem_parcs_fbae52-1/data_stars_dem_parcsf7e1a5.txt"></script>
-<script src="libs/dem_orford_71ec6f-1/data_stars_dem_orford61fae9.txt"></script>
-<script src="libs/dem_orford_8db4f1-1/data_stars_dem_orforda4fb27.txt"></script>
-<script src="libs/dem_orford_quantile_76b045-1/data_stars_dem_orford_quantileef9a67.txt"></script>
-<script src="libs/dem_orford_quantile_c7f308-1/data_stars_dem_orford_quantile90e148.txt"></script>
-<script src="libs/dem_tampon_max_b631a9-1/data_stars_dem_tampon_max4bdaf2.txt"></script>
-<script src="libs/X1_3826fe-1/data_stars_X145a18d.txt"></script>
-<script src="libs/X2_4c8126-1/data_stars_X29e60dc.txt"></script>
-<script src="libs/X3_5312da-1/data_stars_X3465219.txt"></script>
 
 
 <style type="text/css">
@@ -216,7 +157,7 @@ div.csl-indent {
 <li><a href="./">TELUQ -  SCI 1031.</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#section"></a></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
 <li class="part"><span><b>I SCI 1031</b></span></li>
 <li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html"><i class="fa fa-check"></i>À propos du cours</a>
 <ul>
@@ -275,7 +216,15 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-langages-de-programmation-pour-lanalyse-géospatiale"><i class="fa fa-check"></i>Les langages de programmation pour l’analyse géospatiale</a></li>
 </ul></li>
 <li class="chapter" data-level="1.1.3" data-path="lecon_intro.html"><a href="lecon_intro.html#outil_R"><i class="fa fa-check"></i><b>1.1.3</b> Les bibliothèques géo-spatiales de R</a></li>
-<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a></li>
+<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#échelle-spatiale"><i class="fa fa-check"></i>Échelle spatiale</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#échelle-cartographique"><i class="fa fa-check"></i>Échelle cartographique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#distance"><i class="fa fa-check"></i>Distance</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#contiguïté"><i class="fa fa-check"></i>Contiguïté</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#interaction"><i class="fa fa-check"></i>Interaction</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#voisinage"><i class="fa fa-check"></i>Voisinage</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="ex_intro.html"><a href="ex_intro.html"><i class="fa fa-check"></i><b>1.2</b> Exercices</a>
 <ul>
@@ -366,7 +315,12 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocsR"><i class="fa fa-check"></i><b>3.2.2</b> Intégration de R dans le document</a>
 <ul>
 <li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-commentaires-1"><i class="fa fa-check"></i>Les commentaires</a></li>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo"><i class="fa fa-check"></i>Modifier l’affichage du code source avec le paramètre <code>echo</code></a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#affichage-du-code-source"><i class="fa fa-check"></i>Affichage du code source</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#affichage-des-sorties"><i class="fa fa-check"></i>Affichage des sorties</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#modifier-le-mode-devaluation-du-code"><i class="fa fa-check"></i>Modifier le mode d’evaluation du code</a></li>
+<li class="chapter" data-level="3.2.2.1" data-path="ex_markdown2.html"><a href="ex_markdown2.html#afficher-des-tableaux"><i class="fa fa-check"></i><b>3.2.2.1</b> Afficher des tableaux</a></li>
+<li class="chapter" data-level="3.2.2.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html#afficher-des-figures"><i class="fa fa-check"></i><b>3.2.2.2</b> Afficher des figures</a></li>
+<li class="chapter" data-level="3.2.2.3" data-path="ex_markdown2.html"><a href="ex_markdown2.html#afficher-des-images"><i class="fa fa-check"></i><b>3.2.2.3</b> Afficher des images</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2.3" data-path="ex_markdown2.html"><a href="ex_markdown2.html#exo3"><i class="fa fa-check"></i><b>3.2.3</b> À vous de jouer !</a></li>
 </ul></li>
@@ -475,7 +429,10 @@ div.csl-indent {
 <li class="chapter" data-level="6.1.9" data-path="lecon_carto.html"><a href="lecon_carto.html#les-points"><i class="fa fa-check"></i><b>6.1.9</b> Les points</a></li>
 <li class="chapter" data-level="6.1.10" data-path="lecon_carto.html"><a href="lecon_carto.html#données-matricielles"><i class="fa fa-check"></i><b>6.1.10</b> Données matricielles</a></li>
 <li class="chapter" data-level="6.1.11" data-path="lecon_carto.html"><a href="lecon_carto.html#carte-avec-symboles-proportionnels"><i class="fa fa-check"></i><b>6.1.11</b> Carte avec symboles proportionnels</a></li>
-<li class="chapter" data-level="6.1.12" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a></li>
+<li class="chapter" data-level="6.1.12" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-choroplèthes"><i class="fa fa-check"></i><b>6.1.12</b> Cartes Choroplèthes</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_carto.html"><a href="lecon_carto.html#données-covid"><i class="fa fa-check"></i>Données COVID</a></li>
+</ul></li>
 <li class="chapter" data-level="6.1.13" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-à-panneaux-multiples"><i class="fa fa-check"></i><b>6.1.13</b> Cartes à panneaux multiples</a></li>
 <li class="chapter" data-level="6.1.14" data-path="lecon_carto.html"><a href="lecon_carto.html#cartes-avec-encadré"><i class="fa fa-check"></i><b>6.1.14</b> Cartes avec encadré</a></li>
 </ul></li>
@@ -594,7 +551,7 @@ div.csl-indent {
 <div id="pandocmarkdown" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Le variante Pandoc de Markdown<a href="ex_markdown2.html#pandocmarkdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Dans cette partie, nous détaillons les éléments de formatage du texte proposés par
-la syntaxe Pandoc de Markdown<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a></p>
+la syntaxe Pandoc de Markdown<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <p><br></p>
 <div id="informations-de-départ" class="section level4 unnumbered hasAnchor">
 <h4>Informations de départ<a href="ex_markdown2.html#informations-de-départ" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -603,13 +560,13 @@ la syntaxe Pandoc de Markdown<a href="#fn26" class="footnote-ref" id="fnref26"><
 <h5>Les paragraphes<a href="ex_markdown2.html#les-paragraphes" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Pour créer des paragraphes, il faut ajouter une ligne (ou plus) vide entre les paragraphes.
 Ainsi, avec les lignes suivantes :</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb172-1"><a href="ex_markdown2.html#cb172-1" aria-hidden="true" tabindex="-1"></a>Un datum est un système de référence qui détermine la position </span>
-<span id="cb172-2"><a href="ex_markdown2.html#cb172-2" aria-hidden="true" tabindex="-1"></a>d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport </span>
-<span id="cb172-3"><a href="ex_markdown2.html#cb172-3" aria-hidden="true" tabindex="-1"></a>au centre du globe, ainsi que son orientation. </span>
-<span id="cb172-4"><a href="ex_markdown2.html#cb172-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb172-5"><a href="ex_markdown2.html#cb172-5" aria-hidden="true" tabindex="-1"></a>Les datums géocentriques sont associés à des ellipsoïdes </span>
-<span id="cb172-6"><a href="ex_markdown2.html#cb172-6" aria-hidden="true" tabindex="-1"></a>globaux. Ce sont des systèmes de référence terrestres globaux </span>
-<span id="cb172-7"><a href="ex_markdown2.html#cb172-7" aria-hidden="true" tabindex="-1"></a>dont l’origine correspond au centre de masse de la Terre.</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb4-1"><a href="ex_markdown2.html#cb4-1" aria-hidden="true" tabindex="-1"></a>Un datum est un système de référence qui détermine la position </span>
+<span id="cb4-2"><a href="ex_markdown2.html#cb4-2" aria-hidden="true" tabindex="-1"></a>d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport </span>
+<span id="cb4-3"><a href="ex_markdown2.html#cb4-3" aria-hidden="true" tabindex="-1"></a>au centre du globe, ainsi que son orientation. </span>
+<span id="cb4-4"><a href="ex_markdown2.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="ex_markdown2.html#cb4-5" aria-hidden="true" tabindex="-1"></a>Les datums géocentriques sont associés à des ellipsoïdes </span>
+<span id="cb4-6"><a href="ex_markdown2.html#cb4-6" aria-hidden="true" tabindex="-1"></a>globaux. Ce sont des systèmes de référence terrestres globaux </span>
+<span id="cb4-7"><a href="ex_markdown2.html#cb4-7" aria-hidden="true" tabindex="-1"></a>dont l’origine correspond au centre de masse de la Terre.</span></code></pre></div>
 <p><br></p>
 <p>nous obtenons :</p>
 <div class="boite emphase">
@@ -617,12 +574,12 @@ Ainsi, avec les lignes suivantes :</p>
 <p>Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre.</p>
 </div>
 <p>Notez qu’avec un simple retour à la ligne, aucun saut de ligne n’est inséré. Les paragraphes sont alors affichés bout à bout. Par exemple, ce texte:</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb173-1"><a href="ex_markdown2.html#cb173-1" aria-hidden="true" tabindex="-1"></a>Un datum est un système de référence qui détermine la position </span>
-<span id="cb173-2"><a href="ex_markdown2.html#cb173-2" aria-hidden="true" tabindex="-1"></a>d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport </span>
-<span id="cb173-3"><a href="ex_markdown2.html#cb173-3" aria-hidden="true" tabindex="-1"></a>au centre du globe, ainsi que son orientation. </span>
-<span id="cb173-4"><a href="ex_markdown2.html#cb173-4" aria-hidden="true" tabindex="-1"></a>Les datums géocentriques sont associés à des ellipsoïdes </span>
-<span id="cb173-5"><a href="ex_markdown2.html#cb173-5" aria-hidden="true" tabindex="-1"></a>globaux. Ce sont des systèmes de référence terrestres globaux </span>
-<span id="cb173-6"><a href="ex_markdown2.html#cb173-6" aria-hidden="true" tabindex="-1"></a>dont l’origine correspond au centre de masse de la Terre.</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb5-1"><a href="ex_markdown2.html#cb5-1" aria-hidden="true" tabindex="-1"></a>Un datum est un système de référence qui détermine la position </span>
+<span id="cb5-2"><a href="ex_markdown2.html#cb5-2" aria-hidden="true" tabindex="-1"></a>d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport </span>
+<span id="cb5-3"><a href="ex_markdown2.html#cb5-3" aria-hidden="true" tabindex="-1"></a>au centre du globe, ainsi que son orientation. </span>
+<span id="cb5-4"><a href="ex_markdown2.html#cb5-4" aria-hidden="true" tabindex="-1"></a>Les datums géocentriques sont associés à des ellipsoïdes </span>
+<span id="cb5-5"><a href="ex_markdown2.html#cb5-5" aria-hidden="true" tabindex="-1"></a>globaux. Ce sont des systèmes de référence terrestres globaux </span>
+<span id="cb5-6"><a href="ex_markdown2.html#cb5-6" aria-hidden="true" tabindex="-1"></a>dont l’origine correspond au centre de masse de la Terre.</span></code></pre></div>
 <p><br></p>
 <p>s’affiche comme ceci:</p>
 <div class="boite emphase">
@@ -630,12 +587,12 @@ Ainsi, avec les lignes suivantes :</p>
 Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre.</p>
 </div>
 <p>Il est cependant possible d’ajouter un retour à la ligne en utilisant un retour à la ligne et tabulation à la fin du premier paragraphe. Par exemple, ce texte:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb174-1"><a href="ex_markdown2.html#cb174-1" aria-hidden="true" tabindex="-1"></a>Un datum est un système de référence qui détermine la position </span>
-<span id="cb174-2"><a href="ex_markdown2.html#cb174-2" aria-hidden="true" tabindex="-1"></a>d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport </span>
-<span id="cb174-3"><a href="ex_markdown2.html#cb174-3" aria-hidden="true" tabindex="-1"></a>au centre du globe, ainsi que son orientation.          </span>
-<span id="cb174-4"><a href="ex_markdown2.html#cb174-4" aria-hidden="true" tabindex="-1"></a>Les datums géocentriques sont associés à des ellipsoïdes </span>
-<span id="cb174-5"><a href="ex_markdown2.html#cb174-5" aria-hidden="true" tabindex="-1"></a>globaux. Ce sont des systèmes de référence terrestres globaux </span>
-<span id="cb174-6"><a href="ex_markdown2.html#cb174-6" aria-hidden="true" tabindex="-1"></a>dont l’origine correspond au centre de masse de la Terre.</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb6-1"><a href="ex_markdown2.html#cb6-1" aria-hidden="true" tabindex="-1"></a>Un datum est un système de référence qui détermine la position </span>
+<span id="cb6-2"><a href="ex_markdown2.html#cb6-2" aria-hidden="true" tabindex="-1"></a>d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport </span>
+<span id="cb6-3"><a href="ex_markdown2.html#cb6-3" aria-hidden="true" tabindex="-1"></a>au centre du globe, ainsi que son orientation.          </span>
+<span id="cb6-4"><a href="ex_markdown2.html#cb6-4" aria-hidden="true" tabindex="-1"></a>Les datums géocentriques sont associés à des ellipsoïdes </span>
+<span id="cb6-5"><a href="ex_markdown2.html#cb6-5" aria-hidden="true" tabindex="-1"></a>globaux. Ce sont des systèmes de référence terrestres globaux </span>
+<span id="cb6-6"><a href="ex_markdown2.html#cb6-6" aria-hidden="true" tabindex="-1"></a>dont l’origine correspond au centre de masse de la Terre.</span></code></pre></div>
 <p><br></p>
 <p>s’affiche comme ceci:</p>
 <div class="boite emphase">
@@ -643,14 +600,14 @@ Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont de
 Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre.</p>
 </div>
 <p>La seule différence entre cet exemple et l’exemple précédent est l’ajout d’une tabulation après
-“orientation.”</p>
+“orientation.”.</p>
 <p><br></p>
 </div>
 <div id="les-symboles-réservés" class="section level5 unnumbered hasAnchor">
 <h5>Les symboles réservés<a href="ex_markdown2.html#les-symboles-réservés" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Certains symboles sont réservés au formatage du texte. Lorsque leur affichage est requis, c’est-à-dire lorsque nous désirons les utiliser dans notre texte, nous devons les faire précéder du caractère d’échappement qui est, pour Markdown, l’antislash : “\.”</p>
+<p>Certains symboles sont réservés au formatage du texte. Lorsque leur affichage est requis, c’est-à-dire lorsque nous désirons les utiliser dans notre texte, nous devons les faire précéder du caractère d’échappement qui est, pour Markdown, l’antislash : “\”.</p>
 <p>Par exemple, nous devons entrer  :</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb175-1"><a href="ex_markdown2.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="sc">\\</span> <span class="sc">\&amp;</span> <span class="sc">\#</span> \$ <span class="sc">\[</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb7-1"><a href="ex_markdown2.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="sc">\\</span> <span class="sc">\&amp;</span> <span class="sc">\#</span> \$ <span class="sc">\[</span></span></code></pre></div>
 <p><br></p>
 <p>Pour obtenir :</p>
 <div class="boite emphase">
@@ -701,19 +658,19 @@ pouvez utiliser toute la gamme de mise en forme offert par le langage en questio
 <h4>Les titres<a href="ex_markdown2.html#les-titres" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La façon la plus simple de désigner les titres dans un texte se fait par l’utilisation du symbole <code>#</code> (ATX heading). Un seul <code>#</code> désigne un titre de premier niveau, et nous utilisons un nombre croissant de <code>#</code> pour
 descendre dans l’arborescence des titres:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb182-1"><a href="ex_markdown2.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Un titre d&#39;ordre 1</span></span>
-<span id="cb182-2"><a href="ex_markdown2.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Un titre d&#39;ordre 2</span></span>
-<span id="cb182-3"><a href="ex_markdown2.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="fu">### Un titre d&#39;ordre 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb14-1"><a href="ex_markdown2.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Un titre d&#39;ordre 1</span></span>
+<span id="cb14-2"><a href="ex_markdown2.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Un titre d&#39;ordre 2</span></span>
+<span id="cb14-3"><a href="ex_markdown2.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">### Un titre d&#39;ordre 3</span></span></code></pre></div>
 <p><br></p>
 <p>Il est aussi possible d’utiliser une série de “=” en dessous des titres de
 premier niveau et une ligne de “-” en dessous des titres de niveau 2. Cette
 option a la qualité de permettre de repérer facilement les titres dans le code
 source.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb183-1"><a href="ex_markdown2.html#cb183-1" aria-hidden="true" tabindex="-1"></a>Un titre d&#39;ordre 1</span>
-<span id="cb183-2"><a href="ex_markdown2.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">==================</span></span>
-<span id="cb183-3"><a href="ex_markdown2.html#cb183-3" aria-hidden="true" tabindex="-1"></a>Un titre d&#39;ordre 2</span>
-<span id="cb183-4"><a href="ex_markdown2.html#cb183-4" aria-hidden="true" tabindex="-1"></a>------------------</span>
-<span id="cb183-5"><a href="ex_markdown2.html#cb183-5" aria-hidden="true" tabindex="-1"></a><span class="fu">### Un titre d&#39;ordre 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb15-1"><a href="ex_markdown2.html#cb15-1" aria-hidden="true" tabindex="-1"></a>Un titre d&#39;ordre 1</span>
+<span id="cb15-2"><a href="ex_markdown2.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">==================</span></span>
+<span id="cb15-3"><a href="ex_markdown2.html#cb15-3" aria-hidden="true" tabindex="-1"></a>Un titre d&#39;ordre 2</span>
+<span id="cb15-4"><a href="ex_markdown2.html#cb15-4" aria-hidden="true" tabindex="-1"></a>------------------</span>
+<span id="cb15-5"><a href="ex_markdown2.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">### Un titre d&#39;ordre 3</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div id="les-listes-1" class="section level4 unnumbered hasAnchor">
@@ -726,24 +683,24 @@ de ligne.</p>
 <div id="listes-non-numérotées" class="section level5 unnumbered hasAnchor">
 <h5>Listes non numérotées<a href="ex_markdown2.html#listes-non-numérotées" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Pour obtenir une liste non numérotée, nous pouvons utiliser le symbole <code>*</code>  :</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb184-1"><a href="ex_markdown2.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 1,</span>
-<span id="cb184-2"><a href="ex_markdown2.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 2,</span>
-<span id="cb184-3"><a href="ex_markdown2.html#cb184-3" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 3.</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb16-1"><a href="ex_markdown2.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 1,</span>
+<span id="cb16-2"><a href="ex_markdown2.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 2,</span>
+<span id="cb16-3"><a href="ex_markdown2.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 3.</span></code></pre></div>
 <p><br></p>
 <p>ou bien le symbole <code>+</code>  :</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb185-1"><a href="ex_markdown2.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>objet 1,</span>
-<span id="cb185-2"><a href="ex_markdown2.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>objet 2,</span>
-<span id="cb185-3"><a href="ex_markdown2.html#cb185-3" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>objet 3.</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb17-1"><a href="ex_markdown2.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>objet 1,</span>
+<span id="cb17-2"><a href="ex_markdown2.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>objet 2,</span>
+<span id="cb17-3"><a href="ex_markdown2.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>objet 3.</span></code></pre></div>
 <p><br></p>
 <p>ou encore le symbole <code>-</code>  :</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb186-1"><a href="ex_markdown2.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 1,</span>
-<span id="cb186-2"><a href="ex_markdown2.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 2,</span>
-<span id="cb186-3"><a href="ex_markdown2.html#cb186-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 3.</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb18-1"><a href="ex_markdown2.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 1,</span>
+<span id="cb18-2"><a href="ex_markdown2.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 2,</span>
+<span id="cb18-3"><a href="ex_markdown2.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 3.</span></code></pre></div>
 <p><br></p>
 <p>et même  :</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb187-1"><a href="ex_markdown2.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>objet 1,</span>
-<span id="cb187-2"><a href="ex_markdown2.html#cb187-2" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 2,</span>
-<span id="cb187-3"><a href="ex_markdown2.html#cb187-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 3.</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb19-1"><a href="ex_markdown2.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>objet 1,</span>
+<span id="cb19-2"><a href="ex_markdown2.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 2,</span>
+<span id="cb19-3"><a href="ex_markdown2.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 3.</span></code></pre></div>
 <p><br></p>
 <p>Dans tous les cas, la liste produite s’affiche ainsi :</p>
 <div class="boite emphase">
@@ -759,11 +716,11 @@ de ligne.</p>
 <div id="listes-espacées" class="section level5 unnumbered hasAnchor">
 <h5>Listes espacées<a href="ex_markdown2.html#listes-espacées" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Pour produire une liste plus aérée, nous pouvons ajouter un espace entre les éléments de la liste. Lorsque le document produit est en HTML, ce formatage produit une balise paragraphe (c’est-à-dire que <code>&lt;p&gt; &lt;/p&gt;</code> est ajouté).</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb188-1"><a href="ex_markdown2.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 1,</span>
-<span id="cb188-2"><a href="ex_markdown2.html#cb188-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-3"><a href="ex_markdown2.html#cb188-3" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 2,</span>
-<span id="cb188-4"><a href="ex_markdown2.html#cb188-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-5"><a href="ex_markdown2.html#cb188-5" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 3.</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb20-1"><a href="ex_markdown2.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 1,</span>
+<span id="cb20-2"><a href="ex_markdown2.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="ex_markdown2.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 2,</span>
+<span id="cb20-4"><a href="ex_markdown2.html#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="ex_markdown2.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>objet 3.</span></code></pre></div>
 <p><br></p>
 <p>devient:</p>
 <div class="boite emphase">
@@ -778,13 +735,13 @@ de ligne.</p>
 <div id="listes-hiérarchisées" class="section level5 unnumbered hasAnchor">
 <h5>Listes hiérarchisées<a href="ex_markdown2.html#listes-hiérarchisées" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Pour créer des listes hiérarchisées, il s’agit d’utiliser une indentation de quatre espaces (ou une tabulation) entre chaque niveau. Par exemple, ceci:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb189-1"><a href="ex_markdown2.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 1,</span>
-<span id="cb189-2"><a href="ex_markdown2.html#cb189-2" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>machin 1</span>
-<span id="cb189-3"><a href="ex_markdown2.html#cb189-3" aria-hidden="true" tabindex="-1"></a><span class="ss">        - </span>chose 1</span>
-<span id="cb189-4"><a href="ex_markdown2.html#cb189-4" aria-hidden="true" tabindex="-1"></a><span class="ss">        - </span>chose 2</span>
-<span id="cb189-5"><a href="ex_markdown2.html#cb189-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>machin 2</span>
-<span id="cb189-6"><a href="ex_markdown2.html#cb189-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 2,</span>
-<span id="cb189-7"><a href="ex_markdown2.html#cb189-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 3.</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb21-1"><a href="ex_markdown2.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 1,</span>
+<span id="cb21-2"><a href="ex_markdown2.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>machin 1</span>
+<span id="cb21-3"><a href="ex_markdown2.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ss">        - </span>chose 1</span>
+<span id="cb21-4"><a href="ex_markdown2.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ss">        - </span>chose 2</span>
+<span id="cb21-5"><a href="ex_markdown2.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>machin 2</span>
+<span id="cb21-6"><a href="ex_markdown2.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 2,</span>
+<span id="cb21-7"><a href="ex_markdown2.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>objet 3.</span></code></pre></div>
 <p><br></p>
 <p>produit cette liste:</p>
 <div class="boite emphase">
@@ -808,13 +765,13 @@ de ligne.</p>
 <h5>Listes avec du texte ou du code<a href="ex_markdown2.html#listes-avec-du-texte-ou-du-code" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Pour alterner des éléments d’une liste avec du texte ou du code, il faut utiliser des sauts de
 lignes avec l’indentation adéquate. Ainsi, avec les lignes suivantes :</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb190-1"><a href="ex_markdown2.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>élément 1<span class="dv">&amp;nbsp;</span>:</span>
-<span id="cb190-2"><a href="ex_markdown2.html#cb190-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-3"><a href="ex_markdown2.html#cb190-3" aria-hidden="true" tabindex="-1"></a>    Un petit texte qui pourrait expliciter ce qu&#39;est l&#39;élément 1.</span>
-<span id="cb190-4"><a href="ex_markdown2.html#cb190-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-5"><a href="ex_markdown2.html#cb190-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>machin 2:</span>
-<span id="cb190-6"><a href="ex_markdown2.html#cb190-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-7"><a href="ex_markdown2.html#cb190-7" aria-hidden="true" tabindex="-1"></a><span class="in">          for (i in 1:2) print(i)</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb22-1"><a href="ex_markdown2.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>élément 1<span class="dv">&amp;nbsp;</span>:</span>
+<span id="cb22-2"><a href="ex_markdown2.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="ex_markdown2.html#cb22-3" aria-hidden="true" tabindex="-1"></a>    Un petit texte qui pourrait expliciter ce qu&#39;est l&#39;élément 1.</span>
+<span id="cb22-4"><a href="ex_markdown2.html#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="ex_markdown2.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>machin 2:</span>
+<span id="cb22-6"><a href="ex_markdown2.html#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="ex_markdown2.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="in">          for (i in 1:2) print(i)</span></span></code></pre></div>
 <p><br></p>
 <p>nous obtenons :</p>
 <div class="boite emphase">
@@ -830,9 +787,9 @@ lignes avec l’indentation adéquate. Ainsi, avec les lignes suivantes :</p>
 <div id="listes-numérotées" class="section level5 unnumbered hasAnchor">
 <h5>Listes numérotées<a href="ex_markdown2.html#listes-numérotées" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Pour créer une liste numérotée, il suffit de numéroter chaque élément de la liste. Par exemple:</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb192-1"><a href="ex_markdown2.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>machin 1,</span>
-<span id="cb192-2"><a href="ex_markdown2.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>machin 2,</span>
-<span id="cb192-3"><a href="ex_markdown2.html#cb192-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 3.</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb24-1"><a href="ex_markdown2.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>machin 1,</span>
+<span id="cb24-2"><a href="ex_markdown2.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>machin 2,</span>
+<span id="cb24-3"><a href="ex_markdown2.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 3.</span></code></pre></div>
 <p><br></p>
 <p>produit ceci:</p>
 <div class="boite emphase">
@@ -846,10 +803,10 @@ lignes avec l’indentation adéquate. Ainsi, avec les lignes suivantes :</p>
 <p>Si les nombres ne sont pas écrits manière ordonnée, cela ne changera pas le
 résultat. Néanmoins, le premier nombre détermine le numéro de départ de la liste. En
 écrivant :</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb193-1"><a href="ex_markdown2.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 1,</span>
-<span id="cb193-2"><a href="ex_markdown2.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 2,</span>
-<span id="cb193-3"><a href="ex_markdown2.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 3,</span>
-<span id="cb193-4"><a href="ex_markdown2.html#cb193-4" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>machin 4.</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb25-1"><a href="ex_markdown2.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 1,</span>
+<span id="cb25-2"><a href="ex_markdown2.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 2,</span>
+<span id="cb25-3"><a href="ex_markdown2.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 3,</span>
+<span id="cb25-4"><a href="ex_markdown2.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>machin 4.</span></code></pre></div>
 <p><br></p>
 <p>nous obtenons:</p>
 <div class="boite emphase">
@@ -862,9 +819,9 @@ résultat. Néanmoins, le premier nombre détermine le numéro de départ de la 
 </div>
 <p><br></p>
 <p>Pour ne pas se soucier des numéros, il existe un style par défaut :</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb194-1"><a href="ex_markdown2.html#cb194-1" aria-hidden="true" tabindex="-1"></a>#. machin 1,</span>
-<span id="cb194-2"><a href="ex_markdown2.html#cb194-2" aria-hidden="true" tabindex="-1"></a>#. machin 2,</span>
-<span id="cb194-3"><a href="ex_markdown2.html#cb194-3" aria-hidden="true" tabindex="-1"></a>#. machin 3.</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb26-1"><a href="ex_markdown2.html#cb26-1" aria-hidden="true" tabindex="-1"></a>#. machin 1,</span>
+<span id="cb26-2"><a href="ex_markdown2.html#cb26-2" aria-hidden="true" tabindex="-1"></a>#. machin 2,</span>
+<span id="cb26-3"><a href="ex_markdown2.html#cb26-3" aria-hidden="true" tabindex="-1"></a>#. machin 3.</span></code></pre></div>
 <p><br></p>
 <p>Nous retrouvons bien la première liste numérotée :</p>
 <div class="boite emphase">
@@ -876,15 +833,15 @@ résultat. Néanmoins, le premier nombre détermine le numéro de départ de la 
 </div>
 <p><br></p>
 <p>Plusieurs styles de numérotation sont disponibles. Par exemple, en écrivant :</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb195-1"><a href="ex_markdown2.html#cb195-1" aria-hidden="true" tabindex="-1"></a> #) élément 1</span>
-<span id="cb195-2"><a href="ex_markdown2.html#cb195-2" aria-hidden="true" tabindex="-1"></a> #) élément 2</span>
-<span id="cb195-3"><a href="ex_markdown2.html#cb195-3" aria-hidden="true" tabindex="-1"></a> #) élément 3</span>
-<span id="cb195-4"><a href="ex_markdown2.html#cb195-4" aria-hidden="true" tabindex="-1"></a> (1) truc 1</span>
-<span id="cb195-5"><a href="ex_markdown2.html#cb195-5" aria-hidden="true" tabindex="-1"></a> (2) truc 2</span>
-<span id="cb195-6"><a href="ex_markdown2.html#cb195-6" aria-hidden="true" tabindex="-1"></a> (5) truc 3</span>
-<span id="cb195-7"><a href="ex_markdown2.html#cb195-7" aria-hidden="true" tabindex="-1"></a>       i. machin 1</span>
-<span id="cb195-8"><a href="ex_markdown2.html#cb195-8" aria-hidden="true" tabindex="-1"></a>       i. machin 2</span>
-<span id="cb195-9"><a href="ex_markdown2.html#cb195-9" aria-hidden="true" tabindex="-1"></a>       i. machin 3</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb27-1"><a href="ex_markdown2.html#cb27-1" aria-hidden="true" tabindex="-1"></a> #) élément 1</span>
+<span id="cb27-2"><a href="ex_markdown2.html#cb27-2" aria-hidden="true" tabindex="-1"></a> #) élément 2</span>
+<span id="cb27-3"><a href="ex_markdown2.html#cb27-3" aria-hidden="true" tabindex="-1"></a> #) élément 3</span>
+<span id="cb27-4"><a href="ex_markdown2.html#cb27-4" aria-hidden="true" tabindex="-1"></a> (1) truc 1</span>
+<span id="cb27-5"><a href="ex_markdown2.html#cb27-5" aria-hidden="true" tabindex="-1"></a> (2) truc 2</span>
+<span id="cb27-6"><a href="ex_markdown2.html#cb27-6" aria-hidden="true" tabindex="-1"></a> (5) truc 3</span>
+<span id="cb27-7"><a href="ex_markdown2.html#cb27-7" aria-hidden="true" tabindex="-1"></a>       i. machin 1</span>
+<span id="cb27-8"><a href="ex_markdown2.html#cb27-8" aria-hidden="true" tabindex="-1"></a>       i. machin 2</span>
+<span id="cb27-9"><a href="ex_markdown2.html#cb27-9" aria-hidden="true" tabindex="-1"></a>       i. machin 3</span></code></pre></div>
 <p><br></p>
 <p>nous obtenons :</p>
 <div class="boite emphase">
@@ -907,15 +864,15 @@ résultat. Néanmoins, le premier nombre détermine le numéro de départ de la 
 <p><br></p>
 <p>Nous avons aussi la possibilité de mélanger les niveaux numérotés et les niveaux
 non-numérotés. Par exemple, cette liste</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb196-1"><a href="ex_markdown2.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>machin 1,</span>
-<span id="cb196-2"><a href="ex_markdown2.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="ss">    1. </span>machin 1.1,</span>
-<span id="cb196-3"><a href="ex_markdown2.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="ss">    2. </span>machin 1.2,</span>
-<span id="cb196-4"><a href="ex_markdown2.html#cb196-4" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>machin 2,</span>
-<span id="cb196-5"><a href="ex_markdown2.html#cb196-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>machin 2.1,</span>
-<span id="cb196-6"><a href="ex_markdown2.html#cb196-6" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>machin 2.2,</span>
-<span id="cb196-7"><a href="ex_markdown2.html#cb196-7" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>machin 3,</span>
-<span id="cb196-8"><a href="ex_markdown2.html#cb196-8" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 4,</span>
-<span id="cb196-9"><a href="ex_markdown2.html#cb196-9" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>machin 5.</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb28-1"><a href="ex_markdown2.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>machin 1,</span>
+<span id="cb28-2"><a href="ex_markdown2.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ss">    1. </span>machin 1.1,</span>
+<span id="cb28-3"><a href="ex_markdown2.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ss">    2. </span>machin 1.2,</span>
+<span id="cb28-4"><a href="ex_markdown2.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>machin 2,</span>
+<span id="cb28-5"><a href="ex_markdown2.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>machin 2.1,</span>
+<span id="cb28-6"><a href="ex_markdown2.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>machin 2.2,</span>
+<span id="cb28-7"><a href="ex_markdown2.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>machin 3,</span>
+<span id="cb28-8"><a href="ex_markdown2.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>machin 4,</span>
+<span id="cb28-9"><a href="ex_markdown2.html#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>machin 5.</span></code></pre></div>
 <p><br></p>
 <p>donne ceci  :</p>
 <div class="boite emphase">
@@ -942,14 +899,14 @@ non-numérotés. Par exemple, cette liste</p>
 <p><br></p>
 <p>Enfin, il possible de mettre manuellement fin à une liste en introduisant un
 commentaire entre les listes à séparer :</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb197-1"><a href="ex_markdown2.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="in">    (1) truc 1</span></span>
-<span id="cb197-2"><a href="ex_markdown2.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="in">    (2) truc 2</span></span>
-<span id="cb197-3"><a href="ex_markdown2.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="in">    (3) truc 2b</span></span>
-<span id="cb197-4"><a href="ex_markdown2.html#cb197-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb197-5"><a href="ex_markdown2.html#cb197-5" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;!-- end --&gt;</span></span>
-<span id="cb197-6"><a href="ex_markdown2.html#cb197-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb197-7"><a href="ex_markdown2.html#cb197-7" aria-hidden="true" tabindex="-1"></a><span class="in">    (1) truc 3</span></span>
-<span id="cb197-8"><a href="ex_markdown2.html#cb197-8" aria-hidden="true" tabindex="-1"></a><span class="in">    (2) truc 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb29-1"><a href="ex_markdown2.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="in">    (1) truc 1</span></span>
+<span id="cb29-2"><a href="ex_markdown2.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="in">    (2) truc 2</span></span>
+<span id="cb29-3"><a href="ex_markdown2.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="in">    (3) truc 2b</span></span>
+<span id="cb29-4"><a href="ex_markdown2.html#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="ex_markdown2.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;!-- end --&gt;</span></span>
+<span id="cb29-6"><a href="ex_markdown2.html#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="ex_markdown2.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="in">    (1) truc 3</span></span>
+<span id="cb29-8"><a href="ex_markdown2.html#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="in">    (2) truc 4</span></span></code></pre></div>
 <p>ces lignes sont rendues ainsi :</p>
 <div class="boite emphase">
 <ol style="list-style-type: decimal">
@@ -970,9 +927,9 @@ commentaire entre les listes à séparer :</p>
 <h4>Blocs de citation<a href="ex_markdown2.html#blocs-de-citation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Pour utiliser un bloc de citation (la balise “blockquote” en HTML), il suffit
 d’utiliser “&gt;” avant la citation. Ainsi les lignes suivantes :</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode .md"><code class="sourceCode markdown"><span id="cb198-1"><a href="ex_markdown2.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; la citation est ajoutée comme ceci, elle nous donne une indentation adéquate</span></span>
-<span id="cb198-2"><a href="ex_markdown2.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="at">pour une mise en page agréable dont le style peut être facilement travailler</span></span>
-<span id="cb198-3"><a href="ex_markdown2.html#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="at">en HTML grâce au CSS.</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode .md"><code class="sourceCode markdown"><span id="cb30-1"><a href="ex_markdown2.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; la citation est ajoutée comme ceci, elle nous donne une indentation adéquate</span></span>
+<span id="cb30-2"><a href="ex_markdown2.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="at">pour une mise en page agréable dont le style peut être facilement travailler</span></span>
+<span id="cb30-3"><a href="ex_markdown2.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="at">en HTML grâce au CSS.</span></span></code></pre></div>
 <p><br></p>
 <p>deviennent :</p>
 <div class="boite emphase">
@@ -981,9 +938,9 @@ d’utiliser “&gt;” avant la citation. Ainsi les lignes suivantes :</p>
 </blockquote>
 </div>
 <p>Pour créer une hiérarchie dans les citations, nous ajoutons des “&gt;”  :</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode .md"><code class="sourceCode markdown"><span id="cb199-1"><a href="ex_markdown2.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; La citation de départ</span></span>
-<span id="cb199-2"><a href="ex_markdown2.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
-<span id="cb199-3"><a href="ex_markdown2.html#cb199-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;&gt; une hiérarchie dans la citation</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode .md"><code class="sourceCode markdown"><span id="cb31-1"><a href="ex_markdown2.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; La citation de départ</span></span>
+<span id="cb31-2"><a href="ex_markdown2.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb31-3"><a href="ex_markdown2.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;&gt; une hiérarchie dans la citation</span></span></code></pre></div>
 <p><br></p>
 <p>ce qui donne :</p>
 <div class="boite emphase">
@@ -1027,7 +984,7 @@ permet, entre autres, de créer des rapports automatisés.</p>
 <code>`r expression`</code>.</p>
 <p>Par exemple, il est possible d’insérer l’heure et la date en utilisant la fonction R <code>Sys.time()</code>. Ainsi,
 l’utilisation de <code>`r Sys.time()`</code>  dans le texte affichera la sortie de cette fonction R, soit
-2022-05-24 16:24:02.</p>
+2022-07-08 16:29:17.</p>
 <p>Le reste de cette section se concentre sur les blocs de code R (appelés <em>code chunks</em> en anglais).
 Typiquement, l’utilisation d’un tel bloc de code ressemble à ceci :</p>
 <pre><code>```{r, idbloc, param1 = val1, param2 = val2}
@@ -1042,7 +999,7 @@ ligne de code n
 <div id="les-commentaires-1" class="section level4 unnumbered hasAnchor">
 <h4>Les commentaires<a href="ex_markdown2.html#les-commentaires-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Les commentaires sont introduits, comme dans R, sous la forme de lignes de
-codes commençant par un <code>#</code>. Débutons avec un exemple simple qui inclut un
+code commençant par un <code>#</code>. Débutons avec un exemple simple qui inclut un
 commentaire et une addition :</p>
 <pre><code>```{r, addition}
 # une addition avec R.
@@ -1052,47 +1009,54 @@ commentaire et une addition :</p>
 <p>Notez que le terme “addition” qui suit “r” dans l’accolade est l’identifiant du morceau
 de code (la virgule entre les deux premiers éléments est facultative).</p>
 <p>Ce morceau de code s’affiche ainsi:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="ex_markdown2.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une addition avec R.</span></span>
-<span id="cb202-2"><a href="ex_markdown2.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span></span></code></pre></div>
-<pre class="codeout"><code>[1] 5</code></pre>
+<div class="boite demo">
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ex_markdown2.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une addition avec R.</span></span>
+<span id="cb34-2"><a href="ex_markdown2.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
 <p><br></p>
-<p>Nous obtenons donc code R dans un environnement adéquate (voir la coloration
+<p>Nous obtenons donc un code R dans un environnement adéquate (voir la coloration
 du code) avec la sortie console associée, en l’occurrence, le résultat de
 l’addition.</p>
 </div>
-<div id="modifier-laffichage-du-code-source-avec-le-paramètre-echo" class="section level4 unnumbered hasAnchor">
-<h4>Modifier l’affichage du code source avec le paramètre <code>echo</code><a href="ex_markdown2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="affichage-du-code-source" class="section level4 unnumbered hasAnchor">
+<h4>Affichage du code source<a href="ex_markdown2.html#affichage-du-code-source" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="le-paramètre-echo" class="section level5 unnumbered hasAnchor">
+<h5>Le paramètre echo<a href="ex_markdown2.html#le-paramètre-echo" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Prenons le bloc de code suivant.</p>
-<pre><code>``{r}
+<pre><code>```{r}
 # une addition de variables avec R
 a &lt;- 2
 b &lt;- 3
-a + b</code></pre>
-<pre><code>&lt;br&gt;
-
-
-```r
-# une addition de variables avec R
-a &lt;- 2
-b &lt;- 3
-a + b</code></pre>
-<pre class="codeout"><code>[1] 5</code></pre>
+a + b
+```</code></pre>
 <p><br></p>
-<p>Afin de ne pas afficher le code source dans un document (parce que nous souhaitement uniquement afficher la sortie produite par le code), il suffit d’utiliser le paramètre <code>echo = FALSE</code>, (<code>echo = TRUE</code> par défaut). Ainsi, le bloc de code <code>sanscode</code></p>
-<pre><code>``{r sanscode, echo = FALSE}
+<p>Celui-ci s’affiche comme:</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="ex_markdown2.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une addition de variables avec R</span></span>
+<span id="cb37-2"><a href="ex_markdown2.html#cb37-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb37-3"><a href="ex_markdown2.html#cb37-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb37-4"><a href="ex_markdown2.html#cb37-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<p><br></p>
+<p>Afin de ne pas afficher le code source dans un document (parce que nous souhaitement uniquement afficher la sortie produite par le code), il suffit d’utiliser le paramètre <code>echo = FALSE</code>. Par défaut, nous avons que <code>echo = TRUE</code>. Ainsi, le bloc de code <code>sanscode</code></p>
+<pre><code>```{r sanscode, echo = FALSE}
 # une addition de variables avec R
 a &lt;- 2
 b &lt;- 3
 a + b
 ```</code></pre>
 <p><br>
-nous donne:</p>
-<pre class="codeout"><code>[1] 5</code></pre>
+nous donne uniquement la sortie, sans le code:</p>
+<div class="boite demo">
+<pre><code>## [1] 5</code></pre>
+</div>
 <p><br></p>
-<p>Le paramètre <code>echo</code> peut aussi être utilisé pour choisir les lignes à montrer.
+<p>Le paramètre <code>echo</code> peut aussi être utilisé pour choisir des lignes de code spécifique à montrer.
 Pour cela, nous utilisons un vecteur indiquant les positions des lignes à montrer.
 Par exemple, pour montrer uniquement les lignes 1 et 4, nous utilisons:</p>
-<pre><code>``{r code14, echo = c(1, 4)}
+<pre><code>```{r code14, echo = c(1, 4)}
 # une addition de variables avec R
 a &lt;- 2
 b &lt;- 3
@@ -1100,9 +1064,11 @@ a + b
 ```</code></pre>
 <p><br></p>
 <p>ce qui donne:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="ex_markdown2.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une addition de variables avec R</span></span>
-<span id="cb210-2"><a href="ex_markdown2.html#cb210-2" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code></pre></div>
-<pre class="codeout"><code>[1] 5</code></pre>
+<div class="boite demo">
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="ex_markdown2.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une addition de variables avec R</span></span>
+<span id="cb42-2"><a href="ex_markdown2.html#cb42-2" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
 <p><br></p>
 <!--  
 
@@ -1110,7 +1076,7 @@ Nous pouvons aussi choisir les lignes à ne pas montrer en utilisant des valeurs
 négatives. Ainsi, nous pouvons retirer les trois premières lignes du bloc de code:
 
 
-    ``{r codesans13, echo = -c(1:3)}
+    ```{r codesans13, echo = -c(1:3)}
     # une addition de variables avec R
     a <- 2
     b <- 3
@@ -1119,37 +1085,324 @@ négatives. Ainsi, nous pouvons retirer les trois premières lignes du bloc de c
 <br>
 
 ce qui donne:
+<div class="boite demo">
 
 
 ```r
 a + b
 ```
 
-```{.codeout}
-[1] 5
 ```
+## [1] 5
+```
+</div>
 
 <br>
 
 -->
-<!--  
+</div>
+</div>
+<div id="affichage-des-sorties" class="section level4 unnumbered hasAnchor">
+<h4>Affichage des sorties<a href="ex_markdown2.html#affichage-des-sorties" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<!-- #### Le paramètre `comment`
 
-#### Modifier l'affichage des sorties {-}
+Les symboles devant les sorties console de R peuvent être modifiées en utilisant
+le paramètre `comment`. Avec le bloc `comment1`
 
-##### Le paramètre `comment` {-}
+    ```{r comment1, comment = "$ "}
+    # une addition de variables avec R
+    a <- 2
+    b <- 3
+    a + b
+    ```
 
-##### Le paramètre `results` {-}
+on obtient
 
-##### Le paramètre `eval` {-}
 
-##### Choisir les messages retournés {-}
+```r
+# une addition de variables avec R
+a <- 2
+b <- 3
+a + b
+```
 
-#### Afficher des tableaux 
+```
+$  [1] 5
+```
 
-#### Afficher des figures
+De me, `comment2` &nbsp;:
 
-#### Afficher des images
+    ```{r comment2, comment="R>>"}
+    # une addition de variables avec R
+    a <- 2
+    b <- 3
+    a + b
+    ```
+
+il nous donne:
+
+
+
+```r
+# une addition de variables avec R
+a <- 2
+b <- 3
+a + b
+```
+
+```
+R>> [1] 5
+```
 -->
+<div id="le-paramètre-results" class="section level5 unnumbered hasAnchor">
+<h5>Le paramètre results<a href="ex_markdown2.html#le-paramètre-results" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Le paramètre <code>results</code> permet de choisir comment les sorties d’un bloc de code R sont traitées.</p>
+<p>Par défaut, c’est le mode “markup” qui est utilisé:</p>
+<pre><code>```{r markup, results = &#39;markup&#39;}
+ # une division avec R
+ cat(&quot;Exemple de division avec R: 1/998.001 = &quot;, 1/998.001)
+```</code></pre>
+<p><br></p>
+<p>Ceci donne:</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="ex_markdown2.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une division avec R</span></span>
+<span id="cb45-2"><a href="ex_markdown2.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Exemple de division avec R: 1/998.001 = &quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="fl">998.001</span>)</span></code></pre></div>
+<pre><code>## Exemple de division avec R: 1/998.001 =  0.001002003</code></pre>
+</div>
+<p><br></p>
+<p>Lorsque <code>result = 'asis'</code>, les résultats sont affichés comme un paragraphe du
+document texte principal :</p>
+<pre><code>    ```{r asis, results = &#39;asis&#39;}
+    # une division avec R
+    cat(&quot;Exemple de division avec R: 1/998.001 = &quot;, 1/998.001)
+    ```</code></pre>
+<p><br></p>
+<div class="boite demo">
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="ex_markdown2.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une division avec R</span></span>
+<span id="cb48-2"><a href="ex_markdown2.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="ex_markdown2.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Exemple de division avec R: 1/998.001 = &quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="fl">998.001</span>)</span></code></pre></div>
+<p>Exemple de division avec R: 1/998.001 = 0.001002003</p>
+</div>
+<p><br></p>
+<p>Lorsque <code>result = 'hide'</code>, les sorties console ne sont pas ajoutées :</p>
+<pre><code>    ```{r hide, results = &#39;hide&#39;}
+    # une division avec R
+    cat(&quot;Exemple de division avec R: 1/998.001 = &quot;, 1/998.001)
+    ```</code></pre>
+<p><br></p>
+<p>donne:</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="ex_markdown2.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une division avec R</span></span>
+<span id="cb50-2"><a href="ex_markdown2.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Exemple de division avec R: 1/998.001 = &quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="fl">998.001</span>)</span></code></pre></div>
+</div>
+<p><br></p>
+<p>Finalement, <code>results = 'hold'</code> permet d’afficher <em>toutes</em> les sorties après le morceau de code. Sans cette option, les sorties sont ajoutées au fur et à mesure de l’exécution du code et donc le bloc est interrompu.</p>
+<p>Par exemple, avec le code suivant :</p>
+<pre><code>```{r}
+a &lt;- 2
+print(a)
+b &lt;- 3
+print(b)
+2 + 3
+```</code></pre>
+<p><br></p>
+<p>on obtient :</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="ex_markdown2.html#cb52-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb52-2"><a href="ex_markdown2.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="ex_markdown2.html#cb54-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb54-2"><a href="ex_markdown2.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="ex_markdown2.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<p><br></p>
+<p>alors qu’avec <code>results='hold'</code>,</p>
+<pre><code>```{r hold, results = &#39;hold&#39;}
+a &lt;- 2
+print(a)
+b &lt;- 3
+print(b)
+2 + 3
+```</code></pre>
+<p><br></p>
+<p>on obtient plutôt :</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="ex_markdown2.html#cb59-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb59-2"><a href="ex_markdown2.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb59-3"><a href="ex_markdown2.html#cb59-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb59-4"><a href="ex_markdown2.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b)</span>
+<span id="cb59-5"><a href="ex_markdown2.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 2
+## [1] 3
+## [1] 5</code></pre>
+</div>
+<p><br></p>
+</div>
+<div id="affichage-des-messages" class="section level5 unnumbered hasAnchor">
+<h5>Affichage des messages<a href="ex_markdown2.html#affichage-des-messages" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Il y a trois type de messages retournés par R:</p>
+<ol style="list-style-type: decimal">
+<li>les messages : une simple indication (voir la fonction <code>message()</code>);</li>
+<li>les avertissements qui soulignent que quelque chose est peut-être problématiques, mais le code est exécutable (voir la fonction <code>warning()</code>);</li>
+<li>les erreurs qui indiquent que quelque chose ne fonctionne pas dans l’exécution du code.</li>
+</ol>
+<p>Considérons le bloc suivant qui inclut un message, un avertissement, une erreur
+(en commentaire) et une addition.</p>
+<pre><code>```{r}
+message(&quot;Ceci est un message&quot;)
+warning(&quot;Ceci est un avertissement&quot;)
+# stop(&quot;Ceci est un problème&quot;)
+2 + 3
+```</code></pre>
+<p><br></p>
+<div class="boite demo">
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="ex_markdown2.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Ceci est un message&quot;</span>)</span></code></pre></div>
+<pre><code>## Ceci est un message</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="ex_markdown2.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">&quot;Ceci est un avertissement&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Ceci est un avertissement</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="ex_markdown2.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stop(&quot;Ceci est un problème&quot;)</span></span>
+<span id="cb66-2"><a href="ex_markdown2.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<p><br></p>
+<p>Il est possible de supprimer le message en utilisant <code>message = FALSE</code>. En effet, le code suivant:</p>
+<pre><code>```{r sansmessage, message = FALSE}
+message(&quot;Ceci est un message&quot;)
+warning(&quot;Ceci est un avertissement&quot;)
+# stop(&quot;Ceci est un problème&quot;)
+2 + 3
+```</code></pre>
+<p><br></p>
+<p>n’affiche pas le message de sortie:</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="ex_markdown2.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Ceci est un message&quot;</span>)</span>
+<span id="cb69-2"><a href="ex_markdown2.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">&quot;Ceci est un avertissement&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Ceci est un avertissement</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="ex_markdown2.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stop(&quot;Ceci est un problème&quot;)</span></span>
+<span id="cb71-2"><a href="ex_markdown2.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<p><br></p>
+<p>De la même manière il est possible de supprimer l’avertissement avec <code>warning = FALSE</code>.</p>
+<pre><code>```{r sansavertissement, warning = FALSE}
+message(&quot;Ceci est un message&quot;)
+warning(&quot;Ceci est un avertissement&quot;)
+# stop(&quot;Ceci est un problème&quot;)
+2 + 3
+```</code></pre>
+<p><br></p>
+<p>Le code précédent n’affiche pas l’avertissement généré:</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="ex_markdown2.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Ceci est un message&quot;</span>)</span></code></pre></div>
+<pre><code>## Ceci est un message</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="ex_markdown2.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">&quot;Ceci est un avertissement&quot;</span>)</span>
+<span id="cb76-2"><a href="ex_markdown2.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="co"># stop(&quot;Ceci est un problème&quot;)</span></span>
+<span id="cb76-3"><a href="ex_markdown2.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<p><br></p>
+<p>Notez que si vous utilisez <code>results = 'hide'</code> les avertissements et les messages seront tout de
+même retournés.</p>
+<pre><code>```{r sansavertissement2, warning = FALSE, message = FALSE, results = &#39;hide&#39;}
+message(&quot;Ceci est un message&quot;)
+warning(&quot;Ceci est un avertissement&quot;)
+# stop(&quot;Ceci est un problème&quot;)
+2 + 3
+```</code></pre>
+<p><br></p>
+<div class="boite demo">
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="ex_markdown2.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Ceci est un message&quot;</span>)</span></code></pre></div>
+<pre><code>## Ceci est un message</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="ex_markdown2.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">&quot;Ceci est un avertissement&quot;</span>)</span>
+<span id="cb81-2"><a href="ex_markdown2.html#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="co"># stop(&quot;Ceci est un problème&quot;)</span></span>
+<span id="cb81-3"><a href="ex_markdown2.html#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+</div>
+<p><br></p>
+<p>Enfin, par défaut, si une erreur advient dans un code, le document ne sera
+pas généré (c’est d’ailleurs la raison pour laquelle la ligne <code>stop("Ceci est un problème")</code> est commentée précédemment). Il est cependant parfois souhaitable de
+montrer une erreur (à des fins pédagogiques, par exemple). Pour ce faire, il
+faut utiliser <code>error = TRUE</code>:</p>
+<pre><code>```{r erreur, error = TRUE}
+message(&quot;Ceci est un message&quot;)
+warning(&quot;Ceci est un avertissement&quot;)
+stop(&quot;Ceci est un problème&quot;)
+2 + 3
+```</code></pre>
+<p><br></p>
+<div class="boite demo">
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="ex_markdown2.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Ceci est un message&quot;</span>)</span></code></pre></div>
+<pre><code>## Ceci est un message</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="ex_markdown2.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">&quot;Ceci est un avertissement&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Ceci est un avertissement</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="ex_markdown2.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">&quot;Ceci est un problème&quot;</span>)</span></code></pre></div>
+<pre><code>## Error in eval(expr, envir, enclos): Ceci est un problème</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="ex_markdown2.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="modifier-le-mode-devaluation-du-code" class="section level4 unnumbered hasAnchor">
+<h4>Modifier le mode d’evaluation du code<a href="ex_markdown2.html#modifier-le-mode-devaluation-du-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Par défaut, avec <code>rmarkdown</code>, dans un bloc de code R, le code est exécuté par R
+et les sorties sont ajoutées dans le document. Ci-dessus, nous avons vu comment
+modifier ce qui est présenté dans le code source et changer certain aspect de la
+sortie. Il est également possible de modifier l’exécution du code.</p>
+<div id="le-paramètre-eval" class="section level5 unnumbered hasAnchor">
+<h5>Le paramètre eval<a href="ex_markdown2.html#le-paramètre-eval" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Dans certains cas, il peut s’avérer utile de montrer le code source sans
+l’exécuter. Pour empêcher l’évaluation du code, on utilise <code>eval = FALSE</code>.
+Ainsi, avec</p>
+<p><code>{r eval, eval = FALSE}      install.packages(`rmarkdown`)</code>
+<br></p>
+<p>l’installation de la bibliothèque <code>rmarkdown</code> n’est pas exécutée mais simplement affichée :</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="ex_markdown2.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">`</span><span class="at">rmarkdown</span><span class="st">`</span>)</span></code></pre></div>
+</div>
+<p><br></p>
+</div>
+<div id="le-paramètre-include" class="section level5 unnumbered hasAnchor">
+<h5>Le paramètre include<a href="ex_markdown2.html#le-paramètre-include" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Un autre cas relativement commun est de vouloir exécuter un bloc de code
+de manière silencieuse. En d’autres termes, nous ne souhaitons pas présenter le code ni
+sa sortie, mais nous souhaitons tout de même l’exécuter.</p>
+<p>Dans un rapport dynamique, par exemple, nous sommes souvent amenés à exécuter un script ou charger des fonctions qui serviront éventuellement à créer des sorties qui seront intégrées dans le rapport. Nous ne souhaitons pas que les lectrices ou les lecteurs du rapport lisent ces éléments de code.</p>
+<p>Nous savons maintenant que l’utiliation des options <code>echo = FALSE</code>, <code>results = hide</code>, <code>message = FALSE</code> et <code>warning = FALSE</code> ensemble dans
+l’accolade, permet d’obtenir cette exécution silencieuse. Il existe cependant une manière plus rapide d’arriver à ce résultat en utilisant le paramètre <code>include = FALSE</code>.</p>
+<p>En guise d’exemple, créons une fonction qui fait une addition simple et assignons le résultat à la variable <code>res</code></p>
+<pre><code>```{r include, include = FALSE}
+mon_addition &lt;- function(a, b) {
+    return(a + b)
+}
+res &lt;- mon_addition(2, 3)
+```</code></pre>
+<p><br></p>
+<p>L’intégration de ce bloc de code dans le document R markdown n’affichera ni le code ni sa sortie dans le document final. Toutefois, le code sera bel et bien exécuté.</p>
+<p>En effet, nous pouvons afficher la variable <code>res</code> qui a été calculée:</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="ex_markdown2.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(res)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<p><br></p>
+<p>Comme prévu, nous obtenons la valeur 5. Nous pouvons également utiliser la fonction <code>mon_addition()</code> :</p>
+<div class="boite demo">
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="ex_markdown2.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mon_addition</span>(<span class="dv">12</span>, <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## [1] 42</code></pre>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="afficher-des-tableaux" class="section level4 hasAnchor" number="3.2.2.1">
+<h4><span class="header-section-number">3.2.2.1</span> Afficher des tableaux<a href="ex_markdown2.html#afficher-des-tableaux" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="afficher-des-figures" class="section level4 hasAnchor" number="3.2.2.2">
+<h4><span class="header-section-number">3.2.2.2</span> Afficher des figures<a href="ex_markdown2.html#afficher-des-figures" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="afficher-des-images" class="section level4 hasAnchor" number="3.2.2.3">
+<h4><span class="header-section-number">3.2.2.3</span> Afficher des images<a href="ex_markdown2.html#afficher-des-images" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>–&gt;</p>
 </div>
 </div>
 <div id="exo3" class="section level3 hasAnchor" number="3.2.3">
@@ -1161,12 +1414,12 @@ a + b
 <!-- </div> -->
 <div class="footnotes">
 <hr />
-<ol start="26">
-<li id="fn26"><p>Vous pouvez également consulter le <a href="http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html">site de
+<ol start="5">
+<li id="fn5"><p>Vous pouvez également consulter le <a href="http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html">site de
 référence de Pandoc</a> et le résumé à la première page du <a href="http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">guide de référence R Markdown</a>.
 Pour une source en français, le guide
 “Élaboration et conversion de documents avec Markdown et Pandoc”
-(<a href="http://enacit1.epfl.ch/markdown-pandoc/" class="uri">http://enacit1.epfl.ch/markdown-pandoc/</a>) écrit par Jean-Daniel Bonjour fournit un excellent tour d’horizon.<a href="ex_markdown2.html#fnref26" class="footnote-back">↩︎</a></p></li>
+(<a href="http://enacit1.epfl.ch/markdown-pandoc/" class="uri">http://enacit1.epfl.ch/markdown-pandoc/</a>) écrit par Jean-Daniel Bonjour fournit un excellent tour d’horizon.<a href="ex_markdown2.html#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -1237,7 +1490,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
