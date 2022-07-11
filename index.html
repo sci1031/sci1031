@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -20,9 +20,10 @@
   <meta name="twitter:description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
   
 
+<meta name="author" content="" />
 
 
-<meta name="date" content="2022-05-24" />
+<meta name="date" content="2022-07-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -60,7 +61,7 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.0/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -69,48 +70,48 @@
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 <script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
 <script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.0/leaflet-providers-plugin.js"></script>
-<script src="libs/M_42f70b-1/data_stars_Me0c5db.txt"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/M_168adc-1/data_stars_M3ec67f.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric_b5d749-1/data_stars_M_logique_numericf86413.txt"></script>
-<script src="libs/M_factor_08ba2e-1/data_stars_M_factor2073c1.txt"></script>
-<script src="libs/ICU_158c6a-1/data_stars_ICUc2f819.txt"></script>
-<script src="libs/ICU_3d2afe-1/data_stars_ICU21085c.txt"></script>
-<script src="libs/T_sec_27f935-1/data_stars_T_secf950be.txt"></script>
-<script src="libs/T_fact4_moy_0e1694-1/data_stars_T_fact4_moyface28.txt"></script>
-<script src="libs/T_fact4_max_34951d-1/data_stars_T_fact4_maxabc734.txt"></script>
-<script src="libs/T_fact8_moy_6da058-1/data_stars_T_fact8_moy2f9c06.txt"></script>
-<script src="libs/T_fact8_max_ea1fd6-1/data_stars_T_fact8_maxfd7658.txt"></script>
-<script src="libs/SR_58dc94-1/data_stars_SRdb4920.txt"></script>
-<script src="libs/SG_e8a5f7-1/data_stars_SG176059.txt"></script>
-<script src="libs/SB_df573c-1/data_stars_SBabef30.txt"></script>
-<script src="libs/dem_41ad92-1/data_stars_dem2695ad.txt"></script>
-<script src="libs/nouvelles_classes_dem_2b3d7a-1/data_stars_nouvelles_classes_demcd0a81.txt"></script>
-<script src="libs/reclassify(dem, nouvelles_classes2)_0679dc-1/data_stars_reclassifydemnouvelles_classes29f7bea.txt"></script>
-<script src="libs/dem_cr_716e04-1/data_stars_dem_crb1f740.txt"></script>
-<script src="libs/dem_cr_p_dacf91-1/data_stars_dem_cr_p58de91.txt"></script>
-<script src="libs/dem_fa45b0-1/data_stars_dem7cd902.txt"></script>
-<script src="libs/dem_ma_93a084-1/data_stars_dem_maa0958e.txt"></script>
-<script src="libs/dem_ma_inv_76d129-1/data_stars_dem_ma_inv7b6af4.txt"></script>
-<script src="libs/dem_ma_458072-1/data_stars_dem_ma9e85fc.txt"></script>
-<script src="libs/dem_ma_inv_a62340-1/data_stars_dem_ma_inva90e8b.txt"></script>
-<script src="libs/dem_merge_072634-1/data_stars_dem_merge31f085.txt"></script>
-<script src="libs/dem_merge_ordre1_8142b9-1/data_stars_dem_merge_ordre1e815ca.txt"></script>
-<script src="libs/dem_merge_ordre2_70e48f-1/data_stars_dem_merge_ordre25067ac.txt"></script>
-<script src="libs/dem_mosaic_min_964df8-1/data_stars_dem_mosaic_mine84159.txt"></script>
-<script src="libs/dem_mosaic_max_fab873-1/data_stars_dem_mosaic_maxfc8437.txt"></script>
-<script src="libs/dem_mosaic_mean_bead0f-1/data_stars_dem_mosaic_mean8f3a74.txt"></script>
-<script src="libs/dem_parcs_ce7f81-1/data_stars_dem_parcs56317f.txt"></script>
-<script src="libs/dem_parcs_fbae52-1/data_stars_dem_parcsf7e1a5.txt"></script>
-<script src="libs/dem_orford_71ec6f-1/data_stars_dem_orford61fae9.txt"></script>
-<script src="libs/dem_orford_8db4f1-1/data_stars_dem_orforda4fb27.txt"></script>
-<script src="libs/dem_orford_quantile_76b045-1/data_stars_dem_orford_quantileef9a67.txt"></script>
-<script src="libs/dem_orford_quantile_c7f308-1/data_stars_dem_orford_quantile90e148.txt"></script>
-<script src="libs/dem_tampon_max_b631a9-1/data_stars_dem_tampon_max4bdaf2.txt"></script>
-<script src="libs/X1_3826fe-1/data_stars_X145a18d.txt"></script>
-<script src="libs/X2_4c8126-1/data_stars_X29e60dc.txt"></script>
-<script src="libs/X3_5312da-1/data_stars_X3465219.txt"></script>
+<script src="libs/M_logique_numeric_2f7496-1/data_stars_M_logique_numeric42df73.txt"></script>
+<script src="libs/M_factor_dcea42-1/data_stars_M_factorf6dec0.txt"></script>
+<script src="libs/ICU_9610b5-1/data_stars_ICUabd25c.txt"></script>
+<script src="libs/ICU_7b914f-1/data_stars_ICU807956.txt"></script>
+<script src="libs/T_sec_7b18f0-1/data_stars_T_sec418e5d.txt"></script>
+<script src="libs/T_fact4_moy_5db149-1/data_stars_T_fact4_moybd62c3.txt"></script>
+<script src="libs/T_fact4_max_08fc65-1/data_stars_T_fact4_max91db82.txt"></script>
+<script src="libs/T_fact8_moy_1a52b6-1/data_stars_T_fact8_moy92a475.txt"></script>
+<script src="libs/T_fact8_max_e3c69b-1/data_stars_T_fact8_max84b3e1.txt"></script>
+<script src="libs/SR_5bd47c-1/data_stars_SR7984b2.txt"></script>
+<script src="libs/SG_380b12-1/data_stars_SGefb26a.txt"></script>
+<script src="libs/SB_12b0d4-1/data_stars_SB42ec98.txt"></script>
+<script src="libs/dem_b61423-1/data_stars_demfc21e5.txt"></script>
+<script src="libs/nouvelles_classes_dem_450def-1/data_stars_nouvelles_classes_demc4e2f7.txt"></script>
+<script src="libs/reclassify(dem, nouvelles_classes2)_f5ec8d-1/data_stars_reclassifydemnouvelles_classes2e3021f.txt"></script>
+<script src="libs/dem_cr_3c08e1-1/data_stars_dem_cr410e25.txt"></script>
+<script src="libs/dem_cr_p_d5fea7-1/data_stars_dem_cr_p862cbe.txt"></script>
+<script src="libs/dem_b97f86-1/data_stars_dem54cd19.txt"></script>
+<script src="libs/dem_ma_2b65c8-1/data_stars_dem_ma96d480.txt"></script>
+<script src="libs/dem_ma_inv_b4dc57-1/data_stars_dem_ma_inv78ef1d.txt"></script>
+<script src="libs/dem_ma_69b05a-1/data_stars_dem_ma345bdc.txt"></script>
+<script src="libs/dem_ma_inv_3605b8-1/data_stars_dem_ma_invf1c0a3.txt"></script>
+<script src="libs/dem_merge_120dac-1/data_stars_dem_merge23f4c7.txt"></script>
+<script src="libs/dem_merge_ordre1_4afc8e-1/data_stars_dem_merge_ordre1df5860.txt"></script>
+<script src="libs/dem_merge_ordre2_c78291-1/data_stars_dem_merge_ordre2f6bd27.txt"></script>
+<script src="libs/dem_mosaic_min_56b49d-1/data_stars_dem_mosaic_min750abf.txt"></script>
+<script src="libs/dem_mosaic_max_07298d-1/data_stars_dem_mosaic_max1e6c98.txt"></script>
+<script src="libs/dem_mosaic_mean_9103b8-1/data_stars_dem_mosaic_mean187562.txt"></script>
+<script src="libs/dem_parcs_024651-1/data_stars_dem_parcs51b9c4.txt"></script>
+<script src="libs/dem_parcs_db639a-1/data_stars_dem_parcs62f3a0.txt"></script>
+<script src="libs/dem_orford_ecf98d-1/data_stars_dem_orford9730b8.txt"></script>
+<script src="libs/dem_orford_95cb41-1/data_stars_dem_orfordd1583a.txt"></script>
+<script src="libs/dem_orford_quantile_0f7523-1/data_stars_dem_orford_quantilea605d7.txt"></script>
+<script src="libs/dem_orford_quantile_59dcf6-1/data_stars_dem_orford_quantilef06e14.txt"></script>
+<script src="libs/dem_tampon_max_e14b2c-1/data_stars_dem_tampon_max723bae.txt"></script>
+<script src="libs/X1_29fdac-1/data_stars_X1259c06.txt"></script>
+<script src="libs/X2_bd945f-1/data_stars_X2c6df43.txt"></script>
+<script src="libs/X3_43dbe1-1/data_stars_X3a9605d.txt"></script>
 
 
 <style type="text/css">
@@ -216,7 +217,7 @@ div.csl-indent {
 <li><a href="./">TELUQ -  SCI 1031.</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#section"></a></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
 <li class="part"><span><b>I SCI 1031</b></span></li>
 <li class="chapter" data-level="" data-path="à-propos-du-cours.html"><a href="à-propos-du-cours.html"><i class="fa fa-check"></i>À propos du cours</a>
 <ul>
@@ -275,7 +276,15 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#les-langages-de-programmation-pour-lanalyse-géospatiale"><i class="fa fa-check"></i>Les langages de programmation pour l’analyse géospatiale</a></li>
 </ul></li>
 <li class="chapter" data-level="1.1.3" data-path="lecon_intro.html"><a href="lecon_intro.html#outil_R"><i class="fa fa-check"></i><b>1.1.3</b> Les bibliothèques géo-spatiales de R</a></li>
-<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a></li>
+<li class="chapter" data-level="1.1.4" data-path="lecon_intro.html"><a href="lecon_intro.html#pensee_geo"><i class="fa fa-check"></i><b>1.1.4</b> La pensée géographique</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#échelle-spatiale"><i class="fa fa-check"></i>Échelle spatiale</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#échelle-cartographique"><i class="fa fa-check"></i>Échelle cartographique</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#distance"><i class="fa fa-check"></i>Distance</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#contiguïté"><i class="fa fa-check"></i>Contiguïté</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#interaction"><i class="fa fa-check"></i>Interaction</a></li>
+<li class="chapter" data-level="" data-path="lecon_intro.html"><a href="lecon_intro.html#voisinage"><i class="fa fa-check"></i>Voisinage</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="ex_intro.html"><a href="ex_intro.html"><i class="fa fa-check"></i><b>1.2</b> Exercices</a>
 <ul>
@@ -366,7 +375,12 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html#blocsR"><i class="fa fa-check"></i><b>3.2.2</b> Intégration de R dans le document</a>
 <ul>
 <li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#les-commentaires-1"><i class="fa fa-check"></i>Les commentaires</a></li>
-<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#modifier-laffichage-du-code-source-avec-le-paramètre-echo"><i class="fa fa-check"></i>Modifier l’affichage du code source avec le paramètre <code>echo</code></a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#affichage-du-code-source"><i class="fa fa-check"></i>Affichage du code source</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#affichage-des-sorties"><i class="fa fa-check"></i>Affichage des sorties</a></li>
+<li class="chapter" data-level="" data-path="ex_markdown2.html"><a href="ex_markdown2.html#modifier-le-mode-devaluation-du-code"><i class="fa fa-check"></i>Modifier le mode d’evaluation du code</a></li>
+<li class="chapter" data-level="3.2.2.1" data-path="ex_markdown2.html"><a href="ex_markdown2.html#afficher-des-tableaux"><i class="fa fa-check"></i><b>3.2.2.1</b> Afficher des tableaux</a></li>
+<li class="chapter" data-level="3.2.2.2" data-path="ex_markdown2.html"><a href="ex_markdown2.html#afficher-des-figures"><i class="fa fa-check"></i><b>3.2.2.2</b> Afficher des figures</a></li>
+<li class="chapter" data-level="3.2.2.3" data-path="ex_markdown2.html"><a href="ex_markdown2.html#afficher-des-images"><i class="fa fa-check"></i><b>3.2.2.3</b> Afficher des images</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2.3" data-path="ex_markdown2.html"><a href="ex_markdown2.html#exo3"><i class="fa fa-check"></i><b>3.2.3</b> À vous de jouer !</a></li>
 </ul></li>
@@ -576,7 +590,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">SCI 1031 Visualisation et analyse de données spatiales sous R</h1>
 <p class="author"><em></em></p>
-<p class="date"><em>2022-05-24</em></p>
+<p class="date"><em>2022-07-11</em></p>
 </div>
 <div id="section" class="section level1 unnumbered">
 <h1 class="unnumbered"></h1>
@@ -661,7 +675,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
