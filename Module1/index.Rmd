@@ -28,7 +28,7 @@ Ce module est une introduction au cours que vous vous apprêter à suivre. Dans 
  -	Donner des exemples d’application des SIG.
  -	Nommer des outils et logiciels de visualisation et d’analyse géospatiale.
  -	Décrire les avantages offerts par le logiciel R.
- -	Définir les concepts de bases dans l’étude des données spatiales : la résolution, l’étendue, le voisinage, les gradients, l’effet de bordure, etc.
+ -	Définir les concepts de bases dans l’étude des données spatiales : l'échelle spatiale et l'échelle cartographique, la distance, la contiguïté, l'interaction spatiale et le voisinage.
 
 ---
 
@@ -315,6 +315,70 @@ Voici quelques bibliothèques importantes que nous utiliserons dans ce cours :
 <br>
 
 ### La pensée géographique {#pensee_geo}
+
+Nous allons conclure ce module en définissant certains concepts essentiels à l’étude des phénomènes spatiaux.
+
+#### Échelle spatiale {-}
+
+Le terme échelle spatiale réfère à deux concepts : l’*étendue physique* d’un phénomène spatial (Figure \@ref(fig:etendue)) et la *résolution* (Figure \@ref(fig:resolutiondef)), c’est-à-dire la taille de l’unité de mesure, ou encore la précision, avec la laquelle on étudie ce phénomène [@dale_fortin_2014]. 
+
+<br>
+
+```{r etendue, fig.align='left', out.width = "90%",fig.show='hold', fig.link="Module1/images/1_Etendue.jpg", fig.cap='L’étendue physique d’un phénomène spatial.',echo=FALSE}
+a1<-'Module1/images/1_Etendue.jpg'
+knitr::include_graphics(a1)
+```
+
+<br>
+<br>
+
+
+```{r resolutiondef, fig.align='left', out.width = "100%",fig.show='hold', fig.link="Module1/images/1_Resolution.jpg", fig.cap='La résolution à laquelle on observe un phénomène spatial.',echo=FALSE}
+a2<-'Module1/images/1_Resolution.jpg'
+knitr::include_graphics(a2)
+```
+
+
+<br>
+
+#### Échelle cartographique {-}
+
+Sur une carte géographique, l’échelle représente le rapport entre une distance mesurée sur la carte et cette distance mesurée sur la Terre [@TurnerGardner_2015]. On exprime généralement l’échelle par une fraction. Par exemple, 1/10 000, signifie qu’un cm sur la carte représente 10 000 cm sur le terrain (ou 10 m). Alors que 1/1 000 000 signifie qu’un cm sur la carte représente 1 000 000 cm sur le terrain (soit 1 km). Ainsi, plus l’échelle cartographique est petite, plus la résolution est grossière.  Inversement, plus l’échelle cartographique est grande, plus la résolution est fine. 
+
+<br>
+
+#### Distance {-}
+
+La distance est généralement décrite comme la distance à vol d’oiseau entre deux entités spatiales d’intérêt. Dans ce cas, on la calculera par la distance Euclidienne (équation). Cependant, il faut savoir que le concept de distance peut parfois intégrer des facteurs liés à la capacité de se déplacer d’un point à l’autre [@OSullivanUnwin_2010]. Par exemple, la distance entre deux villes, accessibles par voie terrestre, réfère généralement à la distance du trajet parcouru en suivant les routes qui séparent les deux villes. Cette distance sera bien différente de la distance Euclidienne.  Lorsque vous utilisez Google Maps pour calculer un itinéraire, vous savez que la distance du trajet dépendra également du moyen de locomotion choisi. 
+
+De façon similaire, la distance parcourue par un animal dépendra du trajet utilisé pour éviter des obstacles ou des conditions environnementales peu favorables (p. exemple l’absence de couvert forestier). 
+
+Finalement, pour le calcul de grandes distances, il peut être nécessaire de considérer la courbure de la surface terrestre. Dans de telles situations la distance Euclidienne doit être remplacée par une équation plus complexe.
+
+<br>
+
+#### Contiguïté  {-}
+
+
+La contiguïté, aussi appelée l’adjacence, indique la proximité de deux ou plusieurs objets spatiaux. C’est, en quelque sorte, une mesure binaire de distance : l’objet A est près, oui ou non, de l’objet B [@OSullivanUnwin_2010]. La contiguïté est donc un concept relatif à la façon dont on détermine si un objet est proche d’un autre. Par exemple, deux pays qui partagent une même frontière pourront être qualifiés de contiguës. Dans d’autres cas, nous pourrions considérer une distance maximale fixe (p. ex.  50 km) et déterminer que tous les objets (p.ex. des villes) séparés par une distance moindre que la distance fixée sont contiguës. Nous pourrions également déterminer que les cinq (ou un autre nombre fixe) objets les plus proches d’un autre sont contiguës peu importe la distance qui les sépare. 
+
+<br>
+
+#### Interaction {-}
+
+L’interaction spatiale entre deux objets repose également sur le concept de distance. Elle exprime la notion intuitive que tous les objets sont en interaction mais ceux qui sont proches ont plus de chance d’interagir que ceux qui sont distants. On réfère à cette notion comme étant la « première loi » de la géographie et on l'attribut au géographe Waldo Tobler. En anglais, cette loi s’énonce ainsi : « Everything is related to everything, but near things are more related than distant things » [@Tobler_1970]. 
+
+L’interaction entre deux objets se mesure généralement par une fonction allant de 0 (aucune interaction) à 1 (interaction maximale). Cette fonction est inversement proportionnelle à la distance séparant les deux objets de sorte que plus la distance est petite plus l’interaction est forte [@OSullivanUnwin_2010]. D’autres facteurs peuvent influencer la façon dont on mesure l’interaction comme la taille des objets. 
+
+L’interaction est étroitement liée aux concepts de dépendance spatiale et d’autocorrélation spatiale [@dale_fortin_2014]. La dépendance spatiale est l’absence d’indépendance entre des objets rapprochés. Puisque l’assomption d’indépendance des données est requise pour réaliser de nombreux tests statistiques paramétriques il est important de pouvoir déterminer la présence de dépendance spatiale. L’autocorrélation spatiale réfère à la corrélation spatiale entre les valeurs d’une même variable. Par exemple, la température à un emplacement sera corrélée avec la température à des emplacements voisins. Il existe différentes mesures pour déterminer la dépendance et l’autocorrélation spatiale. Dans le cadre de ce cours, nous n’aborderons pas ces mesures plus poussées d’analyse spatiale. 
+
+<br>
+
+####  Voisinage {-}
+
+Le voisinage est aussi un concept relatif qui peut se décrire de différentes façons. Un voisinage peut être défini en fonction d’un objet spatial particulier. Le voisinage est alors constitué des objets spatiaux qui sont adjacents à l’objet spatial d’intérêt. Par exemple, les cadastres limitrophes d’une propriété donnée, ou encore les bâtiments dans un rayon de 500 m autour d’une borne fontaine. Un voisinage peut aussi prendre un sens qui s’apparente à la notion de quartier.  Un voisinage est alors défini comme une région qui entoure des objets spatiaux similaires, et qui se distincte d’autres régions qui circonscrivent également des objets similaires. 
+
+<br>
 
 
 ## Exercices {#ex_intro}

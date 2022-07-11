@@ -800,7 +800,7 @@ Les couches dont le nom commence par `PPS_` et `ES_` contiennent des données ve
 
 Lisons les données vectorielles de la couche `PPS_Public_Ecole` en utilisant la fonction `st_read()`. 
 
- ```{r ecoles_pub}
+```{r ecoles_pub}
 ecoles_pub <- st_read("Module4/Module4_donnees/Donnees_Ouvertes_MEES.gdb", layer = "PPS_Public_Ecole")
 ```
 <br>
