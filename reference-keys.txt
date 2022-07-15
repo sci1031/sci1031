@@ -66,6 +66,10 @@ fig:MTMQuebec
 fig:LCC
 fig:LCCCanada
 fig:Resume
+tab:table11
+tab:table22
+fig:figdim1
+fig:figdim2
 fig:plot-viridis
 fig:unnamed-chunk-119
 fig:unnamed-chunk-121
@@ -129,9 +133,6 @@ résumé
 ex_markdown2
 pandocmarkdown
 blocsR
-afficher-des-tableaux
-afficher-des-figures
-afficher-des-images
 exo3
 vec
 lecon_vec
