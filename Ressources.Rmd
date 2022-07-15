@@ -23,27 +23,15 @@ Les liens suivants vous dirigerons directement vers les données utilisées pour
 
 
 
-* [Module 1](https://github.com/sci1031/data/raw/master/Module1_donnees.zip)
-* [Module 3](https://github.com/sci1031/data/raw/master/Module3_donnees.zip)
-* [Module 4](https://github.com/sci1031/data/raw/master/Module4_donnees.zip)
-* [Module 5](https://github.com/sci1031/data/raw/master/Module5_donnees.zip)
-* [Module 6](https://github.com/sci1031/data/raw/master/Module6_donnees.zip)
-* [Module 7](https://github.com/sci1031/data/raw/master/Module7_donnees.zip)
-* [Module 8](https://github.com/sci1031/data/raw/master/Module8_donnees.zip)
-* [Module 9](https://github.com/sci1031/data/raw/master/Module9_donnees.zip)
+* [Module 1](https://github.com/sci1031/data/raw/main/Module1_donnees.zip)
+* [Module 3](https://github.com/sci1031/data/raw/main/Module3_donnees.zip)
+* [Module 4](https://github.com/sci1031/data/raw/main/Module4_donnees.zip)
+* [Module 5](https://github.com/sci1031/data/raw/main/Module5_donnees.zip)
+* [Module 6](https://github.com/sci1031/data/raw/main/Module6_donnees.zip)
+* [Module 7](https://github.com/sci1031/data/raw/main/Module7_donnees.zip)
+* [Module 8](https://github.com/sci1031/data/raw/main/Module8_donnees.zip)
+* [Module 9](https://github.com/sci1031/data/raw/main/Module9_donnees.zip)
 
-<!--
-* [Module 1](https://github.com/sci1031/sci1031/raw/master/Module1/Module1_donnees.zip)
-* [Module 4](https://github.com/sci1031/sci1031/raw/master/Module4/Module4_donnees.zip)
-* [Module 5](https://github.com/sci1031/sci1031/raw/master/Module5/Module5_donnees.zip)
-* [Module 6](https://github.com/sci1031/sci1031/raw/master/Module6/Module6_donnees.zip)
-* [Module 7](https://github.com/sci1031/sci1031/raw/master/Module7/Module7_donnees.zip)
-* [Module 8](https://github.com/sci1031/sci1031/raw/master/Module8/Module8_donnees.zip)
-* [Module 9](https://github.com/sci1031/sci1031/raw/master/Module9/Module9_donnees.zip)
--->
-
-<!--   * [Module 2](https://github.com/sci1031/sci1031/raw/master/Module2/Module2_donnees.zip)
-* [Module 3](https://github.com/sci1031/sci1031/raw/master/Module3/Module3_donnees.zip)-->
 
 <br>
 

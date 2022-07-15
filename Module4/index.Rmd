@@ -105,7 +105,7 @@ library(leafsync)
 
 </div>
 
-Dans les sections [4.1.3](#read_vec) à [4.1.6](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/sci1031/data/raw/master/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés et un fichier `csv`: 
+Dans les sections [4.1.3](#read_vec) à [4.1.6](#gdb) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 4](https://github.com/sci1031/data/raw/main/Module4_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module4_donnees` pour ce module, et dézippez-le. Le dossier comprend lui même deux dossiers compressés et un fichier `csv`: 
 
 - `Montreal_Velo.zip`
 - `Donnees_Ouvertes_MEES.gbd.zip`

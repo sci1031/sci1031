@@ -1910,7 +1910,7 @@ Cet exercice vise à mettre en pratique les notions apprises pour la rédaction 
 
 </div>
 
-Dans un premier temps, télécharger le dossier [Module3_donnees.zip](https://github.com/sci1031/data/raw/master/Module3_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient trois fichiers:
+Dans un premier temps, télécharger le dossier [Module3_donnees.zip](https://github.com/sci1031/data/raw/main/Module3_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient trois fichiers:
 
 - `villes_qc.csv`.
 - `Mod3_resume.jpg`.

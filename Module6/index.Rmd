@@ -86,7 +86,7 @@ Dans la section [exercice](#ex_carto), vous utiliserez des données disponibles 
 </div>
 
 
-Importez l'[ensemble des données](https://github.com/sci1031/data/raw/master/Module6_donnees.zip) utilisées dans ce module.
+Importez l'[ensemble des données](https://github.com/sci1031/data/raw/main/Module6_donnees.zip) utilisées dans ce module.
 Sauvegardez le dossier compressé (`Module6_donnees.zip`) dans votre répertoire de travail pour ce module, et dézippez-le.
 Ce dossier comprend lui-même cinq sous-dossiers que vous devez également dézipper:
 
