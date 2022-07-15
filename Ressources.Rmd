@@ -24,6 +24,7 @@ Les liens suivants vous dirigerons directement vers les données utilisées pour
 
 
 * [Module 1](https://github.com/sci1031/data/raw/master/Module1_donnees.zip)
+* [Module 3](https://github.com/sci1031/data/raw/master/Module3_donnees.zip)
 * [Module 4](https://github.com/sci1031/data/raw/master/Module4_donnees.zip)
 * [Module 5](https://github.com/sci1031/data/raw/master/Module5_donnees.zip)
 * [Module 6](https://github.com/sci1031/data/raw/master/Module6_donnees.zip)

@@ -680,7 +680,7 @@ title: "Bonjour Markdown!"
 author: "Votre nom"
 date: "La date"
 abstract: "Ce document HTML constitue ma première tentative de modifier l'entête YAML d'un document R Markdown"
-description: "Eh bien, je pensais que ça serait plus difficile!"
+description: "Eh bien, je pensais que ce serait plus difficile!"
 output: 
   html_document:
     theme: yeti
