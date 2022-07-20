@@ -85,7 +85,7 @@ fig:unnamed-chunk-149
 fig:unnamed-chunk-150
 fig:unnamed-chunk-156
 fig:unnamed-chunk-157
-fig:unnamed-chunk-178
+fig:unnamed-chunk-204
 fig:buffer-lapoc
 fig:buffer-regions
 fig:centroid-regions
