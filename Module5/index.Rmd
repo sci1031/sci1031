@@ -34,6 +34,8 @@ module.
 - `raster`
 - `mapview`
 - `leafsync`
+- `FedData`
+
 </div>
 
 <div class="boite ico fonctions gauche">
@@ -54,6 +56,7 @@ module.
 - `stack()`
 - `viewRGB()`
 - `mapview()` et `latticeView()`, que vous connaissez déjà.
+- `ratify()`
 
 </div>
 
@@ -65,11 +68,12 @@ Vous utiliserez aussi les fonctions suivantes, qui ne sont pas spécifiques aux 
 - `dim()`
 - `class()` 
 - `levels()`
-- `factor()`
+- `factor()`, `as.factor()`
 - `plot()`, `hist()`, `boxplot()`
 - `as.data.frame()`
 - `head()`
 - `max()`, `min()`, `median()`, `median()`
+- `which.max()`, `which.min()`
 - `summary()`
 - `names()`
 
@@ -80,7 +84,7 @@ Le premier ensemble contient des données spatiales relatives aux îlots de chal
 Le second ensemble contient des données spatiales satellites captées par Landsat près de la ville de La Tuque en Mauricie.
 
 
-<!--   Dans la section [exercices](#ex_mat), vous utiliserez XXXXX-->
+Dans la section [exercices](#ex_mat), vous utiliserez des données de couverture terrestre d'une région du Colorado aux États-Unis.
 
 </div>
 
@@ -97,13 +101,19 @@ Le second ensemble contient des données spatiales satellites captées par Lands
 
 </div>
 
-Dans les sections [5.1.5](#read_mat) à [5.1.10](#read_mult) du présent module vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 5](https://github.com/sci1031/data/raw/main/Module5_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module5_donnees` pour ce module, et dézippez-le. Le dossier comprend deux fichiers `tif`: 
+Dans les sections [5.1.5](#read_mat) à [5.1.10](#read_mult) ainsi que dans la section [exercices](#ex_mat) du présent module, vous apprendrez à lire et visualiser des données déjà existantes. Afin de faciliter le téléchargement de ces multiples données, l'ensemble des couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 5](https://github.com/sci1031/data/raw/main/Module5_donnees.zip). Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module5_donnees` pour ce module, et dézippez-le. Le dossier comprend quatre fichiers `tif`: 
 
 - `Temp_vdq.tif`
 - `Landsat_LaTuque.tif`
+- `Couvert_2001.tif`
+- `Couvert_2016.tif`
 
 Les données matricielles `Temp_vdq.tif` présentent la température de surface sur le territoire de la ville de Québec.
+
 Le fichier `Landsat_LaTuque.tif` contient des données captées par le satellite Landsat sur une section du territoire de la Haute Mauricie, près de la ville de La Tuque.
+
+Les données `Couvert_2001.tif` et `Couvert_2016.tif` correspondent à la couverture terrestre (p. ex. forêt, champ, eau, etc.) d'une petite région du Colorado aux années 2001 et 2016. Ces données sont utilisées dans la section [exercices](#ex_mat).
+
 
 ### Créer des données matricielles {#create_mat}
 
@@ -927,5 +937,389 @@ writeRaster(S_mult, "Module5/Module5_donnees/LaTuque-copie.tif")
 
 ## Exercices {#ex_mat}
 
+Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#mat) de ce module et apprendrez à manipuler des données matricielles catégoriques.
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
 
->> Exercices à venir!
+Les questions qui suivent se rapportent à des données matricielles de couvertures terrestres d'une petite région du Colorado aux États-Unis. Ce sont les données utilisées dans le tutoriel de [Nikki Inglis](https://www.smalltownbigdata.com/post/steamboat-springs-land-cover-data-nlcd) et qui proviennent du *National Land Cover Database* des États-Unis^[Les données peuvent être téléchargées sur le site du [*Multi-Resolution Land Characteristics Consortium*](https://www.mrlc.gov/).].
+
+Nous allons également utiliser la bibliothèque `FedData` qui permet d'extraire certaines données en provenance de sources fédérales américaines. Installer cette bibliothèque avant de débuter les questions: 
+```{r, eval = FALSE}
+install.packages("FedData")
+```
+
+
+<br>
+
+### Question 1 {-}
+
+**a)** Lire les *rasters* `Couvert_2001.tif` et `Couvert_2016.tif` correspondant aux couvertures terrestres lors des années 2001 et 2016 respectivement.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r, eval=FALSE, echo=TRUE}
+library(raster)
+C2001 <- raster("Module5/Module5_donnees/Couvert_2001.tif")
+C2016 <- raster("Module5/Module5_donnees/Couvert_2016.tif")
+```
+
+```{r, echo=FALSE}
+C2001 <- raster("Module5/Module5_donnees/Couvert_2001.tif")
+C2016 <- raster("Module5/Module5_donnees/Couvert_2016.tif")
+```
+
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**b)** Trouver l'étendue, les dimensions, et la résolution du *raster* associé à l'année 2001.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+extent(C2001)
+dim(C2001)
+res(C2001)
+```
+
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**c)** En utilisant la fonction `st_crs()` de la library `sf`, déterminer le code EPSG du système de coordonnées utilisé ainsi que l'unité de mesure de la projection du *raster* de la couverture terrestre de 2001.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r, eval=FALSE, echo=TRUE}
+library(sf)
+st_crs(C2001)$epsg
+st_crs(C2001)$units
+```
+
+```{r, echo=FALSE}
+st_crs(C2001)$epsg
+st_crs(C2001)$units
+```
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**d)** Confirmer que l'étendue, la résolution et le système de coordonnées sont les mêmes pour les *rasters* des années 2001 et 2016.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+extent(C2001) == extent(C2016)
+res(C2001) == res(C2016)
+st_crs(C2001) == st_crs(C2016)
+```
+
+<br>
+</p>
+</details> 
+
+<br>
+
+### Question 2 {-}
+
+**a)** Créer deux *rasters*, `R2001` et `R2016`, en sélectionnant une région carrée de 500 x 500 cellules à l'intérieure des deux *rasters* de couverture terrestre initiaux.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Rappelons que les dimensions des rasters initiaux, `C2001` et `C2016`, sont `r dim(C2001)[1]` par `r dim(C2001)[2]` cellules. Sélectionnons une région carrée qui soit relativement centrale pour éviter les bordures.
+
+```{r}
+R2001 <- C2001[1000:1499, 700:1199, drop=FALSE]
+R2016 <- C2016[1000:1499, 700:1199, drop=FALSE]
+```
+
+
+
+<br>
+</p>
+</details> 
+<br>
+
+
+**b)** Utiliser la fonction `getValues()` pour trouver les valeurs comprises dans le raster `R2001`, et déterminer la classe de ces valeurs.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+```{r}
+val <- getValues(R2001)
+class(val)
+```
+<br>
+</p>
+</details> 
+<br>
+
+**c)** Puisque les *rasters* `R2001` et `R0016` représentent une couverture terrestre, les valeurs ne devraient pas être numériques mais plutôt catégoriques. Transformer les *rasters* en facteur en utilisant la fonction `as.factor()`.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+R2001f <- as.factor(R2001)
+R2016f <- as.factor(R2016)
+```
+
+<br>
+</p>
+</details> 
+<br>
+
+**d)** Déterminer l'identifiant des catégories de couverture terrestre. Combien de catégories différentes exitent-ils?
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Les niveaux sont donnés par la fonction `levels()`
+```{r}
+levels(R2001f)
+```
+<br>
+
+Leur nombre est de:
+```{r}
+dim(levels(R2001f)[[1]])[1]
+```
+
+
+<br>
+</p>
+</details> 
+<br>
+
+
+### Question 3 {-}
+
+
+
+Pour connaître à quel type de couverts ces catégories correspondent, allons charger la légende disponible dans la bibliothèque `FedData`, en utilisant la fonction `pal_nlcd()`.
+
+```{r}
+library(FedData)
+legende <- pal_nlcd()
+legende
+```
+<br>
+
+Remarquer que les attributs de ce *data.frame*:
+
+* `code`: correspond à l'identifiant de chaque type de couvert;
+* `description`: donne une description du type de couvert;
+* `class`: correspond à la classe du type de couvert. Par exemple, tous les couverts de forêt (*Deciduous Forest*, *Evergreen Forest*, *Mixed Forest*) sont de classe *forest*;
+* `color`: correspond aux couleurs (en format hexadécimal) à utiliser pour représenter les types de couvert.
+
+La quantité de couverts différents répertoriés dans cette légende est:
+```{r}
+dim(legende)[1]
+```
+<br>
+
+Nous remarquons que le nombre de catégories dans la légende est supérieur au nombre de catégories dans le *raster* catégorique `R2001f`.
+Créons un tableau sommaire qui reprend les éléments de `legende` en conservant seulement les types de couverts présents dans le *raster* R2001f:
+
+```{r}
+type2001 <- unique(R2001f) 
+sommaire <- legende[legende$code %in% type2001, ]
+sommaire
+```
+<br>
+
+À partir du nouveau *data.frame* `sommaire`, nous allons maintenant créer un *data.frame* appelé `rat` qui permettra "d'attacher" ces attributs au raster `R2001f`. 
+
+La première colonne d'un *data.frame* `rat` doit toujours se nommer "ID" et lister les identifiants des différentes catégories présentes dans le *raster*.
+
+```{r}
+# Premiere colonne de rat
+rat <- levels(R2001f)[[1]]
+```
+<br>
+
+Nous ajoutons les autres attributs au *data.frame* `rat`
+```{r}
+rat$classe <- sommaire$class
+rat$description <- sommaire$description
+
+rat
+```
+<br>
+
+Nous attachons maintenant la table d'attributs `rat` au *raster* `R2001f` en utilisant donc la fonction `levels()`:
+
+```{r}
+levels(R2001f) <- rat
+
+R2001f
+```
+
+<br>
+
+**a)** Refaite les manipulations précédentes pour le *raster* de la couverture terrestre de 2016. 
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+type2016 <- unique(R2016f) 
+sommaire <- legende[legende$code %in% type2016, ]
+rat <- levels(R2016f)[[1]]
+rat$classe <- sommaire$class
+rat$description <- sommaire$description
+
+levels(R2016f) <- rat
+
+R2016f
+```
+
+
+
+<br>
+</p>
+</details> 
+<br>
+
+### Question 4 {-}
+
+**a)** Visualiser le *raster* catégorique de l'année 2001 avec la fonction `mapview()`. En particulier:
+
+* Utiliser la colonne `color` du data.frame `sommaire` pour définir l'argument `col.regions`.
+* Utiliser l'argument `att = ` afin que la légende affiche la description des types de couvertures.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+mapview(R2001f, col.regions = sommaire$color, att = "description", legend = TRUE)
+```
+
+<br>
+</p>
+</details> 
+<br>
+
+
+**b)** Utiliser la fonction `latticeview()` de la bibliothèque `leafsync` pour afficher les cartes des deux années côte à côte. N'ajouter pas de légende.
+
+
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r, fig.height=6}
+library(leafsync)
+
+m2001 <- mapview(R2001f, col.regions = sommaire$color, legend = FALSE)
+m2016 <- mapview(R2016f, col.regions = sommaire$color,  legend = FALSE)
+
+
+leafsync::latticeview(m2001, m2016, ncol = 2)
+```
+
+<br>
+</p>
+</details> 
+<br>
+
+
+### Question 5 {-}
+
+
+En comparant les deux cartes pour les années 2001 et 2016 nous pouvons observer visuellement des changements dans la couverture terrestre. Cependant, nous désirons faire une comparaison plus quantitative de ces changements.
+
+Pour ce faire, nous pouvons utiliser la fonction `ratify()` de la bibliothèque `raster`. Celle-ci possède l'argument `count` qui permet de compter le nombre de cellules de chaque catégorie^(Noter que la fonction `ratify()`permet également de transformer un *raster* numérique en *raster* catégorique: voir la documentation sur cette [fonction](documentation.org/packages/raster/versions/3.5-15/topics/factors).). Par exemple:
+
+```{r}
+R2001_nbr<-ratify(R2001f, count = TRUE)
+levels(R2001_nbr)
+```
+
+<br>
+
+Ajoutons ce calcul du nombre de cellules de chaque type de couvert au *data.frame* `sommaire`:
+
+```{r}
+sommaire$Nbr2001 <- levels(R2001_nbr)[[1]]$COUNT
+sommaire
+```
+
+<br>
+
+**a)** Répéter les manipulations précédentes pour l'année 2016.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+R2016_nbr<-ratify(R2016f, count = TRUE)
+sommaire$Nbr2016 <- levels(R2016_nbr)[[1]]$COUNT
+```
+
+<br>
+</p>
+</details> 
+<br>
+
+
+**b)** Déterminer le type de couvert qui a le plus augmenté et celui qui a le plus diminué entre l'année 2001 et l'année 2016.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Pour chaque type de couvert, nous calculons la différence entre le nombre de cellules en 2016 et le nombre de cellules en 2001.
+Nous divisons ensuite par le nombre de cellules totales dans l'un ou l'autre des rasters (ils on le même nombre), ce qui permet de comparer les catégories entre elles.
+
+```{r}
+Diff <- 100*(sommaire$Nbr2016 - sommaire$Nbr2001)/ncell(R2016f)
+sommaire$Diff2016_2001 <- Diff
+sommaire
+```
+<br>
+
+Nous pouvons maintenant utiliser les fonctions `which.max()` et `which.min()` qui identifient la position, dans un vecteur, des éléments de valeur maximimale et minimale respectivement. 
+
+```{r}
+sommaire$description[which.max(sommaire$Diff2016_2001)]
+sommaire$description[which.min(sommaire$Diff2016_2001)]
+```
+<br>
+
+Ce sont donc les champs cultivés qui ont le plus augmenté et les peuplements d'arbustres qui ont le plus diminué au cours de cette période.
+
+
+<br>
+</p>
+</details> 
+<br>
