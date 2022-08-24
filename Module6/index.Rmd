@@ -101,7 +101,637 @@ Ce dossier comprend lui-même cinq sous-dossiers que vous devez également dézi
 Nous utiliserons ces données à partir de la section [6.1.3](#basetmap). Commençons d'abord par une introduction sur les principes de bases de la cartographie.
 
 
-### Principes de base en cartographie 
+### Éléments de base en cartographie 
+
+#### Principes fondamentaux {-}
+
+La mise en page d'une carte est importante pour que cette dernière puisse être utilisée efficacement. Nous avons tous déjà vu des cartes de mauvaise qualité. Celles-ci peuvent être difficiles à lire et à interpréter. Elles peuvent être peu informatives, trompeuses et même erronées car certaines informations essentielles sont absentes ou sont diffusées incorrectement. La figure  \@ref(fig:mauvaises-cartes) donne quelques exemples de cartes que l'on peut facilement qualifier de mauvaises.
+
+<br>
+
+```{r mauvaises-cartes, echo=FALSE,out.width="50%",out.height="50%",fig.align='left', fig.cap="Exemples de mauvaises cartes. a) Carte de la diplomation et du revenu selon les comtés aux États-Unis (source: https://blog.stratasan.com/bad-maps-bad-maps). b) Carte du monde (source:https://carto.com). c) Carte de la localisation de tous les pubs dans le sud est du Royaume-Uni (source:http://www.math.uwaterloo.ca/tsp/pubs/data.html). d) Carte de l'Europe (source:https://gis.stackexchange.com).",fig.show='hold', fig.link=c("Module6/images/6_CarteA.png", "Module6/images/6_CarteD.png", "Module6/images/6_CarteB.png", "Module6/images/6_CarteC.png")}
+
+a1<-'Module6/images/6_CarteA.png'
+a2<-'Module6/images/6_CarteD.png'
+a3<-'Module6/images/6_CarteB.png'
+a4<-'Module6/images/6_CarteC.png'
+m4 <-c(a1,a2,a3,a4)
+knitr::include_graphics(rep(m4),1)
+
+```
+<br>
+
+La première carte, par exemple, illustre le niveau de diplomation et de revenu aux États-Unis. Elle utilise une superposition de trois couleurs pour chaque comté du territoire américain. Le rose représente le taux de diplomation à l'école secondaire, le jaune, le taux de diplomation au collègue, et le bleu, le revenu médian. Une multitude de couleurs apparait donc sur la carte la rendant difficile à interpréter. Dans un cas pareil, la carte devient inutile car elle ne permet pas de transmettre un message unique et clair. Une carte est efficace lorsqu'elle est simple. Il faut donc éviter d'y mettre trop d'informations.
+
+La deuxième carte illustre l'ensemble des pays de la planète et présente plusieurs problèmes. D'abord le nom de chaque pays, abrégé par trois lettres, est positionné sur chacun de ceux-ci. Cette approche rend totalement illisible le nom des pays dans les régions où ils sont nombreux. De plus, l'usage d'abbréviation est peu utile à moins de connaître déjà le nom du pays. Finalement, le choix des couleurs employées pour le texte et pour la carte elle-même est épouvantable. Les lettres sont beaucoup trop pâles, nuisant à la lisibilité des noms, et la palette de couleurs pour représenter les pays et les océans (en jaune!) est dérangeante.   
+
+La troisième carte donne la position de tous les pubs dans le sud est du Royaume-Uni. Une telle carte est utile si l'utilisateur a la possibilité d'agrandir l'écran en mode zoom. Autrement, la quantité trop grande de marqueurs masque l'information sur la localisation des pubs. Si l'objectif de cette carte est d'illustrer l'abondance des pubs dans ce pays, alors une représentation de la densité de pubs par habitant pour une division administrative donnée serait plus informative.
+
+Finalement, la dernière carte représente une section de l'Europe. Nous observons un usage exagéré d'écriture sur la carte qui, en plus, repose sur une trop grande diversité de polices et de tailles de caractère. Cette écriture est dense et n'est pas structurée de manière hiérarchique si bien qu'il est impossible de dégager les éléments importants. Également, la signification du gradient de couleurs utilisé n'est pas évidente.  
+
+Il existe quelques principes fondamentaux à respecter lorsque nous concevons une carte. Nous les résumons ici.
+Une carte doit être:
+
+>
+>- **Claire et cohérente**. 
+> Nous devons pouvoir comprendre et interpréter la carte facilement.
+>
+>- **Adaptée à son public cible**. 
+> Une carte qui s'adresse au grand public sera différente d'une carte qui s'adresse à des experts.
+>
+>- **Conforme aux conventions**. 
+>  Une carte doit respectée les conventions propres à son domaine d'application. Cela signifie aussi de respecter les associations naturelles de couleur tel que d'illustrer les plans d'eau par la couleur bleue. 
+> 
+>- **Esthétique**. 
+>  Une carte doit, par sa composition, le choix des couleurs, sa typographie, être agréable à l'oeil. 
+>
+>- **Bien structurée**. 
+>  Une carte doit être dotée d'une certaine hierarchie visuelle. La visualisation d'une carte doit permettre de dégager rapidement ses éléments importants. 
+>
+
+<br>
+
+#### Informations indispensables et optionnelles {-}
+
+Plusieurs éléments de mise en page sont indispensables dans une carte (Figure \@ref(fig:elements-indisp)):
+
+>
+>- Un titre
+>- Une échelle graphique
+>- Une légende
+>- L'orientation
+>- La source
+>- L'auteur ou l'autrice
+>- La référence spatiale
+>
+
+<br>
+
+```{r elements-indisp, echo=FALSE,out.width="100%",out.height="80%",fig.cap="Éléments indispensables d'une carte (source: https://crelaurentides.org/).",fig.show='hold',fig.align='left', fig.link="Module6/Images/6_ElementsIndispensables.png"}
+image<-"Module6/Images/6_ElementsIndispensables.png"
+knitr::include_graphics(image)
+``` 
+<br>
+
+Le **titre** est essentiel car il est la synthèse du message cartographie. Il doit être complet mais concis. Il peut être neutre (p. ex: *Nouveaux cas de COVID-19*) ou subjectif (p. ex: *Hausse fulgurante des cas de COVID-19*).
+
+L'**échelle graphique** est essentielle pour que le lecteur puisse saisir l'étendue et la résolution du phénomène illustré dans la carte. L'échelle doit être simple (sans trop de subdivisions), pas trop longue, donner des valeurs arrondies, et toujours fournir l'unité métrique utilisée ou son abbréviation (p. ex. kilomètres ou km).
+
+La **légende** est essentielle à l'interprétation d'une carte. Celle-ci traduit les éléments graphiques en texte. En effet, tous les éléments qui ne sont pas évidents ou conformes doivent apparaître dans la légende de façon alignée et claire. Une légende doit comprendre: les éléments graphiques, le texte associé à chaque élément et les unités de mesure. Les éléments graphiques se rapportant à des données vectorielles doivent idéalement suivre l'ordre point-ligne-polygone dans la légende. Notez qu'il est aussi inutile d'écrire le mot *Légende*.
+
+L'**orientation** de la carte, spécifiée par une flèche du nord ou une rose des vents, est indispensable si les données illustrées sont en rotation de sorte que le nord ne corresponde pas au haut de la carte. Par exemple, la flèche du nord est indiquée sur la carte du réseau d'autobus de nuit de la Société de transport de Montréal (figure \@ref(fig:fleche-nord)). En effet, pour facilité la lecture de la carte, l'île de Montréal est représentée sur un axe horizontal qui ne correspond pas à l'axe géographique est-ouest. La flèche du nord doit être discrète sur une carte. Par ailleurs, si le nord est bien au haut de la carte, la flèche du nord est optionnelle.
+
+<br>
+
+```{r fleche-nord, echo=FALSE,out.width="100%",out.height="80%",fig.cap="La flèche du nord est indispensable lorsque ce dernier ne correspond pas au haut de la carte (source: http://www.mondecarte.com/carte/canada/montreal/montreal_night_bus_plan.png.",fig.show='hold',fig.align='left', fig.link = c("Module6/Images/6_FlecheNord.png")}
+image <- "Module6/Images/6_FlecheNord.png"
+knitr::include_graphics(image)
+```
+
+<br>
+
+La **source**, l'**auteur.trice**, la **date**, et la **projection** doivent toujours être présents sur une carte. La citation de la source des données est importante pour des raisons éthiques. Les données illustrées ont été assemblées par une personne ou un organisme et nous devons reconnaître le travail de ce dernier. De plus, la citation d'une source, si celle-ci est reconnue, apporte de la crédibilité au contenu de la carte. Finalement, la citation d'une source permet au lecteur ou à la lectrice d'une carte de retracer et d'accéder aux données. Notez que ces quatre éléments devraient apparaître en petits caractères sur la carte car ils ne sont pas centrals au message.
+
+D'autres éléments sont souvent présents sur une carte mais sont optionnels:
+
+>
+>- Un cadre
+>- Un encart
+>- Des graticules 
+>- Un quadrillage
+>
+
+<br>
+
+Un **cadre** sert à délimiter la zone cartographiée  (figure \@ref(fig:cadre-encart)).
+
+Un **encart** est une carte secondaire de petite taille que l'on appose à la carte principale (figure \@ref(fig:cadre-encart)). Cette carte secondaire peut servir, par exemple, à représenter une étendue géographique plus grande qui permet de mieux situer la zone représentée dans la carte principale. Un encart peut être situé à l'intérieur ou à l'extérieur du cadre.
+
+
+```{r cadre-encart, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Un cadre et un encart sont des éléments optionnels de la mise en page d'une carte (source: Proulx et al. 2019).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_CadreEncart.png"}
+image<-"Module6/Images/6_CadreEncart.png"
+knitr::include_graphics(image)
+
+```
+<br>
+
+
+Les **graticules** correspondent au réseau de latitudes et de longitudes permettant d'afficher les coordonnées géographiques des données représentées. Les coordonnées, en degrés, sont affichées sur le cadre de la carte (figure \@ref(fig:graticules)). 
+
+<br>
+
+```{r graticules, echo=FALSE,out.width="70%",out.height="70%",fig.cap="Les graticules sont les coordonnées géographiques (degrés de latitude et de longitude) sur le cadre d'une carte (indice de sévérité des feux de forêt, source:https://cwfis.cfs.nrcan.gc.ca/) .",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Graticules.jpg"}
+image<-"Module6/Images/6_Graticules.jpg"
+knitr::include_graphics(image)
+```
+<br>
+
+Un **quadrillage**, ou une grille, est un réseau de lignes horizontales et verticales perpendiculaires permettant d'afficher le système de coordonnées projetées (figure \@ref(fig:quadrillage)). 
+
+<br>
+
+```{r quadrillage, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Le quadrillage correspond au système de coordonnées projetées. Il est identifé par le nom de la projection cartographique utilisée (source:https://www.sepaq.com/) .",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Quadrillage.png"}
+image<-"Module6/Images/6_Quadrillage.png"
+knitr::include_graphics(image)
+```
+
+<br>
+
+Certaines cartes font l'usage à la fois du quadrillage et des graticules (figure \@ref(fig:gratquad)):
+<br>
+```{r gratquad, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Les graticules et le quadrillage peuvent être utilisées sur une même carte (source:https://sbl.umontreal.ca/) .",fig.show='hold',fig.align='left', fig.link="Module6/Images/6_GratQuad.png"}
+image<-"Module6/Images/6_GratQuad.png"
+knitr::include_graphics(image)
+```
+
+<br>
+
+
+#### Le texte {-}
+
+Différents types de texte apparaissent sur une carte. Il y a le texte utilisé sur ou autour d’une carte comme le titre, le texte de la légende et le texte affichant la source des données, la date, la projection, etc. Une carte peut aussi afficher des **étiquettes**  qui servent à décrire les attributs des données spatiales représentées. Par exemple, le nom d’un pays sur le polygone délimitant les frontières de ce dernier. Une carte peut aussi contenir des **annotations**, c’est-à-dire du texte apposées sur la carte pour préciser des informations ou identifier des éléments qui ne sont pas nécessairement des attributs des données spatiales représentées.
+
+Le choix de la police, de la fonte, de la taille et de la couleur des caractères utilisés dans le texte d'une carte a une influence sur sa lisibilité. Il existe quelques principes à respecter lors du choix de ces éléments.
+
+Nous devons nous limiter à deux polices de caractères : une police avec empattement (*serif* en anglais) et une autre sans empattement (*sans serif*) (figure \@ref(fig:serif)).  Les polices avec empattement  sont généralement utilisées pour étiqueter des objets naturels (plans d’eau, montagnes, etc.) alors que les polices sans serif sont utilisées pour étiqueter des objets anthropiques (villes, routes, ponts, etc.).
+
+<br>
+```{r serif, echo=FALSE,out.width="40%",out.height="40%",fig.cap="Lettre avec empattement à gauche et sans empattement à droite.",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Serif.png" }
+image<-"Module6/Images/6_Serif.png"
+knitr::include_graphics(image)
+```
+<br>
+
+La taille de caractère doit être supérieure à 7 points. Il est préférable de conserver une seule taille de caractères à moins de vouloir créer une hiérarchie visuelle dans les étiquettes. 
+
+Nous devons favoriser également l’utilisation d’une seule couleur de texte, à moins de vouloir identifier différentes catégories d’étiquettes. 
+L’usage de différentes couleurs et tailles de caractères dans l’objectif de créer une hiérarchie visuelle peut améliorer la lisibilité d’une carte mais doit se faire judicieusement et avec parcimonie. Les figures (\@ref(fig:text1)) et (\@ref(fig:text2)) donnent des exemples dans lesquels le texte a été adapté pour améliorer la présentation d’une carte.
+<br>
+
+```{r text1, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemple de carte où l'écriture a été améliorée. Le choix de couleurs différentes pour représenter les frontières et les plans d'eau, ainsi que l'orientation du texte améliore la lisibilité de la carte (source: Guimond 2021 (https://mgimond.github.io/Spatial/good-map-making-tips.html#typefaces-and-fonts)) .",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_ImprovedText1.png"}
+image<-"Module6/Images/6_ImprovedText1.png"
+knitr::include_graphics(image)
+```
+
+<br>
+```{r text2, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemple de carte où l'écriture a été améliorée. La carte du dessus fait l'usage de caractères de tailles, de fonte, de couleurs et d'orientation différentes créant une hiérarchie visuelle efficace (source: https://www.axismaps.com/) .",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_ImprovedText2.png"}
+image<-"Module6/Images/6_ImprovedText2.png"
+knitr::include_graphics(image)
+```
+<br>
+
+
+Dans la figure (\@ref(fig:text2)), remarquez le lettrage en majuscule pour étiqueter des territoires ainsi que la fonte italique et la couleur bleue pour identifier des plans d’eau. De plus, remarquez que les étiquettes associées aux points ne sont jamais directement dessus, dessous ou à côté des points. Elles sont plutôt en haut à droite, en haut à gauche, en bas à droite ou en bas à gauche. 
+
+<br>
+
+#### Les types de carte {-}
+
+Il existe deux grandes catégories de carte: les cartes générales et les cartes thématiques. Les **cartes générales** affichent uniquement l'emplacement géographiques des données qu'elles soient sous forme de points, de lignes, de polygones ou de rasters. Les cartes routières, les plans de localisation, les cartes topographiques et les cartes touristiques en sont des exemples (\@ref(fig:generales)).
+
+<br>
+```{r generales, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Exemples de carte générale. A) Carte routière des environs de Paris (source:https://fr.viamichelin.be/). B) Carte touristique de la Gaspésie (source: http://motoplus.ca). C) Plan du Montréal souterrain (source: https://voyage-montreal.com/montreal-souterrain ).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Generales.png"}
+image<-"Module6/Images/6_Generales.png"
+knitr::include_graphics(image)
+```
+<br>
+
+Les **cartes thématiques**, quant à elles, affichent non seulement l'emplacement géographiques des données spatiales mais aussi un ou plusieurs de leurs attributs. Ces cartes utilisent une **symbologie** pour représenter les attributs des données. C'est-à-dire qu'elles font appel à différentes couleurs, formes et tailles de symboles pour représenter les données de sorte que celles-ci aquièrent une signification. Ces cartes servent ainsi à transmettre un message. Nous approfondirons les concepts de symbologie à la prochaine section. Pour le moment, notons que plusieurs types de cartes thématiques existent. Voici quelques exemples:
+
+
+Les cartes à **symboles gradués** et à **symboles proportionnels** utilisent des symboles de tailles différentes pour afficher une différence quantitative ou relative entre les valeurs de l'attribut représenté. Dans le premier cas, les valeurs sont divisées en classes couvrant chacune une certaine plage de valeurs. Chaque classe est alors illustrée par une taille spécifique de symbole (\@ref(fig:prop)A). Dans le second cas, il n'y a pas de classification des valeurs. La plus petite valeur est illustrée par le plus petite taille de symbole, et la taille de chaque symbole augmente proportionnellement avec la valeur absolue de la donnée qu'elle représente (\@ref(fig:prop)B).
+
+Les cartes de **densité de points** utilisent des symboles ponctuels de même taille mais dont le nombre varie d'une polygone à un autre pour illustrer la variation dans la densité de l'attribut représenté (\@ref(fig:prop)C).
+
+<br>
+```{r prop, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte avec symboles gradués, (B) carte avec symboles proportionnels, (C) carte de densité de points (source: GISGeography 2021. *Dot Distribution vs Graduated Symbols vs Proportional Symbol Maps*: https://gisgeography.com/dot-distribution-graduated-symbols-proportional-symbol-maps/, Consulté le 30 mars 2021).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Proportionnel.png"}
+image<-"Module6/Images/6_Proportionnel.png"
+knitr::include_graphics(image)
+```
+<br>
+
+
+Les cartes **choroplèthes** illustrent les régions d'une carte en utilisant une palette de couleur qui réflètent la variation relative d'un attribut d'une région à l'autre (par exemple la densité de population)(\@ref(fig:choro)). Notons que *choro* signifie aire ou région en grec, et *plèthe* signifie grande quantité ou multitude. L'apparence d'une carte choroplèthe dépend de la façon dont la classification des valeurs d'attribut est réalisée; c'est-à-dire la plage de valeurs attribuée à chaque couleur. Nous reviendrons sur l'importance de la classification dans la prochaine section.
+<br>
+
+
+```{r choro, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Densité de population à l'échelle mondiale. (Source:https://ourworldindata.org/most-densely-populated-countries).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Choroplethe.png"}
+image<-"Module6/Images/6_Choroplethe.png"
+knitr::include_graphics(image)
+```
+
+<br>
+
+
+Les cartes **isoplèthes** représentent les données spatiales par des lignes contour. C'est-à-dire des lignes formées en joignant ensemble les points qui ont la même valeur d'attribut (*iso* signifie égal en grec). Les cartes isoplèthes peuvent aussi utiliser une même couleur pour représenter des régions qui ont une même valeur d'attribut (\@ref(fig:iso)).
+<br>
+
+```{r iso, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Période d'ensoleillement en Europe, en heures par année. (Source:http://averagemaps.blogspot.com/2013/10/isoline-map.html).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Isoplethe.png"}
+image<-"Module6/Images/6_Isoplethe.png"
+knitr::include_graphics(image)
+```
+
+<br>
+Les **cartogrammes** illustrent les régions d'une carte en modifiant leur taille de façon proportionnelle à l'attribut représenté (\@ref(fig:cartogramme)).
+<br>
+```{r cartogramme, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte du monde avec une représentation non modifiée des superficies des états, (B) carte de la population mondiale (la superficie de chaque territoire est proportionnelle à la fraction de la population mondiale y habitant), (C) Carte de la consommation de café en 2014 (la superficie de chaque territoire est proportionnelle à la proportion mondiale de café qui y est consommé (kg par habitants)) (source:https://worldmapper.org/).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Cartogramme.png"}
+image<-"Module6/Images/6_Cartogramme.png"
+knitr::include_graphics(image)
+```
+<br>
+
+#### La symbologie {-}
+
+La carte est un outil de communication. La façon dont sont représentées les données spatiales sur une carte joue un rôle primordial dans l’efficacité et la justesse de cet outil.  
+
+On appelle sémiologie graphique^[Les fondements de la sémiologie graphique ont été développés par le cartographe Jacques Bertin qui publia notamment l’ouvrage «Sémiologie Graphique » en 1967.] ou symbologie «l'encodage des entités cartographiques dans le but de transmettre une signification.» ^[Définition reprise du guide ArcGIS Pro: https://pro.arcgis.com/fr/pro-app/latest/help/mapping/layer-properties/symbolization.htm.] La symbologie se rapporte donc aux choix faits pour représenter les données spatiales et pour représenter les relations entre ces données. 
+
+Les variables visuelles sont des différences dans les entités cartographiques pouvant être perçues par l'oeil humain. Le cartographe Jacques Bertin (1967) proposa l'existence de sept variables visuelles principales: la position, la forme, la taille, la couleur (la teinte), la valeur (la luminosité), la texture et l'orientation (\@ref(fig:variablesvisuelles)). Depuis, d'autres variables se sont ajoutées: la saturation, la disposition, la netteté, la résolution, et la transparence. 
+
+<br>
+
+```{r variablesvisuelles, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Les variables visuelles (source: figure adaptée de https://cartosquad.com/)",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_VariablesVisuelles.png"}
+image<-"Module6/Images/6_VariablesVisuelles.png"
+knitr::include_graphics(image)
+```
+<br>
+
+Une relation entre les données exprime généralement une *différence qualitative* ou une *différence quantitative*. Par exemple, distinguer sur une carte la capitale des autres villes d’un pays relève d’une différence qualitative *nominale*. Nous pouvons alors choisir différents symboles (un point pour une ville et une étoile pour une capitale) ou différentes couleurs (un point bleu pour une ville et un point rouge pour une capitale) pour distinguer ces entités. Les attributs qualitatifs peuvent aussi exprimer une différence *ordinale*, c’est-à-dire une hiérarchie entre les données. Par exemple, les rues, les boulevards, les autoroutes peuvent être représentés par des traits d’aspects ou d’épaisseurs différents. 
+
+Par ailleurs, nous pourrions vouloir exprimer une différence quantitative entre la taille des populations des villes. Cette quantité *absolue* pourrait alors être exprimée par l’utilisation de point dont le diamètre est proportionnel à la taille de la ville qu’il représente. D’autre part, pour représenter une quantité *relative*, par exemple la densité de population de différents états, il vaudra mieux utiliser un gradient de luminosité allant d'une couleur pâle à foncée pour remplir les polygones associés aux états. 
+
+Le tableau de la figure \@ref(fig:symbologie) résume les choix possibles de symbologie en fonction de la nature des données. Ce tableau est tiré du livre Savoir faire une carte : Aide à la conception et à la réalisation d’une carte thématique univariée de Zanin et Trémolo [-@ZaninTremolo_2003]. 
+
+<br>
+
+
+```{r symbologie, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Symbologie selon la nature des données (source: Zanin et Trémolo [-@ZaninTremolo_2003])",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_symbologie.png"}
+image<-"Module6/Images/6_symbologie.png"
+knitr::include_graphics(image)
+```
+
+<br>
+
+Les variables visuelles n'ont pas toutes la même efficacité à distinguer les données. Certaines variables doivent être favorisées alors que d'autres sont à proscrire pour représenter certaines données et leurs relations. Par exemple, la forme est une variable visuelle utile pour distinguer des données nominales. Toutefois, la forme ne devrait pas être utilisée pour représenter des valeurs ordinales ou des valeurs quantitatives. 
+
+<br>
+
+#### Les couleurs {-}
+
+Cette sous-section s'attarde aux variables visuelles liées aux couleurs. Elle reprend, en partie, le [chapitre 4] (https://mgimond.github.io/Spatial/symbolizing-features.html) du livre de Gimond (2021). Le choix des couleurs est évidemment important dans une carte puisque celles-ci permettent de distinguer, de catégoriser ou de mettre l'emphase sur certains phénomènes spatiaux. 
+
+Le choix des couleurs ajoute une certaine subjectivité à une carte. Par exemple, la couleur rouge peu facilement être associée à un extrême ou à un danger. La carte de l'indice de sévérité des feux de forêt à la figure \@ref(fig:graticules) utilise le rouge pour désigner la zone où cet indice est maximal. Le contraire, par exemple utiliser la couleur bleu pour cette zone, aurait porté à confusion et nuit au message véhiculé par la carte.
+
+<br>
+
+##### Les dimensions perceptuelles {-}
+
+Une couleur est définie par une combinaison de trois valeurs qu'on appelle *dimensions perceptuelles*: la teinte, la luminosité et la saturation.
+
+La **teinte** (ou la tonalité, *hue* en anglais) est la dimension que nous associons aux noms des couleurs. La teinte est généralement utilisée pour représenter différentes catégories de données; c'est-à-dire des données qualitatives nominales.
+<br>
+```{r teinte,  fig.cap="Un exemple de 8 différentes teintes de couleur", echo=FALSE, fig.height=0.5, fig.width = 4,fig.show='hold',fig.align='center'}
+# SOURCE: code from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
+library(munsell)
+library(colorspace)
+
+# Function
+pal <- function(col, border = "light gray", ...)
+{ n <- length(col)
+  plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+       axes = FALSE, xlab = "", ylab = "", ...)
+  rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border) }
+# Create different hues
+OP <- par( mar=c(0,0,0,0))
+  h <- rainbow(8, s = 1, v = 0.8)
+  pal(h)
+par(OP)
+```
+
+<br>
+
+La **luminosité** (ou la valeur) est associée à la quantité de lumière qu'une surface réfléchit ou émet. La luminosité est généralement utilisée pour représenter des données ordinales ou relatives.
+<br>
+```{r lumin, fig.cap = "Huit différentes teintes (colonnes) déclinées selon des valeurs décroissantes de luminosité (rangées).", echo=FALSE, fig.height=2, fig.width = 4,warning=FALSE, message=FALSE,fig.show='hold',fig.align='center'}
+
+# SOURCE: code from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
+
+# Function
+pal <- function(col, border = "light gray", ...)
+{ n <- length(col)
+  plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+       axes = FALSE, xlab = "", ylab = "", ...)
+  rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border) }
+# Different lightness values
+h1 <- rainbow(8, s = 1, v = 0.8)
+h2 <- rainbow(8, s = 1, v = 0.6)
+h3 <- rainbow(8, s = 1, v = 0.4)
+h4 <- rainbow(8, s = 1, v = 0.2)
+OP <- par( mfrow=c(4,1), mar=c(0,0,0,0))
+pal(h1); pal(h2); pal(h3); pal(h4)
+par(OP)
+
+```
+<br>
+
+La **saturation** (ou la chromaticité) d'une couleur mesure son intensité. Une couleur vive a une saturation élevée tandiqu'une couleur pâle a une saturation faible. La saturation est surtout utilisée pour distinguer des données ordinales.
+<br>
+```{r saturation,  fig.cap = "Huit différentes teintes (colonnes) déclinées selon des valeurs décroissantes de saturation (rangées).", echo=FALSE, fig.height=2, fig.width = 4,warning=FALSE, message=FALSE, fig.align='center'}
+
+# SOURCE: code from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
+
+# Function
+al <- function(col, border = "light gray", ...)
+{ n <- length(col)
+  plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+       axes = FALSE, xlab = "", ylab = "", ...)
+  rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border) }
+# Different saturation values
+h1 <- rainbow(8, v = 1, s = 0.8)
+h2 <- rainbow(8, v = 1, s = 0.6)
+h3 <- rainbow(8, v = 1, s = 0.4)
+h4 <- rainbow(8, v = 1, s = 0.2)
+OP <- par( mfrow=c(4,1), mar=c(0,0,0,0))
+pal(h1); pal(h2); pal(h3); pal(h4)
+par(OP)
+
+```
+<br>
+
+##### Définir les couleurs dans `R` {-}
+
+Dans `R`, il existe plusieurs façons de définir les couleurs. 
+
+###### Nom des couleurs {-}
+
+Nous pouvons d'abord définir une couleur par son nom. Il existe 657 différents noms de couleur dans `R` que nous pouvons découvrir en utilisant la fonction `colours()`. Voyons quelles sont les 50 premières couleurs:
+
+<br>
+```{r}
+colours()[1:50]
+```
+<br>
+
+Vous remarquerez que les couleurs sont nommées par ordre alphabétique sauf pour la première entrée qui est la couleur blanche (white).
+
+Pour connaître la couleur associée à chaque nom, vous pouvez consulter la charte suivante: [charte des couleurs](https://rstudio-pubs-static.s3.amazonaws.com/3486_79191ad32cf74955b4502b8530aad627.html) [[PDF](Module6/images/6_CharteCouleurs.pdf)].
+
+Vous pouvez utiliser une couleur en la nommant (par ex. `"red"`) ou en référant au numéro de sa position dans le vecteur `colours()` (par ex. `colours()[552]`) si vous connaissez celui-ci.
+
+La fonction `grep()` permet de trouver des couleurs associées à une couleur d'intérêt. Prenons, par exemple, la couleur verte:
+```{r}
+# Indices des couleurs
+grep("green", colours())
+```
+<br>
+
+Ces indices sont associées aux couleurs suivantes:
+
+```{r exgrep, fig.cap = "Quarante couleurs vertes identifiées par la fonction `grep()`", echo=FALSE, fig.height=2.5, fig.width = 4,fig.align='center',warning=FALSE, message=FALSE}
+library(ggplot2)
+vert<-colours()[grep("green", colours())]
+rects<-expand.grid(X=1:8,Y=1:5)
+num<- grep("green", colours())
+text = num[1:40]
+colors = vert[1:40]
+rects$Z<-colors
+
+
+# Code from: https://www.r-graph-gallery.com/79-levelplot-with-ggplot2.html
+p<-ggplot(rects, aes(X,Y, fill=Z, label=text))+
+geom_tile(width=0.9,height = 0.9)+
+geom_text(color = "black") + # add white text in the middle
+  scale_fill_identity(guide = "none") + # color the tiles with the colors in the data frame
+  coord_fixed() + # make sure tiles are square
+  theme_void()
+p
+```
+
+<br>
+
+Nous pouvons déterminer le nom des couleurs de la façon suivante:
+<br>
+```{r}
+# Noms des couleurs
+colours()[grep("green", colours())]
+```
+<br>
+
+###### Composantes RVB {-}
+
+Nous pouvons aussi définir une couleur par un vecteur donnant chacune des trois composantes RVB (RGB en anglais) qui la constitue. Rappellons que chacune des composantes RVB (Rouge, Vert, Bleu) prend une valeur discrète entre 0 et 255. La valeur 0 correspond à l'intensité la plus faible tandis que la valeur 255 correspond à l'intensité la plus élevée. Chaque composante peut aussi être exprimée selon la notation décimale par un nombre entre 0.0 et 1.0. 
+
+Puisque chaque composante RVB peut prendre 256 valeurs différentes, le format RVB permet de définir 256 x 256 x 256 couleurs différentes (16777216!).
+
+La fonction `col2rgb()` permet de traduire une couleur, identifiée par son nom, vers son format RVB. 
+<br>
+```{r}
+# Composantes RVB de la couleur verte
+col2rgb("green")
+
+# Composantes RVB de la couleur vert forêt
+col2rgb("forestgreen")
+
+```
+<br>
+
+###### Codes HEX {-}
+
+Nous pouvons également définir une couleur par son code hexadécimal (HEX). Le code hexadécimal utilise un système en base 16 pour encoder la notation RVB d'une couleur en une notation condensée de six chiffres ou lettres. Le code HEX prend la forme `#RRVVBB` où chaque lettre peut prendre un des 16 symboles suivants: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Par exemple, "00" correspond à la valeur 0, et "FF" correspond à la valeur 255. Ainsi, le code de HEX de la couleur verte est `#00FF00`.
+
+La fonction `rgb(red, green, blue)` renvoie le code HEX d'une couleur identifiée par son format RVB
+<br>
+```{r}
+# Notation HEX de la couleur verte
+rgb(0,255,0, maxColorValue=255)
+
+# Ou en utilisant la forme notation normalisée de RVB
+rgb(0.0,1.0,0.0)
+```
+<br>
+
+
+La fonction `rgb()` permet aussi de définir des couleurs en leur assignant un nom. Par exemple:
+<br>
+```{r}
+rgb(0,(250:255)/255,0, names = paste("vert", 0:5, sep="_"))
+```
+<br>
+
+###### Composantes TSL/TSV {-}
+
+Selon une approche basée sur la perception des couleurs, nous pouvons définir une couleur par sa combinaison de trois paramètres: sa teinte (*hue* en anglais), sa saturation (aussi appelée chromaticité) et sa luminosité (*lightness* en anglais) ou sa valeur (*value* en anglais). Ces systèmes de description des couleurs se nomment TSL (HSL en anglais) et TSV (HSV en anglais). Ils différent légèrement mais ils s'appuient sur les mêmes principes^[Consultez la page [Wikipédia](https://fr.wikipedia.org/wiki/Teinte_saturation_lumi%C3%A8re) pour en apprendre davantage sur les systèmes TSL et TSV.]. 
+
+La fonction `rgb2hsv(red, green, blue)` permet de traduire une couleur représentée par le modèle RVG vers le modèle TSV.
+<br>
+```{r}
+# La couleur verte
+rgb2hsv(0,255,0,maxColorValue=255)
+```
+<br>
+
+Inversément, la fonction `hsv(hue, saturation, value)` permet d'obtenir le code HEX d'une couleur représentée selon le modèle TSV. Chaque entrée de la fonction prend une valeur entre 0.0 et 1.0.
+<br>
+```{r}
+# La couleur verte
+hsv(0.333333,1.0,1.0)
+```
+<br>
+La fonction `hcl(hue, chroma, luminance)` renvoie le code HEX d'une couleur représentée selon le modèle TSL. Le paramètre pour la teinte, *hue*, prend une valeur entre 0 et 360. La valeur maximale du paramètre pour la chromacité, *chroma*, dépend des valeurs attribuées à la teinte et à la luminosité. Le paramètre pour la luminosité, *luminance*, prend une valeur entre 0 et 100. Seul un certain domaine de valeurs de luminosité est possible pour une combinaison de teinte et de chromacité donnée. 
+<br>
+```{r}
+hcl(h = 120, c = 1, l = 0.5)
+```
+<br>
+
+#### Les palettes de couleurs {-}
+
+Une palette de couleurs est un ensemble fini de couleurs pré-sélectionnées. Dans une carte thématique, une palette de couleur établit une correspondance entre une valeur d'attribut et une couleur de la palette. 
+
+Il existe trois catégories de palettes de couleurs. 
+
+>
+>- Les palettes qualitatives
+>- Les palettes séquentielles
+>- Les palettes divergentes
+>  
+
+<br>
+
+Les palettes **qualitatives** sont utilisées pour représenter des données qualitatives nominales, c'est-à-dire des données qui ne sont pas ordonnées ni quantitatives. Une palette qualitative est constituée de couleurs de **teintes** différentes mais de **luminosité** et de **saturation** égales. 
+<br>
+
+```{r qual,  fig.cap="Un exemple de 4 palettes qualitatives", echo=FALSE, fig.height=2, fig.width = 3.5,fig.show='hold',fig.align='center'}
+# SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
+library(RColorBrewer)
+library(gt)
+# Function
+pal <- function(col, border = "light gray", ...)
+{ n <- length(col)
+  plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+       axes = FALSE, xlab = "", ylab = "", ...)
+  rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border) }
+# Different qualitative palettes
+h1 <- brewer.pal(n = 7, name = 'Dark2')
+h2 <- brewer.pal(n = 7, name = 'Pastel2')
+h3 <- brewer.pal(n = 7, name = 'Paired')
+h4 <- brewer.pal(n = 7, name = 'Set3')
+OP <- par( mfrow=c(4,1), mar=c(0,0,0,0))
+pal(h1); pal(h2); pal(h3); pal(h4)
+par(OP)
+```
+<br>
+
+```{r eval = TRUE, echo = FALSE}
+data("World")
+```
+
+
+Une palette qualitative sied bien pour illustrer les différents continents de la planète.
+
+```{r continents, echo=FALSE, out.width="90%",out.height="60%",fig.show='hold',fig.align='center', message=FALSE, warning=FALSE}
+# Exemple qual
+
+World2<-World
+World2<-World2[-8,] #Ceci retire le continent appele: "Seven seas (open ocean)"
+pal<- brewer.pal(n = 7, name = 'Paired')
+mapCont<-tm_shape(World2)+
+tm_polygons("continent", palette = pal, drop.levels=TRUE, title= "",labels=c("Afrique", "Antartique", "Asie", "Europe", "Amérique du Nord", "Océanie", "Amérique du Sud"), legend.is.portrait = FALSE)+
+tm_layout(frame = TRUE, legend.outside = TRUE, 
+            legend.outside.position = "bottom", 
+            legend.outside.size = 0.2,
+            #legend.title.fontface = 0.8, 
+            legend.text.size = 0.6,
+            inner.margins = c(0,0,0,0)
+            )
+mapCont
+```
+Les palettes **séquentielles** sont utilisées pour représenter des données ordonnées, par exemple la température, la densité de population, le revenu moyen par habitant, etc. Une palette séquentielle forme un gradient allant d'une couleur pâle (correspondant à la valeur la plus faible de l'attribut représenté) à une couleur foncée (correspondant à la valeur la plus forte de l'attribut). La palette séquentielle utilise généralement une seule **teinte** (mais parfois plus) qui est déclinée sur plusieurs niveaux de **luminosité** ou de **saturation**.
+<br>
+
+```{r seq,  fig.cap="Un exemple de 5 palettes séquentielles. Les trois premières palettes font appel à une seule teinte (noire, bleue et verte). La quatrième fait appel à deux teintes (jaune et verte) tandis que la dernière fait appel à trois teintes (jaune, orange et rouge)", echo=FALSE, fig.height=2.5, fig.width = 3.5,fig.show='hold',fig.align='center'}
+# SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
+library(RColorBrewer)
+library(gt)
+# Function
+pal <- function(col, border = "light gray", ...)
+{ n <- length(col)
+  plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+       axes = FALSE, xlab = "", ylab = "", ...)
+  rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border) }
+# Different qualitative palettes
+h1 <- brewer.pal(n = 7, name = 'Greys')
+h2 <- brewer.pal(n = 7, name = 'Blues')
+h3 <- brewer.pal(n = 7, name = 'Greens')
+h4 <- brewer.pal(n = 7, name = 'YlGn')
+h5 <- brewer.pal(n = 7, name = 'YlOrRd')
+OP <- par( mfrow=c(6,1), mar=c(0,0,0,0))
+pal(h1); pal(h2); pal(h3); pal(h4); pal(h5)
+par(OP)
+```
+<br>
+
+À titre d'exemple, une palette séquentielle sied bien pour illustrer comment la densité de population varie d'un pays à l'autre. 
+
+```{r popdens, echo=FALSE, out.width="90%",out.height="60%",fig.show='hold',fig.align='center'}
+# Exemple seq
+pal<- brewer.pal(n = 9, name = 'YlOrRd')
+mapPop<-tm_shape(World)+
+tm_polygons("pop_est_dens", palette = pal,id="name", title="Densité de population", style = "quantile", legend.is.portrait = FALSE)+
+  tm_layout(frame = TRUE, legend.outside = TRUE, 
+            legend.outside.position = "bottom", 
+            legend.outside.size = 0.2,
+            #legend.title.fontface = 0.8, 
+            legend.text.size = 0.6,
+            inner.margins = c(0,0,0,0)
+            )
+mapPop
+```
+Les palettes **divergentes** sont également utilisées pour représenter des données ordonnées. Toutefois, une palette divergente met l'accent sur une valeur centrale à partir de laquelle les données divergent. Généralement, une palette divergente est constituée de deux **teintes** complémentaires qui dénotent les valeurs extrêmes de part et d'autre de la valeur centrale. La **saturation** et la **luminosité** de chaque teinte sont alors ajustées pour que les couleurs se répartissent de façon symmétrique autour de la valeur centrale qui est représentée par une couleur pâle. 
+<br>
+```{r div,  fig.cap="Un exemple de 4 palettes divergentes.", echo=FALSE, fig.height=2, fig.width = 3.5,fig.show='hold',fig.align='center'}
+# SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
+library(RColorBrewer)
+library(gt)
+# Function
+pal <- function(col, border = "light gray", ...)
+{ n <- length(col)
+  plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+       axes = FALSE, xlab = "", ylab = "", ...)
+  rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border) }
+# Different qualitative palettes
+h1 <- brewer.pal(n = 7, name = 'BrBG')
+h2 <- brewer.pal(n = 7, name = 'PuOr')
+h3 <- brewer.pal(n = 7, name = 'RdYlBu')
+h4 <- brewer.pal(n = 7, name = 'RdYlGn')
+
+OP <- par( mfrow=c(4,1), mar=c(0,0,0,0))
+pal(h1); pal(h2); pal(h3); pal(h4)
+par(OP)
+```
+
+<br>
+
+Par exemple, une palette divergente illustre bien la distribution spatiale des produits régionaux bruts. 
+```{r income, eval = TRUE,  echo=FALSE, out.width="90%",out.height="60%",fig.show='hold',fig.align='center', warning=FALSE, message =FALSE}
+# Exemple Divergent
+
+#World %>% as.data.frame() %>% head()
+## test with life exp
+# https://tlorusso.github.io/geodata_workshop/tmap_package
+pal<- brewer.pal(n = 5, name = 'RdYlBu')
+mapIncome<-tm_shape(World)+
+tm_polygons("income_grp", palette = pal,id="name", title="Niveau de PRB", labels=c("Élevé (OCDE)", "Élévé (Non-OCDE)", "Intermédiaire supérieur", "Intermédiaire inférieur", "Faible"), legend.is.portrait = FALSE)+
+  tm_layout(frame = TRUE, legend.outside = TRUE, 
+            legend.outside.position = "bottom", 
+            legend.outside.size = 0.2,
+            #legend.title.fontface = 0.8, 
+            legend.text.size = 0.6,
+            inner.margins = c(0,0,0,0)
+            
+            )
+mapIncome
+```
 
 ### Cartes statiques avec tmap {#basetmap}
 
