@@ -29,6 +29,8 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 
 - `tmap`
 - `grid`
+- `viridis`
+- `RColorBrewer`
 
 </div>
 
@@ -66,7 +68,7 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 
 Dans la section [leçon](#lecon_carto), vous utiliserez cinq ensembles de données différents. Quatre ensembles sont formés de données vectorielles. Il s'agit de données sur les régions administratives du Québec et la taille de leur population (polygones), des routes du Québec (lignes), des municipalités du Québec (points), et des cas de COVID dans les régions socio-sanitaires du Québec (polygones). L'ensemble de données matricielles correspond à des données d'élévation sur tout le territoire québécois.
 
-Dans la section [exercice](#ex_carto), vous utiliserez des données disponibles dans les bibliothèques `tmap` et `spData`.
+Dans la section [exercice](#ex_carto), vous utiliserez des données disponibles dans la bibliothèque `tmap`.
 
 </div>
 
@@ -623,6 +625,7 @@ par(OP)
 <br>
 
 ```{r eval = TRUE, echo = FALSE}
+library(tmap)
 data("World")
 ```
 
@@ -631,7 +634,6 @@ Une palette qualitative sied bien pour illustrer les différents continents de l
 
 ```{r continents, echo=FALSE, out.width="90%",out.height="60%",fig.show='hold',fig.align='center', message=FALSE, warning=FALSE}
 # Exemple qual
-
 World2<-World
 World2<-World2[-8,] #Ceci retire le continent appele: "Seven seas (open ocean)"
 pal<- brewer.pal(n = 7, name = 'Paired')
@@ -732,6 +734,115 @@ tm_polygons("income_grp", palette = pal,id="name", title="Niveau de PRB", labels
             )
 mapIncome
 ```
+
+##### Les palettes de couleurs dans R {-}
+
+
+Il existe plusieurs façons de définir des palettes de couleurs dans R.
+<br>
+
+###### Les palettes de couleurs de base de R {-}
+
+Tout d'abord, R comprend des palettes par défaut qui sont définies par les fonctions suivantes:
+
+- `rainbow(n)`
+- `heat.colors(n)`
+- `terrain.colors(n)`
+- `topo.colors(n)`
+- `cm.colors(n)`
+
+Le paramètre `n` spécifie le nombre de couleurs.
+
+```{r basepal,  fig.cap="Les palettes de base dans R.", echo=FALSE, fig.height=2.5, fig.width = 5,fig.show='hold',fig.align='center'}
+# SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
+
+library(gt)
+# Function
+pal <- function(col, border = "light gray", ...)
+{ n <- length(col)
+  plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+       axes = FALSE, xlab = "", ylab = "",...)
+  rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border) 
+  }
+
+
+n = 10
+h1 <- rainbow(n)
+h2 <- heat.colors(n)
+h3 <- terrain.colors(n)
+h4 <- topo.colors(n)
+h5 <- cm.colors(n)
+
+OP <- par( mfrow=c(5,1), mar=c(0,10,0,0))
+pal(h1); pal(h2); pal(h3); pal(h4); pal(h5)
+par(OP)
+#axis(2, c(1/10, 3/10, 5/10, 7/10, 9/10), labels = c("cm.colors", "topo.colors","terrain.colors", "heat.colors", "rainbow"), tick = FALSE, las = 2, hadj = 0)
+mtext(c("cm.colors", "topo.colors","terrain.colors", "heat.colors", "rainbow"), 2, at=c(1/10, 3/10, 5/10, 7/10, 9/10),las = 2, line = 0)
+```
+<br>
+
+
+###### Les palettes viridis {-}
+
+La bibliothèque `viridis` comprend quatre palettes de couleurs séquentielles qui sont définies par les fonctions suivantes:
+
+- `viridis(n)`
+- `magma(n)`
+- `plasma(n)`
+- `inferno(n)`
+
+<br>
+
+```{r viridipal,  fig.cap="Les palettes de la bibliothèque `viridis`.", echo=FALSE, fig.height=2, fig.width = 5,fig.show='hold',fig.align='center'}
+# SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
+
+library(gt)
+library(viridis)
+# Function
+pal <- function(col, border = "light gray", ...)
+{ n <- length(col)
+  plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1),
+       axes = FALSE, xlab = "", ylab = "",...)
+  rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border) 
+  }
+
+
+n = 10
+h1 <- viridis(n)
+h2 <- magma(n)
+h3 <- plasma(n)
+h4 <- inferno(n)
+
+OP <- par( mfrow=c(4,1), mar=c(0,5,0,0))
+pal(h1); pal(h2); pal(h3); pal(h4)
+par(OP)
+#axis(2, c(1/10, 3/10, 5/10, 7/10, 9/10), labels = c("cm.colors", "topo.colors","terrain.colors", "heat.colors", "rainbow"), tick = FALSE, las = 2, hadj = 0)
+mtext(c("inferno", "plasma","magma", "viridis"), 2, at=c(1/8, 3/8, 5/8, 7/8),las = 2, line = 1)
+```
+<br>
+
+###### Les palettes ColorBrewer {-}
+
+La bibliothèque `RColorBrewer` contient les palettes de couleurs [ColorBrewer](https://colorbrewer2.org/#) particulièrement utiles pour la cartographie. Cette bibliothèque comprend un grand nombre de palettes séquentielles, divergentes et qualitatives.
+
+```{r brewerpal,  fig.height=12, fig.width = 5, fig.cap="Les palettes de la bibliothèque `RColorBrewer`.", echo=FALSE, fig.show='hold',fig.align='center'}
+library(RColorBrewer)
+display.brewer.all()
+```
+
+<br>
+
+Remarquez que les palettes de `RColorBrewer` contiennent un nombre maximal de 12 couleurs (ou moins pour les palettes qualitatives), contrairement aux palettes de base et `viridis`. 
+
+Pour choisir une palette particulière, nous utilisons la fonction `brewer.pal(n,name)` où `n` est le nombre de couleurs dans la palette, et `name` est le nom de la palette. Par exemple,
+
+```{r}
+brewer.pal(5, "Accent")
+```
+<br>
+Ceci retourne un vecteur de cinq couleurs de la palette `Accent`.
+
+
 
 ### Cartes statiques avec tmap {#basetmap}
 
@@ -1843,13 +1954,439 @@ Les chiffres (0.72,0.42) correspondent aux coordonnées (x,y) de la position de 
 
 Les arguments `width` et `height` sont des nombres entre 0 et 1. Ceux-ci correspondent au facteur par lequel nous souhaitons réduire la largeur et la hauteur de la carte encadrée. 
 
-
-
-
-
+<br>
 <!--   ### Cartes interactives avec tmap -->
 
-## Exercices
+## Exercices {#ex_carto}
+
+Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#carto) de ce module.
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+
+Cette série d'exercices utilise des données comprises avec la bibliothèque `tmap`. En particulier, vous utiliserez les données `World`, `metro`, et `land`. Charger ces données dans votre session `R`:
+
+```{r}
+data(World)
+data(metro)
+data(land)
+```
 
 
-À venir!
+<br>
+
+### Question 1 {-}
+
+**a)** Quelle est la géométrie des données `World`, et quels sont leurs attributs?
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+La géométrie est donnée par la fonction `st_geometry()` de la bibliothèque `sf`.
+
+```{r}
+st_geometry(World)
+```
+<br>
+Les données `World` sont donc des multipolygones. Chaque multipolygone correspond à un pays de la planète. Nous pouvons connaître le nom des attributs en utilisant la fonction `names()`
+
+
+```{r}
+names(World)
+```
+<br>
+
+Les différents attributs sont des caractéristiques générales des pays comme leur nom (`name`), leur continent (`continent`), leur superficie (`area`), la taille estimée de leur population (`pop_est`), la densité estimée de leur population (`pop_est_dens`), l'espérance de vie de leur population (`life_exp`), etc.
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**b)** Déterminer les dix premières entrées des attributs `iso_a3` et `name` des données `World`.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+World[1:10, c("iso_a3", "name")]
+```
+<br>
+
+Nous comprenons ainsi que l'attribut `iso_a3` correspond à un [code standardisé](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) abrégeant le nom des pays. 
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**c)** Utiliser le style `col_blind` pour illustrer la carte du monde. N'ajouter pas de légende.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r, warning = FALSE, dev = 'png', fig.height=4}
+
+tm_shape(World) + tm_polygons(col="name") + 
+                tm_style("col_blind") +                             
+                tm_layout(legend.show = FALSE)
+```
+<br>
+
+Vous devriez voir afficher un message d'erreur quant au nombre de pays dépassant le nombre maximal de couleurs pouvant être illustrées. Ceci a peu de conséquences pour cette carte puisque peu de pays adjacents ont la même couleur et que ceux-ci sont délimités par des bordures noires nous permettant de les distinguer. 
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**d)** Produire une carte identique à la carte de la question **c** mais représentant uniquement les pays d'Afrique. 
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Isoler le continent africain:
+```{r}
+Afrique <- World[World$continent == "Africa",]
+```
+
+<br>
+
+Produire une carte de l'Afrique avec le style `col_blind` et sans légende.
+```{r, warning = FALSE, dev = 'png', fig.height=6}
+tm_shape(Afrique) + tm_polygons(col="name") + 
+                tm_style("col_blind") +                             
+                tm_layout(legend.show = FALSE)
+```
+<br>
+
+Notez que la bibliothèque `tmap` permet de minimiser le nombre de polygones adjacents illustrés avec la même couleur. Pour se faire, il s'agit de définir `col = MAP_COLORS` en argument à la fonction `tm_polygons()`.
+
+```{r, warning = FALSE, dev = 'png', fig.height=6}
+tm_shape(Afrique) + tm_polygons(col="MAP_COLORS") + 
+                tm_style("col_blind") +                             
+                tm_layout(legend.show = FALSE)
+```
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**e)** Produire une carte de l'Afrique sur laquelle les pays sont identifiés par leur code "iso_a3".
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Nous reprenons d'abord la carte de l'Afrique produire en **d**. Puis, nous ajoutons le code "iso_a3" des pays en utilisant la fonction `tm_text()`:
+
+```{r, dev = 'png', fig.height=6}
+tm_shape(Afrique) + tm_polygons(col="MAP_COLORS") + 
+                tm_style("col_blind") +                             
+                tm_layout(legend.show = FALSE) +
+                tm_text("iso_a3", size = 0.6)
+```
+<br>
+</p>
+</details> 
+
+<br>
+
+**f)** Produire une carte de l'Amérique du Sud où la couleur de chaque pays représente sa densité de population ("pop_est_dens"). Utiliser le style `quantile` pour classer les valeurs de densité, et la palette `Reds` de la bibliothèque `RColorBrewer`. Assurez-vous que la légende porte le titre "Densité de population".
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Dans un premier temps, nous devons isoler les pays de l'Amérique du Sud.
+
+```{r}
+AS <- World[World$continent == "South America",]
+```
+
+<br>
+
+Ensuite, nous devons créer la palette de couleur avec la fonction `brewer.pal()`. Puisque le style `quantile` sépare les valeurs de densité en cinq classes, la palette doit comprendre cinq couleurs.
+
+```{r}
+pal <- brewer.pal(n=5, "Reds")
+```
+<br>
+
+
+Nous pouvons maintenant produire la carte:
+
+```{r,dev = 'png', fig.height=6}
+tm_shape(AS) + 
+  tm_polygons(col = "pop_est_dens",
+              palette = pal,
+              style = "quantile",
+              title = "Densité de population") 
+```
+<br>
+</p>
+</details> 
+
+<br>
+
+**g)** Produire une carte à panneaux multiples de la densité de population en Amérique du Sud. Votre carte doit comprendre les caractéristiques suivantes:
+
+* Chaque panneau de la carte doit correspondre à un pays identifié par son nom.
+* La carte doit comprendre quatre rangées de panneaux.
+* Les pays doivent être illustrés avec un facteur d'échelle de cinq.
+
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Nous utilisons la fonction `tm_facets()` pour produire une carte à panneaux multiples:
+
+```{r, dev = 'png', fig.height=8}
+tm_shape(AS) + 
+  tm_polygons(col = "pop_est_dens",
+              palette = pal,
+              style = "quantile",
+              title = "Densité de population") + 
+  tm_facets(by = "name",
+            nrow = 4,
+            scale.factor = 5
+            )
+```
+
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**h)** Utiliser les arguments de la fonction [`tm_layout()`](https://r-tmap.github.io/tmap/reference/tm_layout.html) pour modifier l'apparence de la carte à panneaux multiples de la question **g**. Plus précisément, ajouter les caractéristiques suivantes:
+
+* Une vignette de hauteur 2 pour chaque *facette*.
+* Une couleur de fond blanc pour chaque vignette.
+* Un texte de taille 0.9 sur chaque vignette.
+* Une légende encadrée et positionnée à l'extérieure à gauche des panneaux.
+* Une légende dont les chiffres sont arrondis à l'unité près, et séparés par le symbole "-".
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Nous devons utiliser les différents arguments de la fonction `tm_layout()` pour préciser les caractéristiques demandées.
+
+```{r, dev = 'png', fig.height=8}
+
+tm_shape(AS) + 
+  tm_polygons(col = "pop_est_dens",
+              palette = pal,
+              style = "quantile",
+              title = "Densité de population") + 
+  tm_facets(by = "name",
+            nrow = 4,
+            scale.factor = 5
+            )+
+  tm_layout(panel.label.height = 2, 
+            panel.label.size = 0.9,
+            panel.label.bg.color = "white",
+            legend.outside = TRUE,
+            legend.outside.position = "left",
+            legend.format = list(format = "f", digits = 0, text.separator = "-"),
+            legend.frame = TRUE)
+```
+
+<br>
+</p>
+</details> 
+
+<br>
+
+
+<br>
+
+### Question 2 {-}
+
+**a)** Quelle est la géométrie des données `metro`, et quels sont leurs attributs?
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+
+Nous utilisons la fonction `st_geometry()` pour connaître la géométrie des données `metro`:
+
+```{r}
+st_geometry(metro)
+```
+<br>
+
+Les données `metro` sont donc composées de points.
+
+Les attributs sont donnés par la fonction `names()`:
+
+```{r}
+names(metro)
+```
+<br>
+
+Les différents attributs correspondent aux tailles des populations des métropoles du monde à différentes années et leur projection pour l'année 2030.
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**b)** Déterminer les dix premières entrées des attributs `name` et `pop2020` des données `metro`.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r}
+metro[1:10, c("name","pop2020")]
+```
+<br>
+</p>
+</details> 
+
+<br>
+
+**c)** En utilisant les données `metro` et `World`, créer une carte du monde sur laquelle les métropoles sont représentées par un cercle dont le diamètre est proportionnel à la taille de sa population en 2020. La carte doit comprendre les éléments suivants:
+
+* Chaque métropole est illustrée par un cercle rouge de bordure noire.
+* La légende porte le nom "Population".
+* La carte du monde est blanche et seules les frontières noires entre les pays y apparaissent.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Nous utilisons la fonction `tm_borders()` pour illustrer les frontières des pays, puis, nous utilisons la fonction `tm_symbols()` pour illustrer les métropoles. 
+
+```{r, dev = 'png', fig.height=4, warning = FALSE, message = FALSE}
+tm_shape(World)+
+  tm_borders(col="black")+
+tm_shape(metro)+
+  tm_symbols(col="red",
+             border.col = "black",
+             size = "pop2020",
+             legend.size.show = TRUE,
+             legend.size.is.portrait = TRUE,
+             title.size = "Population")
+```
+<br>
+</p>
+</details> 
+
+<br>
+
+### Question 3 {-}
+
+**a)** Les données `land` forment un objet de classe `stars`. C'est un objet matriciel composé de plusieurs couches d'attributs. Déterminer les couches comprises dans `land`.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Nous utilisons la fonction `names()` pour déterminer le nom des couches (attributs) des données `land`:
+
+```{r}
+names(land)
+```
+<br>
+
+Pour avoir plus d'informations sur l'objet `land` et connaître les facteurs possibles pour chaque attribut, nous pouvons simplement écrire `land` dans le terminal `R`:
+
+```{r}
+land
+```
+
+<br>
+
+La couche `cover` illustre la couverture terrestre et comprend 20 catégories différentes.
+```{r}
+levels(land$cover)
+```
+<br>
+
+La couche `cover_cls` illustre de façon simplifiée la couverture terrestre en regroupant les 20 catégories précédentes en 8 catégories différentes.
+
+```{r}
+levels(land$cover_cls)
+```
+<br>
+
+La couche `trees` illustre le pourcentage de couverture forestière par pixel. Finalement, la couche `elevation` représente l'élévation en mètres. 
+
+
+<br>
+</p>
+</details> 
+
+<br>
+
+**b)** Utiliser la palette de couleur `Greens` de la bibliothèque `RColorBrewer` pour produire une carte du pourcentage de couvert forestier. De plus, la carte doit comprendre les éléments suivants:
+
+* Six classes de pourcentage de couvert.
+* Un titre principal "Pourcentage de courvert forestier" de taille 1.
+* Une légende extérieure à la carte, située sous la carte, horizonale et sans titre.
+* Une légende dont les chiffres sont séparés par le symbole "-".
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+Nous utilisons la fonction `tm_raster()` pour illustrer la couche `trees` de l'objet `land`. De plus, nous utilisons la fonction `brewer.pal()` de la bibliothèque `RColorBrewer` pour définir la palette de couleur. Finalement, nous utilisons les arguments de la fonction [`tm_layout()`](https://r-tmap.github.io/tmap/reference/tm_layout.html) pour spécifier les éléments demandés.
+
+
+```{r, dev = 'png', fig.height=4, warning = FALSE, message = FALSE}
+pal = brewer.pal(n=6, "Greens")
+tm_shape(land) + 
+  tm_raster("trees",
+             palette = pal,
+             title = "",
+            legend.is.portrait = FALSE) +
+  tm_layout(main.title = "Pourcentage de couvert forestier",
+            main.title.size = 1,
+            legend.outside = TRUE,
+            legend.outside.position = "bottom",
+            legend.format = list(text.separator = "-"))
+```
+
+<br>
+</p>
+</details> 
+
+<br>
+
+<!--   
+
+**c)** 
+
+
+```{r}
+
+pal = brewer.pal(n=6, "Greens")
+tm_shape(land) + 
+  tm_raster("cover_cls",
+             title = "",
+            legend.hist = TRUE
+             ) +
+  tm_layout(main.title = "Couverture terrestre",
+            main.title.size = 1,
+            legend.outside = TRUE,
+            )
+```
+
+-->

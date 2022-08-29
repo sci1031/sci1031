@@ -130,6 +130,7 @@ Dérivés de R Markdown
 * [Liste](https://www.datanovia.com/en/blog/awesome-list-of-657-r-color-names/) des couleurs par leur nom. 
 * Les couleurs dans [`ggplot2`](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)
 * Palettes de couleurs [ColorBrewer](https://colorbrewer2.org/)
+* Palettes de couleurs [Viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
 
 
 
