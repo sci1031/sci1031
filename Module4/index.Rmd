@@ -332,7 +332,7 @@ Supposons que les points désignent des écoles primaires pouvant être publique
 points_attribut <- data.frame(
   nom = c("École A", "École B", "École C", "École D"),
   nombre_eleves = c(403, 357, 280, 296),
-  ecole_publique = as.logical(1, 1, 0, 1)
+  ecole_publique = as.logical(c(1, 1, 0, 1))
 )
 points_attribut
 ```
