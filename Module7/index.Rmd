@@ -558,7 +558,7 @@ Cette fois nous avons utilisé la fonction `unique` pour agréger les attributs 
 
 Retirons la première colonne superflue de ce nouveau *shapefile* et utilisons-le dans les futurs exemples pour désigner les régions administratives. 
 ```{r}
-regions <- regions_agg[-1]  #pour retirer la première ligne
+regions <- regions_agg[-1]  #pour retirer la première colonne
 ```
 
 <br>
