@@ -1648,7 +1648,7 @@ top10_villes
 <br>
 
 
-###### 7. Ville qui compte le plus grand nombre de parcs {-}
+###### 6. Ville qui compte le plus grand nombre de parcs {-}
 
 Pour répondre à la question posée, ordonnons la table d'attributs de l'objet `top10_villes` en se basant sur la nouvelle colonne `nbr_parcs`. 
 
