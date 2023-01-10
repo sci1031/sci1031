@@ -1722,7 +1722,7 @@ knitr::include_graphics('Module9/images/anim_mint.gif')
 
 Vous pouvez également sauvegarder cette animation en exécutant cette ligne de commande&nbsp;:
 ```{r, eval = FALSE}
-saveGIF(anim_carte(mint_crop, 12), movie.name = "anim_mint.gif", ani.height = 500, ani.width = 500)
+saveGIF(anim_carte(mint_region, 12), movie.name = "anim_mint.gif", ani.height = 500, ani.width = 500)
 ```
 
 <br>
