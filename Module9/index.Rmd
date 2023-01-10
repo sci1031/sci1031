@@ -1579,7 +1579,7 @@ Finalement, nous utilisons la fonction `saveGIF()` de la bibliothèque `animatio
 library(animation)
 saveGIF({
   # nous générons une figure par trimestre en commençant au mois de mars 
-  for (i in seq(3, 120, by = 3)) plot_profile(i, pr_mint, pr_maxt, pr_pcp, temps)
+  for (i in seq(3, 120, by = 3)) plot_profil(i, pr_mint, pr_maxt, pr_pcp, temps)
 }, movie.name = "anim3.gif", ani.height = 400, ani.width = 600)
 ```
 
