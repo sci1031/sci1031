@@ -1579,7 +1579,7 @@ Finalement, nous utilisons la fonction `saveGIF()` de la bibliothèque `animatio
 library(animation)
 saveGIF({
   # nous générons une figure par trimestre en commençant au mois de mars 
-  for (i in seq(3, 120, by = 3)) plot_profile(i, pr_mint, pr_maxt, pr_pcp, temps)
+  for (i in seq(3, 120, by = 3)) plot_profil(i, pr_mint, pr_maxt, pr_pcp, temps)
 }, movie.name = "anim3.gif", ani.height = 400, ani.width = 600)
 ```
 
@@ -1722,7 +1722,7 @@ knitr::include_graphics('Module9/images/anim_mint.gif')
 
 Vous pouvez également sauvegarder cette animation en exécutant cette ligne de commande&nbsp;:
 ```{r, eval = FALSE}
-saveGIF(anim_carte(mint_crop, 12), movie.name = "anim_mint.gif", ani.height = 500, ani.width = 500)
+saveGIF(anim_carte(mint_region, 12), movie.name = "anim_mint.gif", ani.height = 500, ani.width = 500)
 ```
 
 <br>
