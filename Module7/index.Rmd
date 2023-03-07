@@ -514,7 +514,7 @@ De façon générale, la fonction `aggregate(x, by, FUN)` comprend trois argumen
 
 Dans notre exemple, nous avons regroupé les points de l'objet spatial `villes_reg_pop["population"]` qui possèdent la même valeur d'attribut `"Rgns_Ad"`. Les points ainsi regroupés forment une géométrie multipoint (`MULTIPOINT`). Chaque groupe de points est identifié par le nom de sa région administrative (Abitibi-Témiscamingue, Bas-Saint-Laurent, etc.). L'attribut d'un groupe est calculé en faisant la somme (`FUN = sum`) des attributs des points qui le constituent. L'argument additionnel `na.rm = TRUE` précise que lors du calcul de la somme, les éléments dont l'attribut `"population"` prend la valeur `NA` doivent être ignorés. En effet, la population de quelques municipalités n'est pas définie dans cette base de données. Notez qu'une autre fonction aurait pu être utilisée, par exemple la moyenne, le maximum, le minimum, etc.
 
-La condition `by` peut prendre différentes forment. Elle peut être définie par une liste de longueur égale au nombre d'éléments dans `x` (c'est-à-dire le même nombre de rangées). C'est de cette façon que nous l'avons définie plus haut (la liste est de longueur égale aux nombres de points dans `villes_reg_pop`). De plus, `by` peut prendre la forme d'un objet spatial dont la géométrie est utilisée pour grouper les éléments de `x`. Dans ce cas, la géométrie du nouvel objet créé par la fonction `aggregate()` est la même que l'objet `by`.
+La condition `by` peut prendre différentes formes. Elle peut être définie par une liste de longueur égale au nombre d'éléments dans `x` (c'est-à-dire le même nombre de rangées). C'est de cette façon que nous l'avons définie plus haut (la liste est de longueur égale aux nombres de points dans `villes_reg_pop`). De plus, `by` peut prendre la forme d'un objet spatial dont la géométrie est utilisée pour grouper les éléments de `x`. Dans ce cas, la géométrie du nouvel objet créé par la fonction `aggregate()` est la même que l'objet `by`.
 
 
 Donnons un exemple illustrant cette situation. Agrégeons maintenant les municipalités de l'objet `villes_pop["population"]` en utilisant directement l'objet `regions` constitué de polygones &nbsp;: 
@@ -558,7 +558,7 @@ Cette fois nous avons utilisé la fonction `unique` pour agréger les attributs 
 
 Retirons la première colonne superflue de ce nouveau *shapefile* et utilisons-le dans les futurs exemples pour désigner les régions administratives. 
 ```{r}
-regions <- regions_agg[-1]  #pour retirer la première ligne
+regions <- regions_agg[-1]  #pour retirer la première colonne
 ```
 
 <br>
@@ -1648,7 +1648,7 @@ top10_villes
 <br>
 
 
-###### 7. Ville qui compte le plus grand nombre de parcs {-}
+###### 6. Ville qui compte le plus grand nombre de parcs {-}
 
 Pour répondre à la question posée, ordonnons la table d'attributs de l'objet `top10_villes` en se basant sur la nouvelle colonne `nbr_parcs`. 
 

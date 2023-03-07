@@ -820,9 +820,9 @@ Remarquez que la classe de l'objet `S_mult` est `RasterBrick` et non pas simplem
 Nous pouvons sélectionner chacune des bandes à partir du *raster* multi-bande de la façon suivante:
 
 ```{r, warning = FALSE, message = FALSE}
-SR <- S_mult$Landsat_LaTuque.1
-SG <- S_mult$Landsat_LaTuque.2
-SB <- S_mult$Landsat_LaTuque.3
+SR <- S_mult$Landsat_LaTuque_1
+SG <- S_mult$Landsat_LaTuque_2
+SB <- S_mult$Landsat_LaTuque_3
 ```
 <br>
 
@@ -1129,10 +1129,10 @@ legende
 
 Remarquer que les attributs de ce *data.frame*:
 
-* `code`: correspond à l'identifiant de chaque type de couvert;
-* `description`: donne une description du type de couvert;
-* `class`: correspond à la classe du type de couvert. Par exemple, tous les couverts de forêt (*Deciduous Forest*, *Evergreen Forest*, *Mixed Forest*) sont de classe *forest*;
-* `color`: correspond aux couleurs (en format hexadécimal) à utiliser pour représenter les types de couvert.
+* `ID`: correspond à l'identifiant de chaque type de couvert;
+* `Description`: donne une description du type de couvert;
+* `Class`: correspond à la classe du type de couvert. Par exemple, tous les couverts de forêt (*Deciduous Forest*, *Evergreen Forest*, *Mixed Forest*) sont de classe *forest*;
+* `Color`: correspond aux couleurs (en format hexadécimal) à utiliser pour représenter les types de couvert.
 
 La quantité de couverts différents répertoriés dans cette légende est:
 ```{r}
@@ -1145,7 +1145,7 @@ Créons un tableau sommaire qui reprend les éléments de `legende` en conservan
 
 ```{r}
 type2001 <- unique(R2001f) 
-sommaire <- legende[legende$code %in% type2001, ]
+sommaire <- legende[legende$ID %in% type2001, ]
 sommaire
 ```
 <br>
@@ -1162,8 +1162,8 @@ rat <- levels(R2001f)[[1]]
 
 Nous ajoutons les autres attributs au *data.frame* `rat`
 ```{r}
-rat$classe <- sommaire$class
-rat$description <- sommaire$description
+rat$classe <- sommaire$Class
+rat$description <- sommaire$Description
 
 rat
 ```
@@ -1188,10 +1188,10 @@ R2001f
 
 ```{r}
 type2016 <- unique(R2016f) 
-sommaire <- legende[legende$code %in% type2016, ]
+sommaire <- legende[legende$ID %in% type2016, ]
 rat <- levels(R2016f)[[1]]
-rat$classe <- sommaire$class
-rat$description <- sommaire$description
+rat$classe <- sommaire$Class
+rat$description <- sommaire$Description
 
 levels(R2016f) <- rat
 
@@ -1209,15 +1209,15 @@ R2016f
 
 **a)** Visualiser le *raster* catégorique de l'année 2001 avec la fonction `mapview()`. En particulier:
 
-* Utiliser la colonne `color` du data.frame `sommaire` pour définir l'argument `col.regions`.
-* Utiliser l'argument `att = ` afin que la légende affiche la description des types de couvertures.
+* Utiliser la colonne `Color` du data.frame `sommaire` pour définir l'argument `col.regions`.
+* Utiliser l'argument `att = ` afin que la légende affiche les types de couvertures.
 
 <details>
 <summary> Réponse</summary>
 <p>
 
 ```{r}
-mapview(R2001f, col.regions = sommaire$color, att = "description", legend = TRUE)
+mapview(R2001f, col.regions = sommaire$Color, att = "classe", legend = TRUE)
 ```
 
 <br>
@@ -1238,8 +1238,8 @@ mapview(R2001f, col.regions = sommaire$color, att = "description", legend = TRUE
 ```{r, fig.height=6}
 library(leafsync)
 
-m2001 <- mapview(R2001f, col.regions = sommaire$color, legend = FALSE)
-m2016 <- mapview(R2016f, col.regions = sommaire$color,  legend = FALSE)
+m2001 <- mapview(R2001f, col.regions = sommaire$Color, legend = FALSE)
+m2016 <- mapview(R2016f, col.regions = sommaire$Color,  legend = FALSE)
 
 
 leafsync::latticeview(m2001, m2016, ncol = 2)
@@ -1311,8 +1311,8 @@ sommaire
 Nous pouvons maintenant utiliser les fonctions `which.max()` et `which.min()` qui identifient la position, dans un vecteur, des éléments de valeur maximimale et minimale respectivement. 
 
 ```{r}
-sommaire$description[which.max(sommaire$Diff2016_2001)]
-sommaire$description[which.min(sommaire$Diff2016_2001)]
+sommaire$Class[which.max(sommaire$Diff2016_2001)]
+sommaire$Class[which.min(sommaire$Diff2016_2001)]
 ```
 <br>
 
