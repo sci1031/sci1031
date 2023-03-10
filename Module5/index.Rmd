@@ -995,7 +995,7 @@ res(C2001)
 
 <br>
 
-**c)** En utilisant la fonction `st_crs()` de la library `sf`, déterminer le code EPSG du système de coordonnées utilisé ainsi que l'unité de mesure de la projection du *raster* de la couverture terrestre de 2001.
+**c)** En utilisant la fonction `st_crs()` de la library `sf`, déterminer en format `proj4string` le CRS utilisé ainsi que l'unité de mesure de la projection du *raster* de la couverture terrestre de 2001.
 
 <details>
 <summary> Réponse</summary>
@@ -1003,12 +1003,12 @@ res(C2001)
 
 ```{r, eval=FALSE, echo=TRUE}
 library(sf)
-st_crs(C2001)$epsg
+st_crs(C2001)$proj4string
 st_crs(C2001)$units
 ```
 
 ```{r, echo=FALSE}
-st_crs(C2001)$epsg
+st_crs(C2001)$proj4string
 st_crs(C2001)$units
 ```
 
@@ -1145,7 +1145,9 @@ Créons un tableau sommaire qui reprend les éléments de `legende` en conservan
 
 ```{r}
 type2001 <- unique(R2001f) 
-sommaire <- legende[legende$ID %in% type2001, ]
+sommaire <- legende[legende$ID %in% type2001, -4]
+# oùlegende$ID %in% type2001 est un vecteur logique, TRUE lorsque ID est dans type2001 FALSE sinon
+# où -4 retire la 4ième colonne du tableau legende contenant une description détaillée du couvert
 sommaire
 ```
 <br>
@@ -1160,10 +1162,9 @@ rat <- levels(R2001f)[[1]]
 ```
 <br>
 
-Nous ajoutons les autres attributs au *data.frame* `rat`
+Nous ajoutons l'attribut `Class`, spécifiant les types de couvert, au *data.frame* `rat`
 ```{r}
 rat$classe <- sommaire$Class
-rat$description <- sommaire$Description
 
 rat
 ```
@@ -1187,12 +1188,11 @@ R2001f
 <p>
 
 ```{r}
+legende <- pal_nlcd()
 type2016 <- unique(R2016f) 
-sommaire <- legende[legende$ID %in% type2016, ]
+sommaire <- legende[legende$ID %in% type2016, -4]
 rat <- levels(R2016f)[[1]]
 rat$classe <- sommaire$Class
-rat$description <- sommaire$Description
-
 levels(R2016f) <- rat
 
 R2016f
@@ -1299,7 +1299,7 @@ sommaire$Nbr2016 <- levels(R2016_nbr)[[1]]$COUNT
 
 
 Pour chaque type de couvert, nous calculons la différence entre le nombre de cellules en 2016 et le nombre de cellules en 2001.
-Nous divisons ensuite par le nombre de cellules totales dans l'un ou l'autre des rasters (ils on le même nombre), ce qui permet de comparer les catégories entre elles.
+Nous divisons ensuite par le nombre de cellules totales dans l'un ou l'autre des rasters (ils ont le même nombre), ce qui permet de comparer les catégories entre elles.
 
 ```{r}
 Diff <- 100*(sommaire$Nbr2016 - sommaire$Nbr2001)/ncell(R2016f)
@@ -1316,7 +1316,7 @@ sommaire$Class[which.min(sommaire$Diff2016_2001)]
 ```
 <br>
 
-Ce sont donc les champs cultivés qui ont le plus augmenté et les peuplements d'arbustres qui ont le plus diminué au cours de cette période.
+Ce sont donc les champs cultivés qui ont le plus augmenté et les peuplements d'arbustres qui ont le plus diminué au cours de cette période. Notez que votre réponse dépendra de la sélection de la région carrée fait en **a)**.
 
 
 <br>
