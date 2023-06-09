@@ -21,13 +21,13 @@ Ce module s’intéresse à la façon dont nous représentons les phénomènes s
 
 À la section [Exercices](#ex_markdown1) vous suivrez la première partie d'une introduction à la bibliothèque `rmarkdown`. La deuxième partie de cette introduction aura lieu dans la section [Exercices du Module 3](#ex_markdown2). 
 
-R Markdown permet de créer des documents dynamiques de formats variés (dont HTML, PDF et Word) qui intègrent des morceaux de code R. Dans le cadre de ce cours, toutes vos évaluations devront être remises dans un fichier R Markdown. Cette section vous permet ainsi de vous familiarisez avec cette bibliothèque. 
+R Markdown permet de créer des documents dynamiques de formats variés (dont HTML, PDF et Word) qui intègrent des morceaux de code R. Dans le cadre de ce cours, toutes vos évaluations devront être remises dans un fichier R Markdown. Cette section vous permet ainsi de vous familiariser avec cette bibliothèque. 
 
 
 ## Leçon
 
 
-Les phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout mais qui ne possèdent pas de frontières naturelles^[Repris de l'introduction aux données spatiales du site [Spatial Data Science](https://rspatial.org/raster/spatial/2-spatialdata.html).]. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes. D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux.
+Les phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout, mais qui ne possèdent pas de frontières naturelles^[Repris de l'introduction aux données spatiales du site [Spatial Data Science](https://rspatial.org/raster/spatial/2-spatialdata.html).]. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes. D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux.
 
 <br>
 ```{r vectomat, fig.align='left', echo=FALSE, fig.cap="Exemples de données vectorielles et matricielles. Gauche: La carte délimitant les régions administratives du Québec est formée à partir de données vectorielles. Droite: La carte topographique du Québec (source : [https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/)](https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/))", out.width = c('50%','50%'), fig.show = 'hold'}
@@ -39,18 +39,18 @@ knitr::include_graphics(rep(m12),1)
 ```
 <br>
 
-Les entités spatiales (ou objets) sont habituellement représentés par ce qu’on appelle des données vectorielles (« vector data », en anglais), alors que les phénomènes continues sont habituellement représentés par des données matricielles (« raster data », en anglais).  Ces deux modèles sont des façons bien différentes de percevoir et de représenter les phénomènes spatiaux. Nous les décrivons dans les deux sous-sections suivantes.
+Les entités spatiales (ou objets) sont habituellement représentées par ce qu’on appelle des données vectorielles (« vector data », en anglais), alors que les phénomènes continus sont habituellement représentés par des données matricielles (« raster data », en anglais).  Ces deux modèles sont des façons bien différentes de percevoir et de représenter les phénomènes spatiaux. Nous les décrivons dans les deux sous-sections suivantes.
 
 
 ### Les données vectorielles
 
 ##### Définition {-}
 
-Les données vectorielles sont utilisées pour représenter des entités spatiales dont les frontières sont explicites et qui possède une localisation précise et unique. Les données vectorielles sont définies par leur localisation géographique, leur géométrie, et un ou plusieurs attributs.
+Les données vectorielles sont utilisées pour représenter des entités spatiales dont les frontières sont explicites et qui possèdent une localisation précise et unique. Les données vectorielles sont définies par leur localisation géographique, leur géométrie, et un ou plusieurs attributs.
 
-La **localisation géographique** désigne l’emplacement de l’entité selon un système de coordonnées géographique ou un système de coordonnées projeté. Un système de coordonnées géographique utilise un système en trois dimensions pour donner la position (x,y,z) ou longitude et latitude d’une entité spatiale sur la surface sphérique de la Terre. Un système de coordonnées projeté, donne la position d’une entité spatiale sur une surface plane à deux dimensions. Nous reviendrons sur les systèmes de coordonnées de référence à la section 2.1.3.
+La **localisation géographique** désigne l’emplacement de l’entité selon un système de coordonnées géographiques ou un système de coordonnées projeté. Un système de coordonnées géographiques utilise un système en trois dimensions pour donner la position (x,y,z) ou longitude et latitude d’une entité spatiale sur la surface sphérique de la Terre. Un système de coordonnées projeté donne la position d’une entité spatiale sur une surface plane à deux dimensions. Nous reviendrons sur les systèmes de coordonnées de référence à la section 2.1.3.
 
-La **géométrie** d’une entité spatiale correspond à sa forme (« shape », en anglais). Il existe trois principaux types de géométrie, aussi appelées des classes : les points, les lignes, et les polygones  (Tableau \@ref(fig:geometriesimple)). Ces classes peuvent être combinées pour créer des géométries plus complexes; des multipoints, des multilignes, des multipolygones, etc.
+La **géométrie** d’une entité spatiale correspond à sa forme (« shape », en anglais). Il existe trois principaux types de géométrie, aussi appelés classes : les points, les lignes, et les polygones  (Tableau \@ref(fig:geometriesimple)). Ces classes peuvent être combinées pour créer des géométries plus complexes; des multipoints, des multilignes, des multipolygones, etc.
 
 <br>
 ```{r geometriesimple, fig.align='left', echo=FALSE,fig.cap="Exemple de données vectorielles de géométrie simple. Remarquez que dans le cas d’un polygone, la première et la dernière coordonnées sont les mêmes. Tableau inspiré de Wikipedia (https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry)", out.width = '80%'}
@@ -70,7 +70,7 @@ knitr::include_graphics('Module2/images/2_multipoints.jpg')
 ```
 <br>
 
-Il est aussi possible de combiner plusieurs points ensemble dans une structure multipoints définie par un attribut unique (Figure \@ref(fig:multipoints)). Par exemple, l’ensemble des restaurants de cuisine vietnamienne dans une ville pourrait être considéré comme une géométrie unique.
+Il est aussi possible de combiner plusieurs points dans une structure multipoints définie par un attribut unique (Figure \@ref(fig:multipoints)). Par exemple, l’ensemble des restaurants de cuisine vietnamienne dans une ville pourrait être considéré comme une géométrie unique.
 
 La géométrie des **lignes** est plus complexe. Le terme ligne en analyse spatiale n’a pas la même définition que dans le langage usuel. Une ligne désigne un ensemble d’une seule ou de plusieurs polylignes (Figure \@ref(fig:multilignes)). Une polyligne, quant à elle, désigne une séquence de segments de droite reliés entre eux. Ainsi, en analyse spatiale, une seule ligne pourrait représenter le fleuve Saint-Laurent et l’ensemble de ces affluents (rivière des Outaouais, rivière Saint-Maurice, le Fjord du Saguenay, etc.). D’autre part, il serait aussi possible de définir plusieurs lignes – une pour chaque affluent, par exemple.
 
@@ -88,7 +88,7 @@ Un **polygone** désigne un ensemble de polylignes fermées. La géométrie d’
 
 Une particularité des polygones est qu’ils peuvent comprendre des trous. C’est-à-dire qu’un polygone peut être entièrement compris à l’intérieur d’un polygone de plus grande superficie. Ceci est le cas d’une île au sein d’un lac, par exemple. Le polygone formant un îlot permet d’éliminer une partie du polygone qui l’englobe. De plus, alors que l’auto-intersection est permise pour une ligne (c’est-à-dire qu’elle peut se croiser sur elle-même), cette propriété n’est pas valide pour un polygone.
 
-Finalement, plusieurs polygones peuvent être considérés comme formant une géométrie unique ((Figure \@ref(fig:multipolygones))). Par exemple, l’Indonésie est constituée de plusieurs îles. Chaque île peut être représentée par son propre polygone, ou encore l’ensemble des îles peut être représenté par un seul polygone (ou multi-polygones) désignant le pays en entier.
+Finalement, plusieurs polygones peuvent être considérés comme formant une géométrie unique ((Figure \@ref(fig:multipolygones))). Par exemple, l’Indonésie est constituée de plusieurs îles. Chaque île peut être représentée par son propre polygone, ou encore l’ensemble des îles peut être représenté par un seul polygone (ou multipolygones) désignant le pays en entier.
 
 <br>
 ```{r multipolygones, fig.align='left', echo=FALSE,fig.cap="Les Antilles peuvent être représentées par plusieurs polygones distincts pour chaque île, ou par un seul multipolygone. Source : https://fr.wikipedia.org/wiki/Antilles", out.width = '50%'}
@@ -106,7 +106,7 @@ knitr::include_graphics('Module2/images/2_relationsspatiales.png')
 
 ##### Format de données vectorielles {-}  
 
-Les données vectorielles peuvent être stockées dans une grande variété de formats différents. Ces formats ont évolué et continuent d’évoluer en fonction des besoins et des avancées technologiques. Plusieurs formats ont été développés pour être utilisés avec des logiciels commerciaux mais peuvent être lus et parfois édités par d’autres logiciels.
+Les données vectorielles peuvent être stockées dans une grande variété de formats différents. Ces formats ont évolué et continuent d’évoluer en fonction des besoins et des avancées technologiques. Plusieurs formats ont été développés pour être utilisés avec des logiciels commerciaux, mais peuvent être lus et parfois édités par d’autres logiciels.
 
 Peu importe leur format, les données vectorielles sont toujours organisées selon une *base de données relationnelle*. Un identifiant désigne chaque objet spatial et l’associe à une géométrie et à un ou plusieurs attributs (Tableau \@ref(fig:baserelationnelle)).
 
@@ -165,7 +165,7 @@ knitr::include_graphics('Module2/images/2_geodatabase.PNG')
 
 ###### COVERAGE {-}
 
- COVERAGE est le format propriétaire d’ESRI, développé pour le logiciel ArcInfo, qui a précédé le format *shapefile*. C’est une autre façon de stockée les données vectorielles qui nécessite plusieurs fichiers. Bien que ce format ne soit plus utilisé lorsque de nouvelles données vectorielles sont conçues, vous pourriez être amenés à rencontrer ce format si vous devez travailler avec des données qui précédent 1990.
+ COVERAGE est le format propriétaire d’ESRI, développé pour le logiciel ArcInfo, qui a précédé le format *shapefile*. C’est une autre façon de stocker les données vectorielles qui nécessite plusieurs fichiers. Bien que ce format ne soit plus utilisé depuis que de nouvelles données vectorielles ont été conçues, vous pourriez être amenés à rencontrer ce format si vous devez travailler avec des données qui précédent 1990.
 
 
 ###### ARCINFO INTERCHANGE FILE (.EOO) {-}
@@ -180,7 +180,7 @@ knitr::include_graphics('Module2/images/2_geodatabase.PNG')
 
 ###### WEB MAP SERVICE (WMS) {-}
 
- N’est pas un format de données mais plutôt un protocole de communication qui permet de visualiser des données spatiales qui sont logées sur un serveur. Les organisations gouvernementales ont souvent recours à cette méthode de partage de l’information spatiale car elle permet de s’assurer que les données diffusées sont toujours à jour. L’utilisateur peut jouer avec les paramètres de visualisation mais ne peut pas importer et modifier les données. Notez que ce protocole est utilisé à la fois pour les données vectorielles et les données matricielles.
+ N’est pas un format de données mais plutôt un protocole de communication qui permet de visualiser des données spatiales qui sont logées sur un serveur. Les organisations gouvernementales ont souvent recours à cette méthode de partage de l’information spatiale car elle permet de s’assurer que les données diffusées sont toujours à jour. L’utilisateur peut jouer avec les paramètres de visualisation, mais ne peut pas importer et modifier les données. Notez que ce protocole est utilisé à la fois pour les données vectorielles et les données matricielles.
 
 
 
@@ -188,9 +188,9 @@ knitr::include_graphics('Module2/images/2_geodatabase.PNG')
 
 ##### Définition {-}
 
-Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un *raster*, formée de rectangles de même forme et de même dimension appelés cellules ou pixels (Figure \@ref(fig:raster)). À chaque cellule de la matrice correspond une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.
+Les données matricielles représentent la surface terrestre par une grille régulière, communément appelée un *raster*, formée de rectangles de même forme et de même dimension appelés cellules ou pixels (Figure \@ref(fig:raster)). À chaque cellule de la matrice correspond une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.
 
-La valeur d’une cellule peut être continue (p. ex. l’élévation - voir Figure \@ref(fig:vectomat)b) ou catégorique (p. ex. le zonage attribué à différents secteurs d’une ville tel que résidentiel, commercial ou industriel). Normalement, la valeur d’une cellule représente la valeur moyenne (ou la valeur prédominante) pour la superficie qu’elle couvre. Cependant, les valeurs sont parfois estimées pour le centre de la cellule.
+La valeur d’une cellule peut être continue (p. ex. l’élévation - voir Figure \@ref(fig:vectomat)b) ou catégorique (p. ex. le zonage attribué à différents secteurs d’une ville tels que résidentiel, commercial ou industriel). Normalement, la valeur d’une cellule représente la valeur moyenne (ou la valeur prédominante) pour la superficie qu’elle couvre. Cependant, les valeurs sont parfois estimées pour le centre de la cellule.
 
 <br>
 ```{r raster, fig.align='left', echo=FALSE,fig.cap="Exemple de données matricielles associées à des classes de végétation obtenues à partir d’une image satellitaire. Figure inspirée de NEON neonscience.org/resources/series/introduction-working-raster-data-r", out.width = '100%'}
@@ -198,7 +198,7 @@ knitr::include_graphics('Module2/images/2_raster.jpg')
 ```
 <br>
 
-On peut utiliser une base de données relationnelle pour lier la valeur d’un pixel à l’attribut qu’il décrit (Figure  \@ref(fig:rastertable)). Contrairement aux données vectorielles où les polygones peuvent être associés à plusieurs attributs, une couche de données matricielles peut représenter un seul attribut.
+On peut utiliser une base de données relationnelle pour lier la valeur d’un pixel à l’attribut qu’il décrit (Figure  \@ref(fig:rastertable)). Contrairement aux données vectorielles où les polygones peuvent être associés à plusieurs attributs, une couche de données matricielles ne peut représenter qu'un seul attribut.
 
 <br>
 ```{r rastertable, fig.align='center', echo=FALSE,fig.cap="Exemple de table relationnelle pour les données vectorielles de la Figure \\@ref(fig:raster). Une valeur numérique est associée à chaque couleur de l’image ainsi qu’à un attribut, ici le type de végétation.", out.width = c('45%','49%'), fig.show = 'hold'}
@@ -215,7 +215,7 @@ La localisation pour des données matricielles est définie par **l’étendue s
 
 ##### Résolution et géométrie {-}
 
-La **résolution** définie la précision avec laquelle nous pouvons discerner les objets dans l’espace. Une grande résolution correspond à une matrice de données dont les cellules ont une petite taille (Figure \@ref(fig:resolution)). En conséquence, une telle matrice est plus lente à visualiser et à manipuler, et requière un fichier plus volumineux. En contrepartie, une couche de données matricielles de faible résolution possède des cellules de plus grande taille, se visualise et se manipule plus rapidement, et est contenue dans un fichier moins volumineux.
+La **résolution** définit la précision avec laquelle nous pouvons discerner les objets dans l’espace. Une grande résolution correspond à une matrice de données dont les cellules ont une petite taille (Figure \@ref(fig:resolution)). En conséquence, une telle matrice est plus lente à visualiser et à manipuler, et requiert un fichier plus volumineux. En contrepartie, une couche de données matricielles de faible résolution possède des cellules de plus grande taille, se visualise et se manipule plus rapidement, et est contenue dans un fichier moins volumineux.
 
 <br>
 ```{r resolution, fig.align='left', echo=FALSE,fig.cap="Exemple du concept de résolution: plus la résolution est grande, plus la taille des cellules est petite. Dans cette figure, la résolution diminue de droite à gauche, et la taille des cellules augmente. Source de données: https://mern.gouv.qc.ca/nos-publications/spatiocarte-quebec/", out.width = '100%'}
@@ -223,7 +223,7 @@ knitr::include_graphics('Module2/images/2_resolution.jpg')
 ```
 <br>
 
-Contrairement aux données vectorielles, la géométrie des données matricielles n’est pas définie explicitement par un ensemble de coordonnées. La géométrie peut être déduite en observant les démarcations se produisant aux limites des ensembles de cellules de même valeur. Cependant ces démarcations ne correspondent pas nécessairement aux frontières des entités sur le terrain (Figure \@ref(fig:boundary)).
+Contrairement aux données vectorielles, la géométrie des données matricielles n’est pas définie explicitement par un ensemble de coordonnées. La géométrie peut être déduite en observant les démarcations se produisant aux limites des ensembles de cellules de même valeur. Cependant, ces démarcations ne correspondent pas nécessairement aux frontières des entités sur le terrain (Figure \@ref(fig:boundary)).
 
 <br>
 ```{r boundary, fig.align='left', echo=FALSE,fig.cap="La géométrie des objets spatiaux matriciels. Les frontières d’une entité spatiale définie avec des données matricielles (droite) ne correspondent pas nécessairement aux frontières réelles (gauche)", out.width = '80%'}
@@ -233,7 +233,7 @@ knitr::include_graphics('Module2/images/2_raster_boundary.png')
 
 Ainsi, lorsque nous représentons des objets spatiaux aux frontières bien définies, l’utilisation de données vectorielles plutôt que matricielles s’avère plus précise et plus efficace.
 
-Par ailleurs, la représentation de phénomènes continus avec des données vectorielles, nécessiterait de définir un grand nombre de petit polygones et d’enregistrer les coordonnées de chacun d’eux. Dans la majorité des cas, une telle représentation augmenterait dramatiquement le temps de traitement des données.
+Par ailleurs, la représentation de phénomènes continus avec des données vectorielles nécessiterait de définir un grand nombre de petits polygones et d’enregistrer les coordonnées de chacun d’eux. Dans la majorité des cas, une telle représentation augmenterait dramatiquement le temps de traitement des données.
 
 ##### Données matricielles à bande unique et multi-bandes {-}
 
@@ -247,7 +247,7 @@ knitr::include_graphics('Module2/images/2_binaire.png')
 ```
 <br>
 
-D’autres rasters peuvent contenir plusieurs couches, appelées aussi des bandes (ou canaux). Par exemple, les images de couleurs contiennent souvent trois bandes: une bande de rouge, une bande de vert et une bande de bleu. C’est ce qu’on nomme le format RGB (pour « red », « green », et « blue »). Ces bandes font références à des sections du spectre électromagnétique captées lors de la prise de l’image (Figure \@ref(fig:electro)).
+D’autres rasters peuvent contenir plusieurs couches, appelées aussi des bandes (ou canaux). Par exemple, les images de couleurs contiennent souvent trois bandes: une bande de rouge, une bande de vert et une bande de bleu. C’est ce qu’on nomme le format RGB (pour « red », « green », et « blue »). Ces bandes font référence à des sections du spectre électromagnétique captées lors de la prise de l’image (Figure \@ref(fig:electro)).
 
 <br>
 ```{r electro, fig.align='left', echo=FALSE,fig.cap="*Raster* multibande. Les bandes blues, vertes et rouges correspondent à des sections du spectre électromagnétique. Source: Esri. Image récupérée à https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/raster-bands.htm.", out.width = '50%'}
@@ -268,7 +268,7 @@ knitr::include_graphics('Module2/images/2_3bands.jpg')
 
 Tout comme les données vectorielles, les données matricielles peuvent être stockées dans une grande variété de formats différents. Les images possèdent des structures matricielles, ainsi les formats bien connus pour la transmission d’images sur le Web, .jpg (Joint Photographic Experts Group), .gif (Graphics Interchange Format), et .png (Portable Network Graphics), sont des exemples de format de données matricielles.
 
-Voici une liste non-exhaustive de formats de données matricielles.
+Voici une liste non exhaustive de formats de données matricielles.
 
 ###### GRID (.GRD) {-}
 
