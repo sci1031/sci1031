@@ -13,11 +13,11 @@ Comme son nom l’indique, le cours SCI1031 porte sur la visualisation et l’an
 
 L’intérêt du cours SCI 1031 est lié à plusieurs aspects. Tout d’abord, nos sociétés sont confrontées à une incroyable augmentation des données spatiales. C’est-à-dire des données qui possèdent une composante spatiale, comme des coordonnées géographiques. 
 
-Pensons, par exemple, aux données de télédétection récoltées par des satellites et des véhicules aériens télépilotés (drones). Ou encore, aux données échantillonnées par des technologies de notre vie quotidienne qui sont munis d’un système de géo-positionnement par satellite (GPS!) intégré comme les téléphones intelligents, les caméras, et les tablettes.  
+Pensons, par exemple, aux données de télédétection récoltées par des satellites et des véhicules aériens télépilotés (drones). Ou encore, aux données échantillonnées par des technologies de notre vie quotidienne qui sont munies d’un système de géopositionnement par satellite (GPS!) intégré comme les téléphones intelligents, les caméras, et les tablettes.  
 
-Cet accroissement des données spatiales est interrelié avec une explosion d’applications qui dépendent des données spatiales et qui en génèrent dans des domaines aussi variés que le marketing, l’évaluation des risques par les compagnies d’assurances, la logistique des réseaux de transports, et les études d’impact environnementaux. 
+Cet accroissement des données spatiales est interrelié avec une explosion d’applications qui dépendent des données spatiales et qui en génèrent dans des domaines aussi variés que le marketing, l’évaluation des risques par les compagnies d’assurances, la logistique des réseaux de transports, et les études d’impact environnemental. 
 
-Ainsi, cette effervescence des données spatiales et de leurs applications entrainement nécessairement une hausse de la demande pour des compétences spécialisées dans la manipulation, la visualisation et l’analyse de données spatiales. 
+Ainsi, cette effervescence des données spatiales et de leurs applications entraine nécessairement une hausse de la demande pour des compétences spécialisées dans la manipulation, la visualisation et l’analyse de données spatiales. 
 
 L’objectif général du cours SCI 1031 est donc de permettre aux étudiantes et aux étudiants de développer ces compétences essentielles pour traiter les données spatiales, tant dans leurs études que sur le marché de l’emploi.
 
@@ -28,7 +28,7 @@ R^[R est soutenu par le *R Core Team* et la *R Foundation for Statistical Comput
 
 R est devenu un outil incontournable en sciences des données. La communauté R est constituée non seulement d’utilisatrices et d’utilisateurs, mais aussi de créatrices et de créateurs. Ceux-ci améliorent constamment les capacités de R par le développement de nouvelles fonctionnalités et de bibliothèques spécialisées qui deviennent accessibles à toute la communauté.
 
-Dans les dernières années, plusieurs expertes et experts de l’analyse et de la visualisation de données spatiales se sont affairés à bâtir des bibliothèques simples et efficaces destinées aux traitements des données spatiales.  Ces bibliothèques sont mise-à-jour continuellement alors que d’autres bibliothèques voient le jour pour répondre à des nouveaux besoins.
+Dans les dernières années, plusieurs expertes et experts de l’analyse et de la visualisation de données spatiales se sont affairés à bâtir des bibliothèques simples et efficaces destinées aux traitements des données spatiales.  Ces bibliothèques sont mises à jour continuellement alors que d’autres bibliothèques voient le jour pour répondre à de nouveaux besoins.
 
 Un avantage indéniable à utiliser R, en comparaison aux autres outils de visualisation de données spatiales, est sa grande flexibilité.  L’abondance des bibliothèques permet d’utiliser R pour accomplir des opérations diverses. Il est ainsi possible de produire des cartes géographiques de grande qualité avec R et de faire des analyses statistiques spatiales très poussées. Tout cela sans changer de logiciel et en conservant la même syntaxe générale. 
 
@@ -110,18 +110,18 @@ Les modules sont tous divisés en deux parties: une partie *Leçon* et une parti
 
 **Pour les modules 4, 5, 6, 7, 8, et 9** 
 
-- La partie *Leçon* comprend des apprentissages théoriques et aussi pratiques: vous serez guidé dans l'utilisation de fonctions R et dans la résolution de problèmes. 
+- La partie *Leçon* comprend des apprentissages théoriques et aussi pratiques: vous serez guidés dans l'utilisation de fonctions R et dans la résolution de problèmes. 
 - La partie *Exercices* comprend des questions pour mettre en pratique vos apprentissages. Bien que les réponses aux questions soient disponibles, il est important de tenter d'y répondre par vous-mêmes. Les questions des travaux notés et de l'examen sont très semblables à celles des parties *Exercices*.
 
 <br>
 
 ##### Apprentissage de R {-}
 
-Il est important d'organiser sur votre ordinateur un environnement de travail optimal pour faciliter vos apprentissages. Il est fortement recommandé de créer un répertoire, par exemple `SCI1031`, dédié exclusivement à ce cours. Dans ce répertoire, créé également un répertoire pour chacun des neuf modules du cours (p. ex. `Module1`, `Module2`, ..., `Module9`). 
+Il est important d'organiser sur votre ordinateur un environnement de travail optimal pour faciliter vos apprentissages. Il est fortement recommandé de créer un répertoire, par exemple `SCI1031`, dédié exclusivement à ce cours. Dans ce répertoire, créer également un répertoire pour chacun des neuf modules du cours (p. ex. `Module1`, `Module2`, ..., `Module9`). 
 
 À chaque module du cours, vous serez amené à utiliser des données sur lesquelles vous pratiquerez des opérations R. Ces données seront fournies dans un dossier zippé à télécharger (`Module1_donnees.zip`, `Module2_donnees.zip`, ...,  `Module9_donnees.zip`). Sauvegarder le dossier de données dans le répertoire correspondant à son module sur votre ordinateur. 
 
-Il est également recommandé de vous créer un fichier R (ou Rmd) pour chaque module (p.ex. `Mod1.R`, `Mod2.R`, ..., `Mod9.R`) dans lequel vous pourrez copier-coller les opérations R enseignées. Vous pourrez ainsi vous exercer à utiliser ces opérations et vous assurer de comprendre leur fonctionnement. Il facile de copier les blocs de codes R à partir de la page web en utilisant le bouton dédié à cette fin dans le coin supérieur droit de chaque bloc.
+Il est également recommandé de vous créer un fichier R (ou Rmd) pour chaque module (p.ex. `Mod1.R`, `Mod2.R`, ..., `Mod9.R`) dans lequel vous pourrez copier-coller les opérations R enseignées. Vous pourrez ainsi vous exercer à utiliser ces opérations et vous assurer de comprendre leur fonctionnement. Il est facile de copier les blocs de codes R à partir de la page web en utilisant le bouton dédié à cette fin dans le coin supérieur droit de chaque bloc.
 
 
 ```{r copypaste, fig.align='center', echo=FALSE, fig.link='Images/Pres_copypaste.png', fig.cap="Le bouton supérieur droit vous permet de copier facilement un bloc de codes R.", out.width = '80%'}
@@ -136,7 +136,7 @@ Le cours comprend trois (3) travaux notés (chacun 20%) et un examen final (40%)
 
 La date de remise des travaux notés, telle que suggérée dans la [feuille de route](#route) est flexible: vous ne serez pas pénalisé si vous remettez votre travail après cette date. Toutefois, il est préférable d'espacer la remise des travaux pour pouvoir bénéficier d'une rétroaction de la part de la personne qui corrige. 
 
-Noter que vous devez faire l'examen au plus tard au cours de la dernière semaine. Il s'agit d'un examen à faire chez soi. L'examen dure 3 heures mais vous avez 3 jours (72 heures) pour remettre vos réponses à partir du moment où vous l'entamez. 
+Noter que vous devez faire l'examen au plus tard au cours de la dernière semaine. Il s'agit d'un examen à faire chez soi. L'examen dure 3 heures, mais vous avez 3 jours (72 heures) pour remettre vos réponses à partir du moment où vous l'entamez. 
 
 Les consignes, les données à utiliser, et les gabarits de réponses pour les travaux notés et l'examen sont disponibles sur la [page web du cours](https://m2.teluq.ca/course/view.php?id=2164) sur le site de la TÉLUQ.
 Seuls les étudiants inscrits à la TÉLUQ ont accès aux évaluations. 
@@ -145,7 +145,7 @@ Seuls les étudiants inscrits à la TÉLUQ ont accès aux évaluations.
 
 #### Rétroaction {-}
 
-Le mode de communication le plus efficace pour rejoindre la personne qui vous encadre est le courriel. Si cela s'avère nécessaire une rencontre zoom ou un appel téléphonique pourront être planifiés.
+Le mode de communication le plus efficace pour rejoindre la personne qui vous encadre est le courriel. Si cela s'avère nécessaire, une rencontre Zoom ou un appel téléphonique pourront être planifiés.
 
 Le sujet de votre courriel doit contenir le sigle du cours. De plus, vous devez clairement vous identifier dans votre courriel: nom, prénom, numéro d'étudiant. La personne qui vous encadre, encadre beaucoup d'étudiantes et d'étudiants, et cela dans plusieurs cours!
 
@@ -239,7 +239,7 @@ Vous êtes autorisé à copier, distribuer et communiquer le matériel contenu s
 
 Je suis professeure au Département Science et technologie de la TELUQ en écologie quantitative et je suis responsable du cours SCI 1031. 
 <br>
-Vous pouvez me rejoindre à l'adresse suivante: elise.filotas@teluq.ca
+Vous pouvez me contacter à l'adresse suivante: elise.filotas@teluq.ca
 
 Consultez mon [site web](http://elisefilotas.ca/fr/maison/) pour en savoir plus sur ma recherche.
 
