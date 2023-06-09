@@ -11,7 +11,7 @@ Comme son nom l’indique, le cours SCI1031 porte sur la visualisation et l’an
 
 #### Pourquoi suivre ce cours ? {-}
 
-L’intérêt du cours SCI 1031 est lié plusieurs aspects. Tout d’abord, nos sociétés sont confrontées à une incroyable augmentation des données spatiales. C’est-à-dire des données qui possèdent une composante spatiale, comme des coordonnées géographiques. 
+L’intérêt du cours SCI 1031 est lié à plusieurs aspects. Tout d’abord, nos sociétés sont confrontées à une incroyable augmentation des données spatiales. C’est-à-dire des données qui possèdent une composante spatiale, comme des coordonnées géographiques. 
 
 Pensons, par exemple, aux données de télédétection récoltées par des satellites et des véhicules aériens télépilotés (drones). Ou encore, aux données échantillonnées par des technologies de notre vie quotidienne qui sont munis d’un système de géo-positionnement par satellite (GPS!) intégré comme les téléphones intelligents, les caméras, et les tablettes.  
 
