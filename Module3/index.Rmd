@@ -13,7 +13,7 @@ Ce module porte sur les systèmes de coordonnées de référence (SRC). Nous avo
 
 -	Expliquer la différence entre un ellipsoïde local et un ellipsoïde global.
 -	Définir ce qu’est un datum et nommer des datums courants. 
--	Expliquer la différence entre le système de coordonnées géographique et le système de coordonnées projeté.
+-	Expliquer la différence entre le système de coordonnées géographiques et le système de coordonnées projetées.
 -	Définir les propriétés permettant de catégoriser les projections
 -	Nommer des projections courantes.
 
