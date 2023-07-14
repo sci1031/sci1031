@@ -1683,7 +1683,7 @@ Nous constatons que Sherbrooke *et* Saint-Jean-sur-Richelieu disposent toutes de
 ## Exercices {#ex_map_vec}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_manip_vec) de ce module.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 <br>
 
@@ -1703,7 +1703,7 @@ library(units)
 <summary> Réponse</summary>
 <p>
 
-Utiliser la fonction `subset()` pour filtrer le *shapefile* `municipalites` et isoler ces quatres villes.
+Utiliser la fonction `subset()` pour filtrer le *shapefile* `municipalites` et isoler ces quatre villes.
 
 ```{r, warning = FALSE}
 Selection <- subset(villes, (toponyme == "Blanc-Sablon") | 
@@ -1717,7 +1717,7 @@ Selection
 
 Le symbole `|` signifie *et*.
 
-Combiner ces quatres villes (points) en un seul objet spatial (multipoints) en utilisant la fonction `st_combine()`&nbsp;:
+Combiner ces quatre villes (points) en un seul objet spatial (multipoints) en utilisant la fonction `st_combine()`&nbsp;:
 
 ```{r}
 Combo_Selection <- st_combine(Selection)
@@ -1725,7 +1725,7 @@ Combo_Selection
 ```
 <br>
 
-Transformer cet objet multipoints en polygone en utilisant la fonction `st_cast()`&nbsp;:
+Transformer cet objet multipoint en polygone en utilisant la fonction `st_cast()`&nbsp;:
 
 ```{r, warning = FALSE}
 Poly_Selection <- st_cast(Combo_Selection, to = "POLYGON")
@@ -1748,7 +1748,7 @@ mapview(Poly_Selection)
 
 <br>
 
-**b)** Quelle est la superficie, en km, de ce polygone?
+**b)** Quelle est la superficie, en km^2, de ce polygone?
 
 <details>
 <summary> Réponse</summary>
@@ -1771,7 +1771,7 @@ st_crs(Poly_Selection_nad83)$proj4string
 
 Les unités sont à présent en mètres.
 
-Calculer la superficie du polygone en utilisant la fonction `st_area()` et convertisser les unités en $km^2$ en utilisant la fonction `set_units()`&nbsp;:
+Calculer la superficie du polygone en utilisant la fonction `st_area()` et convertir les unités en $km^2$ en utilisant la fonction `set_units()`&nbsp;:
 
 ```{r, warning = FALSE}
 Aire <- st_area(Poly_Selection_nad83)
@@ -1863,6 +1863,8 @@ Utiliser la fonction `sum()` pour calculer la population totale comprise dans la
 ```{r, warning=FALSE}
 sum(Villes_Frontiere_tampon_pop$mpopul)
 ```
+<br>
+
 Une autre façon d'obtenir le même résultat est d'utiliser la fonction `aggregate()`&nbsp;:
 
 ```{r, warning=FALSE}
