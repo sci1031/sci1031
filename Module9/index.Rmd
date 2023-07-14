@@ -1601,7 +1601,7 @@ knitr::include_graphics('Module9/images/anim3.gif')
 
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_spatiotemp) de ce module.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 <br>
 
@@ -1611,9 +1611,9 @@ Créer une animation de la carte des températures minimums pour les 12 premiers
 
 * Couvrir seulement la région allant de 71.4°Ouest à 71°Ouest, en longitude, et de 45°Nord à 45.4°Nord en latitude dans le 
 dans le système géodésique mondial WGS84.
-* Comprendre légende affichant les températures de -24 C à +24 C par bond de 2 C.
+* Comprendre une légende affichant les températures de -24 C à +24 C par bond de 2 C.
 * Afficher la légende à droite de la carte.
-* Utiliser une palette de couleurs allant d'une couleur froide pour les températeurs négatives vers une couleur chaude pour les températures négatives.
+* Utiliser une palette de couleurs allant d'une couleur froide pour les températures négatives vers une couleur chaude pour les températures négatives.
 * Avoir un titre qui comprend le mois (en français) et l'année.
 * Être construite avec la bibliothèque `tmap`.
 
@@ -1633,7 +1633,7 @@ mint_region <- crop(mint,region)
 ```
 <br>
 
-Ensuite, construisons une fonction pour afficher une seule couche du *rasterStack* `mint_region` avec les caractéristiques demandées. Définission d'abord les éléments propres à la légende, aux couleurs, et au titre.
+Ensuite, construisons une fonction pour afficher une seule couche du *rasterStack* `mint_region` avec les caractéristiques demandées. Définissons d'abord les éléments propres à la légende, aux couleurs, et au titre.
 
 ```{r}
 # Légende allant de -24 à 24 par pas de 2.
