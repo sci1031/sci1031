@@ -394,7 +394,7 @@ Lorsqu’on combine des couches de données différentes, on doit s’assurer qu
 ## Exercices {#ex_markdown2}
 
 
-Dans cette section nous poursuivons l'introduction à R Markdown entamée dans la section [Exercices](#ex_markdown1) du module 2.
+Dans cette section, nous poursuivons l'introduction à R Markdown entamée dans la section [Exercices](#ex_markdown1) du module 2.
 
 Rappelons les objectifs de cette introduction.
 
@@ -418,7 +418,7 @@ Rappelons les objectifs de cette introduction.
 ### Le variante Pandoc de Markdown {#pandocmarkdown}
 
 
-Dans cette partie, nous détaillons les éléments de formatage du texte proposés par
+Dans cette partie, nous détaillons les éléments de formatage du texte proposé par
 la syntaxe Pandoc de Markdown^[Vous pouvez également consulter le [site de
 référence de Pandoc](http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html) et le résumé à la première page du [guide de référence R Markdown](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
 Pour une source en français, le guide 
@@ -483,7 +483,7 @@ Un datum est un système de référence qui détermine la position d’un ellips
 Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre.
 </div>
 
-Il est cependant possible d'ajouter un retour à la ligne en utilisant un retour à la ligne et tabulation à la fin du premier paragraphe. Par exemple, ce texte:
+Il est cependant possible d'ajouter un retour à la ligne en utilisant un retour à la ligne et une tabulation à la fin du premier paragraphe. Par exemple, ce texte:
 
 
 ```md
@@ -594,9 +594,9 @@ souligné en PDF, mais pas en HTML ni en Word.
 
 Procéder de la sorte n'est pas toujours souhaité car le document R Markdown perd en généralité, en ce sens où
 il  ne pourra pas être correctement généré dans tous les formats. Cela n'est
-cependant pas nécessairement un problème, par exemple, si vous souhaiteZ obtenir
+cependant pas nécessairement un problème, par exemple, si vous souhaitez obtenir
 le document en un seul format, ce fonctionnement devient un atout puisque vous
-pouvez utiliser toute la gamme de mise en forme offert par le langage en question.
+pouvez utiliser toute la gamme de mise en forme offerte par le langage en question.
 
 
 
@@ -805,7 +805,7 @@ produit ceci:
 
 <br>
 
-Si les nombres ne sont pas écrits manière ordonnée, cela ne changera pas le
+Si les nombres ne sont pas écrits de manière ordonnée, cela ne changera pas le
 résultat. Néanmoins, le premier nombre détermine le numéro de départ de la liste. En
 écrivant&nbsp;:
 
@@ -885,7 +885,7 @@ nous obtenons&nbsp;:
 <br>
 
 Nous avons aussi la possibilité de mélanger les niveaux numérotés et les niveaux
-non-numérotés. Par exemple, cette liste
+non numérotés. Par exemple, cette liste
 
 ```md
 1. machin 1,
@@ -917,7 +917,7 @@ donne ceci &nbsp;:
 
 <br>
 
-Enfin, il possible de mettre manuellement fin à une liste en introduisant un
+Enfin, il est possible de mettre manuellement fin à une liste en introduisant un
 commentaire entre les listes à séparer&nbsp;:
 
 ```md
@@ -955,7 +955,7 @@ d'utiliser "\>" avant la citation. Ainsi les lignes suivantes&nbsp;:
 
 ```.md
 > la citation est ajoutée comme ceci, elle nous donne une indentation adéquate
-pour une mise en page agréable dont le style peut être facilement travailler
+pour une mise en page agréable dont le style peut être facilement travaillé
 en HTML grâce au CSS.
 ```
 <br>
@@ -964,7 +964,7 @@ deviennent&nbsp;:
 
 <div class="boite emphase">
 
-> La citation est ajoutée comme ceci, elle nous donne une indentation adéquate pour une mise en page agréable dont le style peut être facilement travailler en HTML grâce au CSS.
+> La citation est ajoutée comme ceci, elle nous donne une indentation adéquate pour une mise en page agréable dont le style peut être facilement travaillé en HTML grâce au CSS.
 </div>
 
 
@@ -993,10 +993,10 @@ ce qui donne&nbsp;:
 
 Pour utiliser les symboles mathématiques dans le texte, les commandes associées
 doivent être placées entre deux "\$". Bien sûr, il faut connaître les
-combinaisons de caractère associées aux différents symboles. Ce sont les même
+combinaisons de caractère associées aux différents symboles. Ce sont les mêmes
 que celles proposées par [Latex](http://latex-project.org/intro.html) et qui
 seront utilisées par [MathJax](http://www.mathjax.org) (par défaut) pour générer
-les expressions mathématiques dans le fichier html. 
+les expressions mathématiques dans le fichier HTML. 
 
 Voici quelques exemples&nbsp;:
 
@@ -1111,13 +1111,13 @@ see is what you get*), vous pouvez utiliser [ce générateur](http://www.tablesg
 
 ##### Les hyperliens {-}
 
-Les liens hypertextes sont utilisés sous la forme [groupe de mots sur lequel cliquer]+(adresse du lien). Pour créer un lien vers la page Markdown de Wikipedia, nous utilisons&nbsp;:
+Les liens hypertextes sont utilisés sous la forme [groupe de mots sur lequel cliquer]+(adresse du lien). Pour créer un lien vers la page Markdown de Wikipédia, nous utilisons&nbsp;:
 
     [Markdown](https://fr.wikipedia.org/wiki/Markdown)
 
 <br>
 
-et voilà le lien vers la page [Markdown](https://fr.wikipedia.org/wiki/Markdown) de Wikipedia.
+et voilà le lien vers la page [Markdown](https://fr.wikipedia.org/wiki/Markdown) de Wikipédia.
 
 <br>
 
@@ -1184,7 +1184,7 @@ Typiquement, l'utilisation d'un tel bloc de code ressemble à ceci&nbsp;:
 
 **idbloc** est le nom de l'identifiant que vous pouvez donner au bloc de code. Ceci permet de citer les blocs ou leurs sorties à l'intérieur du document. L'identifiant n'est pas obligatoire. En revanche, un identifiant donné ne peut être utilisé qu'une seule fois. 
 
-**param1 = val1** correspond à un paramètre permettant de préciser comment le code source sera affiché dans le document, ou comment la sortie du code sera affichée. Il existe un grand nombre de paramètres possibles. Ils permettent de mettre de l'avant certaines parties du code, et aussi de choisir finement les sorties R (figures, tables, etc.) à ajouter aux documents. L'ensemble des paramètres sont disponibles à l'URL suivante <https://yihui.org/knitr/options/>). 
+**param1 = val1** correspond à un paramètre permettant de préciser comment le code source sera affiché dans le document, ou comment la sortie du code sera affichée. Il existe un grand nombre de paramètres possibles. Ils permettent de mettre de l'avant certaines parties du code, et aussi de choisir finement les sorties R (figures, tables, etc.) à ajouter aux documents. L'ensemble des paramètres sont disponibles à l'URL suivante <https://yihui.org/knitr/options/>. 
 
 
 #### Les commentaires {-}
@@ -1213,7 +1213,7 @@ Ce morceau de code s'affiche ainsi:
 
 <br>
 
-Nous obtenons donc un code R dans un environnement adéquate (voir la coloration
+Nous obtenons donc un code R dans un environnement adéquat (voir la coloration
 du code) avec la sortie console associée, en l'occurrence, le résultat de
 l'addition.
 
@@ -1247,7 +1247,7 @@ a + b
 
 <br>
 
-Afin de ne pas afficher le code source dans un document (parce que nous souhaitement uniquement afficher la sortie produite par le code), il suffit d'utiliser le paramètre `echo =
+Afin de ne pas afficher le code source dans un document (parce que nous souhaitons uniquement afficher la sortie produite par le code), il suffit d'utiliser le paramètre `echo =
 FALSE`. Par défaut, nous avons que `echo = TRUE`. Ainsi, le bloc de code `sanscode`
 
 
@@ -1485,10 +1485,10 @@ print(b)
 
 ##### Affichage des messages {-}
 
-Il y a trois type de messages retournés par R:
+Il y a trois types de messages retournés par R:
 
 1. les messages : une simple indication (voir la fonction `message()`);
-2. les avertissements qui soulignent que quelque chose est peut-être problématiques, mais le code est exécutable (voir la fonction `warning()`);
+2. les avertissements qui soulignent que quelque chose est peut-être problématique, mais le code est exécutable (voir la fonction `warning()`);
 3. les erreurs qui indiquent que quelque chose ne fonctionne pas dans l’exécution du code.
 
 Considérons le bloc suivant qui inclut un message, un avertissement, une erreur
@@ -1537,7 +1537,7 @@ warning("Ceci est un avertissement")
 
 <br>
 
-De la même manière il est possible de supprimer l'avertissement avec `warning = FALSE`.
+De la même manière, il est possible de supprimer l'avertissement avec `warning = FALSE`.
 
     `r ''````{r sansavertissement, warning = FALSE}
     message("Ceci est un message")
@@ -1614,7 +1614,7 @@ stop("Ceci est un problème")
 
 Par défaut, avec `rmarkdown`, dans un bloc de code R, le code est exécuté par R
 et les sorties sont ajoutées dans le document. Ci-dessus, nous avons vu comment
-modifier ce qui est présenté dans le code source et changer certain aspect de la
+modifier ce qui est présenté dans le code source et changer certains aspects de la
 sortie. Il est également possible de modifier l’exécution du code.
 
 
@@ -1647,7 +1647,7 @@ sa sortie, mais nous souhaitons tout de même l'exécuter.
 
 Dans un rapport dynamique, par exemple, nous sommes souvent amenés à exécuter un script ou charger des fonctions qui serviront éventuellement à créer des sorties qui seront intégrées dans le rapport. Nous ne souhaitons pas que les lectrices ou les lecteurs du rapport lisent ces éléments de code.
 
-Nous savons maintenant que l'utiliation des options `echo =
+Nous savons maintenant que l'utilisation des options `echo =
 FALSE`, `results = hide`, `message = FALSE` et `warning = FALSE` ensemble dans
 l'accolade, permet d'obtenir cette exécution silencieuse. Il existe cependant une manière plus rapide d'arriver à ce résultat en utilisant le paramètre `include = FALSE`.
 
@@ -1814,7 +1814,7 @@ plot(tab1$var1,tab1$var2)
 <br>
 
 Il est aussi possible de contrôler la largeur de la sortie en utilisant des
-pourcentage, pour cela nous utilisons l'option `out.width`:
+pourcentages, pour cela nous utilisons l'option `out.width`:
 
 <br>
 
@@ -1898,7 +1898,7 @@ include_graphics("Module3/images/3_Rlogo.png")
 
 ### À vous de jouer ! {#exo3}
 
-Cet exercice vise à mettre en pratique les notions apprises pour la rédaction de documents R Markdown. Bien que la réponse soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Cet exercice vise à mettre en pratique les notions apprises pour la rédaction de documents R Markdown. Bien que la réponse soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 <br>
 
@@ -1910,7 +1910,7 @@ Cet exercice vise à mettre en pratique les notions apprises pour la rédaction 
 
 </div>
 
-Dans un premier temps, télécharger le dossier [Module3_donnees.zip](https://github.com/sci1031/data/raw/main/Module3_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient trois fichiers:
+Dans un premier temps, téléchargez le dossier [Module3_donnees.zip](https://github.com/sci1031/data/raw/main/Module3_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient trois fichiers:
 
 - `villes_qc.csv`.
 - `Mod3_resume.jpg`.
