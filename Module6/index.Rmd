@@ -1961,7 +1961,7 @@ Les arguments `width` et `height` sont des nombres entre 0 et 1. Ceux-ci corresp
 ## Exercices {#ex_carto}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#carto) de ce module.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 Cette série d'exercices utilise des données comprises avec la bibliothèque `tmap`. En particulier, vous utiliserez les données `World`, `metro`, et `land`. Charger ces données dans votre session `R`:
 
@@ -2176,7 +2176,7 @@ tm_shape(AS) +
 * Une vignette de hauteur 2 pour chaque *facette*.
 * Une couleur de fond blanc pour chaque vignette.
 * Un texte de taille 0.9 sur chaque vignette.
-* Une légende encadrée et positionnée à l'extérieure à gauche des panneaux.
+* Une légende encadrée et positionnée à l'extérieur à gauche des panneaux.
 * Une légende dont les chiffres sont arrondis à l'unité près, et séparés par le symbole "-".
 
 <details>
@@ -2240,7 +2240,7 @@ names(metro)
 ```
 <br>
 
-Les différents attributs correspondent aux tailles des populations des métropoles du monde à différentes années et leur projection pour l'année 2030.
+Les différents attributs correspondent aux tailles des populations des métropoles du monde à différentes années et à leur projection pour l'année 2030.
 
 <br>
 </p>
@@ -2340,8 +2340,8 @@ La couche `trees` illustre le pourcentage de couverture forestière par pixel. F
 **b)** Utiliser la palette de couleur `Greens` de la bibliothèque `RColorBrewer` pour produire une carte du pourcentage de couvert forestier. De plus, la carte doit comprendre les éléments suivants:
 
 * Six classes de pourcentage de couvert.
-* Un titre principal "Pourcentage de courvert forestier" de taille 1.
-* Une légende extérieure à la carte, située sous la carte, horizonale et sans titre.
+* Un titre principal "Pourcentage de couvert forestier" de taille 1.
+* Une légende extérieure à la carte, située sous la carte, horizontale et sans titre.
 * Une légende dont les chiffres sont séparés par le symbole "-".
 
 <details>
