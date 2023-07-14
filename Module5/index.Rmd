@@ -938,7 +938,7 @@ writeRaster(S_mult, "Module5/Module5_donnees/LaTuque-copie.tif")
 ## Exercices {#ex_mat}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#mat) de ce module et apprendrez à manipuler des données matricielles catégoriques.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 Les questions qui suivent se rapportent à des données matricielles de couvertures terrestres d'une petite région du Colorado aux États-Unis. Ce sont les données utilisées dans le tutoriel de [Nikki Inglis](https://www.smalltownbigdata.com/post/steamboat-springs-land-cover-data-nlcd) et qui proviennent du *National Land Cover Database* des États-Unis^[Les données peuvent être téléchargées sur le site du [*Multi-Resolution Land Characteristics Consortium*](https://www.mrlc.gov/).].
 
@@ -995,7 +995,7 @@ res(C2001)
 
 <br>
 
-**c)** En utilisant la fonction `st_crs()` de la library `sf`, déterminer en format `proj4string` le CRS utilisé ainsi que l'unité de mesure de la projection du *raster* de la couverture terrestre de 2001.
+**c)** En utilisant la fonction `st_crs()` de la library `sf`, déterminer en format `proj4string` le SCR utilisé ainsi que l'unité de mesure de la projection du *raster* de la couverture terrestre de 2001.
 
 <details>
 <summary> Réponse</summary>
@@ -1044,7 +1044,7 @@ st_crs(C2001) == st_crs(C2016)
 <summary> Réponse</summary>
 <p>
 
-Rappelons que les dimensions des rasters initiaux, `C2001` et `C2016`, sont `r dim(C2001)[1]` par `r dim(C2001)[2]` cellules. Sélectionnons une région carrée qui soit relativement centrale pour éviter les bordures.
+Rappelons que les dimensions des rasters initiaux, `C2001` et `C2016`, sont de `r dim(C2001)[1]` par `r dim(C2001)[2]` cellules. Sélectionnons une région carrée qui soit relativement centrale pour éviter les bordures.
 
 ```{r}
 R2001 <- C2001[1000:1499, 700:1199, drop=FALSE]
@@ -1090,7 +1090,7 @@ R2016f <- as.factor(R2016)
 </details> 
 <br>
 
-**d)** Déterminer l'identifiant des catégories de couverture terrestre. Combien de catégories différentes exitent-ils?
+**d)** Déterminer l'identifiant des catégories de couverture terrestre. Combien de catégories différentes exite-t-il?
 
 <details>
 <summary> Réponse</summary>
@@ -1254,7 +1254,7 @@ leafsync::latticeview(m2001, m2016, ncol = 2)
 ### Question 5 {-}
 
 
-En comparant les deux cartes pour les années 2001 et 2016 nous pouvons observer visuellement des changements dans la couverture terrestre. Cependant, nous désirons faire une comparaison plus quantitative de ces changements.
+En comparant les deux cartes pour les années 2001 et 2016, nous pouvons observer visuellement des changements dans la couverture terrestre. Cependant, nous désirons faire une comparaison plus quantitative de ces changements.
 
 Pour ce faire, nous pouvons utiliser la fonction `ratify()` de la bibliothèque `raster`. Celle-ci possède l'argument `count` qui permet de compter le nombre de cellules de chaque catégorie^(Noter que la fonction `ratify()`permet également de transformer un *raster* numérique en *raster* catégorique: voir la documentation sur cette [fonction](documentation.org/packages/raster/versions/3.5-15/topics/factors).). Par exemple:
 
@@ -1308,7 +1308,7 @@ sommaire
 ```
 <br>
 
-Nous pouvons maintenant utiliser les fonctions `which.max()` et `which.min()` qui identifient la position, dans un vecteur, des éléments de valeur maximimale et minimale respectivement. 
+Nous pouvons maintenant utiliser les fonctions `which.max()` et `which.min()` qui identifient la position, dans un vecteur, des éléments de valeur maximale et minimale respectivement. 
 
 ```{r}
 sommaire$Class[which.max(sommaire$Diff2016_2001)]
@@ -1316,7 +1316,7 @@ sommaire$Class[which.min(sommaire$Diff2016_2001)]
 ```
 <br>
 
-Ce sont donc les champs cultivés qui ont le plus augmenté et les peuplements d'arbustres qui ont le plus diminué au cours de cette période. Notez que votre réponse dépendra de la sélection de la région carrée fait en **a)**.
+Ce sont donc les champs cultivés qui ont le plus augmenté et les peuplements d'arbustes qui ont le plus diminué au cours de cette période. Notez que votre réponse dépendra de la sélection de la région carrée faite en **a)**.
 
 
 <br>
