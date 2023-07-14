@@ -393,7 +393,7 @@ Une grande partie du contenu de cette section  est tiré du livre numérique [An
 
 #### Installer R {-}
 
-Nous possédez déjà R sur votre ordinateur? Nous recommandons tout de même d'installer la plus récente version afin d'avoir la version la plus à jour pour être compatible avec les bibliothèques qui seront utilisées dans le cours.
+Vous possédez déjà R sur votre ordinateur? Nous recommandons tout de même d'installer la plus récente version afin d'avoir la version la plus à jour pour être compatible avec les bibliothèques qui seront utilisées dans le cours.
 
 ##### Windows {-}
 
@@ -425,7 +425,7 @@ Assurez-vous d'avoir la dernière version:
 
 ##### Vous utilisez une autre plateforme que RStudio ? {-}
 
-Si vous préférez *vraiment* un autre environnement de développement que RStudio, vous pouvez bien sûr l'utiliser. Aucun apprentissage dans ce cours est dépendant de RStudio. Toutefois, si, en cours de route, vous avez des questions liées à l'environnement que vous avez choisi d'utiliser, il n'est pas certain que la personne qui vous encadre sera en mesure de vous aider.
+Si vous préférez *vraiment* un autre environnement de développement que RStudio, vous pouvez bien sûr l'utiliser. Aucun apprentissage dans ce cours n'est dépendant de RStudio. Toutefois, si, en cours de route, vous avez des questions liées à l'environnement que vous avez choisi d'utiliser, il n'est pas certain que la personne qui vous encadre sera en mesure de vous aider.
 
 
 #### Apprivoiser RStudio {-}
@@ -438,11 +438,11 @@ knitr::include_graphics('Module1/images/1_rstudio.jpg')
 ```
 <br>
 
-La grande fenête à gauche est la **console** R. Vous pouvez y écrire des commandes R à éxécuter.
+La grande fenêtre à gauche est la **console** R. Vous pouvez y écrire des commandes R à exécuter.
 
 La fenêtre supérieure à droite contient les onglets **Environment / History / Connections**:
 
-* Environment: contient les objets que vous avez créé ou chargez dans votre session R.
+* Environment: contient les objets que vous avez créés ou chargez dans votre session R.
 * History: contient la liste des commandes que vous avez entrées dans la console `R. Cette fenêtre peut être utile pour retrouver des commandes que vous avez précédemment utilisées.
 * Connections: permet de se connecter à d'autres sources de données.
 
@@ -452,7 +452,7 @@ La fenêtre inférieur droite contient les onglets **Files / Plots / Packages / 
 
 * Plots: contient toutes les figures crées au cours de votre session R. Vous pouvez agrandir la figure (*Zoom*) et la sauvegarder dans le format de votre choix (*Export*).
 
-* Packages: contient la liste de toutes les bibliothèques installées sur votre ordinateur. À partir de cet onglet vous pouvez installer des nouvelles bibliothèques ou mettre à jour vos bibliothèques actuelles en cliquant sur les boutons *Install* et *Update* respectivement.
+* Packages: contient la liste de toutes les bibliothèques installées sur votre ordinateur. À partir de cet onglet, vous pouvez installer de nouvelles bibliothèques ou mettre à jour vos bibliothèques actuelles en cliquant sur les boutons *Install* et *Update* respectivement.
 
 * Help: présente la documentation R pour une fonction recherchée.
 
@@ -493,7 +493,7 @@ Sauvegarder un fichier R en lui donnant un nom qui a du sens. Ce nom doit être 
 
 #### Les bibliothèques {-}
 
-Une bibliothèque R, appellée "package" en anglais, est un ensemble de fonctions spécialisées créées par des experts ou des expertes dans un champ d'analyse précis.
+Une bibliothèque R, appelée "package" en anglais, est un ensemble de fonctions spécialisées créées par des experts ou des expertes dans un champ d'analyse précis.
 
 Pour **installer** une bibliothèque dans R à même la console, il faut utiliser la fonction `install.packages()`. Par exemple, la ligne de commande suivante installe la bibliothèque `mapview`:
 
@@ -518,7 +518,7 @@ Le répertoire de travail (*working directory* en anglais) est le dossier par d�
 
 Pour choisir un répertoire, aller dans le menu déroulant *Session* au haut de l'écran et sélectionner *Set Working Directory/Choose Directory ...*.
 
-Pour connaitre le répertoire de travail courrant, entrer la commande `getwd()` dans la console. Pour choisir un autre répertoire, il s'agit d'utiliser le commande `setwd()` en identifiant le chemin (*path*) vers le répertoire désiré:
+Pour connaitre le répertoire de travail courant, entrer la commande `getwd()` dans la console. Pour choisir un autre répertoire, il s'agit d'utiliser la commande `setwd()` en identifiant le chemin (*path*) vers le répertoire désiré:
 
 ```{r, eval = FALSE, echo = TRUE}
 setwd("C:/Users/Elise/TELUQ/SCI1031/Module4/Module4_Donnees")
@@ -599,7 +599,7 @@ paste(obj1, obj2)
 
 #### Les catégories de données {-}
 
-Dans le cadre de ce cours nous utiliserons quatre principales catégories ou classes de données supportées par R:
+Dans le cadre de ce cours, nous utiliserons quatre principales catégories ou classes de données supportées par R:
 
 
 * Numérique (*numeric* en anglais) est un nombre décimal ou un nombre entier.
@@ -637,7 +637,7 @@ obj_fac
 ```
 <br>
 
-La fonction `class()` permet de connaitre la catégorie d'une données.
+La fonction `class()` permet de connaitre la catégorie d'une donnée.
 ```{r}
 class(obj_num)
 class(obj_ent)
@@ -870,7 +870,7 @@ list_ex1$couleur[2]
 
 ##### Les data frames {-}
 
-Un *data frame* est un tableau de données à deux dimensions, semblable à une matrice, mais pouvant contenir des données de différentes classes. Généralement chaque ligne du tableau correspond à une observation et chaque colonne à une variable mesurée. Les *data frames* sont similaires à un tableau Excel. Ils peuvent aussi être perçus comme une combinaison de vecteurs de même longueur.
+Un *data frame* est un tableau de données à deux dimensions, semblable à une matrice, mais pouvant contenir des données de différentes classes. Généralement, chaque ligne du tableau correspond à une observation et chaque colonne à une variable mesurée. Les *data frames* sont similaires à un tableau Excel. Ils peuvent aussi être perçus comme une combinaison de vecteurs de même longueur.
 
 Nous pouvons créer un *data frame* en utisant la fonction `data.frame()`:
 ```{r}
@@ -919,7 +919,7 @@ str(tab_ex2)
 ```
 <br>
 
-Parfois les *data frame* peuvent contenir beaucoup de variables et d'observations. Dans ces situations, il peut être utile d'utiliser les fonctions `head()` ou `tail()` qui retournent les 5 premières et les 5 dernières lignes du tableau respectivement.
+Parfois, les *data frame* peuvent contenir beaucoup de variables et d'observations. Dans ces situations, il peut être utile d'utiliser les fonctions `head()` ou `tail()` qui retournent les 5 premières et les 5 dernières lignes du tableau respectivement.
 ```{r}
 head(tab_ex2)
 ```
@@ -998,7 +998,7 @@ Nous pouvons également utiliser la fonction `write.csv()` pour exporter les don
 write.csv(tab_ex1, file = "voitures.csv", row.names = FALSE)
 ```
 <br>
-Dans ce cas, il n'est pas nécessaire les arguments `col.names = TRUE` et `sep = ","` sont pris par défaut, et il n'est donc pas nécessaire de les préciser.
+Dans ce cas, les arguments `col.names = TRUE` et `sep = ","` sont pris par défaut, et il n'est donc pas nécessaire de les préciser.
 
 <br>
 
@@ -1094,7 +1094,7 @@ plot(x,y,
 
 ##### Histogramme
 
-Nous utilisons la fonction `hist()` pour produire un histogramme qui illustre le nombre ou la fréquence d'observation qui ont une certaines valeurs.
+Nous utilisons la fonction `hist()` pour produire un histogramme qui illustre le nombre ou la fréquence d'observation qui ont une certaine valeur.
 
 ```{r, out.width = '60%', dev = 'png'}
 # générer 20 nombres aléatoires à partir d'une
@@ -1140,9 +1140,9 @@ boxplot(x)
 ```
 <br>
 
-Le trait horizonal foncé au centre correspond à la valeur médiane. La ligne supérieure de la boîte correspond au 75^ième^ percentile (3^ième^ quartile) et la ligne inférieure de la boîte au 25^ième^ percentile (1^er^ quartile)
+Le trait horizontal foncé au centre correspond à la valeur médiane. La ligne supérieure de la boîte correspond au 75^ième^ percentile (3^ième^ quartile) et la ligne inférieure de la boîte au 25^ième^ percentile (1^er^ quartile).
 
-Comme pour les autres types de graphique, nous pouvons personnaliser les diagrammes à boîtes en ajoutant des arguments à la fonction `boxplot()`
+Comme pour les autres types de graphique, nous pouvons personnaliser les diagrammes à boîtes en ajoutant des arguments à la fonction `boxplot()`.
 
 ```{r, out.width = '60%', dev = 'png'}
 boxplot(tab_ex2$age,
@@ -1158,7 +1158,7 @@ boxplot(tab_ex2$age,
 ### À vous de jouer! {#exo1}
 
 
-Dans cette section, vous allez mettre en pratique les concepts enseignés en utilisant des données sur les municipalités du Québec qui proviennent du [répertoire des municipalités du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/repertoire-des-municipalites-du-quebec/resource/19385b4e-5503-4330-9e59-f998f5918363). Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Dans cette section, vous allez mettre en pratique les concepts enseignés en utilisant des données sur les municipalités du Québec qui proviennent du [répertoire des municipalités du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/repertoire-des-municipalites-du-quebec/resource/19385b4e-5503-4330-9e59-f998f5918363). Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 <br>
 
@@ -1176,7 +1176,7 @@ Télécharger le dossier [Module1_donnees.zip](https://github.com/sci1031/data/r
 
 #### Question 1 {-}
 
-**a)** Utiliser la fonction `read.csv` pour importer les données dans votre session de travail R. Nommer l'objet importer *villes*.
+**a)** Utiliser la fonction `read.csv` pour importer les données dans votre session de travail R. Nommer l'objet importé *villes*.
 
 
 <details>
@@ -1302,7 +1302,7 @@ class(villes$munnom=="Montréal")
 
 <br>
 
-**b)** Créer l'objet `villes_Outaouais` qui contient les entrées du *data frame* `villes` pour toutes les municipalités de la région administrative de l'Ouatouais.
+**b)** Créer l'objet `villes_Outaouais` qui contient les entrées du *data frame* `villes` pour toutes les municipalités de la région administrative de l'Outaouais.
 
 <details>
 <summary> Réponse</summary>
@@ -1323,7 +1323,7 @@ head(villes_Outaouais)
 
 #### Question 3 {-}
 
-**a)** Créer un histogramme de la distibution de la population des villes du Québec comprenant une dizaine de bandes. Utiliser la fonction `log10()` pour représenter la taille des populations. Préciser les axes de votre graphique adéquatement.
+**a)** Créer un histogramme de la distribution de la population des villes du Québec comprenant une dizaine de bandes. Utiliser la fonction `log10()` pour représenter la taille des populations. Préciser les axes de votre graphique adéquatement.
 
 <details>
 <summary> Réponse</summary>
