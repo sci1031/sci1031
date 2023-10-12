@@ -13,7 +13,7 @@ Ce module porte sur les systèmes de coordonnées de référence (SRC). Nous avo
 
 -	Expliquer la différence entre un ellipsoïde local et un ellipsoïde global.
 -	Définir ce qu’est un datum et nommer des datums courants. 
--	Expliquer la différence entre le système de coordonnées géographique et le système de coordonnées projeté.
+-	Expliquer la différence entre le système de coordonnées géographiques et le système de coordonnées projetées.
 -	Définir les propriétés permettant de catégoriser les projections
 -	Nommer des projections courantes.
 
@@ -53,7 +53,7 @@ knitr::include_graphics('Module3/images/3_forces.jpg')
 Le  **géoïde** est un modèle de la Terre qui tient compte de l’effet du champ gravitationnel. C’est une surface équipotentielle^["Une surface où le potentiel est constant et qui est en tous points perpendiculaire à la direction dans laquelle s'exerce la pesanteur. Une surface équipotentielle est de niveau, c.-à-d. que l'eau y reste au repos". Définition de [Ressources Naturelles Canada](https://www.rncan.gc.ca/modernisation-systeme-reference-altimetrique/9055#surface_equipotentielle)] du champ de gravité de la Terre qui coïncide avec le niveau moyen des océans (Figure \@ref(fig:geoide)). 
 
 <br>
-```{r geoide, fig.align='left', echo=FALSE,fig.cap="Le géoïde. a) La forme irrégulière du géoïde avec des bosses et de creux créer par le champ gravitationnel agissant de façon inégale sur la Terre (source : Bezdek et Sebera 2013). b) Le géoïde coïncide avec le niveau moyen des océans et se distingue de l’ellipsoïde (figure adaptée de [USGS](earthquake.usgs.gov)).", out.width = '100%'}
+```{r geoide, fig.align='left', echo=FALSE,fig.cap="Le géoïde. a) La forme irrégulière du géoïde avec des bosses et des creux créés par le champ gravitationnel agissant de façon inégale sur la Terre (source : Bezdek et Sebera 2013). b) Le géoïde coïncide avec le niveau moyen des océans et se distingue de l’ellipsoïde (figure adaptée de [USGS](earthquake.usgs.gov)).", out.width = '100%'}
 knitr::include_graphics('Module3/images/3_geoide.jpg')
 ```
 <br>
@@ -74,9 +74,9 @@ knitr::include_graphics('Module3/images/3_ellipses.jpg')
 
 Un **datum** est un système de référence qui détermine la position d’un ellipsoïde sur la Terre : c’est-à-dire son origine par rapport au centre du globe, ainsi que son orientation. 
 
-Les **datums géocentriques** sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre . Puisque aucun ellipsoïde n’épouse parfaitement la surface de la Terre,  il y a toujours une certaine marge d’erreur à l’utilisation d’un datum géocentrique (Figure \@ref(fig:ellipsoides)). 
+Les **datums géocentriques** sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre . Puisqu'aucun ellipsoïde n’épouse parfaitement la surface de la Terre,  il y a toujours une certaine marge d’erreur à l’utilisation d’un datum géocentrique (Figure \@ref(fig:ellipsoides)). 
 
-La communauté internationale a adopté différent modèles d’ellipsoïdes globaux au fil du temps avec l’amélioration des techniques spatiales de télémétrie et de positionnement [@Theriault2010]. Ces ellipsoïdes diffèrent par les paramètres mathématiques utilisés pour les définir. 
+La communauté internationale a adopté différents modèles d’ellipsoïdes globaux au fil du temps avec l’amélioration des techniques spatiales de télémétrie et de positionnement [@Theriault2010]. Ces ellipsoïdes diffèrent par les paramètres mathématiques utilisés pour les définir. 
 
 Les principaux systèmes de référence globaux utilisés présentement à travers de monde sont le Geodetic Reference System 1980 (**GRS80**), adopté par [l’Union Géodésique et Géophysique Internationale](http://fr.iugg.org/) et le World Geodetic System 1984 (**WGS84**), défini par le [National Geospatial-Intelligence Agency](https://www.nga.mil/) des États-Unis (Figure \@ref(fig:datum)). Le Global Positioning System (le GPS) utilise le WGS 84. 
 
@@ -98,7 +98,7 @@ knitr::include_graphics('Module3/images/3_ITRF.jpg')
 
 Les **datums locaux** sont associés à des ellipsoïdes locaux. Ce sont des systèmes de référence dont l’origine de l’ellipsoïde est décalée par rapport au centre de la Terre. 
 
-Un datum local fait correspondre un point de la surface de l’ellipsoïde local à un point de la surface de la Terre. Ce point de référence est fixe et il sert « d’ancrage » au datum. C’est le point d’origine du système de référence local, et il est souvent basé sur une plaque tectonique. Il existe des centaines de datum local servant de système de référence à différentes régions du globe. Il est possible d’utiliser le même ellipsoïde pour définir différents datums.
+Un datum local fait correspondre un point de la surface de l’ellipsoïde local à un point de la surface de la Terre. Ce point de référence est fixe et il sert « d’ancrage » au datum. C’est le point d’origine du système de référence local, et il est souvent basé sur une plaque tectonique. Il existe des centaines de datums locaux servant de système de référence à différentes régions du globe. Il est possible d’utiliser le même ellipsoïde pour définir différents datums.
 
 
 Le système de référence utilisé en Amérique du Nord est le North American Datum of 1983 (**NAD83**). Il est basé sur l’ellipsoïde GRS80 et est fixé à la plaque tectonique nord-américaine. Le European Terrestrial Reference System of 1989 (**ETRS89**) est le système de référence utilisé en Europe. Il est aussi basé sur l’ellipsoïde GRS80 mais est fixé à la plaque tectonique eurasienne. On peut utiliser un datum local seulement pour la région pour laquelle il a été conçu. Ainsi, il serait erroné d’utiliser le ETRS89 pour définir la localisation d’un phénomène spatial au Québec.
@@ -124,10 +124,10 @@ knitr::include_graphics('Module3/images/3_SCRS.jpg')
 
 La localisation géographique se fait à partir d’un système de coordonnées. Multiples systèmes de coordonnées peuvent être définis, et les coordonnées d’un endroit sur Terre différeront selon le système utilisé. Il existe deux types de système de coordonnées : le système de coordonnées géographiques et le système de coordonnées projetées. 
 
-Le **système de coordonnées géographique** représente la Terre comme une sphère et donne des coordonnées en trois dimensions pour se situer sur sa surface. Le système géographique est défini par le datum choisi (qui peut être local ou global), une unité angulaire de mesure et un méridien principal [@Esri_mapproj] (Figure \@ref(fig:philambda)).
+Le **système de coordonnées géographiques** représente la Terre comme une sphère et donne des coordonnées en trois dimensions pour se situer sur sa surface. Le système géographique est défini par le datum choisi (qui peut être local ou global), une unité angulaire de mesure et un méridien principal [@Esri_mapproj] (Figure \@ref(fig:philambda)).
 
 <br>
-```{r philambda, fig.align='left', echo=FALSE,fig.cap="Le système de coordonnées géographique. Les points à la surface de la Terre sont définis par les coordonnées sphériques ($\\phi$,$\\lambda$) associées à la longitude (ligne mauve) et à la latitude (ligne bleue foncée) respectivement. Le point rouge possède les coordonnées ($\\phi$,$\\lambda$) = (50$^{\\circ}$ E, 40$^{\\circ}$ N). La ligne jaune représente le méridien principal. Source : Esri, image récupérée à https://desktop.arcgis.com/fr/arcmap/10.3/guide-books/map-projections/geographic-coordinate-system.htm", out.width = '60%'}
+```{r philambda, fig.align='left', echo=FALSE,fig.cap="Le système de coordonnées géographiques. Les points à la surface de la Terre sont définis par les coordonnées sphériques ($\\phi$,$\\lambda$) associées à la longitude (ligne mauve) et à la latitude (ligne bleue foncée) respectivement. Le point rouge possède les coordonnées ($\\phi$,$\\lambda$) = (50$^{\\circ}$ E, 40$^{\\circ}$ N). La ligne jaune représente le méridien principal. Source : Esri, image récupérée à https://desktop.arcgis.com/fr/arcmap/10.3/guide-books/map-projections/geographic-coordinate-system.htm", out.width = '60%'}
 knitr::include_graphics('Module3/images/3_philambda.jpg')
 ```
 <br>
@@ -144,26 +144,26 @@ knitr::include_graphics('Module3/images/3_graticule.jpg')
 ```
 <br>
 
-Le **système de coordonnées projeté**, quant à lui, réfère à une transformation mathématique permettant de représenter sous forme de carte plane la réalité tridimensionnelle de la Terre (Figure \@ref(fig:planprojection)).   
+Le **système de coordonnées projetées**, quant à lui, réfère à une transformation mathématique permettant de représenter sous forme de carte plane la réalité tridimensionnelle de la Terre (Figure \@ref(fig:planprojection)).   
 
 <br>
-```{r planprojection, fig.align='left', echo=FALSE,fig.cap="Le système de coordonnées projeté. Il permet de représenter sur une surface plane bidimensionnelle la surface tridimensionnelle de la carte à l’aide d’une transformation mathématique $(x,y) = f(\\phi, \\lambda)$", out.width = '90%'}
+```{r planprojection, fig.align='left', echo=FALSE,fig.cap="Le système de coordonnées projetées. Il permet de représenter sur une surface plane bidimensionnelle la surface tridimensionnelle de la carte à l’aide d’une transformation mathématique $(x,y) = f(\\phi, \\lambda)$", out.width = '90%'}
 knitr::include_graphics('Module3/images/3_planprojection.png')
 ```
 <br>
 
 
-Les systèmes de coordonnées projetés sont nécessaires pour la création de cartes géographiques. Cependant, puisqu’il est impossible de représenter parfaitement la surface d’un objet tridimensionnel sur une carte plane, les systèmes projetés génèrent certaines distorsions (ou déformations) : forme, distance, direction, etc. Par ailleurs, toutes les projections conservent un élément important de la cartographie : la précision de la localisation géographique.
+Les systèmes de coordonnées projetées sont nécessaires pour la création de cartes géographiques. Cependant, puisqu’il est impossible de représenter parfaitement la surface d’un objet tridimensionnel sur une carte plane, les systèmes projetés génèrent certaines distorsions (ou déformations) : forme, distance, direction, etc. Par ailleurs, toutes les projections conservent un élément important de la cartographie : la précision de la localisation géographique.
 
 ### Les projections
 
-On peut catégoriser les systèmes de coordonnées projetés selon la classe de transformations mathématiques utilisées, le type d’intersections entre le globe et le plan, l’orientation du plan, et le type de distorsions créé sur le plan. 
+On peut catégoriser les systèmes de coordonnées projetées selon la classe de transformations mathématiques utilisées, le type d’intersections entre le globe et le plan, l’orientation du plan, et le type de distorsions créé sur le plan. 
 
 ###### Classes de transformations {-}
 
-On distingue trois classes principales de transformation pour créer un système de coordonnées projeté (Figure \@ref(fig:classes)). 
+On distingue trois classes principales de transformation pour créer un système de coordonnées projetées (Figure \@ref(fig:classes)). 
 
-**Cylindrique** : la surface de la Terre est projetée sur un plan enroulé comme un cylindre. Généralement le cylindre coïncide avec le globe le long d’un parallèle (p.ex. l’équateur).
+**Cylindrique** : la surface de la Terre est projetée sur un plan enroulé comme un cylindre. Généralement, le cylindre coïncide avec le globe le long d’un parallèle (p.ex. l’équateur).
 
 **Conique** : la surface de la Terre est projetée sur un cône. Le cône et le globe coïncident le long d’un ou de deux parallèles. Pour aplanir le cône, il est découpé le long d’un méridien, généralement le méridien opposé au méridien principal. 
 
@@ -180,11 +180,11 @@ knitr::include_graphics('Module3/images/3_classeprojection.jpg')
 
 Il existe deux types d’intersection entre un plan et la surface du globe (Figure \@ref(fig:intersection)).
 
-**Tangente** : le plan touche la surface du globe à un seul point (azimutal) ou le long d’une seule ligne (cylindrique et conique). Les transformations illustrées à la Figure classes sont toutes tangentes.
+**Tangente** : le plan touche la surface du globe à un seul point (azimutal) ou le long d’une seule ligne (cylindrique et conique). Les transformations illustrées à la Figure \@ref(fig:classes) sont toutes tangentes.
 
-**Sécante** : le plan traverse la surface du globe le long d’une seule ligne (azimutal) ou le long de deux lignes (cylindrique et conique). Ces lignes sont appelées les parallèles standards. Les transformations illustrées à la Figure intersection sont toutes sécantes.
+**Sécante** : le plan traverse la surface du globe le long d’une seule ligne (azimutal) ou le long de deux lignes (cylindrique et conique). Ces lignes sont appelées les parallèles standards. Les transformations illustrées à la Figure intersection (Figure \@ref(fig:intersection)) sont toutes sécantes.
 
-Notez qu’il n’y a pas de distorsion au point ou à la ligne d’intersection car à cet endroit les systèmes de coordonnées géographiques et projetés coïncident parfaitement.
+Notez qu’il n’y a pas de distorsion au point ou à la ligne d’intersection car à cet endroit les systèmes de coordonnées géographiques et projetées coïncident parfaitement.
 
 <br>
 ```{r intersection, fig.align='left', echo=FALSE,fig.cap="Plans de projection sécants avec le globe. Illustrations pour les classes de projection cylindrique (gauche), conique (centre) et azimutale (droit). Source : Esri. Image adaptée d’illustrations récupérées à https://desktop.arcgis.com/en/arcmap/10.3/guide-books/map-projections/projection-types.htm", out.width = '90%'}
@@ -197,11 +197,11 @@ knitr::include_graphics('Module3/images/3_secante.jpg')
 
 Le plan de projection peut être positionné selon trois différentes orientations par rapport au globe. 
 
-**Normale** : le plan est parallèle par rapport à l’axe Nord-Sud du globe. Les transformations illustrées aux Figure classes et intersection sont toutes normales.
+**Normale** : le plan est parallèle à l’axe Nord-Sud du globe. Les transformations illustrées aux Figure \@ref(fig:classes) et \@ref(fig:intersection) sont toutes normales.
 
 **Transverse** : le plan est perpendiculaire à l’axe Nord-Sud du globe (Figure \@ref(fig:orientation) gauche).
 
-**Oblique** : le plan est ni parallèle ni perpendiculaire à l’axe Nord-Sud du globe (Figure \@ref(fig:orientation) droite).
+**Oblique** : le plan n'est ni parallèle ni perpendiculaire à l’axe Nord-Sud du globe (Figure \@ref(fig:orientation) droite).
 
 <br>
 ```{r orientation, fig.align='left', echo=FALSE,fig.cap="Orientations du plan de projection. Orientation transversale (gauche), aussi appelée équatoriale pour la projection azimutale, et orientation oblique (droit). Source : Esri. Image adaptée d’illustrations récupérées à https://desktop.arcgis.com/en/arcmap/10.3/guide-books/map-projections/projection-types.htm", out.width ='60%'}
@@ -211,7 +211,7 @@ knitr::include_graphics('Module3/images/3_orientation.jpg')
 
 ###### Distorsion {-}
 
-Les projections produisent toutes une certaine forme de distorsion. On caractérise un système de coordonnées projeté selon la propriété qu’il conserve, c-à-d la propriété qu’il ne déforme pas. Il y a trois propriétés importantes qui sont ou non conservées (en tenant compte de l’échelle de la carte): la forme, la superficie et la distance.
+Les projections produisent toutes une certaine forme de distorsion. On caractérise un système de coordonnées projetées selon la propriété qu’il conserve, c-à-d la propriété qu’il ne déforme pas. Il y a trois propriétés importantes qui sont ou non conservées (en tenant compte de l’échelle de la carte): la forme, la superficie et la distance.
 
 **Conforme** : la projection conserve localement les angles entre les droites. Les cartes de navigation, notamment, sont produites par des projections conformes pour mesurer adéquatement la direction de trajectoires. La conformité implique également la conservation de la forme des régions de petite superficie. 
 
@@ -222,7 +222,7 @@ Les projections produisent toutes une certaine forme de distorsion. On caractér
 Aucune projection ne peut être à la fois conforme et équivalente. Plusieurs projections offrent des compromis entre ces deux propriétés.
 
 
-Il existe plus de deux cent projections distinctes créées au cours de l’Histoire par les scientifiques, notamment des astronomes, des géographes, et des navigateurs. La figure \@ref(fig:projections) illustre un petit sous-ensemble de projections. La projection cylindrique équidistante (coin supérieur gauche de la figure \@ref(fig:projections) a été créée par Marinus de Tyr, un astronome d’origine phénicienne, vers l’an 100. Plusieurs projections sont identifiées par le nom de la personne qui en a fait la découverte. Par exemple, Gérard Mercator est un mathématicien et géographe flamand du 16e siècle, et Jean-Henri Lambert est un mathématicien, cartographe et astronome d’origine alsacienne du 18e siècle. 
+Il existe plus de deux cents projections distinctes créées au cours de l’Histoire par les scientifiques, notamment des astronomes, des géographes, et des navigateurs. La figure \@ref(fig:projections) illustre un petit sous-ensemble de projections. La projection cylindrique équidistante (coin supérieur gauche de la figure \@ref(fig:projections)) a été créée par Marinus de Tyr, un astronome d’origine phénicienne, vers l’an 100. Plusieurs projections sont identifiées par le nom de la personne qui en a fait la découverte. Par exemple, Gérard Mercator est un mathématicien et géographe flamand du 16e siècle, et Jean-Henri Lambert est un mathématicien, cartographe et astronome d’origine alsacienne du 18e siècle. 
 
 <br>
 ```{r projections, fig.align='left', echo=FALSE,fig.cap="Sélection de 12 projections.  L’ensemble des cartes est tiré du site : https://map-projections.net/", out.width = '90%'}
@@ -232,7 +232,7 @@ knitr::include_graphics('Module3/images/3_projections.jpg')
 
 Je vous invite à consulter le site très intéressant de [Tobias Jung](https://map-projections.net/) où un grand nombre de projections est répertorié. Vous pouvez connaître les propriétés des projections et aussi comparer deux projections entre elles. Jetez-y un coup d’œil!
 
-Sur ce site vous pourrez apprendre, par exemple, que les projections de Mollweide, de Bonne, Equal Earth et eumorphique de Boggs sont équivalentes, alors que les projections de Mercator et de Lagrange sont conformes. Les projections de Mercator et cylindrique équidistante, comme son nom l’indique, sont équidistantes.
+Sur ce site, vous pourrez apprendre, par exemple, que les projections de Mollweide, de Bonne, Equal Earth et eumorphique de Boggs sont équivalentes, alors que les projections de Mercator et de Lagrange sont conformes. Les projections de Mercator et cylindrique équidistante, comme son nom l’indique, sont équidistantes.
 
 L’indicatrice de Tissot permet d’illustrer les déformations produites par une projection (Figure \@ref(fig:tissot)). Cette indicatrice porte le nom du cartographe français, Nicolas Auguste Tissot, qui l’a créé au 19e siècle. Le niveau de changement de la taille et de la forme des cercles rouges permet de repérer les endroits sur la carte de plus fortes déformations. 
 
@@ -246,9 +246,9 @@ knitr::include_graphics('Module3/images/3_tissot.jpg')
 
 ###### Projection de Mercator {-}
 
-La *projection de Mercator* (Figure Mercator, Figure projections et Figure tissot coin supérieur droit) est une projection cylindrique conforme. Les méridiens y sont parallèles et équidistants. Les parallèles (les lignes de latitude) sont aussi parallèles. Cependant, elles s’écartent les unes des autres au fur et à mesure qu’elles s’éloignent de l’équateur [@Esri_mapproj].
+La *projection de Mercator* (Figure \@ref(fig:Mercator), Figure \@ref(fig:projections) et Figure \@ref(fig:tissot) coin supérieur droit) est une projection cylindrique conforme. Les méridiens y sont parallèles et équidistants. Les parallèles (les lignes de latitude) sont aussi parallèles. Cependant, elles s’écartent les unes des autres au fur et à mesure qu’elles s’éloignent de l’équateur [@Esri_mapproj].
 
-La projection de Mercator fût originalement conçue pour la navigation puisqu’elle préserve les angles. Elle préserve aussi les formes ce qui la rend très populaire pour la cartographie aux échelles régionales. Par ailleurs, la projection de Mercator ne préserve pas les superficies. Elle génère de grandes distorsions aux pôles (Figure \@ref(fig:tissot) coin supérieur droit). Par exemple, la superficie du Groenland apparait être aussi grande que celle de l’Afrique sur une projection de Mercator (Figure \@ref(fig:Mercator), gauche). En vérité, la superficie du Groenland (2 166 086 km$^{2}$, en mauve sur la Figure Mercator, droit) est inférieure à celle de l’Algérie (2 381 741 km$^{2}$, en orange sur la Figure \@ref(fig:Mercator), droit). Ces distorsions rendent la projection de Mercator peu adéquate pour produire des cartes à l’échelle mondiale.
+La projection de Mercator fut originalement conçue pour la navigation puisqu’elle préserve les angles. Elle préserve aussi les formes, ce qui la rend très populaire pour la cartographie aux échelles régionales. Par ailleurs, la projection de Mercator ne préserve pas les superficies. Elle génère de grandes distorsions aux pôles (Figure \@ref(fig:tissot) coin supérieur droit). Par exemple, la superficie du Groenland apparait être aussi grande que celle de l’Afrique sur une projection de Mercator (Figure \@ref(fig:Mercator), gauche). En vérité, la superficie du Groenland (2 166 086 km$^{2}$, en mauve sur la Figure Mercator, droit) est inférieure à celle de l’Algérie (2 381 741 km$^{2}$, en orange sur la Figure \@ref(fig:Mercator), droit). Ces distorsions rendent la projection de Mercator peu adéquate pour produire des cartes à l’échelle mondiale.
 
 <br>
 ```{r Mercator, fig.align='left', echo=FALSE,fig.cap="Projection de Mercator. À gauche, on observe que les méridiens sont équidistants tandis que les parallèles s’écartent en se dirigeant vers les pôles (source : Tobias Jung, https://map-projections.net/). À droite, on observe que la superficie réelle du Groenland (en mauve) est similaire à celle de l’Algérie (source : https://thetruesize.com/", out.width = '90%'}
@@ -256,7 +256,7 @@ knitr::include_graphics('Module3/images/3_Mercator.jpg')
 ```
 <br>
 
-Les services de cartographie en ligne, comme Google Maps, OpenStreetMap, Bing Maps ou Mapquest, utilise la **projection Web de Mercator** (avec le datum WGS84). Cette projection est légèrement différente de la projection usuelle de Mercator (elle utilise la transformation sphérique plutôt que ellipsoïdal) produisant des cartes qui ne sont pas tout à fait conformes [@PROJ].
+Les services de cartographie en ligne, comme Google Maps, OpenStreetMap, Bing Maps ou Mapquest, utilisent la **projection Web de Mercator** (avec le datum WGS84). Cette projection est légèrement différente de la projection usuelle de Mercator (elle utilise la transformation sphérique plutôt qu'ellipsoïdal) produisant des cartes qui ne sont pas tout à fait conformes [@PROJ].
 
 
 ###### Projection Transverse universelle de Mercator {-}
@@ -273,7 +273,7 @@ La projection transverse de Mercator est réalisée sur chacune des zones de fa�
 
 Les coordonnées d’un point dans ce système projeté sont données d’abord par le numéro de la zone dans laquelle il se situe, puis par sa position au sein de la zone, c’est-à-dire par sa longitude et sa latitude mesurées en mètre. On utilise souvent les appellations anglaises pour désigner les longitudes, eastings, et les latitudes, northings. 
 
-Par convention, on associe au méridien central la longitude de 500000 m (500 km). Si le point se situe à l’ouest du méridien central, sa longitude est déterminée en soustrayant la valeur 500000 m de la distance à laquelle il se trouve du méridien. À l’opposé, si le point se trouve à l’est du méridien central, sa longitude sera déterminée en ajoutant 500000 m à la distance qui le sépare du méridien. Les latitudes sont déterminées à partir de l’équateur. Dans l’hémisphère nord, l’équateur correspond à l’origine (0 m) et la latitude d’un point est déterminée par la distance qui le sépare de l’équateur. Dans l’hémisphère sud, l’équateur correspond à la valeur 10 000 000 m, et la latitude d’un point est déterminée en soustrayant à 10 000 000 m la distance qui le sépare de l’équateur (Figure \@ref(fig:fuseau)). Ces conventions sont utilisées de manière à avoir toujours des coordonnées positives dans la zone couverte par la projection.
+Par convention, on associe au méridien central la longitude de 500 000 m (500 km). Si le point se situe à l’ouest du méridien central, sa longitude est déterminée en soustrayant la valeur 500 000 m de la distance à laquelle il se trouve du méridien. À l’opposé, si le point se trouve à l’est du méridien central, sa longitude sera déterminée en ajoutant 500 000 m à la distance qui le sépare du méridien. Les latitudes sont déterminées à partir de l’équateur. Dans l’hémisphère nord, l’équateur correspond à l’origine (0 m) et la latitude d’un point est déterminée par la distance qui le sépare de l’équateur. Dans l’hémisphère sud, l’équateur correspond à la valeur 10 000 000 m, et la latitude d’un point est déterminée en soustrayant à 10 000 000 m la distance qui le sépare de l’équateur (Figure \@ref(fig:fuseau)). Ces conventions sont utilisées de manière à avoir toujours des coordonnées positives dans la zone couverte par la projection.
 
 <br>
 ```{r fuseau, fig.align='left', echo=FALSE,fig.cap="Longitudes et latitudes à l’intérieur d’une zone de la projection UTM. Source : http://geokov.com/ ", out.width = '50%'}
@@ -289,7 +289,7 @@ knitr::include_graphics('Module3/images/3_UTM_Quebec.jpg')
 ```
 <br>
 
-Pour réduire les problèmes liés aux déformations associées au système UTM, le Québec s’est doté de son propre système : la **projection modifiée transverse de Mercator** (MTM). Le système MTM est identique au système UTM à la différence que chaque zone couvre une longitude de 3$^{\circ}$. Les zones étant plus petites, les distorsions sont réduites. Les zones sont numérotées de 1 à 8 débutant aux Iles-de-la-Madeleine et se terminant en Abitibi (Figure \@ref(fig:MTMQuebec)). On associe au méridien central des zones MTM la longitude de 304800 m. 
+Pour réduire les problèmes liés aux déformations associées au système UTM, le Québec s’est doté de son propre système : la **projection modifiée transverse de Mercator** (MTM). Le système MTM est identique au système UTM à la différence que chaque zone couvre une longitude de 3$^{\circ}$. Les zones étant plus petites, les distorsions sont réduites. Les zones sont numérotées de 1 à 8 débutant aux Iles-de-la-Madeleine et se terminant en Abitibi (Figure \@ref(fig:MTMQuebec)). On associe au méridien central des zones MTM la longitude de 304 800 m. 
 
 <br>
 ```{r MTMQuebec, fig.align='left', echo=FALSE,fig.cap="Projection Mercator Transverse Modifiée au Québec. Source: @Lapointe2005", out.width = '50%'}
@@ -299,7 +299,7 @@ knitr::include_graphics('Module3/images/3_MTM_Quebec.jpg')
 
 ###### Projection conique conforme de Lambert {-}
 
-La **projection conique conforme de Lambert** (LCC) conserve, comme son nom l’indique, la forme des régions ainsi que les angles. Cette projection est également sécante : il n’y a de distorsion le long des deux parallèles standards (Figure \@ref(fig:LCC)). La projection LCC est particulièrement utile pour représenter les régions de latitudes moyennes, comme l’Amérique du Nord, mais elle est également utilisée en Europe.
+La **projection conique conforme de Lambert** (LCC) conserve, comme son nom l’indique, la forme des régions ainsi que les angles. Cette projection est également sécante : il n’y a pas de distorsion le long des deux parallèles standards (Figure \@ref(fig:LCC)). La projection LCC est particulièrement utile pour représenter les régions de latitudes moyennes, comme l’Amérique du Nord, mais elle est également utilisée en Europe.
 
 <br>
 ```{r LCC, fig.align='left', echo=FALSE,fig.cap="Projection conique conforme de Lambert. Source : United States Geological Survey, récupérée sur Wikipedia", out.width = '60%'}
@@ -317,7 +317,7 @@ knitr::include_graphics('Module3/images/3_LCC_Canada.jpg')
 
 ### Représentation d'un SCR
 
-Les données spatiales doivent toujours être accompagnées de l'information permettant de connaître le système de coordonnées de référence qui leur est associé. Ces métadonnées peuvent être représenter (ou encoder) de différentes façons. 
+Les données spatiales doivent toujours être accompagnées de l'information permettant de connaître le système de coordonnées de référence qui leur est associé. Ces métadonnées peuvent être représentées (ou encodées) de différentes façons. 
 
 #### Le Well-known text {-}
 
@@ -332,7 +332,7 @@ st_crs(S)
 
 #### La syntaxe PROJ4 {-}
 
-La syntaxe [PROJ4](https://proj.org/) consiste en une liste de paramètres précédés par le symbole `+`. Elle donne une représentation du CRS de façon beaucoup plus concise. Voici un exemple:
+La syntaxe [PROJ4](https://proj.org/) consiste en une liste de paramètres précédés par le symbole `+`. Elle donne une représentation du SCR de façon beaucoup plus concise. Voici un exemple:
 
 ```{r, echo=FALSE, warning=FALSE}
 st_crs(S)$proj4string
@@ -359,7 +359,7 @@ Vous pouvez trouver d'autres paramètres [ici](https://proj.org/usage/projection
 
 #### Les codes EPSG {.unnumbered #code_epsg} 
 
-Le Comité de topographie et de positionnement (Surveying and Positionning Comittee) de l'Association internationale des producteurs de pétrole et de gaz (OGP), autrefois le European Petroleum Survey Group (EPSG), est une organisation scientifique liée à l’industrie pétrolière qui a mis en place une base de données répertoriant tous les systèmes de référence et les systèmes de coordonnées géographiques et projetés existants. Cette base de données, appelée le registre de codes **EPSG**, associe un code numérique à chaque système pour en faciliter l’identification et précise ses paramètres géodésiques et de projection. Vous pouvez consulter cette base de données [ici](https://www.epsg.org/).
+Le Comité de topographie et de positionnement (Surveying and Positionning Comittee) de l'Association internationale des producteurs de pétrole et de gaz (OGP), autrefois le European Petroleum Survey Group (EPSG), est une organisation scientifique liée à l’industrie pétrolière qui a mis en place une base de données répertoriant tous les systèmes de référence et les systèmes de coordonnées géographiques et projetées existants. Cette base de données, appelée le registre de codes **EPSG**, associe un code numérique à chaque système pour en faciliter l’identification et précise ses paramètres géodésiques et de projection. Vous pouvez consulter cette base de données [ici](https://www.epsg.org/).
 
 Vous pouvez aussi utiliser le site https://epsg.io/ et entrez ‘Quebec’ dans la fenêtre de recherche pour connaître les codes EPGS utilisés au Québec.
 
@@ -378,15 +378,15 @@ Ou encore:
 
 ### Résumé
 
-La figure ci-dessous (Figure \@ref(fig:Resume)) résume les étapes du processus utilisé pour définir un système de coordonnées géographique et un système de coordonnées projeté.
+La figure ci-dessous (Figure \@ref(fig:Resume)) résume les étapes du processus utilisé pour définir un système de coordonnées géographiques et un système de coordonnées projetées.
 
 <br>
-```{r Resume, fig.align='left', echo=FALSE,fig.cap="Résumé. Les étapes du processus pour définir un système de coordonnées géographique et un système de coordonnées projeté. Source : la figure utilise des pictogrammes créés par T. Grajecta (Noun Project)", out.width = '80%'}
+```{r Resume, fig.align='left', echo=FALSE,fig.cap="Résumé. Les étapes du processus pour définir un système de coordonnées géographiques et un système de coordonnées projetées. Source : la figure utilise des pictogrammes créés par T. Grajecta (Noun Project)", out.width = '80%'}
 knitr::include_graphics('Module3/images/3_resume.jpg')
 ```
 <br>
 
-Lorsqu’on représente des données spatiales par un système de coordonnées géographique, il faut **toujours** préciser le datum qui a été adopté. Lorsqu’on représente des données spatiales par un système de coordonnées projeté, il faut **toujours** préciser le datum et la projection.
+Lorsqu’on représente des données spatiales par un système de coordonnées géographiques, il faut **toujours** préciser le datum qui a été adopté. Lorsqu’on représente des données spatiales par un système de coordonnées projetées, il faut **toujours** préciser le datum et la projection.
 
 Lorsqu’on combine des couches de données différentes, on doit s’assurer qu’elles s’appuient sur le même datum et la même projection. Si ce n’est pas le cas, on peut transformer le système de référence et le système de projection. Nous verrons comment procéder à ces transformations dans le [module 7](#manip_vec) et le [module 8](#manip_mat).
 
@@ -394,7 +394,7 @@ Lorsqu’on combine des couches de données différentes, on doit s’assurer qu
 ## Exercices {#ex_markdown2}
 
 
-Dans cette section nous poursuivons l'introduction à R Markdown entamée dans la section [Exercices](#ex_markdown1) du module 2.
+Dans cette section, nous poursuivons l'introduction à R Markdown entamée dans la section [Exercices](#ex_markdown1) du module 2.
 
 Rappelons les objectifs de cette introduction.
 
@@ -418,7 +418,7 @@ Rappelons les objectifs de cette introduction.
 ### Le variante Pandoc de Markdown {#pandocmarkdown}
 
 
-Dans cette partie, nous détaillons les éléments de formatage du texte proposés par
+Dans cette partie, nous détaillons les éléments de formatage du texte proposé par
 la syntaxe Pandoc de Markdown^[Vous pouvez également consulter le [site de
 référence de Pandoc](http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html) et le résumé à la première page du [guide de référence R Markdown](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
 Pour une source en français, le guide 
@@ -483,7 +483,7 @@ Un datum est un système de référence qui détermine la position d’un ellips
 Les datums géocentriques sont associés à des ellipsoïdes globaux. Ce sont des systèmes de référence terrestres globaux dont l’origine correspond au centre de masse de la Terre.
 </div>
 
-Il est cependant possible d'ajouter un retour à la ligne en utilisant un retour à la ligne et tabulation à la fin du premier paragraphe. Par exemple, ce texte:
+Il est cependant possible d'ajouter un retour à la ligne en utilisant un retour à la ligne et une tabulation à la fin du premier paragraphe. Par exemple, ce texte:
 
 
 ```md
@@ -594,9 +594,9 @@ souligné en PDF, mais pas en HTML ni en Word.
 
 Procéder de la sorte n'est pas toujours souhaité car le document R Markdown perd en généralité, en ce sens où
 il  ne pourra pas être correctement généré dans tous les formats. Cela n'est
-cependant pas nécessairement un problème, par exemple, si vous souhaiteZ obtenir
+cependant pas nécessairement un problème, par exemple, si vous souhaitez obtenir
 le document en un seul format, ce fonctionnement devient un atout puisque vous
-pouvez utiliser toute la gamme de mise en forme offert par le langage en question.
+pouvez utiliser toute la gamme de mise en forme offerte par le langage en question.
 
 
 
@@ -805,7 +805,7 @@ produit ceci:
 
 <br>
 
-Si les nombres ne sont pas écrits manière ordonnée, cela ne changera pas le
+Si les nombres ne sont pas écrits de manière ordonnée, cela ne changera pas le
 résultat. Néanmoins, le premier nombre détermine le numéro de départ de la liste. En
 écrivant&nbsp;:
 
@@ -885,7 +885,7 @@ nous obtenons&nbsp;:
 <br>
 
 Nous avons aussi la possibilité de mélanger les niveaux numérotés et les niveaux
-non-numérotés. Par exemple, cette liste
+non numérotés. Par exemple, cette liste
 
 ```md
 1. machin 1,
@@ -917,7 +917,7 @@ donne ceci &nbsp;:
 
 <br>
 
-Enfin, il possible de mettre manuellement fin à une liste en introduisant un
+Enfin, il est possible de mettre manuellement fin à une liste en introduisant un
 commentaire entre les listes à séparer&nbsp;:
 
 ```md
@@ -955,7 +955,7 @@ d'utiliser "\>" avant la citation. Ainsi les lignes suivantes&nbsp;:
 
 ```.md
 > la citation est ajoutée comme ceci, elle nous donne une indentation adéquate
-pour une mise en page agréable dont le style peut être facilement travailler
+pour une mise en page agréable dont le style peut être facilement travaillé
 en HTML grâce au CSS.
 ```
 <br>
@@ -964,7 +964,7 @@ deviennent&nbsp;:
 
 <div class="boite emphase">
 
-> La citation est ajoutée comme ceci, elle nous donne une indentation adéquate pour une mise en page agréable dont le style peut être facilement travailler en HTML grâce au CSS.
+> La citation est ajoutée comme ceci, elle nous donne une indentation adéquate pour une mise en page agréable dont le style peut être facilement travaillé en HTML grâce au CSS.
 </div>
 
 
@@ -993,10 +993,10 @@ ce qui donne&nbsp;:
 
 Pour utiliser les symboles mathématiques dans le texte, les commandes associées
 doivent être placées entre deux "\$". Bien sûr, il faut connaître les
-combinaisons de caractère associées aux différents symboles. Ce sont les même
+combinaisons de caractère associées aux différents symboles. Ce sont les mêmes
 que celles proposées par [Latex](http://latex-project.org/intro.html) et qui
 seront utilisées par [MathJax](http://www.mathjax.org) (par défaut) pour générer
-les expressions mathématiques dans le fichier html. 
+les expressions mathématiques dans le fichier HTML. 
 
 Voici quelques exemples&nbsp;:
 
@@ -1111,13 +1111,13 @@ see is what you get*), vous pouvez utiliser [ce générateur](http://www.tablesg
 
 ##### Les hyperliens {-}
 
-Les liens hypertextes sont utilisés sous la forme [groupe de mots sur lequel cliquer]+(adresse du lien). Pour créer un lien vers la page Markdown de Wikipedia, nous utilisons&nbsp;:
+Les liens hypertextes sont utilisés sous la forme [groupe de mots sur lequel cliquer]+(adresse du lien). Pour créer un lien vers la page Markdown de Wikipédia, nous utilisons&nbsp;:
 
     [Markdown](https://fr.wikipedia.org/wiki/Markdown)
 
 <br>
 
-et voilà le lien vers la page [Markdown](https://fr.wikipedia.org/wiki/Markdown) de Wikipedia.
+et voilà le lien vers la page [Markdown](https://fr.wikipedia.org/wiki/Markdown) de Wikipédia.
 
 <br>
 
@@ -1184,7 +1184,7 @@ Typiquement, l'utilisation d'un tel bloc de code ressemble à ceci&nbsp;:
 
 **idbloc** est le nom de l'identifiant que vous pouvez donner au bloc de code. Ceci permet de citer les blocs ou leurs sorties à l'intérieur du document. L'identifiant n'est pas obligatoire. En revanche, un identifiant donné ne peut être utilisé qu'une seule fois. 
 
-**param1 = val1** correspond à un paramètre permettant de préciser comment le code source sera affiché dans le document, ou comment la sortie du code sera affichée. Il existe un grand nombre de paramètres possibles. Ils permettent de mettre de l'avant certaines parties du code, et aussi de choisir finement les sorties R (figures, tables, etc.) à ajouter aux documents. L'ensemble des paramètres sont disponibles à l'URL suivante <https://yihui.org/knitr/options/>). 
+**param1 = val1** correspond à un paramètre permettant de préciser comment le code source sera affiché dans le document, ou comment la sortie du code sera affichée. Il existe un grand nombre de paramètres possibles. Ils permettent de mettre de l'avant certaines parties du code, et aussi de choisir finement les sorties R (figures, tables, etc.) à ajouter aux documents. L'ensemble des paramètres sont disponibles à l'URL suivante <https://yihui.org/knitr/options/>. 
 
 
 #### Les commentaires {-}
@@ -1213,7 +1213,7 @@ Ce morceau de code s'affiche ainsi:
 
 <br>
 
-Nous obtenons donc un code R dans un environnement adéquate (voir la coloration
+Nous obtenons donc un code R dans un environnement adéquat (voir la coloration
 du code) avec la sortie console associée, en l'occurrence, le résultat de
 l'addition.
 
@@ -1247,7 +1247,7 @@ a + b
 
 <br>
 
-Afin de ne pas afficher le code source dans un document (parce que nous souhaitement uniquement afficher la sortie produite par le code), il suffit d'utiliser le paramètre `echo =
+Afin de ne pas afficher le code source dans un document (parce que nous souhaitons uniquement afficher la sortie produite par le code), il suffit d'utiliser le paramètre `echo =
 FALSE`. Par défaut, nous avons que `echo = TRUE`. Ainsi, le bloc de code `sanscode`
 
 
@@ -1485,10 +1485,10 @@ print(b)
 
 ##### Affichage des messages {-}
 
-Il y a trois type de messages retournés par R:
+Il y a trois types de messages retournés par R:
 
 1. les messages : une simple indication (voir la fonction `message()`);
-2. les avertissements qui soulignent que quelque chose est peut-être problématiques, mais le code est exécutable (voir la fonction `warning()`);
+2. les avertissements qui soulignent que quelque chose est peut-être problématique, mais le code est exécutable (voir la fonction `warning()`);
 3. les erreurs qui indiquent que quelque chose ne fonctionne pas dans l’exécution du code.
 
 Considérons le bloc suivant qui inclut un message, un avertissement, une erreur
@@ -1537,7 +1537,7 @@ warning("Ceci est un avertissement")
 
 <br>
 
-De la même manière il est possible de supprimer l'avertissement avec `warning = FALSE`.
+De la même manière, il est possible de supprimer l'avertissement avec `warning = FALSE`.
 
     `r ''````{r sansavertissement, warning = FALSE}
     message("Ceci est un message")
@@ -1614,7 +1614,7 @@ stop("Ceci est un problème")
 
 Par défaut, avec `rmarkdown`, dans un bloc de code R, le code est exécuté par R
 et les sorties sont ajoutées dans le document. Ci-dessus, nous avons vu comment
-modifier ce qui est présenté dans le code source et changer certain aspect de la
+modifier ce qui est présenté dans le code source et changer certains aspects de la
 sortie. Il est également possible de modifier l’exécution du code.
 
 
@@ -1647,7 +1647,7 @@ sa sortie, mais nous souhaitons tout de même l'exécuter.
 
 Dans un rapport dynamique, par exemple, nous sommes souvent amenés à exécuter un script ou charger des fonctions qui serviront éventuellement à créer des sorties qui seront intégrées dans le rapport. Nous ne souhaitons pas que les lectrices ou les lecteurs du rapport lisent ces éléments de code.
 
-Nous savons maintenant que l'utiliation des options `echo =
+Nous savons maintenant que l'utilisation des options `echo =
 FALSE`, `results = hide`, `message = FALSE` et `warning = FALSE` ensemble dans
 l'accolade, permet d'obtenir cette exécution silencieuse. Il existe cependant une manière plus rapide d'arriver à ce résultat en utilisant le paramètre `include = FALSE`.
 
@@ -1814,7 +1814,7 @@ plot(tab1$var1,tab1$var2)
 <br>
 
 Il est aussi possible de contrôler la largeur de la sortie en utilisant des
-pourcentage, pour cela nous utilisons l'option `out.width`:
+pourcentages, pour cela nous utilisons l'option `out.width`:
 
 <br>
 
@@ -1898,7 +1898,7 @@ include_graphics("Module3/images/3_Rlogo.png")
 
 ### À vous de jouer ! {#exo3}
 
-Cet exercice vise à mettre en pratique les notions apprises pour la rédaction de documents R Markdown. Bien que la réponse soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Cet exercice vise à mettre en pratique les notions apprises pour la rédaction de documents R Markdown. Bien que la réponse soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 <br>
 
@@ -1910,7 +1910,7 @@ Cet exercice vise à mettre en pratique les notions apprises pour la rédaction 
 
 </div>
 
-Dans un premier temps, télécharger le dossier [Module3_donnees.zip](https://github.com/sci1031/data/raw/main/Module3_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient trois fichiers:
+Dans un premier temps, téléchargez le dossier [Module3_donnees.zip](https://github.com/sci1031/data/raw/main/Module3_donnees.zip) dans votre répertoire de travail pour ce module, et dézippez-le. Le dossier contient trois fichiers:
 
 - `villes_qc.csv`.
 - `Mod3_resume.jpg`.

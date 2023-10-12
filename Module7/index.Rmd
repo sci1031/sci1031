@@ -13,10 +13,10 @@ L'objectif principal de ce module est d'apprendre à manipuler des données vect
  - Filtrer des données vectorielles en se basant sur leurs attributs.
  - Joindre spatialement deux ensembles de données vectorielles.
  - Extraire un sous-ensemble de données pour l'intégrer aux attributs d'un second ensemble de données spatiales. 
- - Combiner, aggréger et simplifier des objets vectoriels. 
+ - Combiner, agréger et simplifier des objets vectoriels. 
  - Transformer la géométrie d'objets vectoriels.
  - Créer des zones tampons autour d'objets vectoriels.
- - Trouver le centroid et les coordonnées d'objets vectoriels.
+ - Trouver le centroïde et les coordonnées d'objets vectoriels.
  - Faire des opérations topologiques sur des objets vectoriels (union, intersection, différence) 
  - Confirmer des relations topologiques entre deux objets vectoriels.
  - Calculer des mesures spatiales sur des objets vectoriels (distance, longueur, superficie).
@@ -68,7 +68,7 @@ Au [module 4](#vec), vous avez appris les fonctions essentielles pour lire et vi
 Dans un premier temps, cette leçon vous enseignera le fonctionnement d'opérations de base sur les données vectorielles. 
 Ces opérations comprennent deux grandes catégories: les opérations qui portent sur les *attributs* des données vectorielles et les opérations qui portent sur la *géométrie* des données vectorielles. Les opérations réalisées sur les attributs des données vectorielles sont indépendantes de la composante spatiale des données, alors que les opérations spatiales prennent en considération la géométrie des données et peuvent même la transformer.
 
-Dans un second temps, cette leçon vous guidera dans la résolution d'une problèmatique qui nécessite de manipuler des données vectorielles.  Au cours des différentes étapes permettant de résoudre la problématique, vous mettrez en pratique les diverses fonctions `R` apprises jusqu'à maintenant. Plus précisément, nous allons explorer le territoire Québécois en se posant la question suivante: 
+Dans un second temps, cette leçon vous guidera dans la résolution d'une problématique qui nécessite de manipuler des données vectorielles.  Au cours des différentes étapes permettant de résoudre la problématique, vous mettrez en pratique les diverses fonctions `R` apprises jusqu'à maintenant. Plus précisément, nous allons explorer le territoire Québécois en nous posant la question suivante: 
 
 >
 > **Parmi les dix plus grandes villes du Québec, quelle est celle qui dispose du plus grand nombre de parcs nationaux dans un rayon de 70 km&nbsp;? **
@@ -88,7 +88,7 @@ Dans un second temps, cette leçon vous guidera dans la résolution d'une probl�
 Dans cette leçon, nous allons utiliser les données vectorielles relatives aux [municipalités](https://www.donneesquebec.ca/recherche/fr/dataset/base-de-donnees-geographiques-et-administratives) et aux [régions administratives du Québec](https://www.donneesquebec.ca/recherche/dataset/decoupages-administratifs), ainsi qu'au réseau de la [Société des établissements de plein air du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000), la SÉPAQ. 
 
 
-Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peuvent être téléchargées en cliquant sur un seul lien: [données pour le module 7](https://github.com/sci1031/data/raw/main/Module7_donnees.zip). 
+Afin de faciliter le téléchargement de ces données, l'ensemble de ces couches d'informations spatiales peut être téléchargé en cliquant sur un seul lien: [données pour le module 7](https://github.com/sci1031/data/raw/main/Module7_donnees.zip). 
 
 Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Module7_donnees` pour ce module, et dézippez-le. Le dossier comprend trois sous-dossiers et un fichier *.csv*:
 
@@ -142,7 +142,7 @@ mapview(municipalites, legend = FALSE)
 ```
 <br>
 
-Dans le précédent module portant sur la [cartographie](#carto), nous avons décrit plusieurs fonctionnalités de la bibliothèque `tmap` et avons démontré sa flexibilité et à sa capacité à produire des cartes de grande qualité. Toutefois, la bibliothèque `mapview` demeure fort utile lorsque nous souhaitons visualiser rapidement des données. Par défaut, la fonction `mapview()` affiche la carte d'OpenstreeMap en arrière-pan, ce qui permet de contextualiser facilement les données. 
+Dans le précédent module portant sur la [cartographie](#carto), nous avons décrit plusieurs fonctionnalités de la bibliothèque `tmap` et avons démontré sa flexibilité et sa capacité à produire des cartes de grande qualité. Toutefois, la bibliothèque `mapview` demeure fort utile lorsque nous souhaitons visualiser rapidement des données. Par défaut, la fonction `mapview()` affiche la carte d'OpenstreeMap en arrière-pan, ce qui permet de contextualiser facilement les données. 
 
 
 De plus, les cartes produites avec `mapview()` sont interactives, permettant d'accéder directement à la table d'attributs des données vectorielles représentées. Par exemple, sur la carte ci-dessus, vous n'avez qu'à cliquer sur le marqueur géographique correspondant à chaque municipalité (point) ou à chaque parc (polygone) pour obtenir la liste des attributs et leur valeur. De plus, vous pouvez choisir d'afficher l'une ou l'autre des couches en cochant la couche désirée dans la fenêtre située dans le coin supérieur gauche. 
@@ -158,7 +158,7 @@ Les opérations réalisées sur les attributs des données vectorielles sont ind
 
 ##### Filter des attributs {-}
 
-Une opération fréquente lorsque nous manipulons des données vectorielles est celle de filtrer les données. Par exemple, dans le *shapefile* `municipalites` que nous venons d'importer, nous pourrions vouloir sélectionner seulement certaines municipalités parmi les 767 répertoriées ou certains attributs parmi les 17. Nous pourrions aussi vouloir déterminer quelles municipalités possédent une valeur spécifique pour un attribut donné.
+Une opération fréquente lorsque nous manipulons des données vectorielles est celle de filtrer les données. Par exemple, dans le *shapefile* `municipalites` que nous venons d'importer, nous pourrions vouloir sélectionner seulement certaines municipalités parmi les 767 répertoriées ou certains attributs parmi les 17. Nous pourrions aussi vouloir déterminer quelles municipalités possèdent une valeur spécifique pour un attribut donné.
 
 Dans les sous-sections qui suivent, nous présenterons des opérations qui permettent de filtrer les attributs de données vectorielles.
 
@@ -191,7 +191,7 @@ municipalites[, 2] # Pour accéder à la deuxième colonne.
 
 <br>
 
-Nous remarquons également que le nombre de *fields* (colonnes) à diminuer à 1. 
+Nous remarquons également que le nombre de *fields* (colonnes) a diminué à 1. 
 
 
 ###### Sélectionner des attributs à partir de leur nom {-}
@@ -228,7 +228,7 @@ head(municipalites$HAP_NM_TOP)
 
 <br>
 
-Toutefois, la syntaxte précédente conserve la géométrie du *shapefile* et peut ainsi être utilisée pour définir un nouvel objet spatial. Par exemple, créons un nouveau *shapefile* qui contient seulement le nom des municipalités et leur position géographique :
+Toutefois, la syntaxe précédente conserve la géométrie du *shapefile* et peut ainsi être utilisée pour définir un nouvel objet spatial. Par exemple, créons un nouveau *shapefile* qui contient seulement le nom des municipalités et leur position géographique :
 
 ```{r villes-topo-col2}
 villes <- municipalites[,"HAP_NM_TOP"]
@@ -480,14 +480,14 @@ Cette opération nous a permis de filtrer les municipalités du Québec pour ret
 
 ##### Opérations géométriques {-}
 
-Les opérations géométriques sur les données vectorielles sont des opérations qui peuvent changer la géométrie des données ou qui peuvent créer, à partir de celles-ci, des nouveaux objets vectoriels de géométrie différente. 
+Les opérations géométriques sur les données vectorielles sont des opérations qui peuvent changer la géométrie des données ou qui peuvent créer, à partir de celles-ci, de nouveaux objets vectoriels de géométrie différente. 
 
 
 ###### La fonction `aggregate()` {-}
 
 La fonction `aggregate()` de la bibliothèque `sf` permet d'agréger (c'est-à-dire de grouper) des éléments spatiaux d'une même couche de données vectorielles. 
 
-Afin de démontrer comment opère la fonction `aggregate()` considérons d'abord l'objet `villes_reg_pop`. Ce dernier est formé par la jointure spatiale entre `villes_pop`, le *shapefile* associant à chaque municipalité la taille de sa population, et `regions`&nbsp;:
+Afin de démontrer comment opère la fonction `aggregate()`, considérons d'abord l'objet `villes_reg_pop`. Ce dernier est formé par la jointure spatiale entre `villes_pop`, le *shapefile* associant à chaque municipalité la taille de sa population, et `regions`&nbsp;:
 ```{r, warning = FALSE}
 villes_reg_pop <- st_join(villes_pop, regions[ ,"Rgns_Ad"], left = FALSE)
 villes_reg_pop
@@ -569,11 +569,13 @@ Il est parfois utile de simplifier les objets vectoriels de types ligne ou polyg
 
 La fonction `st_simplify()` de la bibliothèque `sf` permet de simplifier des objets vectoriels de types ligne ou polygone en réduisant le nombre de points que ceux-ci comprennent. Souvenez-vous qu'une ligne est constituée d'une succession de points et qu'un polygone est constitué d'un ensemble de lignes. 
 
-Cette fonction est basée sur l'algorithme de [Douglas-Peucker](https://fr.wikipedia.org/wiki/Algorithme_de_Douglas-Peucker). Décrire le fonctionnement de cet algorithme dépasse l'objectif de ce cours. Grosso modo, l'algorithme fait appel à un seuil de distance (le paramètre `dTolerance`) qu'il utilise pour transformer en ligne droite toute courbe qui dévie d'une ligne droite par une quantité moindre que ce seuil. Cette distance réflète en quelque sorte la résolution que nous souhaitons atteindre avec l'objet simplifié.
+Cette fonction est basée sur l'algorithme de [Douglas-Peucker](https://fr.wikipedia.org/wiki/Algorithme_de_Douglas-Peucker). Décrire le fonctionnement de cet algorithme dépasse l'objectif de ce cours. Grosso modo, l'algorithme fait appel à un seuil de distance (le paramètre `dTolerance`) qu'il utilise pour transformer en ligne droite toute courbe qui dévie d'une ligne droite par une quantité moindre que ce seuil. Cette distance reflète en quelque sorte la résolution que nous souhaitons atteindre avec l'objet simplifié.
 
 Le seuil de tolérance étant une distance, nous l'exprimons en mètres. Nous devons alors nous assurer que l'objet spatial à simplifier est dans un système de coordonnées métriques.
 
-En guise d'exemple, simplifions le *shapefile* des régions administratives du Québec (\@ref(fig:ex-st-simple)):
+En guise d'exemple, simplifions le *shapefile* des régions administratives du Québec (\@ref(fig:ex-st-simple)): 
+<!--  le lien donne ?? une fois le rmd compilé 
+-->
 
 ```{r, warning = FALSE }
 regions_nad <- st_transform(regions, crs = 32198)
@@ -623,11 +625,12 @@ names(GIM)<-c("Id", "Nom_reg", "geometry")
 ```
 <br>
 
-Considérons le *shapefile* `GIM` contenant deux géométries: le polygone délimitant la Gaspésie et un polygone délimitant les Îles-de-la-Madeleine.
+Considérons le *shapefile* `GIM` contenant deux géométries: un polygone délimitant la Gaspésie et un polygone délimitant les Îles-de-la-Madeleine.
 
 ```{r}
 GIM
 ```
+<br>
 
 Maintenant, combinons ces deux polygones pour former une géométrie unique qui correspondra à la région administrative de la Gaspésie - Îles-de-la-Madeleine
 
@@ -636,6 +639,8 @@ Maintenant, combinons ces deux polygones pour former une géométrie unique qui 
 GIM_combine <- st_combine(GIM)
 GIM_combine
 ```
+<br>
+
 Le nouvel objet `GIM_combine` est effectivement formé d'une seule géométrie. Notez cependant que la fonction `st_combine()` ne fusionne pas les frontières à l'intérieur du nouveau polygone formé (\@ref(fig:map-combo)). Pour unir deux polygones, il faut plutôt utiliser la fonction `st_union()` que nous définirons plus bas dans cette leçon.
 
 ```{r map-combo, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="La Gaspésie et les Îles-de-la-Madeleine traitées comme deux polygones distincts (gauche), leur combinaison par la fonction `st_combine()` (centre), et leur union par la fonction `st_union()` (droite)."}
@@ -690,6 +695,8 @@ Mauricie_pts
 <br>
 
 Nous observons que les deux nouveaux objets vectoriels ont bel et bien la géométrie souhaitée (\@ref(fig:ex-cast1)).
+<!--  le lien donne ?? une fois le rmd compilé 
+-->
 
 ```{r ex-cast1, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="La fonction `st_cast()` a été utilisée pour transformer le polygone de la Mauricie (gauche) en multilignes (centre) et en multipoints (droite)."}
 
@@ -753,9 +760,9 @@ L'objet `villes_NQ_lines` correspond effectivement à un ensemble de lignes et l
 
 Une zone tampon (appelée *buffer* en anglais) est un polygone dont les frontières sont définies par une distance donnée autour d'un objet vectoriel. Une zone tampon peut être créée autour de tout objet vectoriel, que ce soit des points, des lignes ou des polygones. 
 
-La création de zones tampons est généralement réalisée pour répondre à des questions de nature géographique. Par exemple, combien de garderies se situent à une distance de 2&nbsp;km de ma maison&nbsp;? Ou encore, combien de stations services se situent à moins de 500&nbsp;m de la route menant de Chelsey à Cantley en Outaouais&nbsp;? 
+La création de zones tampons est généralement réalisée pour répondre à des questions de nature géographique. Par exemple, combien de garderies se situent à une distance de 2&nbsp;km de ma maison&nbsp;? Ou encore, combien de stations-service se situent à moins de 500&nbsp;m de la route menant de Chelsey à Cantley en Outaouais&nbsp;? 
 
-La fonction `st_buffer()` de la bibliothèque `sf` permet de créer des zones tampons. Cette fonction comprend obligatoirement deux arguments. Le premier correspond à l'objet vectoriel autour du quel nous souhaitons construire une zone tampon, et le deuxième argument défini la distance sur laquelle la zone tampon s'étendra autour de l'objet vectoriel. Comme pour la fonction `st_simplify()`, l'objet vectoriel auquel nous appliquons la fonction `st_buffer()` doit être exprimé dans un SCR d'unité de mesure métrique.
+La fonction `st_buffer()` de la bibliothèque `sf` permet de créer des zones tampons. Cette fonction comprend obligatoirement deux arguments. Le premier correspond à l'objet vectoriel autour duquel nous souhaitons construire une zone tampon, et le deuxième argument définit la distance sur laquelle la zone tampon s'étendra autour de l'objet vectoriel. Comme pour la fonction `st_simplify()`, l'objet vectoriel auquel nous appliquons la fonction `st_buffer()` doit être exprimé dans un SCR d'unité de mesure métrique.
 
 Construisons des zones tampons autour de la ville de La Pocatière, que nous avons isolée plus haut, en considérant deux distances différentes (\@ref(fig:buffer-lapoc)):
 
@@ -886,7 +893,7 @@ st_coordinates(la_poc_nad)
 
 <br>
 
-Notez que cette fonction peut être utilisée sur tout objet de type vectoriel (ligne, multiligne, polygone, etc.). La sortie correspondra alors à un tableau donnant les coordonnées de chaque point consituant l'objet. 
+Notez que cette fonction peut être utilisée sur tout objet de type vectoriel (ligne, multiligne, polygone, etc.). La sortie correspondra alors à un tableau donnant les coordonnées de chaque point constituant l'objet. 
 
 
 
@@ -896,9 +903,9 @@ Notez que cette fonction peut être utilisée sur tout objet de type vectoriel (
 Les opérations topologiques décrivent les relations spatiales entre des objets^[https://geocompr.robinlovelace.net/spatial-operations.html#topological-relations].
 Ces opérations sont équivalentes aux opérations ensemblistes en mathématiques, telles l'union ou l'intersection, mais s'appliquent cette fois à des objets définis par une géométrie. 
 
-La bibliothèque `sf` contient plusieurs opérateurs topologiques; par exemple: `st_union()`, `st_intersection()`, `st_difference()` et `st_sym_difference()`. Ces opérateurs forment un nouvel objet spatial à partir des deux objets spatiaux intérroger. Par exemple, la géométrie de l'objet `z` formé par l'opération `z <- st_union(x,y)` est constituée de la géométrie de `x` *et* de celle de `y` sans toutefois qu'il y ait de chevauchement.
+La bibliothèque `sf` contient plusieurs opérateurs topologiques; par exemple: `st_union()`, `st_intersection()`, `st_difference()` et `st_sym_difference()`. Ces opérateurs forment un nouvel objet spatial à partir des deux objets spatiaux intérrogés. Par exemple, la géométrie de l'objet `z` formé par l'opération `z <- st_union(x,y)` est constituée de la géométrie de `x` *et* de celle de `y` sans toutefois qu'il y ait de chevauchement.
 
-Pour illustrer les opérations topologiques entre deux objets vectoriels considérons les polygones A et B créés en définissant des zones tampons à partir des polygones de l'Abitibi-Témiscamingue et du Saguenay - Lac-Saint-Jean respectivement. 
+Pour illustrer les opérations topologiques entre deux objets vectoriels, considérons les polygones A et B créés en définissant des zones tampons à partir des polygones de l'Abitibi-Témiscamingue et du Saguenay - Lac-Saint-Jean respectivement. 
 
 ```{r}
 A <- st_buffer(Abitibi, dist = 80e3)
@@ -927,6 +934,8 @@ sym_diff_AB <- st_sym_difference(A,B)
 <br>
 
 Observons les géométries produites par ces opérations (figure \@ref(fig:topo-op)) &nbsp;:
+<!--  le lien vers la figure donne ?? une fois le rmd compilé 
+-->
 
 ```{r topo-op, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="Exemples d'opérations topologiques sur les polygones A et B. En haut: illustrations de A et B (gauche) et de `st_union(A,B)` (droite). Au centre:   illustrations de `st_difference(A,B)` (gauche) et de `st_difference(B,A)` (droite). En bas: illustrations de `st_intersection(A,B)` (gauche) et de `st_sym_difference(A,B)` (droite)."}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2)+mapview(B, col.regions = "red", alpha.regions = 0.2)
@@ -999,7 +1008,7 @@ point_vert<- subset(points, couleur=="Vert")
 ```
 
 
-Pour bien comprendre comment opère `st_intersects()` considérons le polygone A utilisé précédemment ainsi que l'objet spatial `points` constitués de cinq points de couleur différente.
+Pour bien comprendre comment opère `st_intersects()` considérons le polygone A utilisé précédemment ainsi que l'objet spatial `points` constitué de cinq points de couleur différente.
 
 ```{r}
 points
@@ -1025,8 +1034,8 @@ Utilisons a fonction `st_intersects()` pour déterminer quels points intersecten
 ```{r, warning=FALSE}
 st_intersects(points, A)
 ```
-
-La sortie est exprimée sous forme d'une liste contenant 5 paires éléments; une paire pour chacun des points interrogés. Le premier élément d'une paire (c'est-dire,le chiffre avant le deux-points) correspond à l'indice du point. Le second élément prend la valeur `1` si le point intersecte le polygone A, et la valeur `empty` si le point ne recoupe pas le polygone A. 
+<br>
+La sortie est exprimée sous forme d'une liste contenant 5 paires d'éléments; une paire pour chacun des points interrogés. Le premier élément d'une paire (c'est-dire,le chiffre avant le deux-points) correspond à l'indice du point. Le second élément prend la valeur `1` si le point intersecte le polygone A, et la valeur `empty` si le point ne recoupe pas le polygone A. 
 
 Il est aussi possible d'ajouter l'argument `sparse = FALSE` afin que la sortie s'exprime sous une forme matricielle d'éléments logiques.
 
@@ -1050,7 +1059,7 @@ st_intersects(A, points)
 
 <br>
 
-Dans ce cas, la fonction retourne une liste d'une seule combinaison éléments associée au polygone interrogé. Cette fois, les éléments à droite du deux-points correspondent aux indices des points qui satisfont à la condition d'intersection. 
+Dans ce cas, la fonction retourne une liste d'une seule combinaison d'éléments associée au polygone interrogé. Cette fois, les éléments à droite du deux-points correspondent aux indices des points qui satisfont à la condition d'intersection. 
 
 
 ####### La fonction `st_disjoint` {-}
@@ -1069,7 +1078,7 @@ st_disjoint(A, points)
 points$couleur[st_disjoint(A, points,sparse = FALSE)]
 ```
 
-
+<br>
 ####### La fonction `st_crosses` {-}
 
 La fonction `st_crosses()` vérifie si deux objets spatiaux `X` et `Y` se croisent. Cette fonction est donc similaire à la fonction `st_intersects()` mais elle contient des conditions supplémentaires:
@@ -1155,22 +1164,24 @@ map_AB@map
 <br>
 
 
-Les polygones A et B satisfont la condition de superposition car leur intersection est aussi un polygone. Par ailleurs le polygone A et celui de l'Abitibi ne satisfont pas à la condition de superposition car l'intersection est identique au polygone de l'Abitibi-Témiscamingue. 
+Les polygones A et B satisfont la condition de superposition car leur intersection est aussi un polygone. Par ailleurs, le polygone A et celui de l'Abitibi ne satisfont pas à la condition de superposition car l'intersection est identique au polygone de l'Abitibi-Témiscamingue. 
 
 ```{r}
 st_overlaps(A,B)
 st_overlaps(Abitibi,A)
 ```
-
+<br>
 ####### La fonction `st_touches` {-}
 
-La fonction `st_touches()` vérifie si deux objets `X` et `Y` ont au moins un point en commun sans toutefois que leurs interieurs s'intersectent. La figure \@ref(fig:st-touches) illustre différentes combinaisons de géométries qui se touchent.
+La fonction `st_touches()` vérifie si deux objets `X` et `Y` ont au moins un point en commun sans toutefois que leurs intérieurs s'intersectent. La figure \@ref(fig:st-touches) illustre différentes combinaisons de géométries qui se touchent.
 
 ```{r st-touches, fig.align='center', echo=FALSE, fig.cap="Combinaisons de géométries qui se touchent. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '60%'}
 knitr::include_graphics('Module7/images/st_touches.png')
 ```
 
 Considérons par exemple les objets spatiaux illustrés à la figure \@ref(fig:st-geo-conf4) &nbsp;:
+<!--  le lien vers la figure donne ?? une fois le rmd compilé 
+-->
 
 ```{r st-geo-conf4, warning=FALSE, echo=FALSE, fig.align='center', dev = 'png',fig.cap="Exemples illustrant la fonction `st_touches()`", out.width = '100%'}
 Mauricie <- subset(regions_nad, Rgns_Ad == "Mauricie")
@@ -1195,7 +1206,7 @@ M
 <br>
 
 
-La fonction `st_touches()` nous permet de vérifier que le polygone B, en rouge, touche au trait mauve et que le polygone A, en bleu, touche au point vert. Par ailleurs, la fonction confirme aussi que le polygone A ne touche pas au point bleu car ce sont leurs intérieurs qui s'intersectent. La même situation s'observe pour les polygones A et B qui partagent plus que leurs frontières. Cependant les polygones de l'Abitibi-Témiscamingue, en vert, et de la Mauricie, en jaune, s'intersectent seulement le long de leurs frontières et ainsi se touchent.
+La fonction `st_touches()` nous permet de vérifier que le polygone B, en rouge, touche au trait mauve et que le polygone A, en bleu, touche au point vert. Par ailleurs, la fonction confirme aussi que le polygone A ne touche pas au point bleu car ce sont leurs intérieurs qui s'intersectent. La même situation s'observe pour les polygones A et B qui partagent plus que leurs frontières. Cependant, les polygones de l'Abitibi-Témiscamingue, en vert, et de la Mauricie, en jaune, s'intersectent seulement le long de leurs frontières et ainsi se touchent.
 
 ```{r, warning=FALSE}
 st_touches(B, trait_mauve)
@@ -1205,6 +1216,7 @@ st_touches(A,B)
 st_touches(Abitibi,Mauricie)
 
 ```
+<br>
 
 ####### Les fonctions `st_within`  et `st_contains` {-}
 
@@ -1262,7 +1274,7 @@ st_contains(contour_rose, trait_mauve)
 
 <br>
 
-La fonction `st_contains()` comporte une subtilité qui peut être trompeuse. La condition `st_contains(X,Y)` est satisfaite, c'est-à-dire, l'object `X` contient l'objet `Y`, si et seulement si aucun points de `Y` se trouve à l'extérieur de `X`, et qu'au moins un point de `Y` se trouve à l'intérieur de `X`^[http://lin-ear-th-inking.blogspot.com/2007/06/subtleties-of-ogc-covers-spatial.html]. En particulier, ceci signifie qu'un polygone ne contient jamais sa frontière. Ainsi, dans l'illustration de la figure \@ref(fig:st-geo-conf5), le polygone B, en rouge, ne contient pas le contour rose. Le polygone B ne contient pas non plus le trait mauve. Cependant, il contient le trait vert car ce dernier comporte des points à l'intérieur du polygone B.
+La fonction `st_contains()` comporte une subtilité qui peut être trompeuse. La condition `st_contains(X,Y)` est satisfaite, c'est-à-dire, l'objet `X` contient l'objet `Y`, si et seulement si aucun point de `Y` ne se trouve à l'extérieur de `X`, et qu'au moins un point de `Y` se trouve à l'intérieur de `X`^[http://lin-ear-th-inking.blogspot.com/2007/06/subtleties-of-ogc-covers-spatial.html]. En particulier, ceci signifie qu'un polygone ne contient jamais sa frontière. Ainsi, dans l'illustration de la figure \@ref(fig:st-geo-conf5), le polygone B, en rouge, ne contient pas le contour rose. Le polygone B ne contient pas non plus le trait mauve. Cependant, il contient le trait vert car ce dernier comporte des points à l'intérieur du polygone B.
 
 ```{r}
 st_contains(B, contour_rose)
@@ -1284,7 +1296,7 @@ st_within(trait_mauve, B)
 st_within(trait_vert, B)
 ```
 
-
+<br>
 
 <div class="boite ico important gauche">
 
@@ -1295,10 +1307,10 @@ st_within(trait_vert, B)
 </div>
 
 
-La fonction [`st_join()`](#fct_join), vue plus, qui permet de faire une jointure spatiale entre deux objets vectoriels s'appuie, par défaut, sur la fonction de confirmation `st_intersects()`. En effet, la fonction `st_join(x,y)` identifie la présence d'une intersection entre les éléments de `x` et de `y` puis assigne les attributs de `y` aux éléments de `x` qui satisfont cette condition d'intersection. Par aileurs, il est possible d'utiliser la fonction `st_join()` en utilisant d'autres opérations topologiques de confirmation que celle par défaut. En effet, il est possible de définir un troisième argument, `join`, pour préciser une autre opération comme `st_contains`, `st_touches`, `st_overlaps` etc. 
+La fonction [`st_join()`](#fct_join), vue plus, qui permet de faire une jointure spatiale entre deux objets vectoriels s'appuie, par défaut, sur la fonction de confirmation `st_intersects()`. En effet, la fonction `st_join(x,y)` identifie la présence d'une intersection entre les éléments de `x` et de `y` puis assigne les attributs de `y` aux éléments de `x` qui satisfont cette condition d'intersection. Par ailleurs, il est possible d'utiliser la fonction `st_join()` en utilisant d'autres opérations topologiques de confirmation que celle par défaut. En effet, il est possible de définir un troisième argument, `join`, pour préciser une autre opération comme `st_contains`, `st_touches`, `st_overlaps` etc. 
 
 
-Donnons un exemple. Pour chaque régions administratives du Québec, déterminons les régions qui lui sont adjacentes. Il s'agit ici d'utiliser la fonction `st_join()` avec la condition `st_touches`&nbsp;:
+Donnons un exemple. Pour chaque région administrative du Québec, déterminons les régions qui lui sont adjacentes. Il s'agit ici d'utiliser la fonction `st_join()` avec la condition `st_touches`&nbsp;:
 
 ```{r}
 st_join(regions, regions, join = st_touches)
@@ -1306,7 +1318,7 @@ st_join(regions, regions, join = st_touches)
 
 <br>
 
-Cette fonction nous retourne un objet spatial composé de deux attributs. L'attribut de gauche, `Rgns_Ad.x` donne le nom de chaque polygone des régions administratives de `regions` alors que l'attribut de droite, `Rgns_Ad.y`, assigne à chacun de ces polygones, le nom d'une des régions administrives qui lui est voisine. Puisque chaque polygone possède plus d'une région voisine, leur nom et leur géométrie sont répétées pour chaque région voisine. 
+Cette fonction nous retourne un objet spatial composé de deux attributs. L'attribut de gauche, `Rgns_Ad.x` donne le nom de chaque polygone des régions administratives de `regions` alors que l'attribut de droite, `Rgns_Ad.y`, assigne à chacun de ces polygones, le nom d'une des régions administratives qui lui est voisine. Puisque chaque polygone possède plus d'une région voisine, leur nom et leur géométrie sont répétés pour chaque région voisine. 
 
 
 ##### Opérations de mesure {-}
@@ -1332,6 +1344,8 @@ distance_lapoc_rimou
 <br>
  
 La distance calculée est de `r as.integer(distance_lapoc_rimou[1])`&nbsp;m, soit environ `as.integer(round(distance_lapoc_rimou[1]/1000))` km. Notez que nous avons calculé la distance géométrique et non la distance que l'odomètre d'une voiture calculerait en voyageant sur l'autoroute entre La Pocatière et Rimouski. 
+<!--  le calcul de la distance en km ne marche pas 
+-->
 
 Observez que la fonction `st_distance()` retourne aussi l'unité de mesure, ici des mètres. En effet, l'objet retourné par cette fonction est de classe `units`&nbsp;:
 
@@ -1526,12 +1540,14 @@ villes_pop <- villes_pop[order(villes_pop$population, decreasing = TRUE), ]
 ```
 <br>
 
-L'objet `villes_pop` est maintenant ordonné de manière décroissante en fonction de la taille de la population des municipalités. Ainsi, les 10 premières lignes de cet objet correspondent aux 10 municipalités les plus grandes du Québec. On peut donc assigner les 10 premières lignes à un nouvelle objet intitulé `top10_villes`:
+L'objet `villes_pop` est maintenant ordonné de manière décroissante en fonction de la taille de la population des municipalités. Ainsi, les 10 premières lignes de cet objet correspondent aux 10 municipalités les plus grandes du Québec. On peut donc assigner les 10 premières lignes à un nouvel objet intitulé `top10_villes`:
 
 ```{r}
 top10_villes <- villes_pop[1:10, ]
 top10_villes
 ```
+<br>
+
 Visualisons ce nouvel objet avec la fonction `mapview()`.
 
 ```{r viz-top10-villes, dev = 'png'}
@@ -1551,8 +1567,9 @@ Comme vu dans le [module 4](#vec), les géodatabase permettent de contenir plusi
 st_layers("Module7/Module7_donnees/parcs.gdb") 
 
 ```
+<br>
 
-Nous pouvons remarquer que les intitulés des différentes couches ne sont pas bien définis. Il faut donc prendre le temps de regarder la documentation accessible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000/resource/229322ef-eca2-4ae9-a511-ba599bc2745e). Ne vous inquiétez pas, je l'ai fait pour vous! En s'intéressant à la structure de données et à la nomenclature utilisée et décrite, nous pouvons déterminer que la couche `terpnq_s` correspond aux territoires des parc nationaux du Québec. Nous pouvons donc faire la lecture de la géodatabase avec la fonction `st_read()` en précisant cette couche à l'aide de l'argument `layer`.
+Nous pouvons remarquer que les intitulés des différentes couches ne sont pas bien définis. Il faut donc prendre le temps de regarder la documentation accessible sur le site de [données ouvertes Québec](https://www.donneesquebec.ca/recherche/fr/dataset/couche-des-territoires-recreatifs-du-quebec-a-l-echelle-de-1-100-000/resource/229322ef-eca2-4ae9-a511-ba599bc2745e). Ne vous inquiétez pas, je l'ai fait pour vous! En nous intéressant à la structure de données et à la nomenclature utilisée et décrite, nous pouvons déterminer que la couche `terpnq_s` correspond aux territoires des parcs nationaux du Québec. Nous pouvons donc faire la lecture de la géodatabase avec la fonction `st_read()` en précisant cette couche à l'aide de l'argument `layer`.
 
 ```{r load-parcs2}
 
@@ -1576,7 +1593,7 @@ parcs_nationaux$TRQ_NM_TER
 
 ###### 4. Zones tampons autour des plus grandes municipalités {-}
 
-Nous traçons maintenant une zone tampon (`POLYGON`) de 70&nbsp;km de rayon autour de chaque municipalité (`POINT`) du *shapefile* `top10_villes`. Pour se faire, nous allons utiliser la fonction `st_buffer()`. Avant de réaliser cette opération, nous devons vérifier que le système de coordonnées de référence de l'objet spatial `top10_villes` est défini en unité métrique. En effet, la distance de 70&nbsp;km pourrait être interprétée comme étant 70&nbsp;degrés si l'unité de la projection était en degré. Attention, cette erreur est très courante! Lorsque l'on veut calculer des distances euclidiennes, il faut toujours s'assurer que l'unité du système de projection est en mètre et non en degré.
+Nous traçons maintenant une zone tampon (`POLYGON`) de 70&nbsp;km de rayon autour de chaque municipalité (`POINT`) du *shapefile* `top10_villes`. Pour ce faire, nous allons utiliser la fonction `st_buffer()`. Avant de réaliser cette opération, nous devons vérifier que le système de coordonnées de référence de l'objet spatial `top10_villes` est défini en unité métrique. En effet, la distance de 70&nbsp;km pourrait être interprétée comme étant 70&nbsp;degrés si l'unité de la projection était en degré. Attention, cette erreur est très courante! Lorsque l'on veut calculer des distances euclidiennes, il faut toujours s'assurer que l'unité du système de projection est en mètre et non en degré.
 
 ```{r crs-top-villes}
 st_crs(top10_villes)$proj4string 
@@ -1592,7 +1609,7 @@ st_crs(top10_villes_lcc)$proj4string
 ```
 <br>
 
-Traçons à présent les zones tampon (*buffer*) autour des municipalités à l'aide de la fonction `st_buffer()` comme expliqué précédemment, et visualisons le résultat de cette opération
+Traçons à présent les zones tampon (*buffer*) autour des municipalités à l'aide de la fonction `st_buffer()` comme expliqué précédemment, et visualisons le résultat de cette opération.
 
 ```{r buffer-top-villes, dev = 'png'}
 top10_villes_buffer <- st_buffer(top10_villes_lcc, dist = 70e3) # 70 kms en mètres = 70e3
@@ -1601,7 +1618,7 @@ mapview(top10_villes_buffer, zcol = "toponyme", legend = FALSE)
 
 <br>
 
-Rappelons que le premier argument de la fonction `st_buffer()` correspond à l'objet spatial à partir duquel nous créons les zones tampons, et le second argument correspond à la longueur du rayon des zones tampon en mètres (70&nbsp;km = 70e3&nbsp;m).
+Rappelons que le premier argument de la fonction `st_buffer()` correspond à l'objet spatial à partir duquel nous créons les zones tampons, et le second argument correspond à la longueur du rayon des zones tampons en mètres (70&nbsp;km = 70e3&nbsp;m).
 
 
 ###### 5. Nombre de parcs dans chaque zone tampon {-}
@@ -1627,9 +1644,9 @@ st_intersects(x = top10_villes_buffer, y = parcs_nationaux_lcc, sparse = FALSE)
 
 <br>
 
-La fonction `st_intersects` avec l'argument `sparse = FALSE` retourne une matrice avec en ligne les zones tampons des 10 plus grandes villes (argument `x` ci-dessus) et en colonne, les 27 parcs nationaux du Québec (argument `y` ci-dessus). Pour chacune des combinaisons, la valeur boléenne renvoyée (`TRUE` ou `FALSE`) spécifie si les deux polygones se chevauchent (partiellement ou non). 
+La fonction `st_intersects` avec l'argument `sparse = FALSE` retourne une matrice avec en ligne les zones tampons des 10 plus grandes villes (argument `x` ci-dessus) et en colonne, les 27 parcs nationaux du Québec (argument `y` ci-dessus). Pour chacune des combinaisons, la valeur booléenne renvoyée (`TRUE` ou `FALSE`) spécifie si les deux polygones se chevauchent (partiellement ou non). 
 
-L'une des propriétés intéressante des valeurs boléennes (`TRUE` ou `FALSE`), renvoyées par la fonction `st_intersects`, est que la valeur `TRUE` peut être interprétée par `R` comme une valeur de 1 et `FALSE` comme une valeur de 0. Il est donc possible de réaliser des opérations mathématiques sur des valeurs boléennes. 
+L'une des propriétés intéressantes des valeurs booléennes (`TRUE` ou `FALSE`), renvoyées par la fonction `st_intersects`, est que la valeur `TRUE` peut être interprétée par `R` comme une valeur de 1 et `FALSE` comme une valeur de 0. Il est donc possible de réaliser des opérations mathématiques sur des valeurs booléennes. 
 
 Par exemple, nous pouvons effectuer une sommation sur les lignes (zones tampons de chaque grande municipalité) afin de déterminer combien de parcs nationaux se trouvent à l'intérieur des zones tampons (c-à-d combien d'éléments ont la valeur `TRUE`).
 
@@ -1666,7 +1683,7 @@ Nous constatons que Sherbrooke *et* Saint-Jean-sur-Richelieu disposent toutes de
 ## Exercices {#ex_map_vec}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_manip_vec) de ce module.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 <br>
 
@@ -1686,7 +1703,7 @@ library(units)
 <summary> Réponse</summary>
 <p>
 
-Utiliser la fonction `subset()` pour filtrer le *shapefile* `municipalites` et isoler ces quatres villes.
+Utiliser la fonction `subset()` pour filtrer le *shapefile* `municipalites` et isoler ces quatre villes.
 
 ```{r, warning = FALSE}
 Selection <- subset(villes, (toponyme == "Blanc-Sablon") | 
@@ -1700,7 +1717,7 @@ Selection
 
 Le symbole `|` signifie *et*.
 
-Combiner ces quatres villes (points) en un seul objet spatial (multipoints) en utilisant la fonction `st_combine()`&nbsp;:
+Combiner ces quatre villes (points) en un seul objet spatial (multipoints) en utilisant la fonction `st_combine()`&nbsp;:
 
 ```{r}
 Combo_Selection <- st_combine(Selection)
@@ -1708,7 +1725,7 @@ Combo_Selection
 ```
 <br>
 
-Transformer cet objet multipoints en polygone en utilisant la fonction `st_cast()`&nbsp;:
+Transformer cet objet multipoint en polygone en utilisant la fonction `st_cast()`&nbsp;:
 
 ```{r, warning = FALSE}
 Poly_Selection <- st_cast(Combo_Selection, to = "POLYGON")
@@ -1731,7 +1748,7 @@ mapview(Poly_Selection)
 
 <br>
 
-**b)** Quelle est la superficie, en km, de ce polygone?
+**b)** Quelle est la superficie, en km^2, de ce polygone?
 
 <details>
 <summary> Réponse</summary>
@@ -1754,7 +1771,7 @@ st_crs(Poly_Selection_nad83)$proj4string
 
 Les unités sont à présent en mètres.
 
-Calculer la superficie du polygone en utilisant la fonction `st_area()` et convertisser les unités en $km^2$ en utilisant la fonction `set_units()`&nbsp;:
+Calculer la superficie du polygone en utilisant la fonction `st_area()` et convertir les unités en $km^2$ en utilisant la fonction `set_units()`&nbsp;:
 
 ```{r, warning = FALSE}
 Aire <- st_area(Poly_Selection_nad83)
@@ -1846,6 +1863,8 @@ Utiliser la fonction `sum()` pour calculer la population totale comprise dans la
 ```{r, warning=FALSE}
 sum(Villes_Frontiere_tampon_pop$mpopul)
 ```
+<br>
+
 Une autre façon d'obtenir le même résultat est d'utiliser la fonction `aggregate()`&nbsp;:
 
 ```{r, warning=FALSE}

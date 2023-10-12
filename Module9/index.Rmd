@@ -63,7 +63,7 @@ Dans la section [Exercices](#ex_spatiotemp), vous mettrez en pratique les manipu
 
 Cette leçon est divisée en deux parties. Dans la première partie, vous apprendrez à manipuler des données spatiotemporelles de type vectoriel, et dans la seconde partie, des données spatiotemporelles de type matriciel. 
 
-Chacune des parties est structurée autour d'une problématique à résoudre. Dans la première partie, vous analyser un jeu de données de 400 trajets de cyclistes à Montréal. Cette analyse vous amènera à manipuler des objets
+Chacune des parties est structurée autour d'une problématique à résoudre. Dans la première partie, vous analyserez un jeu de données de 400 trajets de cyclistes à Montréal. Cette analyse vous amènera à manipuler des objets
 vectoriels à des échelles de temps fines (de l'ordre de quelques heures). 
 
 Dans la seconde partie, vous étudierez l'évolution des températures et des précipitations dans la région du Parc national du Mont-Mégantic de 2007 à 2016. Vous manipulerez alors des données climatiques mensuelles sous forme d'une série de *rasters*.
@@ -109,7 +109,7 @@ Nous finirons cette partie avec un exercice de visualisation du trajet le plus l
 
 #### Importer les données 
 
-Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/), mettent à disposition un jeu de données incluant près de [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions de cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr). Les trajets ont notamment été anonymisés - reportez-vous au lien précédent pour plus d'informations relatives au traitement de ces données.
+Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/) mettent à disposition un jeu de données incluant près de [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions de cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr). Les trajets ont notamment été anonymisés - reportez-vous au lien précédent pour plus d'informations relatives au traitement de ces données.
 
 Ce jeu de données de 500 trajets est contenu dans un fichier zippé d'extension 
 [GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` que nous avons préalablement téléchargé. 
@@ -197,7 +197,7 @@ abline(a = 0, b = 1, lty = 2) # lty = 2 donne une ligne discontinue
 
 Nous voyons ainsi rapidement que tous les points sont sur la ligne 1:1. Ceci nous permet de conclure que les valeurs sont identiques ou très proches -  car nous n'avons pas fait de tests formels, et ils se pourraient donc qu'il y ait de minimes différences entre les deux distances. 
 
-Nous devons ensuite quantifier la durée des trajets pour obtenir les vitesses moyennes. Pour cela, nous avons besoin des colonnes `start` et `stop` de l'objet `trajets` qui donnent la date et l'heure associées au début et à la fin de chaque trajet. Par exemple, pour les 20 premiers trajets ces colonnes nous donnent&nbsp;: 
+Nous devons ensuite quantifier la durée des trajets pour obtenir les vitesses moyennes. Pour cela, nous avons besoin des colonnes `start` et `stop` de l'objet `trajets` qui donnent la date et l'heure associées au début et à la fin de chaque trajet. Par exemple, pour les 20 premiers trajets, ces colonnes nous donnent&nbsp;: 
 
 ```{r}
 trajets$start[1:10]
@@ -297,7 +297,7 @@ vit_dec[1:10]
 ```
 <br>
 
-Le ou la plus rapide des cyclistes circule à une vitesse moyenne de `r format(vit_dec[1], digits = 3)`&nbsp;km/h, ce qui ne semble pas réaliste! Nous supposons qu'un problème d'enregistrement de ce trajet est à l'origine de cette valeur abberante. Nous excluons donc ce trajet et retenons le second comme étant le plus rapide. Pour extraire le second trajet, nous utilisons la fonction `order()`.
+Le ou la plus rapide des cyclistes circule à une vitesse moyenne de `r format(vit_dec[1], digits = 3)`&nbsp;km/h, ce qui ne semble pas réaliste! Nous supposons qu'un problème d'enregistrement de ce trajet est à l'origine de cette valeur aberrante. Nous excluons donc ce trajet et retenons le second comme étant le plus rapide. Pour extraire le second trajet, nous utilisons la fonction `order()`.
 
 ```{r traj_rapide}
 traj_rapide <- trajets[order(trajets$vitesse_km_h, decreasing = TRUE)[2], ]
@@ -414,7 +414,7 @@ barplot(
 ```
 
 C'est donc le 10 juillet que nous recensons le plus grand nombre de trajets.
-Nous allons même aller à l'échelle de l'heure et nous recommençons les étapes précédentes avec la fonction `hour()`. Au passage, mentionnons la bibliothèque [`hms`](https://CRAN.R-project.org/package=hms) pour manipuler les heures, minutes et secondes (nous ne l'utiliserons pas ici, mais elles pourraient vous être utile dans vos projets futurs).
+Nous allons même aller à l'échelle de l'heure et nous recommençons les étapes précédentes avec la fonction `hour()`. Au passage, mentionnons la bibliothèque [`hms`](https://CRAN.R-project.org/package=hms) pour manipuler les heures, minutes et secondes (nous ne l'utiliserons pas ici, mais elles pourraient vous être utiles dans vos projets futurs).
 
 ```{r traj_10juillet, fig.width = 9.5, dev = 'png'}
 trajets$heure <- hour(trajets$start)
@@ -432,7 +432,7 @@ C'est donc à 17h le 10 juillet que les trajets sont les plus nombreux.
 
 #### Animation du trajet le plus long
 
-Nous allons à présent animer le trajet de vélo le plus long. Nous voulons, en effet, créer un fichier [GIF](https://fr.wikipedia.org/wiki/Graphics_Interchange_Format) qui illustrera le parcours de la ou du cycliste. Pour y arriver nous devrons faire les étapes suivantes&nbsp;:
+Nous allons à présent animer le trajet de vélo le plus long. Nous voulons, en effet, créer un fichier [GIF](https://fr.wikipedia.org/wiki/Graphics_Interchange_Format) qui illustrera le parcours de la ou du cycliste. Pour y arriver, nous devrons faire les étapes suivantes&nbsp;:
 
 >
 > 1. Trouver le trajet le plus long.
@@ -489,7 +489,7 @@ nrow(traj_long_pts)
 
 <br>
 
-Maintenant, nous allons associer un temps à chaque point du trajet. D'emblée, il nous est possible de déterminer le temps de départ et le temps d'arrivée de ce trajet puisque ceux-ci sont donnés par les valeurs de `traj_long$start` et de `traj_long$stop` respectivement. De plus, l'application "Mon RésoVélo" enregistre les coordonnées spatiales le long d'un trajet à intervalle régulier. Ainsi, le temps associé à chaque point d'un trajet est réparti de façon régulière entre son temps de départ et son temps d'arrivée. Nous créons donc une séquence régulière avec la fonction `R` `seq()` en spécifiant le temps de départ, le temps d'arrivé et le nombre de points que doit inclure la séquence (argument `length.out`) qui est le nombre de lignes (`nrow()`) de la table d'attributs de `traj_long_pts`. Finalement, nous ajoutons cette séquence au nouvel objet `traj_long_pts` dans une colonne `temps`. 
+Maintenant, nous allons associer un temps à chaque point du trajet. D'emblée, il nous est possible de déterminer le temps de départ et le temps d'arrivée de ce trajet puisque ceux-ci sont donnés par les valeurs de `traj_long$start` et de `traj_long$stop` respectivement. De plus, l'application "Mon RésoVélo" enregistre les coordonnées spatiales le long d'un trajet à intervalle régulier. Ainsi, le temps associé à chaque point d'un trajet est réparti de façon régulière entre son temps de départ et son temps d'arrivée. Nous créons donc une séquence régulière avec la fonction `R` `seq()` en spécifiant le temps de départ, le temps d'arrivée et le nombre de points que doit inclure la séquence (argument `length.out`) qui est le nombre de lignes (`nrow()`) de la table d'attributs de `traj_long_pts`. Finalement, nous ajoutons cette séquence au nouvel objet `traj_long_pts` dans une colonne `temps`. 
 
 
 ```{r seq_time}
@@ -507,7 +507,7 @@ traj_long_pts$temps <- seq(
 
 À présent, nous allons visualiser le trajet parcouru sur différentes périodes de temps. Pour chaque période, nous sauvegarderons la visualisation obtenue. À la prochaine étape, nous combinerons ces images pour obtenir une animation. 
 
-Dans un premier temps, visualisons le trajet parcouru pour une période de temps arbitraire, autrement dit pour une période allant du premier point jusqu'à n'importe quel points $n$ le long du trajet `traj_long_pts`. À titre d'exemple, choisissons les 2000 premiers points.
+Dans un premier temps, visualisons le trajet parcouru pour une période de temps arbitraire, autrement dit pour une période allant du premier point jusqu'à n'importe quels points $n$ le long du trajet `traj_long_pts`. À titre d'exemple, choisissons les 2000 premiers points.
 
 ```{r pt_to_li}
 lin <- st_cast(st_combine(traj_long_pts[1:2000, ]), "LINESTRING")
@@ -564,9 +564,9 @@ tm_shape(lin, bbox = st_bbox(traj_long_pts)) +
 
 Pour obtenir une animation pour la totalité du trajet `traj_long`, nous devons alors faire cette même carte pour un nombre croissant de points et combiner toutes ces cartes en un seul fichier GIF. Puisque le trajet total compte `r nrow(traj_long_pts)` points, cette tâche est répétitive. 
 
-Dans ce qui suit nous allons structurer notre code avec quelques fonctions. Cela nous permet d'isoler les différentes étapes à réaliser et d'éviter de répétées du code. De manière générales, structurer son code en différentes fonctions permet d'augmenter la clarté du code et de diminuer les erreurs qui arrivent rapidement quand le code se complexifie. 
+Dans ce qui suit, nous allons structurer notre code avec quelques fonctions. Cela nous permet d'isoler les différentes étapes à réaliser et d'éviter de répéter du code. De manière générale, structurer son code en différentes fonctions permet d'augmenter la clarté du code et de diminuer les erreurs qui arrivent rapidement quand le code se complexifie. 
 
-Nous devons donc prendre un peu de temps pour expliquer comment créer une fonction. Jusqu'ici nous avons utilisé de nombreuses fonctions déjà définies dans `R` ou dans les bibliothèques employées sans que nous n'ayons eu besoin de créer nos propres fonctions. Pour comprendre comment est structurée une fonction, nous allons détailler un exemple simple. 
+Nous devons donc prendre un peu de temps pour expliquer comment créer une fonction. Jusqu'ici, nous avons utilisé de nombreuses fonctions déjà définies dans `R` ou dans les bibliothèques employées sans que nous n'ayons eu besoin de créer nos propres fonctions. Pour comprendre comment est structurée une fonction, nous allons détailler un exemple simple. 
 
 ```{r}
 ma_fonction <- function(a, b = 1) {
@@ -580,7 +580,7 @@ ma_fonction <- function(a, b = 1) {
 ```
 <br>
 
-Dans `R`, une fonction est un objet créé avec `function()`. Comme tout objet nous pouvons l'assigner à une variable et dans notre exemple, nous l'assignons à `ma_fonction` qui sera le nom de la fonction. Dans la parenthèse qui suit `function`, nous écrivons les arguments de la fonction, en l'occurrence pour `ma_fonction`, nous avons `a` et `b`. Dans notre exemple, `b` a une valeur par défaut qui est 1, donc si nous ne spécifions pas `b`, alors `b` aura automatiquement une valeur de 1. 
+Dans `R`, une fonction est un objet créé avec `function()`. Comme tout objet, nous pouvons l'assigner à une variable et dans notre exemple, nous l'assignons à `ma_fonction` qui sera le nom de la fonction. Dans la parenthèse qui suit `function`, nous écrivons les arguments de la fonction, en l'occurrence pour `ma_fonction`, nous avons `a` et `b`. Dans notre exemple, `b` a une valeur par défaut qui est 1, donc si nous ne spécifions pas `b`, alors `b` aura automatiquement une valeur de 1. 
 
 Le corps de la fonction est l'expression juste après cette parenthèse, dans notre cas cela inclut tout ce qui est entre accolades (`{ }`). Une fonction peut comprendre autant de ligne de code que souhaité et peut contenir n'importe quelle expression `R` valide. À titre d'exemple, nous avons utilisé un test logique `if`/`else` pour que la valeur retournée `c` change selon les valeurs de `b`. 
 
@@ -702,7 +702,7 @@ i. La fonction `for()` constitue ce qu'on appelle une **boucle** en programmatio
 
 ii. Nous utilisons `seq()` pour générer une séquence de `n_img` images entre 2 et le maximum de points (`r nrow(traj_long_pts)`). 
 
-iii. La séquence peut générer des nombres décimaux, mais `visual()` demande des nombre entiers, nous utilisons alors `floor()` pour la conversion. 
+iii. La séquence peut générer des nombres décimaux, mais `visual()` demande des nombres entiers, nous utilisons alors `floor()` pour la conversion. 
 
 iv. Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`. 
 
@@ -752,7 +752,7 @@ knitr::include_graphics('Module9/images/anim1.gif')
 
 <br>
 
-Pour finir, nous allons ajouter un fond de carte. Pour cela nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grâce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
+Pour finir, nous allons ajouter un fond de carte. Pour cela, nous allons télécharger un fond de carte de [OpenStreetMap](https://www.openstreetmap.org) grâce à fonction `osm.raster()` de la bibliothèque [`rosm`](https://CRAN.R-project.org/package=rosm).
 
 
 Installons la bibliothèque `rosm`.
@@ -1022,7 +1022,7 @@ dim(val)
 ```
 <br>
 
-Pour appliquer les mêmes opérations sur les différentes couches, il est possible d'utiliser la fonction `R` `apply()` après avoir utilisée la fonction `getValues()`. Par exemple, pour connaître la valeur minimale de chaque couche, nous pouvons utiliser la ligne suivante&nbsp;:
+Pour appliquer les mêmes opérations sur les différentes couches, il est possible d'utiliser la fonction `R` `apply()` après avoir utilisé la fonction `getValues()`. Par exemple, pour connaître la valeur minimale de chaque couche, nous pouvons utiliser la ligne suivante&nbsp;:
 
 ```{r}
 apply(val, 2, min)
@@ -1040,14 +1040,14 @@ su_mint[,1:5]
 ```
 <br>
 
-Aussi, certaines fonctions ont des comportements prédéfinies pour les objets `rasterStack`. Par exemple, la fonction `min()` retourne un objet de classe `rasterLayer` dont chaque cellule contient la valeur minimale des cellules des différentes couches ayant la même latitude et la même longitude (c'est-à-dire à la même position dans le *raster*). 
+Aussi, certaines fonctions ont des comportements prédéfinis pour les objets `rasterStack`. Par exemple, la fonction `min()` retourne un objet de classe `rasterLayer` dont chaque cellule contient la valeur minimale des cellules des différentes couches ayant la même latitude et la même longitude (c'est-à-dire à la même position dans le *raster*). 
 
 ```{r}
 min(mint)
 ```
 <br>
 
-La fonction `max()` a le même comportement, pour une combinaison (longitude, latitude) donnée, elle retourne la valeur maximale des différentes cellules. La fonction `quantile()` retourne les quantiles pour les différentes couches, par défaut, 5 quantiles sont retournées. Ci-dessous, nous présentons le résultat pour les 10 premières couches. 
+La fonction `max()` a le même comportement, pour une combinaison (longitude, latitude) donnée, elle retourne la valeur maximale des différentes cellules. La fonction `quantile()` retourne les quantiles pour les différentes couches, par défaut, 5 quantiles sont retournés. Ci-dessous, nous présentons le résultat pour les 10 premières couches. 
 
 ```{r}
 quantile(mint)[1:10, ]
@@ -1063,7 +1063,7 @@ apply(val, 2, quantile)[, 1:10]
 <br>
 
 
-Il est aussi possible de faire des calculs sur les différentes couches en utilisant la fonction `calc()`, par exemple nous pouvons obtenir le quantiles cellule par cellule de la manière suivante&nbsp;: 
+Il est aussi possible de faire des calculs sur les différentes couches en utilisant la fonction `calc()`, par exemple nous pouvons obtenir les quantiles cellule par cellule de la manière suivante&nbsp;: 
 
 ```{r}
 calc(mint, quantile)
@@ -1103,7 +1103,7 @@ mint_crop <- crop(mint, extent(c(-71.5, -71, 45, 45.5)))
 
 <br>
 
-Pour les deux opérations suivantes nous allons utiliser les contours du Parc national de Frontenac qui est le premier élément de l'objet `parcs_sherbrooke` manipulé au [Module 8](#manip_mat) et disponible dans le répertoire `Module8_donnees`. 
+Pour les deux opérations suivantes, nous allons utiliser les contours du Parc national de Frontenac qui est le premier élément de l'objet `parcs_sherbrooke` manipulé au [Module 8](#manip_mat) et disponible dans le répertoire `Module8_donnees`. 
 
 ```{r, warning = FALSE}
 # importer le raster parcs
@@ -1166,7 +1166,7 @@ plot(mint[[117:120]], main = c("09/2016", "10/2016", "11/2016", "12/2016"))
 ```
 <br>
 
-La fonction `mapview()` peut aussi être utilisée pour visualiser les `rasterStack` (voir [Module 8][#mat]). Les différentes couches seront alors mises les unes par dessus les autres dans l'ordre donné (la dernière étant sur le dessus de la pile). Un trop grand nombre de couches rendra la carte difficile à interpréter. Comme mentionner précédemment, mieux vaut sélectionner un nombre limité de couches à visualiser. Ci-dessous, nous visualisons les trois premières couches.
+La fonction `mapview()` peut aussi être utilisée pour visualiser les `rasterStack` (voir [Module 8][#mat]). Les différentes couches seront alors mises les unes par-dessus les autres dans l'ordre donné (la dernière étant sur le dessus de la pile). Un trop grand nombre de couches rendra la carte difficile à interpréter. Comme mentionner précédemment, mieux vaut sélectionner un nombre limité de couches à visualiser. Ci-dessous, nous visualisons les trois premières couches.
 
 
 ```{r, warning = FALSE}
@@ -1187,14 +1187,14 @@ spatio-temporel:
 - chaque couche est bien un objet spatial (avec son étendue spatiale, sa projection, etc.)
 - les couches sont ordonnées dans le temps. 
 
-Il est cependant important d'insister sur le fait qu'un `rasterStack` ne contient pas nécessairement un objet spatio-temporel. La seule contrainte sur les couches contenues est spatiale: étendue, projection et résolution doivent être identiques. Ainsi, il est commun de travailler sur une même période avec des objets `rasterStack` qui contiennent différentes variables pour une période donnée (par exemple, la température, les précipitations, l'élévation, etc.). Cela permet, entre autres, d'éviter la répétition des mêmes opérations sur plusieurs objets `rasterLayer`. Aussi, certaines données sont, par nature, multi-couches, c'est le cas des données d'imagerie satellitaire (on parle alors de bandes).
+Il est cependant important d'insister sur le fait qu'un `rasterStack` ne contient pas nécessairement un objet spatio-temporel. La seule contrainte sur les couches contenues est spatiale: étendue, projection et résolution doivent être identiques. Ainsi, il est commun de travailler sur une même période avec des objets `rasterStack` qui contiennent différentes variables pour une période donnée (par exemple, la température, les précipitations, l'élévation, etc.). Cela permet, entre autres, d'éviter la répétition des mêmes opérations sur plusieurs objets `rasterLayer`. Aussi, certaines données sont, par nature, multicouches, c'est le cas des données d'imagerie satellitaire (on parle alors de bandes).
 
 Jusqu'ici, nous n'avons pas formalisé l'utilisation du temps, nous savons simplement à quoi correspondent les différentes couches. Cette information a été donnée dans le texte plus haut. Toutefois, dans un contexte de partage de données, cette information aurait été ajoutée dans les métadonnées (les données qui décrivent les données). 
 
 Il existe cependant un moyen de formaliser un peu plus l'information qui ordonne les couches avec la fonction `setZ()`de la bibliothèque `raster`. Nous allons utiliser cette fonction pour associer une date à chacune des couches contenues dans le `rasterStack`. 
 
 
-En premier lieu, créons une séquence de date "mois/année", que nous appèlerons `moan`, en utilisant les fonctions `R` `rep()` et `paste0()`:
+En premier lieu, créons une séquence de date "mois/année", que nous appellerons `moan`, en utilisant les fonctions `R` `rep()` et `paste0()`:
 
 ```{r}
 # ci-dessous la séquence 1, 2..., 12 est répétée 10 fois (i.e. chacun des 12 mois pour chacune des 10 années)
@@ -1232,7 +1232,7 @@ getZ(mint)[1:10]
 ```
 <br>
 
-La couche `mint` pour une année donnée le long de cette axe de temps est accessible en utilisant `[[`. Par exemple, la première couche est&nbsp;:
+La couche `mint` pour une année donnée le long de cet axe de temps est accessible en utilisant `[[`. Par exemple, la première couche est&nbsp;:
 ```{r}
 mint[[1]]
 ```
@@ -1331,7 +1331,7 @@ mean_pcp <- apply(getValues(pcp_megantic), 2, mean, na.rm = TRUE)
 Rappelez-vous que l'argument 2 signifie que la fonction `mean()` est appliquée sur la deuxième dimension de la matrice `getValues(pcp_megantic)` (c'est-à-dire la dimension associée aux couches).
 
 
-Utilisons le vecteur `temps` créé plus tôt pour visualisons le changement dans les précipitations cumulées moyennes en fonction du temps&nbsp;:
+Utilisons le vecteur `temps` créé plus tôt pour visualiser le changement dans les précipitations cumulées moyennes en fonction du temps&nbsp;:
 ```{r mean_pcp_plot, dev = 'png'}
 plot(temps, mean_pcp)
 ```
@@ -1499,7 +1499,7 @@ Nous allons maintenant créer une nouvelle fonction, `plot_profil()`, pour produ
 * la variable temporelle `temps`.
 
 De plus, nous voulons améliorer quelque peu le rendu visuel obtenu avec la fonction `plot()`. Tout d'abord, nous souhaitons
-utiliser les températures minimales et maximales moyennes pour créer une envelope de températures. Cela est possible en faisant appel à la fonction `polygon()`. Attention, la fonction `polygon()` n'est pas liée à la fonction `st_polygon()`!
+utiliser les températures minimales et maximales moyennes pour créer une enveloppe de températures. Cela est possible en faisant appel à la fonction `polygon()`. Attention, la fonction `polygon()` n'est pas liée à la fonction `st_polygon()`!
 
 La fonction `polygon(x,y,...)` dessine un polygone dont les coordonnées des sommets sont données par les vecteurs `x` et `y`.
 Par exemple&nbsp;:
@@ -1572,7 +1572,7 @@ plot_profil(40, pr_mint, pr_maxt, pr_pcp, temps)
 ```
 <br>
 
-Finalement, nous utilisons la fonction `saveGIF()` de la bibliothèque `animation`, pour enregistrée une séquence de figures produites avec `plot_profil()` en faisant évoluer le nombre de mois&nbsp;: 
+Finalement, nous utilisons la fonction `saveGIF()` de la bibliothèque `animation`, pour enregistrer une séquence de figures produites avec `plot_profil()` en faisant évoluer le nombre de mois&nbsp;: 
 
 
 ```R
@@ -1601,7 +1601,7 @@ knitr::include_graphics('Module9/images/anim3.gif')
 
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#lecon_spatiotemp) de ce module.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 <br>
 
@@ -1611,9 +1611,9 @@ Créer une animation de la carte des températures minimums pour les 12 premiers
 
 * Couvrir seulement la région allant de 71.4°Ouest à 71°Ouest, en longitude, et de 45°Nord à 45.4°Nord en latitude dans le 
 dans le système géodésique mondial WGS84.
-* Comprendre légende affichant les températures de -24 C à +24 C par bond de 2 C.
+* Comprendre une légende affichant les températures de -24 C à +24 C par bond de 2 C.
 * Afficher la légende à droite de la carte.
-* Utiliser une palette de couleurs allant d'une couleur froide pour les températeurs négatives vers une couleur chaude pour les températures négatives.
+* Utiliser une palette de couleurs allant d'une couleur froide pour les températures négatives vers une couleur chaude pour les températures négatives.
 * Avoir un titre qui comprend le mois (en français) et l'année.
 * Être construite avec la bibliothèque `tmap`.
 
@@ -1633,7 +1633,7 @@ mint_region <- crop(mint,region)
 ```
 <br>
 
-Ensuite, construisons une fonction pour afficher une seule couche du *rasterStack* `mint_region` avec les caractéristiques demandées. Définission d'abord les éléments propres à la légende, aux couleurs, et au titre.
+Ensuite, construisons une fonction pour afficher une seule couche du *rasterStack* `mint_region` avec les caractéristiques demandées. Définissons d'abord les éléments propres à la légende, aux couleurs, et au titre.
 
 ```{r}
 # Légende allant de -24 à 24 par pas de 2.

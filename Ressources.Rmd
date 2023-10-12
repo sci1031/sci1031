@@ -17,7 +17,7 @@ Seuls les étudiants inscrits à la TÉLUQ ont accès aux évaluations.
 
 #### Données du cours{-}
 
-Les liens suivants vous dirigerons directement vers les données utilisées pour chaque module
+Les liens suivants vous dirigerons directement vers les données utilisées pour chaque module :
 
 <br>
 
@@ -116,7 +116,7 @@ Utilisation de R Markdown des présentations&nbsp;:
 * [ioslide](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)
 * [Slidy](https://bookdown.org/yihui/rmarkdown/slidy-presentation.html)
 
-Dérivés de R Markdown
+Dérivés de R Markdown :
 
 * [bookdown](https://bookdown.org/yihui/bookdown/)
 * [blogdown](https://bookdown.org/yihui/blogdown/)

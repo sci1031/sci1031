@@ -1,3 +1,4 @@
+
 # Cartographie {#carto}
 
 
@@ -125,9 +126,9 @@ knitr::include_graphics(rep(m4),1)
 
 La première carte, par exemple, illustre le niveau de diplomation et de revenu aux États-Unis. Elle utilise une superposition de trois couleurs pour chaque comté du territoire américain. Le rose représente le taux de diplomation à l'école secondaire, le jaune, le taux de diplomation au collègue, et le bleu, le revenu médian. Une multitude de couleurs apparait donc sur la carte la rendant difficile à interpréter. Dans un cas pareil, la carte devient inutile car elle ne permet pas de transmettre un message unique et clair. Une carte est efficace lorsqu'elle est simple. Il faut donc éviter d'y mettre trop d'informations.
 
-La deuxième carte illustre l'ensemble des pays de la planète et présente plusieurs problèmes. D'abord le nom de chaque pays, abrégé par trois lettres, est positionné sur chacun de ceux-ci. Cette approche rend totalement illisible le nom des pays dans les régions où ils sont nombreux. De plus, l'usage d'abbréviation est peu utile à moins de connaître déjà le nom du pays. Finalement, le choix des couleurs employées pour le texte et pour la carte elle-même est épouvantable. Les lettres sont beaucoup trop pâles, nuisant à la lisibilité des noms, et la palette de couleurs pour représenter les pays et les océans (en jaune!) est dérangeante.   
+La deuxième carte illustre l'ensemble des pays de la planète et présente plusieurs problèmes. D'abord le nom de chaque pays, abrégé par trois lettres, est positionné sur chacun de ceux-ci. Cette approche rend totalement illisible le nom des pays dans les régions où ils sont nombreux. De plus, l'usage d'abréviation est peu utile à moins de connaître déjà le nom du pays. Finalement, le choix des couleurs employées pour le texte et pour la carte elle-même est épouvantable. Les lettres sont beaucoup trop pâles, nuisant à la lisibilité des noms, et la palette de couleurs pour représenter les pays et les océans (en jaune!) est dérangeante.   
 
-La troisième carte donne la position de tous les pubs dans le sud est du Royaume-Uni. Une telle carte est utile si l'utilisateur a la possibilité d'agrandir l'écran en mode zoom. Autrement, la quantité trop grande de marqueurs masque l'information sur la localisation des pubs. Si l'objectif de cette carte est d'illustrer l'abondance des pubs dans ce pays, alors une représentation de la densité de pubs par habitant pour une division administrative donnée serait plus informative.
+La troisième carte donne la position de tous les pubs dans le sud-est du Royaume-Uni. Une telle carte est utile si l'utilisateur a la possibilité d'agrandir l'écran en mode zoom. Autrement, la quantité trop grande de marqueurs masque l'information sur la localisation des pubs. Si l'objectif de cette carte est d'illustrer l'abondance des pubs dans ce pays, alors une représentation de la densité de pubs par habitant pour une division administrative donnée serait plus informative.
 
 Finalement, la dernière carte représente une section de l'Europe. Nous observons un usage exagéré d'écriture sur la carte qui, en plus, repose sur une trop grande diversité de polices et de tailles de caractère. Cette écriture est dense et n'est pas structurée de manière hiérarchique si bien qu'il est impossible de dégager les éléments importants. Également, la signification du gradient de couleurs utilisé n'est pas évidente.  
 
@@ -142,13 +143,13 @@ Une carte doit être:
 > Une carte qui s'adresse au grand public sera différente d'une carte qui s'adresse à des experts.
 >
 >- **Conforme aux conventions**. 
->  Une carte doit respectée les conventions propres à son domaine d'application. Cela signifie aussi de respecter les associations naturelles de couleur tel que d'illustrer les plans d'eau par la couleur bleue. 
+>  Une carte doit respecter les conventions propres à son domaine d'application. Cela signifie aussi de respecter les associations naturelles de couleur tel que d'illustrer les plans d'eau par la couleur bleue. 
 > 
 >- **Esthétique**. 
->  Une carte doit, par sa composition, le choix des couleurs, sa typographie, être agréable à l'oeil. 
+>  Une carte doit, par sa composition, le choix des couleurs, sa typographie, être agréable à l'œil. 
 >
 >- **Bien structurée**. 
->  Une carte doit être dotée d'une certaine hierarchie visuelle. La visualisation d'une carte doit permettre de dégager rapidement ses éléments importants. 
+>  Une carte doit être dotée d'une certaine hiérarchie visuelle. La visualisation d'une carte doit permettre de dégager rapidement ses éléments importants. 
 >
 
 <br>
@@ -175,13 +176,13 @@ knitr::include_graphics(image)
 ``` 
 <br>
 
-Le **titre** est essentiel car il est la synthèse du message cartographie. Il doit être complet mais concis. Il peut être neutre (p. ex: *Nouveaux cas de COVID-19*) ou subjectif (p. ex: *Hausse fulgurante des cas de COVID-19*).
+Le **titre** est essentiel car il est la synthèse du message de cartographie. Il doit être complet mais concis. Il peut être neutre (p. ex: *Nouveaux cas de COVID-19*) ou subjectif (p. ex: *Hausse fulgurante des cas de COVID-19*).
 
-L'**échelle graphique** est essentielle pour que le lecteur puisse saisir l'étendue et la résolution du phénomène illustré dans la carte. L'échelle doit être simple (sans trop de subdivisions), pas trop longue, donner des valeurs arrondies, et toujours fournir l'unité métrique utilisée ou son abbréviation (p. ex. kilomètres ou km).
+L'**échelle graphique** est essentielle pour que le lecteur puisse saisir l'étendue et la résolution du phénomène illustré dans la carte. L'échelle doit être simple (sans trop de subdivisions), pas trop longue, donner des valeurs arrondies, et toujours fournir l'unité métrique utilisée ou son abréviation (p. ex. kilomètres ou km).
 
 La **légende** est essentielle à l'interprétation d'une carte. Celle-ci traduit les éléments graphiques en texte. En effet, tous les éléments qui ne sont pas évidents ou conformes doivent apparaître dans la légende de façon alignée et claire. Une légende doit comprendre: les éléments graphiques, le texte associé à chaque élément et les unités de mesure. Les éléments graphiques se rapportant à des données vectorielles doivent idéalement suivre l'ordre point-ligne-polygone dans la légende. Notez qu'il est aussi inutile d'écrire le mot *Légende*.
 
-L'**orientation** de la carte, spécifiée par une flèche du nord ou une rose des vents, est indispensable si les données illustrées sont en rotation de sorte que le nord ne corresponde pas au haut de la carte. Par exemple, la flèche du nord est indiquée sur la carte du réseau d'autobus de nuit de la Société de transport de Montréal (figure \@ref(fig:fleche-nord)). En effet, pour facilité la lecture de la carte, l'île de Montréal est représentée sur un axe horizontal qui ne correspond pas à l'axe géographique est-ouest. La flèche du nord doit être discrète sur une carte. Par ailleurs, si le nord est bien au haut de la carte, la flèche du nord est optionnelle.
+L'**orientation** de la carte, spécifiée par une flèche du nord ou une rose des vents, est indispensable si les données illustrées sont en rotation de sorte que le nord ne corresponde pas au haut de la carte. Par exemple, la flèche du nord est indiquée sur la carte du réseau d'autobus de nuit de la Société de transport de Montréal (figure \@ref(fig:fleche-nord)). En effet, pour faciliter la lecture de la carte, l'île de Montréal est représentée sur un axe horizontal qui ne correspond pas à l'axe géographique est-ouest. La flèche du nord doit être discrète sur une carte. Par ailleurs, si le nord est bien au haut de la carte, la flèche du nord est optionnelle.
 
 <br>
 
@@ -192,7 +193,7 @@ knitr::include_graphics(image)
 
 <br>
 
-La **source**, l'**auteur.trice**, la **date**, et la **projection** doivent toujours être présents sur une carte. La citation de la source des données est importante pour des raisons éthiques. Les données illustrées ont été assemblées par une personne ou un organisme et nous devons reconnaître le travail de ce dernier. De plus, la citation d'une source, si celle-ci est reconnue, apporte de la crédibilité au contenu de la carte. Finalement, la citation d'une source permet au lecteur ou à la lectrice d'une carte de retracer et d'accéder aux données. Notez que ces quatre éléments devraient apparaître en petits caractères sur la carte car ils ne sont pas centrals au message.
+La **source**, l'**auteur.trice**, la **date**, et la **projection** doivent toujours être présents sur une carte. La citation de la source des données est importante pour des raisons éthiques. Les données illustrées ont été assemblées par une personne ou un organisme et nous devons reconnaître le travail de ce dernier. De plus, la citation d'une source, si celle-ci est reconnue, apporte de la crédibilité au contenu de la carte. Finalement, la citation d'une source permet au lecteur ou à la lectrice d'une carte de retracer et d'accéder aux données. Notez que ces quatre éléments devraient apparaître en petits caractères sur la carte car ils ne sont pas central au message.
 
 D'autres éléments sont souvent présents sur une carte mais sont optionnels:
 
@@ -205,9 +206,9 @@ D'autres éléments sont souvent présents sur une carte mais sont optionnels:
 
 <br>
 
-Un **cadre** sert à délimiter la zone cartographiée  (figure \@ref(fig:cadre-encart)).
+Un **cadre** sert à délimiter la zone cartographiée  (Figure \@ref(fig:cadre-encart)).
 
-Un **encart** est une carte secondaire de petite taille que l'on appose à la carte principale (figure \@ref(fig:cadre-encart)). Cette carte secondaire peut servir, par exemple, à représenter une étendue géographique plus grande qui permet de mieux situer la zone représentée dans la carte principale. Un encart peut être situé à l'intérieur ou à l'extérieur du cadre.
+Un **encart** est une carte secondaire de petite taille que l'on appose à la carte principale (Figure \@ref(fig:cadre-encart)). Cette carte secondaire peut servir, par exemple, à représenter une étendue géographique plus grande qui permet de mieux situer la zone représentée dans la carte principale. Un encart peut être situé à l'intérieur ou à l'extérieur du cadre.
 
 
 ```{r cadre-encart, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Un cadre et un encart sont des éléments optionnels de la mise en page d'une carte (source: Proulx et al. 2019).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_CadreEncart.png"}
@@ -228,7 +229,7 @@ knitr::include_graphics(image)
 ```
 <br>
 
-Un **quadrillage**, ou une grille, est un réseau de lignes horizontales et verticales perpendiculaires permettant d'afficher le système de coordonnées projetées (figure \@ref(fig:quadrillage)). 
+Un **quadrillage**, ou une grille, est un réseau de lignes horizontales et verticales perpendiculaires permettant d'afficher le système de coordonnées projetées (Figure \@ref(fig:quadrillage)). 
 
 <br>
 
@@ -239,7 +240,7 @@ knitr::include_graphics(image)
 
 <br>
 
-Certaines cartes font l'usage à la fois du quadrillage et des graticules (figure \@ref(fig:gratquad)):
+Certaines cartes font l'usage à la fois du quadrillage et des graticules (Figure \@ref(fig:gratquad)):
 <br>
 ```{r gratquad, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Les graticules et le quadrillage peuvent être utilisées sur une même carte (source:https://sbl.umontreal.ca/) .",fig.show='hold',fig.align='left', fig.link="Module6/Images/6_GratQuad.png"}
 image<-"Module6/Images/6_GratQuad.png"
@@ -251,7 +252,7 @@ knitr::include_graphics(image)
 
 #### Le texte {-}
 
-Différents types de texte apparaissent sur une carte. Il y a le texte utilisé sur ou autour d’une carte comme le titre, le texte de la légende et le texte affichant la source des données, la date, la projection, etc. Une carte peut aussi afficher des **étiquettes**  qui servent à décrire les attributs des données spatiales représentées. Par exemple, le nom d’un pays sur le polygone délimitant les frontières de ce dernier. Une carte peut aussi contenir des **annotations**, c’est-à-dire du texte apposées sur la carte pour préciser des informations ou identifier des éléments qui ne sont pas nécessairement des attributs des données spatiales représentées.
+Différents types de texte apparaissent sur une carte. Il y a le texte utilisé sur ou autour d’une carte comme le titre, le texte de la légende et le texte affichant la source des données, la date, la projection, etc. Une carte peut aussi afficher des **étiquettes**  qui servent à décrire les attributs des données spatiales représentées. Par exemple, le nom d’un pays sur le polygone délimitant les frontières de ce dernier. Une carte peut aussi contenir des **annotations**, c’est-à-dire du texte apposé sur la carte pour préciser des informations ou identifier des éléments qui ne sont pas nécessairement des attributs des données spatiales représentées.
 
 Le choix de la police, de la fonte, de la taille et de la couleur des caractères utilisés dans le texte d'une carte a une influence sur sa lisibilité. Il existe quelques principes à respecter lors du choix de ces éléments.
 
@@ -289,7 +290,7 @@ Dans la figure (\@ref(fig:text2)), remarquez le lettrage en majuscule pour étiq
 
 #### Les types de carte {-}
 
-Il existe deux grandes catégories de carte: les cartes générales et les cartes thématiques. Les **cartes générales** affichent uniquement l'emplacement géographiques des données qu'elles soient sous forme de points, de lignes, de polygones ou de rasters. Les cartes routières, les plans de localisation, les cartes topographiques et les cartes touristiques en sont des exemples (\@ref(fig:generales)).
+Il existe deux grandes catégories de carte: les cartes générales et les cartes thématiques. Les **cartes générales** affichent uniquement l'emplacement géographique des données qu'elles soient sous forme de points, de lignes, de polygones ou de rasters. Les cartes routières, les plans de localisation, les cartes topographiques et les cartes touristiques en sont des exemples (\@ref(fig:generales)).
 
 <br>
 ```{r generales, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Exemples de carte générale. A) Carte routière des environs de Paris (source:https://fr.viamichelin.be/). B) Carte touristique de la Gaspésie (source: http://motoplus.ca). C) Plan du Montréal souterrain (source: https://voyage-montreal.com/montreal-souterrain ).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Generales.png"}
@@ -298,12 +299,12 @@ knitr::include_graphics(image)
 ```
 <br>
 
-Les **cartes thématiques**, quant à elles, affichent non seulement l'emplacement géographiques des données spatiales mais aussi un ou plusieurs de leurs attributs. Ces cartes utilisent une **symbologie** pour représenter les attributs des données. C'est-à-dire qu'elles font appel à différentes couleurs, formes et tailles de symboles pour représenter les données de sorte que celles-ci aquièrent une signification. Ces cartes servent ainsi à transmettre un message. Nous approfondirons les concepts de symbologie à la prochaine section. Pour le moment, notons que plusieurs types de cartes thématiques existent. Voici quelques exemples:
+Les **cartes thématiques**, quant à elles, affichent non seulement l'emplacement géographique des données spatiales mais aussi un ou plusieurs de leurs attributs. Ces cartes utilisent une **symbologie** pour représenter les attributs des données. C'est-à-dire qu'elles font appel à différentes couleurs, formes et tailles de symboles pour représenter les données de sorte que celles-ci acquièrent une signification. Ces cartes servent ainsi à transmettre un message. Nous approfondirons les concepts de symbologie à la prochaine section. Pour le moment, notons que plusieurs types de cartes thématiques existent. Voici quelques exemples:
 
 
-Les cartes à **symboles gradués** et à **symboles proportionnels** utilisent des symboles de tailles différentes pour afficher une différence quantitative ou relative entre les valeurs de l'attribut représenté. Dans le premier cas, les valeurs sont divisées en classes couvrant chacune une certaine plage de valeurs. Chaque classe est alors illustrée par une taille spécifique de symbole (\@ref(fig:prop)A). Dans le second cas, il n'y a pas de classification des valeurs. La plus petite valeur est illustrée par le plus petite taille de symbole, et la taille de chaque symbole augmente proportionnellement avec la valeur absolue de la donnée qu'elle représente (\@ref(fig:prop)B).
+Les cartes à **symboles gradués** et à **symboles proportionnels** utilisent des symboles de tailles différentes pour afficher une différence quantitative ou relative entre les valeurs de l'attribut représenté. Dans le premier cas, les valeurs sont divisées en classes couvrant chacune une certaine plage de valeurs. Chaque classe est alors illustrée par une taille spécifique de symbole (\@ref(fig:prop)A). Dans le second cas, il n'y a pas de classification des valeurs. La plus petite valeur est illustrée par la plus petite taille de symbole, et la taille de chaque symbole augmente proportionnellement avec la valeur absolue de la donnée qu'elle représente (\@ref(fig:prop)B).
 
-Les cartes de **densité de points** utilisent des symboles ponctuels de même taille mais dont le nombre varie d'une polygone à un autre pour illustrer la variation dans la densité de l'attribut représenté (\@ref(fig:prop)C).
+Les cartes de **densité de points** utilisent des symboles ponctuels de même taille mais dont le nombre varie d'un polygone à un autre pour illustrer la variation dans la densité de l'attribut représenté (\@ref(fig:prop)C).
 
 <br>
 ```{r prop, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte avec symboles gradués, (B) carte avec symboles proportionnels, (C) carte de densité de points (source: GISGeography 2021. *Dot Distribution vs Graduated Symbols vs Proportional Symbol Maps*: https://gisgeography.com/dot-distribution-graduated-symbols-proportional-symbol-maps/, Consulté le 30 mars 2021).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Proportionnel.png"}
@@ -313,7 +314,7 @@ knitr::include_graphics(image)
 <br>
 
 
-Les cartes **choroplèthes** illustrent les régions d'une carte en utilisant une palette de couleur qui réflètent la variation relative d'un attribut d'une région à l'autre (par exemple la densité de population)(\@ref(fig:choro)). Notons que *choro* signifie aire ou région en grec, et *plèthe* signifie grande quantité ou multitude. L'apparence d'une carte choroplèthe dépend de la façon dont la classification des valeurs d'attribut est réalisée; c'est-à-dire la plage de valeurs attribuée à chaque couleur. Nous reviendrons sur l'importance de la classification dans la prochaine section.
+Les cartes **choroplèthes** illustrent les régions d'une carte en utilisant une palette de couleur qui réflète la variation relative d'un attribut d'une région à l'autre (par exemple la densité de population)(\@ref(fig:choro)). Notons que *choro* signifie aire ou région en grec, et *plèthe* signifie grande quantité ou multitude. L'apparence d'une carte choroplèthe dépend de la façon dont la classification des valeurs d'attribut est réalisée; c'est-à-dire la plage de valeurs attribuée à chaque couleur. Nous reviendrons sur l'importance de la classification dans la prochaine section.
 <br>
 
 
@@ -325,7 +326,7 @@ knitr::include_graphics(image)
 <br>
 
 
-Les cartes **isoplèthes** représentent les données spatiales par des lignes contour. C'est-à-dire des lignes formées en joignant ensemble les points qui ont la même valeur d'attribut (*iso* signifie égal en grec). Les cartes isoplèthes peuvent aussi utiliser une même couleur pour représenter des régions qui ont une même valeur d'attribut (\@ref(fig:iso)).
+Les cartes **isoplèthes** représentent les données spatiales par des lignes de contour. C'est-à-dire des lignes formées en joignant les points qui ont la même valeur d'attribut (*iso* signifie égal en grec). Les cartes isoplèthes peuvent aussi utiliser une même couleur pour représenter des régions qui ont une même valeur d'attribut (\@ref(fig:iso)).
 <br>
 
 ```{r iso, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Période d'ensoleillement en Europe, en heures par année. (Source:http://averagemaps.blogspot.com/2013/10/isoline-map.html).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Isoplethe.png"}
@@ -334,9 +335,9 @@ knitr::include_graphics(image)
 ```
 
 <br>
-Les **cartogrammes** illustrent les régions d'une carte en modifiant leur taille de façon proportionnelle à l'attribut représenté (\@ref(fig:cartogramme)).
+Les **cartogrammes** illustrent les régions d'une carte en modifiant leurs tailles de façon proportionnelle à l'attribut représenté (\@ref(fig:cartogramme)).
 <br>
-```{r cartogramme, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte du monde avec une représentation non modifiée des superficies des états, (B) carte de la population mondiale (la superficie de chaque territoire est proportionnelle à la fraction de la population mondiale y habitant), (C) Carte de la consommation de café en 2014 (la superficie de chaque territoire est proportionnelle à la proportion mondiale de café qui y est consommé (kg par habitants)) (source:https://worldmapper.org/).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Cartogramme.png"}
+```{r cartogramme, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte du monde avec une représentation non modifiée des superficies des états, (B) carte de la population mondiale (la superficie de chaque territoire est proportionnelle à la fraction de la population mondiale y habitant), (C) Carte de la consommation de café en 2014 (la superficie de chaque territoire est proportionnelle à la proportion mondiale de café qui y est consommé (kg par habitant)) (source:https://worldmapper.org/).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Cartogramme.png"}
 image<-"Module6/Images/6_Cartogramme.png"
 knitr::include_graphics(image)
 ```
@@ -362,7 +363,7 @@ Une relation entre les données exprime généralement une *différence qualitat
 
 Par ailleurs, nous pourrions vouloir exprimer une différence quantitative entre la taille des populations des villes. Cette quantité *absolue* pourrait alors être exprimée par l’utilisation de point dont le diamètre est proportionnel à la taille de la ville qu’il représente. D’autre part, pour représenter une quantité *relative*, par exemple la densité de population de différents états, il vaudra mieux utiliser un gradient de luminosité allant d'une couleur pâle à foncée pour remplir les polygones associés aux états. 
 
-Le tableau de la figure \@ref(fig:symbologie) résume les choix possibles de symbologie en fonction de la nature des données. Ce tableau est tiré du livre Savoir faire une carte : Aide à la conception et à la réalisation d’une carte thématique univariée de Zanin et Trémolo [-@ZaninTremolo_2003]. 
+Le tableau de la Figure \@ref(fig:symbologie) résume les choix possibles de symbologie en fonction de la nature des données. Ce tableau est tiré du livre Savoir faire une carte : Aide à la conception et à la réalisation d’une carte thématique univariée de Zanin et Trémolo [-@ZaninTremolo_2003]. 
 
 <br>
 
@@ -382,7 +383,7 @@ Les variables visuelles n'ont pas toutes la même efficacité à distinguer les 
 
 Cette sous-section s'attarde aux variables visuelles liées aux couleurs. Elle reprend, en partie, le [chapitre 4] (https://mgimond.github.io/Spatial/symbolizing-features.html) du livre de Gimond (2021). Le choix des couleurs est évidemment important dans une carte puisque celles-ci permettent de distinguer, de catégoriser ou de mettre l'emphase sur certains phénomènes spatiaux. 
 
-Le choix des couleurs ajoute une certaine subjectivité à une carte. Par exemple, la couleur rouge peu facilement être associée à un extrême ou à un danger. La carte de l'indice de sévérité des feux de forêt à la figure \@ref(fig:graticules) utilise le rouge pour désigner la zone où cet indice est maximal. Le contraire, par exemple utiliser la couleur bleu pour cette zone, aurait porté à confusion et nuit au message véhiculé par la carte.
+Le choix des couleurs ajoute une certaine subjectivité à une carte. Par exemple, la couleur rouge peut facilement être associée à un extrême ou à un danger. La carte de l'indice de sévérité des feux de forêt à la figure \@ref(fig:graticules) utilise le rouge pour désigner la zone où cet indice est maximal. Le contraire, par exemple utiliser la couleur bleue pour cette zone, aurait porté à confusion et nuit au message véhiculé par la carte.
 
 <br>
 
@@ -436,7 +437,7 @@ par(OP)
 ```
 <br>
 
-La **saturation** (ou la chromaticité) d'une couleur mesure son intensité. Une couleur vive a une saturation élevée tandiqu'une couleur pâle a une saturation faible. La saturation est surtout utilisée pour distinguer des données ordinales.
+La **saturation** (ou la chromaticité) d'une couleur mesure son intensité. Une couleur vive a une saturation élevée tandis qu'une couleur pâle a une saturation faible. La saturation est surtout utilisée pour distinguer des données ordinales.
 <br>
 ```{r saturation,  fig.cap = "Huit différentes teintes (colonnes) déclinées selon des valeurs décroissantes de saturation (rangées).", echo=FALSE, fig.height=2, fig.width = 4,warning=FALSE, message=FALSE, fig.align='center'}
 
@@ -487,7 +488,7 @@ grep("green", colours())
 ```
 <br>
 
-Ces indices sont associées aux couleurs suivantes:
+Ces indices sont associés aux couleurs suivantes:
 
 ```{r exgrep, fig.cap = "Quarante couleurs vertes identifiées par la fonction `grep()`", echo=FALSE, fig.height=2.5, fig.width = 4,fig.align='center',warning=FALSE, message=FALSE}
 library(ggplot2)
@@ -521,7 +522,7 @@ colours()[grep("green", colours())]
 
 ###### Composantes RVB {-}
 
-Nous pouvons aussi définir une couleur par un vecteur donnant chacune des trois composantes RVB (RGB en anglais) qui la constitue. Rappellons que chacune des composantes RVB (Rouge, Vert, Bleu) prend une valeur discrète entre 0 et 255. La valeur 0 correspond à l'intensité la plus faible tandis que la valeur 255 correspond à l'intensité la plus élevée. Chaque composante peut aussi être exprimée selon la notation décimale par un nombre entre 0.0 et 1.0. 
+Nous pouvons aussi définir une couleur par un vecteur donnant chacune des trois composantes RVB (RGB en anglais) qui la constitue. Rappelons que chacune des composantes RVB (Rouge, Vert, Bleu) prend une valeur discrète entre 0 et 255. La valeur 0 correspond à l'intensité la plus faible tandis que la valeur 255 correspond à l'intensité la plus élevée. Chaque composante peut aussi être exprimée selon la notation décimale par un nombre entre 0.0 et 1.0. 
 
 Puisque chaque composante RVB peut prendre 256 valeurs différentes, le format RVB permet de définir 256 x 256 x 256 couleurs différentes (16777216!).
 
@@ -541,7 +542,7 @@ col2rgb("forestgreen")
 
 Nous pouvons également définir une couleur par son code hexadécimal (HEX). Le code hexadécimal utilise un système en base 16 pour encoder la notation RVB d'une couleur en une notation condensée de six chiffres ou lettres. Le code HEX prend la forme `#RRVVBB` où chaque lettre peut prendre un des 16 symboles suivants: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Par exemple, "00" correspond à la valeur 0, et "FF" correspond à la valeur 255. Ainsi, le code de HEX de la couleur verte est `#00FF00`.
 
-La fonction `rgb(red, green, blue)` renvoie le code HEX d'une couleur identifiée par son format RVB
+La fonction `rgb(red, green, blue)` renvoie le code HEX d'une couleur identifiée par son format RVB.
 <br>
 ```{r}
 # Notation HEX de la couleur verte
@@ -562,7 +563,7 @@ rgb(0,(250:255)/255,0, names = paste("vert", 0:5, sep="_"))
 
 ###### Composantes TSL/TSV {-}
 
-Selon une approche basée sur la perception des couleurs, nous pouvons définir une couleur par sa combinaison de trois paramètres: sa teinte (*hue* en anglais), sa saturation (aussi appelée chromaticité) et sa luminosité (*lightness* en anglais) ou sa valeur (*value* en anglais). Ces systèmes de description des couleurs se nomment TSL (HSL en anglais) et TSV (HSV en anglais). Ils différent légèrement mais ils s'appuient sur les mêmes principes^[Consultez la page [Wikipédia](https://fr.wikipedia.org/wiki/Teinte_saturation_lumi%C3%A8re) pour en apprendre davantage sur les systèmes TSL et TSV.]. 
+Selon une approche basée sur la perception des couleurs, nous pouvons définir une couleur par sa combinaison de trois paramètres: sa teinte (*hue* en anglais), sa saturation (aussi appelée chromaticité) et sa luminosité (*lightness* en anglais) ou sa valeur (*value* en anglais). Ces systèmes de description des couleurs se nomment TSL (HSL en anglais) et TSV (HSV en anglais). Ils diffèrent légèrement mais ils s'appuient sur les mêmes principes^[Consultez la page [Wikipédia](https://fr.wikipedia.org/wiki/Teinte_saturation_lumi%C3%A8re) pour en apprendre davantage sur les systèmes TSL et TSV.]. 
 
 La fonction `rgb2hsv(red, green, blue)` permet de traduire une couleur représentée par le modèle RVG vers le modèle TSV.
 <br>
@@ -588,7 +589,7 @@ hcl(h = 120, c = 1, l = 0.5)
 
 #### Les palettes de couleurs {-}
 
-Une palette de couleurs est un ensemble fini de couleurs pré-sélectionnées. Dans une carte thématique, une palette de couleur établit une correspondance entre une valeur d'attribut et une couleur de la palette. 
+Une palette de couleurs est un ensemble fini de couleurs présélectionnées. Dans une carte thématique, une palette de couleur établit une correspondance entre une valeur d'attribut et une couleur de la palette. 
 
 Il existe trois catégories de palettes de couleurs. 
 
@@ -689,7 +690,7 @@ tm_polygons("pop_est_dens", palette = pal,id="name", title="Densité de populati
             )
 mapPop
 ```
-Les palettes **divergentes** sont également utilisées pour représenter des données ordonnées. Toutefois, une palette divergente met l'accent sur une valeur centrale à partir de laquelle les données divergent. Généralement, une palette divergente est constituée de deux **teintes** complémentaires qui dénotent les valeurs extrêmes de part et d'autre de la valeur centrale. La **saturation** et la **luminosité** de chaque teinte sont alors ajustées pour que les couleurs se répartissent de façon symmétrique autour de la valeur centrale qui est représentée par une couleur pâle. 
+Les palettes **divergentes** sont également utilisées pour représenter des données ordonnées. Toutefois, une palette divergente met l'accent sur une valeur centrale à partir de laquelle les données divergent. Généralement, une palette divergente est constituée de deux **teintes** complémentaires qui dénotent les valeurs extrêmes de part et d'autre de la valeur centrale. La **saturation** et la **luminosité** de chaque teinte sont alors ajustées pour que les couleurs se répartissent de façon symétrique autour de la valeur centrale qui est représentée par une couleur pâle. 
 <br>
 ```{r div,  fig.cap="Un exemple de 4 palettes divergentes.", echo=FALSE, fig.height=2, fig.width = 3.5,fig.show='hold',fig.align='center'}
 # SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
@@ -848,7 +849,7 @@ Ceci retourne un vecteur de cinq couleurs de la palette `Accent`.
 
 Il existe plusieurs bibliothèques R permettant de visualiser des données spatiales. La bibliothèque `mapview`, que nous avons déjà utilisée, en est un exemple. La bibliothèque `ggplot2`, que vous connaissez peut-être, permet de créer des cartes qui peuvent être peaufinées par l'utilisation de fonctions des bibliothèques `sf` et `ggspatial`^[Consulter ce [site](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html) pour en apprendre davantage sur la cartographie avec `ggplot2`]. Dans le cadre de ce cours, nous nous concentrerons sur la bibliothèque `tmap` et l'apprentissage de ses fonctions principales.
 
-Nous avons choisi `tmap` parce que cette bibliothèque est relativement simple à utiliser et que ses fonctions sont intuitives. Le fonctionnement de `tmap` est très similaire à celui de la bibliothèque `ggplot2` qui est fort populaire pour la visualisation de données de toutes sortes. Si vous connaissez déjà `ggplot2`, alors l'apprentissage de `tmap` vous sera familié. Si vous ne connaissez pas `ggplot2`, vous pourriez être amenés à l'utiliser dans le futur, et dans ce cas votre connaissance de `tmap` vous sera utile. 
+Nous avons choisi `tmap` parce que cette bibliothèque est relativement simple à utiliser et que ses fonctions sont intuitives. Le fonctionnement de `tmap` est très similaire à celui de la bibliothèque `ggplot2` qui est fort populaire pour la visualisation de données de toutes sortes. Si vous connaissez déjà `ggplot2`, alors l'apprentissage de `tmap` vous sera familier. Si vous ne connaissez pas `ggplot2`, vous pourriez être amenés à l'utiliser dans le futur, et dans ce cas votre connaissance de `tmap` vous sera utile. 
 
 De façon générale, nous utilisons `tmap` pour cartographier des données spatiales de la façon suivante:
 
@@ -864,7 +865,7 @@ Télécharger la bibliothèque `tmap`:
 ```{r, eval = FALSE}
 install.packages("tmap")
 ```
-
+<br>
 
 Chargez `tmap` dans votre session de travail R ainsi que les bibliothèques `sf` et `raster` dont nous aurons besoin pour lire et manipuler les données vectorielles et matricielles respectivement:
 
@@ -894,17 +895,17 @@ Observer la structure et les attributs du *shapefile* `Q`. Celui-ci contient 17 
 - `NOM_REG`: le nom de la région administrative,
 - `AREA_REG`: la superficie de la région,
 - `Pop_tot`: la population totale en 2019 dans la région,
-- `Pop_0_14`: la population agée de 0 à 14 ans,
-- `Pop_15_24`: la population agée de 15 à 24 ans,
-- `Pop_25_64`: la population agée de 25 à 64 ans,
-- `Pop_65_`: la population agée de 65 ans et plus.
+- `Pop_0_14`: la population âgée de 0 à 14 ans,
+- `Pop_15_24`: la population âgée de 15 à 24 ans,
+- `Pop_25_64`: la population âgée de 25 à 64 ans,
+- `Pop_65_`: la population âgée de 65 ans et plus.
 
 
 #### Intérieur des polygones {-}
 
 ###### Fonction tm_fill {.unnumbered #fct_tmfill}
 
-Créons tout d'abord une carte simple du *shapefile* Q que nous venons de charger. La fonction `tm_fill()` permet de remplir de façon homogène l'intérieur des limites d'un polygone. Elle s'applique donc aux données vectorielles de type polygone, et on l'ajoute à la donction `tm_shape()`.
+Créons tout d'abord une carte simple du *shapefile* Q que nous venons de charger. La fonction `tm_fill()` permet de remplir de façon homogène l'intérieur des limites d'un polygone. Elle s'applique donc aux données vectorielles de type polygone, et on l'ajoute à la fonction `tm_shape()`.
 
 ```{r, dev = 'png', fig.height=6}
 tm_shape(Q)+ 
@@ -1000,7 +1001,7 @@ Rappel types de couleur
 #### Attributs des polygones {-}
 
 La création de cartes, à partir de données vectorielles de type polygone, nécessite parfois de colorer individuellement les polygones. 
-Par exemple, la couleur d'un polygone peut représenter la valeur d'un de ses attributs. Dans ce cas, nous utilisons la fonction `tm_fill()` en associat à l'argument `col` le nom de l`attribut que nous désirons illustrer.
+Par exemple, la couleur d'un polygone peut représenter la valeur d'un de ses attributs. Dans ce cas, nous utilisons la fonction `tm_fill()` en associant à l'argument `col` le nom de l'attribut que nous désirons illustrer.
 
 ```{r, dev = 'png', fig.height=6}
 tm_shape(Q) + tm_fill(col="NUM_REG", title = "Régions")
@@ -1044,7 +1045,7 @@ Remarquer l'usage de la fonction `tmap_arrange()` pour afficher des cartes côte
 
 ###### Fonctions tm_scale_bar() et tm_compass {-}
 
-L'ajout d'un barre d'échelle et d'une rose des vents, se fait par l'utilisation des fonctions `tm_scale_bar()` et `tm_compass()` respectivement:
+L'ajout d'une barre d'échelle et d'une rose des vents se fait par l'utilisation des fonctions `tm_scale_bar()` et `tm_compass()` respectivement:
 
 ```{r, dev = 'png',fig.height=6}
 map_Q +   # la carte du Québec que nous avons créée plus haut
@@ -1076,9 +1077,9 @@ map_Q +
 
 ###### Fonctions tm_grid() et tm_borders(){-}
 
-La fonction `tm_grid()` ajoute une grille à la carte selon le système de coordonnées projetées des données. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées projetée Conique conforme de Lambert (epsg:32198) qui est métrique. 
+La fonction `tm_grid()` ajoute une grille à la carte selon le système de coordonnées projetées des données. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées projetées Conique conforme de Lambert (epsg:32198) qui est métrique. 
 
-La fonction `tm_graticules` ajoute les lignes de longitude et de latitude du système de coordonnées géographiques, c'est-à-dire non-projetées. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées géographiques du Datum North Américain de 1983 (NAD83, espg:4269).
+La fonction `tm_graticules` ajoute les lignes de longitude et de latitude du système de coordonnées géographiques, c'est-à-dire non-projetées. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées géographiques du North American Datum de 1983 (NAD83, espg:4269).
 
 ```{r, dev = 'png', fig.height=6}
 Q1 <- map_Q + tm_grid()
@@ -1132,7 +1133,7 @@ La fonction `tm_layout` permet d'ajuster la mise en page d'une carte et différe
 * L'ajout d'un titre (`title`), la taille de ce dernier (`title.size`) et sa position (`title.position`).
 * La présence ou l'absence d'un cadre (`frame`) et l'épaisseur du trait de celui-ci (`frame.lw`).
 * La taille des marges extérieures au cadre: `outer.margins = c(Haut,Droit,Bas,Gauche)` où `Haut`, `Droit`, `Bas`, `Gauche` sont des chiffres entre 0 (pas de marge) et 1 (marge complète).
-* La couleur du fond de la carte (`bg.color`) et de l'espace à l'extérieure du cadre (`outer.bg.color`).
+* La couleur du fond de la carte (`bg.color`) et de l'espace à l'extérieur du cadre (`outer.bg.color`).
 
 Voici quelques exemples de mise en page qui utilisent ces arguments.
 ```{r eval = FALSE, echo = TRUE, dev = 'png'}
@@ -1273,9 +1274,9 @@ tmap_arrange(Q1,Q2,Q4,Q3, ncol=2, nrow=2, widths = c(.30, 0.70),asp=NULL)
 De plus, la fonction tm_layout permet d'ajuster les couleurs présentes dans la carte:
 
 * L'argument `aes.color` défini la couleur de remplissage des polygones, des frontières, du texte, etc.
-* L'argument `saturation` défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées. Il est aussi possible de données des valeurs négatives. 
+* L'argument `saturation` défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées. Il est aussi possible de donner des valeurs négatives. 
 * L'argument `sepia.intensity` est un nombre entre 0 et 1 qui défini le niveau de "chaleur" des couleurs. Plus sa valeur est grande, plus les couleurs ont une teinte jaune voir brune. La valeur par défaut est 0.
-* L'argument `aes.palette` permet de changer la palette de couleurs utilisées. La librarie `tmap` utilise les palettes de couleurs de [Color Brewer](https://colorbrewer2.org/). Dans le cas d'attributs catégoriques (comme le nom de régions) la palette utilisée par défaut se nomme `Set3`, mais il est possible de choisir d'autres palettes parmi celles-ci: `Accent`, `Dark2`, `Paired`, `Pastel1`, `Pastel2`, `Set1`, et `Set2`. Nous reviendrons sur le sujet des palettes un peu plus loin dans cete leçon.
+* L'argument `aes.palette` permet de changer la palette de couleurs utilisées. La bibliothèque `tmap` utilise les palettes de couleurs de [Color Brewer](https://colorbrewer2.org/). Dans le cas d'attributs catégoriques (comme le nom de régions) la palette utilisée par défaut se nomme `Set3`, mais il est possible de choisir d'autres palettes parmi celles-ci: `Accent`, `Dark2`, `Paired`, `Pastel1`, `Pastel2`, `Set1`, et `Set2`. Nous reviendrons sur le sujet des palettes un peu plus loin dans cette leçon.
 
 Voici quelques exemples de modification des couleurs:
 
@@ -1320,9 +1321,9 @@ tmap_arrange(Q1,Q2,Q3,Q4, ncol=2, nrow=2)
 
 ###### Fonction tm_style() {-}
 
-La librarie `tmap` contient des styles prédéfinis qu'on appelle avec la fonction `tm_style` et qui permettent de ne pas avoir à définir individuellement des arguments de la fonction `tm_layout`.
+La bibliothèque `tmap` contient des styles prédéfinis qu'on appelle avec la fonction `tm_style` et qui permettent de ne pas avoir à définir individuellement des arguments de la fonction `tm_layout`.
 
-Voici quelques uns de ces styles prédéfinis. 
+Voici quelques-uns de ces styles prédéfinis. 
 
 ```{r eval = FALSE, echo = TRUE, dev = 'png'}
 tm_shape(Q) + tm_polygons(col="NUM_REG") + 
@@ -1365,7 +1366,7 @@ tmap_arrange(Q1,Q2,Q3,Q4, ncol=2, nrow=2)
 
 <br>
 
-Vous remarquerez que le style `col_blind` utilise une palette de couleur permettant aux personnes daltoniennes de pouvoir différencier les polygones de couleurs différentes.
+Vous remarquerez que le style `col_blind` utilise une palette de couleur permettant aux personnes daltoniennes de différencier les polygones de couleurs différentes.
 
 ### Écriture sur une carte
 
@@ -1434,7 +1435,7 @@ levels(Ro$ClsRte)
 
 ###### Fonction tm_lines() {-}
 
-La bibliothèque `tmap` possède une fonction particulière pour illustrer des objects vectoriels de type ligne et multigne. Il s'agit de la fonction `tm_lines()`. Celle-ci doit être ajouter à la fonction `tm_shape(L)` où `L` est un *shapefile* contenant des objets de géométrie ligne ou multiligne.
+La bibliothèque `tmap` possède une fonction particulière pour illustrer des objets vectoriels de type ligne et multigne. Il s'agit de la fonction `tm_lines()`. Celle-ci doit être ajoutée à la fonction `tm_shape(L)` où `L` est un *shapefile* contenant des objets de géométrie ligne ou multiligne.
 
 Illustrons les multilignes du *shapefile* `Ro`:
 ```{r, warning = FALSE, dev = 'png', fig.height=5 }
@@ -1543,7 +1544,7 @@ La fonction `tm_markers()` permet d'ajouter du texte facilement sur les repères
 
 ##### Données d'élévation du Québec {-}
 
-Pour explorer les options d'affichage de données matricielles, nous utilisons un *raster* représentant le relief du territoire québecois sous forme d'une matrice d'élévation. Chargeons ces données dans notre session de travail R avec la fonction `raster()`. Nous devons prélablement charger la bibliothèque `raster`:
+Pour explorer les options d'affichage de données matricielles, nous utilisons un *raster* représentant le relief du territoire québécois sous forme d'une matrice d'élévation. Chargeons ces données dans notre session de travail R avec la fonction `raster()`. Nous devons préalablement charger la bibliothèque `raster`:
 
 
 ```{r}
@@ -1643,7 +1644,7 @@ tmap_arrange(Efixed,Equant)
 
 ### Carte avec symboles proportionnels
 
-Dans des cartes thématiques, il est souvent utile de représentées certains attributs par des symboles proportionnels. Les fonctions `tm_symbols()` et `tm_bubbles()` de la bibliothèque `tmap` sont utiles pour réaliser ce type de cartes.
+Dans des cartes thématiques, il est souvent utile de représenter certains attributs par des symboles proportionnels. Les fonctions `tm_symbols()` et `tm_bubbles()` de la bibliothèque `tmap` sont utiles pour réaliser ce type de cartes.
 
 
 ###### Fonction tm_symbols() {-}
@@ -1727,7 +1728,7 @@ tm_shape(Q) +
 
 La fonction `tm_bubbles()` est similaire à la fonction `tm_symbols()` et s'utilise lorsqu'on souhaite seulement représenter des symboles sous forme de cercle/point. Cette fonction est pratique lorsque nous voulons représenter deux attributs avec un symbole: le premier attribut est représenté par la taille du cercle et le second attribut par sa couleur.
 
-Utilisons à nouveau les données sur la taille des populations des régions administratives. Par exemple, représentons chaque région par un cercle dont le diamètre est proportionnel à la taille totale de sa population (comme nous l'avons fait plus haut). De plus, colorons chaque cercle en fonction de la proportion d'enfants (individus agés entre 0 et 14 ans) dans sa population. 
+Utilisons à nouveau les données sur la taille des populations des régions administratives. Par exemple, représentons chaque région par un cercle dont le diamètre est proportionnel à la taille totale de sa population (comme nous l'avons fait plus haut). De plus, colorons chaque cercle en fonction de la proportion d'enfants (individus âgés entre 0 et 14 ans) dans sa population. 
 
 Tout d'abord, nous devons calculer la proportion d'enfants dans chaque région. Pour le moment, nous connaissons seulement le nombre d'enfants (`A0.14_T`). Créons un nouvel attribut pour le *shapefile* Q:
 
@@ -1854,7 +1855,7 @@ tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", legend.is.port
 ###### Fonction `tm_facets()` {-}
 
 
-Il est parfois utile illustrer des polygones côte-à-côte afin de faciliter la comparaison d'un de leurs attributs. On appelle les cartes des polygones individuellement représentés des *panneaux*.
+Il est parfois utile d'illustrer des polygones côte à côte afin de faciliter la comparaison d'un de leurs attributs. On appelle les cartes des polygones individuellement représentés des *panneaux*.
 
 Pour créer une carte à panneaux multiples, nous utilisons d'abord la fonction `tm_polygons()` pour représenter chaque polygone selon la méthode de notre choix (par exemple selon une représentation choroplèthe d'un des attributs). Ensuite, nous ajoutons la fonction `tm_facets()` pour préciser la disposition des panneaux (arguments `nrow` ou `ncol`) ainsi que l'attribut utilisé (la *facette*) pour distinguer chaque panneau (argument `by`). 
 
@@ -1880,7 +1881,7 @@ Il est possible de modifier la police du texte, sa couleur, la couleur de fond d
 
 ### Cartes avec encadré
 
-Il est parfois nécessaire d'accompagner une carte par une autre carte de taille moindre circonscrite dans un encadré sur ou en marge de la carte principale. Ceci est le cas, par exemple, lorsque nous souhaitons préciser la localisation de la carte principale dans une région plus grande.
+Il est parfois nécessaire d'accompagner une carte par une autre carte de taille moindre, circonscrite dans un encadré sur ou en marge de la carte principale. Ceci est le cas, par exemple, lorsque nous souhaitons préciser la localisation de la carte principale dans une région plus grande.
 
 ###### Bibliothèque `grid` {-}
 
@@ -1939,9 +1940,9 @@ carte_cadre <- tm_shape(Q) +
 
 <br>
 
-Nous pouvons enfin combiner les deux cartes ensembles. Il s'agit d'afficher la carte principale et d'ajouter la carte encadré en utilisant la fonction `print()`. 
+Nous pouvons enfin combiner les deux cartes ensemble. Il s'agit d'afficher la carte principale et d'ajouter la carte encadrée en utilisant la fonction `print()`. 
 
-En particulier, nous utilisons la fonction `viewport()` de la bibliothèque `grid` qui permet de définir la position de la carte encadré sur la carte ainsi que sa taille.
+En particulier, nous utilisons la fonction `viewport()` de la bibliothèque `grid` qui permet de définir la position de la carte encadrée sur la carte ainsi que sa taille.
 
 ```{r, warning = FALSE, dev = 'png', fig.height = 6}
 library(grid)
@@ -1952,7 +1953,7 @@ print(carte_cadre, vp = viewport(0.72, 0.42, width = 0.4, height = 0.4))
 
 Les chiffres (0.72,0.42) correspondent aux coordonnées (x,y) de la position de la carte encadrée sur la carte principale (où (0,0) est le coin inférieur gauche de la carte principale, et (1,1) est le coin supérieur droit).
 
-Les arguments `width` et `height` sont des nombres entre 0 et 1. Ceux-ci correspondent au facteur par lequel nous souhaitons réduire la largeur et la hauteur de la carte encadrée. 
+Les arguments `width` et `height` sont des nombres entre 0 et 1. Ceux-ci correspondent aux facteurs par lequels nous souhaitons réduire la largeur et la hauteur de la carte encadrée. 
 
 <br>
 <!--   ### Cartes interactives avec tmap -->
@@ -1960,7 +1961,7 @@ Les arguments `width` et `height` sont des nombres entre 0 et 1. Ceux-ci corresp
 ## Exercices {#ex_carto}
 
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#carto) de ce module.
-Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 Cette série d'exercices utilise des données comprises avec la bibliothèque `tmap`. En particulier, vous utiliserez les données `World`, `metro`, et `land`. Charger ces données dans votre session `R`:
 
@@ -2175,7 +2176,7 @@ tm_shape(AS) +
 * Une vignette de hauteur 2 pour chaque *facette*.
 * Une couleur de fond blanc pour chaque vignette.
 * Un texte de taille 0.9 sur chaque vignette.
-* Une légende encadrée et positionnée à l'extérieure à gauche des panneaux.
+* Une légende encadrée et positionnée à l'extérieur à gauche des panneaux.
 * Une légende dont les chiffres sont arrondis à l'unité près, et séparés par le symbole "-".
 
 <details>
@@ -2239,7 +2240,7 @@ names(metro)
 ```
 <br>
 
-Les différents attributs correspondent aux tailles des populations des métropoles du monde à différentes années et leur projection pour l'année 2030.
+Les différents attributs correspondent aux tailles des populations des métropoles du monde à différentes années et à leur projection pour l'année 2030.
 
 <br>
 </p>
@@ -2339,8 +2340,8 @@ La couche `trees` illustre le pourcentage de couverture forestière par pixel. F
 **b)** Utiliser la palette de couleur `Greens` de la bibliothèque `RColorBrewer` pour produire une carte du pourcentage de couvert forestier. De plus, la carte doit comprendre les éléments suivants:
 
 * Six classes de pourcentage de couvert.
-* Un titre principal "Pourcentage de courvert forestier" de taille 1.
-* Une légende extérieure à la carte, située sous la carte, horizonale et sans titre.
+* Un titre principal "Pourcentage de couvert forestier" de taille 1.
+* Une légende extérieure à la carte, située sous la carte, horizontale et sans titre.
 * Une légende dont les chiffres sont séparés par le symbole "-".
 
 <details>

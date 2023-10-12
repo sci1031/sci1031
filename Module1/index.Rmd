@@ -14,7 +14,7 @@ source("bin/chunk-options.R")
 ```
  -->
 
-Ce module est une introduction au cours que vous vous apprêter à suivre. Dans la section [leçon](#lecon_intro), nous discuterons de l’évolution historique de la visualisation des données spatiales, des premières cartes jusqu’à l’avènement des systèmes d’information géographique. Nous ferons une revue des outils existants pour visualiser et analyser les données spatiales. Finalement, nous présenterons quelques concepts de base essentiels à l’étude des données spatiales.
+Ce module est une introduction au cours que vous vous apprêtez à suivre. Dans la section [leçon](#lecon_intro), nous discuterons de l’évolution historique de la visualisation des données spatiales, des premières cartes jusqu’à l’avènement des systèmes d’information géographique. Nous ferons une revue des outils existants pour visualiser et analyser les données spatiales. Finalement, nous présenterons quelques concepts de base essentiels à l’étude des données spatiales.
 
 <br>
 
@@ -32,7 +32,7 @@ Ce module est une introduction au cours que vous vous apprêter à suivre. Dans 
 
 ---
 
-La section [exercice](#ex_intro) est une brève introduction au logiciel R. Vous apprendrez à installer R et RStudio et vous vous familiariserez avec les notions importantes de l’environnement de travail R. Vous réviserez également les concepts et les fonctions de base pour utiliser R. Cette section se conclue par un petit exercice pour mettre en pratique les concepts R enseignés.
+La section [exercice](#ex_intro) est une brève introduction au logiciel R. Vous apprendrez à installer R et RStudio et vous vous familiariserez avec les notions importantes de l’environnement de travail R. Vous réviserez également les concepts et les fonctions de base pour utiliser R. Cette section se conclut par un petit exercice pour mettre en pratique les concepts R enseignés.
 
 
 
@@ -42,7 +42,7 @@ La section [exercice](#ex_intro) est une brève introduction au logiciel R. Vous
 
 #### Les cartes anciennes {-}
 
-La représentation géographique est une description de l’emplacement des éléments naturels (cours d’eaux, montagnes, forêts, etc.) et artificiels (routes, ponts, bâtiments, etc.) au sein d’un territoire. Cette représentation peut être détaillée ou abstraite, et décrire un espace restreint tout comme un vaste territoire.
+La représentation géographique est une description de l’emplacement des éléments naturels (cours d’eau, montagnes, forêts, etc.) et artificiels (routes, ponts, bâtiments, etc.) au sein d’un territoire. Cette représentation peut être détaillée ou abstraite, et décrire un espace restreint tout comme un vaste territoire.
 
 La cartographie est utilisée depuis l’Antiquité pour répondre à de multiples besoins comme celui d’illustrer la distribution spatiale des ressources, de définir les frontières et l’appartenance des territoires ou encore de guider les déplacements.
 
@@ -101,7 +101,7 @@ knitr::include_graphics(rep(m4),1)
 
 À partir du 19e siècle, on commence à utiliser la représentation géographique afin d’explorer les relations entre l’occurrence de certains phénomènes et leur localisation. C’est le début de l’analyse spatiale. Un exemple bien connu est celui de l’analyse réalisée en 1854 par le docteur anglais [John Snow](https://fr.wikipedia.org/wiki/John_Snow) pour comprendre la propagation d’une épidémie soudaine de choléra dans le quartier Soho de Londres.
 
-John Snow doutait de la théorie  en vigueur à l’époque voulant que les maladies telles le cholera ou la peste soient transmises par l’inhalation d’émanations malsaines (appelées des [miasmes](https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_miasmes) – des mauvais airs). Il supportait plutôt l’hypothèse que le choléra se développe par l’ingestion d’eau impropre.
+John Snow doutait de la théorie  en vigueur à l’époque voulant que les maladies telles le choléra ou la peste soient transmises par l’inhalation d’émanations malsaines (appelées des [miasmes](https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_miasmes) – des mauvais airs). Il supportait plutôt l’hypothèse que le choléra se développe par l’ingestion d’eau impropre.
 
 Il cartographia les lieux de résidence des personnes infectées et observa qu’ils se trouvaient à proximité de la pompe à eau de Broad Street (Figure \@ref(fig:cholera). Cette dernière puisait son eau d’une section polluée de la Tamise. Il sut convaincre les autorités de fermer la pompe, ce qui stoppa l’épidémie.  John Snow est perçu aujourd’hui comme un des pionniers de l’épidémiologie moderne.
 
@@ -119,9 +119,9 @@ L’arrivée de l’informatique et des données numériques viennent transforme
 
 On définit la géomatique comme « l’ensemble des connaissances et technologies nécessaires à la production et au traitement des données numériques décrivant le territoire, ses ressources ou tout autre objet ou phénomène ayant une position géographique. »^[Définition donnée par le Département des sciences géomatiques de l’Université Laval - https://www.scg.ulaval.ca/la-geomatique-cest-quoi, consultée le 11 novembre 2021]
 
-En effet, les géographes ou autres utilisateurs de données spatiales doivent maintenant composer avec des données numériques diverses acquises par la photographie aérienne et satellitaire, les outils topographiques électroniques ou munis de GPS, la numérisation de documents papiers, etc.
+En effet, les géographes ou autres utilisateurs de données spatiales doivent maintenant composer avec des données numériques diverses acquises par la photographie aérienne et satellitaire, les outils topographiques électroniques ou munis de GPS, la numérisation de documents papier, etc.
 
-De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multi-sources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales (Figure \@ref(fig:sigelements)).
+De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multisources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales (Figure \@ref(fig:sigelements)).
 
 
 ```{r sigelements, fig.align='left', echo=FALSE, fig.link='Module1/images/1_SIGelements.jpg', fig.cap="Les différents éléments qui composent un SIG. Source: image récupérée le 6 décembre 2021 à https://bookdown.org/tep/gisbooklet/introduction-to-gis.html.", out.width = '80%'}
@@ -198,7 +198,7 @@ knitr::include_graphics(a7)
 
 #### La science des données {-}
 
-La science des données est un domaine pluridisciplinaire qui regroupe les méthodes scientifiques et l’infrastructure permettant d’extraire les connaissances d’ensembles de données. La science des données utilisent notamment les approches d’intelligence artificielle (tels l’apprentissage automatique et l’apprentissage profond) ainsi que l’infonuagique (p. ex. les serveurs, le stockage de données, et les logiciels disponibles via internet) pour dégager des tendances au sein de données volumineuses ou complexes et ainsi solutionner des problèmes diverses.
+La science des données est un domaine pluridisciplinaire qui regroupe les méthodes scientifiques et l’infrastructure permettant d’extraire les connaissances d’ensembles de données. La science des données utilise notamment les approches d’intelligence artificielle (tels que l’apprentissage automatique et l’apprentissage profond) ainsi que l’infonuagique (p. ex. les serveurs, le stockage de données, et les logiciels disponibles via internet) pour dégager des tendances au sein de données volumineuses ou complexes et ainsi solutionner des problèmes divers.
 
 Les applications de la science des données se sont multipliées devant la disponibilité de données massives et le besoin de les analyser. Ces applications incluent maintenant des secteurs aussi variés que la santé, le commerce et l’astrophysique.
 
@@ -206,7 +206,7 @@ Depuis les années 2010, nous observons une convergence entre la géomatique et 
 
 L’augmentation fulgurante des données spatiales est associée à plusieurs avancées en technologie des capteurs et des communications [@Lee2015]. Ces développements ont permis de diversifier les appareils capables d’acquérir des données géoréférencées et de produire des appareils accessibles à tous et mobiles (penser à vos téléphones cellulaires!). Ces développements ont également permis de connecter en réseau les capteurs de données, et d’accroître la précision des mesures ainsi que leur suivi en temps réel.
 
-Ces avancées technologiques ont donc suscité (et continuent de susciter) l’émergence de nouvelles applications reposant sur l’utilisation de données spatiales.  Par exemple, les données de géolocalisation, et même les messages sur les médias sociaux peuvent faciliter le travail des gouvernements lorsqu’ils doivent fournir efficacement une aide appropriée suivant des évènements tels des accidents. Dans le contexte de la pandémie de COVID-19, les données sur la distribution des cas ont servis, entre autres, à prendre des décisions sur les règles de confinement à adopter selon le nombre de cas par régions.
+Ces avancées technologiques ont donc suscité (et continuent de susciter) l’émergence de nouvelles applications reposant sur l’utilisation de données spatiales.  Par exemple, les données de géolocalisation, et même les messages sur les médias sociaux peuvent faciliter le travail des gouvernements lorsqu’ils doivent fournir efficacement une aide appropriée suivant des évènements tels des accidents. Dans le contexte de la pandémie de COVID-19, les données sur la distribution des cas ont servi, entre autres, à prendre des décisions sur les règles de confinement à adopter selon le nombre de cas par régions.
 
 ```{r datasciencecovid, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_CovidMap.jpg", fig.cap='Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : https://ressouces-fr-covid19canada.hub.arcgis.com/.',echo=FALSE}
 a8<-'Module1/images/1_CovidMap.jpg'
@@ -214,10 +214,10 @@ knitr::include_graphics(a8)
 ```
 <br>
 
-Dans ordre d'idées similaires, l’application [Alerte COVID](https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html)  du gouvernement canadien, qui a pour objectif de limiter la propagation de la maladie, permet aux abonnés d’être informés si une tierce personne ayant reçu un résultat positif s’est trouvée dans leur proximité dans les 14 derniers jours.
+Dans un ordre d'idées similaires, l’application [Alerte COVID](https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html)  du gouvernement canadien, qui a pour objectif de limiter la propagation de la maladie, permet aux abonnés d’être informés si une tierce personne ayant reçu un résultat positif s’est trouvée dans leur proximité dans les 14 derniers jours.
 
 
-En environnement les applications des données spatiales sont nombreuses. Par exemple, les colliers-GPS portés par des mammifères permettent de mieux comprendre le déplacement des individus appartenant à une espèce menacée et ainsi de mieux protéger leur habitat^[Allez jeter un coup d’œil au projet [Voyageur Wolf Project](https://www.voyageurswolfproject.org/animations), qui suit le déplacement de loups dans le nord du Minnesota grâce à des colliers GPS. On peut y voir des animations démontrant le déplacement d’individus de différentes meutes.].  
+En environnement, les applications des données spatiales sont nombreuses. Par exemple, les colliers GPS portés par des mammifères permettent de mieux comprendre le déplacement des individus appartenant à une espèce menacée et ainsi de mieux protéger leur habitat^[Allez jeter un coup d’œil au projet [Voyageur Wolf Project](https://www.voyageurswolfproject.org/animations), qui suit le déplacement de loups dans le nord du Minnesota grâce à des colliers GPS. On peut y voir des animations démontrant le déplacement d’individus de différentes meutes.].  
 
 ```{r datasciencecaribou, fig.align='left', out.width = "70%",fig.show='hold', fig.link="Module1/images/1_Caribou.jpg", fig.cap='Carte illustrant les migrations printanières et automnales de caribous de la sous-population de la Rivière-aux-Feuilles dans le Nord du Québec. Chaque ligne représente le déplacement d’un individu suivi par satellite. Ces données ont été acquises aux cours des années 2009-2011 dans le cadre du projet [Caribou Ungava](https://www.caribou-ungava.ulaval.ca/accueil/). Source : Caribou Ungava, Photo : Steeve Côté. Images récupérées le 10 décembre 2021 à https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html.',echo=FALSE}
 a9<-'Module1/images/1_Caribou.jpg'
@@ -226,7 +226,7 @@ knitr::include_graphics(a9)
 
 <br>
 
-Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme [ebird](https://ebird.org/)  développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde auxquelles tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de mai 2021, ebird contenait plus d’un milliard d’obervations d’oiseaux soumises par environ 700 mille participants^[Source: https://ebird.org/news/global-big-day-2021-reaches-new-heights.].
+Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme [ebird](https://ebird.org/)  développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde à laquelle tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de mai 2021, ebird contenait plus d’un milliard d’observations d’oiseaux soumises par environ 700 mille participants^[Source: https://ebird.org/news/global-big-day-2021-reaches-new-heights.].
 
 ```{r datascienceebird, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_ebird.jpg", fig.cap='Carte illustrant la distribution du Roitelet à triple-bandeau produite à partir des données d’observation de ebird. Le mauve indique les lieux où l’espèce est présente à l’année, le rouge, durant la période de reproduction, le bleu, durant les périodes de non-reproduction, le jaune durant les saisons de pré- et post-reproduction, et le gris les lieux d’absence ou d’observations rares.  Source : https://ebird.org/science/status-and-trends/range-maps - Illustration © Hilary Burn/Lynx Edicions.',echo=FALSE}
 a10<-'Module1/images/1_ebird.jpg'
@@ -234,7 +234,7 @@ knitr::include_graphics(a10)
 ```
 <br>
 
-Les services basés sur la géolocalisation aussi sont de plus en plus important dans notre économie. L’industrie du commerce de détails, de la restauration, du tourisme, et du transport profitent tous d’applications géo-dépendantes. Pensez par exemple à Uber, Dashdoor, Trip Advisor et même les applications de rencontre comme Tinder. De tels services permettent, entre autres, de signaler des offres aux consommateurs en fonction de leur position. De plus, les données spatiales peuvent servir à identifier des intérêts locaux pour certains produits et ainsi permettre aux entreprises d’améliorer l’efficacité de leur chaîne d’approvisionnement.
+Les services basés sur la géolocalisation aussi sont de plus en plus importants dans notre économie. L’industrie du commerce de détail, de la restauration, du tourisme, et du transport profite toute d’applications géodépendantes. Pensez par exemple à Uber, Dashdoor, Trip Advisor et même les applications de rencontre comme Tinder. De tels services permettent, entre autres, de signaler des offres aux consommateurs en fonction de leur position. De plus, les données spatiales peuvent servir à identifier des intérêts locaux pour certains produits et ainsi permettre aux entreprises d’améliorer l’efficacité de leur chaîne d’approvisionnement.
 
 ```{r datascienceloghub, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_AppCommerciale.jpg", fig.cap='Carte illustrant la position des consommateurs et le nombre de ventes d’une entreprise commerciale en Espagne. Carte tirée du site web de la compagnie [Log-hub](log-hub.com)  offrant des services basés sur l’analyse de données spatiales pour améliorer les chaînes d’approvisionnement. Source : https://log-hub.com/my-maps-platform/.',echo=FALSE}
 a11<-'Module1/images/1_AppCommerciale.jpg'
@@ -243,7 +243,7 @@ knitr::include_graphics(a11)
 
 <br>
 
-Les utilisateurs des données spatiales se limitaient historiquement aux organismes gouvernementaux. Or, la multiplication des applications dans différents secteurs a augmenté le besoin pour des logiciels de visualisation et d’analyse de données spatiales et aussi pour une main d’œuvre qualifiée capable d’opérer ces outils.
+Les utilisateurs des données spatiales se limitaient historiquement aux organismes gouvernementaux. Or, la multiplication des applications dans différents secteurs a augmenté le besoin pour des logiciels de visualisation et d’analyse de données spatiales et aussi pour une main-d’œuvre qualifiée capable d’opérer ces outils.
 
 ### Les outils et logiciels de visualisation et d'analyse géo-spatiale {#outils}
 
@@ -253,7 +253,7 @@ Dans le cadre de ce cours, nous utiliserons le logiciel et langage de programmat
 
 Il existe plusieurs logiciels commerciaux de géomatique. Ces logiciels sont relativement dispendieux et généralement seulement les entreprises qui offrent des services spécialisés en géomatique ou les ministères, certaines villes et les universités peuvent se procurer ces licences.
 
-* [ArcGIS]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-pro/overview) : est la plateforme principale de la compagnie [ESRI]( https://www.esri.ca/fr-ca/home) (Environmental Systems Research Institute). Créée en 1999 sous le nom ArcMap, cette application est maintenant vendue sous le nom ArcGIS Pro. ESRI offre également d’autres plateformes dont [ArcGIS Online](https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview), un logiciel de cartographie web, et [ArcGIS Developer]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-developer) pour les développeurs.
+* [ArcGIS]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-pro/overview) : est la plateforme principale de la compagnie [ESRI]( https://www.esri.ca/fr-ca/home) (Environmental Systems Research Institute). Créée en 1999 sous le nom ArcMap, cette application est maintenant vendue sous le nom ArcGIS Pro. ESRI offre également d’autres plateformes, dont [ArcGIS Online](https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview), un logiciel de cartographie web, et [ArcGIS Developer]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-developer) pour les développeurs.
 * [MapInfo](https://www.precisely.com/fr/product/precisely-mapinfo/mapinfo-pro): est la plateforme de la compagnie [Precisely](https://www.precisely.com/fr/) (autrefois Pitney Bowes Software et MapInfo Corporation). Créée en 1995, c’est une des premières plateformes à avoir vu le jour.
 * [Hexagon Geospatial Power Portfolio](https://www.hexagongeospatial.com/products/products): est une plateforme qui comprend divers outils géo-spatiaux dont [ERDAS](https://www.hexagongeospatial.com/products/power-portfolio/erdas-imagine) reconnu pour la manipulation d’images de télédétection.
 * [Manifold](https://manifold.net/):  est une plateforme qui se démarque par sa rapidité de par son utilisation de traitements en parallèle et GPU.
@@ -262,7 +262,7 @@ Il existe plusieurs logiciels commerciaux de géomatique. Ces logiciels sont rel
 
 Il existe une offre de plus en plus intéressante de logiciels libres d’accès. La [Fondation Open Source Geospatial]( https://www.osgeo.org/) (OSGeo), une organisation non-gouvernementale fondée en 2006, a pour objectif de soutenir et promouvoir le développement de codes et de logiciels libres en géomatique.  Elle chapeaute plusieurs [projets]( https://www.osgeo.org/projects/) comme des bibliothèques spécialisées, des applications SIG mobiles ou bureautiques, et des applications pour la gestion de données spatiales. Voici quelques exemples :
 
-* [QGIS](https://www.qgis.org/fr/site/): est une application SIG gratuite et de source libre. Elle est écrite en Python mais possède plusieurs interfaces écrite en R, dont [RQGIS]( https://rdrr.io/cran/RQGIS/).
+* [QGIS](https://www.qgis.org/fr/site/): est une application SIG gratuite et de source libre. Elle est écrite en Python mais possède plusieurs interfaces écrites en R, dont [RQGIS]( https://rdrr.io/cran/RQGIS/).
 *	[GRASS GIS](https://grass.osgeo.org/): est un des projets fondateurs de l’OSGeo qu’on appelle communément GRASS (Geographic Resources Analysis Support System). Cette application libre permet la gestion, le traitement, l’analyse et la visualisation de données spatiales, ainsi que le traitement d’images et la modélisation. Elle est utilisée par des entreprises commerciales et dans les milieux universitaires et gouvernementaux.
 *	[GDAL]( https://gdal.org/): pour Geospatial Data Abstraction Library est une bibliothèque qui permet de lire des données spatiales en formats vectoriel et matriciel^[Nous verrons les concepts de données vectorielles et matricielles au [Module 2](#base) portant sur les Modèles de données spatiales.]. Plusieurs logiciels, libres et commerciaux, utilisent cette bibliothèque dont QGIS, GRASS GIS, ArcGIS, Google Earth et aussi R.
 *	[PostGIS]( https://postgis.net/): est une extension pour les données spatiales de [PostgreSQL]( https://www.postgresql.org/), un système de source libre pour la gestion de base de données relationnelle et objet.
@@ -274,7 +274,7 @@ Les services infonuagiques sont des services de stockage et de traitement de don
 * [Google Earth Engine]( https://earthengine.google.com/): est une plateforme de calcul infonuagique de Google qui permet le traitement de données géo-spatiales. Celle-ci donne accès à un large catalogue d’images satellitaires (p. ex. de [Landsat]( https://landsat.gsfc.nasa.gov/) et [Sentinel-2]( https://sentinel.esa.int/web/sentinel/missions/sentinel-2)) et à la puissance de calcul requise pour les analyser. Google Earth Engine permet ainsi d’explorer les changements sur la surface de la Terre à l’échelle planétaire. Il a été utilisé pour visualiser l’évolution de diverses problématiques environnementales comme la perte de couvert forestier. Google Earth Engine est gratuit pour des utilisations académiques et de recherche et une version payante existe pour les utilisations commerciales. Une interface de programmation existe également pour les développeurs, [Earth Engine API]( https://developers.google.com/earth-engine/).
 * [ArcGIS Online]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview): est la plateforme web d’ArcGIS, le logiciel commercial présenté plus haut. Cette plateforme donne accès à des milliers de cartes.
 * [PanGEO]( https://pangeo.io/): est une plateforme de source libre, et collaborative, pour le développement d’applications pour les analyses géo-spatiales à grande échelle.
-* [Sepal]( https://sepal.io/): est une plateforme gratuite pour l’analyse d’images satellitaires qui repose sur Google Earth Engine et des logiciels de source libre comme Python, R. Sepal est un multiples outils qu’offre [OpenForis]( https://openforis.org/), un projet conçu par la [FAO]( https://www.fao.org/home/fr) (Organisation des Nations Unis pour l’alimentation et l’agriculture) pour permettre aux pays de faire le suivi de leurs ressources naturelles.
+* [Sepal]( https://sepal.io/): est une plateforme gratuite pour l’analyse d’images satellitaires qui repose sur Google Earth Engine et des logiciels de source libre comme Python, R. Sepal est un outil qu’offre [OpenForis]( https://openforis.org/), un projet conçu par la [FAO]( https://www.fao.org/home/fr) (Organisation des Nations Unies pour l’alimentation et l’agriculture) pour permettre aux pays de faire le suivi de leurs ressources naturelles.
 * [Kepler]( https://kepler.gl/): est également une plateforme de source libre pour les analyse géo-spatiales à grande échelle. Elle est supportée par la compagnie [Uber]( https://eng.uber.com/keplergl/).
 * [Planet]( https://www.planet.com/markets/mapping/): est une plateforme commerciale pour les analyses géo-spatiales.
 
@@ -292,7 +292,7 @@ Il existe plusieurs bibliothèques géo-spatiales dans les langages de programma
 En revanche, les langages interprétés^[ Un langage de programmation interprété est un langage qui fait l’interprétation du code directement au moment de l’exécution sans exiger que l’utilisateur ou l’utilisatrice le compile préalablement. Allez voir cet article de [Wikipédia]( https://fr.wikipedia.org/wiki/Interpr%C3%A8te_(informatique)) pour en connaître davantage.
 ], comme R et Python, sont beaucoup plus simples à apprendre et à utiliser. Ces deux langages possèdent maintenant leur propre ensemble de bibliothèques d’analyse et de visualisation de données spatiales. Ce [site](https://gisgeography.com/python-libraries-gis-mapping/) documente les bibliothèques utiles en Python.
 
-Dans le cadre de ce cours, nous utiliserons R en combinaison avec [RStudio]( https://www.rstudio.com/) qui est un environnement de développement (en anglais « integrated development environment », IDE). L’interface RStudio facilite et rend convivial l’utilisation de R. Elle permet, entre autre, de créer des fichiers de code d’extension *.R ou *.Rmd que vous pouvez réutiliser et modifier.
+Dans le cadre de ce cours, nous utiliserons R en combinaison avec [RStudio]( https://www.rstudio.com/) qui est un environnement de développement (en anglais « integrated development environment », IDE). L’interface RStudio facilite et rend convivial l’utilisation de R. Elle permet, entre autres, de créer des fichiers de code d’extension *.R ou *.Rmd que vous pouvez réutiliser et modifier.
 
 <br>
 
@@ -300,16 +300,16 @@ Dans le cadre de ce cours, nous utiliserons R en combinaison avec [RStudio]( htt
 
 Il existe un nombre important de bibliothèques R (« packages » en anglais) qui se concentrent sur différents aspects de la manipulation, de l’analyse et de la visualisation de données spatiales. D’autres bibliothèques plus générales, comme `base R` et `ggplot2` peuvent aussi être utilisées sur des données spatiales pour accomplir certaines fonctions.
 
-La communauté R est très active, de nouvelles bibliothèques sont régulièrement offertes alors les bibliothèques existantes sont mises à jour et améliorer constamment. Ceci est également vrai pour la « communauté R spatiale ». R étant un projet ouvert, tout le monde peut créer des bibliothèques, ou signalez des problèmes afin d’améliorer des bibliothèques existantes. Vous aussi!
+La communauté R est très active, de nouvelles bibliothèques sont régulièrement offertes alors les bibliothèques existantes sont mises à jour et améliorées constamment. Ceci est également vrai pour la « communauté R spatiale ». R étant un projet ouvert, tout le monde peut créer des bibliothèques, ou signalez des problèmes afin d’améliorer des bibliothèques existantes. Vous aussi!
 
 Vous trouverez sur le site de [CRAN]( https://cran.r-project.org/) (The Comprehensive R Archive Network) une page dédiée aux [bibliothèques R pour l’analyse géo-spatiale]( https://cran.r-project.org/web/views/Spatial.html).
 
 Voici quelques bibliothèques importantes que nous utiliserons dans ce cours :
 
-*	[`sf`]( https://r-spatial.github.io/sf/): bibliothèque incontournable offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux vectoriels de différentes classes. sf est relativement récente et est venue remplacer les bibliothèques `sp`, `rgeos` et les parties vectorielles de `rdgal`.
+*	[`sf`]( https://r-spatial.github.io/sf/): bibliothèque incontournable offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux vectoriels de différentes classes. sf est relativement récente et est venue remplacer les bibliothèques `sp`, `rgeos` et les parties vectorielles de `rgdal`.
 *	[`raster`]( https://cran.r-project.org/web/packages/raster/index.html): bibliothèque offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux matriciels.  Notez que la bibliothèque [`terra`](https://rspatial.github.io/terra/reference/terra-package.html) remplacera peut-être `raster` dans les années à venir.
-*	[`spacetime`]( https://cran.r-project.org/web/packages/spacetime/index.html): bibliothèque offrant des fonctions pour manipuler des objets spatiaux-temporels.
-*	[`mapview`]( https://r-spatial.github.io/mapview/): bibliothèque offrant des fonctions pour visualiser rapidement et de façon interactives des données spatiales.
+*	[`spacetime`]( https://cran.r-project.org/web/packages/spacetime/index.html): bibliothèque offrant des fonctions pour manipuler des objets spatio-temporels.
+*	[`mapview`]( https://r-spatial.github.io/mapview/): bibliothèque offrant des fonctions pour visualiser rapidement et de façon interactive des données spatiales.
 *	[`tmap`]( https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html) : bibliothèque offrant des fonctions plus flexibles pour visualiser des données spatiales. Elle utilise un style qui s’apparente à [`ggplot2`](https://ggplot2.tidyverse.org/).
 
 <br>
@@ -360,23 +360,23 @@ Finalement, pour le calcul de grandes distances, il peut être nécessaire de co
 #### Contiguïté  {-}
 
 
-La contiguïté, aussi appelée l’adjacence, indique la proximité de deux ou plusieurs objets spatiaux. C’est, en quelque sorte, une mesure binaire de distance : l’objet A est près, oui ou non, de l’objet B [@OSullivanUnwin_2010]. La contiguïté est donc un concept relatif à la façon dont on détermine si un objet est proche d’un autre. Par exemple, deux pays qui partagent une même frontière pourront être qualifiés de contiguës. Dans d’autres cas, nous pourrions considérer une distance maximale fixe (p. ex.  50 km) et déterminer que tous les objets (p.ex. des villes) séparés par une distance moindre que la distance fixée sont contiguës. Nous pourrions également déterminer que les cinq (ou un autre nombre fixe) objets les plus proches d’un autre sont contiguës peu importe la distance qui les sépare. 
+La contiguïté, aussi appelée l’adjacence, indique la proximité de deux ou plusieurs objets spatiaux. C’est, en quelque sorte, une mesure binaire de distance : l’objet A est près, oui ou non, de l’objet B [@OSullivanUnwin_2010]. La contiguïté est donc un concept relatif à la façon dont on détermine si un objet est proche d’un autre. Par exemple, deux pays qui partagent une même frontière pourront être qualifiés de contigus. Dans d’autres cas, nous pourrions considérer une distance maximale fixe (p. ex.  50 km) et déterminer que tous les objets (p.ex. des villes) séparés par une distance moindre que la distance fixée sont contigus. Nous pourrions également déterminer que les cinq (ou un autre nombre fixe) objets les plus proches d’un autre sont contigus peu importe la distance qui les sépare. 
 
 <br>
 
 #### Interaction {-}
 
-L’interaction spatiale entre deux objets repose également sur le concept de distance. Elle exprime la notion intuitive que tous les objets sont en interaction mais ceux qui sont proches ont plus de chance d’interagir que ceux qui sont distants. On réfère à cette notion comme étant la « première loi » de la géographie et on l'attribut au géographe Waldo Tobler. En anglais, cette loi s’énonce ainsi : « Everything is related to everything, but near things are more related than distant things » [@Tobler_1970]. 
+L’interaction spatiale entre deux objets repose également sur le concept de distance. Elle exprime la notion intuitive que tous les objets sont en interaction, mais ceux qui sont proches ont plus de chance d’interagir que ceux qui sont distants. On réfère à cette notion comme étant la « première loi » de la géographie et on l'attribue au géographe Waldo Tobler. En anglais, cette loi s’énonce ainsi : « Everything is related to everything, but near things are more related than distant things » [@Tobler_1970]. 
 
 L’interaction entre deux objets se mesure généralement par une fonction allant de 0 (aucune interaction) à 1 (interaction maximale). Cette fonction est inversement proportionnelle à la distance séparant les deux objets de sorte que plus la distance est petite plus l’interaction est forte [@OSullivanUnwin_2010]. D’autres facteurs peuvent influencer la façon dont on mesure l’interaction comme la taille des objets. 
 
-L’interaction est étroitement liée aux concepts de dépendance spatiale et d’autocorrélation spatiale [@dale_fortin_2014]. La dépendance spatiale est l’absence d’indépendance entre des objets rapprochés. Puisque l’assomption d’indépendance des données est requise pour réaliser de nombreux tests statistiques paramétriques il est important de pouvoir déterminer la présence de dépendance spatiale. L’autocorrélation spatiale réfère à la corrélation spatiale entre les valeurs d’une même variable. Par exemple, la température à un emplacement sera corrélée avec la température à des emplacements voisins. Il existe différentes mesures pour déterminer la dépendance et l’autocorrélation spatiale. Dans le cadre de ce cours, nous n’aborderons pas ces mesures plus poussées d’analyse spatiale. 
+L’interaction est étroitement liée aux concepts de dépendance spatiale et d’autocorrélation spatiale [@dale_fortin_2014]. La dépendance spatiale est l’absence d’indépendance entre des objets rapprochés. Puisque l’assomption d’indépendance des données est requise pour réaliser de nombreux tests statistiques paramétriques, il est important de pouvoir déterminer la présence de dépendance spatiale. L’autocorrélation spatiale réfère à la corrélation spatiale entre les valeurs d’une même variable. Par exemple, la température à un emplacement sera corrélée avec la température à des emplacements voisins. Il existe différentes mesures pour déterminer la dépendance et l’autocorrélation spatiale. Dans le cadre de ce cours, nous n’aborderons pas ces mesures plus poussées d’analyse spatiale. 
 
 <br>
 
 ####  Voisinage {-}
 
-Le voisinage est aussi un concept relatif qui peut se décrire de différentes façons. Un voisinage peut être défini en fonction d’un objet spatial particulier. Le voisinage est alors constitué des objets spatiaux qui sont adjacents à l’objet spatial d’intérêt. Par exemple, les cadastres limitrophes d’une propriété donnée, ou encore les bâtiments dans un rayon de 500 m autour d’une borne fontaine. Un voisinage peut aussi prendre un sens qui s’apparente à la notion de quartier.  Un voisinage est alors défini comme une région qui entoure des objets spatiaux similaires, et qui se distincte d’autres régions qui circonscrivent également des objets similaires. 
+Le voisinage est aussi un concept relatif qui peut se décrire de différentes façons. Un voisinage peut être défini en fonction d’un objet spatial particulier. Le voisinage est alors constitué des objets spatiaux qui sont adjacents à l’objet spatial d’intérêt. Par exemple, les cadastres limitrophes d’une propriété donnée, ou encore les bâtiments dans un rayon de 500 m autour d’une borne-fontaine. Un voisinage peut aussi prendre un sens qui s’apparente à la notion de quartier.  Un voisinage est alors défini comme une région qui entoure des objets spatiaux similaires, et qui se distincte d’autres régions qui circonscrivent également des objets similaires. 
 
 <br>
 
@@ -393,7 +393,7 @@ Une grande partie du contenu de cette section  est tiré du livre numérique [An
 
 #### Installer R {-}
 
-Nous possédez déjà R sur votre ordinateur? Nous recommandons tout de même d'installer la plus récente version afin d'avoir la version la plus à jour pour être compatible avec les bibliothèques qui seront utilisées dans le cours.
+Vous possédez déjà R sur votre ordinateur? Nous recommandons tout de même d'installer la plus récente version afin d'avoir la version la plus à jour pour être compatible avec les bibliothèques qui seront utilisées dans le cours.
 
 ##### Windows {-}
 
@@ -425,7 +425,7 @@ Assurez-vous d'avoir la dernière version:
 
 ##### Vous utilisez une autre plateforme que RStudio ? {-}
 
-Si vous préférez *vraiment* un autre environnement de développement que RStudio, vous pouvez bien sûr l'utiliser. Aucun apprentissage dans ce cours est dépendant de RStudio. Toutefois, si, en cours de route, vous avez des questions liées à l'environnement que vous avez choisi d'utiliser, il n'est pas certain que la personne qui vous encadre sera en mesure de vous aider.
+Si vous préférez *vraiment* un autre environnement de développement que RStudio, vous pouvez bien sûr l'utiliser. Aucun apprentissage dans ce cours n'est dépendant de RStudio. Toutefois, si, en cours de route, vous avez des questions liées à l'environnement que vous avez choisi d'utiliser, il n'est pas certain que la personne qui vous encadre sera en mesure de vous aider.
 
 
 #### Apprivoiser RStudio {-}
@@ -438,11 +438,11 @@ knitr::include_graphics('Module1/images/1_rstudio.jpg')
 ```
 <br>
 
-La grande fenête à gauche est la **console** R. Vous pouvez y écrire des commandes R à éxécuter.
+La grande fenêtre à gauche est la **console** R. Vous pouvez y écrire des commandes R à exécuter.
 
 La fenêtre supérieure à droite contient les onglets **Environment / History / Connections**:
 
-* Environment: contient les objets que vous avez créé ou chargez dans votre session R.
+* Environment: contient les objets que vous avez créés ou chargez dans votre session R.
 * History: contient la liste des commandes que vous avez entrées dans la console `R. Cette fenêtre peut être utile pour retrouver des commandes que vous avez précédemment utilisées.
 * Connections: permet de se connecter à d'autres sources de données.
 
@@ -452,7 +452,7 @@ La fenêtre inférieur droite contient les onglets **Files / Plots / Packages / 
 
 * Plots: contient toutes les figures crées au cours de votre session R. Vous pouvez agrandir la figure (*Zoom*) et la sauvegarder dans le format de votre choix (*Export*).
 
-* Packages: contient la liste de toutes les bibliothèques installées sur votre ordinateur. À partir de cet onglet vous pouvez installer des nouvelles bibliothèques ou mettre à jour vos bibliothèques actuelles en cliquant sur les boutons *Install* et *Update* respectivement.
+* Packages: contient la liste de toutes les bibliothèques installées sur votre ordinateur. À partir de cet onglet, vous pouvez installer de nouvelles bibliothèques ou mettre à jour vos bibliothèques actuelles en cliquant sur les boutons *Install* et *Update* respectivement.
 
 * Help: présente la documentation R pour une fonction recherchée.
 
@@ -493,7 +493,7 @@ Sauvegarder un fichier R en lui donnant un nom qui a du sens. Ce nom doit être 
 
 #### Les bibliothèques {-}
 
-Une bibliothèque R, appellée "package" en anglais, est un ensemble de fonctions spécialisées créées par des experts ou des expertes dans un champ d'analyse précis.
+Une bibliothèque R, appelée "package" en anglais, est un ensemble de fonctions spécialisées créées par des experts ou des expertes dans un champ d'analyse précis.
 
 Pour **installer** une bibliothèque dans R à même la console, il faut utiliser la fonction `install.packages()`. Par exemple, la ligne de commande suivante installe la bibliothèque `mapview`:
 
@@ -518,7 +518,7 @@ Le répertoire de travail (*working directory* en anglais) est le dossier par d�
 
 Pour choisir un répertoire, aller dans le menu déroulant *Session* au haut de l'écran et sélectionner *Set Working Directory/Choose Directory ...*.
 
-Pour connaitre le répertoire de travail courrant, entrer la commande `getwd()` dans la console. Pour choisir un autre répertoire, il s'agit d'utiliser le commande `setwd()` en identifiant le chemin (*path*) vers le répertoire désiré:
+Pour connaitre le répertoire de travail courant, entrer la commande `getwd()` dans la console. Pour choisir un autre répertoire, il s'agit d'utiliser la commande `setwd()` en identifiant le chemin (*path*) vers le répertoire désiré:
 
 ```{r, eval = FALSE, echo = TRUE}
 setwd("C:/Users/Elise/TELUQ/SCI1031/Module4/Module4_Donnees")
@@ -599,7 +599,7 @@ paste(obj1, obj2)
 
 #### Les catégories de données {-}
 
-Dans le cadre de ce cours nous utiliserons quatre principales catégories ou classes de données supportées par R:
+Dans le cadre de ce cours, nous utiliserons quatre principales catégories ou classes de données supportées par R:
 
 
 * Numérique (*numeric* en anglais) est un nombre décimal ou un nombre entier.
@@ -637,7 +637,7 @@ obj_fac
 ```
 <br>
 
-La fonction `class()` permet de connaitre la catégorie d'une données.
+La fonction `class()` permet de connaitre la catégorie d'une donnée.
 ```{r}
 class(obj_num)
 class(obj_ent)
@@ -870,7 +870,7 @@ list_ex1$couleur[2]
 
 ##### Les data frames {-}
 
-Un *data frame* est un tableau de données à deux dimensions, semblable à une matrice, mais pouvant contenir des données de différentes classes. Généralement chaque ligne du tableau correspond à une observation et chaque colonne à une variable mesurée. Les *data frames* sont similaires à un tableau Excel. Ils peuvent aussi être perçus comme une combinaison de vecteurs de même longueur.
+Un *data frame* est un tableau de données à deux dimensions, semblable à une matrice, mais pouvant contenir des données de différentes classes. Généralement, chaque ligne du tableau correspond à une observation et chaque colonne à une variable mesurée. Les *data frames* sont similaires à un tableau Excel. Ils peuvent aussi être perçus comme une combinaison de vecteurs de même longueur.
 
 Nous pouvons créer un *data frame* en utisant la fonction `data.frame()`:
 ```{r}
@@ -919,7 +919,7 @@ str(tab_ex2)
 ```
 <br>
 
-Parfois les *data frame* peuvent contenir beaucoup de variables et d'observations. Dans ces situations, il peut être utile d'utiliser les fonctions `head()` ou `tail()` qui retournent les 5 premières et les 5 dernières lignes du tableau respectivement.
+Parfois, les *data frame* peuvent contenir beaucoup de variables et d'observations. Dans ces situations, il peut être utile d'utiliser les fonctions `head()` ou `tail()` qui retournent les 5 premières et les 5 dernières lignes du tableau respectivement.
 ```{r}
 head(tab_ex2)
 ```
@@ -998,7 +998,7 @@ Nous pouvons également utiliser la fonction `write.csv()` pour exporter les don
 write.csv(tab_ex1, file = "voitures.csv", row.names = FALSE)
 ```
 <br>
-Dans ce cas, il n'est pas nécessaire les arguments `col.names = TRUE` et `sep = ","` sont pris par défaut, et il n'est donc pas nécessaire de les préciser.
+Dans ce cas, les arguments `col.names = TRUE` et `sep = ","` sont pris par défaut, et il n'est donc pas nécessaire de les préciser.
 
 <br>
 
@@ -1094,7 +1094,7 @@ plot(x,y,
 
 ##### Histogramme
 
-Nous utilisons la fonction `hist()` pour produire un histogramme qui illustre le nombre ou la fréquence d'observation qui ont une certaines valeurs.
+Nous utilisons la fonction `hist()` pour produire un histogramme qui illustre le nombre ou la fréquence d'observation qui ont une certaine valeur.
 
 ```{r, out.width = '60%', dev = 'png'}
 # générer 20 nombres aléatoires à partir d'une
@@ -1140,9 +1140,9 @@ boxplot(x)
 ```
 <br>
 
-Le trait horizonal foncé au centre correspond à la valeur médiane. La ligne supérieure de la boîte correspond au 75^ième^ percentile (3^ième^ quartile) et la ligne inférieure de la boîte au 25^ième^ percentile (1^er^ quartile)
+Le trait horizontal foncé au centre correspond à la valeur médiane. La ligne supérieure de la boîte correspond au 75^ième^ percentile (3^ième^ quartile) et la ligne inférieure de la boîte au 25^ième^ percentile (1^er^ quartile).
 
-Comme pour les autres types de graphique, nous pouvons personnaliser les diagrammes à boîtes en ajoutant des arguments à la fonction `boxplot()`
+Comme pour les autres types de graphique, nous pouvons personnaliser les diagrammes à boîtes en ajoutant des arguments à la fonction `boxplot()`.
 
 ```{r, out.width = '60%', dev = 'png'}
 boxplot(tab_ex2$age,
@@ -1158,7 +1158,7 @@ boxplot(tab_ex2$age,
 ### À vous de jouer! {#exo1}
 
 
-Dans cette section, vous allez mettre en pratique les concepts enseignés en utilisant des données sur les municipalités du Québec qui proviennent du [répertoire des municipalités du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/repertoire-des-municipalites-du-quebec/resource/19385b4e-5503-4330-9e59-f998f5918363). Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous même!
+Dans cette section, vous allez mettre en pratique les concepts enseignés en utilisant des données sur les municipalités du Québec qui proviennent du [répertoire des municipalités du Québec](https://www.donneesquebec.ca/recherche/fr/dataset/repertoire-des-municipalites-du-quebec/resource/19385b4e-5503-4330-9e59-f998f5918363). Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
 <br>
 
@@ -1176,7 +1176,7 @@ Télécharger le dossier [Module1_donnees.zip](https://github.com/sci1031/data/r
 
 #### Question 1 {-}
 
-**a)** Utiliser la fonction `read.csv` pour importer les données dans votre session de travail R. Nommer l'objet importer *villes*.
+**a)** Utiliser la fonction `read.csv` pour importer les données dans votre session de travail R. Nommer l'objet importé *villes*.
 
 
 <details>
@@ -1302,7 +1302,7 @@ class(villes$munnom=="Montréal")
 
 <br>
 
-**b)** Créer l'objet `villes_Outaouais` qui contient les entrées du *data frame* `villes` pour toutes les municipalités de la région administrative de l'Ouatouais.
+**b)** Créer l'objet `villes_Outaouais` qui contient les entrées du *data frame* `villes` pour toutes les municipalités de la région administrative de l'Outaouais.
 
 <details>
 <summary> Réponse</summary>
@@ -1323,7 +1323,7 @@ head(villes_Outaouais)
 
 #### Question 3 {-}
 
-**a)** Créer un histogramme de la distibution de la population des villes du Québec comprenant une dizaine de bandes. Utiliser la fonction `log10()` pour représenter la taille des populations. Préciser les axes de votre graphique adéquatement.
+**a)** Créer un histogramme de la distribution de la population des villes du Québec comprenant une dizaine de bandes. Utiliser la fonction `log10()` pour représenter la taille des populations. Préciser les axes de votre graphique adéquatement.
 
 <details>
 <summary> Réponse</summary>
