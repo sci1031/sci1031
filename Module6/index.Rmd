@@ -860,7 +860,25 @@ tm_shape(DonneesSpatiales) + tm_fonction1() + tm_fonction2() + ...
 
 La fonction `tm_shape()` est suivi d'une ou de plusieurs fonctions qui précisent les objets ou les attributs des données à cartographier ainsi que les éléments cartographiques à ajouter et la mise en page souhaitée. 
 
-Télécharger la bibliothèque `tmap`:
+Télécharger la bibliothèque `tmap`[^notetmap]:
+
+[^notetmap]:En date du 16 octobre 2023, il est préférable d'installer la version précédente de `tmap` car la nouvelle version n'est pas au point pour la fonction `tm_markers()`. Voici la marche à suivre. Installez la bibliothèque `devtools` si vous ne l'avez pas: ` install.packages("devtools")`. Chargez là: `require(devtools)`. Puis installez la version 3.3-3 de `tmap`: `install_version("tmap", version = "3.3-3", repos = "http://cran.us.r-project.org")`. Si on vous demande de mettre à jour certaines bibliothèques, vous pouvez répondre None.
+   
+<!--   
+
+    ```{r, eval = FALSE}
+       # Installez devtools si vous ne l'avez pas:
+       install.packages("devtools")
+    # Chargez cette bibliothèque
+    require(devtools)
+    # Installez la version précédent de tmap:
+    install_version("tmap", version = "3.3-3", repos = "http://cran.us.r-project.org")
+    # Si on vous demande de mettre à jour certaine bibliothèque, vous pouvez répondre None
+    ```
+-->
+
+
+
 
 ```{r, eval = FALSE}
 install.packages("tmap")
@@ -883,7 +901,7 @@ Pour débuter notre exploration des fonctions de cartographie offertes avec `tma
 
 Utiliser la fonction `st_read()` de la bibliothèque `sf` pour lire le *shapefile* `QC_RegAdm_Pop.shp` contenu dans le dossier `Population`:
 
-```{r}
+```{r, message = FALSE}
 Q <- st_read("Module6/Module6_donnees/Population/QC_RegAdm_Pop.shp")
 ```
 
@@ -1524,7 +1542,7 @@ tm_shape(V) + tm_dots(col = "Mncplts",
 
 La fonction `tm_markers()` représente les points par le symbole de repère géographique:
 
-```{r, dev = 'png', fig.height=6 }
+```{r, dev = 'png', fig.height=6}
 
 tm_shape(Q) + tm_fill() +
 tm_shape(V) + tm_markers(size = 0.5, 
@@ -1668,7 +1686,7 @@ tm_shape(Q) +
 
 Par défaut, le symbole utilisé est un point. Le point correspond au symbole `shape = 21`. Nous pouvons toutefois utiliser d'autres symboles comme le carré (`shape = 15`), ou le repère géographique (`shape = marker_icon()`). Vous pouvez même importer vos propres symboles. 
 
-```{r, warning = FALSE, dev = 'png', fig.height=6 }
+```{r, warning = FALSE, dev = 'png', fig.height=6}
 carte_base <- tm_shape(Q) + 
                   tm_polygons(col="NUM_REG", legend.show = FALSE) + 
                   tm_style("bw") 

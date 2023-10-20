@@ -573,8 +573,9 @@ Cette fonction est basée sur l'algorithme de [Douglas-Peucker](https://fr.wikip
 
 Le seuil de tolérance étant une distance, nous l'exprimons en mètres. Nous devons alors nous assurer que l'objet spatial à simplifier est dans un système de coordonnées métriques.
 
-En guise d'exemple, simplifions le *shapefile* des régions administratives du Québec (\@ref(fig:ex-st-simple)): 
-<!--  le lien donne ?? une fois le rmd compilé 
+En guise d'exemple, simplifions le *shapefile* des régions administratives du Québec <!--(\@ref(fig:ex-st-simple))-->: 
+<!--  RINDRA: le lien donne ?? une fois le rmd compilé 
+EF: J'ai retiré la référence temporairement, je suis pas mal certaine que c'est un problème lié à leafsync
 -->
 
 ```{r, warning = FALSE }
@@ -641,7 +642,7 @@ GIM_combine
 ```
 <br>
 
-Le nouvel objet `GIM_combine` est effectivement formé d'une seule géométrie. Notez cependant que la fonction `st_combine()` ne fusionne pas les frontières à l'intérieur du nouveau polygone formé (\@ref(fig:map-combo)). Pour unir deux polygones, il faut plutôt utiliser la fonction `st_union()` que nous définirons plus bas dans cette leçon.
+Le nouvel objet `GIM_combine` est effectivement formé d'une seule géométrie. Notez cependant que la fonction `st_combine()` ne fusionne pas les frontières à l'intérieur du nouveau polygone formé<!-- (\@ref(fig:map-combo)) -->. Pour unir deux polygones, il faut plutôt utiliser la fonction `st_union()` que nous définirons plus bas dans cette leçon.
 
 ```{r map-combo, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="La Gaspésie et les Îles-de-la-Madeleine traitées comme deux polygones distincts (gauche), leur combinaison par la fonction `st_combine()` (centre), et leur union par la fonction `st_union()` (droite)."}
 GIM_union<-st_union(iles, gasp)
@@ -694,7 +695,7 @@ Mauricie_pts
 
 <br>
 
-Nous observons que les deux nouveaux objets vectoriels ont bel et bien la géométrie souhaitée (\@ref(fig:ex-cast1)).
+Nous observons que les deux nouveaux objets vectoriels ont bel et bien la géométrie souhaitée <!--(\@ref(fig:ex-cast1))  -->.
 <!--  le lien donne ?? une fois le rmd compilé 
 -->
 
@@ -933,7 +934,7 @@ sym_diff_AB <- st_sym_difference(A,B)
 
 <br>
 
-Observons les géométries produites par ces opérations (figure \@ref(fig:topo-op)) &nbsp;:
+Observons les géométries produites par ces opérations<!--  (figure \@ref(fig:topo-op))--> &nbsp;:
 <!--  le lien vers la figure donne ?? une fois le rmd compilé 
 -->
 
@@ -1179,7 +1180,7 @@ La fonction `st_touches()` vérifie si deux objets `X` et `Y` ont au moins un po
 knitr::include_graphics('Module7/images/st_touches.png')
 ```
 
-Considérons par exemple les objets spatiaux illustrés à la figure \@ref(fig:st-geo-conf4) &nbsp;:
+Considérons par exemple les objets spatiaux illustrés à la figure<!--  \@ref(fig:st-geo-conf4)-->&nbsp;:
 <!--  le lien vers la figure donne ?? une fois le rmd compilé 
 -->
 
