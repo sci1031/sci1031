@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 2 Modèles de données spatiales | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 2 Modèles de données spatiales | SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2023-03-10" />
+<meta name="date" content="2023-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,14 +54,14 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -69,52 +69,52 @@
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 <script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<script src="libs/M_a0ec98-1/data_stars_M368ed4.txt"></script>
+<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
+<script src="libs/M_0e239f-1/data_stars_M1fbd2c.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric_502691-1/data_stars_M_logique_numeric90d73b.txt"></script>
-<script src="libs/M_factor_d07e63-1/data_stars_M_factor643e81.txt"></script>
-<script src="libs/ICU_a268cb-1/data_stars_ICUaf3819.txt"></script>
-<script src="libs/ICU_24c69f-1/data_stars_ICU5f1986.txt"></script>
-<script src="libs/T_sec_fa8de0-1/data_stars_T_sec1ec368.txt"></script>
-<script src="libs/T_fact4_moy_3d06ab-1/data_stars_T_fact4_moy2567e1.txt"></script>
-<script src="libs/T_fact4_max_d40631-1/data_stars_T_fact4_maxbdc385.txt"></script>
-<script src="libs/T_fact8_moy_17d0a8-1/data_stars_T_fact8_moycd8f43.txt"></script>
-<script src="libs/T_fact8_max_fb912e-1/data_stars_T_fact8_max97ef82.txt"></script>
-<script src="libs/SR_28fd57-1/data_stars_SR0ed653.txt"></script>
-<script src="libs/SG_37198c-1/data_stars_SGae123d.txt"></script>
-<script src="libs/SB_da8234-1/data_stars_SB80b2f7.txt"></script>
-<script src="libs/R2001f_2d6bf3-1/data_stars_R2001fef139c.txt"></script>
-<script src="libs/R2001f_6fb841-1/data_stars_R2001f859e0c.txt"></script>
-<script src="libs/R2016f_fb215d-1/data_stars_R2016f3fa042.txt"></script>
-<script src="libs/dem_9cb70f-1/data_stars_dema85634.txt"></script>
-<script src="libs/nouvelles_classes_dem_cd0bf7-1/data_stars_nouvelles_classes_dem1e5620.txt"></script>
-<script src="libs/reclassify(dem, nouvelles_classes2)_f18230-1/data_stars_reclassifydemnouvelles_classes27d62ac.txt"></script>
-<script src="libs/dem_cr_a0496c-1/data_stars_dem_cr0fe3b4.txt"></script>
-<script src="libs/dem_cr_p_1f8926-1/data_stars_dem_cr_p502379.txt"></script>
-<script src="libs/dem_7b9a85-1/data_stars_dem570a91.txt"></script>
-<script src="libs/dem_ma_2c6b57-1/data_stars_dem_ma81795e.txt"></script>
-<script src="libs/dem_ma_inv_c4153d-1/data_stars_dem_ma_inv6319ac.txt"></script>
-<script src="libs/dem_ma_82b316-1/data_stars_dem_ma63947a.txt"></script>
-<script src="libs/dem_ma_inv_26bfae-1/data_stars_dem_ma_invb4e0c3.txt"></script>
-<script src="libs/dem_merge_1e45d7-1/data_stars_dem_merge79fed4.txt"></script>
-<script src="libs/dem_merge_ordre1_36ce1d-1/data_stars_dem_merge_ordre1087594.txt"></script>
-<script src="libs/dem_merge_ordre2_92568f-1/data_stars_dem_merge_ordre2c817d0.txt"></script>
-<script src="libs/dem_mosaic_min_781f34-1/data_stars_dem_mosaic_mincbd1a0.txt"></script>
-<script src="libs/dem_mosaic_max_06718b-1/data_stars_dem_mosaic_maxc2ea48.txt"></script>
-<script src="libs/dem_mosaic_mean_372465-1/data_stars_dem_mosaic_meana0bd78.txt"></script>
-<script src="libs/dem_parcs_839a06-1/data_stars_dem_parcseaf0c6.txt"></script>
-<script src="libs/dem_parcs_6f4da2-1/data_stars_dem_parcs54afbe.txt"></script>
-<script src="libs/dem_orford_356890-1/data_stars_dem_orfordca693b.txt"></script>
-<script src="libs/dem_orford_045619-1/data_stars_dem_orford27a40f.txt"></script>
-<script src="libs/dem_orford_quantile_fead09-1/data_stars_dem_orford_quantiled76294.txt"></script>
-<script src="libs/dem_orford_quantile_40e537-1/data_stars_dem_orford_quantile5c3bd1.txt"></script>
-<script src="libs/dem_tampon_max_4f5a83-1/data_stars_dem_tampon_max9e5c17.txt"></script>
-<script src="libs/X1_1d3abf-1/data_stars_X1d90bfe.txt"></script>
-<script src="libs/X2_50d36a-1/data_stars_X27c64e0.txt"></script>
-<script src="libs/X3_2eb618-1/data_stars_X3c8b20f.txt"></script>
+<script src="libs/M_logique_numeric_064c7b-1/data_stars_M_logique_numerica15e23.txt"></script>
+<script src="libs/M_factor_c0d142-1/data_stars_M_factor8f5a4e.txt"></script>
+<script src="libs/ICU_4201e7-1/data_stars_ICU3e6084.txt"></script>
+<script src="libs/ICU_f804bd-1/data_stars_ICUb86407.txt"></script>
+<script src="libs/T_sec_95de26-1/data_stars_T_secb5e10a.txt"></script>
+<script src="libs/T_fact4_moy_b0a75d-1/data_stars_T_fact4_moy01b49d.txt"></script>
+<script src="libs/T_fact4_max_a4dbe0-1/data_stars_T_fact4_max24e58a.txt"></script>
+<script src="libs/T_fact8_moy_96c25d-1/data_stars_T_fact8_moy287ec6.txt"></script>
+<script src="libs/T_fact8_max_930d6a-1/data_stars_T_fact8_max91c5b3.txt"></script>
+<script src="libs/SR_9a284d-1/data_stars_SR1320fe.txt"></script>
+<script src="libs/SG_5f43c6-1/data_stars_SG8b40e1.txt"></script>
+<script src="libs/SB_71e86d-1/data_stars_SB523abe.txt"></script>
+<script src="libs/R2001f_eabf98-1/data_stars_R2001f538d1a.txt"></script>
+<script src="libs/R2001f_16af0e-1/data_stars_R2001f873025.txt"></script>
+<script src="libs/R2016f_231ea6-1/data_stars_R2016f739805.txt"></script>
+<script src="libs/dem_5d974f-1/data_stars_dem027be6.txt"></script>
+<script src="libs/nouvelles_classes_dem_68da5b-1/data_stars_nouvelles_classes_dema2649f.txt"></script>
+<script src="libs/reclassify(dem, nouvelles_classes2)_c802ea-1/data_stars_reclassifydemnouvelles_classes2580416.txt"></script>
+<script src="libs/dem_cr_17ace0-1/data_stars_dem_cr80c592.txt"></script>
+<script src="libs/dem_cr_p_e91645-1/data_stars_dem_cr_p0a4c71.txt"></script>
+<script src="libs/dem_da8f57-1/data_stars_dem5a4708.txt"></script>
+<script src="libs/dem_ma_4c36a2-1/data_stars_dem_mab389fc.txt"></script>
+<script src="libs/dem_ma_inv_103485-1/data_stars_dem_ma_invf9bc84.txt"></script>
+<script src="libs/dem_ma_36e729-1/data_stars_dem_maa9d462.txt"></script>
+<script src="libs/dem_ma_inv_b6f38e-1/data_stars_dem_ma_inv43d672.txt"></script>
+<script src="libs/dem_merge_365a29-1/data_stars_dem_merge4216d8.txt"></script>
+<script src="libs/dem_merge_ordre1_96d215-1/data_stars_dem_merge_ordre1d08921.txt"></script>
+<script src="libs/dem_merge_ordre2_703be8-1/data_stars_dem_merge_ordre202e136.txt"></script>
+<script src="libs/dem_mosaic_min_2efb43-1/data_stars_dem_mosaic_min3e0b86.txt"></script>
+<script src="libs/dem_mosaic_max_65c470-1/data_stars_dem_mosaic_max9a0634.txt"></script>
+<script src="libs/dem_mosaic_mean_e4c1f3-1/data_stars_dem_mosaic_mean3ecfd1.txt"></script>
+<script src="libs/dem_parcs_6a0532-1/data_stars_dem_parcsb3a087.txt"></script>
+<script src="libs/dem_parcs_07fa46-1/data_stars_dem_parcs47d85e.txt"></script>
+<script src="libs/dem_orford_3e1459-1/data_stars_dem_orfordde0fb8.txt"></script>
+<script src="libs/dem_orford_ea69b3-1/data_stars_dem_orford21536f.txt"></script>
+<script src="libs/dem_orford_quantile_71e2b9-1/data_stars_dem_orford_quantilec934df.txt"></script>
+<script src="libs/dem_orford_quantile_7d5e40-1/data_stars_dem_orford_quantile2fb903.txt"></script>
+<script src="libs/dem_tampon_max_f4c63e-1/data_stars_dem_tampon_maxec8460.txt"></script>
+<script src="libs/X1_cd47e1-1/data_stars_X1ca9df2.txt"></script>
+<script src="libs/X2_238d9c-1/data_stars_X22d043b.txt"></script>
+<script src="libs/X3_c03a9b-1/data_stars_X37cf429.txt"></script>
 
 
 <style type="text/css">
@@ -181,6 +181,10 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -631,7 +635,7 @@ div.csl-indent {
 </ul>
 <hr />
 <p>À la section <a href="ex_markdown1.html#ex_markdown1">Exercices</a> vous suivrez la première partie d’une introduction à la bibliothèque <code>rmarkdown</code>. La deuxième partie de cette introduction aura lieu dans la section <a href="ex_markdown2.html#ex_markdown2">Exercices du Module 3</a>.</p>
-<p>R Markdown permet de créer des documents dynamiques de formats variés (dont HTML, PDF et Word) qui intègrent des morceaux de code R. Dans le cadre de ce cours, toutes vos évaluations devront être remises dans un fichier R Markdown. Cette section vous permet ainsi de vous familiarisez avec cette bibliothèque.</p>
+<p>R Markdown permet de créer des documents dynamiques de formats variés (dont HTML, PDF et Word) qui intègrent des morceaux de code R. Dans le cadre de ce cours, toutes vos évaluations devront être remises dans un fichier R Markdown. Cette section vous permet ainsi de vous familiariser avec cette bibliothèque.</p>
 </div>
 </div>
             </section>

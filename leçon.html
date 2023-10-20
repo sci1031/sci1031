@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2023-03-10" />
+<meta name="date" content="2023-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,14 +54,14 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -69,52 +69,52 @@
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 <script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<script src="libs/M_a0ec98-1/data_stars_M368ed4.txt"></script>
+<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
+<script src="libs/M_0e239f-1/data_stars_M1fbd2c.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric_502691-1/data_stars_M_logique_numeric90d73b.txt"></script>
-<script src="libs/M_factor_d07e63-1/data_stars_M_factor643e81.txt"></script>
-<script src="libs/ICU_a268cb-1/data_stars_ICUaf3819.txt"></script>
-<script src="libs/ICU_24c69f-1/data_stars_ICU5f1986.txt"></script>
-<script src="libs/T_sec_fa8de0-1/data_stars_T_sec1ec368.txt"></script>
-<script src="libs/T_fact4_moy_3d06ab-1/data_stars_T_fact4_moy2567e1.txt"></script>
-<script src="libs/T_fact4_max_d40631-1/data_stars_T_fact4_maxbdc385.txt"></script>
-<script src="libs/T_fact8_moy_17d0a8-1/data_stars_T_fact8_moycd8f43.txt"></script>
-<script src="libs/T_fact8_max_fb912e-1/data_stars_T_fact8_max97ef82.txt"></script>
-<script src="libs/SR_28fd57-1/data_stars_SR0ed653.txt"></script>
-<script src="libs/SG_37198c-1/data_stars_SGae123d.txt"></script>
-<script src="libs/SB_da8234-1/data_stars_SB80b2f7.txt"></script>
-<script src="libs/R2001f_2d6bf3-1/data_stars_R2001fef139c.txt"></script>
-<script src="libs/R2001f_6fb841-1/data_stars_R2001f859e0c.txt"></script>
-<script src="libs/R2016f_fb215d-1/data_stars_R2016f3fa042.txt"></script>
-<script src="libs/dem_9cb70f-1/data_stars_dema85634.txt"></script>
-<script src="libs/nouvelles_classes_dem_cd0bf7-1/data_stars_nouvelles_classes_dem1e5620.txt"></script>
-<script src="libs/reclassify(dem, nouvelles_classes2)_f18230-1/data_stars_reclassifydemnouvelles_classes27d62ac.txt"></script>
-<script src="libs/dem_cr_a0496c-1/data_stars_dem_cr0fe3b4.txt"></script>
-<script src="libs/dem_cr_p_1f8926-1/data_stars_dem_cr_p502379.txt"></script>
-<script src="libs/dem_7b9a85-1/data_stars_dem570a91.txt"></script>
-<script src="libs/dem_ma_2c6b57-1/data_stars_dem_ma81795e.txt"></script>
-<script src="libs/dem_ma_inv_c4153d-1/data_stars_dem_ma_inv6319ac.txt"></script>
-<script src="libs/dem_ma_82b316-1/data_stars_dem_ma63947a.txt"></script>
-<script src="libs/dem_ma_inv_26bfae-1/data_stars_dem_ma_invb4e0c3.txt"></script>
-<script src="libs/dem_merge_1e45d7-1/data_stars_dem_merge79fed4.txt"></script>
-<script src="libs/dem_merge_ordre1_36ce1d-1/data_stars_dem_merge_ordre1087594.txt"></script>
-<script src="libs/dem_merge_ordre2_92568f-1/data_stars_dem_merge_ordre2c817d0.txt"></script>
-<script src="libs/dem_mosaic_min_781f34-1/data_stars_dem_mosaic_mincbd1a0.txt"></script>
-<script src="libs/dem_mosaic_max_06718b-1/data_stars_dem_mosaic_maxc2ea48.txt"></script>
-<script src="libs/dem_mosaic_mean_372465-1/data_stars_dem_mosaic_meana0bd78.txt"></script>
-<script src="libs/dem_parcs_839a06-1/data_stars_dem_parcseaf0c6.txt"></script>
-<script src="libs/dem_parcs_6f4da2-1/data_stars_dem_parcs54afbe.txt"></script>
-<script src="libs/dem_orford_356890-1/data_stars_dem_orfordca693b.txt"></script>
-<script src="libs/dem_orford_045619-1/data_stars_dem_orford27a40f.txt"></script>
-<script src="libs/dem_orford_quantile_fead09-1/data_stars_dem_orford_quantiled76294.txt"></script>
-<script src="libs/dem_orford_quantile_40e537-1/data_stars_dem_orford_quantile5c3bd1.txt"></script>
-<script src="libs/dem_tampon_max_4f5a83-1/data_stars_dem_tampon_max9e5c17.txt"></script>
-<script src="libs/X1_1d3abf-1/data_stars_X1d90bfe.txt"></script>
-<script src="libs/X2_50d36a-1/data_stars_X27c64e0.txt"></script>
-<script src="libs/X3_2eb618-1/data_stars_X3c8b20f.txt"></script>
+<script src="libs/M_logique_numeric_064c7b-1/data_stars_M_logique_numerica15e23.txt"></script>
+<script src="libs/M_factor_c0d142-1/data_stars_M_factor8f5a4e.txt"></script>
+<script src="libs/ICU_4201e7-1/data_stars_ICU3e6084.txt"></script>
+<script src="libs/ICU_f804bd-1/data_stars_ICUb86407.txt"></script>
+<script src="libs/T_sec_95de26-1/data_stars_T_secb5e10a.txt"></script>
+<script src="libs/T_fact4_moy_b0a75d-1/data_stars_T_fact4_moy01b49d.txt"></script>
+<script src="libs/T_fact4_max_a4dbe0-1/data_stars_T_fact4_max24e58a.txt"></script>
+<script src="libs/T_fact8_moy_96c25d-1/data_stars_T_fact8_moy287ec6.txt"></script>
+<script src="libs/T_fact8_max_930d6a-1/data_stars_T_fact8_max91c5b3.txt"></script>
+<script src="libs/SR_9a284d-1/data_stars_SR1320fe.txt"></script>
+<script src="libs/SG_5f43c6-1/data_stars_SG8b40e1.txt"></script>
+<script src="libs/SB_71e86d-1/data_stars_SB523abe.txt"></script>
+<script src="libs/R2001f_eabf98-1/data_stars_R2001f538d1a.txt"></script>
+<script src="libs/R2001f_16af0e-1/data_stars_R2001f873025.txt"></script>
+<script src="libs/R2016f_231ea6-1/data_stars_R2016f739805.txt"></script>
+<script src="libs/dem_5d974f-1/data_stars_dem027be6.txt"></script>
+<script src="libs/nouvelles_classes_dem_68da5b-1/data_stars_nouvelles_classes_dema2649f.txt"></script>
+<script src="libs/reclassify(dem, nouvelles_classes2)_c802ea-1/data_stars_reclassifydemnouvelles_classes2580416.txt"></script>
+<script src="libs/dem_cr_17ace0-1/data_stars_dem_cr80c592.txt"></script>
+<script src="libs/dem_cr_p_e91645-1/data_stars_dem_cr_p0a4c71.txt"></script>
+<script src="libs/dem_da8f57-1/data_stars_dem5a4708.txt"></script>
+<script src="libs/dem_ma_4c36a2-1/data_stars_dem_mab389fc.txt"></script>
+<script src="libs/dem_ma_inv_103485-1/data_stars_dem_ma_invf9bc84.txt"></script>
+<script src="libs/dem_ma_36e729-1/data_stars_dem_maa9d462.txt"></script>
+<script src="libs/dem_ma_inv_b6f38e-1/data_stars_dem_ma_inv43d672.txt"></script>
+<script src="libs/dem_merge_365a29-1/data_stars_dem_merge4216d8.txt"></script>
+<script src="libs/dem_merge_ordre1_96d215-1/data_stars_dem_merge_ordre1d08921.txt"></script>
+<script src="libs/dem_merge_ordre2_703be8-1/data_stars_dem_merge_ordre202e136.txt"></script>
+<script src="libs/dem_mosaic_min_2efb43-1/data_stars_dem_mosaic_min3e0b86.txt"></script>
+<script src="libs/dem_mosaic_max_65c470-1/data_stars_dem_mosaic_max9a0634.txt"></script>
+<script src="libs/dem_mosaic_mean_e4c1f3-1/data_stars_dem_mosaic_mean3ecfd1.txt"></script>
+<script src="libs/dem_parcs_6a0532-1/data_stars_dem_parcsb3a087.txt"></script>
+<script src="libs/dem_parcs_07fa46-1/data_stars_dem_parcs47d85e.txt"></script>
+<script src="libs/dem_orford_3e1459-1/data_stars_dem_orfordde0fb8.txt"></script>
+<script src="libs/dem_orford_ea69b3-1/data_stars_dem_orford21536f.txt"></script>
+<script src="libs/dem_orford_quantile_71e2b9-1/data_stars_dem_orford_quantilec934df.txt"></script>
+<script src="libs/dem_orford_quantile_7d5e40-1/data_stars_dem_orford_quantile2fb903.txt"></script>
+<script src="libs/dem_tampon_max_f4c63e-1/data_stars_dem_tampon_maxec8460.txt"></script>
+<script src="libs/X1_cd47e1-1/data_stars_X1ca9df2.txt"></script>
+<script src="libs/X2_238d9c-1/data_stars_X22d043b.txt"></script>
+<script src="libs/X3_c03a9b-1/data_stars_X37cf429.txt"></script>
 
 
 <style type="text/css">
@@ -181,6 +181,10 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -617,7 +621,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="leçon" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Leçon<a href="leçon.html#leçon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Les phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout mais qui ne possèdent pas de frontières naturelles<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes. D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux.</p>
+<p>Les phénomènes spatiaux sont généralement perçus comme étant soit des entités discrètes avec des frontières bien définies ou encore comme des phénomènes continus qu’on observe de partout, mais qui ne possèdent pas de frontières naturelles<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>. Une rivière, une route, un pays, ou une ville sont tous des exemples d’entités spatiales discrètes. D’autre part, l’élévation, la température ou la qualité de l’air sont des exemples de phénomènes continus, appelés aussi des champs spatiaux.</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:vectomat"></span>
 <img src="Module2/images/2_regionsadminQC.png" alt="Exemples de données vectorielles et matricielles. Gauche: La carte délimitant les régions administratives du Québec est formée à partir de données vectorielles. Droite: La carte topographique du Québec (source : [https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/)](https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/))" width="50%" /><img src="Module2/images/2_elevationQC.png" alt="Exemples de données vectorielles et matricielles. Gauche: La carte délimitant les régions administratives du Québec est formée à partir de données vectorielles. Droite: La carte topographique du Québec (source : [https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/)](https://mern.gouv.qc.ca/repertoire-geographique/carte-relief-quebec/))" width="50%" />
@@ -626,14 +630,14 @@ FIGURE 2.1: Exemples de données vectorielles et matricielles. Gauche: La carte 
 </p>
 </div>
 <p><br></p>
-<p>Les entités spatiales (ou objets) sont habituellement représentés par ce qu’on appelle des données vectorielles (« vector data », en anglais), alors que les phénomènes continues sont habituellement représentés par des données matricielles (« raster data », en anglais). Ces deux modèles sont des façons bien différentes de percevoir et de représenter les phénomènes spatiaux. Nous les décrivons dans les deux sous-sections suivantes.</p>
+<p>Les entités spatiales (ou objets) sont habituellement représentées par ce qu’on appelle des données vectorielles (« vector data », en anglais), alors que les phénomènes continus sont habituellement représentés par des données matricielles (« raster data », en anglais). Ces deux modèles sont des façons bien différentes de percevoir et de représenter les phénomènes spatiaux. Nous les décrivons dans les deux sous-sections suivantes.</p>
 <div id="les-données-vectorielles" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Les données vectorielles<a href="leçon.html#les-données-vectorielles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="définition" class="section level5 unnumbered hasAnchor">
 <h5>Définition<a href="leçon.html#définition" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Les données vectorielles sont utilisées pour représenter des entités spatiales dont les frontières sont explicites et qui possède une localisation précise et unique. Les données vectorielles sont définies par leur localisation géographique, leur géométrie, et un ou plusieurs attributs.</p>
-<p>La <strong>localisation géographique</strong> désigne l’emplacement de l’entité selon un système de coordonnées géographique ou un système de coordonnées projeté. Un système de coordonnées géographique utilise un système en trois dimensions pour donner la position (x,y,z) ou longitude et latitude d’une entité spatiale sur la surface sphérique de la Terre. Un système de coordonnées projeté, donne la position d’une entité spatiale sur une surface plane à deux dimensions. Nous reviendrons sur les systèmes de coordonnées de référence à la section 2.1.3.</p>
-<p>La <strong>géométrie</strong> d’une entité spatiale correspond à sa forme (« shape », en anglais). Il existe trois principaux types de géométrie, aussi appelées des classes : les points, les lignes, et les polygones (Tableau <a href="leçon.html#fig:geometriesimple">2.2</a>). Ces classes peuvent être combinées pour créer des géométries plus complexes; des multipoints, des multilignes, des multipolygones, etc.</p>
+<p>Les données vectorielles sont utilisées pour représenter des entités spatiales dont les frontières sont explicites et qui possèdent une localisation précise et unique. Les données vectorielles sont définies par leur localisation géographique, leur géométrie, et un ou plusieurs attributs.</p>
+<p>La <strong>localisation géographique</strong> désigne l’emplacement de l’entité selon un système de coordonnées géographiques ou un système de coordonnées projeté. Un système de coordonnées géographiques utilise un système en trois dimensions pour donner la position (x,y,z) ou longitude et latitude d’une entité spatiale sur la surface sphérique de la Terre. Un système de coordonnées projeté donne la position d’une entité spatiale sur une surface plane à deux dimensions. Nous reviendrons sur les systèmes de coordonnées de référence à la section 2.1.3.</p>
+<p>La <strong>géométrie</strong> d’une entité spatiale correspond à sa forme (« shape », en anglais). Il existe trois principaux types de géométrie, aussi appelés classes : les points, les lignes, et les polygones (Tableau <a href="leçon.html#fig:geometriesimple">2.2</a>). Ces classes peuvent être combinées pour créer des géométries plus complexes; des multipoints, des multilignes, des multipolygones, etc.</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:geometriesimple"></span>
 <img src="Module2/images/2_geometriesimple.png" alt="Exemple de données vectorielles de géométrie simple. Remarquez que dans le cas d’un polygone, la première et la dernière coordonnées sont les mêmes. Tableau inspiré de Wikipedia (https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry)" width="80%" />
@@ -655,7 +659,7 @@ FIGURE 2.3: L’emplacement des stations de vélo en libre partage, <em>Bixi</em
 </p>
 </div>
 <p><br></p>
-<p>Il est aussi possible de combiner plusieurs points ensemble dans une structure multipoints définie par un attribut unique (Figure <a href="leçon.html#fig:multipoints">2.3</a>). Par exemple, l’ensemble des restaurants de cuisine vietnamienne dans une ville pourrait être considéré comme une géométrie unique.</p>
+<p>Il est aussi possible de combiner plusieurs points dans une structure multipoints définie par un attribut unique (Figure <a href="leçon.html#fig:multipoints">2.3</a>). Par exemple, l’ensemble des restaurants de cuisine vietnamienne dans une ville pourrait être considéré comme une géométrie unique.</p>
 <p>La géométrie des <strong>lignes</strong> est plus complexe. Le terme ligne en analyse spatiale n’a pas la même définition que dans le langage usuel. Une ligne désigne un ensemble d’une seule ou de plusieurs polylignes (Figure <a href="leçon.html#fig:multilignes">2.4</a>). Une polyligne, quant à elle, désigne une séquence de segments de droite reliés entre eux. Ainsi, en analyse spatiale, une seule ligne pourrait représenter le fleuve Saint-Laurent et l’ensemble de ces affluents (rivière des Outaouais, rivière Saint-Maurice, le Fjord du Saguenay, etc.). D’autre part, il serait aussi possible de définir plusieurs lignes – une pour chaque affluent, par exemple.</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:multilignes"></span>
@@ -669,7 +673,7 @@ FIGURE 2.4: Le réseau hydrologique du bassin de l’Amazone représente un exem
 <p>Un réseau – par exemple un réseau routier ou un réseau hydrographique – est une ligne de géométrie particulière comprenant des informations additionnelles comme le débit, la connectivité ou la distance.</p>
 <p>Un <strong>polygone</strong> désigne un ensemble de polylignes fermées. La géométrie d’un polygone est très semblable à celle des lignes à l’exception que la dernière paire de coordonnées doit coïncider avec la première paire afin de « fermer » le polygone.</p>
 <p>Une particularité des polygones est qu’ils peuvent comprendre des trous. C’est-à-dire qu’un polygone peut être entièrement compris à l’intérieur d’un polygone de plus grande superficie. Ceci est le cas d’une île au sein d’un lac, par exemple. Le polygone formant un îlot permet d’éliminer une partie du polygone qui l’englobe. De plus, alors que l’auto-intersection est permise pour une ligne (c’est-à-dire qu’elle peut se croiser sur elle-même), cette propriété n’est pas valide pour un polygone.</p>
-<p>Finalement, plusieurs polygones peuvent être considérés comme formant une géométrie unique ((Figure <a href="leçon.html#fig:multipolygones">2.5</a>)). Par exemple, l’Indonésie est constituée de plusieurs îles. Chaque île peut être représentée par son propre polygone, ou encore l’ensemble des îles peut être représenté par un seul polygone (ou multi-polygones) désignant le pays en entier.</p>
+<p>Finalement, plusieurs polygones peuvent être considérés comme formant une géométrie unique ((Figure <a href="leçon.html#fig:multipolygones">2.5</a>)). Par exemple, l’Indonésie est constituée de plusieurs îles. Chaque île peut être représentée par son propre polygone, ou encore l’ensemble des îles peut être représenté par un seul polygone (ou multipolygones) désignant le pays en entier.</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:multipolygones"></span>
 <img src="Module2/images/2_multipolygones.png" alt="Les Antilles peuvent être représentées par plusieurs polygones distincts pour chaque île, ou par un seul multipolygone. Source : https://fr.wikipedia.org/wiki/Antilles" width="50%" />
@@ -690,7 +694,7 @@ FIGURE 2.6: Exemples de relations spatiales entre deux entités spatiales : a) a
 </div>
 <div id="format-de-données-vectorielles" class="section level5 unnumbered hasAnchor">
 <h5>Format de données vectorielles<a href="leçon.html#format-de-données-vectorielles" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Les données vectorielles peuvent être stockées dans une grande variété de formats différents. Ces formats ont évolué et continuent d’évoluer en fonction des besoins et des avancées technologiques. Plusieurs formats ont été développés pour être utilisés avec des logiciels commerciaux mais peuvent être lus et parfois édités par d’autres logiciels.</p>
+<p>Les données vectorielles peuvent être stockées dans une grande variété de formats différents. Ces formats ont évolué et continuent d’évoluer en fonction des besoins et des avancées technologiques. Plusieurs formats ont été développés pour être utilisés avec des logiciels commerciaux, mais peuvent être lus et parfois édités par d’autres logiciels.</p>
 <p>Peu importe leur format, les données vectorielles sont toujours organisées selon une <em>base de données relationnelle</em>. Un identifiant désigne chaque objet spatial et l’associe à une géométrie et à un ou plusieurs attributs (Tableau <a href="leçon.html#fig:baserelationnelle">2.7</a>).</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:baserelationnelle"></span>
@@ -738,7 +742,7 @@ FIGURE 2.8: Illustration d’une géodatabase telle que représentée sur le sit
 </div>
 <div id="coverage" class="section level6 unnumbered hasAnchor">
 <h6>COVERAGE<a href="leçon.html#coverage" class="anchor-section" aria-label="Anchor link to header"></a></h6>
-<p>COVERAGE est le format propriétaire d’ESRI, développé pour le logiciel ArcInfo, qui a précédé le format <em>shapefile</em>. C’est une autre façon de stockée les données vectorielles qui nécessite plusieurs fichiers. Bien que ce format ne soit plus utilisé lorsque de nouvelles données vectorielles sont conçues, vous pourriez être amenés à rencontrer ce format si vous devez travailler avec des données qui précédent 1990.</p>
+<p>COVERAGE est le format propriétaire d’ESRI, développé pour le logiciel ArcInfo, qui a précédé le format <em>shapefile</em>. C’est une autre façon de stocker les données vectorielles qui nécessite plusieurs fichiers. Bien que ce format ne soit plus utilisé depuis que de nouvelles données vectorielles ont été conçues, vous pourriez être amenés à rencontrer ce format si vous devez travailler avec des données qui précédent 1990.</p>
 </div>
 <div id="arcinfo-interchange-file-.eoo" class="section level6 unnumbered hasAnchor">
 <h6>ARCINFO INTERCHANGE FILE (.EOO)<a href="leçon.html#arcinfo-interchange-file-.eoo" class="anchor-section" aria-label="Anchor link to header"></a></h6>
@@ -750,7 +754,7 @@ FIGURE 2.8: Illustration d’une géodatabase telle que représentée sur le sit
 </div>
 <div id="web-map-service-wms" class="section level6 unnumbered hasAnchor">
 <h6>WEB MAP SERVICE (WMS)<a href="leçon.html#web-map-service-wms" class="anchor-section" aria-label="Anchor link to header"></a></h6>
-<p>N’est pas un format de données mais plutôt un protocole de communication qui permet de visualiser des données spatiales qui sont logées sur un serveur. Les organisations gouvernementales ont souvent recours à cette méthode de partage de l’information spatiale car elle permet de s’assurer que les données diffusées sont toujours à jour. L’utilisateur peut jouer avec les paramètres de visualisation mais ne peut pas importer et modifier les données. Notez que ce protocole est utilisé à la fois pour les données vectorielles et les données matricielles.</p>
+<p>N’est pas un format de données mais plutôt un protocole de communication qui permet de visualiser des données spatiales qui sont logées sur un serveur. Les organisations gouvernementales ont souvent recours à cette méthode de partage de l’information spatiale car elle permet de s’assurer que les données diffusées sont toujours à jour. L’utilisateur peut jouer avec les paramètres de visualisation, mais ne peut pas importer et modifier les données. Notez que ce protocole est utilisé à la fois pour les données vectorielles et les données matricielles.</p>
 </div>
 </div>
 </div>
@@ -758,8 +762,8 @@ FIGURE 2.8: Illustration d’une géodatabase telle que représentée sur le sit
 <h3><span class="header-section-number">2.1.2</span> Les données matricielles<a href="leçon.html#les-données-matricielles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="définition-1" class="section level5 unnumbered hasAnchor">
 <h5>Définition<a href="leçon.html#définition-1" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Les données matricielles représentent la surface terrestre par une grille régulière, communément appelé un <em>raster</em>, formée de rectangles de même forme et de même dimension appelés cellules ou pixels (Figure <a href="leçon.html#fig:raster">2.9</a>). À chaque cellule de la matrice correspond une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.</p>
-<p>La valeur d’une cellule peut être continue (p. ex. l’élévation - voir Figure <a href="leçon.html#fig:vectomat">2.1</a>b) ou catégorique (p. ex. le zonage attribué à différents secteurs d’une ville tel que résidentiel, commercial ou industriel). Normalement, la valeur d’une cellule représente la valeur moyenne (ou la valeur prédominante) pour la superficie qu’elle couvre. Cependant, les valeurs sont parfois estimées pour le centre de la cellule.</p>
+<p>Les données matricielles représentent la surface terrestre par une grille régulière, communément appelée un <em>raster</em>, formée de rectangles de même forme et de même dimension appelés cellules ou pixels (Figure <a href="leçon.html#fig:raster">2.9</a>). À chaque cellule de la matrice correspond une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.</p>
+<p>La valeur d’une cellule peut être continue (p. ex. l’élévation - voir Figure <a href="leçon.html#fig:vectomat">2.1</a>b) ou catégorique (p. ex. le zonage attribué à différents secteurs d’une ville tels que résidentiel, commercial ou industriel). Normalement, la valeur d’une cellule représente la valeur moyenne (ou la valeur prédominante) pour la superficie qu’elle couvre. Cependant, les valeurs sont parfois estimées pour le centre de la cellule.</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:raster"></span>
 <img src="Module2/images/2_raster.jpg" alt="Exemple de données matricielles associées à des classes de végétation obtenues à partir d’une image satellitaire. Figure inspirée de NEON neonscience.org/resources/series/introduction-working-raster-data-r" width="100%" />
@@ -768,7 +772,7 @@ FIGURE 2.9: Exemple de données matricielles associées à des classes de végé
 </p>
 </div>
 <p><br></p>
-<p>On peut utiliser une base de données relationnelle pour lier la valeur d’un pixel à l’attribut qu’il décrit (Figure <a href="leçon.html#fig:rastertable">2.10</a>). Contrairement aux données vectorielles où les polygones peuvent être associés à plusieurs attributs, une couche de données matricielles peut représenter un seul attribut.</p>
+<p>On peut utiliser une base de données relationnelle pour lier la valeur d’un pixel à l’attribut qu’il décrit (Figure <a href="leçon.html#fig:rastertable">2.10</a>). Contrairement aux données vectorielles où les polygones peuvent être associés à plusieurs attributs, une couche de données matricielles ne peut représenter qu’un seul attribut.</p>
 <br>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:rastertable"></span>
 <img src="Module2/images/2_raster_tableB.png" alt="Exemple de table relationnelle pour les données vectorielles de la Figure \@ref(fig:raster). Une valeur numérique est associée à chaque couleur de l’image ainsi qu’à un attribut, ici le type de végétation." width="45%" /><img src="Module2/images/2_raster_tableC.png" alt="Exemple de table relationnelle pour les données vectorielles de la Figure \@ref(fig:raster). Une valeur numérique est associée à chaque couleur de l’image ainsi qu’à un attribut, ici le type de végétation." width="49%" />
@@ -782,7 +786,7 @@ FIGURE 2.10: Exemple de table relationnelle pour les données vectorielles de la
 </div>
 <div id="résolution-et-géométrie" class="section level5 unnumbered hasAnchor">
 <h5>Résolution et géométrie<a href="leçon.html#résolution-et-géométrie" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>La <strong>résolution</strong> définie la précision avec laquelle nous pouvons discerner les objets dans l’espace. Une grande résolution correspond à une matrice de données dont les cellules ont une petite taille (Figure <a href="leçon.html#fig:resolution">2.11</a>). En conséquence, une telle matrice est plus lente à visualiser et à manipuler, et requière un fichier plus volumineux. En contrepartie, une couche de données matricielles de faible résolution possède des cellules de plus grande taille, se visualise et se manipule plus rapidement, et est contenue dans un fichier moins volumineux.</p>
+<p>La <strong>résolution</strong> définit la précision avec laquelle nous pouvons discerner les objets dans l’espace. Une grande résolution correspond à une matrice de données dont les cellules ont une petite taille (Figure <a href="leçon.html#fig:resolution">2.11</a>). En conséquence, une telle matrice est plus lente à visualiser et à manipuler, et requiert un fichier plus volumineux. En contrepartie, une couche de données matricielles de faible résolution possède des cellules de plus grande taille, se visualise et se manipule plus rapidement, et est contenue dans un fichier moins volumineux.</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:resolution"></span>
 <img src="Module2/images/2_resolution.jpg" alt="Exemple du concept de résolution: plus la résolution est grande, plus la taille des cellules est petite. Dans cette figure, la résolution diminue de droite à gauche, et la taille des cellules augmente. Source de données: https://mern.gouv.qc.ca/nos-publications/spatiocarte-quebec/" width="100%" />
@@ -791,7 +795,7 @@ FIGURE 2.11: Exemple du concept de résolution: plus la résolution est grande, 
 </p>
 </div>
 <p><br></p>
-<p>Contrairement aux données vectorielles, la géométrie des données matricielles n’est pas définie explicitement par un ensemble de coordonnées. La géométrie peut être déduite en observant les démarcations se produisant aux limites des ensembles de cellules de même valeur. Cependant ces démarcations ne correspondent pas nécessairement aux frontières des entités sur le terrain (Figure <a href="leçon.html#fig:boundary">2.12</a>).</p>
+<p>Contrairement aux données vectorielles, la géométrie des données matricielles n’est pas définie explicitement par un ensemble de coordonnées. La géométrie peut être déduite en observant les démarcations se produisant aux limites des ensembles de cellules de même valeur. Cependant, ces démarcations ne correspondent pas nécessairement aux frontières des entités sur le terrain (Figure <a href="leçon.html#fig:boundary">2.12</a>).</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:boundary"></span>
 <img src="Module2/images/2_raster_boundary.png" alt="La géométrie des objets spatiaux matriciels. Les frontières d’une entité spatiale définie avec des données matricielles (droite) ne correspondent pas nécessairement aux frontières réelles (gauche)" width="80%" />
@@ -801,7 +805,7 @@ FIGURE 2.12: La géométrie des objets spatiaux matriciels. Les frontières d’
 </div>
 <p><br></p>
 <p>Ainsi, lorsque nous représentons des objets spatiaux aux frontières bien définies, l’utilisation de données vectorielles plutôt que matricielles s’avère plus précise et plus efficace.</p>
-<p>Par ailleurs, la représentation de phénomènes continus avec des données vectorielles, nécessiterait de définir un grand nombre de petit polygones et d’enregistrer les coordonnées de chacun d’eux. Dans la majorité des cas, une telle représentation augmenterait dramatiquement le temps de traitement des données.</p>
+<p>Par ailleurs, la représentation de phénomènes continus avec des données vectorielles nécessiterait de définir un grand nombre de petits polygones et d’enregistrer les coordonnées de chacun d’eux. Dans la majorité des cas, une telle représentation augmenterait dramatiquement le temps de traitement des données.</p>
 </div>
 <div id="données-matricielles-à-bande-unique-et-multi-bandes" class="section level5 unnumbered hasAnchor">
 <h5>Données matricielles à bande unique et multi-bandes<a href="leçon.html#données-matricielles-à-bande-unique-et-multi-bandes" class="anchor-section" aria-label="Anchor link to header"></a></h5>
@@ -815,7 +819,7 @@ FIGURE 2.13: Exemple de codage binaire pour les <em>raster</em> à une couche: I
 </p>
 </div>
 <p><br></p>
-<p>D’autres rasters peuvent contenir plusieurs couches, appelées aussi des bandes (ou canaux). Par exemple, les images de couleurs contiennent souvent trois bandes: une bande de rouge, une bande de vert et une bande de bleu. C’est ce qu’on nomme le format RGB (pour « red », « green », et « blue »). Ces bandes font références à des sections du spectre électromagnétique captées lors de la prise de l’image (Figure <a href="leçon.html#fig:electro">2.14</a>).</p>
+<p>D’autres rasters peuvent contenir plusieurs couches, appelées aussi des bandes (ou canaux). Par exemple, les images de couleurs contiennent souvent trois bandes: une bande de rouge, une bande de vert et une bande de bleu. C’est ce qu’on nomme le format RGB (pour « red », « green », et « blue »). Ces bandes font référence à des sections du spectre électromagnétique captées lors de la prise de l’image (Figure <a href="leçon.html#fig:electro">2.14</a>).</p>
 <br>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:electro"></span>
 <img src="Module2/images/2_electromagnetic_spectrum.png" alt="*Raster* multibande. Les bandes blues, vertes et rouges correspondent à des sections du spectre électromagnétique. Source: Esri. Image récupérée à https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/raster-bands.htm." width="50%" />
@@ -837,7 +841,7 @@ FIGURE 2.15: Image satellitaire de région de l’Estrie. Le raster multi-bande 
 <div id="format-des-données-matricielles" class="section level5 unnumbered hasAnchor">
 <h5>Format des données matricielles<a href="leçon.html#format-des-données-matricielles" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Tout comme les données vectorielles, les données matricielles peuvent être stockées dans une grande variété de formats différents. Les images possèdent des structures matricielles, ainsi les formats bien connus pour la transmission d’images sur le Web, .jpg (Joint Photographic Experts Group), .gif (Graphics Interchange Format), et .png (Portable Network Graphics), sont des exemples de format de données matricielles.</p>
-<p>Voici une liste non-exhaustive de formats de données matricielles.</p>
+<p>Voici une liste non exhaustive de formats de données matricielles.</p>
 <div id="grid-.grd" class="section level6 unnumbered hasAnchor">
 <h6>GRID (.GRD)<a href="leçon.html#grid-.grd" class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <p>GRID est le format propriétaire d’ESRI pour stocker des données matricielles.</p>

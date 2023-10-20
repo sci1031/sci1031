@@ -112,7 +112,7 @@ fig:div
 fig:basepal
 fig:viridipal
 fig:brewerpal
-fig:unnamed-chunk-215
+fig:unnamed-chunk-216
 fig:buffer-lapoc
 fig:buffer-regions
 fig:centroid-regions

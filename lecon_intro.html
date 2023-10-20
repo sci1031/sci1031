@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.1 Leçon | SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2023-03-10" />
+<meta name="date" content="2023-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,14 +54,14 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -69,52 +69,52 @@
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 <script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<script src="libs/M_a0ec98-1/data_stars_M368ed4.txt"></script>
+<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
+<script src="libs/M_0e239f-1/data_stars_M1fbd2c.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric_502691-1/data_stars_M_logique_numeric90d73b.txt"></script>
-<script src="libs/M_factor_d07e63-1/data_stars_M_factor643e81.txt"></script>
-<script src="libs/ICU_a268cb-1/data_stars_ICUaf3819.txt"></script>
-<script src="libs/ICU_24c69f-1/data_stars_ICU5f1986.txt"></script>
-<script src="libs/T_sec_fa8de0-1/data_stars_T_sec1ec368.txt"></script>
-<script src="libs/T_fact4_moy_3d06ab-1/data_stars_T_fact4_moy2567e1.txt"></script>
-<script src="libs/T_fact4_max_d40631-1/data_stars_T_fact4_maxbdc385.txt"></script>
-<script src="libs/T_fact8_moy_17d0a8-1/data_stars_T_fact8_moycd8f43.txt"></script>
-<script src="libs/T_fact8_max_fb912e-1/data_stars_T_fact8_max97ef82.txt"></script>
-<script src="libs/SR_28fd57-1/data_stars_SR0ed653.txt"></script>
-<script src="libs/SG_37198c-1/data_stars_SGae123d.txt"></script>
-<script src="libs/SB_da8234-1/data_stars_SB80b2f7.txt"></script>
-<script src="libs/R2001f_2d6bf3-1/data_stars_R2001fef139c.txt"></script>
-<script src="libs/R2001f_6fb841-1/data_stars_R2001f859e0c.txt"></script>
-<script src="libs/R2016f_fb215d-1/data_stars_R2016f3fa042.txt"></script>
-<script src="libs/dem_9cb70f-1/data_stars_dema85634.txt"></script>
-<script src="libs/nouvelles_classes_dem_cd0bf7-1/data_stars_nouvelles_classes_dem1e5620.txt"></script>
-<script src="libs/reclassify(dem, nouvelles_classes2)_f18230-1/data_stars_reclassifydemnouvelles_classes27d62ac.txt"></script>
-<script src="libs/dem_cr_a0496c-1/data_stars_dem_cr0fe3b4.txt"></script>
-<script src="libs/dem_cr_p_1f8926-1/data_stars_dem_cr_p502379.txt"></script>
-<script src="libs/dem_7b9a85-1/data_stars_dem570a91.txt"></script>
-<script src="libs/dem_ma_2c6b57-1/data_stars_dem_ma81795e.txt"></script>
-<script src="libs/dem_ma_inv_c4153d-1/data_stars_dem_ma_inv6319ac.txt"></script>
-<script src="libs/dem_ma_82b316-1/data_stars_dem_ma63947a.txt"></script>
-<script src="libs/dem_ma_inv_26bfae-1/data_stars_dem_ma_invb4e0c3.txt"></script>
-<script src="libs/dem_merge_1e45d7-1/data_stars_dem_merge79fed4.txt"></script>
-<script src="libs/dem_merge_ordre1_36ce1d-1/data_stars_dem_merge_ordre1087594.txt"></script>
-<script src="libs/dem_merge_ordre2_92568f-1/data_stars_dem_merge_ordre2c817d0.txt"></script>
-<script src="libs/dem_mosaic_min_781f34-1/data_stars_dem_mosaic_mincbd1a0.txt"></script>
-<script src="libs/dem_mosaic_max_06718b-1/data_stars_dem_mosaic_maxc2ea48.txt"></script>
-<script src="libs/dem_mosaic_mean_372465-1/data_stars_dem_mosaic_meana0bd78.txt"></script>
-<script src="libs/dem_parcs_839a06-1/data_stars_dem_parcseaf0c6.txt"></script>
-<script src="libs/dem_parcs_6f4da2-1/data_stars_dem_parcs54afbe.txt"></script>
-<script src="libs/dem_orford_356890-1/data_stars_dem_orfordca693b.txt"></script>
-<script src="libs/dem_orford_045619-1/data_stars_dem_orford27a40f.txt"></script>
-<script src="libs/dem_orford_quantile_fead09-1/data_stars_dem_orford_quantiled76294.txt"></script>
-<script src="libs/dem_orford_quantile_40e537-1/data_stars_dem_orford_quantile5c3bd1.txt"></script>
-<script src="libs/dem_tampon_max_4f5a83-1/data_stars_dem_tampon_max9e5c17.txt"></script>
-<script src="libs/X1_1d3abf-1/data_stars_X1d90bfe.txt"></script>
-<script src="libs/X2_50d36a-1/data_stars_X27c64e0.txt"></script>
-<script src="libs/X3_2eb618-1/data_stars_X3c8b20f.txt"></script>
+<script src="libs/M_logique_numeric_064c7b-1/data_stars_M_logique_numerica15e23.txt"></script>
+<script src="libs/M_factor_c0d142-1/data_stars_M_factor8f5a4e.txt"></script>
+<script src="libs/ICU_4201e7-1/data_stars_ICU3e6084.txt"></script>
+<script src="libs/ICU_f804bd-1/data_stars_ICUb86407.txt"></script>
+<script src="libs/T_sec_95de26-1/data_stars_T_secb5e10a.txt"></script>
+<script src="libs/T_fact4_moy_b0a75d-1/data_stars_T_fact4_moy01b49d.txt"></script>
+<script src="libs/T_fact4_max_a4dbe0-1/data_stars_T_fact4_max24e58a.txt"></script>
+<script src="libs/T_fact8_moy_96c25d-1/data_stars_T_fact8_moy287ec6.txt"></script>
+<script src="libs/T_fact8_max_930d6a-1/data_stars_T_fact8_max91c5b3.txt"></script>
+<script src="libs/SR_9a284d-1/data_stars_SR1320fe.txt"></script>
+<script src="libs/SG_5f43c6-1/data_stars_SG8b40e1.txt"></script>
+<script src="libs/SB_71e86d-1/data_stars_SB523abe.txt"></script>
+<script src="libs/R2001f_eabf98-1/data_stars_R2001f538d1a.txt"></script>
+<script src="libs/R2001f_16af0e-1/data_stars_R2001f873025.txt"></script>
+<script src="libs/R2016f_231ea6-1/data_stars_R2016f739805.txt"></script>
+<script src="libs/dem_5d974f-1/data_stars_dem027be6.txt"></script>
+<script src="libs/nouvelles_classes_dem_68da5b-1/data_stars_nouvelles_classes_dema2649f.txt"></script>
+<script src="libs/reclassify(dem, nouvelles_classes2)_c802ea-1/data_stars_reclassifydemnouvelles_classes2580416.txt"></script>
+<script src="libs/dem_cr_17ace0-1/data_stars_dem_cr80c592.txt"></script>
+<script src="libs/dem_cr_p_e91645-1/data_stars_dem_cr_p0a4c71.txt"></script>
+<script src="libs/dem_da8f57-1/data_stars_dem5a4708.txt"></script>
+<script src="libs/dem_ma_4c36a2-1/data_stars_dem_mab389fc.txt"></script>
+<script src="libs/dem_ma_inv_103485-1/data_stars_dem_ma_invf9bc84.txt"></script>
+<script src="libs/dem_ma_36e729-1/data_stars_dem_maa9d462.txt"></script>
+<script src="libs/dem_ma_inv_b6f38e-1/data_stars_dem_ma_inv43d672.txt"></script>
+<script src="libs/dem_merge_365a29-1/data_stars_dem_merge4216d8.txt"></script>
+<script src="libs/dem_merge_ordre1_96d215-1/data_stars_dem_merge_ordre1d08921.txt"></script>
+<script src="libs/dem_merge_ordre2_703be8-1/data_stars_dem_merge_ordre202e136.txt"></script>
+<script src="libs/dem_mosaic_min_2efb43-1/data_stars_dem_mosaic_min3e0b86.txt"></script>
+<script src="libs/dem_mosaic_max_65c470-1/data_stars_dem_mosaic_max9a0634.txt"></script>
+<script src="libs/dem_mosaic_mean_e4c1f3-1/data_stars_dem_mosaic_mean3ecfd1.txt"></script>
+<script src="libs/dem_parcs_6a0532-1/data_stars_dem_parcsb3a087.txt"></script>
+<script src="libs/dem_parcs_07fa46-1/data_stars_dem_parcs47d85e.txt"></script>
+<script src="libs/dem_orford_3e1459-1/data_stars_dem_orfordde0fb8.txt"></script>
+<script src="libs/dem_orford_ea69b3-1/data_stars_dem_orford21536f.txt"></script>
+<script src="libs/dem_orford_quantile_71e2b9-1/data_stars_dem_orford_quantilec934df.txt"></script>
+<script src="libs/dem_orford_quantile_7d5e40-1/data_stars_dem_orford_quantile2fb903.txt"></script>
+<script src="libs/dem_tampon_max_f4c63e-1/data_stars_dem_tampon_maxec8460.txt"></script>
+<script src="libs/X1_cd47e1-1/data_stars_X1ca9df2.txt"></script>
+<script src="libs/X2_238d9c-1/data_stars_X22d043b.txt"></script>
+<script src="libs/X3_c03a9b-1/data_stars_X37cf429.txt"></script>
 
 
 <style type="text/css">
@@ -181,6 +181,10 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -621,7 +625,7 @@ div.csl-indent {
 <h3><span class="header-section-number">1.1.1</span> Les données spatiales d’hier à aujourd’hui<a href="lecon_intro.html#hist" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="les-cartes-anciennes" class="section level4 unnumbered hasAnchor">
 <h4>Les cartes anciennes<a href="lecon_intro.html#les-cartes-anciennes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>La représentation géographique est une description de l’emplacement des éléments naturels (cours d’eaux, montagnes, forêts, etc.) et artificiels (routes, ponts, bâtiments, etc.) au sein d’un territoire. Cette représentation peut être détaillée ou abstraite, et décrire un espace restreint tout comme un vaste territoire.</p>
+<p>La représentation géographique est une description de l’emplacement des éléments naturels (cours d’eau, montagnes, forêts, etc.) et artificiels (routes, ponts, bâtiments, etc.) au sein d’un territoire. Cette représentation peut être détaillée ou abstraite, et décrire un espace restreint tout comme un vaste territoire.</p>
 <p>La cartographie est utilisée depuis l’Antiquité pour répondre à de multiples besoins comme celui d’illustrer la distribution spatiale des ressources, de définir les frontières et l’appartenance des territoires ou encore de guider les déplacements.</p>
 <p>La carte de la cité babylonienne de Nippur, datant d’environ 1500 av. J.-C., constitue probablement la plus vieille carte connue tracée à l’échelle (Figure <a href="lecon_intro.html#fig:nippur">1.1</a>). Dessinée sur une tablette d’argile, cette carte représente, notamment, un réseau d’irrigation destiné à l’agriculture.</p>
 <br>
@@ -667,7 +671,7 @@ FIGURE 1.5: Représentations de Montréal en 1556, 1645, 1758, 1843, 1897, 1920,
 </div>
 <p><br></p>
 <p>À partir du 19e siècle, on commence à utiliser la représentation géographique afin d’explorer les relations entre l’occurrence de certains phénomènes et leur localisation. C’est le début de l’analyse spatiale. Un exemple bien connu est celui de l’analyse réalisée en 1854 par le docteur anglais <a href="https://fr.wikipedia.org/wiki/John_Snow">John Snow</a> pour comprendre la propagation d’une épidémie soudaine de choléra dans le quartier Soho de Londres.</p>
-<p>John Snow doutait de la théorie en vigueur à l’époque voulant que les maladies telles le cholera ou la peste soient transmises par l’inhalation d’émanations malsaines (appelées des <a href="https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_miasmes">miasmes</a> – des mauvais airs). Il supportait plutôt l’hypothèse que le choléra se développe par l’ingestion d’eau impropre.</p>
+<p>John Snow doutait de la théorie en vigueur à l’époque voulant que les maladies telles le choléra ou la peste soient transmises par l’inhalation d’émanations malsaines (appelées des <a href="https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_miasmes">miasmes</a> – des mauvais airs). Il supportait plutôt l’hypothèse que le choléra se développe par l’ingestion d’eau impropre.</p>
 <p>Il cartographia les lieux de résidence des personnes infectées et observa qu’ils se trouvaient à proximité de la pompe à eau de Broad Street (Figure <a href="lecon_intro.html#fig:cholera">1.6</a>. Cette dernière puisait son eau d’une section polluée de la Tamise. Il sut convaincre les autorités de fermer la pompe, ce qui stoppa l’épidémie. John Snow est perçu aujourd’hui comme un des pionniers de l’épidémiologie moderne.</p>
 <p><br></p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:cholera"></span>
@@ -682,8 +686,8 @@ FIGURE 1.6: Reconstitution de la carte de l’épidémie de cholera créée par 
 <h4>La géomatique<a href="lecon_intro.html#la-géomatique" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>L’arrivée de l’informatique et des données numériques viennent transformer la cartographie traditionnelle et la façon de traiter l’information géographique. Dans les années 1960, le terme « géomatique », qui est une contraction entre les mots géographie et informatique, est proposé pour désigner cette nouvelle discipline.</p>
 <p>On définit la géomatique comme « l’ensemble des connaissances et technologies nécessaires à la production et au traitement des données numériques décrivant le territoire, ses ressources ou tout autre objet ou phénomène ayant une position géographique. »<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<p>En effet, les géographes ou autres utilisateurs de données spatiales doivent maintenant composer avec des données numériques diverses acquises par la photographie aérienne et satellitaire, les outils topographiques électroniques ou munis de GPS, la numérisation de documents papiers, etc.</p>
-<p>De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multi-sources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales (Figure <a href="lecon_intro.html#fig:sigelements">1.7</a>).</p>
+<p>En effet, les géographes ou autres utilisateurs de données spatiales doivent maintenant composer avec des données numériques diverses acquises par la photographie aérienne et satellitaire, les outils topographiques électroniques ou munis de GPS, la numérisation de documents papier, etc.</p>
+<p>De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multisources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales (Figure <a href="lecon_intro.html#fig:sigelements">1.7</a>).</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:sigelements"></span>
 <a href="Module1/images/1_SIGelements.jpg" target="_blank"><img src="Module1/images/1_SIGelements.jpg" alt="Les différents éléments qui composent un SIG. Source: image récupérée le 6 décembre 2021 à https://bookdown.org/tep/gisbooklet/introduction-to-gis.html." width="80%" /></a>
 <p class="caption">
@@ -762,11 +766,11 @@ FIGURE 1.15: Géomarketing pour les études de marché. Source : <a href="https:
 </div>
 <div id="la-science-des-données" class="section level4 unnumbered hasAnchor">
 <h4>La science des données<a href="lecon_intro.html#la-science-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>La science des données est un domaine pluridisciplinaire qui regroupe les méthodes scientifiques et l’infrastructure permettant d’extraire les connaissances d’ensembles de données. La science des données utilisent notamment les approches d’intelligence artificielle (tels l’apprentissage automatique et l’apprentissage profond) ainsi que l’infonuagique (p. ex. les serveurs, le stockage de données, et les logiciels disponibles via internet) pour dégager des tendances au sein de données volumineuses ou complexes et ainsi solutionner des problèmes diverses.</p>
+<p>La science des données est un domaine pluridisciplinaire qui regroupe les méthodes scientifiques et l’infrastructure permettant d’extraire les connaissances d’ensembles de données. La science des données utilise notamment les approches d’intelligence artificielle (tels que l’apprentissage automatique et l’apprentissage profond) ainsi que l’infonuagique (p. ex. les serveurs, le stockage de données, et les logiciels disponibles via internet) pour dégager des tendances au sein de données volumineuses ou complexes et ainsi solutionner des problèmes divers.</p>
 <p>Les applications de la science des données se sont multipliées devant la disponibilité de données massives et le besoin de les analyser. Ces applications incluent maintenant des secteurs aussi variés que la santé, le commerce et l’astrophysique.</p>
 <p>Depuis les années 2010, nous observons une convergence entre la géomatique et la science des données. En effets, les concepts et les outils développer dans ces domaines traditionnellement distincts sont mis à profit afin de pouvoir gérer, analyser et visualiser un nombre de grandissant de données spatiales.</p>
 <p>L’augmentation fulgurante des données spatiales est associée à plusieurs avancées en technologie des capteurs et des communications <span class="citation">(<a href="ressources.html#ref-Lee2015" role="doc-biblioref">Lee and Kang 2015</a>)</span>. Ces développements ont permis de diversifier les appareils capables d’acquérir des données géoréférencées et de produire des appareils accessibles à tous et mobiles (penser à vos téléphones cellulaires!). Ces développements ont également permis de connecter en réseau les capteurs de données, et d’accroître la précision des mesures ainsi que leur suivi en temps réel.</p>
-<p>Ces avancées technologiques ont donc suscité (et continuent de susciter) l’émergence de nouvelles applications reposant sur l’utilisation de données spatiales. Par exemple, les données de géolocalisation, et même les messages sur les médias sociaux peuvent faciliter le travail des gouvernements lorsqu’ils doivent fournir efficacement une aide appropriée suivant des évènements tels des accidents. Dans le contexte de la pandémie de COVID-19, les données sur la distribution des cas ont servis, entre autres, à prendre des décisions sur les règles de confinement à adopter selon le nombre de cas par régions.</p>
+<p>Ces avancées technologiques ont donc suscité (et continuent de susciter) l’émergence de nouvelles applications reposant sur l’utilisation de données spatiales. Par exemple, les données de géolocalisation, et même les messages sur les médias sociaux peuvent faciliter le travail des gouvernements lorsqu’ils doivent fournir efficacement une aide appropriée suivant des évènements tels des accidents. Dans le contexte de la pandémie de COVID-19, les données sur la distribution des cas ont servi, entre autres, à prendre des décisions sur les règles de confinement à adopter selon le nombre de cas par régions.</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:datasciencecovid"></span>
 <a href="Module1/images/1_CovidMap.jpg" target="_blank"><img src="Module1/images/1_CovidMap.jpg" alt="Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : https://ressouces-fr-covid19canada.hub.arcgis.com/." width="80%" /></a>
 <p class="caption">
@@ -774,8 +778,8 @@ FIGURE 1.16: Carte illustrant la distribution des cas au Canada. Ce portail SIG 
 </p>
 </div>
 <p><br></p>
-<p>Dans ordre d’idées similaires, l’application <a href="https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html">Alerte COVID</a> du gouvernement canadien, qui a pour objectif de limiter la propagation de la maladie, permet aux abonnés d’être informés si une tierce personne ayant reçu un résultat positif s’est trouvée dans leur proximité dans les 14 derniers jours.</p>
-<p>En environnement les applications des données spatiales sont nombreuses. Par exemple, les colliers-GPS portés par des mammifères permettent de mieux comprendre le déplacement des individus appartenant à une espèce menacée et ainsi de mieux protéger leur habitat<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>Dans un ordre d’idées similaires, l’application <a href="https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html">Alerte COVID</a> du gouvernement canadien, qui a pour objectif de limiter la propagation de la maladie, permet aux abonnés d’être informés si une tierce personne ayant reçu un résultat positif s’est trouvée dans leur proximité dans les 14 derniers jours.</p>
+<p>En environnement, les applications des données spatiales sont nombreuses. Par exemple, les colliers GPS portés par des mammifères permettent de mieux comprendre le déplacement des individus appartenant à une espèce menacée et ainsi de mieux protéger leur habitat<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:datasciencecaribou"></span>
 <a href="Module1/images/1_Caribou.jpg" target="_blank"><img src="Module1/images/1_Caribou.jpg" alt="Carte illustrant les migrations printanières et automnales de caribous de la sous-population de la Rivière-aux-Feuilles dans le Nord du Québec. Chaque ligne représente le déplacement d’un individu suivi par satellite. Ces données ont été acquises aux cours des années 2009-2011 dans le cadre du projet [Caribou Ungava](https://www.caribou-ungava.ulaval.ca/accueil/). Source : Caribou Ungava, Photo : Steeve Côté. Images récupérées le 10 décembre 2021 à https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html." width="70%" /></a>
 <p class="caption">
@@ -783,7 +787,7 @@ FIGURE 1.17: Carte illustrant les migrations printanières et automnales de cari
 </p>
 </div>
 <p><br></p>
-<p>Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme <a href="https://ebird.org/">ebird</a> développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde auxquelles tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de mai 2021, ebird contenait plus d’un milliard d’obervations d’oiseaux soumises par environ 700 mille participants<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
+<p>Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme <a href="https://ebird.org/">ebird</a> développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde à laquelle tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de mai 2021, ebird contenait plus d’un milliard d’observations d’oiseaux soumises par environ 700 mille participants<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:datascienceebird"></span>
 <a href="Module1/images/1_ebird.jpg" target="_blank"><img src="Module1/images/1_ebird.jpg" alt="Carte illustrant la distribution du Roitelet à triple-bandeau produite à partir des données d’observation de ebird. Le mauve indique les lieux où l’espèce est présente à l’année, le rouge, durant la période de reproduction, le bleu, durant les périodes de non-reproduction, le jaune durant les saisons de pré- et post-reproduction, et le gris les lieux d’absence ou d’observations rares.  Source : https://ebird.org/science/status-and-trends/range-maps - Illustration © Hilary Burn/Lynx Edicions." width="80%" /></a>
 <p class="caption">
@@ -791,7 +795,7 @@ FIGURE 1.18: Carte illustrant la distribution du Roitelet à triple-bandeau prod
 </p>
 </div>
 <p><br></p>
-<p>Les services basés sur la géolocalisation aussi sont de plus en plus important dans notre économie. L’industrie du commerce de détails, de la restauration, du tourisme, et du transport profitent tous d’applications géo-dépendantes. Pensez par exemple à Uber, Dashdoor, Trip Advisor et même les applications de rencontre comme Tinder. De tels services permettent, entre autres, de signaler des offres aux consommateurs en fonction de leur position. De plus, les données spatiales peuvent servir à identifier des intérêts locaux pour certains produits et ainsi permettre aux entreprises d’améliorer l’efficacité de leur chaîne d’approvisionnement.</p>
+<p>Les services basés sur la géolocalisation aussi sont de plus en plus importants dans notre économie. L’industrie du commerce de détail, de la restauration, du tourisme, et du transport profite toute d’applications géodépendantes. Pensez par exemple à Uber, Dashdoor, Trip Advisor et même les applications de rencontre comme Tinder. De tels services permettent, entre autres, de signaler des offres aux consommateurs en fonction de leur position. De plus, les données spatiales peuvent servir à identifier des intérêts locaux pour certains produits et ainsi permettre aux entreprises d’améliorer l’efficacité de leur chaîne d’approvisionnement.</p>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:datascienceloghub"></span>
 <a href="Module1/images/1_AppCommerciale.jpg" target="_blank"><img src="Module1/images/1_AppCommerciale.jpg" alt="Carte illustrant la position des consommateurs et le nombre de ventes d’une entreprise commerciale en Espagne. Carte tirée du site web de la compagnie [Log-hub](log-hub.com)  offrant des services basés sur l’analyse de données spatiales pour améliorer les chaînes d’approvisionnement. Source : https://log-hub.com/my-maps-platform/." width="80%" /></a>
 <p class="caption">
@@ -799,7 +803,7 @@ FIGURE 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 </p>
 </div>
 <p><br></p>
-<p>Les utilisateurs des données spatiales se limitaient historiquement aux organismes gouvernementaux. Or, la multiplication des applications dans différents secteurs a augmenté le besoin pour des logiciels de visualisation et d’analyse de données spatiales et aussi pour une main d’œuvre qualifiée capable d’opérer ces outils.</p>
+<p>Les utilisateurs des données spatiales se limitaient historiquement aux organismes gouvernementaux. Or, la multiplication des applications dans différents secteurs a augmenté le besoin pour des logiciels de visualisation et d’analyse de données spatiales et aussi pour une main-d’œuvre qualifiée capable d’opérer ces outils.</p>
 </div>
 </div>
 <div id="outils" class="section level3 hasAnchor" number="1.1.2">
@@ -809,7 +813,7 @@ FIGURE 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 <h4>Les logiciels commerciaux<a href="lecon_intro.html#les-logiciels-commerciaux" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Il existe plusieurs logiciels commerciaux de géomatique. Ces logiciels sont relativement dispendieux et généralement seulement les entreprises qui offrent des services spécialisés en géomatique ou les ministères, certaines villes et les universités peuvent se procurer ces licences.</p>
 <ul>
-<li><a href="https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-pro/overview">ArcGIS</a> : est la plateforme principale de la compagnie <a href="https://www.esri.ca/fr-ca/home">ESRI</a> (Environmental Systems Research Institute). Créée en 1999 sous le nom ArcMap, cette application est maintenant vendue sous le nom ArcGIS Pro. ESRI offre également d’autres plateformes dont <a href="https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview">ArcGIS Online</a>, un logiciel de cartographie web, et <a href="https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-developer">ArcGIS Developer</a> pour les développeurs.</li>
+<li><a href="https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-pro/overview">ArcGIS</a> : est la plateforme principale de la compagnie <a href="https://www.esri.ca/fr-ca/home">ESRI</a> (Environmental Systems Research Institute). Créée en 1999 sous le nom ArcMap, cette application est maintenant vendue sous le nom ArcGIS Pro. ESRI offre également d’autres plateformes, dont <a href="https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview">ArcGIS Online</a>, un logiciel de cartographie web, et <a href="https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-developer">ArcGIS Developer</a> pour les développeurs.</li>
 <li><a href="https://www.precisely.com/fr/product/precisely-mapinfo/mapinfo-pro">MapInfo</a>: est la plateforme de la compagnie <a href="https://www.precisely.com/fr/">Precisely</a> (autrefois Pitney Bowes Software et MapInfo Corporation). Créée en 1995, c’est une des premières plateformes à avoir vu le jour.</li>
 <li><a href="https://www.hexagongeospatial.com/products/products">Hexagon Geospatial Power Portfolio</a>: est une plateforme qui comprend divers outils géo-spatiaux dont <a href="https://www.hexagongeospatial.com/products/power-portfolio/erdas-imagine">ERDAS</a> reconnu pour la manipulation d’images de télédétection.</li>
 <li><a href="https://manifold.net/">Manifold</a>: est une plateforme qui se démarque par sa rapidité de par son utilisation de traitements en parallèle et GPU.</li>
@@ -819,7 +823,7 @@ FIGURE 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 <h4>Les logiciels libres d’accès<a href="lecon_intro.html#les-logiciels-libres-daccès" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Il existe une offre de plus en plus intéressante de logiciels libres d’accès. La <a href="https://www.osgeo.org/">Fondation Open Source Geospatial</a> (OSGeo), une organisation non-gouvernementale fondée en 2006, a pour objectif de soutenir et promouvoir le développement de codes et de logiciels libres en géomatique. Elle chapeaute plusieurs <a href="https://www.osgeo.org/projects/">projets</a> comme des bibliothèques spécialisées, des applications SIG mobiles ou bureautiques, et des applications pour la gestion de données spatiales. Voici quelques exemples :</p>
 <ul>
-<li><a href="https://www.qgis.org/fr/site/">QGIS</a>: est une application SIG gratuite et de source libre. Elle est écrite en Python mais possède plusieurs interfaces écrite en R, dont <a href="https://rdrr.io/cran/RQGIS/">RQGIS</a>.</li>
+<li><a href="https://www.qgis.org/fr/site/">QGIS</a>: est une application SIG gratuite et de source libre. Elle est écrite en Python mais possède plusieurs interfaces écrites en R, dont <a href="https://rdrr.io/cran/RQGIS/">RQGIS</a>.</li>
 <li><a href="https://grass.osgeo.org/">GRASS GIS</a>: est un des projets fondateurs de l’OSGeo qu’on appelle communément GRASS (Geographic Resources Analysis Support System). Cette application libre permet la gestion, le traitement, l’analyse et la visualisation de données spatiales, ainsi que le traitement d’images et la modélisation. Elle est utilisée par des entreprises commerciales et dans les milieux universitaires et gouvernementaux.</li>
 <li><a href="https://gdal.org/">GDAL</a>: pour Geospatial Data Abstraction Library est une bibliothèque qui permet de lire des données spatiales en formats vectoriel et matriciel<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. Plusieurs logiciels, libres et commerciaux, utilisent cette bibliothèque dont QGIS, GRASS GIS, ArcGIS, Google Earth et aussi R.</li>
 <li><a href="https://postgis.net/">PostGIS</a>: est une extension pour les données spatiales de <a href="https://www.postgresql.org/">PostgreSQL</a>, un système de source libre pour la gestion de base de données relationnelle et objet.</li>
@@ -832,7 +836,7 @@ FIGURE 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 <li><a href="https://earthengine.google.com/">Google Earth Engine</a>: est une plateforme de calcul infonuagique de Google qui permet le traitement de données géo-spatiales. Celle-ci donne accès à un large catalogue d’images satellitaires (p. ex. de <a href="https://landsat.gsfc.nasa.gov/">Landsat</a> et <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-2">Sentinel-2</a>) et à la puissance de calcul requise pour les analyser. Google Earth Engine permet ainsi d’explorer les changements sur la surface de la Terre à l’échelle planétaire. Il a été utilisé pour visualiser l’évolution de diverses problématiques environnementales comme la perte de couvert forestier. Google Earth Engine est gratuit pour des utilisations académiques et de recherche et une version payante existe pour les utilisations commerciales. Une interface de programmation existe également pour les développeurs, <a href="https://developers.google.com/earth-engine/">Earth Engine API</a>.</li>
 <li><a href="https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview">ArcGIS Online</a>: est la plateforme web d’ArcGIS, le logiciel commercial présenté plus haut. Cette plateforme donne accès à des milliers de cartes.</li>
 <li><a href="https://pangeo.io/">PanGEO</a>: est une plateforme de source libre, et collaborative, pour le développement d’applications pour les analyses géo-spatiales à grande échelle.</li>
-<li><a href="https://sepal.io/">Sepal</a>: est une plateforme gratuite pour l’analyse d’images satellitaires qui repose sur Google Earth Engine et des logiciels de source libre comme Python, R. Sepal est un multiples outils qu’offre <a href="https://openforis.org/">OpenForis</a>, un projet conçu par la <a href="https://www.fao.org/home/fr">FAO</a> (Organisation des Nations Unis pour l’alimentation et l’agriculture) pour permettre aux pays de faire le suivi de leurs ressources naturelles.</li>
+<li><a href="https://sepal.io/">Sepal</a>: est une plateforme gratuite pour l’analyse d’images satellitaires qui repose sur Google Earth Engine et des logiciels de source libre comme Python, R. Sepal est un outil qu’offre <a href="https://openforis.org/">OpenForis</a>, un projet conçu par la <a href="https://www.fao.org/home/fr">FAO</a> (Organisation des Nations Unies pour l’alimentation et l’agriculture) pour permettre aux pays de faire le suivi de leurs ressources naturelles.</li>
 <li><a href="https://kepler.gl/">Kepler</a>: est également une plateforme de source libre pour les analyse géo-spatiales à grande échelle. Elle est supportée par la compagnie <a href="https://eng.uber.com/keplergl/">Uber</a>.</li>
 <li><a href="https://www.planet.com/markets/mapping/">Planet</a>: est une plateforme commerciale pour les analyses géo-spatiales.</li>
 </ul>
@@ -844,21 +848,21 @@ FIGURE 1.19: Carte illustrant la position des consommateurs et le nombre de vent
 <p>L’utilisation de lignes de commandes plutôt que d’interfaces graphiques permet également d’automatiser des tâches que l’on désire répéter plusieurs fois dans une analyse ou encore de réutiliser des blocs de code dans différents projets. De plus, un code se partage facilement et peut être ainsi amélioré par d’autres contributeurs ou contributrices.</p>
 <p>Il existe plusieurs bibliothèques géo-spatiales dans les langages de programmation à usage général comme C++ et Java. Cependant, la courbe d’apprentissage est grande pour ces langages et les efforts requis sont disproportionnés pour les usagers qui comptent utiliser leurs fonctionnalités de façon limitée seulement.</p>
 <p>En revanche, les langages interprétés<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, comme R et Python, sont beaucoup plus simples à apprendre et à utiliser. Ces deux langages possèdent maintenant leur propre ensemble de bibliothèques d’analyse et de visualisation de données spatiales. Ce <a href="https://gisgeography.com/python-libraries-gis-mapping/">site</a> documente les bibliothèques utiles en Python.</p>
-<p>Dans le cadre de ce cours, nous utiliserons R en combinaison avec <a href="https://www.rstudio.com/">RStudio</a> qui est un environnement de développement (en anglais « integrated development environment », IDE). L’interface RStudio facilite et rend convivial l’utilisation de R. Elle permet, entre autre, de créer des fichiers de code d’extension <em>.R ou </em>.Rmd que vous pouvez réutiliser et modifier.</p>
+<p>Dans le cadre de ce cours, nous utiliserons R en combinaison avec <a href="https://www.rstudio.com/">RStudio</a> qui est un environnement de développement (en anglais « integrated development environment », IDE). L’interface RStudio facilite et rend convivial l’utilisation de R. Elle permet, entre autres, de créer des fichiers de code d’extension <em>.R ou </em>.Rmd que vous pouvez réutiliser et modifier.</p>
 <p><br></p>
 </div>
 </div>
 <div id="outil_R" class="section level3 hasAnchor" number="1.1.3">
 <h3><span class="header-section-number">1.1.3</span> Les bibliothèques géo-spatiales de R<a href="lecon_intro.html#outil_R" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Il existe un nombre important de bibliothèques R (« packages » en anglais) qui se concentrent sur différents aspects de la manipulation, de l’analyse et de la visualisation de données spatiales. D’autres bibliothèques plus générales, comme <code>base R</code> et <code>ggplot2</code> peuvent aussi être utilisées sur des données spatiales pour accomplir certaines fonctions.</p>
-<p>La communauté R est très active, de nouvelles bibliothèques sont régulièrement offertes alors les bibliothèques existantes sont mises à jour et améliorer constamment. Ceci est également vrai pour la « communauté R spatiale ». R étant un projet ouvert, tout le monde peut créer des bibliothèques, ou signalez des problèmes afin d’améliorer des bibliothèques existantes. Vous aussi!</p>
+<p>La communauté R est très active, de nouvelles bibliothèques sont régulièrement offertes alors les bibliothèques existantes sont mises à jour et améliorées constamment. Ceci est également vrai pour la « communauté R spatiale ». R étant un projet ouvert, tout le monde peut créer des bibliothèques, ou signalez des problèmes afin d’améliorer des bibliothèques existantes. Vous aussi!</p>
 <p>Vous trouverez sur le site de <a href="https://cran.r-project.org/">CRAN</a> (The Comprehensive R Archive Network) une page dédiée aux <a href="https://cran.r-project.org/web/views/Spatial.html">bibliothèques R pour l’analyse géo-spatiale</a>.</p>
 <p>Voici quelques bibliothèques importantes que nous utiliserons dans ce cours :</p>
 <ul>
-<li><a href="https://r-spatial.github.io/sf/"><code>sf</code></a>: bibliothèque incontournable offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux vectoriels de différentes classes. sf est relativement récente et est venue remplacer les bibliothèques <code>sp</code>, <code>rgeos</code> et les parties vectorielles de <code>rdgal</code>.</li>
+<li><a href="https://r-spatial.github.io/sf/"><code>sf</code></a>: bibliothèque incontournable offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux vectoriels de différentes classes. sf est relativement récente et est venue remplacer les bibliothèques <code>sp</code>, <code>rgeos</code> et les parties vectorielles de <code>rgdal</code>.</li>
 <li><a href="https://cran.r-project.org/web/packages/raster/index.html"><code>raster</code></a>: bibliothèque offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux matriciels. Notez que la bibliothèque <a href="https://rspatial.github.io/terra/reference/terra-package.html"><code>terra</code></a> remplacera peut-être <code>raster</code> dans les années à venir.</li>
-<li><a href="https://cran.r-project.org/web/packages/spacetime/index.html"><code>spacetime</code></a>: bibliothèque offrant des fonctions pour manipuler des objets spatiaux-temporels.</li>
-<li><a href="https://r-spatial.github.io/mapview/"><code>mapview</code></a>: bibliothèque offrant des fonctions pour visualiser rapidement et de façon interactives des données spatiales.</li>
+<li><a href="https://cran.r-project.org/web/packages/spacetime/index.html"><code>spacetime</code></a>: bibliothèque offrant des fonctions pour manipuler des objets spatio-temporels.</li>
+<li><a href="https://r-spatial.github.io/mapview/"><code>mapview</code></a>: bibliothèque offrant des fonctions pour visualiser rapidement et de façon interactive des données spatiales.</li>
 <li><a href="https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html"><code>tmap</code></a> : bibliothèque offrant des fonctions plus flexibles pour visualiser des données spatiales. Elle utilise un style qui s’apparente à <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a>.</li>
 </ul>
 <p><br></p>
@@ -900,19 +904,19 @@ FIGURE 1.21: La résolution à laquelle on observe un phénomène spatial.
 </div>
 <div id="contiguïté" class="section level4 unnumbered hasAnchor">
 <h4>Contiguïté<a href="lecon_intro.html#contiguïté" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>La contiguïté, aussi appelée l’adjacence, indique la proximité de deux ou plusieurs objets spatiaux. C’est, en quelque sorte, une mesure binaire de distance : l’objet A est près, oui ou non, de l’objet B <span class="citation">(<a href="ressources.html#ref-OSullivanUnwin_2010" role="doc-biblioref">O’Sullivan and Unwin 2010</a>)</span>. La contiguïté est donc un concept relatif à la façon dont on détermine si un objet est proche d’un autre. Par exemple, deux pays qui partagent une même frontière pourront être qualifiés de contiguës. Dans d’autres cas, nous pourrions considérer une distance maximale fixe (p. ex. 50 km) et déterminer que tous les objets (p.ex. des villes) séparés par une distance moindre que la distance fixée sont contiguës. Nous pourrions également déterminer que les cinq (ou un autre nombre fixe) objets les plus proches d’un autre sont contiguës peu importe la distance qui les sépare.</p>
+<p>La contiguïté, aussi appelée l’adjacence, indique la proximité de deux ou plusieurs objets spatiaux. C’est, en quelque sorte, une mesure binaire de distance : l’objet A est près, oui ou non, de l’objet B <span class="citation">(<a href="ressources.html#ref-OSullivanUnwin_2010" role="doc-biblioref">O’Sullivan and Unwin 2010</a>)</span>. La contiguïté est donc un concept relatif à la façon dont on détermine si un objet est proche d’un autre. Par exemple, deux pays qui partagent une même frontière pourront être qualifiés de contigus. Dans d’autres cas, nous pourrions considérer une distance maximale fixe (p. ex. 50 km) et déterminer que tous les objets (p.ex. des villes) séparés par une distance moindre que la distance fixée sont contigus. Nous pourrions également déterminer que les cinq (ou un autre nombre fixe) objets les plus proches d’un autre sont contigus peu importe la distance qui les sépare.</p>
 <p><br></p>
 </div>
 <div id="interaction" class="section level4 unnumbered hasAnchor">
 <h4>Interaction<a href="lecon_intro.html#interaction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>L’interaction spatiale entre deux objets repose également sur le concept de distance. Elle exprime la notion intuitive que tous les objets sont en interaction mais ceux qui sont proches ont plus de chance d’interagir que ceux qui sont distants. On réfère à cette notion comme étant la « première loi » de la géographie et on l’attribut au géographe Waldo Tobler. En anglais, cette loi s’énonce ainsi : « Everything is related to everything, but near things are more related than distant things » <span class="citation">(<a href="ressources.html#ref-Tobler_1970" role="doc-biblioref">Tobler 1970</a>)</span>.</p>
+<p>L’interaction spatiale entre deux objets repose également sur le concept de distance. Elle exprime la notion intuitive que tous les objets sont en interaction, mais ceux qui sont proches ont plus de chance d’interagir que ceux qui sont distants. On réfère à cette notion comme étant la « première loi » de la géographie et on l’attribue au géographe Waldo Tobler. En anglais, cette loi s’énonce ainsi : « Everything is related to everything, but near things are more related than distant things » <span class="citation">(<a href="ressources.html#ref-Tobler_1970" role="doc-biblioref">Tobler 1970</a>)</span>.</p>
 <p>L’interaction entre deux objets se mesure généralement par une fonction allant de 0 (aucune interaction) à 1 (interaction maximale). Cette fonction est inversement proportionnelle à la distance séparant les deux objets de sorte que plus la distance est petite plus l’interaction est forte <span class="citation">(<a href="ressources.html#ref-OSullivanUnwin_2010" role="doc-biblioref">O’Sullivan and Unwin 2010</a>)</span>. D’autres facteurs peuvent influencer la façon dont on mesure l’interaction comme la taille des objets.</p>
-<p>L’interaction est étroitement liée aux concepts de dépendance spatiale et d’autocorrélation spatiale <span class="citation">(<a href="ressources.html#ref-dale_fortin_2014" role="doc-biblioref">Dale and Fortin 2014</a>)</span>. La dépendance spatiale est l’absence d’indépendance entre des objets rapprochés. Puisque l’assomption d’indépendance des données est requise pour réaliser de nombreux tests statistiques paramétriques il est important de pouvoir déterminer la présence de dépendance spatiale. L’autocorrélation spatiale réfère à la corrélation spatiale entre les valeurs d’une même variable. Par exemple, la température à un emplacement sera corrélée avec la température à des emplacements voisins. Il existe différentes mesures pour déterminer la dépendance et l’autocorrélation spatiale. Dans le cadre de ce cours, nous n’aborderons pas ces mesures plus poussées d’analyse spatiale.</p>
+<p>L’interaction est étroitement liée aux concepts de dépendance spatiale et d’autocorrélation spatiale <span class="citation">(<a href="ressources.html#ref-dale_fortin_2014" role="doc-biblioref">Dale and Fortin 2014</a>)</span>. La dépendance spatiale est l’absence d’indépendance entre des objets rapprochés. Puisque l’assomption d’indépendance des données est requise pour réaliser de nombreux tests statistiques paramétriques, il est important de pouvoir déterminer la présence de dépendance spatiale. L’autocorrélation spatiale réfère à la corrélation spatiale entre les valeurs d’une même variable. Par exemple, la température à un emplacement sera corrélée avec la température à des emplacements voisins. Il existe différentes mesures pour déterminer la dépendance et l’autocorrélation spatiale. Dans le cadre de ce cours, nous n’aborderons pas ces mesures plus poussées d’analyse spatiale.</p>
 <p><br></p>
 </div>
 <div id="voisinage" class="section level4 unnumbered hasAnchor">
 <h4>Voisinage<a href="lecon_intro.html#voisinage" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Le voisinage est aussi un concept relatif qui peut se décrire de différentes façons. Un voisinage peut être défini en fonction d’un objet spatial particulier. Le voisinage est alors constitué des objets spatiaux qui sont adjacents à l’objet spatial d’intérêt. Par exemple, les cadastres limitrophes d’une propriété donnée, ou encore les bâtiments dans un rayon de 500 m autour d’une borne fontaine. Un voisinage peut aussi prendre un sens qui s’apparente à la notion de quartier. Un voisinage est alors défini comme une région qui entoure des objets spatiaux similaires, et qui se distincte d’autres régions qui circonscrivent également des objets similaires.</p>
+<p>Le voisinage est aussi un concept relatif qui peut se décrire de différentes façons. Un voisinage peut être défini en fonction d’un objet spatial particulier. Le voisinage est alors constitué des objets spatiaux qui sont adjacents à l’objet spatial d’intérêt. Par exemple, les cadastres limitrophes d’une propriété donnée, ou encore les bâtiments dans un rayon de 500 m autour d’une borne-fontaine. Un voisinage peut aussi prendre un sens qui s’apparente à la notion de quartier. Un voisinage est alors défini comme une région qui entoure des objets spatiaux similaires, et qui se distincte d’autres régions qui circonscrivent également des objets similaires.</p>
 <p><br></p>
 </div>
 </div>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.2 Exercices | SCI 1031 Visualisation et analyse de données spatiales sous R</title>
   <meta name="description" content="Ce cours est une introduction à la visualisation et l’analyse de données spatiales sous R. Il est offert à la TÉLUQ sous le sigle SCI 1031." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.2 Exercices | SCI 1031 Visualisation et analyse de données spatiales sous R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2023-03-10" />
+<meta name="date" content="2023-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,14 +54,14 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -69,52 +69,52 @@
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 <script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<script src="libs/M_a0ec98-1/data_stars_M368ed4.txt"></script>
+<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
+<script src="libs/M_0e239f-1/data_stars_M1fbd2c.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/M_logique_numeric_502691-1/data_stars_M_logique_numeric90d73b.txt"></script>
-<script src="libs/M_factor_d07e63-1/data_stars_M_factor643e81.txt"></script>
-<script src="libs/ICU_a268cb-1/data_stars_ICUaf3819.txt"></script>
-<script src="libs/ICU_24c69f-1/data_stars_ICU5f1986.txt"></script>
-<script src="libs/T_sec_fa8de0-1/data_stars_T_sec1ec368.txt"></script>
-<script src="libs/T_fact4_moy_3d06ab-1/data_stars_T_fact4_moy2567e1.txt"></script>
-<script src="libs/T_fact4_max_d40631-1/data_stars_T_fact4_maxbdc385.txt"></script>
-<script src="libs/T_fact8_moy_17d0a8-1/data_stars_T_fact8_moycd8f43.txt"></script>
-<script src="libs/T_fact8_max_fb912e-1/data_stars_T_fact8_max97ef82.txt"></script>
-<script src="libs/SR_28fd57-1/data_stars_SR0ed653.txt"></script>
-<script src="libs/SG_37198c-1/data_stars_SGae123d.txt"></script>
-<script src="libs/SB_da8234-1/data_stars_SB80b2f7.txt"></script>
-<script src="libs/R2001f_2d6bf3-1/data_stars_R2001fef139c.txt"></script>
-<script src="libs/R2001f_6fb841-1/data_stars_R2001f859e0c.txt"></script>
-<script src="libs/R2016f_fb215d-1/data_stars_R2016f3fa042.txt"></script>
-<script src="libs/dem_9cb70f-1/data_stars_dema85634.txt"></script>
-<script src="libs/nouvelles_classes_dem_cd0bf7-1/data_stars_nouvelles_classes_dem1e5620.txt"></script>
-<script src="libs/reclassify(dem, nouvelles_classes2)_f18230-1/data_stars_reclassifydemnouvelles_classes27d62ac.txt"></script>
-<script src="libs/dem_cr_a0496c-1/data_stars_dem_cr0fe3b4.txt"></script>
-<script src="libs/dem_cr_p_1f8926-1/data_stars_dem_cr_p502379.txt"></script>
-<script src="libs/dem_7b9a85-1/data_stars_dem570a91.txt"></script>
-<script src="libs/dem_ma_2c6b57-1/data_stars_dem_ma81795e.txt"></script>
-<script src="libs/dem_ma_inv_c4153d-1/data_stars_dem_ma_inv6319ac.txt"></script>
-<script src="libs/dem_ma_82b316-1/data_stars_dem_ma63947a.txt"></script>
-<script src="libs/dem_ma_inv_26bfae-1/data_stars_dem_ma_invb4e0c3.txt"></script>
-<script src="libs/dem_merge_1e45d7-1/data_stars_dem_merge79fed4.txt"></script>
-<script src="libs/dem_merge_ordre1_36ce1d-1/data_stars_dem_merge_ordre1087594.txt"></script>
-<script src="libs/dem_merge_ordre2_92568f-1/data_stars_dem_merge_ordre2c817d0.txt"></script>
-<script src="libs/dem_mosaic_min_781f34-1/data_stars_dem_mosaic_mincbd1a0.txt"></script>
-<script src="libs/dem_mosaic_max_06718b-1/data_stars_dem_mosaic_maxc2ea48.txt"></script>
-<script src="libs/dem_mosaic_mean_372465-1/data_stars_dem_mosaic_meana0bd78.txt"></script>
-<script src="libs/dem_parcs_839a06-1/data_stars_dem_parcseaf0c6.txt"></script>
-<script src="libs/dem_parcs_6f4da2-1/data_stars_dem_parcs54afbe.txt"></script>
-<script src="libs/dem_orford_356890-1/data_stars_dem_orfordca693b.txt"></script>
-<script src="libs/dem_orford_045619-1/data_stars_dem_orford27a40f.txt"></script>
-<script src="libs/dem_orford_quantile_fead09-1/data_stars_dem_orford_quantiled76294.txt"></script>
-<script src="libs/dem_orford_quantile_40e537-1/data_stars_dem_orford_quantile5c3bd1.txt"></script>
-<script src="libs/dem_tampon_max_4f5a83-1/data_stars_dem_tampon_max9e5c17.txt"></script>
-<script src="libs/X1_1d3abf-1/data_stars_X1d90bfe.txt"></script>
-<script src="libs/X2_50d36a-1/data_stars_X27c64e0.txt"></script>
-<script src="libs/X3_2eb618-1/data_stars_X3c8b20f.txt"></script>
+<script src="libs/M_logique_numeric_064c7b-1/data_stars_M_logique_numerica15e23.txt"></script>
+<script src="libs/M_factor_c0d142-1/data_stars_M_factor8f5a4e.txt"></script>
+<script src="libs/ICU_4201e7-1/data_stars_ICU3e6084.txt"></script>
+<script src="libs/ICU_f804bd-1/data_stars_ICUb86407.txt"></script>
+<script src="libs/T_sec_95de26-1/data_stars_T_secb5e10a.txt"></script>
+<script src="libs/T_fact4_moy_b0a75d-1/data_stars_T_fact4_moy01b49d.txt"></script>
+<script src="libs/T_fact4_max_a4dbe0-1/data_stars_T_fact4_max24e58a.txt"></script>
+<script src="libs/T_fact8_moy_96c25d-1/data_stars_T_fact8_moy287ec6.txt"></script>
+<script src="libs/T_fact8_max_930d6a-1/data_stars_T_fact8_max91c5b3.txt"></script>
+<script src="libs/SR_9a284d-1/data_stars_SR1320fe.txt"></script>
+<script src="libs/SG_5f43c6-1/data_stars_SG8b40e1.txt"></script>
+<script src="libs/SB_71e86d-1/data_stars_SB523abe.txt"></script>
+<script src="libs/R2001f_eabf98-1/data_stars_R2001f538d1a.txt"></script>
+<script src="libs/R2001f_16af0e-1/data_stars_R2001f873025.txt"></script>
+<script src="libs/R2016f_231ea6-1/data_stars_R2016f739805.txt"></script>
+<script src="libs/dem_5d974f-1/data_stars_dem027be6.txt"></script>
+<script src="libs/nouvelles_classes_dem_68da5b-1/data_stars_nouvelles_classes_dema2649f.txt"></script>
+<script src="libs/reclassify(dem, nouvelles_classes2)_c802ea-1/data_stars_reclassifydemnouvelles_classes2580416.txt"></script>
+<script src="libs/dem_cr_17ace0-1/data_stars_dem_cr80c592.txt"></script>
+<script src="libs/dem_cr_p_e91645-1/data_stars_dem_cr_p0a4c71.txt"></script>
+<script src="libs/dem_da8f57-1/data_stars_dem5a4708.txt"></script>
+<script src="libs/dem_ma_4c36a2-1/data_stars_dem_mab389fc.txt"></script>
+<script src="libs/dem_ma_inv_103485-1/data_stars_dem_ma_invf9bc84.txt"></script>
+<script src="libs/dem_ma_36e729-1/data_stars_dem_maa9d462.txt"></script>
+<script src="libs/dem_ma_inv_b6f38e-1/data_stars_dem_ma_inv43d672.txt"></script>
+<script src="libs/dem_merge_365a29-1/data_stars_dem_merge4216d8.txt"></script>
+<script src="libs/dem_merge_ordre1_96d215-1/data_stars_dem_merge_ordre1d08921.txt"></script>
+<script src="libs/dem_merge_ordre2_703be8-1/data_stars_dem_merge_ordre202e136.txt"></script>
+<script src="libs/dem_mosaic_min_2efb43-1/data_stars_dem_mosaic_min3e0b86.txt"></script>
+<script src="libs/dem_mosaic_max_65c470-1/data_stars_dem_mosaic_max9a0634.txt"></script>
+<script src="libs/dem_mosaic_mean_e4c1f3-1/data_stars_dem_mosaic_mean3ecfd1.txt"></script>
+<script src="libs/dem_parcs_6a0532-1/data_stars_dem_parcsb3a087.txt"></script>
+<script src="libs/dem_parcs_07fa46-1/data_stars_dem_parcs47d85e.txt"></script>
+<script src="libs/dem_orford_3e1459-1/data_stars_dem_orfordde0fb8.txt"></script>
+<script src="libs/dem_orford_ea69b3-1/data_stars_dem_orford21536f.txt"></script>
+<script src="libs/dem_orford_quantile_71e2b9-1/data_stars_dem_orford_quantilec934df.txt"></script>
+<script src="libs/dem_orford_quantile_7d5e40-1/data_stars_dem_orford_quantile2fb903.txt"></script>
+<script src="libs/dem_tampon_max_f4c63e-1/data_stars_dem_tampon_maxec8460.txt"></script>
+<script src="libs/X1_cd47e1-1/data_stars_X1ca9df2.txt"></script>
+<script src="libs/X2_238d9c-1/data_stars_X22d043b.txt"></script>
+<script src="libs/X3_c03a9b-1/data_stars_X37cf429.txt"></script>
 
 
 <style type="text/css">
@@ -181,6 +181,10 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -618,11 +622,11 @@ div.csl-indent {
 <div id="ex_carto" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Exercices<a href="ex_carto.html#ex_carto" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Dans cette section, vous mettrez en pratique certains concepts vus dans la section <a href="carto.html#carto">leçon</a> de ce module.
-Bien que la réponse à chaque question soit disponible, il est <strong>très important</strong> de tenter d’y répondre par vous même!</p>
+Bien que la réponse à chaque question soit disponible, il est <strong>très important</strong> de tenter d’y répondre par vous-même!</p>
 <p>Cette série d’exercices utilise des données comprises avec la bibliothèque <code>tmap</code>. En particulier, vous utiliserez les données <code>World</code>, <code>metro</code>, et <code>land</code>. Charger ces données dans votre session <code>R</code>:</p>
-<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="ex_carto.html#cb709-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(World)</span>
-<span id="cb709-2"><a href="ex_carto.html#cb709-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(metro)</span>
-<span id="cb709-3"><a href="ex_carto.html#cb709-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(land)</span></code></pre></div>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="ex_carto.html#cb714-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(World)</span>
+<span id="cb714-2"><a href="ex_carto.html#cb714-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(metro)</span>
+<span id="cb714-3"><a href="ex_carto.html#cb714-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(land)</span></code></pre></div>
 <p><br></p>
 <div id="question-1-4" class="section level3 unnumbered hasAnchor">
 <h3>Question 1<a href="ex_carto.html#question-1-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -633,7 +637,7 @@ Réponse
 </summary>
 <p>
 <p>La géométrie est donnée par la fonction <code>st_geometry()</code> de la bibliothèque <code>sf</code>.</p>
-<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="ex_carto.html#cb710-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(World)</span></code></pre></div>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb715-1"><a href="ex_carto.html#cb715-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(World)</span></code></pre></div>
 <pre class="codeout"><code>Geometry set for 177 features 
 Geometry type: MULTIPOLYGON
 Dimension:     XY
@@ -647,7 +651,7 @@ First 5 geometries:</code></pre>
 <pre><code>MULTIPOLYGON (((-65.5 -55.2, -66.45 -55.25, -66...</code></pre>
 <p><br>
 Les données <code>World</code> sont donc des multipolygones. Chaque multipolygone correspond à un pays de la planète. Nous pouvons connaître le nom des attributs en utilisant la fonction <code>names()</code></p>
-<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb717-1"><a href="ex_carto.html#cb717-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(World)</span></code></pre></div>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="ex_carto.html#cb722-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(World)</span></code></pre></div>
 <pre class="codeout"><code> [1] &quot;iso_a3&quot;       &quot;name&quot;         &quot;sovereignt&quot;  
  [4] &quot;continent&quot;    &quot;area&quot;         &quot;pop_est&quot;     
  [7] &quot;pop_est_dens&quot; &quot;economy&quot;      &quot;income_grp&quot;  
@@ -666,7 +670,7 @@ Les données <code>World</code> sont donc des multipolygones. Chaque multipolygo
 Réponse
 </summary>
 <p>
-<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="ex_carto.html#cb719-1" aria-hidden="true" tabindex="-1"></a>World[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">&quot;iso_a3&quot;</span>, <span class="st">&quot;name&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="ex_carto.html#cb724-1" aria-hidden="true" tabindex="-1"></a>World[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">&quot;iso_a3&quot;</span>, <span class="st">&quot;name&quot;</span>)]</span></code></pre></div>
 <pre class="codeout"><code>Simple feature collection with 10 features and 2 fields
 Geometry type: MULTIPOLYGON
 Dimension:     XY
@@ -706,10 +710,10 @@ Geodetic CRS:  WGS 84
 Réponse
 </summary>
 <p>
-<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="ex_carto.html#cb721-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(World) <span class="sc">+</span> <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;name&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb721-2"><a href="ex_carto.html#cb721-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="sc">+</span>                             </span>
-<span id="cb721-3"><a href="ex_carto.html#cb721-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-275-1.png" width="720" style="display: block; margin: auto;" />
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="ex_carto.html#cb726-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(World) <span class="sc">+</span> <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;name&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb726-2"><a href="ex_carto.html#cb726-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="sc">+</span>                             </span>
+<span id="cb726-3"><a href="ex_carto.html#cb726-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-276-1.png" width="720" style="display: block; margin: auto;" />
 <br></p>
 <p>Vous devriez voir afficher un message d’erreur quant au nombre de pays dépassant le nombre maximal de couleurs pouvant être illustrées. Ceci a peu de conséquences pour cette carte puisque peu de pays adjacents ont la même couleur et que ceux-ci sont délimités par des bordures noires nous permettant de les distinguer.</p>
 <br>
@@ -723,19 +727,19 @@ Réponse
 </summary>
 <p>
 <p>Isoler le continent africain:</p>
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="ex_carto.html#cb722-1" aria-hidden="true" tabindex="-1"></a>Afrique <span class="ot">&lt;-</span> World[World<span class="sc">$</span>continent <span class="sc">==</span> <span class="st">&quot;Africa&quot;</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="ex_carto.html#cb727-1" aria-hidden="true" tabindex="-1"></a>Afrique <span class="ot">&lt;-</span> World[World<span class="sc">$</span>continent <span class="sc">==</span> <span class="st">&quot;Africa&quot;</span>,]</span></code></pre></div>
 <p><br></p>
 <p>Produire une carte de l’Afrique avec le style <code>col_blind</code> et sans légende.</p>
-<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="ex_carto.html#cb723-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Afrique) <span class="sc">+</span> <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;name&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb723-2"><a href="ex_carto.html#cb723-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="sc">+</span>                             </span>
-<span id="cb723-3"><a href="ex_carto.html#cb723-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-277-1.png" width="720" style="display: block; margin: auto;" />
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="ex_carto.html#cb728-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Afrique) <span class="sc">+</span> <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;name&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb728-2"><a href="ex_carto.html#cb728-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="sc">+</span>                             </span>
+<span id="cb728-3"><a href="ex_carto.html#cb728-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-278-1.png" width="720" style="display: block; margin: auto;" />
 <br></p>
 <p>Notez que la bibliothèque <code>tmap</code> permet de minimiser le nombre de polygones adjacents illustrés avec la même couleur. Pour se faire, il s’agit de définir <code>col = MAP_COLORS</code> en argument à la fonction <code>tm_polygons()</code>.</p>
-<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="ex_carto.html#cb724-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Afrique) <span class="sc">+</span> <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;MAP_COLORS&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb724-2"><a href="ex_carto.html#cb724-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="sc">+</span>                             </span>
-<span id="cb724-3"><a href="ex_carto.html#cb724-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-278-1.png" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="ex_carto.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Afrique) <span class="sc">+</span> <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;MAP_COLORS&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb729-2"><a href="ex_carto.html#cb729-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="sc">+</span>                             </span>
+<span id="cb729-3"><a href="ex_carto.html#cb729-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-279-1.png" width="720" style="display: block; margin: auto;" /></p>
 <br>
 </p>
 </details>
@@ -747,11 +751,11 @@ Réponse
 </summary>
 <p>
 <p>Nous reprenons d’abord la carte de l’Afrique produire en <strong>d</strong>. Puis, nous ajoutons le code “iso_a3” des pays en utilisant la fonction <code>tm_text()</code>:</p>
-<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb725-1"><a href="ex_carto.html#cb725-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Afrique) <span class="sc">+</span> <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;MAP_COLORS&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb725-2"><a href="ex_carto.html#cb725-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="sc">+</span>                             </span>
-<span id="cb725-3"><a href="ex_carto.html#cb725-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb725-4"><a href="ex_carto.html#cb725-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_text</span>(<span class="st">&quot;iso_a3&quot;</span>, <span class="at">size =</span> <span class="fl">0.6</span>)</span></code></pre></div>
-<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-279-1.png" width="720" style="display: block; margin: auto;" />
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="ex_carto.html#cb730-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Afrique) <span class="sc">+</span> <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;MAP_COLORS&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb730-2"><a href="ex_carto.html#cb730-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>) <span class="sc">+</span>                             </span>
+<span id="cb730-3"><a href="ex_carto.html#cb730-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_layout</span>(<span class="at">legend.show =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb730-4"><a href="ex_carto.html#cb730-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">tm_text</span>(<span class="st">&quot;iso_a3&quot;</span>, <span class="at">size =</span> <span class="fl">0.6</span>)</span></code></pre></div>
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-280-1.png" width="720" style="display: block; margin: auto;" />
 <br>
 </p>
 </details>
@@ -763,18 +767,18 @@ Réponse
 </summary>
 <p>
 <p>Dans un premier temps, nous devons isoler les pays de l’Amérique du Sud.</p>
-<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="ex_carto.html#cb726-1" aria-hidden="true" tabindex="-1"></a>AS <span class="ot">&lt;-</span> World[World<span class="sc">$</span>continent <span class="sc">==</span> <span class="st">&quot;South America&quot;</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb731-1"><a href="ex_carto.html#cb731-1" aria-hidden="true" tabindex="-1"></a>AS <span class="ot">&lt;-</span> World[World<span class="sc">$</span>continent <span class="sc">==</span> <span class="st">&quot;South America&quot;</span>,]</span></code></pre></div>
 <p><br></p>
 <p>Ensuite, nous devons créer la palette de couleur avec la fonction <code>brewer.pal()</code>. Puisque le style <code>quantile</code> sépare les valeurs de densité en cinq classes, la palette doit comprendre cinq couleurs.</p>
-<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="ex_carto.html#cb727-1" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="st">&quot;Reds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="ex_carto.html#cb732-1" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">5</span>, <span class="st">&quot;Reds&quot;</span>)</span></code></pre></div>
 <p><br></p>
 <p>Nous pouvons maintenant produire la carte:</p>
-<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="ex_carto.html#cb728-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(AS) <span class="sc">+</span> </span>
-<span id="cb728-2"><a href="ex_carto.html#cb728-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;pop_est_dens&quot;</span>,</span>
-<span id="cb728-3"><a href="ex_carto.html#cb728-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> pal,</span>
-<span id="cb728-4"><a href="ex_carto.html#cb728-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">style =</span> <span class="st">&quot;quantile&quot;</span>,</span>
-<span id="cb728-5"><a href="ex_carto.html#cb728-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">&quot;Densité de population&quot;</span>) </span></code></pre></div>
-<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-282-1.png" width="720" style="display: block; margin: auto;" />
+<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="ex_carto.html#cb733-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(AS) <span class="sc">+</span> </span>
+<span id="cb733-2"><a href="ex_carto.html#cb733-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;pop_est_dens&quot;</span>,</span>
+<span id="cb733-3"><a href="ex_carto.html#cb733-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> pal,</span>
+<span id="cb733-4"><a href="ex_carto.html#cb733-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">style =</span> <span class="st">&quot;quantile&quot;</span>,</span>
+<span id="cb733-5"><a href="ex_carto.html#cb733-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">&quot;Densité de population&quot;</span>) </span></code></pre></div>
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-283-1.png" width="720" style="display: block; margin: auto;" />
 <br>
 </p>
 </details>
@@ -791,16 +795,16 @@ Réponse
 </summary>
 <p>
 <p>Nous utilisons la fonction <code>tm_facets()</code> pour produire une carte à panneaux multiples:</p>
-<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="ex_carto.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(AS) <span class="sc">+</span> </span>
-<span id="cb729-2"><a href="ex_carto.html#cb729-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;pop_est_dens&quot;</span>,</span>
-<span id="cb729-3"><a href="ex_carto.html#cb729-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> pal,</span>
-<span id="cb729-4"><a href="ex_carto.html#cb729-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">style =</span> <span class="st">&quot;quantile&quot;</span>,</span>
-<span id="cb729-5"><a href="ex_carto.html#cb729-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">&quot;Densité de population&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb729-6"><a href="ex_carto.html#cb729-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_facets</span>(<span class="at">by =</span> <span class="st">&quot;name&quot;</span>,</span>
-<span id="cb729-7"><a href="ex_carto.html#cb729-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="dv">4</span>,</span>
-<span id="cb729-8"><a href="ex_carto.html#cb729-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">scale.factor =</span> <span class="dv">5</span></span>
-<span id="cb729-9"><a href="ex_carto.html#cb729-9" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-283-1.png" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="ex_carto.html#cb734-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(AS) <span class="sc">+</span> </span>
+<span id="cb734-2"><a href="ex_carto.html#cb734-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;pop_est_dens&quot;</span>,</span>
+<span id="cb734-3"><a href="ex_carto.html#cb734-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> pal,</span>
+<span id="cb734-4"><a href="ex_carto.html#cb734-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">style =</span> <span class="st">&quot;quantile&quot;</span>,</span>
+<span id="cb734-5"><a href="ex_carto.html#cb734-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">&quot;Densité de population&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb734-6"><a href="ex_carto.html#cb734-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_facets</span>(<span class="at">by =</span> <span class="st">&quot;name&quot;</span>,</span>
+<span id="cb734-7"><a href="ex_carto.html#cb734-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="dv">4</span>,</span>
+<span id="cb734-8"><a href="ex_carto.html#cb734-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">scale.factor =</span> <span class="dv">5</span></span>
+<span id="cb734-9"><a href="ex_carto.html#cb734-9" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-284-1.png" width="720" style="display: block; margin: auto;" /></p>
 <br>
 </p>
 </details>
@@ -810,7 +814,7 @@ Réponse
 <li>Une vignette de hauteur 2 pour chaque <em>facette</em>.</li>
 <li>Une couleur de fond blanc pour chaque vignette.</li>
 <li>Un texte de taille 0.9 sur chaque vignette.</li>
-<li>Une légende encadrée et positionnée à l’extérieure à gauche des panneaux.</li>
+<li>Une légende encadrée et positionnée à l’extérieur à gauche des panneaux.</li>
 <li>Une légende dont les chiffres sont arrondis à l’unité près, et séparés par le symbole “-”.</li>
 </ul>
 <details>
@@ -819,23 +823,23 @@ Réponse
 </summary>
 <p>
 <p>Nous devons utiliser les différents arguments de la fonction <code>tm_layout()</code> pour préciser les caractéristiques demandées.</p>
-<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="ex_carto.html#cb730-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(AS) <span class="sc">+</span> </span>
-<span id="cb730-2"><a href="ex_carto.html#cb730-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;pop_est_dens&quot;</span>,</span>
-<span id="cb730-3"><a href="ex_carto.html#cb730-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> pal,</span>
-<span id="cb730-4"><a href="ex_carto.html#cb730-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">style =</span> <span class="st">&quot;quantile&quot;</span>,</span>
-<span id="cb730-5"><a href="ex_carto.html#cb730-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">&quot;Densité de population&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb730-6"><a href="ex_carto.html#cb730-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_facets</span>(<span class="at">by =</span> <span class="st">&quot;name&quot;</span>,</span>
-<span id="cb730-7"><a href="ex_carto.html#cb730-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="dv">4</span>,</span>
-<span id="cb730-8"><a href="ex_carto.html#cb730-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">scale.factor =</span> <span class="dv">5</span></span>
-<span id="cb730-9"><a href="ex_carto.html#cb730-9" aria-hidden="true" tabindex="-1"></a>            )<span class="sc">+</span></span>
-<span id="cb730-10"><a href="ex_carto.html#cb730-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">panel.label.height =</span> <span class="dv">2</span>, </span>
-<span id="cb730-11"><a href="ex_carto.html#cb730-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">panel.label.size =</span> <span class="fl">0.9</span>,</span>
-<span id="cb730-12"><a href="ex_carto.html#cb730-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">panel.label.bg.color =</span> <span class="st">&quot;white&quot;</span>,</span>
-<span id="cb730-13"><a href="ex_carto.html#cb730-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb730-14"><a href="ex_carto.html#cb730-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside.position =</span> <span class="st">&quot;left&quot;</span>,</span>
-<span id="cb730-15"><a href="ex_carto.html#cb730-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.format =</span> <span class="fu">list</span>(<span class="at">format =</span> <span class="st">&quot;f&quot;</span>, <span class="at">digits =</span> <span class="dv">0</span>, <span class="at">text.separator =</span> <span class="st">&quot;-&quot;</span>),</span>
-<span id="cb730-16"><a href="ex_carto.html#cb730-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.frame =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-284-1.png" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="ex_carto.html#cb735-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(AS) <span class="sc">+</span> </span>
+<span id="cb735-2"><a href="ex_carto.html#cb735-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;pop_est_dens&quot;</span>,</span>
+<span id="cb735-3"><a href="ex_carto.html#cb735-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> pal,</span>
+<span id="cb735-4"><a href="ex_carto.html#cb735-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">style =</span> <span class="st">&quot;quantile&quot;</span>,</span>
+<span id="cb735-5"><a href="ex_carto.html#cb735-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">&quot;Densité de population&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb735-6"><a href="ex_carto.html#cb735-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_facets</span>(<span class="at">by =</span> <span class="st">&quot;name&quot;</span>,</span>
+<span id="cb735-7"><a href="ex_carto.html#cb735-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="dv">4</span>,</span>
+<span id="cb735-8"><a href="ex_carto.html#cb735-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">scale.factor =</span> <span class="dv">5</span></span>
+<span id="cb735-9"><a href="ex_carto.html#cb735-9" aria-hidden="true" tabindex="-1"></a>            )<span class="sc">+</span></span>
+<span id="cb735-10"><a href="ex_carto.html#cb735-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">panel.label.height =</span> <span class="dv">2</span>, </span>
+<span id="cb735-11"><a href="ex_carto.html#cb735-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">panel.label.size =</span> <span class="fl">0.9</span>,</span>
+<span id="cb735-12"><a href="ex_carto.html#cb735-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">panel.label.bg.color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb735-13"><a href="ex_carto.html#cb735-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb735-14"><a href="ex_carto.html#cb735-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside.position =</span> <span class="st">&quot;left&quot;</span>,</span>
+<span id="cb735-15"><a href="ex_carto.html#cb735-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.format =</span> <span class="fu">list</span>(<span class="at">format =</span> <span class="st">&quot;f&quot;</span>, <span class="at">digits =</span> <span class="dv">0</span>, <span class="at">text.separator =</span> <span class="st">&quot;-&quot;</span>),</span>
+<span id="cb735-16"><a href="ex_carto.html#cb735-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.frame =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-285-1.png" width="720" style="display: block; margin: auto;" /></p>
 <br>
 </p>
 </details>
@@ -851,7 +855,7 @@ Réponse
 </summary>
 <p>
 <p>Nous utilisons la fonction <code>st_geometry()</code> pour connaître la géométrie des données <code>metro</code>:</p>
-<div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb731-1"><a href="ex_carto.html#cb731-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(metro)</span></code></pre></div>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="ex_carto.html#cb736-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(metro)</span></code></pre></div>
 <pre class="codeout"><code>Geometry set for 436 features 
 Geometry type: POINT
 Dimension:     XY
@@ -867,13 +871,13 @@ First 5 geometries:</code></pre>
 <p><br></p>
 <p>Les données <code>metro</code> sont donc composées de points.</p>
 <p>Les attributs sont donnés par la fonction <code>names()</code>:</p>
-<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="ex_carto.html#cb740-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(metro)</span></code></pre></div>
+<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="ex_carto.html#cb745-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(metro)</span></code></pre></div>
 <pre class="codeout"><code> [1] &quot;name&quot;      &quot;name_long&quot; &quot;iso_a3&quot;    &quot;pop1950&quot;  
  [5] &quot;pop1960&quot;   &quot;pop1970&quot;   &quot;pop1980&quot;   &quot;pop1990&quot;  
  [9] &quot;pop2000&quot;   &quot;pop2010&quot;   &quot;pop2020&quot;   &quot;pop2030&quot;  
 [13] &quot;geometry&quot; </code></pre>
 <p><br></p>
-<p>Les différents attributs correspondent aux tailles des populations des métropoles du monde à différentes années et leur projection pour l’année 2030.</p>
+<p>Les différents attributs correspondent aux tailles des populations des métropoles du monde à différentes années et à leur projection pour l’année 2030.</p>
 <br>
 </p>
 </details>
@@ -884,7 +888,7 @@ First 5 geometries:</code></pre>
 Réponse
 </summary>
 <p>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="ex_carto.html#cb742-1" aria-hidden="true" tabindex="-1"></a>metro[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>,<span class="st">&quot;pop2020&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="ex_carto.html#cb747-1" aria-hidden="true" tabindex="-1"></a>metro[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>,<span class="st">&quot;pop2020&quot;</span>)]</span></code></pre></div>
 <pre><code>old-style crs object detected; please recreate object with a recent sf::st_crs()</code></pre>
 <pre class="codeout"><code>Simple feature collection with 10 features and 2 fields
 Geometry type: POINT
@@ -918,16 +922,16 @@ Réponse
 </summary>
 <p>
 <p>Nous utilisons la fonction <code>tm_borders()</code> pour illustrer les frontières des pays, puis, nous utilisons la fonction <code>tm_symbols()</code> pour illustrer les métropoles.</p>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="ex_carto.html#cb745-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(World)<span class="sc">+</span></span>
-<span id="cb745-2"><a href="ex_carto.html#cb745-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col=</span><span class="st">&quot;black&quot;</span>)<span class="sc">+</span></span>
-<span id="cb745-3"><a href="ex_carto.html#cb745-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(metro)<span class="sc">+</span></span>
-<span id="cb745-4"><a href="ex_carto.html#cb745-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_symbols</span>(<span class="at">col=</span><span class="st">&quot;red&quot;</span>,</span>
-<span id="cb745-5"><a href="ex_carto.html#cb745-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">border.col =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb745-6"><a href="ex_carto.html#cb745-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="st">&quot;pop2020&quot;</span>,</span>
-<span id="cb745-7"><a href="ex_carto.html#cb745-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend.size.show =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb745-8"><a href="ex_carto.html#cb745-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend.size.is.portrait =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb745-9"><a href="ex_carto.html#cb745-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">title.size =</span> <span class="st">&quot;Population&quot;</span>)</span></code></pre></div>
-<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-288-1.png" width="720" style="display: block; margin: auto;" />
+<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="ex_carto.html#cb750-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(World)<span class="sc">+</span></span>
+<span id="cb750-2"><a href="ex_carto.html#cb750-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col=</span><span class="st">&quot;black&quot;</span>)<span class="sc">+</span></span>
+<span id="cb750-3"><a href="ex_carto.html#cb750-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(metro)<span class="sc">+</span></span>
+<span id="cb750-4"><a href="ex_carto.html#cb750-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_symbols</span>(<span class="at">col=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb750-5"><a href="ex_carto.html#cb750-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">border.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb750-6"><a href="ex_carto.html#cb750-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="st">&quot;pop2020&quot;</span>,</span>
+<span id="cb750-7"><a href="ex_carto.html#cb750-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend.size.show =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb750-8"><a href="ex_carto.html#cb750-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend.size.is.portrait =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb750-9"><a href="ex_carto.html#cb750-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">title.size =</span> <span class="st">&quot;Population&quot;</span>)</span></code></pre></div>
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-289-1.png" width="720" style="display: block; margin: auto;" />
 <br>
 </p>
 </details>
@@ -942,11 +946,11 @@ Réponse
 </summary>
 <p>
 <p>Nous utilisons la fonction <code>names()</code> pour déterminer le nom des couches (attributs) des données <code>land</code>:</p>
-<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="ex_carto.html#cb746-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(land)</span></code></pre></div>
+<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="ex_carto.html#cb751-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(land)</span></code></pre></div>
 <pre class="codeout"><code>[1] &quot;cover&quot;     &quot;cover_cls&quot; &quot;trees&quot;     &quot;elevation&quot;</code></pre>
 <p><br></p>
 <p>Pour avoir plus d’informations sur l’objet <code>land</code> et connaître les facteurs possibles pour chaque attribut, nous pouvons simplement écrire <code>land</code> dans le terminal <code>R</code>:</p>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="ex_carto.html#cb748-1" aria-hidden="true" tabindex="-1"></a>land</span></code></pre></div>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="ex_carto.html#cb753-1" aria-hidden="true" tabindex="-1"></a>land</span></code></pre></div>
 <pre class="codeout"><code>stars object with 2 dimensions and 4 attributes
 attribute(s):
                cover       
@@ -975,14 +979,14 @@ attribute(s):
  NA&#39;s   :389580  
 dimension(s):
   from   to offset.xmin delta.xmax
-x    1 1080        -180   0.333333
-y    1  540          90  -0.333333
+x    1 1080        -180      0.333
+y    1  540          90     -0.333
                         refsys point x/y
 x +proj=longlat +ellps=WGS8...  NULL [x]
 y +proj=longlat +ellps=WGS8...  NULL [y]</code></pre>
 <p><br></p>
 <p>La couche <code>cover</code> illustre la couverture terrestre et comprend 20 catégories différentes.</p>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="ex_carto.html#cb750-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(land<span class="sc">$</span>cover)</span></code></pre></div>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="ex_carto.html#cb755-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(land<span class="sc">$</span>cover)</span></code></pre></div>
 <pre class="codeout"><code> [1] &quot;Broadleaf Evergreen Forest&quot;          
  [2] &quot;Broadleaf Deciduous Forest&quot;          
  [3] &quot;Needleleaf Evergreen Forest&quot;         
@@ -1005,7 +1009,7 @@ y +proj=longlat +ellps=WGS8...  NULL [y]</code></pre>
 [20] &quot;Water bodies&quot;                        </code></pre>
 <p><br></p>
 <p>La couche <code>cover_cls</code> illustre de façon simplifiée la couverture terrestre en regroupant les 20 catégories précédentes en 8 catégories différentes.</p>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="ex_carto.html#cb752-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(land<span class="sc">$</span>cover_cls)</span></code></pre></div>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="ex_carto.html#cb757-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(land<span class="sc">$</span>cover_cls)</span></code></pre></div>
 <pre class="codeout"><code>[1] &quot;Forest&quot;                     
 [2] &quot;Other natural vegetation&quot;   
 [3] &quot;Cropland&quot;                   
@@ -1023,8 +1027,8 @@ y +proj=longlat +ellps=WGS8...  NULL [y]</code></pre>
 <p><strong>b)</strong> Utiliser la palette de couleur <code>Greens</code> de la bibliothèque <code>RColorBrewer</code> pour produire une carte du pourcentage de couvert forestier. De plus, la carte doit comprendre les éléments suivants:</p>
 <ul>
 <li>Six classes de pourcentage de couvert.</li>
-<li>Un titre principal “Pourcentage de courvert forestier” de taille 1.</li>
-<li>Une légende extérieure à la carte, située sous la carte, horizonale et sans titre.</li>
+<li>Un titre principal “Pourcentage de couvert forestier” de taille 1.</li>
+<li>Une légende extérieure à la carte, située sous la carte, horizontale et sans titre.</li>
 <li>Une légende dont les chiffres sont séparés par le symbole “-”.</li>
 </ul>
 <details>
@@ -1033,18 +1037,18 @@ Réponse
 </summary>
 <p>
 <p>Nous utilisons la fonction <code>tm_raster()</code> pour illustrer la couche <code>trees</code> de l’objet <code>land</code>. De plus, nous utilisons la fonction <code>brewer.pal()</code> de la bibliothèque <code>RColorBrewer</code> pour définir la palette de couleur. Finalement, nous utilisons les arguments de la fonction <a href="https://r-tmap.github.io/tmap/reference/tm_layout.html"><code>tm_layout()</code></a> pour spécifier les éléments demandés.</p>
-<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="ex_carto.html#cb754-1" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">=</span> <span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">6</span>, <span class="st">&quot;Greens&quot;</span>)</span>
-<span id="cb754-2"><a href="ex_carto.html#cb754-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(land) <span class="sc">+</span> </span>
-<span id="cb754-3"><a href="ex_carto.html#cb754-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_raster</span>(<span class="st">&quot;trees&quot;</span>,</span>
-<span id="cb754-4"><a href="ex_carto.html#cb754-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> pal,</span>
-<span id="cb754-5"><a href="ex_carto.html#cb754-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb754-6"><a href="ex_carto.html#cb754-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.is.portrait =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb754-7"><a href="ex_carto.html#cb754-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">&quot;Pourcentage de couvert forestier&quot;</span>,</span>
-<span id="cb754-8"><a href="ex_carto.html#cb754-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size =</span> <span class="dv">1</span>,</span>
-<span id="cb754-9"><a href="ex_carto.html#cb754-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb754-10"><a href="ex_carto.html#cb754-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb754-11"><a href="ex_carto.html#cb754-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.format =</span> <span class="fu">list</span>(<span class="at">text.separator =</span> <span class="st">&quot;-&quot;</span>))</span></code></pre></div>
-<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-293-1.png" width="720" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="ex_carto.html#cb759-1" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">=</span> <span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">6</span>, <span class="st">&quot;Greens&quot;</span>)</span>
+<span id="cb759-2"><a href="ex_carto.html#cb759-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(land) <span class="sc">+</span> </span>
+<span id="cb759-3"><a href="ex_carto.html#cb759-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_raster</span>(<span class="st">&quot;trees&quot;</span>,</span>
+<span id="cb759-4"><a href="ex_carto.html#cb759-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> pal,</span>
+<span id="cb759-5"><a href="ex_carto.html#cb759-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb759-6"><a href="ex_carto.html#cb759-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.is.portrait =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb759-7"><a href="ex_carto.html#cb759-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="st">&quot;Pourcentage de couvert forestier&quot;</span>,</span>
+<span id="cb759-8"><a href="ex_carto.html#cb759-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size =</span> <span class="dv">1</span>,</span>
+<span id="cb759-9"><a href="ex_carto.html#cb759-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb759-10"><a href="ex_carto.html#cb759-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb759-11"><a href="ex_carto.html#cb759-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.format =</span> <span class="fu">list</span>(<span class="at">text.separator =</span> <span class="st">&quot;-&quot;</span>))</span></code></pre></div>
+<p><img src="Cours_SpatialR_files/figure-html/unnamed-chunk-294-1.png" width="720" style="display: block; margin: auto;" /></p>
 <br>
 </p>
 </details>
@@ -1068,7 +1072,7 @@ tm_shape(land) +
             )
 ```
 
-<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-294-1.svg" width="720" style="display: block; margin: auto;" />
+<img src="Cours_SpatialR_files/figure-html/unnamed-chunk-295-1.svg" width="720" style="display: block; margin: auto;" />
 
 -->
 
