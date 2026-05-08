@@ -31,7 +31,7 @@ module.
 <div class="boite ico librairie gauche">
 ###### Vous utiliserez les bibliothèques suivantes: {-}
 
-- `raster`
+- `terra`
 - `mapview`
 - `leafsync`
 - `FedData`
@@ -41,22 +41,21 @@ module.
 <div class="boite ico fonctions gauche">
 ###### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
-- `raster()`
-- `getValues()`
-- `maxValue()`
-- `cellStats()`
+- `rast()`
+- `values()`
+- `global()`
 - `ncell()`
 - `res()`
-- `extent()`
+- `ext()`
+- `xFromCol()`, `yFromRow()`
 - `crs()`
 - `aggregate()`
-- `projectRaster()`
+- `project()`
 - `writeRaster()`
-- `brick()`
-- `stack()`
+- `c()`
 - `viewRGB()`
 - `mapview()` et `latticeView()`, que vous connaissez déjà.
-- `ratify()`
+- `freq()`
 
 </div>
 
@@ -119,13 +118,13 @@ Les données `Couvert_2001.tif` et `Couvert_2016.tif` correspondent à la couver
 
 Les données matricielles représentent la surface terrestre par une grille régulière, communément appelée un *raster*. Dans cette leçon, nous utiliserons les expressions «*raster*» et «données matricielles» de façon interchangeable. 
 
-Pour créer, lire et manipuler des données matricielles, nous allons utiliser la bibliothèque `raster`. Commençons par charger la bibliothèque `raster` dans notre session de travail `R`.
+Pour créer, lire et manipuler des données matricielles, nous allons utiliser la bibliothèque `terra`. Commençons par charger la bibliothèque `terra` dans notre session de travail `R`.
 
 ```{r}
 # Installez la bibliothèque si ce n'est pas déjà fait
-# install.packages("raster")
+# install.packages("terra")
 # Chargez la bibliothèque
-library(raster)
+library(terra)
 ```
 <br>
 
@@ -133,13 +132,13 @@ library(raster)
 
 Au [module 2](#base), nous avons expliqué qu'un *raster* est formé de rectangles de même forme et de même dimension appelés cellules ou pixels. À chaque cellule de cette matrice correspond une valeur numérique (ou une valeur manquante) associée à un attribut d’intérêt. On appelle couche (« layer » en anglais) l’information recueillie dans la matrice.
 
-La fonction `raster()` de la bibliothèque `raster` permet de créer un *raster*. Par exemple:
+La fonction `rast()` de la bibliothèque `terra` permet de créer un *raster*. Par exemple:
 ```{r}
-M <- raster(nrows=8, ncols=8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
+M <- rast(nrows=8, ncols=8, xmin=1, xmax=5, ymin=1, ymax=5, vals=1:64)
 ```
 <br>
 
-Où `nrows` et `ncols` correspondent respectivement au nombre de lignes et au nombre de colonnes du *raster* `M`, `xmn` et `xmx` correspondent respectivement aux coordonnées-x minimale et maximale du *raster*, `ymn` et `ymx` aux coordonnées-y minimale et maximale, et `vals` est un vecteur comprenant la valeur de chaque pixel du *raster*. Dans le cas présent, le *raster* `M` contient 64 pixels. Le premier pixel a la valeur 1, le deuxième pixel a la valeur 2 et ainsi de suite.
+Où `nrows` et `ncols` correspondent respectivement au nombre de lignes et au nombre de colonnes du *raster* `M`, `xmin` et `xmax` correspondent respectivement aux coordonnées-x minimale et maximale du *raster*, `ymin` et `ymax` aux coordonnées-y minimale et maximale, et `vals` est un vecteur comprenant la valeur de chaque pixel du *raster*. Dans le cas présent, le *raster* `M` contient 64 pixels. Le premier pixel a la valeur 1, le deuxième pixel a la valeur 2 et ainsi de suite.
 
 Voyons les informations données, lorsque nous appelons le *raster* `M` que nous venons de créer:
 
@@ -152,14 +151,14 @@ Nous remarquons que des informations additionnelles apparaissent: `ncell` corres
 
 Si le SCR d'un *raster* n'est pas défini au moment de sa création, comme dans le cas présent, alors le SCR WGS84 sera attribué par défaut.
 
-Remarquez que la classe (`class`) de l'objet `M` est définie comme étant un `RasterLayer`. Nous verrons dans la dernière section de cette leçon qu'il existe d'autres classes de *raster*, soit les `RasterBrick` et les `RasterStack`.
+Remarquez que la classe (`class`) de l'objet `M` est définie comme étant un `SpatRaster`. Cette classe unique de la bibliothèque `terra` sert aussi bien pour les *rasters* à une seule couche que pour ceux à plusieurs couches.
 
 Remarquez aussi que la résolution d'un pixel est de `0.5 x 0.5`, car les 64 pixels du raster occupent le carré d'aire 16 délimité par les quatre points (1,1), (1,5), (5,1) et (5,5).
 
 Ainsi, une façon équivalente de créer le *raster* `M` est:
 
 ```{r create_M_v2}
-M <- raster(res = 0.5, xmn = 1, xmx = 5, ymn = 1, ymx = 5, vals = 1:64)
+M <- rast(res = 0.5, xmin=1, xmax=5, ymin=1, ymax=5, vals=1:64)
 M
 ```
 <br>
@@ -179,12 +178,14 @@ ncol(M)
 
 res(M)
 
-extent(M)
+ext(M)
 
 crs(M)
 ```
 
 <br>
+
+Notons que la fonction `ext()` de la bibliothèque `terra` retourne l'étendue spatiale d'un *raster*, c'est-à-dire ses coordonnées minimales et maximales selon les axes x et y.
 
 Il existe plusieurs fonctions permettant de visualiser les *rasters*.
 Nous pouvons simplement utiliser la fonction `plot()`.
@@ -238,8 +239,8 @@ z_mult3
 class(z_mult3) #vérifions que les valeurs sont bien de type logique
 
 # utilisons le vecteur logique z_mult3 pour créer un raster logique
-M_logique <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, 
-    vals = z_mult3)
+M_logique <- rast(nrows=8, ncols=8, xmin=1, xmax=5, ymin=1, ymax=5,
+    vals=z_mult3)
 
 M_logique
 ```
@@ -251,8 +252,8 @@ Visualisons maintenant ce *raster* de type logique:
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, dev = 'png', fig.dim = c(5, 5), fig.cap="Raster dont les valeurs sont de type logique"}
 #mp_ml <- mapview(M_logique)
 #mp_ml@map
-M_logique_numeric <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, 
-    vals = as.numeric(z_mult3))
+M_logique_numeric <- rast(nrows=8, ncols=8, xmin=1, xmax=5, ymin=1, ymax=5,
+    vals=as.numeric(z_mult3))
 mp_ml <- mapview(M_logique_numeric)
 mp_ml@map
 ```
@@ -303,8 +304,8 @@ z_fact <- factor(z_char)
 class(z_fact)
 
 # Obtenons maintenant un raster de type facteur
-M_factor <- raster(nrows = 8, ncols = 8, xmn = 1, xmx = 5, ymn = 1, ymx = 5, 
-    vals = z_fact)
+M_factor <- rast(nrows=8, ncols=8, xmin=1, xmax=5, ymin=1, ymax=5,
+    vals=z_fact)
 
 M_factor
 ```
@@ -340,7 +341,7 @@ g[3] = NA
 g[4] = NA
 g[12] =NA
 g[19] = NA
-G <- raster(nrows=5, ncols=5, res = 0.5, xmn = 1, xmx = 3.5, ymn = 1, ymx = 3.5, vals = g)
+G <- rast(nrows=5, ncols=5, res=0.5, xmin=1, xmax=3.5, ymin=1, ymax=3.5, vals=g)
 G
 ```
 <br>
@@ -395,10 +396,10 @@ knitr::include_graphics('Module8/images/coordsPixel.png')
 ### Statistiques de base sur un raster
 
 Voyons maintenant comment calculer des statistiques de base sur les valeurs contenues dans un *raster*.
-Tout d'abord, pour connaître l'ensemble des valeurs d'un *raster*, nous pouvons utiliser la fonction `getValues()`.
+Tout d'abord, pour connaître l'ensemble des valeurs d'un *raster*, nous pouvons utiliser la fonction `values()`.
 
 ```{r}
-getValues(G)
+values(G)
 ```
 <br>
 
@@ -412,31 +413,23 @@ G[]
 Nous pouvons alors calculer des statistiques élémentaires sur ces valeurs. Par exemple, quelle est la valeur maximale du *raster* `G`?
 
 ```{r}
-max(getValues(G), na.rm = TRUE)
+max(values(G), na.rm = TRUE)
 ```
 <br>
 
 Noter que nous devons préciser que les valeurs `NA` ne soient pas prises en considération lors du calcul de statistiques. En effet, `na.rm = TRUE` signifie que les valeurs `NA` sont retirées (*remove* en anglais, abrégé par *rm*).
 
-Plus simplement, nous pouvons utiliser la fonction équivalente `maxValue` exclusive aux données de classe `raster`.
-
-```{r}
-maxValue(G)
-```
-<br>
 
 De la même façon, nous pouvons obtenir d'autres statistiques élémentaires:
 
 ```{r basic_stats_G, collapse = TRUE}
-minValue(G)
+min(values(G), na.rm = TRUE)
 
-min(getValues(G), na.rm = TRUE)
+mean(values(G), na.rm = TRUE)
 
-mean(getValues(G), na.rm = TRUE)
+median(values(G), na.rm = TRUE)
 
-median(getValues(G), na.rm = TRUE)
-
-quantile(getValues(G), na.rm = TRUE)
+quantile(values(G), na.rm = TRUE)
 ```
 <br>
 
@@ -449,24 +442,24 @@ summary(G)
 
 En plus du minimum, du maximum, et de la médiane, la fonction `summary()` retourne le premier et le troisième quantile, ainsi que le nombre de cellules de valeur `NA` contenu dans le *raster*.
 
-La fonction `cellStats` permet également d'obtenir des statistiques sur les *rasters*. La statistique désirée doit être précisée dans les options de la fonction `cellStats`. Par exemple:
+La fonction `global()` de la bibliothèque `terra` permet également d'obtenir des statistiques sur les *rasters*. La statistique désirée doit être précisée en deuxième argument. Par exemple:
 
 ```{r cellStats, collapse=TRUE}
-cellStats(G, mean, na.rm = TRUE)  
+global(G, "mean")$mean
 
-cellStats(G, sd, na.rm = TRUE)   #la déviation standard
+global(G, "sd")$sd              #la déviation standard
 
-cellStats(G, max, na.rm = TRUE)
+global(G, "max")$max
 
-cellStats(G, min, na.rm = TRUE)
+global(G, "min")$min
 
-cellStats(G, median, na.rm = TRUE)
+median(values(G), na.rm = TRUE)
 
-cellStats(G, quantile, na.rm = TRUE)
+quantile(values(G), na.rm = TRUE)
 
-cellStats(G, range, na.rm = TRUE) #le minimum et le maximum
+global(G, c("min", "max"))      #le minimum et le maximum
 
-cellStats(G, sum, na.rm = TRUE)
+global(G, "sum")$sum
 ```
 <br>
 
@@ -503,17 +496,17 @@ La température de surface mesurée sur les territoires urbains permet d'identif
 
 #### Lire les données {-}
 
-Nous allons maintenant lire les données matricielles en utilisant la fonction `raster()` de la bibliothèque `raster`.
+Nous allons maintenant lire les données matricielles en utilisant la fonction `rast()` de la bibliothèque `terra`.
 
 ```{r icu, warning = FALSE, message = FALSE}
-T_vdq <- raster("Module5/Module5_donnees/Temp_vdq.tif")
+T_vdq <- rast("Module5/Module5_donnees/Temp_vdq.tif")
 ```
 
 <br>
 
 Nous pouvons d'emblée reconnaître les informations relatives à la dimension, la résolution, l'étendue, le CRS, et aux valeurs minimale et maximale du *raster* `T_vdq`.
 
-Nous pouvons également utiliser les fonctions `dim()`, `ncell()`, `res()`, `extent()`, `crs()`, et `cellStats(, range)` pour retrouver ces informations:
+Nous pouvons également utiliser les fonctions `dim()`, `ncell()`, `res()`, `ext()`, `crs()`, et `global(, c("min","max"))` pour retrouver ces informations:
 
 ```{r}
 dim(T_vdq)
@@ -522,9 +515,9 @@ ncell(T_vdq)
 
 res(T_vdq)
 
-extent(T_vdq)
+ext(T_vdq)
 
-cellStats(T_vdq, range)
+global(T_vdq, c("min", "max"))
 ```
 <br>
 
@@ -560,31 +553,25 @@ summary(T_vdq)
 
 <br>
 
-Remarquez le message retourné par `R`: "`summary is an estimate based on a sample of 1e+05 cells (3.39% of all cells)`". Ce message nous prévient que, par défaut, les calculs de la fonction `summary()` sont réalisés sur un échantillon de 100 000 cellules choisies aléatoirement. Dans le cas présent, puisque le *raster* `T_vdq` contient `ncells(T_vdq) = 2946366` cellules, un échantillon de 100 000 cellules correspond donc seulement à 3.39% de toutes les cellules.
-
-La limite par défaut du nombre de cellules sélectionnées pour calculer les statistiques dans la fonction `summary()` est très utile pour obtenir des résultats rapides, surtout lorsque *raster* est volumineux. Cependant, dans certains cas, cet échantillonnage limité pourrait mener à un estimé trompeur. Ainsi, il est toujours possible de spécifier la taille désirée de l'échantillon en utilisant l'option `maxsamp`. Par exemple : 
+Dans `terra`, la fonction `summary()` calcule les statistiques sur l’ensemble des valeurs du *raster* (ou sur un échantillon si le *raster* est très volumineux). L’argument `maxsamp` permet de contrôler le nombre maximum de cellules utilisées pour le calcul. Par exemple, pour s’assurer que toutes les cellules soient prises en compte nous précisions:
 
 ```{r}
 summary(T_vdq, maxsamp = ncell(T_vdq))
 ```
 <br>
 
-Vous remarquerez que l’exécution de la fonction `summary()` peut prendre plus de temps lorsque le nombre de cellules échantillonnées est plus grand. Dans le cas présent du *raster* `T_vdq`, les statistiques demeurent inchangées mais le nombre de valeurs `NA` a été corrigé. 
+Vous remarquerez que l’exécution de la fonction `summary()` peut prendre plus de temps lorsque le nombre de cellules échantillonnées est plus grand.
 
-Nous pouvons également visualiser l'histogramme des valeurs de température de surface.
+Nous pouvons également visualiser l’histogramme des valeurs de température de surface.
 
-```{r, fig.dim = c(6, 5), fig.align='center', dev = 'png', fig.cap = "Distribution des températures de surface dans la ville de Québec"}
-hist(getValues(T_vdq),
+```{r, fig.dim = c(6, 5), fig.align=’center’, dev = ‘png’, fig.cap = "Distribution des températures de surface dans la ville de Québec"}
+hist(values(T_vdq),
      breaks = 10,
      main = "",
      xlab = "Valeurs",
      ylab = "Fréquence",
      col = "darkorange")
 ```
-
-<br>
-
-Remarquez que nous avons spécifié que la distribution soit calculée sur l'ensemble des valeurs contenues dans le *raster* `T_vdq` en utilisant la fonction `getValues()`. Autrement, la fonction `hist()` appliquée à un *raster* utilise un échantillonnage aléatoire de 100 000 cellules, similairement à la fonction `summary()`.
 <br>
 
 ### Visualiser les données matricielles avec mapview()
@@ -636,10 +623,12 @@ Naturellement, le temps nécessaire pour générer la carte est alors plus long.
 
 #### Visualiser une section d'un raster {-}
 
-Nous voulons maintenant nous concentrer sur une petite section de la carte de la région de la ville de Québec. Nous pouvons le faire en spécifiant les lignes et les colonnes qui nous intéressent dans le *raster*. Par exemple, choisissons une région carrée de 100 x 100 cellules dans le quartier Sainte-Foy.
+Nous voulons maintenant nous concentrer sur une petite section de la carte de la région de la ville de Québec. Dans `terra`, nous utilisons la fonction `crop()` avec comme argument une étendue spatiale définie par la fonction `ext()`. Pour définir cette étendue à partir des indices de lignes et de colonnes, nous utilisons les fonctions `xFromCol()` et `yFromRow()`, qui retournent respectivement la coordonnée x associée à une colonne et la coordonnée y associée à une ligne. Par exemple, choisissons une région carrée de 100 x 100 cellules dans le quartier Sainte-Foy.
 
 ```{r map_T, eval = FALSE, echo = TRUE, dev = 'png'}
-T_sec <- T_vdq[351:450, 351:450, drop = FALSE]
+ext_sec <- ext(xFromCol(T_vdq, 351), xFromCol(T_vdq, 450),
+               yFromRow(T_vdq, 450), yFromRow(T_vdq, 351))
+T_sec <- crop(T_vdq, ext_sec)
 
 mapview(T_sec,  map.types = "OpenStreetMap")
 ```
@@ -647,14 +636,13 @@ mapview(T_sec,  map.types = "OpenStreetMap")
 
 
 ```{r, eval = TRUE, echo = FALSE, warnings = FALSE, dev = 'png', fig.cap="Carte de la température de surface dans le secteur de Sainte-Foy"}
-T_sec <- T_vdq[351:450, 351:450, drop = FALSE]
+ext_sec <- ext(xFromCol(T_vdq, 351), xFromCol(T_vdq, 450),
+               yFromRow(T_vdq, 450), yFromRow(T_vdq, 351))
+T_sec <- crop(T_vdq, ext_sec)
 
 m = mapview(T_sec,  map.types = "OpenStreetMap", homebutton = FALSE)
 m@map
 ```
-<br>
-
-Notez que l'option `drop = FALSE` est importante car elle permet au nouvel objet `T` de demeurer un *raster* comme `T_vdq`. Autrement, `T` deviendrait un simple vecteur.
 
 Nous observons sur la carte que les températures les plus chaudes (pixels de couleur jaune) sont situées sur les grandes infrastructures bétonnées comme les axes routiers ainsi que les bâtiments et les stationnements (par exemple ceux de la Place Laurier et Sainte-Foy). D'autre part, les températures les plus fraîches (pixels de couleur mauve foncé) sont situées sur des zones boisées comme celles sur le campus de l'Université Laval.
 
@@ -693,7 +681,7 @@ Remarquez que nous avons utilisé la fonction `latticeView()` pour visualiser ce
 
 ### Changer la projection d'un *raster*
 
-Comme pour les données vectorielles, il est possible de manipuler le système de coordonnées de référence de données matricielles. Rappelons que pour connaître le SCR d'un *raster* il s'agit d'utiliser la fonction `crs()` de la bibliothèque `raster`.
+Comme pour les données vectorielles, il est possible de manipuler le système de coordonnées de référence de données matricielles. Rappelons que pour connaître le SCR d'un *raster* il s'agit d'utiliser la fonction `crs()` de la bibliothèque `terra`.
 
 ```{r}
 crs(T_vdq)
@@ -738,9 +726,9 @@ proj_mtm7 <- "+proj=tmerc +lat_0=0 +lon_0=-70.5 +k=0.9999 +x_0=304800 +y_0=0 +el
 
 <br>
 
-Pour transformer la projection d'un *raster*, nous devons utiliser la fonction `projectRaster()` de la bibliothèque `Raster`.
+Pour transformer la projection d'un *raster*, nous devons utiliser la fonction `project()` de la bibliothèque `terra`.
 ```{r}
-T_mtm7 <- projectRaster(T_vdq, crs = proj_mtm7)
+T_mtm7 <- project(T_vdq, proj_mtm7)
 ```
 <br>
 
@@ -756,8 +744,9 @@ plot(T_mtm7, main = "MTM fuseau 7")
 Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
 
 ```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM", dev = 'png'}
-T_crop <- crop(T_vdq,extent(T_vdq,651,750, 351,450))
-T_crop_mtm7 <- projectRaster(T_crop, crs = proj_mtm7)
+T_crop <- crop(T_vdq, ext(xFromCol(T_vdq, 351), xFromCol(T_vdq, 450),
+                           yFromRow(T_vdq, 750), yFromRow(T_vdq, 651)))
+T_crop_mtm7 <- project(T_crop, proj_mtm7)
 par(mfrow = c(1,2))
 plot(T_crop, main = "Québec Lambert", legend = FALSE)
 plot(T_crop_mtm7, main = "MTM fuseau 7")
@@ -774,7 +763,7 @@ Pour sélectionner une région précise dans un *raster*, nous avons utilisé la
 
 ### Sauvegarder un raster
 
-Finalement, pour sauvegarder des données matricielles, nous utilisons la fonction `writeRaster()` de la bibliothèque `raster`. Par exemple, sauvegardons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
+Finalement, pour sauvegarder des données matricielles, nous utilisons la fonction `writeRaster()` de la bibliothèque `terra`. Par exemple, sauvegardons les données matricielles `T_vdq` que nous avons transformées dans le système de projection MTM.
 
 
 ```{r, eval = FALSE}
@@ -788,7 +777,7 @@ writeRaster(T_mtm7,nom_du_fichier)
 
 Les données matricielles peuvent contenir plusieurs couches, appelées aussi des bandes ou des canaux. C'est le cas des images de couleurs qui contiennent souvent trois bandes: une bande de rouge, une bande de vert et une bande de bleu. Dans cette section, nous apprendrons à lire et visualiser ce type de *raster* en utilisant des données satellitaires.
 
-Le gouvernement québécois abrite sur son site [Données Québec](https://www.donneesquebec.ca/recherche/fr/dataset/mosaique-landsat) les données satellites, captées par Sentinel-2 et Landsat, couvrant l'ensemble de la province. Nous parlons alors d'une mosaïque d'images.
+Le gouvernement québécois abrite sur son site [Données Québec](https://www.donneesquebec.ca/recherche/dataset/mosaiques-annuelles-landsat-du-quebec) les données satellites, captées par Sentinel-2 et Landsat, couvrant l'ensemble de la province. Nous parlons alors d'une mosaïque d'images.
 Sentinel-2 est une mission d'observation de la Terre de l'Agence spatiale européenne, tandis que Landsat est une mission développée par l'Agence spatiale américaine. Pour en apprendre davantage sur ces programmes d'observation et sur les satellites utilisés, consultez les sites de [Sentinel-2](https://eos.com/sentinel-2/) et de [Landsat](https://landsat.gsfc.nasa.gov/) ou encore les sites respectifs de Wikipédia ([Sentinel-2](https://fr.wikipedia.org/wiki/Sentinel-2) et [Landsat](https://fr.wikipedia.org/wiki/Programme_Landsat)).
 
 
@@ -797,43 +786,34 @@ La résolution des images captées par Sentinel-2 est de 10&nbsp;m par 10&nbsp;m
 
 #### Lire des données multi-bande {-}
 
-Nous allons maintenant lire le fichier `Landsat_LaTuque.tif` qui correspond aux données satellitaires captées par Landsat sur une section du territoire de la Haute Mauricie, près de la ville de La Tuque. Pour ce faire, nous utilisons la fonction `raster()` de la bibliothèque `raster':
+Nous allons maintenant lire le fichier `Landsat_LaTuque.tif` qui correspond aux données satellitaires captées par Landsat sur une section du territoire de la Haute Mauricie, près de la ville de La Tuque. Pour ce faire, nous utilisons la fonction `rast()` de la bibliothèque `terra`. Contrairement à certaines autres bibliothèques, `rast()` lit automatiquement toutes les bandes d'un fichier multi-bande:
 
 ```{r warning = FALSE}
-S <- raster("Module5/Module5_donnees/Landsat_LaTuque.tif")
-S
+S_mult <- rast("Module5/Module5_donnees/Landsat_LaTuque.tif")
+S_mult
 ```
 
 <br>
 
-Nous remarquons qu'une information supplémentaire est apparue dans la description du *raster*. Il s'agit de `band : 1 (of 3 bands)`.
-Cette information nous précise que nous venons de lire une seule bande alors que ces données matricielles en contiennent trois. Lorsque nous rencontrons un *raster* de plusieurs bandes, il faut plutôt utiliser la fonction `brick()` ou la fonction `stack()` de la bibliothèque `raster` pour lire l'ensemble des bandes.
+L'objet `S_mult` est de classe `SpatRaster` et contient trois couches (`nlyr`). Les valeurs minimum (0) et maximum (255) sont données pour chacune des trois couches.
+
+Nous pouvons sélectionner chacune des bandes à partir du *raster* multi-bande en utilisant l'opérateur `[[`:
 
 ```{r, warning = FALSE, message = FALSE}
-S_mult <- brick("Module5/Module5_donnees/Landsat_LaTuque.tif")
+SR <- S_mult[[1]]
+SG <- S_mult[[2]]
+SB <- S_mult[[3]]
 ```
 <br>
 
-Remarquez que la classe de l'objet `S_mult` est `RasterBrick` et non pas simplement `Raster` comme l'objet `S` précédent. De plus, `dimensions` spécifie maintenant que `S_mult` contient trois couches (`nlayers`). Le nom de chaque couche est également donné: `Landsat_LaTuque.1`, `Landsat_LaTuque.2` et `Landsat_LaTuque.3`. Finalement, les valeurs minimum (0) et maximum (255) sont données pour chacune des trois couches.
-
-
-Nous pouvons sélectionner chacune des bandes à partir du *raster* multi-bande de la façon suivante:
-
-```{r, warning = FALSE, message = FALSE}
-SR <- S_mult$Landsat_LaTuque_1
-SG <- S_mult$Landsat_LaTuque_2
-SB <- S_mult$Landsat_LaTuque_3
-```
-<br>
-
-Par ailleurs, nous pouvons également lire chacune des bandes individuellement avec la fonction `raster()`:
+Par ailleurs, nous pouvons également lire chacune des bandes individuellement avec la fonction `rast()` en précisant l'argument `lyrs`:
 
 ```{r, collapse=TRUE, warning = FALSE, message = FALSE}
 nom_fichier <- "Module5/Module5_donnees/Landsat_LaTuque.tif"
 
-SR <- raster(nom_fichier, band = 1) #lecture de la bande rouge
-SG <- raster(nom_fichier, band = 2) #lecture de la bande verte (green)
-SB <- raster(nom_fichier, band = 3) #lecture de la bande bleu
+SR <- rast(nom_fichier, lyrs = 1) #lecture de la bande rouge
+SG <- rast(nom_fichier, lyrs = 2) #lecture de la bande verte (green)
+SB <- rast(nom_fichier, lyrs = 3) #lecture de la bande bleue
 
 SR
 SG
@@ -841,20 +821,18 @@ SB
 ```
 <br>
 
-Ainsi, `SR` correspond à la première bande (la rouge), `SG` à la deuxième bande (la verte), et `SB` à la troisième bande (la bleu). Chaque *raster* comprend des valeurs entre 0 et 255. Ces valeurs correspondent au format RGB, et ensemble ces trois couches permettent de visualiser des images couleurs.
+Ainsi, `SR` correspond à la première bande (la rouge), `SG` à la deuxième bande (la verte), et `SB` à la troisième bande (la bleue). Chaque *raster* comprend des valeurs entre 0 et 255. Ces valeurs correspondent au format RGB, et ensemble ces trois couches permettent de visualiser des images couleurs.
 
-#### RasterBrick et RasterStack {-}
+#### Combiner des couches en un SpatRaster {-}
 
-Un `RasterBrick` correspond généralement à différentes bandes spectrales stockées dans un seul objet ou un seul fichier dans la mémoire de votre ordinateur.
+Dans `terra`, la classe `SpatRaster` peut contenir une ou plusieurs couches, qu'elles proviennent d'un seul fichier ou de sources différentes. Pour combiner des couches en un seul objet, on utilise la fonction `c()`. Une condition essentielle est que toutes les couches possèdent la même étendue, la même résolution, et le même SCR.
 
-D'autre part, un `RasterStack` qu'on obtient par l'utilisation de la fonction `stack()` permet de combiner des couches provenant de fichiers différents ou d'objets logés à différents endroits de la mémoire de votre ordinateur. Une condition essentielle pour combiner des couches dans un `RasterStack` est que celles-ci possèdent la même étendue, la même résolution, et le même SCR.
+Démontrons cela par un exemple. Définissons deux couches provenant d'objets différents que nous combinerons avec la fonction `c()`.
 
-Démontrons en quoi consiste un`RasterStack` par un exemple. Définissons deux couches provenant d'objets différents que nous combinerons par l'utilisation de la fonction `stack()`.
-
-D'abord, utilisons la fonction `raster()` pour créer un *raster* qui possède la même géométrie que les couches du *raster* `S_mult`.
+D'abord, utilisons la fonction `rast()` pour créer un *raster* qui possède la même géométrie que les couches du *raster* `S_mult`.
 
 ```{r}
-raster_1 <- raster(res = res(SR), ext = extent(SR), crs = crs(SR))
+raster_1 <- rast(res = res(SR), extent = ext(SR), crs = crs(SR))
 ```
 
 <br>
@@ -868,32 +846,23 @@ values(raster_1) = 1:ncell(SR)
 
 Ici, chaque pixel a comme valeur le numéro de son indice dans la matrice.
 
-Ensuite, définissons un deuxième couche correspondant à une bande du *raster* `S_mult`:
+Ensuite, définissons une deuxième couche correspondant à une bande du *raster* `S_mult`:
 
 ```{r}
 raster_2 <- SR
 ```
 <br>
 
-
-Remarquez que la `source` de chaque couche ainsi créée diffère:
+Maintenant, combinons ces deux couches avec la fonction `c()`:
 
 ```{r}
-raster_1
-raster_2
+R_spat <- c(raster_1, raster_2)
+
+R_spat
 ```
 <br>
 
-Maintenant, combinons ces deux couches pour former un `RasterStack` en utilisant la fonction `stack()`:
-
-```{r}
-R_stack <- stack(raster_1, raster_2)
-
-R_stack
-```
-<br>
-
-Nous avons ainsi créé un *raster* de classe `RasterStack`.
+Nous avons ainsi créé un objet `SpatRaster` à deux couches.
 
 
 #### Visualiser un raster multi-bande {-}
@@ -924,7 +893,7 @@ viewRGB(S_mult, r = 1, g = 2, b = 3)
 Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présent. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières^[Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://www.donneesquebec.ca/recherche/dataset/mosaique-landsat/resource/4e3cc78e-9448-400a-9d64-6ac05fd0b68d) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].].
 
 
-Finalement, pour sauvegarder un *raster* multibande, nous pouvons encore utiliser la fonction `writeRaster()` de la bibliothèque `raster`.
+Finalement, pour sauvegarder un *raster* multibande, nous pouvons encore utiliser la fonction `writeRaster()` de la bibliothèque `terra`.
 
 
 ```{r  eval = FALSE, warning = FALSE, message = FALSE}
@@ -940,7 +909,7 @@ writeRaster(S_mult, "Module5/Module5_donnees/LaTuque-copie.tif")
 Dans cette section, vous mettrez en pratique certains concepts vus dans la section [leçon](#mat) de ce module et apprendrez à manipuler des données matricielles catégoriques.
 Bien que la réponse à chaque question soit disponible, il est **très important** de tenter d'y répondre par vous-même!
 
-Les questions qui suivent se rapportent à des données matricielles de couvertures terrestres d'une petite région du Colorado aux États-Unis. Ce sont les données utilisées dans le tutoriel de [Nikki Inglis](https://www.smalltownbigdata.com/post/steamboat-springs-land-cover-data-nlcd) et qui proviennent du *National Land Cover Database* des États-Unis^[Les données peuvent être téléchargées sur le site du [*Multi-Resolution Land Characteristics Consortium*](https://www.mrlc.gov/).].
+Les questions qui suivent se rapportent à des données matricielles de couvertures terrestres d'une petite région du Colorado aux États-Unis. Ce sont les données utilisées dans le tutoriel de [Nikki Inglis](https://smalltownbigdata.github.io/april2021-snowfall/april2021-snowfall.html) et qui proviennent du [National Land Cover Database](https://www.mrlc.gov/).
 
 Nous allons également utiliser la bibliothèque `FedData` qui permet d'extraire certaines données en provenance de sources fédérales américaines. Installer cette bibliothèque avant de débuter les questions: 
 ```{r, eval = FALSE}
@@ -959,14 +928,14 @@ install.packages("FedData")
 <p>
 
 ```{r, eval=FALSE, echo=TRUE}
-library(raster)
-C2001 <- raster("Module5/Module5_donnees/Couvert_2001.tif")
-C2016 <- raster("Module5/Module5_donnees/Couvert_2016.tif")
+library(terra)
+C2001 <- rast("Module5/Module5_donnees/Couvert_2001.tif")
+C2016 <- rast("Module5/Module5_donnees/Couvert_2016.tif")
 ```
 
 ```{r, echo=FALSE}
-C2001 <- raster("Module5/Module5_donnees/Couvert_2001.tif")
-C2016 <- raster("Module5/Module5_donnees/Couvert_2016.tif")
+C2001 <- rast("Module5/Module5_donnees/Couvert_2001.tif")
+C2016 <- rast("Module5/Module5_donnees/Couvert_2016.tif")
 ```
 
 
@@ -983,7 +952,7 @@ C2016 <- raster("Module5/Module5_donnees/Couvert_2016.tif")
 <p>
 
 ```{r}
-extent(C2001)
+ext(C2001)
 dim(C2001)
 res(C2001)
 ```
@@ -1025,7 +994,7 @@ st_crs(C2001)$units
 <p>
 
 ```{r}
-extent(C2001) == extent(C2016)
+ext(C2001) == ext(C2016)
 res(C2001) == res(C2016)
 st_crs(C2001) == st_crs(C2016)
 ```
@@ -1047,8 +1016,10 @@ st_crs(C2001) == st_crs(C2016)
 Rappelons que les dimensions des rasters initiaux, `C2001` et `C2016`, sont de `r dim(C2001)[1]` par `r dim(C2001)[2]` cellules. Sélectionnons une région carrée qui soit relativement centrale pour éviter les bordures.
 
 ```{r}
-R2001 <- C2001[1000:1499, 700:1199, drop=FALSE]
-R2016 <- C2016[1000:1499, 700:1199, drop=FALSE]
+R2001 <- crop(C2001, ext(xFromCol(C2001, 700), xFromCol(C2001, 1199),
+                          yFromRow(C2001, 1499), yFromRow(C2001, 1000)))
+R2016 <- crop(C2016, ext(xFromCol(C2016, 700), xFromCol(C2016, 1199),
+                          yFromRow(C2016, 1499), yFromRow(C2016, 1000)))
 ```
 
 
@@ -1059,14 +1030,14 @@ R2016 <- C2016[1000:1499, 700:1199, drop=FALSE]
 <br>
 
 
-**b)** Utiliser la fonction `getValues()` pour trouver les valeurs comprises dans le raster `R2001`, et déterminer la classe de ces valeurs.
+**b)** Utiliser la fonction `values()` pour trouver les valeurs comprises dans le raster `R2001`, et déterminer la classe de ces valeurs.
 
 
 <details>
 <summary> Réponse</summary>
 <p>
 ```{r}
-val <- getValues(R2001)
+val <- values(R2001)
 class(val)
 ```
 <br>
@@ -1256,11 +1227,11 @@ leafsync::latticeview(m2001, m2016, ncol = 2)
 
 En comparant les deux cartes pour les années 2001 et 2016, nous pouvons observer visuellement des changements dans la couverture terrestre. Cependant, nous désirons faire une comparaison plus quantitative de ces changements.
 
-Pour ce faire, nous pouvons utiliser la fonction `ratify()` de la bibliothèque `raster`. Celle-ci possède l'argument `count` qui permet de compter le nombre de cellules de chaque catégorie^(Noter que la fonction `ratify()`permet également de transformer un *raster* numérique en *raster* catégorique: voir la documentation sur cette [fonction](documentation.org/packages/raster/versions/3.5-15/topics/factors).). Par exemple:
+Pour ce faire, nous pouvons utiliser la fonction `freq()` de la bibliothèque `terra`. Celle-ci compte le nombre de cellules de chaque catégorie et retourne un *data.frame* avec les colonnes `layer`, `value` et `count`. Par exemple:
 
 ```{r}
-R2001_nbr<-ratify(R2001f, count = TRUE)
-levels(R2001_nbr)
+freq_2001 <- freq(R2001f)
+freq_2001
 ```
 
 <br>
@@ -1268,7 +1239,7 @@ levels(R2001_nbr)
 Ajoutons ce calcul du nombre de cellules de chaque type de couvert au *data.frame* `sommaire`:
 
 ```{r}
-sommaire$Nbr2001 <- levels(R2001_nbr)[[1]]$COUNT
+sommaire$Nbr2001 <- freq_2001$count
 sommaire
 ```
 
@@ -1281,8 +1252,8 @@ sommaire
 <p>
 
 ```{r}
-R2016_nbr<-ratify(R2016f, count = TRUE)
-sommaire$Nbr2016 <- levels(R2016_nbr)[[1]]$COUNT
+freq_2016 <- freq(R2016f)
+sommaire$Nbr2016 <- freq_2016$count
 ```
 
 <br>
