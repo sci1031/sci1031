@@ -445,21 +445,17 @@ En plus du minimum, du maximum, et de la médiane, la fonction `summary()` retou
 La fonction `global()` de la bibliothèque `terra` permet également d'obtenir des statistiques sur les *rasters*. La statistique désirée doit être précisée en deuxième argument. Par exemple:
 
 ```{r cellStats, collapse=TRUE}
-global(G, "mean")$mean
+global(G, "mean", na.rm = TRUE)
 
-global(G, "sd")$sd              #la déviation standard
+global(G, "sd", na.rm = TRUE)              #la déviation standard
 
-global(G, "max")$max
+global(G, "max", na.rm = TRUE)
 
-global(G, "min")$min
+global(G, "min", na.rm = TRUE)
 
-median(values(G), na.rm = TRUE)
+global(G, c("min", "max"), na.rm = TRUE)      #le minimum et le maximum
 
-quantile(values(G), na.rm = TRUE)
-
-global(G, c("min", "max"))      #le minimum et le maximum
-
-global(G, "sum")$sum
+global(G, "sum", na.rm = TRUE)
 ```
 <br>
 
