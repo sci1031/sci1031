@@ -53,7 +53,7 @@ module.
 - `project()`
 - `writeRaster()`
 - `c()`
-- `viewRGB()`
+- `plotRGB()`
 - `mapview()` et `latticeView()`, que vous connaissez déjà.
 - `freq()`
 
@@ -190,7 +190,7 @@ Notons que la fonction `ext()` de la bibliothèque `terra` retourne l'étendue s
 Il existe plusieurs fonctions permettant de visualiser les *rasters*.
 Nous pouvons simplement utiliser la fonction `plot()`.
 
-```{r, fig.dim = c(5, 5), fig.align='center', dev = 'png', fig.cap="Visualisation du raster `M` avec la fonction `plot()`" }
+```{r, fig.dim = c(5, 5), fig.align="center", dev = "png", fig.cap="Visualisation du raster `M` avec la fonction `plot()`" }
 plot(M)
 ```
 <br>
@@ -464,7 +464,7 @@ global(G, "sum")$sum
 <br>
 
 Nous pouvons également visualiser la distribution des valeurs contenues dans un *raster* en utilisant les fonctions `R` usuelles telles que `hist()` ou `boxplot`. Par exemple,
-```{r, fig.dim = c(5, 5), fig.align='center', dev = 'png', fig.cap="Histogramme de la distribution des valeurs dans le raster G"}
+```{r, fig.dim = c(5, 5), fig.align="center", dev = "png", fig.cap="Histogramme de la distribution des valeurs dans le raster G"}
 hist(G,
      main = "",
      xlab = "Valeurs",
@@ -475,7 +475,7 @@ hist(G,
 
 Ou encore,
 
-```{r, fig.dim = c(4, 4), fig.align='center', dev = 'png', fig.cap="Valeur moyenne et intervalle de confiance du raster G"}
+```{r, fig.dim = c(4, 4), fig.align="center", dev = "png", fig.cap="Valeur moyenne et intervalle de confiance du raster G"}
 boxplot(G,
         main = "",
         ylab = "Valeurs",
@@ -564,7 +564,7 @@ Vous remarquerez que l’exécution de la fonction `summary()` peut prendre plus
 
 Nous pouvons également visualiser l’histogramme des valeurs de température de surface.
 
-```{r, fig.dim = c(6, 5), fig.align=’center’, dev = ‘png’, fig.cap = "Distribution des températures de surface dans la ville de Québec"}
+```{r, fig.dim = c(6, 5), fig.align="center", dev = "png", fig.cap = "Distribution des températures de surface dans la ville de Québec"}
 hist(values(T_vdq),
      breaks = 10,
      main = "",
@@ -869,7 +869,7 @@ Nous avons ainsi créé un objet `SpatRaster` à deux couches.
 
 Visualisons individuellement les bandes d'un *raster* multi-bande en utilisant la fonction `mapview()` de la bibliothèque `mapview`.
 
-```{r latticeView, collapse = TRUE, warning = FALSE, fig.height=10, fig.width = 10,fig.show='hold',fig.align='center', fig.cap="Carte pour chacune des bandes rouge, verte et bleue", dev = 'png'}
+```{r latticeView, collapse = TRUE, warning = FALSE, fig.height=10, fig.width = 10,fig.show="hold",fig.align="center", fig.cap="Carte pour chacune des bandes rouge, verte et bleue", dev = "png"}
 # Définissons une palette de gris de 256 tons différents
 mapviewOptions(raster.palette = gray.colors(256))
 
@@ -883,10 +883,10 @@ leafsync::latticeView(Map_SR, Map_SG, Map_SB, ncol = 3)
 ```
 <br>
 
-Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `viewRGB()` de la bibliothèque `mapview`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu.
+Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `plotRGB()` de la bibliothèque `terra`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu.
 
 ```{r viewRG, fig.cap = "Carte combinant les trois bandes de couleurs", warning = FALSE, message = FALSE, dev = 'png'}
-viewRGB(S_mult, r = 1, g = 2, b = 3)
+plotRGB(S_mult, r = 1, g = 2, b = 3)
 ```
 <br>
 
@@ -1115,7 +1115,7 @@ Nous remarquons que le nombre de catégories dans la légende est supérieur au 
 Créons un tableau sommaire qui reprend les éléments de `legende` en conservant seulement les types de couverts présents dans le *raster* R2001f:
 
 ```{r}
-type2001 <- unique(R2001f) 
+type2001 <- unique(R2001f)[[1]]
 sommaire <- legende[legende$ID %in% type2001, -4]
 # oùlegende$ID %in% type2001 est un vecteur logique, TRUE lorsque ID est dans type2001 FALSE sinon
 # où -4 retire la 4ième colonne du tableau legende contenant une description détaillée du couvert
@@ -1160,7 +1160,7 @@ R2001f
 
 ```{r}
 legende <- pal_nlcd()
-type2016 <- unique(R2016f) 
+type2016 <- unique(R2016f)[[1]]
 sommaire <- legende[legende$ID %in% type2016, -4]
 rat <- levels(R2016f)[[1]]
 rat$classe <- sommaire$Class
