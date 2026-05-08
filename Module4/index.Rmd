@@ -84,7 +84,6 @@ Dans la section [exercice](#ex_vec), vous utiliserez les données vectorielles `
 </div>
 
 ```{r load-libraries4, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
-#library(raster)
 library(rgdal)
 library(sf)
 library(mapview)
