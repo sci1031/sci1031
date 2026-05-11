@@ -725,27 +725,37 @@ proj_mtm7 <- "+proj=tmerc +lat_0=0 +lon_0=-70.5 +k=0.9999 +x_0=304800 +y_0=0 +el
 Pour transformer la projection d'un *raster*, nous devons utiliser la fonction `project()` de la bibliothèque `terra`.
 ```{r}
 T_mtm7 <- project(T_vdq, proj_mtm7)
+T_merc <-project(T_vdq, "EPSG:3857")
 ```
 <br>
 
 Comparons les deux cartes utilisant des projections différentes:
 
 ```{r, fig.cap = "Rasters de projections Québec Lambert et MTM", dev = 'png'}
-par(mfrow = c(1,2))
-plot(T_vdq, main = "Québec Lambert", legend = FALSE)
+par(mfrow = c(1,3))
+plot(T_vdq, main = "Québec Lambert")
 plot(T_mtm7, main = "MTM fuseau 7")
+plot(T_merc, main = "Mercator web")
 ```
 <br>
 
 Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
 
 ```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM", dev = 'png'}
-T_crop <- crop(T_vdq, ext(xFromCol(T_vdq, 351), xFromCol(T_vdq, 450),
-                           yFromRow(T_vdq, 750), yFromRow(T_vdq, 651)))
+#T_crop <- crop(T_vdq, ext(xFromCol(T_vdq, 351), xFromCol(T_vdq, 450),
+  #                         yFromRow(T_vdq, 750), #yFromRow(T_vdq, 651)))
+
+ext_sec <- ext(xFromCol(T_vdq, 351), xFromCol(T_vdq, 450),
+               yFromRow(T_vdq, 450), yFromRow(T_vdq, 351))
+T_crop <- crop(T_vdq, ext_sec)
+
 T_crop_mtm7 <- project(T_crop, proj_mtm7)
-par(mfrow = c(1,2))
-plot(T_crop, main = "Québec Lambert", legend = FALSE)
+T_crop_merc <-  project(T_crop, "EPSG:3857")
+par(mfrow = c(1,3))
+plot(T_crop, main = "Québec Lambert")
 plot(T_crop_mtm7, main = "MTM fuseau 7")
+plot(T_crop_merc, main = "Mercator web")
+
 ```
 <br>
 
