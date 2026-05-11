@@ -53,6 +53,7 @@ module.
 - `project()`
 - `writeRaster()`
 - `c()`
+- `crop()`
 - `plotRGB()`
 - `mapview()` et `latticeView()`, que vous connaissez déjà.
 - `freq()`
@@ -513,7 +514,7 @@ res(T_vdq)
 
 ext(T_vdq)
 
-global(T_vdq, c("min", "max"))
+global(T_vdq, c("min", "max"), na.rm = TRUE)
 ```
 <br>
 
@@ -652,7 +653,7 @@ Pour augmenter la résolution d'un *raster* nous utilisons la fonction `aggregat
 
 Quelle valeur prendra alors une cellule de plus grande résolution? Par défaut, la cellule aura comme valeur la moyenne des valeurs des cellules groupées par l'agrégation. Par ailleurs, il est aussi possible de spécifier d'autres fonctions pour calculer la valeur des cellules de plus grande résolution en utilisant l'option `fun`. Par exemple, nous pourrions choisir que la valeur agrégée corresponde à la valeur maximum des valeurs des cellules groupées.
 
-```{r, fig.dim = c(8, 8), dev = 'png', fig.cap = "Cartes de différentes résolutions", eval = TRUE}
+```{r, fig.dim = c(8, 8), dev = 'png', fig.cap = "Cartes de différentes résolutions", eval = TRUE, fig.height=8}
 T_fact4_moy <- aggregate(T_sec, fact = 4)
 T_fact4_max <- aggregate(T_sec, fact = 4, fun = 'max')
 T_fact8_moy <- aggregate(T_sec, fact = 8)
@@ -668,7 +669,7 @@ map_fact8_max <- mapview(T_fact8_max, legend = FALSE, homebutton = FALSE)
 leafsync::latticeView(map_fact4_moy, map_fact4_max, map_fact8_moy, map_fact8_max, ncol = 2)
 
 ```
-
+<br style="clear:both;">
 <br>
 
 
@@ -725,45 +726,61 @@ proj_mtm7 <- "+proj=tmerc +lat_0=0 +lon_0=-70.5 +k=0.9999 +x_0=304800 +y_0=0 +el
 Pour transformer la projection d'un *raster*, nous devons utiliser la fonction `project()` de la bibliothèque `terra`.
 ```{r}
 T_mtm7 <- project(T_vdq, proj_mtm7)
-T_merc <-project(T_vdq, "EPSG:3857")
 ```
 <br>
 
 Comparons les deux cartes utilisant des projections différentes:
-
-```{r, fig.cap = "Rasters de projections Québec Lambert et MTM", dev = 'png'}
-par(mfrow = c(1,3))
+```{r, fig.cap = "Rasters de projections Québec Lambert et MTM", dev = 'png', fig.height=2}
+par(mfrow = c(1,2))
 plot(T_vdq, main = "Québec Lambert")
 plot(T_mtm7, main = "MTM fuseau 7")
-plot(T_merc, main = "Mercator web")
 ```
+
 <br>
 
-Il est difficile de percevoir une différence, car celle-ci est légère. Pour s'en convaincre, visualisons une plus petite section de la carte de la ville de Québec:
+Il est difficile de percevoir une différence, car celle-ci est légère à l'échelle d'une petite région. Pour s'en convaincre, comparons la dimension, le nombre de cellules, la résolution et l'étendue des deux rasters de projection différente. 
 
-```{r, echo = FALSE, fig.cap = "Section des rasters de projections Québec Lambert et MTM", dev = 'png'}
-#T_crop <- crop(T_vdq, ext(xFromCol(T_vdq, 351), xFromCol(T_vdq, 450),
-  #                         yFromRow(T_vdq, 750), #yFromRow(T_vdq, 651)))
-
-ext_sec <- ext(xFromCol(T_vdq, 351), xFromCol(T_vdq, 450),
-               yFromRow(T_vdq, 450), yFromRow(T_vdq, 351))
-T_crop <- crop(T_vdq, ext_sec)
-
-T_crop_mtm7 <- project(T_crop, proj_mtm7)
-T_crop_merc <-  project(T_crop, "EPSG:3857")
-par(mfrow = c(1,3))
-plot(T_crop, main = "Québec Lambert")
-plot(T_crop_mtm7, main = "MTM fuseau 7")
-plot(T_crop_merc, main = "Mercator web")
-
-```
 <br>
 
-Remarquez que la carte de droite, utilisant la projection MTM, est, en effet, inclinée par rapport à la carte utilisant la projection Québec Lambert. Remarquez aussi que les coordonnées des axes x et y sont différentes.
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, tab.cap = "Propriétés des rasters de projections Québec Lambert et MTM", dev = 'png'}
+library(knitr)
+library(kableExtra)
 
-De plus, vous aurez sans doute remarqué que nous avons utilisé la fonction `plot()` et non `mapview()` pour afficher ces cartes. En effet, au moment d'écrire ces lignes, la fonction `mapview()` ne permet pas d'afficher des données matricielles dans leur CRS d'origine. Les données matricielles sont automatiquement transformées selon la projection Web de Mercator au moment de la visualisation, si bien qu'il est impossible de percevoir les différences provenant de projections différentes. Ce problème n'existe pas pour les données vectorielles pour lesquelles nous pouvons utiliser l'option `crs.native = TRUE`.
+tableau <- data.frame(
+  Fonction = c("dim()", "res()", "ncell()", "ext()"),
+  Lambert  = c(
+    paste(dim(T_vdq), collapse = " x "),
+    paste(ncell(T_vdq), collapse = " x "),
+    paste(round(res(T_vdq), 2), collapse = " x "),
+    paste(round(as.vector(ext(T_vdq)), 2), collapse = ", ")
+  ),
+  MTM = c(
+    paste(dim(T_mtm7), collapse = " x "),
+    paste(ncell(T_mtm7), collapse = " x "),
+    paste(round(res(T_mtm7), 2), collapse = " x "),
+    paste(round(as.vector(ext(T_mtm7)), 2), collapse = ", ")
+  )
+)
 
-Pour sélectionner une région précise dans un *raster*, nous avons utilisé la fonction `crop()`. Nous reviendrons en détail sur cette fonction dans le [module 8](#manip_mat) qui traite de la manipulation de données matricielles.
+kable(tableau,
+      col.names = c("Propriétés", "Québec Lambert", "MTM fuseau 7"),
+      align = c("l", "c", "c")) |>
+      kable_styling(font_size = 11, html_font = "inherit") 
+```
+
+
+<br>
+
+Remarquez que les deux rasters ont des propriétés différentes. Ainsi, la valeur d'une cellule sera généralement différente dans les deux rasters.
+
+```{r}
+T_vdq[500,500]
+T_mtm7[500,500]
+```
+
+<br>
+Il faut donc toujours porter attention à la projection choisie pour des analyses. Si nous utilisons plus d'un raster, ceux-ci doivent avoir la même projection.
+
 
 <br>
 
