@@ -109,7 +109,7 @@ Sauvegardez le dossier compressé (`zip`) dans votre répertoire de travail `Mod
 
 Commençons par charger les bibliothèques requises pour lire les données spatiales vectorielles (`sf`) et les visualiser (`mapview`). 
 
-```{r load-libraries7, echo = TRUE, results='hide', warning = FALSE, message = FALSE}
+```{r load-libraries7, echo = TRUE, results="hide", warning = FALSE, message = FALSE}
 library(sf)
 library(mapview)
 ```
@@ -137,7 +137,7 @@ Pour en savoir davantage sur ces attributs de nature géographique, démographiq
 
 Nous pouvons maintenant visuellement valider que l'importation des données a bien été réussie en utilisant la fonction `mapview()`&nbsp;:
 
-```{r vis-ville, dev = 'png'}
+```{r vis-ville, dev = "png"}
 mapview(municipalites, legend = FALSE) 
 ```
 <br>
@@ -439,7 +439,7 @@ villes_reg <- st_join(villes, regions[ ,"Rgns_Ad"], left = FALSE)
 
 Visualisons le nouveau *shapefile* que nous venons de créer. Ce dernier contient seulement les municipalités à l'intérieur du territoire québécois.
 
-```{r,  warning = FALSE, dev = 'png'}
+```{r,  warning = FALSE, dev = "png"}
 mapview(villes_reg, legend = FALSE)
 ```
 
@@ -448,7 +448,7 @@ mapview(villes_reg, legend = FALSE)
 Notez que lorsque vous cliquez sur les points de la carte, la valeur de l'attribut  "Rngs_Ad" est maintenant également donnée.
 
 Vous pouvez ainsi différencier visuellement les municipalités selon leur région administrative d'attache.
-```{r,  warning = FALSE, dev = 'png'}
+```{r,  warning = FALSE, dev = "png"}
 mapview(villes_reg, zcol = "Rgns_Ad", legend = FALSE)
 ```
 
@@ -467,7 +467,7 @@ Le *shapefile* `reg_villes` est constitué des polygones de `regions`. Puisque p
 
 Remarquez que nous pouvons aussi utiliser la fonction `join_st()` en vue de créer un filtre spatial, par exemple avec la fonction `subset()` &nbsp;:
 
-```{r, dev = 'png'}
+```{r, dev = "png"}
 villes_CN<- subset(villes_reg, Rgns_Ad=="Côte-Nord")
 mapview(villes_CN, legend = FALSE)
 ```
@@ -529,7 +529,7 @@ reg_pop2
 Observez que les groupements sont maintenant des polygones, et non des multipoints. Par ailleurs le calcul de l'attribut `"population"` est le même. 
 
 Une visualisation du nouvel objet `reg_pop2` permet d'illustrer les régions selon la taille de leur population&nbsp;:
-```{r, dev = 'png'}
+```{r, dev = "png"}
 mapview(reg_pop2)
 ```
 
@@ -585,7 +585,7 @@ regions_simple_40 <- st_simplify(regions_nad, dTolerance = 40000) #40000m
 ```
 
 
-```{r ex-st-simple, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png', fig.cap="La carte des régions administratives du Québec. Polygones originaux (à gauche) et polygones simplifiés avec un seuil faible (au centre) et un seuil élevé (à droite)."}
+```{r ex-st-simple, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png", fig.cap="La carte des régions administratives du Québec. Polygones originaux (à gauche) et polygones simplifiés avec un seuil faible (au centre) et un seuil élevé (à droite)."}
 map <- mapview(regions_nad, col.regions = "blue", alpha.regions = 0.4, legend = FALSE)
 map_10 <- mapview(regions_simple_10, col.regions = "blue", alpha.regions = 0.4, legend = FALSE)
 map_40 <- mapview(regions_simple_40, col.regions = "blue", alpha.regions = 0.4,legend = FALSE)
@@ -644,7 +644,7 @@ GIM_combine
 
 Le nouvel objet `GIM_combine` est effectivement formé d'une seule géométrie. Notez cependant que la fonction `st_combine()` ne fusionne pas les frontières à l'intérieur du nouveau polygone formé<!-- (\@ref(fig:map-combo)) -->. Pour unir deux polygones, il faut plutôt utiliser la fonction `st_union()` que nous définirons plus bas dans cette leçon.
 
-```{r map-combo, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="La Gaspésie et les Îles-de-la-Madeleine traitées comme deux polygones distincts (gauche), leur combinaison par la fonction `st_combine()` (centre), et leur union par la fonction `st_union()` (droite)."}
+```{r map-combo, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png",fig.cap="La Gaspésie et les Îles-de-la-Madeleine traitées comme deux polygones distincts (gauche), leur combinaison par la fonction `st_combine()` (centre), et leur union par la fonction `st_union()` (droite)."}
 GIM_union<-st_union(iles, gasp)
 GIM_combine<-st_sf(GIM_combine)#sinon la legende n'apparait aps
 map_GIM <- mapview(GIM, zcol = "Nom_reg")
@@ -699,7 +699,7 @@ Nous observons que les deux nouveaux objets vectoriels ont bel et bien la géom�
 <!--  le lien donne ?? une fois le rmd compilé 
 -->
 
-```{r ex-cast1, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="La fonction `st_cast()` a été utilisée pour transformer le polygone de la Mauricie (gauche) en multilignes (centre) et en multipoints (droite)."}
+```{r ex-cast1, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png",fig.cap="La fonction `st_cast()` a été utilisée pour transformer le polygone de la Mauricie (gauche) en multilignes (centre) et en multipoints (droite)."}
 
 Lines<- mapview(Mauricie_lines, legend = FALSE)
 Poly <- mapview(Mauricie, legend = FALSE)
@@ -741,7 +741,7 @@ villes_NQ_pol
 
 <br>
 
-```{r ex-cast2, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="La fonction `st_cast()` a été utilisée pour transformer les villes du Nord-du-Québec de multipoints (gauche) en ligne (centre) et en polygone (droite)."}
+```{r ex-cast2, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png",fig.cap="La fonction `st_cast()` a été utilisée pour transformer les villes du Nord-du-Québec de multipoints (gauche) en ligne (centre) et en polygone (droite)."}
 
 Points <- mapview(villes_NQ_combo, legend = FALSE)
 Lines <- mapview(villes_NQ_lines, legend = FALSE)
@@ -777,7 +777,7 @@ la_poc_tampon50 <- st_buffer(la_poc_nad, dist = 50e3)
 
 Notez que l'expression `e3` correspond au chiffre 1000 (c'est-à-dire 10 exposent 3).
 
-```{r buffer-lapoc, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="Deux zones tampons de 10 km (en bleu) et de 50 km (en vert) autour de la ville de La Pocatière"}
+```{r buffer-lapoc, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png",fig.cap="Deux zones tampons de 10 km (en bleu) et de 50 km (en vert) autour de la ville de La Pocatière"}
 # library(tmap)
 # new_bb <- bb(regions_nad, xlim = c(0.25, 0.75), ylim = c(0.25, 0.75), relative = TRUE)
 # mapQ <- tm_shape(regions_nad, bbox = new_bb) + tm_fill()
@@ -813,7 +813,7 @@ SagStJean_tampon50 <- st_buffer(SagStJean, dist = 70e3)  #70 km
 
 <br>
 
-```{r buffer-regions, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="Une zone tampon de 20 km autour de la région administrative de l'Abitibi-Témicamingue et une zone tampon de 70 km autour du Saguenay - Lac-Saint-Jean."}
+```{r buffer-regions, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png",fig.cap="Une zone tampon de 20 km autour de la région administrative de l'Abitibi-Témicamingue et une zone tampon de 70 km autour du Saguenay - Lac-Saint-Jean."}
 M <- mapview(SagStJean_tampon50, col.regions = "green", alpha.regions = 0.2, legend = FALSE) +
 mapview(SagStJean, col.regions = "green", alpha.regions = 0.4, legend = FALSE) + 
 mapview(Abitibi_tampon20, col.regions = "blue", alpha.regions = 0.2,  legend = FALSE) +
@@ -845,7 +845,7 @@ centre_SagStJean
 
 La fonction `st_centroid()` retourne un objet vectoriel de type point qui conserve les attributs du polygone.
 
-```{r centroid-regions, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="Les centroïdes (en rouge) des régions de l'Abitibi-Témicamingue (en bleu) et du Saguenay - Lac-Saint-Jean (vert) calculés avec la fonction  `st_centroid()`."}
+```{r centroid-regions, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png",fig.cap="Les centroïdes (en rouge) des régions de l'Abitibi-Témicamingue (en bleu) et du Saguenay - Lac-Saint-Jean (vert) calculés avec la fonction  `st_centroid()`."}
 M <- mapview(centre_SagStJean, col.regions = "red", legend = FALSE) +
 mapview(SagStJean, col.regions = "green", alpha.regions = 0.4, legend = FALSE) + 
 mapview(centre_Abitibi, col.regions = "red" ,legend = FALSE) +
@@ -938,7 +938,7 @@ Observons les géométries produites par ces opérations<!--  (figure \@ref(fig:
 <!--  le lien vers la figure donne ?? une fois le rmd compilé 
 -->
 
-```{r topo-op, echo = FALSE, warning = FALSE, fig.align = 'left', out.width = '100%', dev = 'png',fig.cap="Exemples d'opérations topologiques sur les polygones A et B. En haut: illustrations de A et B (gauche) et de `st_union(A,B)` (droite). Au centre:   illustrations de `st_difference(A,B)` (gauche) et de `st_difference(B,A)` (droite). En bas: illustrations de `st_intersection(A,B)` (gauche) et de `st_sym_difference(A,B)` (droite)."}
+```{r topo-op, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png",fig.cap="Exemples d'opérations topologiques sur les polygones A et B. En haut: illustrations de A et B (gauche) et de `st_union(A,B)` (droite). Au centre:   illustrations de `st_difference(A,B)` (gauche) et de `st_difference(B,A)` (droite). En bas: illustrations de `st_intersection(A,B)` (gauche) et de `st_sym_difference(A,B)` (droite)."}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2)+mapview(B, col.regions = "red", alpha.regions = 0.2)
 map_union <- mapview(union_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
 map_inter <- mapview(union_AB, col.regions = "grey", alpha.regions = 0.2, legend = FALSE) + mapview(inter_AB, col.regions = "darkmagenta", alpha.regions = 0.2)
@@ -967,7 +967,7 @@ La bibliothèque `sf` contient plusieurs opérateurs topologiques de confirmatio
 La fonction `st_intersects()` vérifie si deux objets spatiaux `X` et `Y` occupent un espace commun. La fonction confirmera qu'il y a bel et bien une intersection entre les deux objets si leurs intérieurs ou leurs frontières se recoupent. `X` et `Y` peuvent avoir n'importe quelle géométrie (point, multipoint, ligne, multiligne, polygone, multipolygone) (figure  \@ref(fig:st-intersects)).
 
 
-```{r st-intersects, fig.align='center', echo=FALSE, fig.cap="Combinaisons de géométries satisfaisant à la condition d'intersection. Récupérer sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '60%'}
+```{r st-intersects, fig.align="center", echo=FALSE, fig.cap="Combinaisons de géométries satisfaisant à la condition d'intersection. Récupérer sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = "60%"}
 knitr::include_graphics('Module7/images/st_intersects.png')
 ```
 
@@ -1015,7 +1015,7 @@ Pour bien comprendre comment opère `st_intersects()` considérons le polygone A
 points
 ```
 
-```{r geo-conf1, warning=FALSE, echo=FALSE, fig.align='center', dev = 'png',fig.cap="Exemples illustrant la fonction `st_intersects()`.", out.width = '100%'}
+```{r geo-conf1, warning=FALSE, echo=FALSE, fig.align="center", dev = "png",fig.cap="Exemples illustrant la fonction `st_intersects()`.", out.width = "100%"}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
   ##mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE) +
   mapview(point_bleu, col.regions="blue",legend = FALSE) + 
@@ -1068,7 +1068,7 @@ Dans ce cas, la fonction retourne une liste d'une seule combinaison d'éléments
 La fonction `st_disjoint()` vérifie la condition inverse de la fonction `st_intersects()`, c'est-à-dire l'absence d'intersection entre deux objets `X` et `Y` (figure  \@ref(fig:st-disjoint)). 
 
 
-```{r st-disjoint, fig.align='center', echo=FALSE, fig.cap="Combinaisons de géométries disjointes. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '60%'}
+```{r st-disjoint, fig.align="center", echo=FALSE, fig.cap="Combinaisons de géométries disjointes. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = "60%"}
 knitr::include_graphics('Module7/images/st_disjoint.png')
 ```
 
@@ -1090,7 +1090,7 @@ La fonction `st_crosses()` vérifie si deux objets spatiaux `X` et `Y` se croise
 
 La figure \@ref(fig:st-crosses) illustre différentes combinaisons de géométries qui satisfont à la condition `st_crosses`.
 
-```{r st-crosses, fig.align='center', echo=FALSE, dev = 'png',fig.cap="Combinaisons de géométries qui se croisent. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '60%'}
+```{r st-crosses, fig.align="center", echo=FALSE, dev = "png",fig.cap="Combinaisons de géométries qui se croisent. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = "60%"}
 knitr::include_graphics('Module7/images/st_crosses.png')
 ```
 
@@ -1113,7 +1113,7 @@ trait_bleu<-Abi_trait
 trait_mauve<-B_trait
 ```
 
-```{r geo-conf2, warning=FALSE, echo=FALSE, fig.align='center', dev = 'png',fig.cap="Exemples illustrant la fonction `st_crosses()`.", out.width = '100%'}
+```{r geo-conf2, warning=FALSE, echo=FALSE, fig.align="center", dev = "png",fig.cap="Exemples illustrant la fonction `st_crosses()`.", out.width = "100%"}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
   mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE) +
   mapview(trait_bleu, color ="darkblue", lwd = 3, legend = FALSE)+
@@ -1149,13 +1149,13 @@ Le trait bleu ne croise pas le polygone A car l'intersection entre ces deux géo
 
 La fonction `st_overlaps()` vérifie si l'intersection entre deux géométries de même dimension possède aussi la même dimension. De plus, cette intersection ne peut être égale à une des deux géométries interrogées. La figure \@ref(fig:st-overlaps) illustre différentes combinaisons de géométries qui satisfont à la condition de superposition.
 
-```{r st-overlaps, fig.align='center', echo=FALSE, fig.cap="Combinaisons de géométries qui se superposent. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '60%'}
+```{r st-overlaps, fig.align="center", echo=FALSE, fig.cap="Combinaisons de géométries qui se superposent. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = "60%"}
 knitr::include_graphics('Module7/images/st_overlaps.png')
 ```
 
 Considérons les polygones A, B, ainsi que celui de l'Abitibi-Témiscamingue illustrés à la figure \@ref(fig:st-geo-conf3). 
 
-```{r st-geo-conf3, warning=FALSE, echo=FALSE, fig.align='center', dev = 'png',fig.cap="Exemples illustrant la fonction `st_overlaps()`.", out.width = '100%'}
+```{r st-geo-conf3, warning=FALSE, echo=FALSE, fig.align="center", dev = "png",fig.cap="Exemples illustrant la fonction `st_overlaps()`.", out.width = "100%"}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
 mapview(Abitibi, col.regions = "green", alpha.regions = 0.2, legend = FALSE) + 
     mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE) 
@@ -1176,7 +1176,7 @@ st_overlaps(Abitibi,A)
 
 La fonction `st_touches()` vérifie si deux objets `X` et `Y` ont au moins un point en commun sans toutefois que leurs intérieurs s'intersectent. La figure \@ref(fig:st-touches) illustre différentes combinaisons de géométries qui se touchent.
 
-```{r st-touches, fig.align='center', echo=FALSE, fig.cap="Combinaisons de géométries qui se touchent. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '60%'}
+```{r st-touches, fig.align="center", echo=FALSE, fig.cap="Combinaisons de géométries qui se touchent. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = "60%"}
 knitr::include_graphics('Module7/images/st_touches.png')
 ```
 
@@ -1184,7 +1184,7 @@ Considérons par exemple les objets spatiaux illustrés à la figure<!--  \@ref(
 <!--  le lien vers la figure donne ?? une fois le rmd compilé 
 -->
 
-```{r st-geo-conf4, warning=FALSE, echo=FALSE, fig.align='center', dev = 'png',fig.cap="Exemples illustrant la fonction `st_touches()`", out.width = '100%'}
+```{r st-geo-conf4, warning=FALSE, echo=FALSE, fig.align="center", dev = "png",fig.cap="Exemples illustrant la fonction `st_touches()`", out.width = "100%"}
 Mauricie <- subset(regions_nad, Rgns_Ad == "Mauricie")
 
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
@@ -1226,7 +1226,7 @@ La fonction `st_within(X,Y)` vérifie si l'objet `X` est entièrement à l'inté
 
 La figure \@ref(fig:st-within) illustre différentes combinaisons de géométries qui sont contenues dans une autre géométrie.
 
-```{r st-within, fig.align='center', echo=FALSE, fig.cap="Combinaisons de géométries qui contiennent ou sont contenues dans une autre géométrie. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = '60%'}
+```{r st-within, fig.align="center", echo=FALSE, fig.cap="Combinaisons de géométries qui contiennent ou sont contenues dans une autre géométrie. Image récupérée sur le site de documentation de **postgis**: http://postgis.net/workshops/postgis-intro/spatial_relationships.html", out.width = "60%"}
 knitr::include_graphics('Module7/images/st_within.png')
 ```
 
@@ -1248,7 +1248,7 @@ trait_vert<-trait_gros
 
 Pour illustrer ces fonctions, considérons les objets spatiaux illustrés à la figure \@ref(fig:st-geo-conf5) &nbsp;:
 
-```{r st-geo-conf5, warning=FALSE, echo=FALSE, fig.align='center', dev = 'png',fig.cap="Exemples illustrant les fonctions `st_contains()` et `st_within()`.", out.width = '100%'}
+```{r st-geo-conf5, warning=FALSE, echo=FALSE, fig.align="center", dev = "png",fig.cap="Exemples illustrant les fonctions `st_contains()` et `st_within()`.", out.width = "100%"}
 map_AB <- mapview(A, col.regions = "blue", alpha.regions = 0.2, legend = FALSE) + 
   mapview(B, col.regions = "red", alpha.regions = 0.2, legend = FALSE) +
   mapview(trait_bleu, color ="darkblue", lwd = 3, legend = FALSE)+
@@ -1551,7 +1551,7 @@ top10_villes
 
 Visualisons ce nouvel objet avec la fonction `mapview()`.
 
-```{r viz-top10-villes, dev = 'png'}
+```{r viz-top10-villes, dev = "png"}
 mapview(top10_villes, zcol= "population")
 ```
 
@@ -1581,7 +1581,7 @@ parcs_nationaux <- st_read("Module7/Module7_donnees/parcs.gdb", layer = "terpnq_
 
 Visualisons les polygones de `parcs_nationaux`.
 
-```{r vis-parcs, dev = 'png'}
+```{r vis-parcs, dev = "png"}
 mapview(parcs_nationaux, zcol = "TRQ_NM_TER", legend = FALSE)
 ```
 <br>
@@ -1612,7 +1612,7 @@ st_crs(top10_villes_lcc)$proj4string
 
 Traçons à présent les zones tampon (*buffer*) autour des municipalités à l'aide de la fonction `st_buffer()` comme expliqué précédemment, et visualisons le résultat de cette opération.
 
-```{r buffer-top-villes, dev = 'png'}
+```{r buffer-top-villes, dev = "png"}
 top10_villes_buffer <- st_buffer(top10_villes_lcc, dist = 70e3) # 70 kms en mètres = 70e3
 mapview(top10_villes_buffer, zcol = "toponyme", legend = FALSE)
 ```
@@ -1736,7 +1736,7 @@ Poly_Selection
 
 Confirmer votre réponse en visualisant le polygone formé&nbsp;:
 
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 mapview(Poly_Selection)
 
 ```
@@ -1805,7 +1805,7 @@ Lanaudiere <- subset(regions_nad, Rgns_Ad == "Lanaudière")
 
 Trouver la frontière entre les deux régions en utilisant la fonction `st_intersection()`&nbsp;:
 
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 Frontiere <- st_intersection(Laurentides, Lanaudiere)
 mapview(Frontiere)
 ```
@@ -1815,7 +1815,7 @@ La visualisation permet de valider votre calcul.
 
 Créer maintenant une zone tampon de 50 km autour de la frontière en utilisant la fonction `st_buffer`&nbsp;:
 
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 Frontiere_tampon <- st_buffer(Frontiere, dist = 20e3)
 mapview(Frontiere_tampon)
 ```
@@ -1824,7 +1824,7 @@ mapview(Frontiere_tampon)
 
 Utiliser à nouveau la fonction `st_intersection()` pour trouver les municipalités à l'intérieur de la zone tampon. Il s'agit, en effet, de trouver l'intersection entre les *shapeliles* `villes` et `Frontiere_tampon`.
 
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 villes_nad <- st_transform(villes, crs = 32198) #utiliser une projection métrique
 Villes_Frontiere_tampon <- st_intersection(villes_nad, Frontiere_tampon)
 mapview(Villes_Frontiere_tampon)
@@ -1893,7 +1893,7 @@ Trouver les régions administratives traversées par la ligne reliant la ville d
 <br>
 Utiliser la fonction `subset()` pour isoler les points du *shapefile* `villes_nad` correspondants aux villes de Sherbrooke et de Fermont.
 
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 Sherb_Fermont <- subset(villes_nad, (toponyme == "Sherbrooke") | (toponyme == "Fermont"))
 
 mapview(Sherb_Fermont) 
@@ -1910,7 +1910,7 @@ Sherb_Fermont_points <- st_combine(Sherb_Fermont)
 
 Utiliser la fonction `st_cast()` pour transformer la géométrie multipoint en ligne.
 
-```{r, warning=FALSE, dev = 'png'}
+```{r, warning=FALSE, dev = "png"}
 Sherb_Fermont_ligne <- st_cast(Sherb_Fermont_points, to = "LINESTRING")
 
 mapview(Sherb_Fermont_ligne)
@@ -1926,7 +1926,7 @@ regions_nad[st_crosses(regions_nad, Sherb_Fermont_ligne, sparse = FALSE ),]
 
 Utiliser la fonction `mapview()` pour valider visuellement votre réponse.
 
-```{r, warning=FALSE, dev = 'png'}
+```{r, warning=FALSE, dev = "png"}
 regions_traversees <- regions_nad[st_crosses(regions_nad, Sherb_Fermont_ligne, sparse = FALSE ),]
 
 mapview(regions_traversees) + mapview(Sherb_Fermont_ligne)
@@ -1958,7 +1958,7 @@ SJSR_tampon <- subset(top10_villes_buffer, toponyme == "Saint-Jean-sur-Richelieu
 
 Utiliser la fonction `st_intersection` pour trouver les parcs du *shapefile* `parcs_nationaux_lcc` qui intersectent cette zone tampon.
 
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 Parcs_SJSR_tampon <- st_intersection(parcs_nationaux_lcc, SJSR_tampon)
 
 mapview(Parcs_SJSR_tampon) + mapview(SJSR_tampon, col.regions = "red", alpha.regions = 0.2)
