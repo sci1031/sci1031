@@ -462,8 +462,10 @@ leafsync::latticeView(map_ma, map_ma_inv, map_merge, ncol = 3)
 
 ```
 
+<div style="clear:both;"></div>
+
 <br>
-<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Note m@map marche pas avec leafsync --> 
+<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Note m@map marche pas avec leafsync -->
 <br>
 
 >
@@ -502,7 +504,9 @@ leafsync::latticeView(map_ordre1,map_ordre2, ncol = 2)
 
 ```
 
-<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Faire m@map car ce n'est pas la bonne classe d'objet créé avec leafsync --> 
+<div style="clear:both;"></div>
+
+<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Faire m@map car ce n'est pas la bonne classe d'objet créé avec leafsync -->
 
 <br>
 
@@ -531,6 +535,9 @@ map_mosaic_mean <- mapview(dem_mosaic_mean, legend = F)
 leafsync::latticeView(map_mosaic_min , map_mosaic_max, map_mosaic_mean, ncol = 3)
 
 ```
+
+<div style="clear:both;"></div>
+
 <br>
 <br>
 
