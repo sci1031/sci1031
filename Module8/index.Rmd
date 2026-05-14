@@ -177,8 +177,6 @@ Nous pouvons apercevoir que certaines cellules du *raster* `dem` contiennent des
 
 Plus précisément, nous allons utiliser la fonction `which()` pour filtrer les données du *raster* `dem`. Rappelons que la fonction `which()` identifie la position des éléments de valeur `TRUE` dans un vecteur logique (voir le [module 7](#fct_which) pour un rappel). Utilisons donc cette fonction pour trouver les cellules qui ont des valeurs d'élévation négatives.
 
-<!-- je crois qu'à partir d'ici le dem a déjà été modifié et il n'y a plus de valeur négative et ind et nombre donne 0 -->
-
 ```{r}
 ind <- which(values(dem) < 0)
 ind
@@ -218,8 +216,7 @@ summary(values(dem))
 ```
 <br>
 
-L'élévation minimale est maintenant de 2 et le nombre de `NA` a augmenté de `r length(ind)`. Ceci confirme que notre filtre a bien été appliqué. 
-<!-- le dem a déjà été modifiée et la valeur min est de 30 et il y a 3839 NA dans le summary de dem -->
+L'élévation minimale est maintenant de `r min(values(dem), na.rm = TRUE)` et le nombre de `NA` a augmenté de `r length(ind)`. Ceci confirme que notre filtre a bien été appliqué.
 
 La fonction `which()` peut aussi être utilisée pour filtrer des données selon des expressions logiques plus complexes. Nous pouvons, par exemple, remplacer `values(dem) < 0` par `values(dem) < 0 | values(dem) > 1000` pour exclure également les cellules avec des valeurs plus grandes que 1000&nbsp;m. De plus, il est aussi possible de changer les valeurs des cellules identifiées en d'autres valeurs que `NA`.
 
