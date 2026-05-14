@@ -465,7 +465,6 @@ leafsync::latticeView(map_ma, map_ma_inv, map_merge, ncol = 3)
 <div style="clear:both;"></div>
 
 <br>
-<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Note m@map marche pas avec leafsync -->
 <br>
 
 >
@@ -506,8 +505,6 @@ leafsync::latticeView(map_ordre1,map_ordre2, ncol = 2)
 
 <div style="clear:both;"></div>
 
-<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Faire m@map car ce n'est pas la bonne classe d'objet créé avec leafsync -->
-
 <br>
 
 ###### Fonction `mosaic()` {-}
@@ -540,9 +537,6 @@ leafsync::latticeView(map_mosaic_min , map_mosaic_max, map_mosaic_mean, ncol = 3
 
 <br>
 <br>
-
-<!-- ICI probleme cette ligne ne va pas en-dessous de l'image mais comme sur son cote. Faire m@map car ce n'est pas la bonne classe d'objet créé avec leafsync --> 
-
 
 La fonction `mosaic()` requiert également que les *rasters* utilisés possèdent la même résolution et le même SCR.
 
