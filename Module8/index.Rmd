@@ -927,30 +927,39 @@ Observez que nous avons effectivement une seule entité spatiale.
 
 ###### 6. Extraire les cellules d'élévation le long du sentier {-}
 
-Pour faire le profil topographique du sentier `rando`, nous devons extraire des données d’élévation du parc (`elv_megantic`) celles qui se trouvent le long du sentier. Pour ce faire nous allons utiliser la fonction `extract()` de la bibliothèque `terra` comme suit.
+Pour faire le profil topographique du sentier, nous devons extraire les données d’élévation du raster `elv_megantic` le long du sentier. Pour que le profil soit correct, il est essentiel que les valeurs d’élévation soient extraites dans l’**ordre de traversée** du sentier, c’est-à-dire du début à la fin du trajet. Or, la fonction `extract()` appliquée directement à une géométrie de ligne ne garantit pas cet ordre.
+
+Pour assurer l’ordre de traversée, nous commençons par convertir les sections du sentier en une série de **points** à l’aide de `st_cast()`. Cette fonction décompose chaque section (géométrie de type ligne) en ses **vertex** — les points qui définissent la géométrie — en les retournant dans leur ordre d’apparition le long de la ligne. Contrairement à une extraction le long d’une ligne, l’extraction à des points garantit que `terra` retourne les valeurs dans l’ordre des points fournis.
 
 ```{r elv_profile}
-topo_elv <- extract(elv_megantic, vect(rando), cells = TRUE)
+rando_pts <- st_cast(rando_sections, "POINT")
+topo_elv <- extract(elv_megantic, vect(rando_pts), cells = TRUE)
 ```
 <br>
 
 Notons que cette opération peut prendre plusieurs secondes pour être complétée par votre ordinateur.
 
-Deux remarques méritent d’être mentionnées concernant cette opération&nbsp;:
+Trois remarques méritent d’être mentionnées concernant cette opération&nbsp;:
 
 >
->i. Nous avons besoin de convertir `rando` qui est de classe `sfc` en objet de classe `SpatVector` pour l’utiliser avec `extract()`, ce que nous faisons avec `vect()`.
+>i. `st_cast(rando_sections, "POINT")` décompose les géométries de ligne de `rando_sections` en leurs vertex successifs, retournés dans leur ordre d’apparition le long de chaque section. La concaténation de toutes les sections dans `rando_pts` préserve ainsi l’ordre de traversée du sentier de bout en bout.
+>
+
+<br>
+
+>
+>ii. Nous avons besoin de convertir `rando_pts` qui est de classe `sf` en objet de classe `SpatVector` pour l’utiliser avec `extract()`, ce que nous faisons avec `vect()`.
 >
 
 <br>
 
 >
->ii. `cells = TRUE` nous permet d’avoir les indices des cellules extraites.
+>iii. `cells = TRUE` nous permet d’avoir les indices des cellules extraites.
 >
 
 <br>
 
-Comme vu un peu plus haut, la fonction `extract()` de `terra` retourne un *data.frame*. Ainsi, `topo_elv` est un objet de classe `data.frame` avec trois colonnes: `ID` (l’identifiant du sentier, toujours `1`), les valeurs d’élévation, et `cell` (les indices des cellules).
+Comme vu un peu plus haut, la fonction `extract()` de `terra` retourne un *data.frame*. Ainsi, `topo_elv` est un objet de classe `data.frame` avec trois colonnes: `ID` (l’identifiant de chaque point, de 1 au nombre total de points), les valeurs d’élévation, et `cell` (les indices des cellules).
 
 Nous pouvons confirmer ces propos par les commandes suivantes&nbsp;:
 ```{r}
@@ -962,7 +971,7 @@ names(topo_elv)   # noms des colonnes
 
 Renommons les colonnes pour plus de clarté&nbsp;:
 ```{r}
-names(topo_elv) <- c("sentier_id", "elevation", "cellule_id")
+names(topo_elv) <- c("point_id", "elevation", "cellule_id")
 head(topo_elv)
 ```
 
