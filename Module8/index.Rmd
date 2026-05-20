@@ -777,7 +777,7 @@ La fonction `get_elev_raster()` requiert deux arguments. Le premier argument sp�
 # install.packages("elevatr")
 # install.packages("progress") #Installer aussi!
 library(elevatr)
-elv_megantic <- get_elev_raster(parc_megantic, z = 13) 
+elv_megantic <- get_elev_raster(parc_megantic, z = 14) 
 
 ```
 <br>
@@ -932,7 +932,7 @@ Pour faire le profil topographique du sentier, nous devons extraire les données
 Pour assurer l’ordre de traversée, nous commençons par convertir les sections du sentier en une série de **points** à l’aide de `st_cast()`. Cette fonction décompose chaque section (géométrie de type ligne) en ses **vertex** — les points qui définissent la géométrie — en les retournant dans leur ordre d’apparition le long de la ligne. Contrairement à une extraction le long d’une ligne, l’extraction à des points garantit que `terra` retourne les valeurs dans l’ordre des points fournis.
 
 ```{r elv_profile}
-rando_pts <- st_cast(rando_sections, "POINT")
+rando_pts <- st_cast(rando, "POINT")
 topo_elv <- extract(elv_megantic, vect(rando_pts), cells = TRUE)
 ```
 <br>
@@ -942,7 +942,7 @@ Notons que cette opération peut prendre plusieurs secondes pour être complét�
 Trois remarques méritent d’être mentionnées concernant cette opération&nbsp;:
 
 >
->i. `st_cast(rando_sections, "POINT")` décompose les géométries de ligne de `rando_sections` en leurs vertex successifs, retournés dans leur ordre d’apparition le long de chaque section. La concaténation de toutes les sections dans `rando_pts` préserve ainsi l’ordre de traversée du sentier de bout en bout.
+>i. `st_cast(rando, "POINT")` décompose le MULTILINESTRING `rando` en ses vertex successifs, retournés dans l’ordre dans lequel ils définissent la géométrie. L’ordre de traversée du sentier est ainsi préservé dans `rando_pts`.
 >
 
 <br>
