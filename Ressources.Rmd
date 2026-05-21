@@ -82,7 +82,7 @@ Vous trouverez ici des liens vers différentes ressources R.
 
 * Outil de recherche des [bibliothèques de CRAN](https://www.rdocumentation.org/)
 * [`sf`](https://r-spatial.github.io/sf/articles/)
-* [`raster`](https://cran.r-project.org/web/packages/raster/index.html)
+* [`terra`](https://rspatial.org/terra/)
 * [`mapview`](https://r-spatial.github.io/mapview/)
 * [`tmap`](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html)
 * [`animation`](https://yihui.org/animation/)

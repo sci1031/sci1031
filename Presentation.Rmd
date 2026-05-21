@@ -72,7 +72,7 @@ Ce module se veut une introduction à la bibliothèque R `sf`. Il présente les 
 
 **Module 5 : Données matricielles**
 <br>
-Ce module se veut une introduction à la bibliothèque R `raster`. Il présente les fonctions de base pour lire, interpréter et visualiser des données matricielles.
+Ce module se veut une introduction à la bibliothèque R `terra`. Il présente les fonctions de base pour lire, interpréter et visualiser des données matricielles.
 
 
 **Module 6 : Cartographie**
