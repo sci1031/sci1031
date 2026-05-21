@@ -112,7 +112,7 @@ La mise en page d'une carte est importante pour que cette dernière puisse être
 
 <br>
 
-```{r mauvaises-cartes, echo=FALSE,out.width="50%",out.height="50%",fig.align='left', fig.cap="Exemples de mauvaises cartes. a) Carte de la diplomation et du revenu selon les comtés aux États-Unis (source: https://blog.stratasan.com/bad-maps-bad-maps). b) Carte du monde (source:https://carto.com). c) Carte de la localisation de tous les pubs dans le sud est du Royaume-Uni (source:http://www.math.uwaterloo.ca/tsp/pubs/data.html). d) Carte de l'Europe (source:https://gis.stackexchange.com).",fig.show='hold', fig.link=c("Module6/images/6_CarteA.png", "Module6/images/6_CarteD.png", "Module6/images/6_CarteB.png", "Module6/images/6_CarteC.png")}
+```{r mauvaises-cartes, echo=FALSE,out.width="50%",out.height="50%",fig.align="left", fig.cap="Exemples de mauvaises cartes. a) Carte de la diplomation et du revenu selon les comtés aux États-Unis (source: https://blog.stratasan.com/bad-maps-bad-maps). b) Carte du monde (source:https://carto.com). c) Carte de la localisation de tous les pubs dans le sud est du Royaume-Uni (source:http://www.math.uwaterloo.ca/tsp/pubs/data.html). d) Carte de l'Europe (source:https://gis.stackexchange.com).",fig.show="hold", fig.link=c("Module6/images/6_CarteA.png", "Module6/images/6_CarteD.png", "Module6/images/6_CarteB.png", "Module6/images/6_CarteC.png")}
 
 a1<-'Module6/images/6_CarteA.png'
 a2<-'Module6/images/6_CarteD.png'
@@ -170,7 +170,7 @@ Plusieurs éléments de mise en page sont indispensables dans une carte (Figure 
 
 <br>
 
-```{r elements-indisp, echo=FALSE,out.width="100%",out.height="80%",fig.cap="Éléments indispensables d'une carte (source: https://crelaurentides.org/).",fig.show='hold',fig.align='left', fig.link="Module6/Images/6_ElementsIndispensables.png"}
+```{r elements-indisp, echo=FALSE,out.width="100%",out.height="80%",fig.cap="Éléments indispensables d'une carte (source: https://crelaurentides.org/).",fig.show="hold",fig.align="left", fig.link="Module6/Images/6_ElementsIndispensables.png"}
 image<-"Module6/Images/6_ElementsIndispensables.png"
 knitr::include_graphics(image)
 ``` 
@@ -186,7 +186,7 @@ L'**orientation** de la carte, spécifiée par une flèche du nord ou une rose d
 
 <br>
 
-```{r fleche-nord, echo=FALSE,out.width="100%",out.height="80%",fig.cap="La flèche du nord est indispensable lorsque ce dernier ne correspond pas au haut de la carte (source: http://www.mondecarte.com/carte/canada/montreal/montreal_night_bus_plan.png.",fig.show='hold',fig.align='left', fig.link = c("Module6/Images/6_FlecheNord.png")}
+```{r fleche-nord, echo=FALSE,out.width="100%",out.height="80%",fig.cap="La flèche du nord est indispensable lorsque ce dernier ne correspond pas au haut de la carte (source: http://www.mondecarte.com/carte/canada/montreal/montreal_night_bus_plan.png.",fig.show="hold",fig.align="left", fig.link = c("Module6/Images/6_FlecheNord.png")}
 image <- "Module6/Images/6_FlecheNord.png"
 knitr::include_graphics(image)
 ```
@@ -211,7 +211,7 @@ Un **cadre** sert à délimiter la zone cartographiée  (Figure \@ref(fig:cadre-
 Un **encart** est une carte secondaire de petite taille que l'on appose à la carte principale (Figure \@ref(fig:cadre-encart)). Cette carte secondaire peut servir, par exemple, à représenter une étendue géographique plus grande qui permet de mieux situer la zone représentée dans la carte principale. Un encart peut être situé à l'intérieur ou à l'extérieur du cadre.
 
 
-```{r cadre-encart, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Un cadre et un encart sont des éléments optionnels de la mise en page d'une carte (source: Proulx et al. 2019).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_CadreEncart.png"}
+```{r cadre-encart, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Un cadre et un encart sont des éléments optionnels de la mise en page d'une carte (source: Proulx et al. 2019).",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_CadreEncart.png"}
 image<-"Module6/Images/6_CadreEncart.png"
 knitr::include_graphics(image)
 
@@ -223,7 +223,7 @@ Les **graticules** correspondent au réseau de latitudes et de longitudes permet
 
 <br>
 
-```{r graticules, echo=FALSE,out.width="70%",out.height="70%",fig.cap="Les graticules sont les coordonnées géographiques (degrés de latitude et de longitude) sur le cadre d'une carte (indice de sévérité des feux de forêt, source:https://cwfis.cfs.nrcan.gc.ca/) .",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Graticules.jpg"}
+```{r graticules, echo=FALSE,out.width="70%",out.height="70%",fig.cap="Les graticules sont les coordonnées géographiques (degrés de latitude et de longitude) sur le cadre d'une carte (indice de sévérité des feux de forêt, source:https://cwfis.cfs.nrcan.gc.ca/) .",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_Graticules.jpg"}
 image<-"Module6/Images/6_Graticules.jpg"
 knitr::include_graphics(image)
 ```
@@ -233,7 +233,7 @@ Un **quadrillage**, ou une grille, est un réseau de lignes horizontales et vert
 
 <br>
 
-```{r quadrillage, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Le quadrillage correspond au système de coordonnées projetées. Il est identifé par le nom de la projection cartographique utilisée (source:https://www.sepaq.com/) .",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Quadrillage.png"}
+```{r quadrillage, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Le quadrillage correspond au système de coordonnées projetées. Il est identifé par le nom de la projection cartographique utilisée (source:https://www.sepaq.com/) .",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_Quadrillage.png"}
 image<-"Module6/Images/6_Quadrillage.png"
 knitr::include_graphics(image)
 ```
@@ -242,7 +242,7 @@ knitr::include_graphics(image)
 
 Certaines cartes font l'usage à la fois du quadrillage et des graticules (Figure \@ref(fig:gratquad)):
 <br>
-```{r gratquad, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Les graticules et le quadrillage peuvent être utilisées sur une même carte (source:https://sbl.umontreal.ca/) .",fig.show='hold',fig.align='left', fig.link="Module6/Images/6_GratQuad.png"}
+```{r gratquad, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Les graticules et le quadrillage peuvent être utilisées sur une même carte (source:https://sbl.umontreal.ca/) .",fig.show="hold",fig.align="left", fig.link="Module6/Images/6_GratQuad.png"}
 image<-"Module6/Images/6_GratQuad.png"
 knitr::include_graphics(image)
 ```
@@ -259,7 +259,7 @@ Le choix de la police, de la fonte, de la taille et de la couleur des caractère
 Nous devons nous limiter à deux polices de caractères : une police avec empattement (*serif* en anglais) et une autre sans empattement (*sans serif*) (figure \@ref(fig:serif)).  Les polices avec empattement  sont généralement utilisées pour étiqueter des objets naturels (plans d’eau, montagnes, etc.) alors que les polices sans serif sont utilisées pour étiqueter des objets anthropiques (villes, routes, ponts, etc.).
 
 <br>
-```{r serif, echo=FALSE,out.width="40%",out.height="40%",fig.cap="Lettre avec empattement à gauche et sans empattement à droite.",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Serif.png" }
+```{r serif, echo=FALSE,out.width="40%",out.height="40%",fig.cap="Lettre avec empattement à gauche et sans empattement à droite.",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_Serif.png" }
 image<-"Module6/Images/6_Serif.png"
 knitr::include_graphics(image)
 ```
@@ -271,13 +271,13 @@ Nous devons favoriser également l’utilisation d’une seule couleur de texte,
 L’usage de différentes couleurs et tailles de caractères dans l’objectif de créer une hiérarchie visuelle peut améliorer la lisibilité d’une carte mais doit se faire judicieusement et avec parcimonie. Les figures (\@ref(fig:text1)) et (\@ref(fig:text2)) donnent des exemples dans lesquels le texte a été adapté pour améliorer la présentation d’une carte.
 <br>
 
-```{r text1, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemple de carte où l'écriture a été améliorée. Le choix de couleurs différentes pour représenter les frontières et les plans d'eau, ainsi que l'orientation du texte améliore la lisibilité de la carte (source: Guimond 2021 (https://mgimond.github.io/Spatial/good-map-making-tips.html#typefaces-and-fonts)) .",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_ImprovedText1.png"}
+```{r text1, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemple de carte où l'écriture a été améliorée. Le choix de couleurs différentes pour représenter les frontières et les plans d'eau, ainsi que l'orientation du texte améliore la lisibilité de la carte (source: Guimond 2021 (https://mgimond.github.io/Spatial/good-map-making-tips.html#typefaces-and-fonts)) .",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_ImprovedText1.png"}
 image<-"Module6/Images/6_ImprovedText1.png"
 knitr::include_graphics(image)
 ```
 
 <br>
-```{r text2, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemple de carte où l'écriture a été améliorée. La carte du dessus fait l'usage de caractères de tailles, de fonte, de couleurs et d'orientation différentes créant une hiérarchie visuelle efficace (source: https://www.axismaps.com/) .",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_ImprovedText2.png"}
+```{r text2, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemple de carte où l'écriture a été améliorée. La carte du dessus fait l'usage de caractères de tailles, de fonte, de couleurs et d'orientation différentes créant une hiérarchie visuelle efficace (source: https://www.axismaps.com/) .",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_ImprovedText2.png"}
 image<-"Module6/Images/6_ImprovedText2.png"
 knitr::include_graphics(image)
 ```
@@ -293,7 +293,7 @@ Dans la figure (\@ref(fig:text2)), remarquez le lettrage en majuscule pour étiq
 Il existe deux grandes catégories de carte: les cartes générales et les cartes thématiques. Les **cartes générales** affichent uniquement l'emplacement géographique des données qu'elles soient sous forme de points, de lignes, de polygones ou de rasters. Les cartes routières, les plans de localisation, les cartes topographiques et les cartes touristiques en sont des exemples (\@ref(fig:generales)).
 
 <br>
-```{r generales, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Exemples de carte générale. A) Carte routière des environs de Paris (source:https://fr.viamichelin.be/). B) Carte touristique de la Gaspésie (source: http://motoplus.ca). C) Plan du Montréal souterrain (source: https://voyage-montreal.com/montreal-souterrain ).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Generales.png"}
+```{r generales, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Exemples de carte générale. A) Carte routière des environs de Paris (source:https://fr.viamichelin.be/). B) Carte touristique de la Gaspésie (source: http://motoplus.ca). C) Plan du Montréal souterrain (source: https://voyage-montreal.com/montreal-souterrain ).",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_Generales.png"}
 image<-"Module6/Images/6_Generales.png"
 knitr::include_graphics(image)
 ```
@@ -307,7 +307,7 @@ Les cartes à **symboles gradués** et à **symboles proportionnels** utilisent 
 Les cartes de **densité de points** utilisent des symboles ponctuels de même taille mais dont le nombre varie d'un polygone à un autre pour illustrer la variation dans la densité de l'attribut représenté (\@ref(fig:prop)C).
 
 <br>
-```{r prop, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte avec symboles gradués, (B) carte avec symboles proportionnels, (C) carte de densité de points (source: GISGeography 2021. *Dot Distribution vs Graduated Symbols vs Proportional Symbol Maps*: https://gisgeography.com/dot-distribution-graduated-symbols-proportional-symbol-maps/, Consulté le 30 mars 2021).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Proportionnel.png"}
+```{r prop, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte avec symboles gradués, (B) carte avec symboles proportionnels, (C) carte de densité de points (source: GISGeography 2021. *Dot Distribution vs Graduated Symbols vs Proportional Symbol Maps*: https://gisgeography.com/dot-distribution-graduated-symbols-proportional-symbol-maps/, Consulté le 30 mars 2021).",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_Proportionnel.png"}
 image<-"Module6/Images/6_Proportionnel.png"
 knitr::include_graphics(image)
 ```
@@ -318,7 +318,7 @@ Les cartes **choroplèthes** illustrent les régions d'une carte en utilisant un
 <br>
 
 
-```{r choro, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Densité de population à l'échelle mondiale. (Source:https://ourworldindata.org/most-densely-populated-countries).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Choroplethe.png"}
+```{r choro, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Densité de population à l'échelle mondiale. (Source:https://ourworldindata.org/most-densely-populated-countries).",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_Choroplethe.png"}
 image<-"Module6/Images/6_Choroplethe.png"
 knitr::include_graphics(image)
 ```
@@ -329,7 +329,7 @@ knitr::include_graphics(image)
 Les cartes **isoplèthes** représentent les données spatiales par des lignes de contour. C'est-à-dire des lignes formées en joignant les points qui ont la même valeur d'attribut (*iso* signifie égal en grec). Les cartes isoplèthes peuvent aussi utiliser une même couleur pour représenter des régions qui ont une même valeur d'attribut (\@ref(fig:iso)).
 <br>
 
-```{r iso, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Période d'ensoleillement en Europe, en heures par année. (Source:http://averagemaps.blogspot.com/2013/10/isoline-map.html).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Isoplethe.png"}
+```{r iso, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Période d'ensoleillement en Europe, en heures par année. (Source:http://averagemaps.blogspot.com/2013/10/isoline-map.html).",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_Isoplethe.png"}
 image<-"Module6/Images/6_Isoplethe.png"
 knitr::include_graphics(image)
 ```
@@ -337,7 +337,7 @@ knitr::include_graphics(image)
 <br>
 Les **cartogrammes** illustrent les régions d'une carte en modifiant leurs tailles de façon proportionnelle à l'attribut représenté (\@ref(fig:cartogramme)).
 <br>
-```{r cartogramme, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte du monde avec une représentation non modifiée des superficies des états, (B) carte de la population mondiale (la superficie de chaque territoire est proportionnelle à la fraction de la population mondiale y habitant), (C) Carte de la consommation de café en 2014 (la superficie de chaque territoire est proportionnelle à la proportion mondiale de café qui y est consommé (kg par habitant)) (source:https://worldmapper.org/).",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_Cartogramme.png"}
+```{r cartogramme, echo=FALSE,out.width="80%",out.height="80%",fig.cap="Exemples de (A) carte du monde avec une représentation non modifiée des superficies des états, (B) carte de la population mondiale (la superficie de chaque territoire est proportionnelle à la fraction de la population mondiale y habitant), (C) Carte de la consommation de café en 2014 (la superficie de chaque territoire est proportionnelle à la proportion mondiale de café qui y est consommé (kg par habitant)) (source:https://worldmapper.org/).",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_Cartogramme.png"}
 image<-"Module6/Images/6_Cartogramme.png"
 knitr::include_graphics(image)
 ```
@@ -353,7 +353,7 @@ Les variables visuelles sont des différences dans les entités cartographiques 
 
 <br>
 
-```{r variablesvisuelles, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Les variables visuelles (source: figure adaptée de https://cartosquad.com/)",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_VariablesVisuelles.png"}
+```{r variablesvisuelles, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Les variables visuelles (source: figure adaptée de https://cartosquad.com/)",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_VariablesVisuelles.png"}
 image<-"Module6/Images/6_VariablesVisuelles.png"
 knitr::include_graphics(image)
 ```
@@ -368,7 +368,7 @@ Le tableau de la Figure \@ref(fig:symbologie) résume les choix possibles de sym
 <br>
 
 
-```{r symbologie, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Symbologie selon la nature des données (source: Zanin et Trémolo [-@ZaninTremolo_2003])",fig.show='hold',fig.align='left', fig.link = "Module6/Images/6_symbologie.png"}
+```{r symbologie, echo=FALSE,out.width="100%",out.height="100%",fig.cap="Symbologie selon la nature des données (source: Zanin et Trémolo [-@ZaninTremolo_2003])",fig.show="hold",fig.align="left", fig.link = "Module6/Images/6_symbologie.png"}
 image<-"Module6/Images/6_symbologie.png"
 knitr::include_graphics(image)
 ```
@@ -393,7 +393,7 @@ Une couleur est définie par une combinaison de trois valeurs qu'on appelle *dim
 
 La **teinte** (ou la tonalité, *hue* en anglais) est la dimension que nous associons aux noms des couleurs. La teinte est généralement utilisée pour représenter différentes catégories de données; c'est-à-dire des données qualitatives nominales.
 <br>
-```{r teinte,  fig.cap="Un exemple de 8 différentes teintes de couleur", echo=FALSE, fig.height=0.5, fig.width = 4,fig.show='hold',fig.align='center'}
+```{r teinte,  fig.cap="Un exemple de 8 différentes teintes de couleur", echo=FALSE, fig.height=0.5, fig.width = 4,fig.show="hold",fig.align="center"}
 # SOURCE: code from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 library(munsell)
 library(colorspace)
@@ -415,7 +415,7 @@ par(OP)
 
 La **luminosité** (ou la valeur) est associée à la quantité de lumière qu'une surface réfléchit ou émet. La luminosité est généralement utilisée pour représenter des données ordinales ou relatives.
 <br>
-```{r lumin, fig.cap = "Huit différentes teintes (colonnes) déclinées selon des valeurs décroissantes de luminosité (rangées).", echo=FALSE, fig.height=2, fig.width = 4,warning=FALSE, message=FALSE,fig.show='hold',fig.align='center'}
+```{r lumin, fig.cap = "Huit différentes teintes (colonnes) déclinées selon des valeurs décroissantes de luminosité (rangées).", echo=FALSE, fig.height=2, fig.width = 4,warning=FALSE, message=FALSE,fig.show="hold",fig.align="center"}
 
 # SOURCE: code from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 
@@ -439,7 +439,7 @@ par(OP)
 
 La **saturation** (ou la chromaticité) d'une couleur mesure son intensité. Une couleur vive a une saturation élevée tandis qu'une couleur pâle a une saturation faible. La saturation est surtout utilisée pour distinguer des données ordinales.
 <br>
-```{r saturation,  fig.cap = "Huit différentes teintes (colonnes) déclinées selon des valeurs décroissantes de saturation (rangées).", echo=FALSE, fig.height=2, fig.width = 4,warning=FALSE, message=FALSE, fig.align='center'}
+```{r saturation,  fig.cap = "Huit différentes teintes (colonnes) déclinées selon des valeurs décroissantes de saturation (rangées).", echo=FALSE, fig.height=2, fig.width = 4,warning=FALSE, message=FALSE, fig.align="center"}
 
 # SOURCE: code from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 
@@ -490,7 +490,7 @@ grep("green", colours())
 
 Ces indices sont associés aux couleurs suivantes:
 
-```{r exgrep, fig.cap = "Quarante couleurs vertes identifiées par la fonction `grep()`", echo=FALSE, fig.height=2.5, fig.width = 4,fig.align='center',warning=FALSE, message=FALSE}
+```{r exgrep, fig.cap = "Quarante couleurs vertes identifiées par la fonction `grep()`", echo=FALSE, fig.height=2.5, fig.width = 4,fig.align="center",warning=FALSE, message=FALSE}
 library(ggplot2)
 vert<-colours()[grep("green", colours())]
 rects<-expand.grid(X=1:8,Y=1:5)
@@ -604,10 +604,9 @@ Il existe trois catégories de palettes de couleurs.
 Les palettes **qualitatives** sont utilisées pour représenter des données qualitatives nominales, c'est-à-dire des données qui ne sont pas ordonnées ni quantitatives. Une palette qualitative est constituée de couleurs de **teintes** différentes mais de **luminosité** et de **saturation** égales. 
 <br>
 
-```{r qual,  fig.cap="Un exemple de 4 palettes qualitatives", echo=FALSE, fig.height=2, fig.width = 3.5,fig.show='hold',fig.align='center'}
+```{r qual,  fig.cap="Un exemple de 4 palettes qualitatives", echo=FALSE, fig.height=2, fig.width = 3.5,fig.show="hold",fig.align="center"}
 # SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 library(RColorBrewer)
-library(gt)
 # Function
 pal <- function(col, border = "light gray", ...)
 { n <- length(col)
@@ -633,7 +632,7 @@ data("World")
 
 Une palette qualitative sied bien pour illustrer les différents continents de la planète.
 
-```{r continents, echo=FALSE, out.width="90%",out.height="60%",fig.show='hold',fig.align='center', message=FALSE, warning=FALSE}
+```{r continents, echo=FALSE, out.width="90%",out.height="60%",fig.show="hold",fig.align="center", message=FALSE, warning=FALSE}
 # Exemple qual
 World2<-World
 World2<-World2[-8,] #Ceci retire le continent appele: "Seven seas (open ocean)"
@@ -652,10 +651,9 @@ mapCont
 Les palettes **séquentielles** sont utilisées pour représenter des données ordonnées, par exemple la température, la densité de population, le revenu moyen par habitant, etc. Une palette séquentielle forme un gradient allant d'une couleur pâle (correspondant à la valeur la plus faible de l'attribut représenté) à une couleur foncée (correspondant à la valeur la plus forte de l'attribut). La palette séquentielle utilise généralement une seule **teinte** (mais parfois plus) qui est déclinée sur plusieurs niveaux de **luminosité** ou de **saturation**.
 <br>
 
-```{r seq,  fig.cap="Un exemple de 5 palettes séquentielles. Les trois premières palettes font appel à une seule teinte (noire, bleue et verte). La quatrième fait appel à deux teintes (jaune et verte) tandis que la dernière fait appel à trois teintes (jaune, orange et rouge)", echo=FALSE, fig.height=2.5, fig.width = 3.5,fig.show='hold',fig.align='center'}
+```{r seq,  fig.cap="Un exemple de 5 palettes séquentielles. Les trois premières palettes font appel à une seule teinte (noire, bleue et verte). La quatrième fait appel à deux teintes (jaune et verte) tandis que la dernière fait appel à trois teintes (jaune, orange et rouge)", echo=FALSE, fig.height=2.5, fig.width = 3.5,fig.show="hold",fig.align="center"}
 # SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 library(RColorBrewer)
-library(gt)
 # Function
 pal <- function(col, border = "light gray", ...)
 { n <- length(col)
@@ -676,7 +674,7 @@ par(OP)
 
 À titre d'exemple, une palette séquentielle sied bien pour illustrer comment la densité de population varie d'un pays à l'autre. 
 
-```{r popdens, echo=FALSE, out.width="90%",out.height="60%",fig.show='hold',fig.align='center'}
+```{r popdens, echo=FALSE, out.width="90%",out.height="60%",fig.show="hold",fig.align="center"}
 # Exemple seq
 pal<- brewer.pal(n = 9, name = 'YlOrRd')
 mapPop<-tm_shape(World)+
@@ -692,10 +690,9 @@ mapPop
 ```
 Les palettes **divergentes** sont également utilisées pour représenter des données ordonnées. Toutefois, une palette divergente met l'accent sur une valeur centrale à partir de laquelle les données divergent. Généralement, une palette divergente est constituée de deux **teintes** complémentaires qui dénotent les valeurs extrêmes de part et d'autre de la valeur centrale. La **saturation** et la **luminosité** de chaque teinte sont alors ajustées pour que les couleurs se répartissent de façon symétrique autour de la valeur centrale qui est représentée par une couleur pâle. 
 <br>
-```{r div,  fig.cap="Un exemple de 4 palettes divergentes.", echo=FALSE, fig.height=2, fig.width = 3.5,fig.show='hold',fig.align='center'}
+```{r div,  fig.cap="Un exemple de 4 palettes divergentes.", echo=FALSE, fig.height=2, fig.width = 3.5,fig.show="hold",fig.align="center"}
 # SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 library(RColorBrewer)
-library(gt)
 # Function
 pal <- function(col, border = "light gray", ...)
 { n <- length(col)
@@ -716,7 +713,7 @@ par(OP)
 <br>
 
 Par exemple, une palette divergente illustre bien la distribution spatiale des produits régionaux bruts. 
-```{r income, eval = TRUE,  echo=FALSE, out.width="90%",out.height="60%",fig.show='hold',fig.align='center', warning=FALSE, message =FALSE}
+```{r income, eval = TRUE,  echo=FALSE, out.width="90%",out.height="60%",fig.show="hold",fig.align="center", warning=FALSE, message =FALSE}
 # Exemple Divergent
 
 #World %>% as.data.frame() %>% head()
@@ -754,10 +751,9 @@ Tout d'abord, R comprend des palettes par défaut qui sont définies par les fon
 
 Le paramètre `n` spécifie le nombre de couleurs.
 
-```{r basepal,  fig.cap="Les palettes de base dans R.", echo=FALSE, fig.height=2.5, fig.width = 5,fig.show='hold',fig.align='center'}
+```{r basepal,  fig.cap="Les palettes de base dans R.", echo=FALSE, fig.height=2.5, fig.width = 5,fig.show="hold",fig.align="center"}
 # SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 
-library(gt)
 # Function
 pal <- function(col, border = "light gray", ...)
 { n <- length(col)
@@ -794,10 +790,9 @@ La bibliothèque `viridis` comprend quatre palettes de couleurs séquentielles q
 
 <br>
 
-```{r viridipal,  fig.cap="Les palettes de la bibliothèque `viridis`.", echo=FALSE, fig.height=2, fig.width = 5,fig.show='hold',fig.align='center'}
+```{r viridipal,  fig.cap="Les palettes de la bibliothèque `viridis`.", echo=FALSE, fig.height=2, fig.width = 5,fig.show="hold",fig.align="center"}
 # SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 
-library(gt)
 library(viridis)
 # Function
 pal <- function(col, border = "light gray", ...)
@@ -826,7 +821,7 @@ mtext(c("inferno", "plasma","magma", "viridis"), 2, at=c(1/8, 3/8, 5/8, 7/8),las
 
 La bibliothèque `RColorBrewer` contient les palettes de couleurs [ColorBrewer](https://colorbrewer2.org/#) particulièrement utiles pour la cartographie. Cette bibliothèque comprend un grand nombre de palettes séquentielles, divergentes et qualitatives.
 
-```{r brewerpal,  fig.height=12, fig.width = 5, fig.cap="Les palettes de la bibliothèque `RColorBrewer`.", echo=FALSE, fig.show='hold',fig.align='center'}
+```{r brewerpal,  fig.height=12, fig.width = 5, fig.cap="Les palettes de la bibliothèque `RColorBrewer`.", echo=FALSE, fig.show="hold",fig.align="center"}
 library(RColorBrewer)
 display.brewer.all()
 ```
@@ -885,12 +880,12 @@ install.packages("tmap")
 ```
 <br>
 
-Chargez `tmap` dans votre session de travail R ainsi que les bibliothèques `sf` et `raster` dont nous aurons besoin pour lire et manipuler les données vectorielles et matricielles respectivement:
+Chargez `tmap` dans votre session de travail R ainsi que les bibliothèques `sf` et `terra` dont nous aurons besoin pour lire et manipuler les données vectorielles et matricielles respectivement:
 
 ```{r}
 library(tmap)
 library(sf)
-library(raster)
+library(terra)
 ```
 
 ### Les polygones 
@@ -925,7 +920,7 @@ Observer la structure et les attributs du *shapefile* `Q`. Celui-ci contient 17 
 
 Créons tout d'abord une carte simple du *shapefile* Q que nous venons de charger. La fonction `tm_fill()` permet de remplir de façon homogène l'intérieur des limites d'un polygone. Elle s'applique donc aux données vectorielles de type polygone, et on l'ajoute à la fonction `tm_shape()`.
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 tm_shape(Q)+ 
   tm_fill()
 ```
@@ -935,7 +930,7 @@ tm_shape(Q)+
 
 La bibliothèque `tmap` comprend sa propre classe d'objets:
 
-```{r, dev = 'png'}
+```{r, dev = "png"}
 map_Q <- tm_shape(Q)+ 
              tm_fill()
 
@@ -953,7 +948,7 @@ La création d'objet `tmap` est utile car, comme nous le verrons, elle permet de
 
 La fonction `tm_borders()` permet d'illustrer les frontières des polygones:
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 # frontiere des regions admin
 tm_shape(Q) +
   tm_borders()
@@ -963,7 +958,7 @@ tm_shape(Q) +
 
 La fonction `tm_borders()` peut s'utiliser conjointement avec la fonction `tm_fill()`:
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 # Quebec + frontiere
 tm_shape(Q) +
   tm_fill() +
@@ -975,7 +970,7 @@ tm_shape(Q) +
 
 Par ailleurs, la fonction `tm_polygons()` est équivalente l'utilisation conjointe de `tm_borders()` et `tm_fill()`:
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 # tm_polygons = tm_fill + tm_borders 
 tm_shape(Q) +
    tm_polygons()
@@ -987,7 +982,7 @@ tm_shape(Q) +
 
 Les fonctions `tm_borders()` et `tm_fill()` possèdent plusieurs arguments pour ajuster l'apparence de la carte. Voici des exemples:
 
-```{r, dev = 'png', fig.cap="Cette figure est inspirée de la [figure 9.3](https://geocompr.robinlovelace.net/adv-map.html) du livre Geocomputation with R [@lovelace_geocomputation_2021]."}
+```{r, dev = "png", fig.cap="Cette figure est inspirée de la [figure 9.3](https://geocompr.robinlovelace.net/adv-map.html) du livre Geocomputation with R [@lovelace_geocomputation_2021]."}
 
 # couleur des polygones 
 Q1 <- tm_shape(Q) + tm_fill(col="green")
@@ -1021,7 +1016,7 @@ Rappel types de couleur
 La création de cartes, à partir de données vectorielles de type polygone, nécessite parfois de colorer individuellement les polygones. 
 Par exemple, la couleur d'un polygone peut représenter la valeur d'un de ses attributs. Dans ce cas, nous utilisons la fonction `tm_fill()` en associant à l'argument `col` le nom de l'attribut que nous désirons illustrer.
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 tm_shape(Q) + tm_fill(col="NUM_REG", title = "Régions")
 ```
 
@@ -1030,7 +1025,7 @@ Dans le cas ci-dessus, l'attribut illustré (`NUM_REG`) est catégorique et dist
 
 Nous pouvons aussi choisir d'illustrer un seul des polygones d'un *shapefile*. Dans un tel cas, nous devons isoler le polygone désiré et n'illustrer que ce dernier avec la fonction `tm_shape()`. Par exemple, isolons le polygone correspondant à la région de l'Outaouais: 
 
-```{r, dev = 'png', fig.height=4}
+```{r, dev = "png", fig.height=4}
 Q_Outaouais <- Q[Q$NOM_REG == "Outaouais",]
 tm_shape(Q_Outaouais) + tm_fill(col="blue", alpha = 0.4)
 ```
@@ -1039,7 +1034,7 @@ tm_shape(Q_Outaouais) + tm_fill(col="blue", alpha = 0.4)
 Nous pouvons également vouloir mettre l'emphase sur un polygone en particulier, en assignant une couleur seulement à celui-ci, tout en cartographiant l'ensemble des polygones. Dans ce cas, nous pouvons utiliser le caractère additif des objets `tmap`. Nous créons un premier objet représentant l'ensemble des polygones et nous lui additionnons un deuxième objet représentant le polygone que nous souhaitons mettre en évidence.
 
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 # Une option
 Q1 <- tm_shape(Q) + tm_borders(col="black")
 Q2 <- tm_shape(Q_Outaouais) + tm_fill(col="blue", alpha = 0.4)
@@ -1065,7 +1060,7 @@ Remarquer l'usage de la fonction `tmap_arrange()` pour afficher des cartes côte
 
 L'ajout d'une barre d'échelle et d'une rose des vents se fait par l'utilisation des fonctions `tm_scale_bar()` et `tm_compass()` respectivement:
 
-```{r, dev = 'png',fig.height=6}
+```{r, dev = "png",fig.height=6}
 map_Q +   # la carte du Québec que nous avons créée plus haut
   # ajout d'une barre d'échelle
   tm_scale_bar(breaks = c(0,250,500),
@@ -1080,7 +1075,7 @@ map_Q +   # la carte du Québec que nous avons créée plus haut
 où l'argument `break` précise les divisions sur la barre d'échelle, `text.size` la taille du texte sous la barre, et `position` la position de la barre sur la carte (gauche ou droite, haut ou bas).
 
 Plusieurs options d'arguments sont possibles. Utilisez `help(tm_scale_bar)` ou `help(tm_compass)` pour connaître les autres arguments possibles pour ces fonctions. Par exemple,
-```{r, dev = 'png',fig.height=6}
+```{r, dev = "png",fig.height=6}
 map_Q +   
   tm_scale_bar(width = 2, 
                position=c("right","bottom")) +
@@ -1099,7 +1094,7 @@ La fonction `tm_grid()` ajoute une grille à la carte selon le système de coord
 
 La fonction `tm_graticules` ajoute les lignes de longitude et de latitude du système de coordonnées géographiques, c'est-à-dire non-projetées. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées géographiques du North American Datum de 1983 (NAD83, espg:4269).
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 Q1 <- map_Q + tm_grid()
 
 Q2 <- map_Q + tm_graticules()
@@ -1110,7 +1105,7 @@ tmap_arrange(Q1,Q2)
 
 Plusieurs options d'arguments existent pour les fonctions `tm_grid()` et `tm_graticules()`. Par exemple, il est possible de préciser le nombre de divisions sur l'axe des *x* (`n.x`) et sur l'axe des *y* (`n.y`)^[Noter que le nombre de divisions créé par `tmap` est approximativement celui demandé car `tmap` crée des divisions uniformément espacées situées sur des coordonnées de valeurs entières.], l'épaisseur du trait (`lwd`), la couleur (`col`) ou encore la taille de l'écriture (`labels.size`).
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 Q1 <- map_Q + tm_grid(labels.size=0.5, 
                       col="yellow", 
                       lwd=3, 
@@ -1131,7 +1126,7 @@ tmap_arrange(Q1,Q2)
 
 Il faut utiliser la fonction `tm_credits()` pour ajouter à la carte une mention sur la source des données, ou toute autre information comme l'auteur ou l'autrice de la carte et son organisation d'attache. Par défaut, la mention apparaît dans le coin inférieur droit.
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 map_Q + 
   tm_credits("Données récupérées \nsur le site donneesquebec.ca", 
              size = 0.6)
@@ -1154,7 +1149,7 @@ La fonction `tm_layout` permet d'ajuster la mise en page d'une carte et différe
 * La couleur du fond de la carte (`bg.color`) et de l'espace à l'extérieur du cadre (`outer.bg.color`).
 
 Voici quelques exemples de mise en page qui utilisent ces arguments.
-```{r eval = FALSE, echo = TRUE, dev = 'png'}
+```{r eval = FALSE, echo = TRUE, dev = "png"}
 # Création d'une carte générale
 map_Q <- tm_shape(Q) + tm_fill() + tm_borders()
 
@@ -1169,7 +1164,7 @@ map_Q + tm_layout(frame.lwd = 2, outer.margins = c(0, 0.2,0, 0.2), outer.bg.colo
 ```
 
 
-```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png'}
+```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
 Qtitre = map_Q + tm_layout(title = "Carte du Québec", title.size =0.8, title.position = c("right","top"))
 Qframe = map_Q + tm_layout(frame = FALSE)
 Qbg = map_Q + tm_layout(bg.color = "aquamarine", scale = 2)
@@ -1209,7 +1204,7 @@ tm_shape(Q) +
 
 ```
 
-```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png'}
+```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
 Q1 <- tm_shape(Q) + 
   tm_polygons(col = "NOM_REG") + 
   tm_layout(legend.show = FALSE)
@@ -1232,7 +1227,7 @@ tm_shape(Q) +
   tm_layout(legend.outside = TRUE)
 ```
 
-```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png',fig.height=6 }
+```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png",fig.height=6 }
 tm_shape(Q) + 
   tm_fill(col="NOM_REG", title = "Régions administratives") + 
   tm_layout(legend.outside = TRUE)
@@ -1252,7 +1247,7 @@ tm_shape(Q) +
 
 ```
 
-```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png', fig.height=6 }
+```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) + 
   tm_fill(col="NOM_REG", title = "Régions administratives") + 
   tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE, 
@@ -1267,7 +1262,7 @@ tm_shape(Q) +
 
 <!--   
 
-```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png'}
+```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
 Q1 = tm_shape(Q)+tm_polygons(col="NOM_REG") + tm_layout(legend.show = FALSE, asp=1)
 Q2= tm_shape(Q)+tm_fill(col="NOM_REG", title = "Régions administratives")+tm_layout(legend.outside = TRUE, asp=1)
 
@@ -1319,7 +1314,7 @@ Q4 <- tm_shape(Q) + tm_polygons(col="NUM_REG") +
 
 
 
-```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png'}
+```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
 
 Q1 = tm_shape(Q)+tm_polygons() + tm_layout(aes.color = c(fill="lightblue",borders="darkgreen"))
 Q2 = tm_shape(Q)+tm_polygons(col="NUM_REG") + tm_layout(legend.show = FALSE,
@@ -1343,7 +1338,7 @@ La bibliothèque `tmap` contient des styles prédéfinis qu'on appelle avec la f
 
 Voici quelques-uns de ces styles prédéfinis. 
 
-```{r eval = FALSE, echo = TRUE, dev = 'png'}
+```{r eval = FALSE, echo = TRUE, dev = "png"}
 tm_shape(Q) + tm_polygons(col="NUM_REG") + 
                 tm_style("classic") +
                 tm_layout(legend.show = FALSE) 
@@ -1363,7 +1358,7 @@ tm_shape(Q) + tm_polygons(col="NUM_REG") +
 ```
 
 
-```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = 'png'}
+```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
 Q1 = tm_shape(Q)+tm_polygons(col="NUM_REG") + 
                                   tm_style("classic") +
                                   tm_layout(legend.show = FALSE) 
@@ -1397,7 +1392,7 @@ Il faut aller ici: https://rdrr.io/cran/tmap/man/tm_text.html
 La fonction `tm_text()` permet d'écrire sur chaque polygone la valeur d'un de ses attributs.
 Par exemple, nous pouvons ajouter le numéro de la région administrative sur chaque polygone:
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 tm_shape(Q) + tm_polygons(col="NUM_REG") + 
                 tm_style("col_blind") + 
                 tm_layout(legend.show = FALSE, frame = FALSE)+
@@ -1407,7 +1402,7 @@ tm_shape(Q) + tm_polygons(col="NUM_REG") +
 
 Ou encore:
 
-```{r, warning = FALSE, dev = 'png', fig.height=6 }
+```{r, warning = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) + tm_polygons() +
                 tm_layout(aes.color = c(fill="black",borders="white"),
                           bg.color = "black",
@@ -1456,7 +1451,7 @@ levels(Ro$ClsRte)
 La bibliothèque `tmap` possède une fonction particulière pour illustrer des objets vectoriels de type ligne et multigne. Il s'agit de la fonction `tm_lines()`. Celle-ci doit être ajoutée à la fonction `tm_shape(L)` où `L` est un *shapefile* contenant des objets de géométrie ligne ou multiligne.
 
 Illustrons les multilignes du *shapefile* `Ro`:
-```{r, warning = FALSE, dev = 'png', fig.height=5 }
+```{r, warning = FALSE, dev = "png", fig.height=5 }
 tm_shape(Ro) + tm_lines()
 ```
 <br>
@@ -1464,7 +1459,7 @@ tm_shape(Ro) + tm_lines()
 
 Pour superposer la carte des routes sur la carte du Québec, nous utilisons la propriété additive des objets `tmap`.
 
-```{r, warning = FALSE, dev = 'png', fig.height=6 }
+```{r, warning = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) + tm_fill() +
   tm_shape(Ro) + tm_lines(col="brown") +
   tm_layout(title = "Réseau routier")
@@ -1475,7 +1470,7 @@ Notez que chaque fois qu'on ajoute un nouvel ensemble de données à cartographi
 
 Pour représenter différemment les objets de type ligne en fonction de la valeur d'un de leur attribut, nous pouvons utiliser l'argument `col` dans la fonction `tm_lines`:
 
-```{r, warning = FALSE, dev = 'png', fig.height=6 }
+```{r, warning = FALSE, dev = "png", fig.height=6 }
 # créons une palette de trois couleurs
 pal.col<-c("red","darkgoldenrod4","darkslateblue")
 
@@ -1510,7 +1505,7 @@ La bibliothèque `tmap` comprend plusieurs fonctions permettant de représenter 
 
 La fonction `tm_dots()` fonctionne de façon similaire aux fonctions `tm_polygons()` et `tm_lines()`. Il suffit de l'ajouté à la fonction `tm_shape(P)` où `P` est un *shapefile* de types point ou multipoint.
 
-```{r, dev = 'png', fig.height=6 }
+```{r, dev = "png", fig.height=6 }
 # Juste les points
 Q1 <- tm_shape(V) + tm_dots()
 
@@ -1525,7 +1520,7 @@ tmap_arrange(Q1,Q2)
 
 Nous pouvons également définir la couleur des points en fonction de la valeur de leur attribut.
 
-```{r, dev = 'png', fig.height=6 }
+```{r, dev = "png", fig.height=6 }
 tm_shape(Q) + tm_fill() +
 tm_shape(V) + tm_dots(col = "Mncplts", 
                       palette = "Paired", 
@@ -1542,7 +1537,7 @@ tm_shape(V) + tm_dots(col = "Mncplts",
 
 La fonction `tm_markers()` représente les points par le symbole de repère géographique:
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 
 tm_shape(Q) + tm_fill() +
 tm_shape(V) + tm_markers(size = 0.5, 
@@ -1562,13 +1557,13 @@ La fonction `tm_markers()` permet d'ajouter du texte facilement sur les repères
 
 ##### Données d'élévation du Québec {-}
 
-Pour explorer les options d'affichage de données matricielles, nous utilisons un *raster* représentant le relief du territoire québécois sous forme d'une matrice d'élévation. Chargeons ces données dans notre session de travail R avec la fonction `raster()`. Nous devons préalablement charger la bibliothèque `raster`:
+Pour explorer les options d'affichage de données matricielles, nous utilisons un *raster* représentant le relief du territoire québécois sous forme d'une matrice d'élévation. Chargeons ces données dans notre session de travail R avec la fonction `rast()` de la bibliothèque `terra`:
 
 
 ```{r}
-library(raster)
+library(terra)
 
-E <- raster("Module6/Module6_donnees/Elevation/QC_Elevation.tif")
+E <- rast("Module6/Module6_donnees/Elevation/QC_Elevation.tif")
 ```
 
 <br>
@@ -1583,7 +1578,7 @@ La fonction `tm_raster()` de la bibliothèque `tmap` permet de visualiser les *r
 tm_shape(E) + tm_raster(title = "Élévation (m)")
 tm_shape(E) + tm_raster(n = 10, title = "Élévation (m)")
 ```
-```{r, echo = FALSE, dev = 'png', fig.height=6 }
+```{r, echo = FALSE, dev = "png", fig.height=6 }
 Q1 <- tm_shape(E) + tm_raster(title = "Élévation (m)")
 Q2 <- tm_shape(E) + tm_raster(n = 10, title = "Élévation (m)")
 
@@ -1593,7 +1588,7 @@ tmap_arrange(Q1,Q2)
 
 Il est possible d'afficher en légende un histogramme illustrant la distribution des valeurs. Par exemple: 
 
-```{r, dev = 'png', fig.height=6 }
+```{r, dev = "png", fig.height=6 }
 tm_shape(E) + tm_raster(n = 10,
                         title = "Élévation (m)",
                         legend.hist = TRUE) +
@@ -1605,7 +1600,7 @@ tm_shape(E) + tm_raster(n = 10,
 
 Par défaut, la palette de couleur utilisée est la palette séquentielle `YlOrBr` de [ColorBrewer](https://colorbrewer2.org/) (de jaune à brun en passant par orange). Or, nous pouvons changer la palette de couleur. Utilisons, par exemple, la fonction `colorRampPalette()` pour créer notre propre palette de couleur. 
 
-```{r, dev = 'png', warning = FALSE, fig.height=6}
+```{r, dev = "png", warning = FALSE, fig.height=6}
 
 pal.elevation = colorRampPalette( c("midnightblue","forestgreen",
                                     "darkolivegreen4","burlywood", 
@@ -1630,7 +1625,7 @@ Il existe différentes façons de former des classes de valeur à partir de la d
 
 Visualisons à nouveau la carte des données d'élévation en utilisant un style "fixed" et un style "quantile":
 
-```{r, dev = 'png', warning = FALSE, fig.height=6 }
+```{r, dev = "png", warning = FALSE, fig.height=6 }
 # définir la mise en page pour les deux cartes
 format_carte <- tm_layout(frame = FALSE, 
                           legend.position = c(0.67,0.04), 
@@ -1672,7 +1667,7 @@ La fonction `tm_symbols()` est similaire à la fonction `tm_dots()` mais ne s'ut
 En guise d'exemple, reprenons les données sur les régions administratives du Québec pour lesquelles nous connaissons la taille de la population. Nous pouvons illustrer les régions par un cercle dont le diamètre est proportionnel à la taille de sa population. Il s'agit d'attribuer à l'argument `size`, le nom de l'attribut que nous souhaitons représenter. 
 
 
-```{r, warning = FALSE, dev = 'png', fig.height=6 }
+```{r, warning = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) + 
   tm_polygons(col="NUM_REG", legend.show = FALSE) + 
   tm_style("bw") +
@@ -1686,7 +1681,7 @@ tm_shape(Q) +
 
 Par défaut, le symbole utilisé est un point. Le point correspond au symbole `shape = 21`. Nous pouvons toutefois utiliser d'autres symboles comme le carré (`shape = 15`), ou le repère géographique (`shape = marker_icon()`). Vous pouvez même importer vos propres symboles. 
 
-```{r, warning = FALSE, dev = 'png', fig.height=6}
+```{r, warning = FALSE, dev = "png", fig.height=6}
 carte_base <- tm_shape(Q) + 
                   tm_polygons(col="NUM_REG", legend.show = FALSE) + 
                   tm_style("bw") 
@@ -1717,7 +1712,7 @@ tmap_arrange(carte_carre, carte_marqueur)
 
 Lorsque nous utilisons des symboles proportionnels, nous devons souvent avoir plus d'une légende. Par exemple, dans les cartes précédentes, nous avions seulement une légende se rapportant à la taille des populations mais aucune légende pour identifier les régions. Pour ajouter deux légendes (ou plus), nous devons utiliser la fonction `tm_layout()` avec l'argument `legend.stack` qui précise si les légendes seront disposées de façon verticale ou horizontale. 
 
-```{r, warning = FALSE, dev = 'png', fig.height = 6}
+```{r, warning = FALSE, dev = "png", fig.height = 6}
 tm_shape(Q) + 
   tm_polygons(col="NOM_REG",  
               palette="Set1", 
@@ -1757,7 +1752,7 @@ Q$Pop_prop_enfant <- Q$Pop_0_14/Q$Pop_tot
 
 Utilisons maintenant la fonction `tm_bubbles()` en définissant l'argument `size` par l'attribut `"ATot_T"`, et l'argument `col` par l'attribut `"Pop_prop_enfant"`:
 
-```{r, warning = FALSE, dev = 'png', fig.height = 6}
+```{r, warning = FALSE, dev = "png", fig.height = 6}
 tm_shape(Q) +
   tm_polygons(col = "NUM_REG", 
               legend.show = FALSE, 
@@ -1792,7 +1787,7 @@ Pour créer des cartes choroplèthes, nous utilisons l'argument `col` de la fonc
 
 Créons des cartes choroplèthes de la proportion d'enfants dans les régions administratives en utilisant différentes classifications de couleurs. 
 
-```{r, warning = FALSE, dev = 'png', fig.height = 6}
+```{r, warning = FALSE, dev = "png", fig.height = 6}
 
 # Par defaut, nous avons 4 classes
 Qdefaut <- tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant")
@@ -1832,7 +1827,7 @@ Q_covid$prop_cas<-(Q_covid$Cs_cmls)/(Q_covid$ATot_T)
 
 
 Comparaison nombre vs proportion
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 
 Q_nombre<-tm_shape(Q_covid)+tm_polygons(col="Cs_cmls", title = "Nombre de cas")
 
@@ -1844,7 +1839,7 @@ tmap_arrange(Q_nombre,Q_prop)
 
 Expliquer le sens de chaque style.
 Voir: https://bookdown.org/nicohahn/making_maps_with_r5/docs/tmap.html#static-maps-with-tmap
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 format_carte <-tm_layout(legend.text.size = 0.55)
 
 Q_quantile<-tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", title = "Quantile")+format_carte
@@ -1858,7 +1853,7 @@ C'est souvent en regardant la distribution des données qu'on peut déterminer l
 EXEMPLE DE MELANIE ou alors faire ça au début.
 
 Représenter chaque region individuellement
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", legend.is.portrait = FALSE)+
   tm_facets(by="NOM_REG", nrow =4,  scale.factor = 5)+
   tm_layout(panel.label.height=2, panel.label.size = 0.9, legend.show = FALSE)
@@ -1879,7 +1874,7 @@ Pour créer une carte à panneaux multiples, nous utilisons d'abord la fonction 
 
 Représentons à nouveau les polygones des régions administratives selon la proportion d'enfants dans leur population mais cette fois en créant une carte à panneaux multiples:
 
-```{r, warning = FALSE, dev = 'png'}
+```{r, warning = FALSE, dev = "png"}
 tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant",  
                           style = "quantile") +
                  tm_facets(by = "NOM_REG", 
@@ -1917,7 +1912,7 @@ En guise d'exemple, considérons une section du *raster* d'élévation `E` corre
 Q_Outaouais <- subset(Q, NOM_REG == "Outaouais")
 
 # Découper le raster E selon l'étendue de Q_Outaouais
-E_Outaouais <- crop(E, extent(Q_Outaouais))
+E_Outaouais <- crop(E, ext(Q_Outaouais))
 
 # Créer un mask 
 E_Outaouais <- mask(E_Outaouais, Q_Outaouais)
@@ -1962,7 +1957,7 @@ Nous pouvons enfin combiner les deux cartes ensemble. Il s'agit d'afficher la ca
 
 En particulier, nous utilisons la fonction `viewport()` de la bibliothèque `grid` qui permet de définir la position de la carte encadrée sur la carte ainsi que sa taille.
 
-```{r, warning = FALSE, dev = 'png', fig.height = 6}
+```{r, warning = FALSE, dev = "png", fig.height = 6}
 library(grid)
 carte_princ + format_carte
 print(carte_cadre, vp = viewport(0.72, 0.42, width = 0.4, height = 0.4))
@@ -2048,7 +2043,7 @@ Nous comprenons ainsi que l'attribut `iso_a3` correspond à un [code standardis�
 <summary> Réponse</summary>
 <p>
 
-```{r, warning = FALSE, dev = 'png', fig.height=4}
+```{r, warning = FALSE, dev = "png", fig.height=4}
 
 tm_shape(World) + tm_polygons(col="name") + 
                 tm_style("col_blind") +                             
@@ -2079,7 +2074,7 @@ Afrique <- World[World$continent == "Africa",]
 <br>
 
 Produire une carte de l'Afrique avec le style `col_blind` et sans légende.
-```{r, warning = FALSE, dev = 'png', fig.height=6}
+```{r, warning = FALSE, dev = "png", fig.height=6}
 tm_shape(Afrique) + tm_polygons(col="name") + 
                 tm_style("col_blind") +                             
                 tm_layout(legend.show = FALSE)
@@ -2088,7 +2083,7 @@ tm_shape(Afrique) + tm_polygons(col="name") +
 
 Notez que la bibliothèque `tmap` permet de minimiser le nombre de polygones adjacents illustrés avec la même couleur. Pour se faire, il s'agit de définir `col = MAP_COLORS` en argument à la fonction `tm_polygons()`.
 
-```{r, warning = FALSE, dev = 'png', fig.height=6}
+```{r, warning = FALSE, dev = "png", fig.height=6}
 tm_shape(Afrique) + tm_polygons(col="MAP_COLORS") + 
                 tm_style("col_blind") +                             
                 tm_layout(legend.show = FALSE)
@@ -2108,7 +2103,7 @@ tm_shape(Afrique) + tm_polygons(col="MAP_COLORS") +
 
 Nous reprenons d'abord la carte de l'Afrique produire en **d**. Puis, nous ajoutons le code "iso_a3" des pays en utilisant la fonction `tm_text()`:
 
-```{r, dev = 'png', fig.height=6}
+```{r, dev = "png", fig.height=6}
 tm_shape(Afrique) + tm_polygons(col="MAP_COLORS") + 
                 tm_style("col_blind") +                             
                 tm_layout(legend.show = FALSE) +
@@ -2144,7 +2139,7 @@ pal <- brewer.pal(n=5, "Reds")
 
 Nous pouvons maintenant produire la carte:
 
-```{r,dev = 'png', fig.height=6}
+```{r,dev = "png", fig.height=6}
 tm_shape(AS) + 
   tm_polygons(col = "pop_est_dens",
               palette = pal,
@@ -2170,7 +2165,7 @@ tm_shape(AS) +
 
 Nous utilisons la fonction `tm_facets()` pour produire une carte à panneaux multiples:
 
-```{r, dev = 'png', fig.height=8}
+```{r, dev = "png", fig.height=8}
 tm_shape(AS) + 
   tm_polygons(col = "pop_est_dens",
               palette = pal,
@@ -2204,7 +2199,7 @@ tm_shape(AS) +
 
 Nous devons utiliser les différents arguments de la fonction `tm_layout()` pour préciser les caractéristiques demandées.
 
-```{r, dev = 'png', fig.height=8}
+```{r, dev = "png", fig.height=8}
 
 tm_shape(AS) + 
   tm_polygons(col = "pop_est_dens",
@@ -2293,7 +2288,7 @@ metro[1:10, c("name","pop2020")]
 
 Nous utilisons la fonction `tm_borders()` pour illustrer les frontières des pays, puis, nous utilisons la fonction `tm_symbols()` pour illustrer les métropoles. 
 
-```{r, dev = 'png', fig.height=4, warning = FALSE, message = FALSE}
+```{r, dev = "png", fig.height=4, warning = FALSE, message = FALSE}
 tm_shape(World)+
   tm_borders(col="black")+
 tm_shape(metro)+
@@ -2369,7 +2364,7 @@ La couche `trees` illustre le pourcentage de couverture forestière par pixel. F
 Nous utilisons la fonction `tm_raster()` pour illustrer la couche `trees` de l'objet `land`. De plus, nous utilisons la fonction `brewer.pal()` de la bibliothèque `RColorBrewer` pour définir la palette de couleur. Finalement, nous utilisons les arguments de la fonction [`tm_layout()`](https://r-tmap.github.io/tmap/reference/tm_layout.html) pour spécifier les éléments demandés.
 
 
-```{r, dev = 'png', fig.height=4, warning = FALSE, message = FALSE}
+```{r, dev = "png", fig.height=4, warning = FALSE, message = FALSE}
 pal = brewer.pal(n=6, "Greens")
 tm_shape(land) + 
   tm_raster("trees",

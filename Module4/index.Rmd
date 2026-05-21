@@ -33,14 +33,13 @@ La section [4.5](#gdb) vous familiarisera avec les données vectorielles en form
 ###### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `sf`
-- `rgdal`
 - `mapview`
 - `leafsync`
 - `spData`
 
 Installez ces librairies si vous ne les avez pas:
 ```{r, eval = FALSE}
-install.packages(c('sf', 'rgdal', 'mapview', 'leafsync', 'spData'))
+install.packages(c('sf', 'mapview', 'leafsync', 'spData'))
 ```
 
 </div>
@@ -84,8 +83,6 @@ Dans la section [exercice](#ex_vec), vous utiliserez les données vectorielles `
 </div>
 
 ```{r load-libraries4, echo = FALSE, results='hide', warning = FALSE, message = FALSE}
-#library(raster)
-library(rgdal)
 library(sf)
 library(mapview)
 library(leafsync)
@@ -126,7 +123,7 @@ Le fichier `nz_capitales.csv` contient les coordonnées géographiques des capit
 
 ### Créer des données vectorielles {#create_vec}
 
-Pour créer, lire et manipuler des données vectorielles, nous allons utiliser la bibliothèque `sf`. Notez que la bibliothèque `rgdal` se charge automatiquement lorsque `sf` se charge.
+Pour créer, lire et manipuler des données vectorielles, nous allons utiliser la bibliothèque `sf`.
 
 ```{r load-sf, eval = FALSE}
 library(sf)
