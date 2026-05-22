@@ -40,7 +40,7 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 
 - `tm_shape()`
 - `tm_fill()`
-- `tm_scale_bar()`
+- `tm_scalebar()`
 - `tm_compass()`
 - `tm_grid()`
 - `tm_graticules()`
@@ -634,18 +634,20 @@ Une palette qualitative sied bien pour illustrer les différents continents de l
 
 ```{r continents, echo=FALSE, out.width="90%",out.height="60%",fig.show="hold",fig.align="center", message=FALSE, warning=FALSE}
 # Exemple qual
-World2<-World
-World2<-World2[-8,] #Ceci retire le continent appele: "Seven seas (open ocean)"
-pal<- brewer.pal(n = 7, name = 'Paired')
-mapCont<-tm_shape(World2)+
-tm_polygons("continent", palette = pal, drop.levels=TRUE, title= "",labels=c("Afrique", "Antartique", "Asie", "Europe", "Amérique du Nord", "Océanie", "Amérique du Sud"), legend.is.portrait = FALSE)+
-tm_layout(frame = TRUE, legend.outside = TRUE, 
-            legend.outside.position = "bottom", 
+World2 <- World
+World2 <- World2[-8,] #Ceci retire le continent appele: "Seven seas (open ocean)"
+pal <- brewer.pal(n = 7, name = 'Paired')
+mapCont <- tm_shape(World2) +
+  tm_polygons(fill = "continent",
+              fill.scale = tm_scale(values = pal,
+                                    labels = c("Afrique", "Antartique", "Asie", "Europe", "Amérique du Nord", "Océanie", "Amérique du Sud"),
+                                    drop.levels = TRUE),
+              fill.legend = tm_legend(title = "", orientation = "landscape")) +
+  tm_layout(frame = TRUE, legend.outside = TRUE,
+            legend.outside.position = "bottom",
             legend.outside.size = 0.2,
-            #legend.title.fontface = 0.8, 
             legend.text.size = 0.6,
-            inner.margins = c(0,0,0,0)
-            )
+            inner.margins = c(0, 0, 0, 0))
 mapCont
 ```
 Les palettes **séquentielles** sont utilisées pour représenter des données ordonnées, par exemple la température, la densité de population, le revenu moyen par habitant, etc. Une palette séquentielle forme un gradient allant d'une couleur pâle (correspondant à la valeur la plus faible de l'attribut représenté) à une couleur foncée (correspondant à la valeur la plus forte de l'attribut). La palette séquentielle utilise généralement une seule **teinte** (mais parfois plus) qui est déclinée sur plusieurs niveaux de **luminosité** ou de **saturation**.
@@ -676,16 +678,17 @@ par(OP)
 
 ```{r popdens, echo=FALSE, out.width="90%",out.height="60%",fig.show="hold",fig.align="center"}
 # Exemple seq
-pal<- brewer.pal(n = 9, name = 'YlOrRd')
-mapPop<-tm_shape(World)+
-tm_polygons("pop_est_dens", palette = pal,id="name", title="Densité de population", style = "quantile", legend.is.portrait = FALSE)+
-  tm_layout(frame = TRUE, legend.outside = TRUE, 
-            legend.outside.position = "bottom", 
+pal <- brewer.pal(n = 9, name = 'YlOrRd')
+mapPop <- tm_shape(World) +
+  tm_polygons(fill = "pop_est_dens",
+              fill.scale = tm_scale_intervals(values = pal, style = "quantile"),
+              fill.legend = tm_legend(title = "Densité de population", orientation = "landscape"),
+              id = "name") +
+  tm_layout(frame = TRUE, legend.outside = TRUE,
+            legend.outside.position = "bottom",
             legend.outside.size = 0.2,
-            #legend.title.fontface = 0.8, 
             legend.text.size = 0.6,
-            inner.margins = c(0,0,0,0)
-            )
+            inner.margins = c(0, 0, 0, 0))
 mapPop
 ```
 Les palettes **divergentes** sont également utilisées pour représenter des données ordonnées. Toutefois, une palette divergente met l'accent sur une valeur centrale à partir de laquelle les données divergent. Généralement, une palette divergente est constituée de deux **teintes** complémentaires qui dénotent les valeurs extrêmes de part et d'autre de la valeur centrale. La **saturation** et la **luminosité** de chaque teinte sont alors ajustées pour que les couleurs se répartissent de façon symétrique autour de la valeur centrale qui est représentée par une couleur pâle. 
@@ -719,17 +722,18 @@ Par exemple, une palette divergente illustre bien la distribution spatiale des p
 #World %>% as.data.frame() %>% head()
 ## test with life exp
 # https://tlorusso.github.io/geodata_workshop/tmap_package
-pal<- brewer.pal(n = 5, name = 'RdYlBu')
-mapIncome<-tm_shape(World)+
-tm_polygons("income_grp", palette = pal,id="name", title="Niveau de PRB", labels=c("Élevé (OCDE)", "Élévé (Non-OCDE)", "Intermédiaire supérieur", "Intermédiaire inférieur", "Faible"), legend.is.portrait = FALSE)+
-  tm_layout(frame = TRUE, legend.outside = TRUE, 
-            legend.outside.position = "bottom", 
+pal <- brewer.pal(n = 5, name = 'RdYlBu')
+mapIncome <- tm_shape(World) +
+  tm_polygons(fill = "income_grp",
+              fill.scale = tm_scale(values = pal,
+                                    labels = c("Élevé (OCDE)", "Élévé (Non-OCDE)", "Intermédiaire supérieur", "Intermédiaire inférieur", "Faible")),
+              fill.legend = tm_legend(title = "Niveau de PRB", orientation = "landscape"),
+              id = "name") +
+  tm_layout(frame = TRUE, legend.outside = TRUE,
+            legend.outside.position = "bottom",
             legend.outside.size = 0.2,
-            #legend.title.fontface = 0.8, 
             legend.text.size = 0.6,
-            inner.margins = c(0,0,0,0)
-            
-            )
+            inner.margins = c(0, 0, 0, 0))
 mapIncome
 ```
 
@@ -855,9 +859,7 @@ tm_shape(DonneesSpatiales) + tm_fonction1() + tm_fonction2() + ...
 
 La fonction `tm_shape()` est suivi d'une ou de plusieurs fonctions qui précisent les objets ou les attributs des données à cartographier ainsi que les éléments cartographiques à ajouter et la mise en page souhaitée. 
 
-Télécharger la bibliothèque `tmap`[^notetmap]:
-
-[^notetmap]:En date du 16 octobre 2023, il est préférable d'installer la version précédente de `tmap` car la nouvelle version n'est pas au point pour la fonction `tm_markers()`. Voici la marche à suivre. Installez la bibliothèque `devtools` si vous ne l'avez pas: ` install.packages("devtools")`. Chargez là: `require(devtools)`. Puis installez la version 3.3-3 de `tmap`: `install_version("tmap", version = "3.3-3", repos = "http://cran.us.r-project.org")`. Si on vous demande de mettre à jour certaines bibliothèques, vous pouvez répondre None.
+Télécharger la bibliothèque `tmap`:
    
 <!--   
 
@@ -984,24 +986,24 @@ Les fonctions `tm_borders()` et `tm_fill()` possèdent plusieurs arguments pour 
 
 ```{r, dev = "png", fig.cap="Cette figure est inspirée de la [figure 9.3](https://geocompr.robinlovelace.net/adv-map.html) du livre Geocomputation with R [@lovelace_geocomputation_2021]."}
 
-# couleur des polygones 
-Q1 <- tm_shape(Q) + tm_fill(col="green")
+# couleur des polygones
+Q1 <- tm_shape(Q) + tm_fill(fill = "green")
 
 # transparence
-Q2 <- tm_shape(Q) + tm_fill(col="green", alpha = 0.4)
+Q2 <- tm_shape(Q) + tm_fill(fill = "green", alpha = 0.4)
 
 # couleur des frontières
-Q3 <- tm_shape(Q) + tm_borders(col="green")
+Q3 <- tm_shape(Q) + tm_borders(col = "green")
 
 # épaisseur du trait
-Q4 <- tm_shape(Q) + tm_borders(col="pink", lwd = 4) 
+Q4 <- tm_shape(Q) + tm_borders(col = "pink", lwd = 4)
 
 # type de trait
-Q5 <- tm_shape(Q) + tm_borders(col="blue", lty = 2) 
+Q5 <- tm_shape(Q) + tm_borders(col = "blue", lty = 2)
 
 # couleur des polygones et des frontières
-Q6 <- tm_shape(Q) + tm_fill(col="blue", alpha = 0.3) + 
-  tm_borders(col="black")
+Q6 <- tm_shape(Q) + tm_fill(fill = "blue", alpha = 0.3) +
+  tm_borders(col = "black")
 
 tmap_arrange(Q1,Q2,Q3,Q4,Q5,Q6)
 ```
@@ -1014,10 +1016,10 @@ Rappel types de couleur
 #### Attributs des polygones {-}
 
 La création de cartes, à partir de données vectorielles de type polygone, nécessite parfois de colorer individuellement les polygones. 
-Par exemple, la couleur d'un polygone peut représenter la valeur d'un de ses attributs. Dans ce cas, nous utilisons la fonction `tm_fill()` en associant à l'argument `col` le nom de l'attribut que nous désirons illustrer.
+Par exemple, la couleur d'un polygone peut représenter la valeur d'un de ses attributs. Dans ce cas, nous utilisons la fonction `tm_fill()` en associant à l'argument `fill` le nom de l'attribut que nous désirons illustrer.
 
 ```{r, dev = "png", fig.height=6}
-tm_shape(Q) + tm_fill(col="NUM_REG", title = "Régions")
+tm_shape(Q) + tm_fill(fill = "NUM_REG", fill.legend = tm_legend(title = "Régions"))
 ```
 
 <br> 
@@ -1027,7 +1029,7 @@ Nous pouvons aussi choisir d'illustrer un seul des polygones d'un *shapefile*. D
 
 ```{r, dev = "png", fig.height=4}
 Q_Outaouais <- Q[Q$NOM_REG == "Outaouais",]
-tm_shape(Q_Outaouais) + tm_fill(col="blue", alpha = 0.4)
+tm_shape(Q_Outaouais) + tm_fill(fill = "blue", alpha = 0.4)
 ```
 <br>
 
@@ -1036,13 +1038,13 @@ Nous pouvons également vouloir mettre l'emphase sur un polygone en particulier,
 
 ```{r, dev = "png", fig.height=6}
 # Une option
-Q1 <- tm_shape(Q) + tm_borders(col="black")
-Q2 <- tm_shape(Q_Outaouais) + tm_fill(col="blue", alpha = 0.4)
+Q1 <- tm_shape(Q) + tm_borders(col = "black")
+Q2 <- tm_shape(Q_Outaouais) + tm_fill(fill = "blue", alpha = 0.4)
 Q12 <- Q1 + Q2
 
 # Une autre option
 Q3 <- tm_shape(Q) + tm_fill()
-Q4 <- tm_shape(Q_Outaouais) + tm_borders(col="blue", lwd = 4)
+Q4 <- tm_shape(Q_Outaouais) + tm_borders(col = "blue", lwd = 4)
 Q34 <- Q3 + Q4
 
 tmap_arrange(Q12,Q34)
@@ -1056,14 +1058,14 @@ Remarquer l'usage de la fonction `tmap_arrange()` pour afficher des cartes côte
 
 #### Barre d'échelle et rose des vents {-}
 
-###### Fonctions tm_scale_bar() et tm_compass {-}
+###### Fonctions tm_scalebar() et tm_compass {-}
 
-L'ajout d'une barre d'échelle et d'une rose des vents se fait par l'utilisation des fonctions `tm_scale_bar()` et `tm_compass()` respectivement:
+L'ajout d'une barre d'échelle et d'une rose des vents se fait par l'utilisation des fonctions `tm_scalebar()` et `tm_compass()` respectivement:
 
 ```{r, dev = "png",fig.height=6}
 map_Q +   # la carte du Québec que nous avons créée plus haut
   # ajout d'une barre d'échelle
-  tm_scale_bar(breaks = c(0,250,500),
+  tm_scalebar(breaks = c(0,250,500),
                text.size = 0.8, 
                position=c("right","bottom")) +
   # ajout d'une rose des vents
@@ -1074,14 +1076,14 @@ map_Q +   # la carte du Québec que nous avons créée plus haut
 
 où l'argument `break` précise les divisions sur la barre d'échelle, `text.size` la taille du texte sous la barre, et `position` la position de la barre sur la carte (gauche ou droite, haut ou bas).
 
-Plusieurs options d'arguments sont possibles. Utilisez `help(tm_scale_bar)` ou `help(tm_compass)` pour connaître les autres arguments possibles pour ces fonctions. Par exemple,
+Plusieurs options d'arguments sont possibles. Utilisez `help(tm_scalebar)` ou `help(tm_compass)` pour connaître les autres arguments possibles pour ces fonctions. Par exemple,
 ```{r, dev = "png",fig.height=6}
-map_Q +   
-  tm_scale_bar(width = 2, 
-               position=c("right","bottom")) +
+map_Q +
+  tm_scalebar(breaks = c(0, 50, 100),
+              text.size = 0.8,
+              position = c("right", "bottom")) +
   tm_compass(type = "4star",
-             size = 2, 
-             show.labels = 2, 
+             show.labels = 2,
              position = c("right", "top"))
 ```
 <br>
@@ -1143,7 +1145,7 @@ La fonction `tm_layout` permet d'ajuster la mise en page d'une carte et différe
 
 #### Titre, cadre et couleur du fond {-}
 
-* L'ajout d'un titre (`title`), la taille de ce dernier (`title.size`) et sa position (`title.position`).
+* L'ajout d'un titre (`main.title`), la taille de ce dernier (`main.title.size`) et sa position (`main.title.position`).
 * La présence ou l'absence d'un cadre (`frame`) et l'épaisseur du trait de celui-ci (`frame.lw`).
 * La taille des marges extérieures au cadre: `outer.margins = c(Haut,Droit,Bas,Gauche)` où `Haut`, `Droit`, `Bas`, `Gauche` sont des chiffres entre 0 (pas de marge) et 1 (marge complète).
 * La couleur du fond de la carte (`bg.color`) et de l'espace à l'extérieur du cadre (`outer.bg.color`).
@@ -1154,7 +1156,7 @@ Voici quelques exemples de mise en page qui utilisent ces arguments.
 map_Q <- tm_shape(Q) + tm_fill() + tm_borders()
 
 # Différentes options de mise en page
-map_Q + tm_layout(title = "Carte du Québec", title.size =0.8, title.position = c("right","top"))
+map_Q + tm_layout(main.title = "Carte du Québec", main.title.size = 0.8, main.title.position = c("right", "top"))
 
 map_Q + tm_layout(frame = FALSE)
 
@@ -1165,10 +1167,10 @@ map_Q + tm_layout(frame.lwd = 2, outer.margins = c(0, 0.2,0, 0.2), outer.bg.colo
 
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
-Qtitre = map_Q + tm_layout(title = "Carte du Québec", title.size =0.8, title.position = c("right","top"))
+Qtitre = map_Q + tm_layout(main.title = "Carte du Québec", main.title.size = 0.8, main.title.position = c("right", "top"))
 Qframe = map_Q + tm_layout(frame = FALSE)
 Qbg = map_Q + tm_layout(bg.color = "aquamarine", scale = 2)
-Qf = map_Q + tm_layout(aes.color = c(fill = "palegreen", borders = "black"), frame.double.line = TRUE, outer.margins = c(0, 0.2,0, 0.2))
+Qf = map_Q + tm_layout(frame.double.line = TRUE, outer.margins = c(0, 0.2, 0, 0.2))
 Qmargin = map_Q + tm_layout(frame.lwd = 2, outer.margins = c(0.1, 0.2,0.1, 0.2), outer.bg.color="lavender")
 
 tmap_arrange(Qtitre,Qframe,Qbg,Qmargin, ncol=2, nrow=2, outer.margins = NULL)
@@ -1189,74 +1191,74 @@ Voici quelques exemples de mise en page de la légende:
 
 ```{r eval = FALSE, echo = TRUE}
 
-tm_shape(Q) + 
-  tm_polygons(col = "NOM_REG") + 
+tm_shape(Q) +
+  tm_polygons(fill = "NOM_REG") +
   tm_layout(legend.show = FALSE)
 
 tm_shape(Q) +
-  tm_polygons(col = "NUM_REG", title = "Régions administratives", 
-              legend.is.portrait = FALSE) + 
-  tm_layout(frame = FALSE, legend.outside = TRUE, 
-            legend.outside.position = "bottom", 
-            legend.outside.size = 0.15, 
+  tm_polygons(fill = "NUM_REG",
+              fill.legend = tm_legend(title = "Régions administratives",
+                                      orientation = "landscape")) +
+  tm_layout(frame = FALSE, legend.outside = TRUE,
+            legend.outside.position = "bottom",
+            legend.outside.size = 0.15,
             legend.text.size = 0.75)
 
 
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
-Q1 <- tm_shape(Q) + 
-  tm_polygons(col = "NOM_REG") + 
+Q1 <- tm_shape(Q) +
+  tm_polygons(fill = "NOM_REG") +
   tm_layout(legend.show = FALSE)
 
 Q3 <- tm_shape(Q) +
-  tm_polygons(col = "NUM_REG", title = "Régions administratives", legend.is.portrait=FALSE) + 
-  tm_layout(frame = FALSE, legend.outside = TRUE, 
-            legend.outside.position = "bottom", 
-            legend.outside.size = 0.15, 
+  tm_polygons(fill = "NUM_REG",
+              fill.legend = tm_legend(title = "Régions administratives",
+                                      orientation = "landscape")) +
+  tm_layout(frame = FALSE, legend.outside = TRUE,
+            legend.outside.position = "bottom",
+            legend.outside.size = 0.15,
             legend.text.size = 0.75)
 
-tmap_arrange(Q1,Q3)
+tmap_arrange(Q1, Q3)
 ```
 
 <br>
 
 ```{r eval = FALSE, echo = TRUE}
-tm_shape(Q) + 
-  tm_fill(col = "NOM_REG", title = "Régions administratives") + 
+tm_shape(Q) +
+  tm_fill(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
   tm_layout(legend.outside = TRUE)
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png",fig.height=6 }
-tm_shape(Q) + 
-  tm_fill(col="NOM_REG", title = "Régions administratives") + 
+tm_shape(Q) +
+  tm_fill(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
   tm_layout(legend.outside = TRUE)
-
 ```
 <br>
 
 ```{r eval = FALSE, echo = TRUE}
-tm_shape(Q) + 
-  tm_fill(col="NOM_REG", title = "Régions administratives") + 
-  tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE, 
-            legend.outside.position = "left", 
-            legend.title.fontfamily = "serif", 
-            legend.title.fontface = 2, 
-            legend.title.color = "lightpink", 
+tm_shape(Q) +
+  tm_fill(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
+  tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE,
+            legend.outside.position = "left",
+            legend.title.fontfamily = "serif",
+            legend.title.fontface = 2,
+            legend.title.color = "lightpink",
             legend.text.color = "white")
-
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png", fig.height=6 }
-tm_shape(Q) + 
-  tm_fill(col="NOM_REG", title = "Régions administratives") + 
-  tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE, 
-            legend.outside.position = "left", 
-            legend.title.fontfamily = "serif", 
-            legend.title.fontface = 2, 
-            legend.title.color = "lightpink", 
+tm_shape(Q) +
+  tm_fill(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
+  tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE,
+            legend.outside.position = "left",
+            legend.title.fontfamily = "serif",
+            legend.title.fontface = 2,
+            legend.title.color = "lightpink",
             legend.text.color = "white")
-
 ```
 <br>
 
@@ -1284,48 +1286,44 @@ tmap_arrange(Q1,Q2,Q4,Q3, ncol=2, nrow=2, widths = c(.30, 0.70),asp=NULL)
 
 #### Ajustement des couleurs {-}
 
-De plus, la fonction tm_layout permet d'ajuster les couleurs présentes dans la carte:
+En tmap v4, les couleurs des éléments d'une carte se définissent directement dans les fonctions de couche plutôt que dans `tm_layout()`. Certains arguments de `tm_layout()` permettent néanmoins d'ajuster l'apparence globale des couleurs:
 
-* L'argument `aes.color` défini la couleur de remplissage des polygones, des frontières, du texte, etc.
-* L'argument `saturation` défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées. Il est aussi possible de donner des valeurs négatives. 
-* L'argument `sepia.intensity` est un nombre entre 0 et 1 qui défini le niveau de "chaleur" des couleurs. Plus sa valeur est grande, plus les couleurs ont une teinte jaune voir brune. La valeur par défaut est 0.
-* L'argument `aes.palette` permet de changer la palette de couleurs utilisées. La bibliothèque `tmap` utilise les palettes de couleurs de [Color Brewer](https://colorbrewer2.org/). Dans le cas d'attributs catégoriques (comme le nom de régions) la palette utilisée par défaut se nomme `Set3`, mais il est possible de choisir d'autres palettes parmi celles-ci: `Accent`, `Dark2`, `Paired`, `Pastel1`, `Pastel2`, `Set1`, et `Set2`. Nous reviendrons sur le sujet des palettes un peu plus loin dans cette leçon.
+* La couleur de remplissage d'un polygone se définit avec l'argument `fill` et la couleur des frontières avec l'argument `col` dans `tm_polygons()` ou `tm_fill()`.
+* L'argument `saturation` de `tm_layout()` défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées.
+* L'argument `sepia.intensity` de `tm_layout()` est un nombre entre 0 et 1 qui défini le niveau de "chaleur" des couleurs. Plus sa valeur est grande, plus les couleurs ont une teinte jaune voir brune. La valeur par défaut est 0.
+* La palette de couleurs d'une couche se change avec `fill.scale = tm_scale(values = "nom_palette")`. La bibliothèque `tmap` utilise les palettes de couleurs de [Color Brewer](https://colorbrewer2.org/). Dans le cas d'attributs catégoriques (comme le nom de régions) la palette utilisée par défaut se nomme `Set3`, mais il est possible de choisir d'autres palettes parmi celles-ci: `Accent`, `Dark2`, `Paired`, `Pastel1`, `Pastel2`, `Set1`, et `Set2`. Nous reviendrons sur le sujet des palettes un peu plus loin dans cette leçon.
 
 Voici quelques exemples de modification des couleurs:
 
 ```{r eval = FALSE, echo = TRUE}
-Q1 <- tm_shape(Q) + tm_polygons() + 
-                    tm_layout(aes.color = c(fill="lightblue",borders="darkgreen"))
+Q1 <- tm_shape(Q) + tm_polygons(fill = "lightblue", col = "darkgreen")
 
-Q2 <- tm_shape(Q) + tm_polygons(col="NUM_REG") + 
+Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG", col = "white") +
                     tm_layout(legend.show = FALSE,
-                              aes.color = c(borders="white"),
                               saturation = 0)
 
-Q3 <- tm_shape(Q) + tm_polygons(col="NUM_REG") + 
+Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
                     tm_layout(legend.show = FALSE,
                               sepia.intensity = 0.5)
 
-Q4 <- tm_shape(Q) + tm_polygons(col="NUM_REG") + 
-                    tm_layout(legend.show = FALSE, 
-                              aes.palette = list(cat = "Accent"))
-
+Q4 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                 fill.scale = tm_scale(values = "Accent")) +
+                    tm_layout(legend.show = FALSE)
 ```
 
 
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
+Q1 <- tm_shape(Q) + tm_polygons(fill = "lightblue", col = "darkgreen")
+Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG", col = "white") +
+                    tm_layout(legend.show = FALSE, saturation = 0)
+Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
+                    tm_layout(legend.show = FALSE, sepia.intensity = 0.5)
+Q4 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                  fill.scale = tm_scale(values = "Accent")) +
+                    tm_layout(legend.show = FALSE)
 
-Q1 = tm_shape(Q)+tm_polygons() + tm_layout(aes.color = c(fill="lightblue",borders="darkgreen"))
-Q2 = tm_shape(Q)+tm_polygons(col="NUM_REG") + tm_layout(legend.show = FALSE,
-                                                        aes.color = c(borders="white"),
-                                                        saturation = 0)
-Q3 = tm_shape(Q)+tm_polygons(col="NUM_REG") + tm_layout(legend.show = FALSE,
-                                                        sepia.intensity = 0.5)
-Q4 = tm_shape(Q)+tm_polygons(col="NUM_REG") + tm_layout(legend.show = FALSE, 
-                                                        aes.palette = list(cat = "Accent"))
-
-tmap_arrange(Q1,Q2,Q3,Q4, ncol=2, nrow=2)
+tmap_arrange(Q1, Q2, Q3, Q4, ncol = 2, nrow = 2)
 ```
 
 <br>
@@ -1339,47 +1337,46 @@ La bibliothèque `tmap` contient des styles prédéfinis qu'on appelle avec la f
 Voici quelques-uns de ces styles prédéfinis. 
 
 ```{r eval = FALSE, echo = TRUE, dev = "png"}
-tm_shape(Q) + tm_polygons(col="NUM_REG") + 
+tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
                 tm_style("classic") +
-                tm_layout(legend.show = FALSE) 
+                tm_layout(legend.show = FALSE)
 
-tm_shape(Q) + tm_polygons(col="NUM_REG") + 
+tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
                 tm_style("bw") +
-                tm_layout(legend.show = FALSE) 
+                tm_layout(legend.show = FALSE)
 
-tm_shape(Q) + tm_polygons(col="NUM_REG") +
+tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
                 tm_style("cobalt") +
-                tm_layout(legend.show = FALSE) 
-                                            
-tm_shape(Q) + tm_polygons(col="NUM_REG") + 
-                tm_style("col_blind") +                             
-                tm_layout(legend.show = FALSE) 
-                                            
+                tm_layout(legend.show = FALSE)
+
+tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
+                tm_style("gray") +
+                tm_layout(legend.show = FALSE)
+
 ```
 
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
-Q1 = tm_shape(Q)+tm_polygons(col="NUM_REG") + 
-                                  tm_style("classic") +
-                                  tm_layout(legend.show = FALSE) 
-Q2 = tm_shape(Q)+tm_polygons(col="NUM_REG") + 
-                                  tm_style("bw") +
-                                  tm_layout(legend.show = FALSE) 
-Q3 = tm_shape(Q)+tm_polygons(col="NUM_REG") +
-                                  tm_style("cobalt") +
-                                  tm_layout(legend.show = FALSE) 
-                                            
-Q4 = tm_shape(Q)+tm_polygons(col="NUM_REG") + 
-                                  tm_style("col_blind") +                             
-                                  tm_layout(legend.show = FALSE) 
-                                            
-tmap_arrange(Q1,Q2,Q3,Q4, ncol=2, nrow=2)
+Q1 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
+                      tm_style("classic") +
+                      tm_layout(legend.show = FALSE)
+Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
+                      tm_style("bw") +
+                      tm_layout(legend.show = FALSE)
+Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
+                      tm_style("cobalt") +
+                      tm_layout(legend.show = FALSE)
+Q4 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
+                      tm_style("gray") +
+                      tm_layout(legend.show = FALSE)
+
+tmap_arrange(Q1, Q2, Q3, Q4, ncol = 2, nrow = 2)
 
 ```
 
 <br>
 
-Vous remarquerez que le style `col_blind` utilise une palette de couleur permettant aux personnes daltoniennes de différencier les polygones de couleurs différentes.
+Vous remarquerez que le style `gray` utilise des teintes de gris, ce qui le rend accessible aux personnes daltoniennes. En tmap v4, pour des cartes thématiques accessibles aux daltoniens, il est également recommandé d'utiliser des palettes de couleur adaptées, disponibles dans le package [`cols4all`](https://cols4all.github.io/cols4all-R/) (par exemple `fill.scale = tm_scale(values = "cols4all::yl_or_rd")`).
 
 ### Écriture sur une carte
 
@@ -1393,32 +1390,30 @@ La fonction `tm_text()` permet d'écrire sur chaque polygone la valeur d'un de s
 Par exemple, nous pouvons ajouter le numéro de la région administrative sur chaque polygone:
 
 ```{r, dev = "png", fig.height=6}
-tm_shape(Q) + tm_polygons(col="NUM_REG") + 
-                tm_style("col_blind") + 
-                tm_layout(legend.show = FALSE, frame = FALSE)+
-                tm_text("NUM_REG", size = 0.6, fontface="bold")
+tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
+                tm_style("gray") +
+                tm_layout(legend.show = FALSE, frame = FALSE) +
+                tm_text("NUM_REG", size = 0.6, fontface = "bold")
 ```
 <br>
 
 Ou encore:
 
 ```{r, warning = FALSE, dev = "png", fig.height=6 }
-tm_shape(Q) + tm_polygons() +
-                tm_layout(aes.color = c(fill="black",borders="white"),
-                          bg.color = "black",
-                          frame = FALSE, 
-                          legend.bg.color = TRUE,
-                          legend.outside = TRUE, 
+tm_shape(Q) + tm_polygons(fill = "black", col = "white") +
+                tm_layout(bg.color = "black",
+                          frame = FALSE,
+                          legend.bg.color = "black",
+                          legend.outside = TRUE,
                           legend.text.size = 0.8,
                           legend.text.color = "white",
                           legend.title.color = "white") +
-                tm_text("NUM_REG", col= "NOM_REG", 
-                        palette = "Paired", 
-                        size = 0.8, fontface="bold", 
-                        legend.col.show = TRUE, 
-                        title.col = "Régions administratives",
-                        auto.placement=TRUE, 
-                        just="right")
+                tm_text("NUM_REG", col = "NOM_REG",
+                        col.scale = tm_scale(values = "Paired"),
+                        col.legend = tm_legend(title = "Régions administratives"),
+                        size = 0.8, fontface = "bold",
+                        auto.placement = TRUE,
+                        just = "right")
 ```
 <br>
 
@@ -1462,7 +1457,7 @@ Pour superposer la carte des routes sur la carte du Québec, nous utilisons la p
 ```{r, warning = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) + tm_fill() +
   tm_shape(Ro) + tm_lines(col="brown") +
-  tm_layout(title = "Réseau routier")
+  tm_layout(main.title = "Réseau routier")
 ```
 <br>
 
@@ -1472,14 +1467,14 @@ Pour représenter différemment les objets de type ligne en fonction de la valeu
 
 ```{r, warning = FALSE, dev = "png", fig.height=6 }
 # créons une palette de trois couleurs
-pal.col<-c("red","darkgoldenrod4","darkslateblue")
+pal.col <- c("red", "darkgoldenrod4", "darkslateblue")
 
 tm_shape(Q) +
   tm_fill() +
   tm_shape(Ro) +
-  tm_lines(col = "ClsRte", 
-           palette = pal.col, 
-           title.col = "Types de route")
+  tm_lines(col = "ClsRte",
+           col.scale = tm_scale(values = pal.col),
+           col.legend = tm_legend(title = "Types de route"))
 ```
 <br>
 
@@ -1510,8 +1505,8 @@ La fonction `tm_dots()` fonctionne de façon similaire aux fonctions `tm_polygon
 Q1 <- tm_shape(V) + tm_dots()
 
 # Les points et la carte du QC
-Q2 <- tm_shape(Q) + tm_fill(col = "blue", alpha = 0.4) +
-      tm_shape(V) + tm_dots(col = "darkblue", size = 1)
+Q2 <- tm_shape(Q) + tm_fill(fill = "blue", alpha = 0.4) +
+      tm_shape(V) + tm_dots(fill = "darkblue", size = 1)
 
 # 
 tmap_arrange(Q1,Q2)
@@ -1522,27 +1517,27 @@ Nous pouvons également définir la couleur des points en fonction de la valeur 
 
 ```{r, dev = "png", fig.height=6 }
 tm_shape(Q) + tm_fill() +
-tm_shape(V) + tm_dots(col = "Mncplts", 
-                      palette = "Paired", 
-                      size = 1) + 
-              tm_layout(frame = FALSE, 
-                        legend.outside = TRUE, 
-                        title = "Municipalités", 
-                        legend.title.color = NA, 
+tm_shape(V) + tm_dots(fill = "Mncplts",
+                      fill.scale = tm_scale(values = "Paired"),
+                      size = 1) +
+              tm_layout(frame = FALSE,
+                        legend.outside = TRUE,
+                        main.title = "Municipalités",
+                        legend.title.color = NA,
                         legend.text.size = 0.8)
 ```
 <br>
 
 ###### Fonction tm_markers() {-}
 
-La fonction `tm_markers()` représente les points par le symbole de repère géographique:
+La fonction `tm_markers()` représente les points par le symbole de repère géographique. Elle fonctionne en mode interactif (voir la section [Cartes interactives](#cartes-interactives)) :
 
-```{r, dev = "png", fig.height=6}
+```{r, eval = FALSE}
 
 tm_shape(Q) + tm_fill() +
-tm_shape(V) + tm_markers(size = 0.5, 
-                         text = "Mncplts", 
-                         text.size = 0.8, 
+tm_shape(V) + tm_markers(size = 0.5,
+                         text = "Mncplts",
+                         text.size = 0.8,
                          text.just = "top") +
               tm_layout(inner.margins = c(0.1,0.2,0.1,0.2))
 
@@ -1575,25 +1570,25 @@ Le *raster* `E` est une matrice de 810612 cellules, et chacune de ces cellules a
 La fonction `tm_raster()` de la bibliothèque `tmap` permet de visualiser les *rasters* en assignant des couleurs différentes pour des classes de valeurs différentes. L'argument `n` sert à préciser le nombre approximatif de classes à utiliser.
 
 ```{r, eval = FALSE, echo = TRUE}
-tm_shape(E) + tm_raster(title = "Élévation (m)")
-tm_shape(E) + tm_raster(n = 10, title = "Élévation (m)")
+tm_shape(E) + tm_raster(col.legend = tm_legend(title = "Élévation (m)"))
+tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10),
+                        col.legend = tm_legend(title = "Élévation (m)"))
 ```
 ```{r, echo = FALSE, dev = "png", fig.height=6 }
-Q1 <- tm_shape(E) + tm_raster(title = "Élévation (m)")
-Q2 <- tm_shape(E) + tm_raster(n = 10, title = "Élévation (m)")
+Q1 <- tm_shape(E) + tm_raster(col.legend = tm_legend(title = "Élévation (m)"))
+Q2 <- tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10),
+                               col.legend = tm_legend(title = "Élévation (m)"))
 
-tmap_arrange(Q1,Q2)
+tmap_arrange(Q1, Q2)
 ```
 <br>
 
 Il est possible d'afficher en légende un histogramme illustrant la distribution des valeurs. Par exemple: 
 
 ```{r, dev = "png", fig.height=6 }
-tm_shape(E) + tm_raster(n = 10,
-                        title = "Élévation (m)",
-                        legend.hist = TRUE) +
-              tm_legend(outside = TRUE, 
-                        hist.width = 4)
+tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10),
+                        col.legend = tm_legend(title = "Élévation (m)", hist = TRUE)) +
+              tm_layout(legend.outside = TRUE)
 ```
 <br>
 
@@ -1606,16 +1601,14 @@ pal.elevation = colorRampPalette( c("midnightblue","forestgreen",
                                     "darkolivegreen4","burlywood", 
                                     "chocolate4"))
 
-tm_shape(E) + tm_raster(n = 10, 
-                        title = "Élévation", 
-                        palette = pal.elevation(10), 
-                        legend.hist = TRUE, 
-                        colorNA = "beige" ) +
-              tm_legend(outside = TRUE, hist.width = 3)
+tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10, values = pal.elevation(10),
+                                             value.na = "beige"),
+                        col.legend = tm_legend(title = "Élévation", hist = TRUE)) +
+              tm_layout(legend.outside = TRUE)
 ```
 <br>
 
-Il existe différentes façons de former des classes de valeur à partir de la distribution. L'argument `style` de la fonction `tm_raster()` permet de choisir une méthode parmi plusieurs dont les suivantes:
+Il existe différentes façons de former des classes de valeur à partir de la distribution. L'argument `style` se précise à l'intérieur de la fonction `tm_scale_intervals()` assignée à l'argument `col.scale` de `tm_raster()`. Il permet de choisir une méthode parmi plusieurs dont les suivantes:
 
 - `"fixed"`: crée des classes de valeurs selon notre propre choix. Ces classes doivent être définies dans un  vecteur assigné à l'argument `breaks`.
 - `"equal"`: divise les valeurs en `n` classes. Ceci est la méthode par défaut. 
@@ -1627,30 +1620,31 @@ Visualisons à nouveau la carte des données d'élévation en utilisant un style
 
 ```{r, dev = "png", warning = FALSE, fig.height=6 }
 # définir la mise en page pour les deux cartes
-format_carte <- tm_layout(frame = FALSE, 
-                          legend.position = c(0.67,0.04), 
-                          legend.title.size = 0.8, 
-                          legend.format=c(text.align="right"),
-                          legend.bg.color = "white", 
-                          legend.frame = "black")
+format_carte <- tm_layout(frame = FALSE,
+                          legend.position = c(0.67, 0.04),
+                          legend.title.size = 0.8,
+                          legend.bg.color = "white",
+                          legend.frame = TRUE)
 
-# style fixed.
-Efixed <- tm_shape(E) + 
-            tm_raster(title = "Élévation(m)",
-                      palette = pal.elevation(10),  
-                      style = "fixed", 
-                      breaks = c(0,100,200,300,400,500,600,700,800,900,1000,1600)) +
+# style fixed
+Efixed <- tm_shape(E) +
+            tm_raster(col.scale = tm_scale_intervals(
+                          values = pal.elevation(10),
+                          style = "fixed",
+                          breaks = c(0,100,200,300,400,500,600,700,800,900,1000,1600)),
+                      col.legend = tm_legend(title = "Élévation(m)")) +
             format_carte
 
 # style quantile
 Equant <- tm_shape(E) +
-            tm_raster(title = "Élévation(m)", 
-                      palette=pal.elevation(10),  
-                      style="quantile") +
+            tm_raster(col.scale = tm_scale_intervals(
+                          values = pal.elevation(10),
+                          style = "quantile"),
+                      col.legend = tm_legend(title = "Élévation(m)")) +
             format_carte
 
 
-tmap_arrange(Efixed,Equant)
+tmap_arrange(Efixed, Equant)
 ```
 
 <br>
@@ -1668,41 +1662,36 @@ En guise d'exemple, reprenons les données sur les régions administratives du Q
 
 
 ```{r, warning = FALSE, dev = "png", fig.height=6 }
-tm_shape(Q) + 
-  tm_polygons(col="NUM_REG", legend.show = FALSE) + 
+tm_shape(Q) +
+  tm_polygons(fill = "NUM_REG", fill.legend = tm_legend(show = FALSE)) +
   tm_style("bw") +
-  tm_symbols(col = "black", 
-             size = "Pop_tot", 
-             legend.size.show = TRUE, 
-             legend.size.is.portrait = TRUE, 
-             title.size = "Population")
+  tm_symbols(fill = "black",
+             size = "Pop_tot",
+             size.legend = tm_legend(title = "Population", orientation = "portrait"))
 ```
 <br>
 
-Par défaut, le symbole utilisé est un point. Le point correspond au symbole `shape = 21`. Nous pouvons toutefois utiliser d'autres symboles comme le carré (`shape = 15`), ou le repère géographique (`shape = marker_icon()`). Vous pouvez même importer vos propres symboles. 
+Par défaut, le symbole utilisé est un point. Le point correspond au symbole `shape = 21`. Nous pouvons toutefois utiliser d'autres symboles comme le carré (`shape = 15`) ou le triangle inversé (`shape = 25`).
 
 ```{r, warning = FALSE, dev = "png", fig.height=6}
-carte_base <- tm_shape(Q) + 
-                  tm_polygons(col="NUM_REG", legend.show = FALSE) + 
-                  tm_style("bw") 
+carte_base <- tm_shape(Q) +
+                  tm_polygons(fill = "NUM_REG", fill.legend = tm_legend(show = FALSE)) +
+                  tm_style("bw")
 
-carte_carre <- carte_base + 
+carte_carre <- carte_base +
                  tm_symbols(shape = 15,
-                            col = "red", 
-                            size = "Pop_tot", 
-                            legend.size.show = TRUE, 
-                            legend.size.is.portrait = TRUE, 
-                            title.size = "Population")
+                            fill = "red",
+                            size = "Pop_tot",
+                            size.legend = tm_legend(title = "Population", orientation = "portrait"))
 
-carte_marqueur <- carte_base + 
-                 tm_symbols(shape = marker_icon(),
-                            border.col = NULL, 
-                            size = "Pop_tot", 
-                            legend.size.show = TRUE, 
-                            legend.size.is.portrait = TRUE, 
-                            title.size = "Population")
+carte_triangle <- carte_base +
+                 tm_symbols(shape = 25,
+                            fill = "red",
+                            col = NA,
+                            size = "Pop_tot",
+                            size.legend = tm_legend(title = "Population", orientation = "portrait"))
 
-tmap_arrange(carte_carre, carte_marqueur)
+tmap_arrange(carte_carre, carte_triangle)
 ```
 
 <br>
@@ -1713,25 +1702,22 @@ tmap_arrange(carte_carre, carte_marqueur)
 Lorsque nous utilisons des symboles proportionnels, nous devons souvent avoir plus d'une légende. Par exemple, dans les cartes précédentes, nous avions seulement une légende se rapportant à la taille des populations mais aucune légende pour identifier les régions. Pour ajouter deux légendes (ou plus), nous devons utiliser la fonction `tm_layout()` avec l'argument `legend.stack` qui précise si les légendes seront disposées de façon verticale ou horizontale. 
 
 ```{r, warning = FALSE, dev = "png", fig.height = 6}
-tm_shape(Q) + 
-  tm_polygons(col="NOM_REG",  
-              palette="Set1", 
-              border.col = "darkgrey", 
-              title ="Régions administratives") + 
-   tm_symbols(size = "Pop_tot", 
-              border.col = "grey", 
-              col="black", 
-              scale = 2, 
-              legend.size.show = TRUE, 
-              legend.size.is.portrait = FALSE, 
-              sizes.legend.labels = c("500","1000","1500","2000","2500"), 
-              title.size ="Population (en milliers)") +
-    tm_layout(frame = FALSE, 
-              legend.outside = TRUE, 
-              legend.stack = "vertical", 
-              legend.title.fontface = "bold" ) 
-
-                               
+tm_shape(Q) +
+  tm_polygons(fill = "NOM_REG",
+              fill.scale = tm_scale(values = "Set1"),
+              fill.legend = tm_legend(title = "Régions administratives"),
+              col = "darkgrey") +
+   tm_symbols(fill = "black",
+              col = "grey",
+              size = "Pop_tot",
+              size.scale = tm_scale(max.size = 2),
+              size.legend = tm_legend(title = "Population (en milliers)",
+                                      orientation = "landscape",
+                                      labels = c("500", "1000", "1500", "2000", "2500"))) +
+    tm_layout(frame = FALSE,
+              legend.outside = TRUE,
+              legend.stack = "vertical",
+              legend.title.fontface = "bold")
 ```
 
 <br> 
@@ -1750,30 +1736,29 @@ Q$Pop_prop_enfant <- Q$Pop_0_14/Q$Pop_tot
 ```
 <br>
 
-Utilisons maintenant la fonction `tm_bubbles()` en définissant l'argument `size` par l'attribut `"ATot_T"`, et l'argument `col` par l'attribut `"Pop_prop_enfant"`:
+Utilisons maintenant la fonction `tm_bubbles()` en définissant l'argument `size` par l'attribut `"Pop_tot"`, et l'argument `fill` par l'attribut `"Pop_prop_enfant"`:
 
 ```{r, warning = FALSE, dev = "png", fig.height = 6}
 tm_shape(Q) +
-  tm_polygons(col = "NUM_REG", 
-              legend.show = FALSE, 
-              palette = "Greys") + 
-   tm_bubbles(size = "Pop_tot" , 
-              col = "Pop_prop_enfant", 
-              style = "quantile", 
-              scale = 2,  
-              border.col = "black", 
-              border.lwd = .5,
-              legend.size.show = TRUE, 
-              legend.size.is.portrait = FALSE, 
-              title.size ="Population (en milliers)", 
-              title.col = "Proportion d'enfants (0-14 ans)", 
-              sizes.legend.labels = c("500","1000","1500","2000","2500"))+
-    tm_layout(frame = FALSE, 
-              legend.outside = TRUE, 
+  tm_polygons(fill = "NUM_REG",
+              fill.scale = tm_scale(values = "Greys"),
+              fill.legend = tm_legend(show = FALSE)) +
+   tm_bubbles(size = "Pop_tot",
+              fill = "Pop_prop_enfant",
+              fill.scale = tm_scale_intervals(style = "quantile"),
+              size.scale = tm_scale(max.size = 2),
+              col = "black",
+              lwd = .5,
+              size.legend = tm_legend(title = "Population (en milliers)",
+                                      orientation = "landscape",
+                                      labels = c("500", "1000", "1500", "2000", "2500")),
+              fill.legend = tm_legend(title = "Proportion d'enfants (0-14 ans)")) +
+    tm_layout(frame = FALSE,
+              legend.outside = TRUE,
               legend.title.size = 1)
 ```
 <br>
-L'argument `style` est utilisé pour définir les classes de couleurs. Ici, nous avons choisi une classification en quantile. Noter que nous pouvons définir un titre pour la légende des tailles (`title.size`) et un titre pour la légende des couleurs (`title.col`). 
+L'argument `style` se précise à l'intérieur de `fill.scale = tm_scale_intervals(style = "quantile")` pour définir les classes de couleurs. Ici, nous avons choisi une classification en quantile. Noter que nous pouvons définir un titre pour la légende des tailles (`size.legend = tm_legend(title = ...)`) et un titre pour la légende des couleurs (`fill.legend = tm_legend(title = ...)`).
 
 Remarquer que cette figure nous permet d'observer que la proportion d'enfants au Nunavik est très grande malgré que la taille de la population soit petite. 
 
@@ -1783,23 +1768,24 @@ Remarquer que cette figure nous permet d'observer que la proportion d'enfants au
 
 Les cartes choroplèthes sont utilisées pour représenter des données vectorielles de type polygone en assignant une couleur à chaque polygone en fonction de la valeur d'un de ces attributs. 
 
-Pour créer des cartes choroplèthes, nous utilisons l'argument `col` de la fonction `tm_polygons()`. L'assignation des couleurs se fait de la même façon que pour `tm_raster()` et `tm_bubbles()` en définissant des classes de valeur d'attribut.
+Pour créer des cartes choroplèthes, nous utilisons l'argument `fill` de la fonction `tm_polygons()`. L'assignation des couleurs se fait en utilisant `fill.scale = tm_scale_intervals()` pour définir les classes de valeur d'attribut, de la même façon que pour `tm_raster()` et `tm_bubbles()`.
 
 Créons des cartes choroplèthes de la proportion d'enfants dans les régions administratives en utilisant différentes classifications de couleurs. 
 
 ```{r, warning = FALSE, dev = "png", fig.height = 6}
 
 # Par defaut, nous avons 4 classes
-Qdefaut <- tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant")
+Qdefaut <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant")
 
-# style fixed.
-Qfixed <- tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant", 
-                                    style = "fixed", 
-                                    breaks = c(0.1, 0.14, 0.15, 0.16, 0.18, 0.3))
+# style fixed
+Qfixed <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                     fill.scale = tm_scale_intervals(
+                                       style = "fixed",
+                                       breaks = c(0.1, 0.14, 0.15, 0.16, 0.18, 0.3)))
 
-# style quantile 
-Qquant = tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant", 
-                                   style = "quantile")
+# style quantile
+Qquant <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                     fill.scale = tm_scale_intervals(style = "quantile"))
 
 tmap_arrange(Qdefaut,Qfixed,Qquant)
 
@@ -1875,13 +1861,13 @@ Pour créer une carte à panneaux multiples, nous utilisons d'abord la fonction 
 Représentons à nouveau les polygones des régions administratives selon la proportion d'enfants dans leur population mais cette fois en créant une carte à panneaux multiples:
 
 ```{r, warning = FALSE, dev = "png"}
-tm_shape(Q) + tm_polygons(col = "Pop_prop_enfant",  
-                          style = "quantile") +
-                 tm_facets(by = "NOM_REG", 
-                           nrow = 5,  
+tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                           fill.scale = tm_scale_intervals(style = "quantile")) +
+                 tm_facets(by = "NOM_REG",
+                           nrow = 5,
                            scale.factor = 5) +
-                 tm_layout(panel.label.height = 2, 
-                           panel.label.size = 0.9, 
+                 tm_layout(panel.label.height = 2,
+                           panel.label.size = 0.9,
                            legend.show = FALSE)
 ```
 <br>
@@ -1924,11 +1910,11 @@ E_Outaouais <- mask(E_Outaouais, Q_Outaouais)
 Créons d'abord une carte des données d'élévation pour la région de l'Outaouais. Cette carte consituera notre carte principale.
 ```{r}
 # Définir la carte principale
-carte_princ <- tm_shape(E_Outaouais) + 
-                tm_raster(title = "Élévation (m)", 
-                          palette = pal.elevation(5)) + 
-                tm_scale_bar(position = c("left","bottom"), 
-                             text.size = 0.6) 
+carte_princ <- tm_shape(E_Outaouais) +
+                tm_raster(col.scale = tm_scale(values = pal.elevation(5)),
+                          col.legend = tm_legend(title = "Élévation (m)")) +
+                tm_scalebar(position = c("left", "bottom"),
+                             text.size = 0.6)
 
 # Mise en page de la carte                
 format_carte <- tm_layout(frame = FALSE, 
@@ -1936,7 +1922,7 @@ format_carte <- tm_layout(frame = FALSE,
                           legend.outside.position = "right",
                           legend.title.size = 0.8, 
                           legend.bg.color = "white", 
-                          legend.frame = "black")
+                          legend.frame = TRUE)
 ```
 <br>
 
@@ -1948,7 +1934,7 @@ Créons maintenant une carte du Québec qui délimite la région de l'Outaouais 
 carte_cadre <- tm_shape(Q) + 
                   tm_borders(col = "black") + 
                tm_shape(Q_Outaouais) + 
-                  tm_borders(lw=2, col="red")
+                  tm_borders(lwd=2, col="red")
 ```
 
 <br>
@@ -2037,7 +2023,7 @@ Nous comprenons ainsi que l'attribut `iso_a3` correspond à un [code standardis�
 
 <br>
 
-**c)** Utiliser le style `col_blind` pour illustrer la carte du monde. N'ajouter pas de légende.
+**c)** Utiliser le style `gray` pour illustrer la carte du monde. N'ajouter pas de légende.
 
 <details>
 <summary> Réponse</summary>
@@ -2045,8 +2031,8 @@ Nous comprenons ainsi que l'attribut `iso_a3` correspond à un [code standardis�
 
 ```{r, warning = FALSE, dev = "png", fig.height=4}
 
-tm_shape(World) + tm_polygons(col="name") + 
-                tm_style("col_blind") +                             
+tm_shape(World) + tm_polygons(fill = "name") +
+                tm_style("gray") +
                 tm_layout(legend.show = FALSE)
 ```
 <br>
@@ -2073,19 +2059,19 @@ Afrique <- World[World$continent == "Africa",]
 
 <br>
 
-Produire une carte de l'Afrique avec le style `col_blind` et sans légende.
+Produire une carte de l'Afrique avec le style `gray` et sans légende.
 ```{r, warning = FALSE, dev = "png", fig.height=6}
-tm_shape(Afrique) + tm_polygons(col="name") + 
-                tm_style("col_blind") +                             
+tm_shape(Afrique) + tm_polygons(fill="name") +
+                tm_style("gray") +
                 tm_layout(legend.show = FALSE)
 ```
 <br>
 
-Notez que la bibliothèque `tmap` permet de minimiser le nombre de polygones adjacents illustrés avec la même couleur. Pour se faire, il s'agit de définir `col = MAP_COLORS` en argument à la fonction `tm_polygons()`.
+Notez que la bibliothèque `tmap` permet de minimiser le nombre de polygones adjacents illustrés avec la même couleur. Pour se faire, il s'agit de définir `fill = MAP_COLORS` en argument à la fonction `tm_polygons()`.
 
 ```{r, warning = FALSE, dev = "png", fig.height=6}
-tm_shape(Afrique) + tm_polygons(col="MAP_COLORS") + 
-                tm_style("col_blind") +                             
+tm_shape(Afrique) + tm_polygons(fill="MAP_COLORS") +
+                tm_style("gray") +
                 tm_layout(legend.show = FALSE)
 ```
 
@@ -2104,8 +2090,8 @@ tm_shape(Afrique) + tm_polygons(col="MAP_COLORS") +
 Nous reprenons d'abord la carte de l'Afrique produire en **d**. Puis, nous ajoutons le code "iso_a3" des pays en utilisant la fonction `tm_text()`:
 
 ```{r, dev = "png", fig.height=6}
-tm_shape(Afrique) + tm_polygons(col="MAP_COLORS") + 
-                tm_style("col_blind") +                             
+tm_shape(Afrique) + tm_polygons(fill="MAP_COLORS") +
+                tm_style("gray") +
                 tm_layout(legend.show = FALSE) +
                 tm_text("iso_a3", size = 0.6)
 ```
@@ -2140,11 +2126,10 @@ pal <- brewer.pal(n=5, "Reds")
 Nous pouvons maintenant produire la carte:
 
 ```{r,dev = "png", fig.height=6}
-tm_shape(AS) + 
-  tm_polygons(col = "pop_est_dens",
-              palette = pal,
-              style = "quantile",
-              title = "Densité de population") 
+tm_shape(AS) +
+  tm_polygons(fill = "pop_est_dens",
+              fill.scale = tm_scale_intervals(style = "quantile", values = pal),
+              fill.legend = tm_legend(title = "Densité de population"))
 ```
 <br>
 </p>
@@ -2166,11 +2151,10 @@ tm_shape(AS) +
 Nous utilisons la fonction `tm_facets()` pour produire une carte à panneaux multiples:
 
 ```{r, dev = "png", fig.height=8}
-tm_shape(AS) + 
-  tm_polygons(col = "pop_est_dens",
-              palette = pal,
-              style = "quantile",
-              title = "Densité de population") + 
+tm_shape(AS) +
+  tm_polygons(fill = "pop_est_dens",
+              fill.scale = tm_scale_intervals(style = "quantile", values = pal),
+              fill.legend = tm_legend(title = "Densité de population")) +
   tm_facets(by = "name",
             nrow = 4,
             scale.factor = 5
@@ -2201,16 +2185,15 @@ Nous devons utiliser les différents arguments de la fonction `tm_layout()` pour
 
 ```{r, dev = "png", fig.height=8}
 
-tm_shape(AS) + 
-  tm_polygons(col = "pop_est_dens",
-              palette = pal,
-              style = "quantile",
-              title = "Densité de population") + 
+tm_shape(AS) +
+  tm_polygons(fill = "pop_est_dens",
+              fill.scale = tm_scale_intervals(style = "quantile", values = pal),
+              fill.legend = tm_legend(title = "Densité de population")) +
   tm_facets(by = "name",
             nrow = 4,
             scale.factor = 5
-            )+
-  tm_layout(panel.label.height = 2, 
+            ) +
+  tm_layout(panel.label.height = 2,
             panel.label.size = 0.9,
             panel.label.bg.color = "white",
             legend.outside = TRUE,
@@ -2292,12 +2275,10 @@ Nous utilisons la fonction `tm_borders()` pour illustrer les frontières des pay
 tm_shape(World)+
   tm_borders(col="black")+
 tm_shape(metro)+
-  tm_symbols(col="red",
-             border.col = "black",
+  tm_symbols(fill = "red",
+             col = "black",
              size = "pop2020",
-             legend.size.show = TRUE,
-             legend.size.is.portrait = TRUE,
-             title.size = "Population")
+             size.legend = tm_legend(title = "Population", orientation = "portrait"))
 ```
 <br>
 </p>
@@ -2368,9 +2349,8 @@ Nous utilisons la fonction `tm_raster()` pour illustrer la couche `trees` de l'o
 pal = brewer.pal(n=6, "Greens")
 tm_shape(land) + 
   tm_raster("trees",
-             palette = pal,
-             title = "",
-            legend.is.portrait = FALSE) +
+            col.scale = tm_scale_intervals(n = 6, values = pal),
+            col.legend = tm_legend(title = "", orientation = "landscape")) +
   tm_layout(main.title = "Pourcentage de couvert forestier",
             main.title.size = 1,
             legend.outside = TRUE,
