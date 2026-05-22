@@ -39,15 +39,15 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 ###### Vous apprendrez à utiliser les fonctions suivantes: {-}
 
 - `tm_shape()`
+- `tm_polygons()`
 - `tm_fill()`
+- `tm_borders()`
 - `tm_scalebar()`
 - `tm_compass()`
 - `tm_grid()`
 - `tm_graticules()`
 - `tm_credits()`
 - `tmap_arrange()`
-- `tm_borders()`
-- `tm_polygons()`
 - `tm_layout()`
 - `tm_style()`
 - `tm_text()`
@@ -186,7 +186,7 @@ L'**orientation** de la carte, spécifiée par une flèche du nord ou une rose d
 
 <br>
 
-```{r fleche-nord, echo=FALSE,out.width="100%",out.height="80%",fig.cap="La flèche du nord est indispensable lorsque ce dernier ne correspond pas au haut de la carte (source: http://www.mondecarte.com/carte/canada/montreal/montreal_night_bus_plan.png.",fig.show="hold",fig.align="left", fig.link = c("Module6/Images/6_FlecheNord.png")}
+```{r fleche-nord, echo=FALSE,out.width="100%",out.height="80%",fig.cap="La flèche du nord est indispensable lorsque ce dernier ne correspond pas au haut de la carte (source: http://www.mondecarte.com/carte/canada/montreal/montreal_night_bus_plan.png).",fig.show="hold",fig.align="left", fig.link = c("Module6/Images/6_FlecheNord.png")}
 image <- "Module6/Images/6_FlecheNord.png"
 knitr::include_graphics(image)
 ```
@@ -393,7 +393,7 @@ Une couleur est définie par une combinaison de trois valeurs qu'on appelle *dim
 
 La **teinte** (ou la tonalité, *hue* en anglais) est la dimension que nous associons aux noms des couleurs. La teinte est généralement utilisée pour représenter différentes catégories de données; c'est-à-dire des données qualitatives nominales.
 <br>
-```{r teinte,  fig.cap="Un exemple de 8 différentes teintes de couleur", echo=FALSE, fig.height=0.5, fig.width = 4,fig.show="hold",fig.align="center"}
+```{r teinte,  fig.cap="Un exemple de 8 différentes teintes de couleur", echo=FALSE, message = FALSE, fig.height=0.5, fig.width = 4,fig.show="hold",fig.align="center"}
 # SOURCE: code from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 library(munsell)
 library(colorspace)
@@ -843,6 +843,11 @@ brewer.pal(5, "Accent")
 Ceci retourne un vecteur de cinq couleurs de la palette `Accent`.
 
 
+<!--
+###### Les palettes cols4all {-}
+
+Note: dire quelquechose à propos de https://cols4all.github.io/cols4all-R/
+-->
 
 ### Cartes statiques avec tmap {#basetmap}
 
@@ -884,7 +889,7 @@ install.packages("tmap")
 
 Chargez `tmap` dans votre session de travail R ainsi que les bibliothèques `sf` et `terra` dont nous aurons besoin pour lire et manipuler les données vectorielles et matricielles respectivement:
 
-```{r}
+```{r, message = FALSE}
 library(tmap)
 library(sf)
 library(terra)
@@ -898,7 +903,7 @@ Pour débuter notre exploration des fonctions de cartographie offertes avec `tma
 
 Utiliser la fonction `st_read()` de la bibliothèque `sf` pour lire le *shapefile* `QC_RegAdm_Pop.shp` contenu dans le dossier `Population`:
 
-```{r, message = FALSE}
+```{r, message = FALSE, results='hide'}
 Q <- st_read("Module6/Module6_donnees/Population/QC_RegAdm_Pop.shp")
 ```
 
@@ -916,15 +921,31 @@ Observer la structure et les attributs du *shapefile* `Q`. Celui-ci contient 17 
 - `Pop_65_`: la population âgée de 65 ans et plus.
 
 
-#### Intérieur des polygones {-}
+#### Polygones {-}
 
-###### Fonction tm_fill {.unnumbered #fct_tmfill}
+###### Fonction tm_polygons() {.unnumbered #fct_tmfill}
 
-Créons tout d'abord une carte simple du *shapefile* Q que nous venons de charger. La fonction `tm_fill()` permet de remplir de façon homogène l'intérieur des limites d'un polygone. Elle s'applique donc aux données vectorielles de type polygone, et on l'ajoute à la fonction `tm_shape()`.
+Créons tout d'abord une carte simple du *shapefile* Q que nous venons de charger. En tmap v4, la fonction principale pour représenter des données vectorielles de type polygone est `tm_polygons()`. Elle remplit l'intérieur des polygones et en dessine les frontières. Elle s'ajoute à la fonction `tm_shape()`.
 
 ```{r, dev = "png", fig.height=6}
-tm_shape(Q)+ 
+tm_shape(Q) +
+  tm_polygons()
+```
+<br>
+
+Pour n'afficher que l'intérieur des polygones sans les frontières, on utilise la fonction `tm_fill()` :
+
+```{r, dev = "png", fig.height=6}
+tm_shape(Q) +
   tm_fill()
+```
+<br>
+
+Pour n'afficher que les frontières sans remplissage, on utilise la fonction `tm_borders()` :
+
+```{r, dev = "png", fig.height=6}
+tm_shape(Q) +
+  tm_borders()
 ```
 <br>
 
@@ -933,66 +954,29 @@ tm_shape(Q)+
 La bibliothèque `tmap` comprend sa propre classe d'objets:
 
 ```{r, dev = "png"}
-map_Q <- tm_shape(Q)+ 
+map_Q <- tm_shape(Q) +
              tm_fill()
 
 class(map_Q)
 ```
 <br>
-En créant un objet `tmap`, la carte est seulement affichée lorsqu'on appelle l'objet. 
+En créant un objet `tmap`, la carte est seulement affichée lorsqu'on appelle l'objet.
 La création d'objet `tmap` est utile car, comme nous le verrons, elle permet de constituer une carte de base à laquelle nous pouvons ajouter des éléments cartographiques.
 
 
-#### Frontières des polygones {-}
-
-
-###### Fonction tm_borders() {-}
-
-La fonction `tm_borders()` permet d'illustrer les frontières des polygones:
-
-```{r, dev = "png", fig.height=6}
-# frontiere des regions admin
-tm_shape(Q) +
-  tm_borders()
-```
-<br>
-
-
-La fonction `tm_borders()` peut s'utiliser conjointement avec la fonction `tm_fill()`:
-
-```{r, dev = "png", fig.height=6}
-# Quebec + frontiere
-tm_shape(Q) +
-  tm_fill() +
-  tm_borders()
-```
-<br>
-
-###### Fonction tm_polygons() {-}
-
-Par ailleurs, la fonction `tm_polygons()` est équivalente l'utilisation conjointe de `tm_borders()` et `tm_fill()`:
-
-```{r, dev = "png", fig.height=6}
-# tm_polygons = tm_fill + tm_borders 
-tm_shape(Q) +
-   tm_polygons()
-
-```
-<br>
-
 ##### Paramètres esthétiques {-}
 
-Les fonctions `tm_borders()` et `tm_fill()` possèdent plusieurs arguments pour ajuster l'apparence de la carte. Voici des exemples:
+Les fonctions `tm_fill()`, `tm_borders()` et `tm_polygons()` possèdent plusieurs arguments pour ajuster l'apparence de la carte. Voici des exemples:
 
 ```{r, dev = "png", fig.cap="Cette figure est inspirée de la [figure 9.3](https://geocompr.robinlovelace.net/adv-map.html) du livre Geocomputation with R [@lovelace_geocomputation_2021]."}
 
-# couleur des polygones
+# couleur du remplissage (sans frontières)
 Q1 <- tm_shape(Q) + tm_fill(fill = "green")
 
-# transparence
-Q2 <- tm_shape(Q) + tm_fill(fill = "green", alpha = 0.4)
+# transparence du remplissage
+Q2 <- tm_shape(Q) + tm_fill(fill = "green", fill_alpha = 0.4)
 
-# couleur des frontières
+# couleur des frontières (sans remplissage)
 Q3 <- tm_shape(Q) + tm_borders(col = "green")
 
 # épaisseur du trait
@@ -1001,9 +985,8 @@ Q4 <- tm_shape(Q) + tm_borders(col = "pink", lwd = 4)
 # type de trait
 Q5 <- tm_shape(Q) + tm_borders(col = "blue", lty = 2)
 
-# couleur des polygones et des frontières
-Q6 <- tm_shape(Q) + tm_fill(fill = "blue", alpha = 0.3) +
-  tm_borders(col = "black")
+# couleur du remplissage et des frontières
+Q6 <- tm_shape(Q) + tm_polygons(fill = "blue", col = "black", fill_alpha = 0.3)
 
 tmap_arrange(Q1,Q2,Q3,Q4,Q5,Q6)
 ```
@@ -1016,10 +999,10 @@ Rappel types de couleur
 #### Attributs des polygones {-}
 
 La création de cartes, à partir de données vectorielles de type polygone, nécessite parfois de colorer individuellement les polygones. 
-Par exemple, la couleur d'un polygone peut représenter la valeur d'un de ses attributs. Dans ce cas, nous utilisons la fonction `tm_fill()` en associant à l'argument `fill` le nom de l'attribut que nous désirons illustrer.
+Par exemple, la couleur d'un polygone peut représenter la valeur d'un de ses attributs. Dans ce cas, nous utilisons la fonction `tm_polygons()` en associant à l'argument `fill` le nom de l'attribut que nous désirons illustrer.
 
 ```{r, dev = "png", fig.height=6}
-tm_shape(Q) + tm_fill(fill = "NUM_REG", fill.legend = tm_legend(title = "Régions"))
+tm_shape(Q) + tm_polygons(fill = "NUM_REG", fill.legend = tm_legend(title = "Régions"))
 ```
 
 <br> 
@@ -1029,7 +1012,7 @@ Nous pouvons aussi choisir d'illustrer un seul des polygones d'un *shapefile*. D
 
 ```{r, dev = "png", fig.height=4}
 Q_Outaouais <- Q[Q$NOM_REG == "Outaouais",]
-tm_shape(Q_Outaouais) + tm_fill(fill = "blue", alpha = 0.4)
+tm_shape(Q_Outaouais) + tm_fill(fill = "blue", fill_alpha = 0.4)
 ```
 <br>
 
@@ -1039,7 +1022,7 @@ Nous pouvons également vouloir mettre l'emphase sur un polygone en particulier,
 ```{r, dev = "png", fig.height=6}
 # Une option
 Q1 <- tm_shape(Q) + tm_borders(col = "black")
-Q2 <- tm_shape(Q_Outaouais) + tm_fill(fill = "blue", alpha = 0.4)
+Q2 <- tm_shape(Q_Outaouais) + tm_fill(fill = "blue", fill_alpha = 0.4)
 Q12 <- Q1 + Q2
 
 # Une autre option
@@ -1090,7 +1073,7 @@ map_Q +
 
 #### Grille et graticules {-}
 
-###### Fonctions tm_grid() et tm_borders(){-}
+###### Fonctions tm_grid() et tm_graticules(){-}
 
 La fonction `tm_grid()` ajoute une grille à la carte selon le système de coordonnées projetées des données. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées projetées Conique conforme de Lambert (epsg:32198) qui est métrique. 
 
@@ -1153,7 +1136,7 @@ La fonction `tm_layout` permet d'ajuster la mise en page d'une carte et différe
 Voici quelques exemples de mise en page qui utilisent ces arguments.
 ```{r eval = FALSE, echo = TRUE, dev = "png"}
 # Création d'une carte générale
-map_Q <- tm_shape(Q) + tm_fill() + tm_borders()
+map_Q <- tm_shape(Q) + tm_polygons()
 
 # Différentes options de mise en page
 map_Q + tm_layout(main.title = "Carte du Québec", main.title.size = 0.8, main.title.position = c("right", "top"))
@@ -1228,20 +1211,20 @@ tmap_arrange(Q1, Q3)
 
 ```{r eval = FALSE, echo = TRUE}
 tm_shape(Q) +
-  tm_fill(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
+  tm_polygons(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
   tm_layout(legend.outside = TRUE)
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png",fig.height=6 }
 tm_shape(Q) +
-  tm_fill(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
+  tm_polygons(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
   tm_layout(legend.outside = TRUE)
 ```
 <br>
 
 ```{r eval = FALSE, echo = TRUE}
 tm_shape(Q) +
-  tm_fill(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
+  tm_polygons(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
   tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE,
             legend.outside.position = "left",
             legend.title.fontfamily = "serif",
@@ -1252,7 +1235,7 @@ tm_shape(Q) +
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) +
-  tm_fill(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
+  tm_polygons(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
   tm_layout(bg.color = "black", frame = FALSE, legend.outside = TRUE,
             legend.outside.position = "left",
             legend.title.fontfamily = "serif",
@@ -1288,7 +1271,7 @@ tmap_arrange(Q1,Q2,Q4,Q3, ncol=2, nrow=2, widths = c(.30, 0.70),asp=NULL)
 
 En tmap v4, les couleurs des éléments d'une carte se définissent directement dans les fonctions de couche plutôt que dans `tm_layout()`. Certains arguments de `tm_layout()` permettent néanmoins d'ajuster l'apparence globale des couleurs:
 
-* La couleur de remplissage d'un polygone se définit avec l'argument `fill` et la couleur des frontières avec l'argument `col` dans `tm_polygons()` ou `tm_fill()`.
+* La couleur de remplissage d'un polygone se définit avec l'argument `fill` et la couleur des frontières avec l'argument `col` dans `tm_polygons()`.
 * L'argument `saturation` de `tm_layout()` défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées.
 * L'argument `sepia.intensity` de `tm_layout()` est un nombre entre 0 et 1 qui défini le niveau de "chaleur" des couleurs. Plus sa valeur est grande, plus les couleurs ont une teinte jaune voir brune. La valeur par défaut est 0.
 * La palette de couleurs d'une couche se change avec `fill.scale = tm_scale(values = "nom_palette")`. La bibliothèque `tmap` utilise les palettes de couleurs de [Color Brewer](https://colorbrewer2.org/). Dans le cas d'attributs catégoriques (comme le nom de régions) la palette utilisée par défaut se nomme `Set3`, mais il est possible de choisir d'autres palettes parmi celles-ci: `Accent`, `Dark2`, `Paired`, `Pastel1`, `Pastel2`, `Set1`, et `Set2`. Nous reviendrons sur le sujet des palettes un peu plus loin dans cette leçon.
@@ -1439,7 +1422,7 @@ Ro$ClsRte <- as.factor(Ro$ClsRte)
 levels(Ro$ClsRte)
 ```
 <br>
-
+1
 
 ###### Fonction tm_lines() {-}
 
@@ -1505,7 +1488,7 @@ La fonction `tm_dots()` fonctionne de façon similaire aux fonctions `tm_polygon
 Q1 <- tm_shape(V) + tm_dots()
 
 # Les points et la carte du QC
-Q2 <- tm_shape(Q) + tm_fill(fill = "blue", alpha = 0.4) +
+Q2 <- tm_shape(Q) + tm_fill(fill = "blue", fill_alpha = 0.4) +
       tm_shape(V) + tm_dots(fill = "darkblue", size = 1)
 
 # 
@@ -1931,10 +1914,10 @@ Créons maintenant une carte du Québec qui délimite la région de l'Outaouais 
 
 ```{r}
 # Définir la carte encadré
-carte_cadre <- tm_shape(Q) + 
-                  tm_borders(col = "black") + 
-               tm_shape(Q_Outaouais) + 
-                  tm_borders(lwd=2, col="red")
+carte_cadre <- tm_shape(Q) +
+                  tm_borders(col = "black") +
+               tm_shape(Q_Outaouais) +
+                  tm_borders(lwd = 2, col = "red")
 ```
 
 <br>
@@ -2269,11 +2252,11 @@ metro[1:10, c("name","pop2020")]
 <summary> Réponse</summary>
 <p>
 
-Nous utilisons la fonction `tm_borders()` pour illustrer les frontières des pays, puis, nous utilisons la fonction `tm_symbols()` pour illustrer les métropoles. 
+Nous utilisons `tm_borders()` pour illustrer les frontières des pays, puis `tm_symbols()` pour illustrer les métropoles.
 
 ```{r, dev = "png", fig.height=4, warning = FALSE, message = FALSE}
 tm_shape(World)+
-  tm_borders(col="black")+
+  tm_borders(col = "black")+
 tm_shape(metro)+
   tm_symbols(fill = "red",
              col = "black",
