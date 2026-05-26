@@ -925,7 +925,7 @@ Observer la structure et les attributs du *shapefile* `Q`. Celui-ci contient 17 
 
 ###### Fonction tm_polygons() {.unnumbered #fct_tmfill}
 
-Créons tout d'abord une carte simple du *shapefile* Q que nous venons de charger. En tmap v4, la fonction principale pour représenter des données vectorielles de type polygone est `tm_polygons()`. Elle remplit l'intérieur des polygones et en dessine les frontières. Elle s'ajoute à la fonction `tm_shape()`.
+Créons tout d'abord une carte simple du *shapefile* Q que nous venons de charger. La fonction principale pour représenter des données vectorielles de type polygone est `tm_polygons()`. Elle remplit l'intérieur des polygones et en dessine les frontières. Elle s'ajoute à la fonction `tm_shape()`.
 
 ```{r, dev = "png", fig.height=6}
 tm_shape(Q) +
@@ -1049,25 +1049,25 @@ L'ajout d'une barre d'échelle et d'une rose des vents se fait par l'utilisation
 map_Q +   # la carte du Québec que nous avons créée plus haut
   # ajout d'une barre d'échelle
   tm_scalebar(breaks = c(0,250,500),
-               text.size = 0.8, 
-               position=c("right","bottom")) +
+               text.size = 0.8,
+               position = tm_pos_in("right", "bottom")) +
   # ajout d'une rose des vents
-  tm_compass(type = "arrow", 
-             position = c("right", "top"))
+  tm_compass(type = "arrow",
+             position = tm_pos_in("right", "top"))
 ```
 <br>
 
-où l'argument `break` précise les divisions sur la barre d'échelle, `text.size` la taille du texte sous la barre, et `position` la position de la barre sur la carte (gauche ou droite, haut ou bas).
+où l'argument `breaks` précise les divisions sur la barre d'échelle, `text.size` la taille du texte sous la barre, et `position` la position de la barre sur la carte, spécifiée avec `tm_pos_in("horizontal", "vertical")` où `"horizontal"` est `"left"`, `"center"` ou `"right"`, et `"vertical"` est `"top"`, `"center"` ou `"bottom"`.
 
 Plusieurs options d'arguments sont possibles. Utilisez `help(tm_scalebar)` ou `help(tm_compass)` pour connaître les autres arguments possibles pour ces fonctions. Par exemple,
 ```{r, dev = "png",fig.height=6}
 map_Q +
   tm_scalebar(breaks = c(0, 50, 100),
               text.size = 0.8,
-              position = c("right", "bottom")) +
+              position = tm_pos_in("right", "bottom")) +
   tm_compass(type = "4star",
              show.labels = 2,
-             position = c("right", "top"))
+             position = tm_pos_in("right", "top"))
 ```
 <br>
 
@@ -1269,7 +1269,7 @@ tmap_arrange(Q1,Q2,Q4,Q3, ncol=2, nrow=2, widths = c(.30, 0.70),asp=NULL)
 
 #### Ajustement des couleurs {-}
 
-En tmap v4, les couleurs des éléments d'une carte se définissent directement dans les fonctions de couche plutôt que dans `tm_layout()`. Certains arguments de `tm_layout()` permettent néanmoins d'ajuster l'apparence globale des couleurs:
+Les couleurs des éléments d'une carte se définissent directement dans les fonctions de couche plutôt que dans `tm_layout()`. Certains arguments de `tm_layout()` permettent néanmoins d'ajuster l'apparence globale des couleurs:
 
 * La couleur de remplissage d'un polygone se définit avec l'argument `fill` et la couleur des frontières avec l'argument `col` dans `tm_polygons()`.
 * L'argument `saturation` de `tm_layout()` défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées.
@@ -1359,7 +1359,7 @@ tmap_arrange(Q1, Q2, Q3, Q4, ncol = 2, nrow = 2)
 
 <br>
 
-Vous remarquerez que le style `gray` utilise des teintes de gris, ce qui le rend accessible aux personnes daltoniennes. En tmap v4, pour des cartes thématiques accessibles aux daltoniens, il est également recommandé d'utiliser des palettes de couleur adaptées, disponibles dans le package [`cols4all`](https://cols4all.github.io/cols4all-R/) (par exemple `fill.scale = tm_scale(values = "cols4all::yl_or_rd")`).
+Vous remarquerez que le style `gray` utilise des teintes de gris, ce qui le rend accessible aux personnes daltoniennes. Pour des cartes thématiques accessibles aux daltoniens, il est également recommandé d'utiliser des palettes de couleur adaptées, disponibles dans le package [`cols4all`](https://cols4all.github.io/cols4all-R/) (par exemple `fill.scale = tm_scale(values = "cols4all::yl_or_rd")`).
 
 ### Écriture sur une carte
 
