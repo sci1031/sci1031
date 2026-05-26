@@ -1077,27 +1077,27 @@ map_Q +
 
 La fonction `tm_grid()` ajoute une grille à la carte selon le système de coordonnées projetées des données. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées projetées Conique conforme de Lambert (epsg:32198) qui est métrique. 
 
-La fonction `tm_graticules` ajoute les lignes de longitude et de latitude du système de coordonnées géographiques, c'est-à-dire non-projetées. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées géographiques du North American Datum de 1983 (NAD83, espg:4269).
+La fonction `tm_graticules` ajoute les lignes de longitude et de latitude du système de coordonnées géographiques, c'est-à-dire non-projetées. Dans le cas présent, le *shapefile* `Q` est exprimé dans le système de coordonnées géographiques du North American Datum de 1983 (NAD83, espg:4269). Nous précisons donc `crs = 4269` dans `tm_graticules()`, car par défaut la fonction utilise le CRS EPSG:4326 (WGS84).
 
-```{r, dev = "png", fig.height=6}
+```{r, dev = "png", fig.height=6, fig.width=10}
 Q1 <- map_Q + tm_grid()
 
-Q2 <- map_Q + tm_graticules()
+Q2 <- map_Q + tm_graticules(crs = 4269)
 
 tmap_arrange(Q1,Q2)
 ```
 <br> 
 
-Plusieurs options d'arguments existent pour les fonctions `tm_grid()` et `tm_graticules()`. Par exemple, il est possible de préciser le nombre de divisions sur l'axe des *x* (`n.x`) et sur l'axe des *y* (`n.y`)^[Noter que le nombre de divisions créé par `tmap` est approximativement celui demandé car `tmap` crée des divisions uniformément espacées situées sur des coordonnées de valeurs entières.], l'épaisseur du trait (`lwd`), la couleur (`col`) ou encore la taille de l'écriture (`labels.size`).
+Plusieurs options d'arguments existent pour les fonctions `tm_grid()` et `tm_graticules()`. Par exemple, il est possible de préciser le nombre de divisions sur l'axe des *x* (`n.x`) et sur l'axe des *y* (`n.y`)^[Noter que le nombre de divisions créé par `tmap` est approximativement celui demandé car `tmap` crée des divisions uniformément espacées situées sur des coordonnées de valeurs entières.], l'épaisseur du trait (`lwd`), la couleur (`col`) ou encore la taille de l'écriture (`labels.size`). Dans l'exemple ci-dessous, `tm_graticules()` est appelé sans préciser `crs`, ce qui utilise le CRS par défaut (EPSG:4326, WGS84) plutôt que NAD83 (EPSG:4269) — notez la légère différence dans le positionnement des graticules.
 
-```{r, dev = "png", fig.height=6}
-Q1 <- map_Q + tm_grid(labels.size=0.5, 
-                      col="yellow", 
-                      lwd=3, 
+```{r, dev = "png", fig.height=6, fig.width=10}
+Q1 <- map_Q + tm_grid(labels.size=0.5,
+                      col="yellow",
+                      lwd=3,
                       n.x = 10, n.y = 4)
 
-Q2 <- map_Q + tm_graticules(labels.col = "darkblue", 
-                            alpha = 0.3, 
+Q2 <- map_Q + tm_graticules(labels.col = "darkblue",
+                            alpha = 0.3,
                             labels.cardinal = FALSE)
 
 tmap_arrange(Q1,Q2)
