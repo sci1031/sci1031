@@ -1068,21 +1068,21 @@ map_Q +   # la carte du Québec que nous avons créée plus haut
   # ajout d'une barre d'échelle
   tm_scalebar(breaks = c(0,250,500),
                text.size = 0.8,
-               position = tm_pos_in("right", "bottom")) +
+               position = tm_pos_in("left", "bottom")) +
   # ajout d'une rose des vents
   tm_compass(type = "arrow",
              position = tm_pos_in("right", "top"))
 ```
 <br>
 
-où l'argument `breaks` précise les divisions sur la barre d'échelle, `text.size` la taille du texte sous la barre, et `position` la position de la barre sur la carte, spécifiée avec `tm_pos_in("horizontal", "vertical")` où `"horizontal"` est `"left"`, `"center"` ou `"right"`, et `"vertical"` est `"top"`, `"center"` ou `"bottom"`.
+où l'argument `breaks` précise les divisions sur la barre d'échelle, `text.size` la taille du texte sous la barre, et `position` la position de la barre sur la carte, spécifiée avec `tm_pos_in("horizontal", "vertical")` où `"horizontal"` est `"left"`, `"center"` ou `"right"`, et `"vertical"` est `"top"`, `"center"` ou `"bottom"`. Dans les exemples ci-dessus, la barre d'échelle est placée en bas à gauche et la rose des vents en haut à droite.
 
 Plusieurs options d'arguments sont possibles. Utilisez `help(tm_scalebar)` ou `help(tm_compass)` pour connaître les autres arguments possibles pour ces fonctions. Par exemple,
 ```{r, dev = "png",fig.height=6}
 map_Q +
   tm_scalebar(breaks = c(0, 50, 100),
               text.size = 0.8,
-              position = tm_pos_in("right", "bottom")) +
+              position = tm_pos_in("left", "bottom")) +
   tm_compass(type = "4star",
              show.labels = 2,
              position = tm_pos_in("right", "top"))
@@ -1909,7 +1909,7 @@ Créons d'abord une carte des données d'élévation pour la région de l'Outaou
 carte_princ <- tm_shape(E_Outaouais) +
                 tm_raster(col.scale = tm_scale(values = pal.elevation(5)),
                           col.legend = tm_legend(title = "Élévation (m)")) +
-                tm_scalebar(position = c("left", "bottom"),
+                tm_scalebar(position = tm_pos_in("left", "bottom"),
                              text.size = 0.6)
 
 # Mise en page de la carte                
