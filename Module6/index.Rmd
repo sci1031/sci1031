@@ -1039,6 +1039,24 @@ Remarquer l'usage de la fonction `tmap_arrange()` pour afficher des cartes côte
 
 ### Spécificités cartographiques
 
+#### Titre {-}
+
+###### Fonction tm_title() {-}
+
+La fonction `tm_title()` permet d'ajouter un titre à une carte. Elle s'utilise comme une couche additionnelle :
+
+```{r, dev = "png", fig.height=4}
+map_Q + tm_title("Carte du Québec")
+```
+<br>
+
+L'argument `size` contrôle la taille du titre, et `position` sa position sur la carte avec `tm_pos_in("horizontal", "vertical")` :
+
+```{r, dev = "png", fig.height=4}
+map_Q + tm_title("Carte du Québec", size = 0.8, position = tm_pos_in("right", "top"))
+```
+<br>
+
 #### Barre d'échelle et rose des vents {-}
 
 ###### Fonctions tm_scalebar() et tm_compass {-}
@@ -1088,7 +1106,7 @@ tmap_arrange(Q1,Q2)
 ```
 <br> 
 
-Plusieurs options d'arguments existent pour les fonctions `tm_grid()` et `tm_graticules()`. Par exemple, il est possible de préciser le nombre de divisions sur l'axe des *x* (`n.x`) et sur l'axe des *y* (`n.y`)^[Noter que le nombre de divisions créé par `tmap` est approximativement celui demandé car `tmap` crée des divisions uniformément espacées situées sur des coordonnées de valeurs entières.], l'épaisseur du trait (`lwd`), la couleur (`col`) ou encore la taille de l'écriture (`labels.size`). Dans l'exemple ci-dessous, `tm_graticules()` est appelé sans préciser `crs`, ce qui utilise le CRS par défaut (EPSG:4326, WGS84) plutôt que NAD83 (EPSG:4269) — notez la légère différence dans le positionnement des graticules.
+Plusieurs options d'arguments existent pour les fonctions `tm_grid()` et `tm_graticules()`. Par exemple, il est possible de préciser le nombre de divisions sur l'axe des *x* (`n.x`) et sur l'axe des *y* (`n.y`)^[Noter que le nombre de divisions créé par `tmap` est approximativement celui demandé car `tmap` crée des divisions uniformément espacées situées sur des coordonnées de valeurs entières.], l'épaisseur du trait (`lwd`), la couleur (`col`) ou encore la taille de l'écriture (`labels.size`). Dans l'exemple ci-dessous, `tm_graticules()` est appelé sans préciser `crs`, ce qui utilise le CRS par défaut (EPSG:4326, WGS84) plutôt que NAD83 (EPSG:4269) — notez que la différence entre ces deux CRS est peu perceptible dans cette carte du Québec.
 
 ```{r, dev = "png", fig.height=6, fig.width=10}
 Q1 <- map_Q + tm_grid(labels.size=0.5,
@@ -1126,9 +1144,8 @@ map_Q +
 
 La fonction `tm_layout` permet d'ajuster la mise en page d'une carte et différents éléments de son esthétique. Pour découvrir l'ensemble des arguments possibles tapez la commande `help(tm_layout)` (ou `?tm_layout`) dans votre console R. Plusieurs des arguments utiles sont présentés ci-dessous.
 
-#### Titre, cadre et couleur du fond {-}
+#### Cadre et couleur du fond {-}
 
-* L'ajout d'un titre (`main.title`), la taille de ce dernier (`main.title.size`) et sa position (`main.title.position`).
 * La présence ou l'absence d'un cadre (`frame`) et l'épaisseur du trait de celui-ci (`frame.lw`).
 * La taille des marges extérieures au cadre: `outer.margins = c(Haut,Droit,Bas,Gauche)` où `Haut`, `Droit`, `Bas`, `Gauche` sont des chiffres entre 0 (pas de marge) et 1 (marge complète).
 * La couleur du fond de la carte (`bg.color`) et de l'espace à l'extérieur du cadre (`outer.bg.color`).
@@ -1139,8 +1156,6 @@ Voici quelques exemples de mise en page qui utilisent ces arguments.
 map_Q <- tm_shape(Q) + tm_polygons()
 
 # Différentes options de mise en page
-map_Q + tm_layout(main.title = "Carte du Québec", main.title.size = 0.8, main.title.position = c("right", "top"))
-
 map_Q + tm_layout(frame = FALSE)
 
 map_Q + tm_layout(bg.color = "aquamarine", scale = 2)
@@ -1150,13 +1165,11 @@ map_Q + tm_layout(frame.lwd = 2, outer.margins = c(0, 0.2,0, 0.2), outer.bg.colo
 
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
-Qtitre = map_Q + tm_layout(main.title = "Carte du Québec", main.title.size = 0.8, main.title.position = c("right", "top"))
 Qframe = map_Q + tm_layout(frame = FALSE)
 Qbg = map_Q + tm_layout(bg.color = "aquamarine", scale = 2)
-Qf = map_Q + tm_layout(frame.double.line = TRUE, outer.margins = c(0, 0.2, 0, 0.2))
 Qmargin = map_Q + tm_layout(frame.lwd = 2, outer.margins = c(0.1, 0.2,0.1, 0.2), outer.bg.color="lavender")
 
-tmap_arrange(Qtitre,Qframe,Qbg,Qmargin, ncol=2, nrow=2, outer.margins = NULL)
+tmap_arrange(Qframe, Qbg, Qmargin, ncol=2, nrow=2, outer.margins = NULL)
 ```
 <br>
 
@@ -1440,7 +1453,7 @@ Pour superposer la carte des routes sur la carte du Québec, nous utilisons la p
 ```{r, warning = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) + tm_fill() +
   tm_shape(Ro) + tm_lines(col="brown") +
-  tm_layout(main.title = "Réseau routier")
+  tm_title("Réseau routier")
 ```
 <br>
 
@@ -1505,9 +1518,9 @@ tm_shape(V) + tm_dots(fill = "Mncplts",
                       size = 1) +
               tm_layout(frame = FALSE,
                         legend.outside = TRUE,
-                        main.title = "Municipalités",
                         legend.title.color = NA,
-                        legend.text.size = 0.8)
+                        legend.text.size = 0.8) +
+              tm_title("Municipalités")
 ```
 <br>
 
@@ -2334,11 +2347,10 @@ tm_shape(land) +
   tm_raster("trees",
             col.scale = tm_scale_intervals(n = 6, values = pal),
             col.legend = tm_legend(title = "", orientation = "landscape")) +
-  tm_layout(main.title = "Pourcentage de couvert forestier",
-            main.title.size = 1,
-            legend.outside = TRUE,
+  tm_layout(legend.outside = TRUE,
             legend.outside.position = "bottom",
-            legend.format = list(text.separator = "-"))
+            legend.format = list(text.separator = "-")) +
+  tm_title("Pourcentage de couvert forestier", size = 1)
 ```
 
 <br>
