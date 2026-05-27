@@ -843,11 +843,28 @@ brewer.pal(5, "Accent")
 Ceci retourne un vecteur de cinq couleurs de la palette `Accent`.
 
 
-<!--
+
 ###### Les palettes cols4all {-}
 
-Note: dire quelquechose à propos de https://cols4all.github.io/cols4all-R/
--->
+La bibliothèque [`cols4all`](https://cols4all.github.io/cols4all-R/) est une bibliothèque de palettes de couleurs conçue pour être accessible aux personnes ayant une déficience de la vision des couleurs (*daltonisme*). Elle regroupe des palettes provenant de nombreuses sources, dont ColorBrewer et Viridis, auxquelles s'ajoutent de nouvelles palettes. Depuis la version 4 de `tmap`, `cols4all` est la bibliothèque de palettes utilisée par défaut.
+
+`cols4all` contient des palettes séquentielles (`"seq"`), divergentes (`"div"`) et qualitatives (`"cat"`). Pour obtenir la liste des noms de palettes d'un type donné, on utilise la fonction `c4a_palettes()` :
+
+```{r eval = FALSE}
+library(cols4all)
+c4a_palettes(type = "cat")   # palettes qualitatives
+c4a_palettes(type = "seq")   # palettes séquentielles
+c4a_palettes(type = "div")   # palettes divergentes
+```
+
+Pour obtenir les couleurs d'une palette particulière, on utilise la fonction `c4a(name, n)` où `name` est le nom de la palette et `n` le nombre de couleurs souhaité. Par exemple :
+
+```{r}
+library(cols4all)
+c4a("brewer.set3", 6)
+```
+<br>
+Ceci retourne un vecteur de six couleurs de la palette `brewer.set3` de ColorBrewer.
 
 ### Cartes statiques avec tmap {#basetmap}
 
