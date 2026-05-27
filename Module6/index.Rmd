@@ -1428,20 +1428,17 @@ Vous remarquerez que le style `gray` utilise des teintes de gris, ce qui le rend
 
 ### Écriture sur une carte
 
-###### Fonction tm_text() {-}
-<!-- 
-Attention tm_text() ne donne pas les bonnes info ici:https://www.rdocumentation.org/packages/tmap/versions/0.7/topics/tm_text
-Il faut aller ici: https://rdrr.io/cran/tmap/man/tm_text.html
-  -->
+###### Fonction tm_labels() {-}
 
-La fonction `tm_text()` permet d'écrire sur chaque polygone la valeur d'un de ses attributs.
+La fonction `tm_labels()` permet d'écrire sur chaque polygone la valeur d'un de ses attributs.
 Par exemple, nous pouvons ajouter le numéro de la région administrative sur chaque polygone:
 
 ```{r, dev = "png", fig.height=6}
-tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
+tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                           fill.legend = tm_legend(show = FALSE)) +
                 tm_style("gray") +
-                tm_layout(legend.show = FALSE, frame = FALSE) +
-                tm_text("NUM_REG", size = 0.6, fontface = "bold")
+                tm_layout(frame = FALSE) +
+                tm_labels("NUM_REG", size = 0.6, fontface = "bold")
 ```
 <br>
 
@@ -1450,18 +1447,16 @@ Ou encore:
 ```{r, warning = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) + tm_polygons(fill = "black", col = "white") +
                 tm_layout(bg.color = "black",
-                          frame = FALSE,
-                          legend.bg.color = "black",
-                          legend.outside = TRUE,
-                          legend.text.size = 0.8,
-                          legend.text.color = "white",
-                          legend.title.color = "white") +
-                tm_text("NUM_REG", col = "NOM_REG",
-                        col.scale = tm_scale(values = "Paired"),
-                        col.legend = tm_legend(title = "Régions administratives"),
-                        size = 0.8, fontface = "bold",
-                        auto.placement = TRUE,
-                        just = "right")
+                          frame = FALSE) +
+                tm_labels("NUM_REG", col = "NOM_REG",
+                          col.scale = tm_scale(values = "Paired"),
+                          col.legend = tm_legend(title = "Régions administratives",
+                                                 position = tm_pos_out("right", "center"),
+                                                 text.color = "white",
+                                                 title.color = "white",
+                                                 bg.color = "black"),
+                          size = 0.8, fontface = "bold",
+                          just = "right")
 ```
 <br>
 
