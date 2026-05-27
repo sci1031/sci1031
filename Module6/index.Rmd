@@ -1192,7 +1192,7 @@ tm_shape(Q) +
   tm_polygons(fill = "NUM_REG",
               fill.legend = tm_legend(title = "Régions administratives",
                                       orientation = "landscape",
-                                      position = tm_pos_out("bottom", "center"))) +
+                                      position = tm_pos_out("center", "bottom"))) +
   tm_layout(frame = FALSE, legend.outside = TRUE,
             legend.outside.size = 0.15,
             legend.text.size = 0.75)
@@ -1207,7 +1207,7 @@ Q3 <- tm_shape(Q) +
   tm_polygons(fill = "NUM_REG",
               fill.legend = tm_legend(title = "Régions administratives",
                                       orientation = "landscape",
-                                      position = tm_pos_out("bottom", "center"))) +
+                                      position = tm_pos_out("center", "bottom"))) +
   tm_layout(frame = FALSE, legend.outside = TRUE,
             legend.outside.size = 0.15,
             legend.text.size = 0.75)
