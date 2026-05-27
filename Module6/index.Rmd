@@ -1385,38 +1385,38 @@ La bibliothèque `tmap` contient des styles prédéfinis qu'on appelle avec la f
 Voici quelques-uns de ces styles prédéfinis. 
 
 ```{r eval = FALSE, echo = TRUE, dev = "png"}
-tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                tm_style("classic") +
-                tm_layout(legend.show = FALSE)
+tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                           fill.legend = tm_legend(show = FALSE)) +
+                tm_style("classic")
 
-tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                tm_style("bw") +
-                tm_layout(legend.show = FALSE)
+tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                           fill.legend = tm_legend(show = FALSE)) +
+                tm_style("bw")
 
-tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                tm_style("cobalt") +
-                tm_layout(legend.show = FALSE)
+tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                           fill.legend = tm_legend(show = FALSE)) +
+                tm_style("cobalt")
 
-tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                tm_style("gray") +
-                tm_layout(legend.show = FALSE)
+tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                           fill.legend = tm_legend(show = FALSE)) +
+                tm_style("gray")
 
 ```
 
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
-Q1 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                      tm_style("classic") +
-                      tm_layout(legend.show = FALSE)
-Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                      tm_style("bw") +
-                      tm_layout(legend.show = FALSE)
-Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                      tm_style("cobalt") +
-                      tm_layout(legend.show = FALSE)
-Q4 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                      tm_style("gray") +
-                      tm_layout(legend.show = FALSE)
+Q1 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                  fill.legend = tm_legend(show = FALSE)) +
+                      tm_style("classic")
+Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                  fill.legend = tm_legend(show = FALSE)) +
+                      tm_style("bw")
+Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                  fill.legend = tm_legend(show = FALSE)) +
+                      tm_style("cobalt")
+Q4 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                  fill.legend = tm_legend(show = FALSE)) +
+                      tm_style("gray")
 
 tmap_arrange(Q1, Q2, Q3, Q4, ncol = 2, nrow = 2)
 
