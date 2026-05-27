@@ -1318,44 +1318,60 @@ tmap_arrange(Q1,Q2,Q4,Q3, ncol=2, nrow=2, widths = c(.30, 0.70),asp=NULL)
 
 #### Ajustement des couleurs {-}
 
-Les couleurs des éléments d'une carte se définissent directement dans les fonctions de couche plutôt que dans `tm_layout()`. Certains arguments de `tm_layout()` permettent néanmoins d'ajuster l'apparence globale des couleurs:
+Dans `tm_polygons()`, la couleur de remplissage se définit avec l'argument `fill` et la couleur des frontières avec l'argument `col`. Pour cartographier un attribut, on passe son nom à `fill` ; pour une couleur fixe, on passe directement le nom de la couleur. La palette de couleurs se change avec `fill.scale = tm_scale(values = "nom_palette")`. La bibliothèque `tmap` utilise par défaut les palettes de `cols4all` ; dans le cas d'attributs catégoriques (comme le nom de régions), la palette par défaut se nomme `brewer.set3`. Nous reviendrons sur le sujet des palettes un peu plus loin dans cette leçon.
 
-* La couleur de remplissage d'un polygone se définit avec l'argument `fill` et la couleur des frontières avec l'argument `col` dans `tm_polygons()`.
-* L'argument `saturation` de `tm_layout()` défini le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées.
-* L'argument `sepia.intensity` de `tm_layout()` est un nombre entre 0 et 1 qui défini le niveau de "chaleur" des couleurs. Plus sa valeur est grande, plus les couleurs ont une teinte jaune voir brune. La valeur par défaut est 0.
-* La palette de couleurs d'une couche se change avec `fill.scale = tm_scale(values = "nom_palette")`. La bibliothèque `tmap` utilise les palettes de couleurs de [Color Brewer](https://colorbrewer2.org/). Dans le cas d'attributs catégoriques (comme le nom de régions) la palette utilisée par défaut se nomme `Set3`, mais il est possible de choisir d'autres palettes parmi celles-ci: `Accent`, `Dark2`, `Paired`, `Pastel1`, `Pastel2`, `Set1`, et `Set2`. Nous reviendrons sur le sujet des palettes un peu plus loin dans cette leçon.
-
-Voici quelques exemples de modification des couleurs:
+Voici quelques exemples :
 
 ```{r eval = FALSE, echo = TRUE}
 Q1 <- tm_shape(Q) + tm_polygons(fill = "lightblue", col = "darkgreen")
 
-Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG", col = "white") +
-                    tm_layout(legend.show = FALSE,
-                              saturation = 0)
+Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG", col = "white",
+                                 fill.legend = tm_legend(show = FALSE))
 
-Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                    tm_layout(legend.show = FALSE,
-                              sepia.intensity = 0.5)
-
-Q4 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
-                                 fill.scale = tm_scale(values = "Accent")) +
-                    tm_layout(legend.show = FALSE)
+Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                 fill.scale = tm_scale(values = "area9"),
+                                 fill.legend = tm_legend(show = FALSE))
 ```
-
-
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
 Q1 <- tm_shape(Q) + tm_polygons(fill = "lightblue", col = "darkgreen")
-Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG", col = "white") +
-                    tm_layout(legend.show = FALSE, saturation = 0)
-Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG") +
-                    tm_layout(legend.show = FALSE, sepia.intensity = 0.5)
-Q4 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
-                                  fill.scale = tm_scale(values = "Accent")) +
-                    tm_layout(legend.show = FALSE)
+Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG", col = "white",
+                                 fill.legend = tm_legend(show = FALSE))
+Q3 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                 fill.scale = tm_scale(values = "area9"),
+                                 fill.legend = tm_legend(show = FALSE))
 
-tmap_arrange(Q1, Q2, Q3, Q4, ncol = 2, nrow = 2)
+tmap_arrange(Q1, Q2, Q3, ncol = 3, nrow = 1)
+```
+
+<br>
+
+La fonction `tm_layout()` offre également deux arguments pour ajuster l'apparence globale des couleurs d'une carte :
+
+* L'argument `color.saturation` définit le niveau de saturation des couleurs. La valeur par défaut est 1, et la valeur 0 donne une représentation en noir et blanc. Il est possible de donner des valeurs supérieures à 1 pour des couleurs très saturées.
+* L'argument `color.sepia_intensity` est un nombre entre 0 et 1 qui définit le niveau de "chaleur" des couleurs. Plus sa valeur est grande, plus les couleurs ont une teinte jaune voire brune. La valeur par défaut est 0.
+
+```{r eval = FALSE, echo = TRUE}
+Q1 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                 fill.legend = tm_legend(show = FALSE)) +
+                    tm_layout(color.saturation = 0.3)
+
+Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                fill.scale = tm_scale(values = "area9"),
+                                 fill.legend = tm_legend(show = FALSE)) +
+                    tm_layout(color.sepia_intensity = 0.)
+```
+
+```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
+Q1 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                 fill.legend = tm_legend(show = FALSE)) +
+                    tm_layout(color.saturation = 0.3)
+Q2 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
+                                fill.scale = tm_scale(values = "area9"),
+                                 fill.legend = tm_legend(show = FALSE)) +
+                    tm_layout(color.sepia_intensity = 0.6)
+
+tmap_arrange(Q1, Q2, ncol = 2, nrow = 1)
 ```
 
 <br>
