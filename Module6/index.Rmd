@@ -1257,7 +1257,6 @@ tm_shape(Q) +
                                       bg.color = "black",
                                       title.size = 2,
                                       text.size = 1,
-                                      item.height = 1.4,
                                       title.color = "lightpink",
                                       text.color = "white")) +
   tm_layout(bg.color = "black", frame = FALSE)
@@ -1272,7 +1271,6 @@ tm_shape(Q) +
                                       bg.color = "black",
                                       title.size = 2,
                                       text.size = 1,
-                                      item.height = 1.4,
                                       title.color = "lightpink",
                                       text.color = "white")) +
   tm_layout(bg.color = "black", frame = FALSE)
