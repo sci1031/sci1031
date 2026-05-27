@@ -1175,11 +1175,15 @@ tmap_arrange(Qframe, Qbg, Qmargin, ncol=3, nrow=1, outer.margins = NULL)
 
 #### Légende {-}
 
-La fonction `tm_legend()` permet de configurer la position de la légende. Les arguments utiles sont :
+La fonction `tm_legend()` permet de configurer la position de la légende. Elle s'utilise comme valeur de l'argument `fill.legend=` (ou `col.legend=`, `size.legend=`, etc.) de la fonction de cartographie à laquelle la légende s'applique — par exemple `tm_polygons()` pour les polygones, et comme nous le verrons plus loin `tm_raster()`, `tm_lines()`, `tm_symbols()`, etc. Les arguments utiles sont :
 
 * L'affichage de la légende (`show`). Par défaut la légende est affichée.
 * La position de la légende, avec `position = tm_pos_in("horizontal", "vertical")` pour une légende à l'intérieur du cadre, ou `position = tm_pos_out("horizontal", "vertical")` pour une légende à l'extérieur du cadre. Par défaut, la légende est placée dans le coin où il y a le plus d'espace.
 * L'orientation de la légende (`orientation`), soit `"portrait"` (par défaut) ou `"landscape"`.
+* L'affichage d'un cadre autour de la légende (`frame`). Par défaut un cadre est affiché.
+* La couleur du fond de la légende (`bg.couleur`). Par défaut le font est blanc.
+* La taille du titre (`title.size`) et du texte (`text.size`).
+* La hauteur (`item.height`) et la largeur (`item.width`) des éléments dans la légende.
 
 Voici quelques exemples :
 
@@ -1192,74 +1196,86 @@ tm_shape(Q) +
   tm_polygons(fill = "NUM_REG",
               fill.legend = tm_legend(title = "Régions administratives",
                                       orientation = "landscape",
-                                      position = tm_pos_out("center", "bottom"))) +
-  tm_layout(frame = FALSE, legend.outside = TRUE,
-            legend.outside.size = 0.15,
-            legend.text.size = 0.75)
+                                      position = tm_pos_out("center", "bottom"),
+                                      item.height = 1,
+                                      item.width = 1,
+                                      title.size = 1,
+                                      text.size = 0.75))
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png", fig.width=10}
+tmap_options(component.autoscale = FALSE)
+
 Q1 <- tm_shape(Q) +
   tm_polygons(fill = "NOM_REG",
               fill.legend = tm_legend(show = FALSE))
 
-Q3 <- tm_shape(Q) +
+Q2 <- tm_shape(Q) +
   tm_polygons(fill = "NUM_REG",
               fill.legend = tm_legend(title = "Régions administratives",
                                       orientation = "landscape",
-                                      position = tm_pos_out("center", "bottom"))) +
-  tm_layout(frame = FALSE, legend.outside = TRUE,
-            legend.outside.size = 0.15,
-            legend.text.size = 0.75)
+                                      position = tm_pos_out("center", "bottom"),
+                                      item.height = 1,
+                                      item.width = 1,
+                                      title.size = 1,
+                                      text.size = 0.75))
 
-tmap_arrange(Q1, Q3)
+tmap_arrange(Q1, Q2)
 ```
 
 <br>
 
 ```{r eval = FALSE, echo = TRUE}
 tm_shape(Q) +
-  tm_polygons(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
-  tm_layout(legend.outside = TRUE)
+  tm_polygons(fill = "NOM_REG", 
+              fill.legend = tm_legend(title = "Régions administratives",
+                                      position = tm_pos_out("right", "center"),
+                                      frame = FALSE,
+                                      bg.color = "antiquewhite"))
+  
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png", fig.height=6}
 tm_shape(Q) +
-  tm_polygons(fill = "NOM_REG", fill.legend = tm_legend(title = "Régions administratives")) +
-  tm_layout(legend.outside = TRUE)
+  tm_polygons(fill = "NOM_REG", 
+              fill.legend = tm_legend(title = "Régions administratives",
+                                      position = tm_pos_out("right", "center"),
+                                      frame = FALSE,
+                                      bg.color = "antiquewhite"))
+ 
 ```
 <br>
 
-La fonction `tm_layout()` permet de configurer l'apparence de la légende. Les arguments utiles sont :
-
-* L'option de mettre un cadre autour de la légende (`legend.frame`) et la couleur de fond de la légende (`legend.bg.color`).
-* La taille de la légende extérieure (`legend.outside.size`) et la taille du texte de la légende (`legend.text.size`).
-* La police de caractère (`legend.title.fontfamily`), le style (`legend.title.fontface`), et la couleur (`legend.title.color`) du titre de la légende.
-
-Voici un exemple :
+La fonction `tm_legend()`s'utilise en conjonction avec la fonction `tm_layout()`. Voici un exemple :
 
 ```{r eval = FALSE, echo = TRUE}
 tm_shape(Q) +
   tm_polygons(fill = "NOM_REG",
               fill.legend = tm_legend(title = "Régions administratives",
-                                      position = tm_pos_out("left", "center"))) +
-  tm_layout(bg.color = "black", frame = FALSE,
-            legend.title.fontfamily = "serif",
-            legend.title.fontface = 2,
-            legend.title.color = "lightpink",
-            legend.text.color = "white")
+                                      position = tm_pos_out("left", "center"),
+                                      title.fontfamily = "serif",
+                                      bg.color = "black",
+                                      title.size = 2,
+                                      text.size = 1,
+                                      item.height = 1.4,
+                                      title.color = "lightpink",
+                                      text.color = "white")) +
+  tm_layout(bg.color = "black", frame = FALSE)
 ```
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png", fig.height=6}
 tm_shape(Q) +
   tm_polygons(fill = "NOM_REG",
               fill.legend = tm_legend(title = "Régions administratives",
-                                      position = tm_pos_out("left", "center"))) +
-  tm_layout(bg.color = "black", frame = FALSE,
-            legend.title.fontfamily = "serif",
-            legend.title.fontface = 2,
-            legend.title.color = "lightpink",
-            legend.text.color = "white")
+                                      position = tm_pos_out("left", "center"),
+                                      title.fontfamily = "serif",
+                                      bg.color = "black",
+                                      title.size = 2,
+                                      text.size = 1,
+                                      item.height = 1.4,
+                                      title.color = "lightpink",
+                                      text.color = "white")) +
+  tm_layout(bg.color = "black", frame = FALSE)
 ```
 <br>
 
