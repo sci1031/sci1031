@@ -1587,23 +1587,31 @@ tm_shape(V) + tm_dots(fill = "Mncplts",
 ```
 <br>
 
-###### Fonction tm_markers() {-}
+###### Symboles avec tm_symbols() {-}
 
-La fonction `tm_markers()` représente les points par le symbole de repère géographique. Elle fonctionne en mode interactif (voir la section [Cartes interactives](#cartes-interactives)) :
+La fonction `tm_symbols()` permet de représenter les points avec n'importe quelle forme disponible dans R, spécifiée par l'argument `shape`. La figure ci-dessous présente les formes disponibles et leur numéro correspondant :
 
-```{r, eval = FALSE}
-
-tm_shape(Q) + tm_fill() +
-tm_shape(V) + tm_markers(size = 0.5,
-                         text = "Mncplts",
-                         text.size = 0.8,
-                         text.just = "top") +
-              tm_layout(inner.margins = c(0.1,0.2,0.1,0.2))
-
+```{r, echo = FALSE, fig.cap = "Formes disponibles dans R et leur numéro (`shape`).", fig.height=3, fig.width=7, fig.align="center"}
+par(mar = c(0, 0, 0, 0))
+plot(0, type = "n", xlim = c(0, 26), ylim = c(0.5, 2.5), axes = FALSE, xlab = "", ylab = "")
+for (i in 0:25) {
+  points(i + 0.5, 2, pch = i, cex = 1.8, bg = "steelblue", col = "steelblue4")
+  text(i + 0.5, 1.4, labels = i, cex = 0.8)
+}
 ```
+
 <br>
 
-La fonction `tm_markers()` permet d'ajouter du texte facilement sur les repères et contient des arguments similaires à la fonction `tm_text()`.   
+Par exemple, utilisons un triangle orienté vers le bas (`shape = 25`) et ajoutons des étiquettes avec `tm_labels()` :
+
+```{r, eval = TRUE, dev = "png", fig.height=6}
+tm_shape(Q) + tm_fill() +
+tm_shape(V) + tm_symbols(shape = 25,
+                          fill = "darkblue",
+                          size = 0.8,
+                          fill.legend = tm_legend(show = FALSE)) +
+              tm_labels(text = "Mncplts", size = 0.7)
+```
 
 
 ### Données matricielles
