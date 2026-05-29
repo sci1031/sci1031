@@ -1587,7 +1587,7 @@ tm_shape(V) + tm_dots(fill = "Mncplts",
 ```
 <br>
 
-###### Symboles avec tm_symbols() {-}
+###### Repères géographiques avec tm_symbols() {-}
 
 La fonction `tm_symbols()` permet de représenter les points avec n'importe quelle forme disponible dans R, spécifiée par l'argument `shape`. La figure ci-dessous présente les formes disponibles et leur numéro correspondant :
 
@@ -1728,7 +1728,7 @@ Dans des cartes thématiques, il est souvent utile de représenter certains attr
 
 ###### Fonction tm_symbols() {-}
 
-La fonction `tm_symbols()` est similaire à la fonction `tm_dots()` mais ne s'utilise pas nécessairement avec des données vectorielles de type points. En particulier, elle permet de représenter la valeur d'attribut d'un polygone en affichant un symbole dont la taille ou la couleur est proportionnelle à cette valeur. 
+Nous avons vu que la fonction `tm_symbols()` permet de représenter des points avec différentes formes. Elle peut également s'utiliser avec des données vectorielles de type polygones pour créer des symboles proportionnels : un symbole est alors placé au centroïde de chaque polygone, dont la taille ou la couleur est proportionnelle à la valeur d'un attribut.
 
 En guise d'exemple, reprenons les données sur les régions administratives du Québec pour lesquelles nous connaissons la taille de la population. Nous pouvons illustrer les régions par un cercle dont le diamètre est proportionnel à la taille de sa population. Il s'agit d'attribuer à l'argument `size`, le nom de l'attribut que nous souhaitons représenter. 
 
@@ -1747,19 +1747,17 @@ Par défaut, le symbole utilisé est un point. Le point correspond au symbole `s
 
 ```{r, warning = FALSE, dev = "png", fig.height=6}
 carte_base <- tm_shape(Q) +
-                  tm_polygons(fill = "NUM_REG", fill.legend = tm_legend(show = FALSE)) +
-                  tm_style("bw")
+                  tm_polygons(fill = "grey", fill.legend = tm_legend(show = FALSE)) 
 
 carte_carre <- carte_base +
                  tm_symbols(shape = 15,
-                            fill = "red",
+                            col = "red",
                             size = "Pop_tot",
                             size.legend = tm_legend(title = "Population", orientation = "portrait"))
 
 carte_triangle <- carte_base +
                  tm_symbols(shape = 25,
                             fill = "red",
-                            col = NA,
                             size = "Pop_tot",
                             size.legend = tm_legend(title = "Population", orientation = "portrait"))
 
