@@ -1501,7 +1501,7 @@ Ro$ClsRte <- as.factor(Ro$ClsRte)
 levels(Ro$ClsRte)
 ```
 <br>
-1
+
 
 ###### Fonction tm_lines() {-}
 
@@ -1563,15 +1563,12 @@ La bibliothèque `tmap` comprend plusieurs fonctions permettant de représenter 
 La fonction `tm_dots()` fonctionne de façon similaire aux fonctions `tm_polygons()` et `tm_lines()`. Il suffit de l'ajouté à la fonction `tm_shape(P)` où `P` est un *shapefile* de types point ou multipoint.
 
 ```{r, dev = "png", fig.height=6 }
-# Juste les points
-Q1 <- tm_shape(V) + tm_dots()
 
 # Les points et la carte du QC
-Q2 <- tm_shape(Q) + tm_fill(fill = "blue", fill_alpha = 0.4) +
-      tm_shape(V) + tm_dots(fill = "darkblue", size = 1)
+tm_shape(Q) + tm_fill(fill = "blue", fill_alpha = 0.4) +
+tm_shape(V) + tm_dots(fill = "darkblue", size = 1)
 
-# 
-tmap_arrange(Q1,Q2)
+
 ```
 <br>
 
@@ -1580,13 +1577,13 @@ Nous pouvons également définir la couleur des points en fonction de la valeur 
 ```{r, dev = "png", fig.height=6 }
 tm_shape(Q) + tm_fill() +
 tm_shape(V) + tm_dots(fill = "Mncplts",
-                      fill.scale = tm_scale(values = "Paired"),
+                      fill.scale = tm_scale(values = "brewer.paired"),
+                      fill.legend = tm_legend(title = "Municipalités",
+                                              text.size = 0.8,
+                                              position = tm_pos_out("right", "center")),
                       size = 1) +
-              tm_layout(frame = FALSE,
-                        legend.outside = TRUE,
-                        legend.title.color = NA,
-                        legend.text.size = 0.8) +
-              tm_title("Municipalités")
+              tm_layout(frame = FALSE)
+              
 ```
 <br>
 
