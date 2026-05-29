@@ -1634,28 +1634,38 @@ Le *raster* `E` est une matrice de 810612 cellules, et chacune de ces cellules a
 
 ###### Fonction tm_raster() {-}
 
-La fonction `tm_raster()` de la bibliothèque `tmap` permet de visualiser les *rasters* en assignant des couleurs différentes pour des classes de valeurs différentes. L'argument `n` sert à préciser le nombre approximatif de classes à utiliser.
+La fonction `tm_raster()` de la bibliothèque `tmap` permet de visualiser les *rasters* en assignant des couleurs différentes pour des classes de valeurs différentes.
 
-```{r, eval = FALSE, echo = TRUE}
-tm_shape(E) + tm_raster(col.legend = tm_legend(title = "Élévation (m)"))
-tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10),
-                        col.legend = tm_legend(title = "Élévation (m)"))
+```{r, eval = TRUE, echo = TRUE,  dev = "png", fig.height=6}
+tm_shape(E) + 
+  tm_raster(col.legend = tm_legend(title = "Élévation (m)",
+                                   position = tm_pos_out("right","center")))
 ```
-```{r, echo = FALSE, dev = "png", fig.height=6 }
-Q1 <- tm_shape(E) + tm_raster(col.legend = tm_legend(title = "Élévation (m)"))
-Q2 <- tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10),
-                               col.legend = tm_legend(title = "Élévation (m)"))
+
+Nous pouvons visualiser la distribution des valeurs possibles dans le *raster* cartographié en utilisant la fonction `tm_chart_histogram()` qu'on associe à l'argument `col.chart` de la fonction `tm_raster()`.
+
+```{r, eval = TRUE, echo = TRUE,  dev = "png", fig.height=6}
+tm_shape(E) + 
+  tm_raster(col.legend = tm_legend(title = "Élévation (m)",
+                                   position = tm_pos_out("right","center")),
+            col.chart = tm_chart_histogram())
+```
+
+Par défaut, `tm_raster()` catégorise les valeurs selon le style `"pretty"`, qui produit des classes aux limites arrondies et visuellement agréables. Comme on peut le voir dans l'histogramme, les valeurs d'élévation sont très concentrées près de 0 m. Le style `"pretty"` ne reflète donc pas nécessairement bien cette distribution. On peut utiliser `col.scale = tm_scale(n = ...)` pour préciser le nombre approximatif de classes, et `style =` pour choisir une méthode de coupure différente. Par exemple, le style `"quantile"` produit des classes qui contiennent chacune le même nombre de cellules, ce qui peut mieux mettre en valeur les variations dans les zones de faible élévation. Comparons les deux :
+```{r, eval = TRUE, echo = TRUE, dev = "png", fig.height=6, fig.width = 10 }
+Q1 <- tm_shape(E) +
+  tm_raster(col.scale = tm_scale(n = 10),
+            col.legend = tm_legend(title = 'pretty (n=10)',
+                                   position = tm_pos_out("right", "center")),
+            col.chart = tm_chart_histogram(position = tm_pos_out("right", "center")))
+            
+Q2 <- tm_shape(E) +
+  tm_raster(col.scale = tm_scale(n = 5, style = "quantile"),
+            col.legend = tm_legend(title = 'quantile (n=5)',
+                                   position = tm_pos_out("right", "center")),
+            col.chart = tm_chart_histogram(position = tm_pos_out("right", "center")))
 
 tmap_arrange(Q1, Q2)
-```
-<br>
-
-Il est possible d'afficher en légende un histogramme illustrant la distribution des valeurs. Par exemple: 
-
-```{r, dev = "png", fig.height=6 }
-tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10),
-                        col.legend = tm_legend(title = "Élévation (m)", hist = TRUE)) +
-              tm_layout(legend.outside = TRUE)
 ```
 <br>
 
