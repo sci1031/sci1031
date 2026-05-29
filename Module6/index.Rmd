@@ -1747,7 +1747,7 @@ Par défaut, le symbole utilisé est un point. Le point correspond au symbole `s
 
 ```{r, warning = FALSE, dev = "png", fig.height=6}
 carte_base <- tm_shape(Q) +
-                  tm_polygons(fill = "grey", fill.legend = tm_legend(show = FALSE)) 
+                  tm_polygons(fill = "grey85", fill.legend = tm_legend(show = FALSE)) 
 
 carte_carre <- carte_base +
                  tm_symbols(shape = 15,
