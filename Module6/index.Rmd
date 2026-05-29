@@ -1651,7 +1651,15 @@ tm_shape(E) +
             col.chart = tm_chart_histogram())
 ```
 
-Par défaut, `tm_raster()` catégorise les valeurs selon le style `"pretty"`, qui produit des classes aux limites arrondies et visuellement agréables. Comme on peut le voir dans l'histogramme, les valeurs d'élévation sont très concentrées près de 0 m. Le style `"pretty"` ne reflète donc pas nécessairement bien cette distribution. On peut utiliser `col.scale = tm_scale(n = ...)` pour préciser le nombre approximatif de classes, et `style =` pour choisir une méthode de coupure différente. Par exemple, le style `"quantile"` produit des classes qui contiennent chacune le même nombre de cellules, ce qui peut mieux mettre en valeur les variations dans les zones de faible élévation. Comparons les deux :
+Par défaut, `tm_raster()` catégorise les valeurs selon le style `"pretty"`, qui produit des classes aux limites arrondies et visuellement agréables. Comme on peut le voir dans l'histogramme, les valeurs d'élévation sont très concentrées près de 0 m. Le style `"pretty"` ne reflète donc pas nécessairement bien cette distribution. On peut utiliser `col.scale = tm_scale(n = ...)` pour préciser le nombre approximatif de classes, et `style =` pour choisir une méthode de coupure différente. Les styles disponibles sont :
+
+- `"fixed"` : crée des classes selon un choix explicite de limites, définies dans un vecteur assigné à l'argument `breaks`.
+- `"equal"` : divise l'étendue des valeurs en `n` classes de largeur égale.
+- `"pretty"` : choisit des limites de classes arrondies et visuellement agréables. C'est la méthode par défaut.
+- `"quantile"` : divise les valeurs en quantiles, de sorte que chaque classe contient le même nombre de cellules.
+- `"jenks"` : utilise l'algorithme de Jenks pour minimiser la variance à l'intérieur des classes.
+
+Par exemple, le style `"quantile"` peut mieux mettre en valeur les variations dans les zones de faible élévation. Comparons les deux :
 ```{r, eval = TRUE, echo = TRUE, dev = "png", fig.height=6, fig.width = 10 }
 Q1 <- tm_shape(E) +
   tm_raster(col.scale = tm_scale(n = 10),
@@ -1670,58 +1678,45 @@ tmap_arrange(Q1, Q2)
 <br>
 
 
-Par défaut, la palette de couleur utilisée est la palette séquentielle `YlOrBr` de [ColorBrewer](https://colorbrewer2.org/) (de jaune à brun en passant par orange). Or, nous pouvons changer la palette de couleur. Utilisons, par exemple, la fonction `colorRampPalette()` pour créer notre propre palette de couleur. 
+Par défaut, la palette de couleur utilisée est la palette séquentielle `hcl.blues3` de `cols4all`. Or, nous pouvons changer la palette de couleur avec l'argument `values` de `tm_scale()`. Utilisons, par exemple, la fonction `colorRampPalette()` pour créer notre propre palette de couleur inspirée du relief :
 
 ```{r, dev = "png", warning = FALSE, fig.height=6}
-
-pal.elevation = colorRampPalette( c("midnightblue","forestgreen",
-                                    "darkolivegreen4","burlywood", 
+pal.elevation <- colorRampPalette(c("midnightblue", "forestgreen",
+                                    "darkolivegreen4", "burlywood",
                                     "chocolate4"))
 
 tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10, values = pal.elevation(10),
-                                             value.na = "beige"),
-                        col.legend = tm_legend(title = "Élévation", hist = TRUE)) +
-              tm_layout(legend.outside = TRUE)
+                                             value.na = NA),
+                        col.legend = tm_legend(title = "Élévation (m)",
+                                               position = tm_pos_out("right", "center"),
+                                               na.show = FALSE),
+                        col.chart = tm_chart_histogram(
+                                               position = tm_pos_out("right", "center")))
 ```
 <br>
 
-Il existe différentes façons de former des classes de valeur à partir de la distribution. L'argument `style` se précise à l'intérieur de la fonction `tm_scale_intervals()` assignée à l'argument `col.scale` de `tm_raster()`. Il permet de choisir une méthode parmi plusieurs dont les suivantes:
-
-- `"fixed"`: crée des classes de valeurs selon notre propre choix. Ces classes doivent être définies dans un  vecteur assigné à l'argument `breaks`.
-- `"equal"`: divise les valeurs en `n` classes. Ceci est la méthode par défaut. 
-- `"pretty"`: choisi automatiquement le nombre de classes qui permet de distinguer les valeurs dans un rendu esthétique. 
-- `"quantile"`: divise les valeurs en quantiles. 
-- `"jenks"`: utilise l'algorithme de Jenks pour déterminer le nombre optimal de classes.
-
-Visualisons à nouveau la carte des données d'élévation en utilisant un style "fixed" et un style "quantile":
+Visualisons la carte des données d'élévation en utilisant un style `"fixed"` et un style `"equal"` :
 
 ```{r, dev = "png", warning = FALSE, fig.height=6 }
-# définir la mise en page pour les deux cartes
-format_carte <- tm_layout(frame = FALSE,
-                          legend.position = c(0.67, 0.04),
-                          legend.title.size = 0.8,
-                          legend.bg.color = "white",
-                          legend.frame = TRUE)
-
 # style fixed
 Efixed <- tm_shape(E) +
             tm_raster(col.scale = tm_scale_intervals(
                           values = pal.elevation(10),
                           style = "fixed",
                           breaks = c(0,100,200,300,400,500,600,700,800,900,1000,1600)),
-                      col.legend = tm_legend(title = "Élévation(m)")) +
-            format_carte
+                      col.legend = tm_legend(title = "Élévation (m)",
+                                             position = tm_pos_out("right", "center")))
 
-# style quantile
-Equant <- tm_shape(E) +
+# style equal
+Eequal <- tm_shape(E) +
             tm_raster(col.scale = tm_scale_intervals(
                           values = pal.elevation(10),
-                          style = "quantile"),
-                      col.legend = tm_legend(title = "Élévation(m)")) +
-            format_carte
+                          style = "equal",
+                          n = 10),
+                      col.legend = tm_legend(title = "Élévation (m)",
+                                             position = tm_pos_out("right", "center")))
 
-
-tmap_arrange(Efixed, Equant)
+tmap_arrange(Efixed, Eequal)
 ```
 
 <br>
