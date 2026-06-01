@@ -1736,7 +1736,6 @@ En guise d'exemple, reprenons les données sur les régions administratives du Q
 ```{r, warning = FALSE, dev = "png", fig.height=6 }
 tm_shape(Q) +
   tm_polygons(fill = "NUM_REG", fill.legend = tm_legend(show = FALSE)) +
-  tm_style("bw") +
   tm_symbols(fill = "black",
              size = "Pop_tot",
              size.legend = tm_legend(title = "Population", orientation = "portrait"))
@@ -1757,9 +1756,10 @@ carte_carre <- carte_base +
 
 carte_triangle <- carte_base +
                  tm_symbols(shape = 25,
-                            fill = "red",
+                            fill = "NUM_REG",
                             size = "Pop_tot",
-                            size.legend = tm_legend(title = "Population", orientation = "portrait"))
+                            size.legend = tm_legend(title = "Population", orientation = "portrait"),
+                            fill.legend = tm_legend(show = FALSE))
 
 tmap_arrange(carte_carre, carte_triangle)
 ```
@@ -1769,25 +1769,25 @@ tmap_arrange(carte_carre, carte_triangle)
 
 ##### Représenter deux légendes {-}
 
-Lorsque nous utilisons des symboles proportionnels, nous devons souvent avoir plus d'une légende. Par exemple, dans les cartes précédentes, nous avions seulement une légende se rapportant à la taille des populations mais aucune légende pour identifier les régions. Pour ajouter deux légendes (ou plus), nous devons utiliser la fonction `tm_layout()` avec l'argument `legend.stack` qui précise si les légendes seront disposées de façon verticale ou horizontale. 
+Lorsque nous utilisons des symboles proportionnels, nous devons souvent avoir plus d'une légende. Par exemple, dans les cartes précédentes, nous avions seulement une légende se rapportant à la taille des populations mais aucune légende pour identifier les régions.
+
+Pour regrouper plusieurs légendes ensemble, on attribue la même valeur à l'argument `group_id` dans chaque `tm_legend()` concerné. Toutes les légendes partageant le même `group_id` seront affichées ensemble. La fonction `tm_components()` permet ensuite de contrôler la disposition des légendes groupées grâce à l'argument `stack` : `"vertical"` pour les empiler verticalement, `"horizontal"` pour les disposer côte à côte. Dans l'exemple suivant, la légende des régions administratives et celle de la taille de la population utilisent toutes deux `group_id = "légende"` :
 
 ```{r, warning = FALSE, dev = "png", fig.height = 6}
 tm_shape(Q) +
   tm_polygons(fill = "NOM_REG",
-              fill.scale = tm_scale(values = "Set1"),
-              fill.legend = tm_legend(title = "Régions administratives"),
-              col = "darkgrey") +
+              fill.scale = tm_scale(values = "seaborn.muted"),
+              fill.legend = tm_legend(title = "Régions administratives", group_id = "légende")) +
    tm_symbols(fill = "black",
-              col = "grey",
               size = "Pop_tot",
-              size.scale = tm_scale(max.size = 2),
               size.legend = tm_legend(title = "Population (en milliers)",
                                       orientation = "landscape",
-                                      labels = c("500", "1000", "1500", "2000", "2500"))) +
-    tm_layout(frame = FALSE,
-              legend.outside = TRUE,
-              legend.stack = "vertical",
-              legend.title.fontface = "bold")
+                                      group_id = "légende"),
+              size.scale = tm_scale(labels = c("500", "1000", "1500", "2000"))) +
+            
+  tm_components(group_id = "légende", stack = "vertical")
+                                     
+
 ```
 
 <br> 
@@ -1802,7 +1802,7 @@ Utilisons à nouveau les données sur la taille des populations des régions adm
 Tout d'abord, nous devons calculer la proportion d'enfants dans chaque région. Pour le moment, nous connaissons seulement le nombre d'enfants (`A0.14_T`). Créons un nouvel attribut pour le *shapefile* Q:
 
 ```{r}
-Q$Pop_prop_enfant <- Q$Pop_0_14/Q$Pop_tot
+Q$Pop_prop_enfant <- round(100*Q$Pop_0_14/Q$Pop_tot)
 ```
 <br>
 
@@ -1810,25 +1810,30 @@ Utilisons maintenant la fonction `tm_bubbles()` en définissant l'argument `size
 
 ```{r, warning = FALSE, dev = "png", fig.height = 6}
 tm_shape(Q) +
+  
   tm_polygons(fill = "NUM_REG",
-              fill.scale = tm_scale(values = "Greys"),
+              fill.scale = tm_scale(values = "brewer.greys"),
               fill.legend = tm_legend(show = FALSE)) +
+  
    tm_bubbles(size = "Pop_tot",
-              fill = "Pop_prop_enfant",
-              fill.scale = tm_scale_intervals(style = "quantile"),
-              size.scale = tm_scale(max.size = 2),
-              col = "black",
-              lwd = .5,
+              size.scale = tm_scale(labels = c("500", "1000", "1500", "2000", "2500")),
               size.legend = tm_legend(title = "Population (en milliers)",
                                       orientation = "landscape",
-                                      labels = c("500", "1000", "1500", "2000", "2500")),
-              fill.legend = tm_legend(title = "Proportion d'enfants (0-14 ans)")) +
-    tm_layout(frame = FALSE,
-              legend.outside = TRUE,
-              legend.title.size = 1)
+                                      group_id = "légende"),
+              fill = "Pop_prop_enfant",
+              fill.scale = tm_scale_intervals(values = "brewer.reds",
+                                              style = "quantile"),
+              fill.legend = tm_legend(title = "Proportion d'enfants de 0 à 14 ans (%)", 
+                                      group_id = "légende")) +
+  
+    tm_components(group_id = "légende", 
+                  position = tm_pos_out("center", "bottom"), 
+                  stack = "horizontal")
 ```
+
+
 <br>
-L'argument `style` se précise à l'intérieur de `fill.scale = tm_scale_intervals(style = "quantile")` pour définir les classes de couleurs. Ici, nous avons choisi une classification en quantile. Noter que nous pouvons définir un titre pour la légende des tailles (`size.legend = tm_legend(title = ...)`) et un titre pour la légende des couleurs (`fill.legend = tm_legend(title = ...)`).
+L'argument `fill.scale = tm_scale_intervals()` définit l'échelle de couleur pour la variable de remplissage. Il accepte deux arguments principaux : `values` pour la palette de couleurs (ici `"brewer.reds"`) et `style` pour la méthode de classification (ici `"quantile"`). On peut également définir un titre pour chaque légende : `size.legend = tm_legend(title = ...)` pour la légende des tailles et `fill.legend = tm_legend(title = ...)` pour la légende des couleurs.
 
 Remarquer que cette figure nous permet d'observer que la proportion d'enfants au Nunavik est très grande malgré que la taille de la population soit petite. 
 
