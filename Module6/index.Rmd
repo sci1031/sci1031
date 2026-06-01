@@ -1751,7 +1751,7 @@ carte_base <- tm_shape(Q) +
 
 carte_carre <- carte_base +
                  tm_symbols(shape = 15,
-                            col = "red",
+                            fill = "red",
                             size = "Pop_tot",
                             size.legend = tm_legend(title = "Population", orientation = "portrait"))
 
