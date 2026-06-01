@@ -1843,30 +1843,115 @@ Remarquer que cette figure nous permet d'observer que la proportion d'enfants au
 
 Les cartes choroplèthes sont utilisées pour représenter des données vectorielles de type polygone en assignant une couleur à chaque polygone en fonction de la valeur d'un de ces attributs. 
 
-Pour créer des cartes choroplèthes, nous utilisons l'argument `fill` de la fonction `tm_polygons()`. L'assignation des couleurs se fait en utilisant `fill.scale = tm_scale_intervals()` pour définir les classes de valeur d'attribut, de la même façon que pour `tm_raster()` et `tm_bubbles()`.
+Pour créer des cartes choroplèthes, nous utilisons l'argument `fill` de la fonction `tm_polygons()`. L'argument `fill.scale` permet de contrôler la façon dont les valeurs sont associées aux couleurs. Il existe trois principales fonctions d'échelle :
 
-Créons des cartes choroplèthes de la proportion d'enfants dans les régions administratives en utilisant différentes classifications de couleurs. 
+- **Sans `fill.scale`** : tmap applique une échelle par défaut (`tm_scale()`) avec un style `"pretty"` et une palette automatique.
+- **`tm_scale_continuous()`** : produit un dégradé de couleur continu, sans découpage en classes.
+- **`tm_scale_intervals()`** : découpe les valeurs en classes discrètes selon un style de classification (`style = "fixed"`, `"quantile"`, `"equal"`, etc.). Lorsque `style = "fixed"`, les coupures sont définies manuellement avec l'argument `breaks`.
+
+Créons des cartes choroplèthes de la proportion d'enfants dans les régions administratives en comparant ces différentes échelles :
+
+<br>
+
+```{r, echo = TRUE, eval = FALSE}
+
+# Par defaut, 
+Qdefaut <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant")
+                                    
+# Style continu
+Qcont<- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                    fill.scale = tm_scale_continuous())
+ 
+# style fixe défini manuellement
+Qfixed <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                    fill.scale = tm_scale_intervals(
+                                       style = "fixed",
+                                       breaks = c(5, 10, 15, 20, 25, 30)))
+       
+# style quantile
+Qquant <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                    fill.scale = tm_scale_intervals(style = "quantile"))
+
+```
+
+
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, dev = "png", fig.height = 12, fig.width = 10}
+
+# Par defaut, 
+Qdefaut <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                     fill.legend = tm_legend(title = "Échelle par défaut", 
+                                                             position = tm_pos_out("right", "center")))
+                                     
+# Style continu
+Qcont<- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                    fill.scale = tm_scale_continuous(),
+                                    fill.legend = tm_legend( title = "Échelle continue",
+                                                             position = tm_pos_out("right", "center")))
+
+
+# style fixe défini manuellement
+Qfixed <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                    fill.scale = tm_scale_intervals(
+                                       style = "fixed",
+                                       breaks = c(5, 10, 15, 20, 25, 30)),
+                                    fill.legend = tm_legend( title = "Échelle prédéfinie",
+                                                             position = tm_pos_out("right", "center")))
+
+
+# style quantile
+Qquant <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                    fill.scale = tm_scale_intervals(style = "quantile"),
+                                    fill.legend = tm_legend( title = "Échelle quantile",
+                                                             position = tm_pos_out("right", "center")))
+
+
+tmap_arrange(Qdefaut,Qcont,Qfixed,Qquant)
+
+```
 
 ```{r, warning = FALSE, dev = "png", fig.height = 6}
 
 # Par defaut, nous avons 4 classes
-Qdefaut <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant")
+Qdefaut <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                     # fill.legend = tm_legend(orientation = "landscape",
+                                     #                          item.width = 3,
+                                     #                          title = "Pourc.d'enfants de 0 à 14 ans")
+                                     )
+
+Qcont<- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                                    fill.scale = tm_scale_continuous(),
+                                    # fill.legend = tm_legend(orientation = "landscape",
+                                    #                         item.width = 3,
+                                    #                         title = "Pourc.d'enfants de 0 à 14 ans")
+                                  )
+
 
 # style fixed
 Qfixed <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
-                                     fill.scale = tm_scale_intervals(
+                                    fill.scale = tm_scale_intervals(
                                        style = "fixed",
-                                       breaks = c(0.1, 0.14, 0.15, 0.16, 0.18, 0.3)))
+                                       breaks = c(5, 10, 15, 20, 25, 30)),
+                                    # fill.legend = tm_legend(orientation = "landscape",
+                                    #                         item.width = 3,
+                                    #                         title = "Pourc.d'enfants de 0 à 14 ans")
+                                    )
+
 
 # style quantile
 Qquant <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
-                                     fill.scale = tm_scale_intervals(style = "quantile"))
+                                    fill.scale = tm_scale_intervals(style = "quantile",
+                                                                    labels = ("")),
+                                    # fill.legend = tm_legend(orientation = "landscape",
+                                    #                         item.width = 3,
+                                    #                         title = "Pourc.d'enfants de 0 à 14 ans")
+                                    )
 
-tmap_arrange(Qdefaut,Qfixed,Qquant)
+#tmap_arrange(Qdefaut,Qfixed,Qquant)
+tmap_arrange(Qdefaut,Qcont,Qfixed,Qquant)
 
 
 ```
-<br>
 
 <!--  
 #### Données COVID {-}
