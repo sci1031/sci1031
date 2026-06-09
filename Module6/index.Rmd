@@ -864,6 +864,8 @@ c4a_palettes(type = "seq")   # palettes séquentielles
 c4a_palettes(type = "div")   # palettes divergentes
 ```
 
+<br>
+
 Pour obtenir les couleurs d'une palette particulière, on utilise la fonction `c4a(name, n)` où `name` est le nom de la palette et `n` le nombre de couleurs souhaité. Par exemple :
 
 ```{r}
@@ -1410,6 +1412,7 @@ tm_shape(Q) + tm_polygons(fill = "NUM_REG",
 
 ```
 
+<br>
 
 ```{r eval = TRUE, warning = FALSE, echo = FALSE, dev = "png"}
 Q1 <- tm_shape(Q) + tm_polygons(fill = "NUM_REG",
@@ -1704,7 +1707,7 @@ tm_shape(E) + tm_raster(col.scale = tm_scale(n = 10, values = pal.elevation(10),
 
 Visualisons la carte des données d'élévation en utilisant un style `"fixed"` et un style `"equal"` :
 
-```{r, dev = "png", warning = FALSE, fig.height=6 }
+```{r, dev = "png", warning = FALSE, fig.height=5 }
 # style fixed
 Efixed <- tm_shape(E) +
             tm_raster(col.scale = tm_scale_intervals(
