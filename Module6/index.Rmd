@@ -22,6 +22,8 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 - Utiliser les fonctions de `tmap` pour cartographier des données matricielles.
 - Utiliser les fonctions de `tmap` pour créer des cartes avec symboles proportionnels et choroplèthes.
 - Utiliser les fonctions de `tmap` pour créer des cartes à panneaux multiples
+- Utiliser les fonctions de `tmap` pour créer des cartes interactives
+
 
 ---
 
@@ -29,9 +31,8 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 ###### Vous utiliserez les bibliothèques suivantes: {-}
 
 - `tmap`
+- `cols4all`
 - `grid`
-- `viridis`
-- `RColorBrewer`
 
 </div>
 
@@ -47,17 +48,21 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 - `tm_grid()`
 - `tm_graticules()`
 - `tm_credits()`
+- `tm_title()`
 - `tmap_arrange()`
 - `tm_layout()`
 - `tm_style()`
-- `tm_text()`
+- `tm_labels()`
 - `tm_lines()`
-- `tm_markers()`
-- `tm_raster()`
-- `tm_legend()`
+- `tm_dots()`
 - `tm_symbols()`
 - `tm_bubbles()`
+- `tm_raster()`
+- `tm_legend()`
 - `tm_facets()`
+- `tmap_mode()`
+- `ttm()`
+- `c4a_palettes()`
 - `viewport()`
 - `print()`
 
@@ -1591,7 +1596,7 @@ tm_shape(V) + tm_dots(fill = "Mncplts",
 
 La fonction `tm_symbols()` permet de représenter les points avec n'importe quelle forme disponible dans R, spécifiée par l'argument `shape`. La figure ci-dessous présente les formes disponibles et leur numéro correspondant :
 
-```{r, echo = FALSE, fig.cap = "Formes disponibles dans R et leur numéro (`shape`).", fig.height=3, fig.width=7, fig.align="center"}
+```{r, echo = FALSE, fig.cap = "Formes disponibles dans R et leur numéro (`shape`).", fig.height=2, fig.width=7, fig.align="center"}
 par(mar = c(0, 0, 0, 0))
 plot(0, type = "n", xlim = c(0, 26), ylim = c(0.5, 2.5), axes = FALSE, xlab = "", ylab = "")
 for (i in 0:25) {
