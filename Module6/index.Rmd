@@ -2147,6 +2147,20 @@ L'argument `hover` de `tm_symbols()` définit le texte qui s'affiche au survol d
 
 <br>
 
+Pour les données matricielles, le mode interactif offre aussi le zoom, le déplacement et la possibilité de choisir un fond de carte (OpenStreetMap, image satellite, etc.). En revanche, contrairement aux données vectorielles, le survol de la souris sur les cellules du raster n'affiche pas la valeur de chaque cellule. Voici un exemple avec les données d'élévation du Québec :
+
+```{r, eval = FALSE, echo = TRUE}
+tm_shape(E) +
+  tm_raster(col.scale = tm_scale(values = pal.elevation(5)))
+```
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE}
+tm_shape(E) +
+  tm_raster(col.scale = tm_scale(values = pal.elevation(5)))
+```
+
+<br>
+
 N'oublions pas de revenir au mode statique à la fin :
 
 ```{r}
