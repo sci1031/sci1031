@@ -74,7 +74,7 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 <div class="boite ico donnees gauche">
 ###### Vous utiliserez les données suivantes: {-}
 
-Dans la section [leçon](#lecon_carto), vous utiliserez cinq ensembles de données différents. Quatre ensembles sont formés de données vectorielles. Il s'agit de données sur les régions administratives du Québec et la taille de leur population (polygones), des routes du Québec (lignes), des municipalités du Québec (points), et des cas de COVID dans les régions socio-sanitaires du Québec (polygones). L'ensemble de données matricielles correspond à des données d'élévation sur tout le territoire québécois.
+Dans la section [leçon](#lecon_carto), vous utiliserez quatre ensembles de données différents. Trois ensembles sont formés de données vectorielles. Il s'agit de données sur les régions administratives du Québec et la taille de leur population (polygones), des routes du Québec (lignes) et des municipalités du Québec (points). L'ensemble de données matricielles correspond à des données d'élévation sur tout le territoire québécois.
 
 Dans la section [exercice](#ex_carto), vous utiliserez des données disponibles dans la bibliothèque `tmap`.
 
@@ -98,9 +98,8 @@ Dans la section [exercice](#ex_carto), vous utiliserez des données disponibles 
 
 Importez l'[ensemble des données](https://github.com/sci1031/data/raw/main/Module6_donnees.zip) utilisées dans ce module.
 Sauvegardez le dossier compressé (`Module6_donnees.zip`) dans votre répertoire de travail pour ce module, et dézippez-le.
-Ce dossier comprend lui-même cinq sous-dossiers que vous devez également dézipper:
+Ce dossier comprend lui-même quatre sous-dossiers que vous devez également dézipper:
 
-- `COVID`
 - `Elevation`
 - `Population`
 - `Routes`
