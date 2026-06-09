@@ -1845,7 +1845,7 @@ Les cartes choroplèthes sont utilisées pour représenter des données vectorie
 
 Pour créer des cartes choroplèthes, nous utilisons l'argument `fill` de la fonction `tm_polygons()`. L'argument `fill.scale` permet de contrôler la façon dont les valeurs sont associées aux couleurs. Il existe trois principales fonctions d'échelle :
 
-- **Sans `fill.scale`** : tmap applique une échelle par défaut (`tm_scale()`) avec un style `"pretty"` et une palette automatique.
+- Sans **`fill.scale`** : tmap applique une échelle par défaut (`tm_scale()`) avec un style `"pretty"` et une palette automatique.
 - **`tm_scale_continuous()`** : produit un dégradé de couleur continu, sans découpage en classes.
 - **`tm_scale_intervals()`** : découpe les valeurs en classes discrètes selon un style de classification (`style = "fixed"`, `"quantile"`, `"equal"`, etc.). Lorsque `style = "fixed"`, les coupures sont définies manuellement avec l'argument `breaks`.
 
@@ -1910,48 +1910,7 @@ tmap_arrange(Qdefaut,Qcont,Qfixed,Qquant)
 
 ```
 
-```{r, warning = FALSE, dev = "png", fig.height = 6}
 
-# Par defaut, nous avons 4 classes
-Qdefaut <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
-                                     # fill.legend = tm_legend(orientation = "landscape",
-                                     #                          item.width = 3,
-                                     #                          title = "Pourc.d'enfants de 0 à 14 ans")
-                                     )
-
-Qcont<- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
-                                    fill.scale = tm_scale_continuous(),
-                                    # fill.legend = tm_legend(orientation = "landscape",
-                                    #                         item.width = 3,
-                                    #                         title = "Pourc.d'enfants de 0 à 14 ans")
-                                  )
-
-
-# style fixed
-Qfixed <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
-                                    fill.scale = tm_scale_intervals(
-                                       style = "fixed",
-                                       breaks = c(5, 10, 15, 20, 25, 30)),
-                                    # fill.legend = tm_legend(orientation = "landscape",
-                                    #                         item.width = 3,
-                                    #                         title = "Pourc.d'enfants de 0 à 14 ans")
-                                    )
-
-
-# style quantile
-Qquant <- tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
-                                    fill.scale = tm_scale_intervals(style = "quantile",
-                                                                    labels = ("")),
-                                    # fill.legend = tm_legend(orientation = "landscape",
-                                    #                         item.width = 3,
-                                    #                         title = "Pourc.d'enfants de 0 à 14 ans")
-                                    )
-
-#tmap_arrange(Qdefaut,Qfixed,Qquant)
-tmap_arrange(Qdefaut,Qcont,Qfixed,Qquant)
-
-
-```
 
 <!--  
 #### Données COVID {-}
@@ -2031,6 +1990,16 @@ tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
                            legend.show = FALSE)
 ```
 <br>
+
+```{r, warning = FALSE, dev = "png"}
+tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                          fill.scale = tm_scale_intervals(style = "quantile"),
+                          fill.legend = tm_legend(show = FALSE)) +
+                 tm_facets(by = "NOM_REG",
+                           nrow = 5,
+                           scale.factor = 5) 
+                 
+```
 
 L'argument `scale.factor` détermine la mise à l'échelle du texte par rapport à la mise à l'échelle des polygones. Les polygones ont été réduits de taille pour entrer dans leur panneau, toutefois nous souhaitons que le titre apparaissant dans la partie supérieure du panneau ne soit pas réduit autant.  
 
