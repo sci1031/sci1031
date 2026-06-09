@@ -2018,10 +2018,12 @@ En guise d'exemple, considérons une section du *raster* d'élévation `E` corre
 Q_Outaouais <- subset(Q, NOM_REG == "Outaouais")
 
 # Découper le raster E selon l'étendue de Q_Outaouais
-E_Outaouais <- crop(E, ext(Q_Outaouais))
+# Cette opération retourne une section rectangulaire de E qui contient les frontières de Q_Outaouais
+E_Outaouais_ext <- crop(E, ext(Q_Outaouais))
 
 # Créer un mask 
-E_Outaouais <- mask(E_Outaouais, Q_Outaouais)
+# Cette opération retourne une section de E de forme identique à celle du polygone Q_Outaouais
+E_Outaouais <- mask(E_Outaouais_ext, Q_Outaouais)
 ```
 
 <br>
@@ -2031,18 +2033,16 @@ Créons d'abord une carte des données d'élévation pour la région de l'Outaou
 ```{r}
 # Définir la carte principale
 carte_princ <- tm_shape(E_Outaouais) +
-                tm_raster(col.scale = tm_scale(values = pal.elevation(5)),
-                          col.legend = tm_legend(title = "Élévation (m)")) +
-                tm_scalebar(position = tm_pos_in("left", "bottom"),
-                             text.size = 0.6)
-
-# Mise en page de la carte                
-format_carte <- tm_layout(frame = FALSE, 
-                          legend.outside = TRUE,
-                          legend.outside.position = "right",
-                          legend.title.size = 0.8, 
-                          legend.bg.color = "white", 
-                          legend.frame = TRUE)
+               tm_raster(col.scale = tm_scale(values = pal.elevation(5)),
+                         col.legend = tm_legend(
+                           title = "Élévation (m)",
+                           position = tm_pos_out("right", "center"),
+                           title.size = 0.8,
+                           bg.color = "white",
+                           frame = TRUE)) +
+               tm_scalebar(position = tm_pos_in("left", "bottom"),
+                           text.size = 0.6) +
+               tm_layout(frame = FALSE)
 ```
 <br>
 
@@ -2063,9 +2063,9 @@ Nous pouvons enfin combiner les deux cartes ensemble. Il s'agit d'afficher la ca
 
 En particulier, nous utilisons la fonction `viewport()` de la bibliothèque `grid` qui permet de définir la position de la carte encadrée sur la carte ainsi que sa taille.
 
-```{r, warning = FALSE, dev = "png", fig.height = 6}
+```{r, warning = FALSE, message = FALSE, dev = "png", fig.height = 6}
 library(grid)
-carte_princ + format_carte
+carte_princ
 print(carte_cadre, vp = viewport(0.72, 0.42, width = 0.4, height = 0.4))
 ```
 <br>
