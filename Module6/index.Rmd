@@ -32,6 +32,8 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 
 - `tmap`
 - `cols4all`
+- `viridis`
+- `RColorBrewer`
 - `grid`
 
 </div>
@@ -799,7 +801,7 @@ La bibliothèque `viridis` comprend quatre palettes de couleurs séquentielles q
 
 <br>
 
-```{r viridipal,  fig.cap="Les palettes de la bibliothèque `viridis`.", echo=FALSE, fig.height=2, fig.width = 5,fig.show="hold",fig.align="center"}
+```{r viridipal, message = FALSE, fig.cap="Les palettes de la bibliothèque `viridis`.", echo=FALSE, fig.height=2, fig.width = 5,fig.show="hold",fig.align="center"}
 # SOURCE: code adapted from Gimond: https://github.com/mgimond/Spatial/blob/master/04-Symbolizing-features.Rmd
 
 library(viridis)
@@ -830,7 +832,7 @@ mtext(c("inferno", "plasma","magma", "viridis"), 2, at=c(1/8, 3/8, 5/8, 7/8),las
 
 La bibliothèque `RColorBrewer` contient les palettes de couleurs [ColorBrewer](https://colorbrewer2.org/#) particulièrement utiles pour la cartographie. Cette bibliothèque comprend un grand nombre de palettes séquentielles, divergentes et qualitatives.
 
-```{r brewerpal,  fig.height=12, fig.width = 5, fig.cap="Les palettes de la bibliothèque `RColorBrewer`.", echo=FALSE, fig.show="hold",fig.align="center"}
+```{r brewerpal,  fig.height=10, fig.width = 5, fig.cap="Les palettes de la bibliothèque `RColorBrewer`.", echo=FALSE, fig.show="hold",fig.align="center"}
 library(RColorBrewer)
 display.brewer.all()
 ```
