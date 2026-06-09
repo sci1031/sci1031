@@ -1603,7 +1603,7 @@ La fonction `tm_symbols()` permet de représenter les points avec n'importe quel
 
 ```{r, echo = FALSE, fig.cap = "Formes disponibles dans R et leur numéro (`shape`).", fig.height=2, fig.width=7, fig.align="center"}
 par(mar = c(0, 0, 0, 0))
-plot(0, type = "n", xlim = c(0, 26), ylim = c(0.5, 2.5), axes = FALSE, xlab = "", ylab = "")
+plot(0, type = "n", xlim = c(0, 26), ylim = c(1.1, 2.3), axes = FALSE, xlab = "", ylab = "")
 for (i in 0:25) {
   points(i + 0.5, 2, pch = i, cex = 1.8, bg = "steelblue", col = "steelblue4")
   text(i + 0.5, 1.4, labels = i, cex = 0.8)
