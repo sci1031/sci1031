@@ -1556,7 +1556,7 @@ V <- st_read("Module6/Module6_donnees/Villes/QC_coord_municipalites.shp")
 
 Ce *shapefile* compte 15 objets de type point et un seul attribut (`Mncplts`) correspondant au nom de la municipalité qui lui est associée.
 
-La bibliothèque `tmap` comprend plusieurs fonctions permettant de représenter des données de type point. Familiarisons-nous d'abord avec les fonctions `tm_dots()` et `tm_markers()`. Nous verrons plus loin les fonctions `tm_bubbles()` et `tm_symbols()`. 
+La bibliothèque `tmap` comprend plusieurs fonctions permettant de représenter des données de type point. Familiarisons-nous d'abord avec les fonctions `tm_dots()` et `tm_symbols()`. Nous verrons plus loin les fonctions `tm_bubbles()` et, dans la section sur les cartes interactives, `tm_markers()`.
 
 ###### Fonction tm_dots() {-}
 
@@ -2077,7 +2077,70 @@ Les chiffres (0.72,0.42) correspondent aux coordonnées (x,y) de la position de 
 Les arguments `width` et `height` sont des nombres entre 0 et 1. Ceux-ci correspondent aux facteurs par lequels nous souhaitons réduire la largeur et la hauteur de la carte encadrée. 
 
 <br>
-<!--   ### Cartes interactives avec tmap -->
+
+### Cartes interactives {#carto_interactive}
+
+Jusqu'ici, toutes les cartes produites étaient statiques. La bibliothèque `tmap` permet également de produire des cartes interactives basées sur la bibliothèque [`leaflet`](https://leafletjs.com/), offrant des fonctionnalités de zoom, de déplacement et d'exploration des données.
+
+Pour basculer en mode interactif, il suffit d'utiliser la fonction `tmap_mode("view")`. La fonction `tmap_mode("plot")` permet de revenir au mode statique. La fonction `ttm()` (*toggle tmap mode*) permet de basculer rapidement entre les deux modes.
+
+```{r, eval = FALSE, echo = TRUE}
+tmap_mode("view")  # mode interactif
+tmap_mode("plot")  # mode statique
+ttm()              # basculer entre les deux modes
+```
+
+<br>
+
+En mode interactif, le code de carte habituel produit une carte Leaflet. Par exemple, reprenons la carte des régions administratives du Québec :
+
+```{r, eval = FALSE, echo = TRUE}
+tmap_mode("view")
+
+tm_shape(Q) +
+  tm_polygons(fill = "NOM_REG",
+              fill.legend = tm_legend(show = FALSE),
+              id = "NOM_REG")
+```
+
+```{r, echo = FALSE, eval = TRUE}
+tmap_mode("view")
+
+tm_shape(Q) +
+  tm_polygons(fill = "NOM_REG",
+              fill.legend = tm_legend(show = FALSE),
+              id = "NOM_REG")
+```
+
+<br>
+
+L'argument `id` de la fonction `tm_polygons()` (ou de toute autre fonction de couche) définit le texte qui s'affiche au survol de la souris sur un élément de la carte. Ici, le nom de la région administrative apparaît au survol.
+
+La fonction `tm_markers()` est disponible en mode interactif pour placer des marqueurs sur la carte. Reprenons les données de municipalités `V` :
+
+```{r, eval = FALSE, echo = TRUE}
+tm_shape(Q) +
+  tm_polygons(fill = "grey85") +
+tm_shape(V) +
+  tm_markers(id = "Mncplts")
+```
+
+```{r, echo = FALSE, eval = TRUE}
+tm_shape(Q) +
+  tm_polygons(fill = "grey85") +
+tm_shape(V) +
+  tm_markers(id = "Mncplts")
+```
+
+<br>
+
+N'oublions pas de revenir au mode statique à la fin :
+
+```{r}
+tmap_mode("plot")
+```
+
+<br>
 
 ## Exercices {#ex_carto}
 
