@@ -1556,7 +1556,7 @@ V <- st_read("Module6/Module6_donnees/Villes/QC_coord_municipalites.shp")
 
 Ce *shapefile* compte 15 objets de type point et un seul attribut (`Mncplts`) correspondant au nom de la municipalité qui lui est associée.
 
-La bibliothèque `tmap` comprend plusieurs fonctions permettant de représenter des données de type point. Familiarisons-nous d'abord avec les fonctions `tm_dots()` et `tm_symbols()`. Nous verrons plus loin les fonctions `tm_bubbles()` et, dans la section sur les cartes interactives, `tm_markers()`.
+La bibliothèque `tmap` comprend plusieurs fonctions permettant de représenter des données de type point. Familiarisons-nous d'abord avec les fonctions `tm_dots()` et `tm_symbols()`. Nous verrons plus loin la fonction `tm_bubbles()`.
 
 ###### Fonction tm_dots() {-}
 
@@ -2116,21 +2116,25 @@ tm_shape(Q) +
 
 L'argument `id` de la fonction `tm_polygons()` (ou de toute autre fonction de couche) définit le texte qui s'affiche au survol de la souris sur un élément de la carte. Ici, le nom de la région administrative apparaît au survol.
 
-La fonction `tm_markers()` est disponible en mode interactif pour placer des marqueurs sur la carte. Reprenons les données de municipalités `V` :
+On peut également superposer des données de type point. Reprenons les données de municipalités `V` et utilisons `hover` pour afficher le nom de la municipalité au survol :
 
 ```{r, eval = FALSE, echo = TRUE}
 tm_shape(Q) +
   tm_polygons(fill = "grey85") +
 tm_shape(V) +
-  tm_markers(id = "Mncplts")
+  tm_symbols(size = 0.5, hover = "Mncplts")
 ```
 
 ```{r, echo = FALSE, eval = TRUE}
 tm_shape(Q) +
   tm_polygons(fill = "grey85") +
 tm_shape(V) +
-  tm_markers(id = "Mncplts")
+  tm_symbols(size = 0.5, hover = "Mncplts")
 ```
+
+<br>
+
+L'argument `hover` de `tm_symbols()` définit le texte qui s'affiche au survol de la souris sur un symbole. En lui passant le nom d'un attribut, seule la valeur de cet attribut est affichée — ici, le nom de la municipalité.
 
 <br>
 
