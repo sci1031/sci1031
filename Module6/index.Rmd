@@ -1979,17 +1979,6 @@ Pour créer une carte à panneaux multiples, nous utilisons d'abord la fonction 
 
 Représentons à nouveau les polygones des régions administratives selon la proportion d'enfants dans leur population mais cette fois en créant une carte à panneaux multiples:
 
-```{r, warning = FALSE, dev = "png"}
-tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
-                           fill.scale = tm_scale_intervals(style = "quantile")) +
-                 tm_facets(by = "NOM_REG",
-                           nrow = 5,
-                           scale.factor = 5) +
-                 tm_layout(panel.label.height = 2,
-                           panel.label.size = 0.9,
-                           legend.show = FALSE)
-```
-<br>
 
 ```{r, warning = FALSE, dev = "png"}
 tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
@@ -2000,6 +1989,8 @@ tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
                            scale.factor = 5) 
                  
 ```
+
+<br>
 
 L'argument `scale.factor` détermine la mise à l'échelle du texte par rapport à la mise à l'échelle des polygones. Les polygones ont été réduits de taille pour entrer dans leur panneau, toutefois nous souhaitons que le titre apparaissant dans la partie supérieure du panneau ne soit pas réduit autant.  
 
