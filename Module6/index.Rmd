@@ -2229,9 +2229,9 @@ Nous comprenons ainsi que l'attribut `iso_a3` correspond à un [code standardis�
 
 ```{r, warning = FALSE, dev = "png", fig.height=4}
 
-tm_shape(World) + tm_polygons(fill = "name") +
-                tm_style("gray") +
-                tm_layout(legend.show = FALSE)
+tm_shape(World) + tm_polygons(fill = "name",
+                               fill.legend = tm_legend(show = FALSE)) +
+                tm_style("gray")
 ```
 <br>
 
@@ -2259,18 +2259,18 @@ Afrique <- World[World$continent == "Africa",]
 
 Produire une carte de l'Afrique avec le style `gray` et sans légende.
 ```{r, warning = FALSE, dev = "png", fig.height=6}
-tm_shape(Afrique) + tm_polygons(fill="name") +
-                tm_style("gray") +
-                tm_layout(legend.show = FALSE)
+tm_shape(Afrique) + tm_polygons(fill="name",
+                                fill.legend = tm_legend(show = FALSE)) +
+                tm_style("gray")
 ```
 <br>
 
 Notez que la bibliothèque `tmap` permet de minimiser le nombre de polygones adjacents illustrés avec la même couleur. Pour se faire, il s'agit de définir `fill = MAP_COLORS` en argument à la fonction `tm_polygons()`.
 
 ```{r, warning = FALSE, dev = "png", fig.height=6}
-tm_shape(Afrique) + tm_polygons(fill="MAP_COLORS") +
-                tm_style("gray") +
-                tm_layout(legend.show = FALSE)
+tm_shape(Afrique) + tm_polygons(fill="MAP_COLORS",
+                                fill.legend = tm_legend(show = FALSE)) +
+                tm_style("gray")
 ```
 
 <br>
@@ -2285,13 +2285,13 @@ tm_shape(Afrique) + tm_polygons(fill="MAP_COLORS") +
 <summary> Réponse</summary>
 <p>
 
-Nous reprenons d'abord la carte de l'Afrique produire en **d**. Puis, nous ajoutons le code "iso_a3" des pays en utilisant la fonction `tm_text()`:
+Nous reprenons d'abord la carte de l'Afrique produite en **d**. Puis, nous ajoutons le code "iso_a3" des pays en utilisant la fonction `tm_labels()`:
 
 ```{r, dev = "png", fig.height=6}
-tm_shape(Afrique) + tm_polygons(fill="MAP_COLORS") +
+tm_shape(Afrique) + tm_polygons(fill="MAP_COLORS",
+                                fill.legend = tm_legend(show = FALSE)) +
                 tm_style("gray") +
-                tm_layout(legend.show = FALSE) +
-                tm_text("iso_a3", size = 0.6)
+                tm_labels(text = "iso_a3", size = 0.6)
 ```
 <br>
 </p>
@@ -2299,7 +2299,7 @@ tm_shape(Afrique) + tm_polygons(fill="MAP_COLORS") +
 
 <br>
 
-**f)** Produire une carte de l'Amérique du Sud où la couleur de chaque pays représente sa densité de population ("pop_est_dens"). Utiliser le style `quantile` pour classer les valeurs de densité, et la palette `Reds` de la bibliothèque `RColorBrewer`. Assurez-vous que la légende porte le titre "Densité de population".
+**f)** Produire une carte de l'Amérique du Sud où la couleur de chaque pays représente sa densité de population ("pop_est_dens"). Utiliser le style `quantile` pour classer les valeurs de densité, et la palette `"brewer.reds"` de `cols4all`. Assurez-vous que la légende porte le titre "Densité de population".
 
 <details>
 <summary> Réponse</summary>
@@ -2313,20 +2313,12 @@ AS <- World[World$continent == "South America",]
 
 <br>
 
-Ensuite, nous devons créer la palette de couleur avec la fonction `brewer.pal()`. Puisque le style `quantile` sépare les valeurs de densité en cinq classes, la palette doit comprendre cinq couleurs.
-
-```{r}
-pal <- brewer.pal(n=5, "Reds")
-```
-<br>
-
-
-Nous pouvons maintenant produire la carte:
+Nous pouvons maintenant produire la carte en spécifiant la palette directement dans `tm_scale_intervals()` :
 
 ```{r,dev = "png", fig.height=6}
 tm_shape(AS) +
   tm_polygons(fill = "pop_est_dens",
-              fill.scale = tm_scale_intervals(style = "quantile", values = pal),
+              fill.scale = tm_scale_intervals(style = "quantile", values = "brewer.reds"),
               fill.legend = tm_legend(title = "Densité de population"))
 ```
 <br>
@@ -2351,7 +2343,7 @@ Nous utilisons la fonction `tm_facets()` pour produire une carte à panneaux mul
 ```{r, dev = "png", fig.height=8}
 tm_shape(AS) +
   tm_polygons(fill = "pop_est_dens",
-              fill.scale = tm_scale_intervals(style = "quantile", values = pal),
+              fill.scale = tm_scale_intervals(style = "quantile", values = "brewer.reds"),
               fill.legend = tm_legend(title = "Densité de population")) +
   tm_facets(by = "name",
             nrow = 4,
@@ -2379,14 +2371,16 @@ tm_shape(AS) +
 <p>
 
 
-Nous devons utiliser les différents arguments de la fonction `tm_layout()` pour préciser les caractéristiques demandées.
+Nous utilisons `fill.legend = tm_legend()` pour la position et l'encadrement de la légende, et `tm_layout()` pour les paramètres des vignettes et le format des chiffres.
 
 ```{r, dev = "png", fig.height=8}
 
 tm_shape(AS) +
   tm_polygons(fill = "pop_est_dens",
-              fill.scale = tm_scale_intervals(style = "quantile", values = pal),
-              fill.legend = tm_legend(title = "Densité de population")) +
+              fill.scale = tm_scale_intervals(style = "quantile", values = "brewer.reds"),
+              fill.legend = tm_legend(title = "Densité de population",
+                                     position = tm_pos_out("left", "center"),
+                                     frame = TRUE)) +
   tm_facets(by = "name",
             nrow = 4,
             scale.factor = 5
@@ -2394,10 +2388,7 @@ tm_shape(AS) +
   tm_layout(panel.label.height = 2,
             panel.label.size = 0.9,
             panel.label.bg.color = "white",
-            legend.outside = TRUE,
-            legend.outside.position = "left",
-            legend.format = list(format = "f", digits = 0, text.separator = "-"),
-            legend.frame = TRUE)
+            legend.format = list(format = "f", digits = 0, text.separator = "-"))
 ```
 
 <br>
@@ -2529,7 +2520,7 @@ La couche `trees` illustre le pourcentage de couverture forestière par pixel. F
 
 <br>
 
-**b)** Utiliser la palette de couleur `Greens` de la bibliothèque `RColorBrewer` pour produire une carte du pourcentage de couvert forestier. De plus, la carte doit comprendre les éléments suivants:
+**b)** Utiliser la palette de couleur `"brewer.greens"` de `cols4all` pour produire une carte du pourcentage de couvert forestier. De plus, la carte doit comprendre les éléments suivants:
 
 * Six classes de pourcentage de couvert.
 * Un titre principal "Pourcentage de couvert forestier" de taille 1.
@@ -2540,18 +2531,16 @@ La couche `trees` illustre le pourcentage de couverture forestière par pixel. F
 <summary> Réponse</summary>
 <p>
 
-Nous utilisons la fonction `tm_raster()` pour illustrer la couche `trees` de l'objet `land`. De plus, nous utilisons la fonction `brewer.pal()` de la bibliothèque `RColorBrewer` pour définir la palette de couleur. Finalement, nous utilisons les arguments de la fonction [`tm_layout()`](https://r-tmap.github.io/tmap/reference/tm_layout.html) pour spécifier les éléments demandés.
-
+Nous utilisons la fonction `tm_raster()` pour illustrer la couche `trees` de l'objet `land`. La palette est spécifiée directement dans `tm_scale_intervals()`. La position de la légende est définie dans `col.legend = tm_legend()`, et le format des chiffres dans `tm_layout()`.
 
 ```{r, dev = "png", fig.height=4, warning = FALSE, message = FALSE}
-pal = brewer.pal(n=6, "Greens")
-tm_shape(land) + 
+tm_shape(land) +
   tm_raster("trees",
-            col.scale = tm_scale_intervals(n = 6, values = pal),
-            col.legend = tm_legend(title = "", orientation = "landscape")) +
-  tm_layout(legend.outside = TRUE,
-            legend.outside.position = "bottom",
-            legend.format = list(text.separator = "-")) +
+            col.scale = tm_scale_intervals(n = 6, values = "brewer.greens"),
+            col.legend = tm_legend(title = "",
+                                   orientation = "landscape",
+                                   position = tm_pos_out("center", "bottom"))) +
+  tm_layout(legend.format = list(text.separator = "-")) +
   tm_title("Pourcentage de couvert forestier", size = 1)
 ```
 
@@ -2581,3 +2570,39 @@ tm_shape(land) +
 ```
 
 -->
+
+<br>
+
+### Question 4 {-}
+
+En utilisant les données `land`, produire une carte interactive de la couverture terrestre simplifiée (`cover_cls`). N'oubliez pas de revenir au mode statique à la fin.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+```{r, eval = FALSE, echo = TRUE}
+tmap_mode("view")
+
+tm_shape(land) +
+  tm_raster("cover_cls")
+
+tmap_mode("plot")
+```
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE}
+tmap_mode("view")
+
+tm_shape(land) +
+  tm_raster("cover_cls")
+```
+
+```{r, echo = FALSE}
+tmap_mode("plot")
+```
+
+<br>
+</p>
+</details>
+
+<br>
