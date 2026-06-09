@@ -2018,11 +2018,13 @@ En guise d'exemple, considérons une section du *raster* d'élévation `E` corre
 Q_Outaouais <- subset(Q, NOM_REG == "Outaouais")
 
 # Découper le raster E selon l'étendue de Q_Outaouais
-# Cette opération retourne une section rectangulaire de E qui contient les frontières de Q_Outaouais
+# Cette opération retourne une section rectangulaire de E 
+# qui contient les frontières de Q_Outaouais
 E_Outaouais_ext <- crop(E, ext(Q_Outaouais))
 
 # Créer un mask 
-# Cette opération retourne une section de E de forme identique à celle du polygone Q_Outaouais
+# Cette opération retourne une section de E de forme 
+# identique à celle du polygone Q_Outaouais
 E_Outaouais <- mask(E_Outaouais_ext, Q_Outaouais)
 ```
 
