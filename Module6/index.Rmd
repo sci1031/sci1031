@@ -2589,7 +2589,7 @@ tm_shape(land) +
 
 ### Question 4 {-}
 
-En utilisant les données `land`, produire une carte interactive de la couverture terrestre simplifiée (`cover_cls`). N'oubliez pas de revenir au mode statique à la fin.
+**a)** En utilisant les données `land`, produire une carte interactive de la couverture terrestre simplifiée (`cover_cls`). N'oubliez pas de revenir au mode statique à la fin.
 
 <details>
 <summary> Réponse</summary>
@@ -2609,6 +2609,42 @@ tmap_mode("view")
 
 tm_shape(land) +
   tm_raster("cover_cls")
+```
+
+```{r, echo = FALSE}
+tmap_mode("plot")
+```
+
+<br>
+</p>
+</details>
+
+<br>
+
+**b)** En utilisant les données `metro` et `World`, produire une carte interactive des métropoles mondiales avec OpenStreetMap comme fond de carte. Le nom de chaque métropole doit apparaître lors du survol de la souris.
+
+<details>
+<summary> Réponse</summary>
+<p>
+
+On utilise `tm_basemap()` pour choisir le fond de carte, et l'argument `hover` dans `tm_symbols()` pour afficher une valeur d'attribut au survol :
+
+```{r, eval = FALSE, echo = TRUE}
+tmap_mode("view")
+
+tm_shape(metro) +
+  tm_symbols(fill = "purple", size = 0.3, hover = "name") +
+tm_basemap("OpenStreetMap")
+
+tmap_mode("plot")
+```
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE}
+tmap_mode("view")
+
+tm_shape(metro) +
+  tm_symbols(fill = "purple", size = 0.3, hover = "name") +
+tm_basemap("OpenStreetMap")
 ```
 
 ```{r, echo = FALSE}
