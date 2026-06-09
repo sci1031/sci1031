@@ -1927,7 +1927,7 @@ tmap_arrange(Qdefaut,Qcont,Qfixed,Qquant)
 Lire les données: cas cumulés de COVID en date du 18 janvier 2021 par région socio-sanitaire.
 
 
-```{r}
+```{r, eval=FALSE}
 Q_covid <-st_read("Module6/Module6_donnees/COVID/QC_Covid_210118.shp")
 ```
 
@@ -1935,13 +1935,13 @@ Q_covid <-st_read("Module6/Module6_donnees/COVID/QC_Covid_210118.shp")
 
 
 Comme pour la proportion d'enfants, on veut la densité de cas: la proportion de cas par rapport à la population totale d'une région socio-sanitaire
-```{r}
+```{r, eval=FALSE}
 Q_covid$prop_cas<-(Q_covid$Cs_cmls)/(Q_covid$ATot_T)
 ```
 
 
 Comparaison nombre vs proportion
-```{r, warning = FALSE, dev = "png"}
+```{r, eval=FALSE, warning = FALSE, dev = "png"}
 
 Q_nombre<-tm_shape(Q_covid)+tm_polygons(col="Cs_cmls", title = "Nombre de cas")
 
@@ -1953,7 +1953,7 @@ tmap_arrange(Q_nombre,Q_prop)
 
 Expliquer le sens de chaque style.
 Voir: https://bookdown.org/nicohahn/making_maps_with_r5/docs/tmap.html#static-maps-with-tmap
-```{r, warning = FALSE, dev = "png"}
+```{r, eval=FALSE, warning = FALSE, dev = "png"}
 format_carte <-tm_layout(legend.text.size = 0.55)
 
 Q_quantile<-tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", title = "Quantile")+format_carte
@@ -1967,7 +1967,7 @@ C'est souvent en regardant la distribution des données qu'on peut déterminer l
 EXEMPLE DE MELANIE ou alors faire ça au début.
 
 Représenter chaque region individuellement
-```{r, warning = FALSE, dev = "png"}
+```{r, eval=FALSE, warning = FALSE, dev = "png"}
 tm_shape(Q_covid)+tm_polygons(col="prop_cas", style = "quantile", legend.is.portrait = FALSE)+
   tm_facets(by="NOM_REG", nrow =4,  scale.factor = 5)+
   tm_layout(panel.label.height=2, panel.label.size = 0.9, legend.show = FALSE)
