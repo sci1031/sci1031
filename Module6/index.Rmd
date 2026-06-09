@@ -2131,14 +2131,16 @@ On peut également superposer des données de type point. Reprenons les données
 tm_shape(Q) +
   tm_polygons(fill = "grey85") +
 tm_shape(V) +
-  tm_symbols(size = 0.5, hover = "Mncplts")
+  tm_symbols(fill = "red", size = 0.5, hover = "Mncplts") +
+tm_basemap("CartoDB.DarkMatter")
 ```
 
 ```{r, echo = FALSE, eval = TRUE}
 tm_shape(Q) +
   tm_polygons(fill = "grey85") +
 tm_shape(V) +
-  tm_symbols(size = 0.5, hover = "Mncplts")
+  tm_symbols(fill = "red", size = 0.5, hover = "Mncplts") +
+tm_basemap("CartoDB.DarkMatter")
 ```
 
 <br>
@@ -2151,12 +2153,12 @@ Pour les données matricielles, le mode interactif offre aussi le zoom, le dépl
 
 ```{r, eval = FALSE, echo = TRUE}
 tm_shape(E) +
-  tm_raster(col.scale = tm_scale(values = pal.elevation(5)))
+  tm_raster(col.scale = tm_scale_intervals(style = "quantile", values = pal.elevation(5)))
 ```
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE}
 tm_shape(E) +
-  tm_raster(col.scale = tm_scale(values = pal.elevation(5)))
+  tm_raster(col.scale = tm_scale_intervals(style = "quantile", values = pal.elevation(5)))
 ```
 
 <br>
