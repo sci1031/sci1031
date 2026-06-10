@@ -594,6 +594,8 @@ M <- leafsync::latticeView(map,map_10, map_40, ncol = 3)
 M
 ```
 <div style="clear:both;"></div>
+<div style="clear:both;"></div>
+
 
 Remarquez que nous avons d'abord transformé l'objet spatial `regions` dans le système de coordonnées de référence NAD83, dont le EPSG correspond à 32198, puisque l'unité de ce système est le mètre.
 
@@ -656,6 +658,7 @@ M <- leafsync::latticeView(map_GIM,map_GIM_combo, map_GIM_union, ncol = 3)
 M
 ```
 <div style="clear:both;"></div>
+<div style="clear:both;"></div>
 
 <!--  La classe est aussi changée
 En fait, on dirait que non: je retire?
@@ -710,6 +713,7 @@ M
 
 ```
 <div style="clear:both;"></div>
+<div style="clear:both;"></div>
 
 
 Dans cet exemple, nous avons en quelque sorte "décomposé" la géométrie d'un polygone en lignes puis en points. Or, la fonction `st_cast()` peut également servir à "consolider" des géométries.
@@ -750,6 +754,8 @@ M
 
 ```
 <div style="clear:both;"></div>
+<div style="clear:both;"></div>
+
 
 L'objet `villes_NQ_lines` correspond effectivement à un ensemble de lignes et l'objet `villes_NQ_lines` à un ensemble de polygones formés en reliant les points ensembles.
 
@@ -937,6 +943,8 @@ M <- leafsync::latticeView(map_AB, map_union,map_diffAB, map_diffBA, map_inter, 
 M
 ```
 <div style="clear:both;"></div>
+<div style="clear:both;"></div>
+
 
 
 ###### Opérations topologiques de confirmation {-}
@@ -1188,6 +1196,7 @@ M <- leafsync::latticeView(map_AB, mapreg, ncol = 2)
 M
 
 ```
+<div style="clear:both;"></div>
 <div style="clear:both;"></div>
 
 
