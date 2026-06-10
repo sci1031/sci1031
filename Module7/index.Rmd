@@ -593,8 +593,7 @@ map_40 <- mapview(regions_simple_40, col.regions = "blue", alpha.regions = 0.4,l
 M <- leafsync::latticeView(map,map_10, map_40, ncol = 3)
 M
 ```
-<div style="clear:both;"></div>
-<div style="clear:both;"></div>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 
 Remarquez que nous avons d'abord transformé l'objet spatial `regions` dans le système de coordonnées de référence NAD83, dont le EPSG correspond à 32198, puisque l'unité de ce système est le mètre.
@@ -657,8 +656,7 @@ M <- leafsync::latticeView(map_GIM,map_GIM_combo, map_GIM_union, ncol = 3)
 
 M
 ```
-<div style="clear:both;"></div>
-<div style="clear:both;"></div>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 <!--  La classe est aussi changée
 En fait, on dirait que non: je retire?
@@ -712,8 +710,7 @@ M <- leafsync::latticeView(Poly@map,Lines@map,Points@map, ncol = 3)
 M
 
 ```
-<div style="clear:both;"></div>
-<div style="clear:both;"></div>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 
 Dans cet exemple, nous avons en quelque sorte "décomposé" la géométrie d'un polygone en lignes puis en points. Or, la fonction `st_cast()` peut également servir à "consolider" des géométries.
@@ -753,8 +750,7 @@ M <- leafsync::latticeView(Points,Lines,Pol, ncol = 3)
 M
 
 ```
-<div style="clear:both;"></div>
-<div style="clear:both;"></div>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 
 L'objet `villes_NQ_lines` correspond effectivement à un ensemble de lignes et l'objet `villes_NQ_lines` à un ensemble de polygones formés en reliant les points ensembles.
@@ -942,8 +938,7 @@ M <- leafsync::latticeView(map_AB, map_union,map_diffAB, map_diffBA, map_inter, 
 
 M
 ```
-<div style="clear:both;"></div>
-<div style="clear:both;"></div>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 
 
@@ -1196,8 +1191,7 @@ M <- leafsync::latticeView(map_AB, mapreg, ncol = 2)
 M
 
 ```
-<div style="clear:both;"></div>
-<div style="clear:both;"></div>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 
 La fonction `st_touches()` nous permet de vérifier que le polygone B, en rouge, touche au trait mauve et que le polygone A, en bleu, touche au point vert. Par ailleurs, la fonction confirme aussi que le polygone A ne touche pas au point bleu car ce sont leurs intérieurs qui s'intersectent. La même situation s'observe pour les polygones A et B qui partagent plus que leurs frontières. Cependant, les polygones de l'Abitibi-Témiscamingue, en vert, et de la Mauricie, en jaune, s'intersectent seulement le long de leurs frontières et ainsi se touchent.
