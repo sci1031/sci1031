@@ -756,7 +756,7 @@ file.remove(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
 <!-- ![](Module9/images/anim1.gif)-->
 
 
-```{r anim1, fig.align='center', echo=FALSE}
+```{r anim1, fig.align='center', out.width = "80%", echo=FALSE}
 knitr::include_graphics('Module9/images/anim1.gif')
 ```
 
