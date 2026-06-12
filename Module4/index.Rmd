@@ -707,9 +707,7 @@ st_crs(limites_terrestres)$proj4string
 
 Nous allons maintenant transformer le SCR vers la projection de Robinson (`robin`) et le Système géodésique mondial de 1984 (`WGS84`). Pour ce faire, nous utilisons la fonction `st_transform()` de la bibliothèque `st`.
 ```{r reproj-terre, echo = TRUE,  warning = FALSE, message = FALSE, eval = TRUE}
-##limites_terrestres_rob <- st_transform(limites_terrestres,
- ##   CRS("+proj=robin +datum=WGS84"))
-limites_terrestres_rob <- st_transform(limites_terrestres, CRS("+proj=robin +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" ))
+limites_terrestres_rob <- st_transform(limites_terrestres, "+proj=robin +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
 ```
 <br>
 
