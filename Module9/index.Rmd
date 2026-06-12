@@ -686,6 +686,7 @@ Nous allons maintenant créer une nouvelle fonction, `anim()`, qui nous permettr
 ```{R}
 anim <- function(traj_pts, n_img, basemap = NULL) {
   for (i in floor(seq(2, nrow(traj_pts), length.out = n_img))) {
+    grid::grid.newpage()
     print(visual(traj_pts, i, basemap))
   }
 }
@@ -693,15 +694,17 @@ anim <- function(traj_pts, n_img, basemap = NULL) {
 
 <br>
 
-Quelques remarques: 
+Quelques remarques:
 
-i. La fonction `for()` constitue ce qu'on appelle une **boucle** en programmation informatique. La boucle vient répéter une action, donnée par les lignes de codes entre les accolades `{ }`, pour chaque élément contenu dans une séquence. 
+i. La fonction `for()` constitue ce qu'on appelle une **boucle** en programmation informatique. La boucle vient répéter une action, donnée par les lignes de codes entre les accolades `{ }`, pour chaque élément contenu dans une séquence.
 
-ii. Nous utilisons `seq()` pour générer une séquence de `n_img` images entre 2 et le maximum de points (`r nrow(traj_long_pts)`). 
+ii. Nous utilisons `seq()` pour générer une séquence de `n_img` images entre 2 et le maximum de points (`r nrow(traj_long_pts)`).
 
-iii. La séquence peut générer des nombres décimaux, mais `visual()` demande des nombres entiers, nous utilisons alors `floor()` pour la conversion. 
+iii. La séquence peut générer des nombres décimaux, mais `visual()` demande des nombres entiers, nous utilisons alors `floor()` pour la conversion.
 
-iv. Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`. 
+iv. Nous reprenons l'argument `basemap` pour qu'il puisse être passé à `visual()`.
+
+v. La fonction `grid::grid.newpage()` de la bibliothèque `grid` (incluse avec `R`) efface la page graphique courante avant de dessiner la prochaine carte. Cela est nécessaire pour que chaque image soit capturée séparément lors de la création du GIF.
 
 <br>
 
@@ -736,7 +739,9 @@ saveGIF(anim(traj_long_pts, 20, NULL), movie.name = "anim1.gif", ani.height = 50
 
 ```{r, eval = FALSE}
 library(animation)
-saveGIF(anim(traj_long_pts, 20, NULL), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
+saveGIF(anim(traj_long_pts, 20, NULL),
+        movie.name = file.path(getwd(), "Module9/images/anim1.gif"),
+        ani.height = 500, ani.width = 500)
 ```
 
    
