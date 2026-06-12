@@ -91,7 +91,7 @@ Ce module présente les fonctions R pour filtrer les valeurs des données matric
 
 **Module 9 : Données spatiotemporelles**
 <br>
-Ce module explique comment manipuler des données spatiales qui possèdent une dimension temporelle. Il présente certaines fonctions des bibliothèques R `lubridate` et `animation`.
+Ce module explique comment manipuler des données spatiales qui possèdent une dimension temporelle. Il présente certaines fonctions des bibliothèques R `lubridate` et `magick`.
 <br>
 
 #### Fonctionnement du cours {-}
