@@ -791,13 +791,6 @@ tm_shape(carte_fond) + tm_rgb()
 
 
 Maintenant, répétons notre animation en remplaçant la valeur `NULL` de l'argument `basemap` par la carte de fond.
-<!--
-```R
-saveGIF(anim(traj_long_pts, 20, tm_shape(carte_fond) + tm_rgb()), 
-   movie.name = "anim2.gif", ani.height = 500, ani.width = 500)
-
-```
--->
 
 ```{r, eval = FALSE}
 library(magick)
@@ -1558,15 +1551,27 @@ plot_profil(40, pr_mint, pr_maxt, pr_pcp, temps)
 ```
 <br>
 
-Finalement, nous utilisons la fonction `saveGIF()` de la bibliothèque `animation`, pour enregistrer une séquence de figures produites avec `plot_profil()` en faisant évoluer le nombre de mois&nbsp;: 
+Finalement, nous sauvegardons une séquence de figures produites avec `plot_profil()` en faisant évoluer le nombre de mois. Comme `plot_profil()` est une figure base R (et non `tmap`), nous utilisons la fonction `png()` pour sauvegarder chaque image, puis `magick` pour les assembler en GIF&nbsp;:
 
+```{r, eval = FALSE}
+library(magick)
 
-```R
-library(animation)
-saveGIF({
-  # nous générons une figure par trimestre en commençant au mois de mars 
-  for (i in seq(3, 120, by = 3)) plot_profil(i, pr_mint, pr_maxt, pr_pcp, temps)
-}, movie.name = "anim3.gif", ani.height = 400, ani.width = 600)
+images_dir <- "Module9/images"
+idx <- seq(3, 120, by = 3)
+
+for (k in seq_along(idx)) {
+  png(file.path(images_dir, sprintf("image_%03d.png", k)), width = 600, height = 400)
+  plot_profil(idx[k], pr_mint, pr_maxt, pr_pcp, temps)
+  dev.off()
+}
+
+imgs <- image_read(sort(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
+                                   full.names = TRUE)))
+image_write(image_animate(imgs, fps = 5),
+            path = file.path(images_dir, "anim3.gif"))
+
+file.remove(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
+                       full.names = TRUE))
 ```
 
 ```{r anim3, fig.align='center', echo=FALSE}
@@ -1704,9 +1709,26 @@ knitr::include_graphics('Module9/images/anim_mint.gif')
 ```
 <br>
 
-Vous pouvez également sauvegarder cette animation en exécutant cette ligne de commande&nbsp;:
+Vous pouvez également sauvegarder cette animation en exécutant ces lignes de commande&nbsp;:
 ```{r, eval = FALSE}
-saveGIF(anim_carte(mint_region, 12), movie.name = "anim_mint.gif", ani.height = 500, ani.width = 500)
+library(magick)
+
+images_dir <- "Module9/images"
+idx <- 1:12
+
+for (k in seq_along(idx)) {
+  tmap_save(fct_carte(mint_region, idx[k]),
+            filename = file.path(images_dir, sprintf("image_%03d.png", k)),
+            width = 1000, height = 1000)
+}
+
+imgs <- image_read(sort(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
+                                   full.names = TRUE)))
+image_write(image_animate(imgs, fps = 5),
+            path = file.path(images_dir, "anim_mint.gif"))
+
+file.remove(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
+                       full.names = TRUE))
 ```
 
 <br>
