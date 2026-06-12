@@ -719,29 +719,37 @@ anim(traj_long_pts, n_img = 5, NULL)
 <br>
 
 
-Une fois l'animation créée, pour un nombre d'images donné, nous voulons la sauvegarder en format GIF. Pour générer un fichier GIF, nous utilisons la fonction `saveGIF()` de la bibliothèque `animation`. Cette fonction prend en premier argument une expression (du code `R`) qui permet de générer une série de figures qui seront ensuite combinées en GIF. 
+Une fois l'animation créée, pour un nombre d'images donné, nous voulons la sauvegarder en format GIF. Pour cela, nous allons générer chaque image individuellement avec `tmap_save()`, puis les assembler en GIF avec la bibliothèque `magick`.
 
 <!-- Ajouter icone biblio  -->
 
-Installons la bibliothèque `animation`.
+Installons la bibliothèque `magick`.
 ```{r eval=FALSE}
-install.packages("animation")
+install.packages("magick")
 ```
 <br>
 
-Nous pouvons maintenant utiliser `saveGIF()`.
-<!--
-```R
-library(animation)
-saveGIF(anim(traj_long_pts, 20, NULL), movie.name = "anim1.gif", ani.height = 500, ani.width = 500)
-```
--->
+Nous générons d'abord chaque image individuellement avec `tmap_save()`. La fonction `sprintf()` permet de nommer les fichiers de façon ordonnée (`image_001.png`, `image_002.png`, etc.). Nous assemblons ensuite les images en GIF avec `image_animate()`, en spécifiant le nombre d'images par seconde (`fps`). Enfin, nous supprimons les images individuelles devenues inutiles avec `file.remove()`.
 
 ```{r, eval = FALSE}
-library(animation)
-saveGIF(anim(traj_long_pts, 20, NULL),
-        movie.name = file.path(getwd(), "Module9/images/anim1.gif"),
-        ani.height = 500, ani.width = 500)
+library(magick)
+
+images_dir <- "Module9/images"
+idx <- floor(seq(2, nrow(traj_long_pts), length.out = 20))
+
+for (k in seq_along(idx)) {
+  tmap_save(visual(traj_long_pts, idx[k], NULL),
+            filename = file.path(images_dir, sprintf("image_%03d.png", k)),
+            width = 1000, height = 1000)
+}
+
+imgs <- image_read(sort(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
+                                   full.names = TRUE)))
+image_write(image_animate(imgs, fps = 5),
+            path = file.path(images_dir, "anim1.gif"))
+
+file.remove(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
+                       full.names = TRUE))
 ```
 
    
