@@ -26,7 +26,7 @@ Manipuler le temps (les dates, les heures, les secondes, etc.) représente une c
 - `terra`
 - `sf`
 - `lubridate`
-- `animation`
+- `magick`
 - `maptiles`
 - `tmap`
 
@@ -48,7 +48,7 @@ Manipuler le temps (les dates, les heures, les secondes, etc.) représente une c
 - `difftime()`
 - `get_tiles()`
 - `as_date_time()`, `ym()`, `hour()`, `minute()`, `second()`
-- `saveGIF()`
+- `image_animate()`, `image_read()`, `image_write()`
 
 Et vous apprendrez aussi à créer vos propres fonctions avec `function()`.
 
@@ -683,7 +683,7 @@ visual(traj_long_pts, 4000)
 Nous allons maintenant créer une nouvelle fonction, `anim()`, qui nous permettra de générer une série de `n_img` images de notre trajet en appelant notre fonction `visual()` créée à l'étape précédente.
 
 
-```{R}
+```{r}
 anim <- function(traj_pts, n_img, basemap = NULL) {
   for (i in floor(seq(2, nrow(traj_pts), length.out = n_img))) {
     grid::grid.newpage()
@@ -1147,7 +1147,7 @@ plot(mint[[117:120]], main = c("09/2016", "10/2016", "11/2016", "12/2016"))
 La bibliothèque `tmap` en mode interactif permet également de visualiser les `SpatRaster` multicouches. Ci-dessous, nous visualisons les trois premières couches. Un trop grand nombre de couches rendra la carte difficile à interpréter; mieux vaut sélectionner un nombre limité de couches à visualiser.
 
 
-```{r, eval = TRUE, warning = FALSE}
+```{r, eval = TRUE, message = FALSE, warning = FALSE}
 tmap_mode("view")
 tm_shape(mint[[1:3]]) +
   tm_raster()
@@ -1261,7 +1261,7 @@ Commençons!
 Nous décidons de prendre les cellules de nos couches qui sont à l'intérieur du Parc du Mont-Mégantic ainsi que les cellules qui sont proches du parc, dans un rayon de 5&nbsp;km. Cette opération de *buffer* est très souvent utilisée pour augmenter la couverture spatiale et ainsi obtenir une moyenne climatique à une plus large échelle. Nous commençons donc par extraire les limites du parc de l'objet `parcs` et nous y ajoutons une zone tampon de 5&nbsp;km. 
 
 
-```{R}
+```{r}
 megantic <- parcs[2, ]
 megantic_buf <- st_buffer(megantic, dist = 5000)
 ```
@@ -1269,14 +1269,14 @@ megantic_buf <- st_buffer(megantic, dist = 5000)
 
 Ici `dist = 5000`, car les distances sont à exprimer en mètre, nous pouvons le savoir en regardant le champ `units` retourner par `st_crs()`.
 
-```{R}
+```{r}
 st_crs(parcs)$units  
 ```
 <br>
 
 Nous affichons maintenant, les deux objets&nbsp;: les limites du parc et les mêmes limites auxquelles une zone tampon de 5&nbsp;km a été ajoutée. 
 
-```{R, dev = 'png'}
+```{r, dev = 'png'}
 parc_buffer <- mapview(megantic, col.regions = "seagreen") + mapview(megantic_buf, col.regions = "lightgreen") 
 parc_buffer@map
 ```
@@ -1284,7 +1284,7 @@ parc_buffer@map
 
 Nous allons maintenant appeler la fonction `mask()` de la bibliothèque `terra` pour extraire les cellules désirées du *raster* `pcp` (précipitations cumulées). Utiliser cette fonction nous permet de visualiser spatialement les données extraites, mais notons que nous aurions pu aussi utiliser la fonction `extract()` pour répondre à la question.
 
-```{R pcp_megantic}
+```{r pcp_megantic}
 pcp_megantic <- mask(pcp, st_transform(megantic_buf, st_crs(pcp)))
 ```
 <br>
@@ -1293,7 +1293,7 @@ Notez également, que nous nous sommes assurés que le *raster* utilisé pour cr
 
 Visualisons les quatres premières couches de `pcp_megantic`&nbsp;:
 
-```{R plot_pcp_megantic, dev = 'png'}
+```{r plot_pcp_megantic, dev = 'png'}
 plot(pcp_megantic[[1:4]])
 ```
 <br>
@@ -1305,7 +1305,7 @@ Celles-ci correspondent aux précipitations cumulées dans la région autour du 
 
 Nous pouvons alors extraire les valeurs des différentes couches avec la fonction `values()` et faire la moyenne couche par couche (c'est-à-dire mois par mois) en utilisant les fonctions `R` `apply()` et `mean()`, sans oublier d'enlever les valeurs non attribuées (`NA`).
 
-```{R mean_pcp}
+```{r mean_pcp}
 mean_pcp <- apply(values(pcp_megantic), 2, mean, na.rm = TRUE)
 ```
 
@@ -1330,7 +1330,7 @@ min(mean_pcp)
 
 Cette valeur correspond à la plus faible pluviométrie moyenne. Pour quel mois cette valeur a-t-elle été enregistrée?
 
-```{R}
+```{r}
 which.min(mean_pcp)
 temps[which.min(mean_pcp)]
 # ou encore
@@ -1369,7 +1369,7 @@ Pour répondre à cette question, nous utilisons seulement les cellules contenue
 
 Nous appliquons la fonction `mask()` au `SpatRaster` `maxt` qui contient les températures maximales moyennes en utilisant les limites du parc. Comme nous avons déjà réalisé des opérations de `mask()` à plusieurs reprises, nous allons faire cette première étape à l'aide d'une seule ligne de commande.
 
-```{R}
+```{r}
 maxt_megantic <- mask(maxt, st_transform(megantic, st_crs(maxt)))
 ```
 <br>
@@ -1378,7 +1378,7 @@ maxt_megantic <- mask(maxt, st_transform(megantic, st_crs(maxt)))
 
 Pour la seconde étape, il y a plusieurs façons de procéder. Ici, nous allons procéder en deux temps&nbsp;: nous allons d'abord trouver la couche (ou les couches) qui contient (ou contiennent) la valeur de température maximale, puis trouver les coordonnées du point (ou des points) associées. Nous calculons donc le maximum pour chaque couche, puis nous déterminons quel est le maximum de ces maxima.
 
-```{R}
+```{r}
 id <- which.max(apply(values(maxt_megantic), 2, max, na.rm = TRUE))
 id
 ```
@@ -1404,7 +1404,7 @@ max(apply(values(maxt_megantic), 2, max, na.rm = TRUE))
 
 Utilisons maintenant la fonction `xyFromCell()` de la bibliothèque `terra` pour déterminer les coordonnées spatiales auxquelles cette température a été enregistrée.
 
-```{R}
+```{r}
 xyFromCell(maxt_megantic[[id]], which.max(values(maxt_megantic[[id]])))
 ```
 <br>
@@ -1467,7 +1467,7 @@ Pour finir, nous allons animer les profils que nous venons de dessiner.
 
 Ici, au lieu d'appeler la fonction `profil()` dans la fonction `plot()`, comme fait précédemment, nous calculons les profils des trois variables environnementales (`mint`, `maxt` et `pcp`) en amont. Cela permet de gagner du temps de calcul. 
 
-```{R}
+```{r}
 pr_mint <- profil(mint, megantic_buf)
 pr_maxt <- profil(maxt, megantic_buf)
 pr_pcp <- profil(pcp, megantic_buf)
@@ -1510,7 +1510,7 @@ De plus, toujours dans l'objectif d'améliorer le rendu visuel de la figure, nou
 La fonction `plot_profil()` prend la forme suivante&nbsp;:
 
 
-```{R plot_profil}
+```{r plot_profil}
 plot_profil <- function(n, pr_mint, pr_maxt, pr_pcp, temps) {
   # Créer un vecteur allant de 1 à n
     id <- seq_len(n)
@@ -1549,7 +1549,7 @@ plot_profil <- function(n, pr_mint, pr_maxt, pr_pcp, temps) {
 
 Nous devons maintenant passer les profils calculés précédemment à la fonction `plot_profil()` pour les afficher. Par exemple, pour visualiser les profils pour les 40 premiers mois, nous utilisons la valeur `40` pour `n`.   
 
-```{R plot_profil_40}
+```{r plot_profil_40}
 plot_profil(40, pr_mint, pr_maxt, pr_pcp, temps)
 ```
 <br>
