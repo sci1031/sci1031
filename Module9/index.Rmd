@@ -1154,7 +1154,7 @@ tm_shape(mint[[1:3]]) +
 tmap_mode("plot")
 ```
 
-<br>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 La fonction `tmap_mode("view")` bascule `tmap` en mode interactif, ce qui produit une carte navigable (zoom, déplacement) basée sur `leaflet`, plutôt qu'une figure statique. Par défaut, `tmap` est en mode `"plot"` (figure statique). Remarquer que vous pouvez sélectionner l'affichage de l'une ou l'autre des couches dans le menu apparaissant dans le coin supérieur droit de la carte.
 
