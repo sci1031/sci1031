@@ -84,8 +84,8 @@ Vous trouverez ici des liens vers différentes ressources R.
 * [`sf`](https://r-spatial.github.io/sf/articles/)
 * [`terra`](https://rspatial.org/terra/)
 * [`mapview`](https://r-spatial.github.io/mapview/)
-* [`tmap`](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html)
-* [`animation`](https://yihui.org/animation/)
+* [`tmap`](https://r-tmap.github.io/tmap/)
+* [`magick`](https://docs.ropensci.org/magick/)
 * [`lubridate`](https://lubridate.tidyverse.org/)
 
 <br>
