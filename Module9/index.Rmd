@@ -800,8 +800,25 @@ saveGIF(anim(traj_long_pts, 20, tm_shape(carte_fond) + tm_rgb()),
 -->
 
 ```{r, eval = FALSE}
-saveGIF(anim(traj_long_pts, 20, tm_shape(carte_fond) + tm_rgb()), 
-   movie.name = "anim2.gif", ani.height = 500, ani.width = 500)
+library(magick)
+
+images_dir <- "Module9/images"
+idx <- floor(seq(2, nrow(traj_long_pts), length.out = 20))
+fond <- tm_shape(carte_fond) + tm_rgb()
+
+for (k in seq_along(idx)) {
+  tmap_save(visual(traj_long_pts, idx[k], fond),
+            filename = file.path(images_dir, sprintf("image_%03d.png", k)),
+            width = 1000, height = 1000)
+}
+
+imgs <- image_read(sort(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
+                                   full.names = TRUE)))
+image_write(image_animate(imgs, fps = 5),
+            path = file.path(images_dir, "anim2.gif"))
+
+file.remove(list.files(images_dir, pattern = "image_[0-9]+\\.png$",
+                       full.names = TRUE))
 ```
 
    
