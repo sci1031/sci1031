@@ -2093,7 +2093,7 @@ Jusqu'ici, toutes les cartes produites étaient statiques. La bibliothèque `tma
 
 Pour basculer en mode interactif, il suffit d'utiliser la fonction `tmap_mode("view")`. La fonction `tmap_mode("plot")` permet de revenir au mode statique. La fonction `ttm()` (*toggle tmap mode*) permet de basculer rapidement entre les deux modes.
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = TRUE, message = FALSE}
 tmap_mode("view")  # mode interactif
 tmap_mode("plot")  # mode statique
 ttm()              # basculer entre les deux modes
@@ -2165,7 +2165,7 @@ tm_shape(E) +
 
 N'oublions pas de revenir au mode statique à la fin :
 
-```{r}
+```{r, message = FALSE}
 tmap_mode("plot")
 ```
 

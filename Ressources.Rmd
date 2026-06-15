@@ -131,6 +131,7 @@ Dérivés de R Markdown :
 * Les couleurs dans [`ggplot2`](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)
 * Palettes de couleurs [ColorBrewer](https://colorbrewer2.org/)
 * Palettes de couleurs [Viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+* Palettes de courleurs [cols4all](https://cols4all.github.io/cols4all-R/)
 
 
 

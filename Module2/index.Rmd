@@ -774,7 +774,7 @@ Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1
 [^1]: La version 1 n'utilise pas Pandoc.
 [^2]: Pandoc est d'ailleurs capable de gérer différentes variantes de Markdown.
 [^pmd]: Voir <https://pandoc.org/MANUAL.html#pandocs-markdown>, consulté le 29 avril 2022.
-[^knitr]: Voir <https://yihui.org/knitr/)>, consulté le 29 avril 2022.
+[^knitr]: Voir <https://yihui.org/knitr/>, consulté le 29 avril 2022.
 [^wiki_TeX]: Voir <https://fr.wikibooks.org/wiki/LaTeX/%C3%89crire_des_math%C3%A9matiques>, consulté le 29 avril 2022.
 [^tiny]: Voir <https://yihui.org/tinytex/>, consulté le 29 avril 2022.
 [^linux]: Par example, si vous travaillez dans un environnement Linux, vous pouvez simplement entrer cette commande dans un terminal: ```

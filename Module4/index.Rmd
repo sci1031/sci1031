@@ -187,6 +187,8 @@ m_polygone <-mapview(polygone)
 leafsync::latticeView(m_multi_point, m_ligne, m_polygone, ncol=3)
 ```
 
+<div style="clear:both;"></div>
+
 ```{r plotgeo2, eval = FALSE, echo = FALSE, dev = 'png', fig.cap = "Géométries multipoint, ligne et polygone crées avec les fonctions `st_multipoint()`,`st_linestring()`, et `st_polygon()` respectivement."}
 M_df <- as.data.frame(M)
 M_points <- st_as_sf(M_df, coords = c("x","y"))
@@ -732,6 +734,7 @@ Map <- leafsync::latticeView(map_mercator,map_robinson, ncol = 2)
 Map
 ```
 
+<div style="clear:both;"></div>
 
 
 <br>
@@ -748,6 +751,8 @@ Map <- leafsync::latticeView(map_web,map_mercator,map_robinson, ncol = 3)
 Map
 
 ```
+
+<div style="clear:both;"></div>
 
 <br>
 
