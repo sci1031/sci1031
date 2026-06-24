@@ -1919,9 +1919,26 @@ tmap_arrange(Qdefaut,Qcont,Qfixed,Qquant)
 
 ```
 
+<br>
+La fonction `tm_chart_histogram()` vue pour les *rasters* fonctionne aussi pour les cartes choroplèthes. La syntaxe est la même : on la passe à l'argument `fill.chart` de `tm_polygons()`, en remplaçant `col.chart` par `fill.chart` puisque l'esthétique principale des polygones est `fill`.
+
+```{r, echo = TRUE, eval = FALSE}
+tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                           fill.scale = tm_scale_intervals(style = "quantile"),
+                           fill.chart = tm_chart_histogram())
+```
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, dev = "png"}
+tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
+                           fill.scale = tm_scale_intervals(style = "quantile"),
+                           fill.legend = tm_legend(title = "Proportion d'enfants (%)",
+                                                   position = tm_pos_out("right", "center")),
+                           fill.chart = tm_chart_histogram())
+```
 
 
-<!--  
+
+<!--
 #### Données COVID {-}
 
 Lire les données: cas cumulés de COVID en date du 18 janvier 2021 par région socio-sanitaire.
