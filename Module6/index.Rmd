@@ -60,6 +60,7 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 - `tm_symbols()`
 - `tm_bubbles()`
 - `tm_raster()`
+- `tm_chart_histogram()`
 - `tm_legend()`
 - `tm_facets()`
 - `tmap_mode()`
@@ -1922,7 +1923,7 @@ tmap_arrange(Qdefaut,Qcont,Qfixed,Qquant)
 <br>
 La fonction `tm_chart_histogram()` vue pour les *rasters* fonctionne aussi pour les cartes choroplèthes. La syntaxe est la même : on la passe à l'argument `fill.chart` de `tm_polygons()`, en remplaçant `col.chart` par `fill.chart` puisque l'esthétique principale des polygones est `fill`.
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = TRUE, eval = FALSE, fig.height = 6}
 tm_shape(Q) + tm_polygons(fill = "Pop_prop_enfant",
                            fill.scale = tm_scale_intervals(style = "quantile"),
                            fill.chart = tm_chart_histogram())
