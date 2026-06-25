@@ -61,6 +61,7 @@ Ce module porte sur la cartographie et il comporte deux objectifs principaux. Le
 - `tm_bubbles()`
 - `tm_raster()`
 - `tm_legend()`
+- `tm_components()`
 - `tm_facets()`
 - `tmap_mode()`
 - `ttm()`
@@ -1798,6 +1799,8 @@ tm_shape(Q) +
                                      
 
 ```
+
+
 
 <br> 
 
