@@ -425,6 +425,25 @@ summary(dem_ex[, 2])
 ```
 <br>
 
+Il est également possible d'agréger les valeurs extraites directement lors de l'extraction en passant une **fonction** à l'argument `fun`. Par exemple, pour calculer l'**élévation moyenne** à l'intérieur de chacun des quatre parcs nationaux, nous pouvons écrire&nbsp;:
+
+```{r extract_fun}
+dem_parcs_moy <- extract(dem_lcc, vect(parcs), fun = mean, na.rm = TRUE)
+dem_parcs_moy
+```
+<br>
+
+Le résultat est un *data.frame* dont la colonne `ID` identifie chaque polygone (de 1 à 4, correspondant aux quatre parcs) et dont la deuxième colonne contient la valeur agrégée — ici la moyenne d'élévation. Il est alors possible d'ajouter ces valeurs directement à l'objet vectoriel `parcs`&nbsp;:
+
+```{r extract_ajout}
+parcs$elev_moy <- dem_parcs_moy[, 2]
+parcs[, c("TRQ_NM_", "elev_moy")]
+```
+<br>
+
+Cette approche est particulièrement utile lorsqu'on souhaite caractériser des unités spatiales (polygones) à partir d'une couche matricielle, sans avoir à passer par `mask()` pour chaque polygone individuellement.
+<br>
+
 #### Combiner des *rasters* 
 
 Une opération qui peut s'avérer utile est celle de combiner des *rasters*, c'est-à-dire former un seul *raster* à partir de deux *rasters* ou plus. Par exemple, une telle opération pourrait être nécessaire si, pour une problématique donnée, nous devions combiner des *rasters* d'élévation de chaque région administrative du Québec pour obtenir un seul *raster* couvrant l'entièreté de la province. 
