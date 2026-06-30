@@ -121,7 +121,7 @@ Les données matricielles représentent la surface terrestre par une grille rég
 
 Pour créer, lire et manipuler des données matricielles, nous allons utiliser la bibliothèque `terra`. Commençons par charger la bibliothèque `terra` dans notre session de travail `R`.
 
-```{r}
+```{r, message = FALSE}
 # Installez la bibliothèque si ce n'est pas déjà fait
 # install.packages("terra")
 # Chargez la bibliothèque
@@ -904,11 +904,15 @@ Map_SB <- mapview(SB, homebutton = FALSE)
 # Visualisons les trois cartes côte à côte
 leafsync::latticeView(Map_SR, Map_SG, Map_SB, ncol = 3)
 ```
+
+<div style="clear:both;"></div>
+
+
 <br>
 
 Nous pouvons également visualiser les trois bandes ensemble en utilisant la fonction `plotRGB()` de la bibliothèque `terra`. Cette fonction s'applique au *raster* multibande, et demande qu'on spécifie quelle couche du raster est associée à chacune des couleurs rouge, vert et bleu.
 
-```{r viewRG, fig.cap = "Carte combinant les trois bandes de couleurs", warning = FALSE, message = FALSE, dev = 'png'}
+```{r viewRG, fig.cap = "Carte combinant les trois bandes de couleurs", warning = FALSE, message = FALSE, dev = 'png', fig.height=4}
 plotRGB(S_mult, r = 1, g = 2, b = 3)
 ```
 <br>
@@ -1238,6 +1242,9 @@ m2016 <- mapview(R2016f, col.regions = sommaire$Color,  legend = FALSE)
 
 leafsync::latticeview(m2001, m2016, ncol = 2)
 ```
+
+<div style="clear:both;"></div>
+
 
 <br>
 </p>

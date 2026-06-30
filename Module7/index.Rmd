@@ -593,7 +593,8 @@ map_40 <- mapview(regions_simple_40, col.regions = "blue", alpha.regions = 0.4,l
 M <- leafsync::latticeView(map,map_10, map_40, ncol = 3)
 M
 ```
-<br>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
+
 
 Remarquez que nous avons d'abord transformé l'objet spatial `regions` dans le système de coordonnées de référence NAD83, dont le EPSG correspond à 32198, puisque l'unité de ce système est le mètre.
 
@@ -655,8 +656,7 @@ M <- leafsync::latticeView(map_GIM,map_GIM_combo, map_GIM_union, ncol = 3)
 
 M
 ```
-
-<br>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 <!--  La classe est aussi changée
 En fait, on dirait que non: je retire?
@@ -710,8 +710,7 @@ M <- leafsync::latticeView(Poly@map,Lines@map,Points@map, ncol = 3)
 M
 
 ```
-
-<br>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 
 Dans cet exemple, nous avons en quelque sorte "décomposé" la géométrie d'un polygone en lignes puis en points. Or, la fonction `st_cast()` peut également servir à "consolider" des géométries.
@@ -751,8 +750,8 @@ M <- leafsync::latticeView(Points,Lines,Pol, ncol = 3)
 M
 
 ```
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
-<br>
 
 L'objet `villes_NQ_lines` correspond effectivement à un ensemble de lignes et l'objet `villes_NQ_lines` à un ensemble de polygones formés en reliant les points ensembles.
 
@@ -778,17 +777,6 @@ la_poc_tampon50 <- st_buffer(la_poc_nad, dist = 50e3)
 Notez que l'expression `e3` correspond au chiffre 1000 (c'est-à-dire 10 exposent 3).
 
 ```{r buffer-lapoc, echo = FALSE, warning = FALSE, fig.align = "left", out.width = "100%", dev = "png",fig.cap="Deux zones tampons de 10 km (en bleu) et de 50 km (en vert) autour de la ville de La Pocatière"}
-# library(tmap)
-# new_bb <- bb(regions_nad, xlim = c(0.25, 0.75), ylim = c(0.25, 0.75), relative = TRUE)
-# mapQ <- tm_shape(regions_nad, bbox = new_bb) + tm_fill()
-# mapdot <- tm_shape(la_poc_nad) + tm_dots(col="black")
-# map1 <- mapQ + mapdot + tm_layout(outer.margins = c(0.3, 0.3, 0.3, 0.3)) + 
-#  tm_shape(la_poc_tampon10) + tm_fill(col="blue", alpha = 0.4) + tm_borders(col="blue")
-# map2<- mapQ + mapdot + tm_layout(inner.margins = c(0.3, 0.3, 0.3, 0.3)) +
-#   tm_shape(la_poc_tampon50) + tm_fill(col="green", alpha = 0.4) + tm_borders(col="green")
-# 
-# 
-# tmap_arrange(map1,map2)
 M <- mapview(la_poc_tampon50, col.regions = "green", alpha.regions = 0.2, legend = FALSE) + mapview(la_poc_tampon10, col.regions = "blue", alpha.regions = 0.4,  legend = FALSE)
 
 M@map
@@ -950,8 +938,8 @@ M <- leafsync::latticeView(map_AB, map_union,map_diffAB, map_diffBA, map_inter, 
 
 M
 ```
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
-<br>
 
 
 ###### Opérations topologiques de confirmation {-}
@@ -1203,8 +1191,7 @@ M <- leafsync::latticeView(map_AB, mapreg, ncol = 2)
 M
 
 ```
-
-<br>
+<div style="clear:both; margin-bottom: 1.5em;"></div>
 
 
 La fonction `st_touches()` nous permet de vérifier que le polygone B, en rouge, touche au trait mauve et que le polygone A, en bleu, touche au point vert. Par ailleurs, la fonction confirme aussi que le polygone A ne touche pas au point bleu car ce sont leurs intérieurs qui s'intersectent. La même situation s'observe pour les polygones A et B qui partagent plus que leurs frontières. Cependant, les polygones de l'Abitibi-Témiscamingue, en vert, et de la Mauricie, en jaune, s'intersectent seulement le long de leurs frontières et ainsi se touchent.

@@ -314,7 +314,7 @@ La fonction `crop()` accepte en second argument, non seulement les objets de cla
 En guise d'exemple, nous allons maintenant rogner le *raster* `dem` en utilisant les limites du premier parc de la SÉPAQ identifié dans les données vectorielles `parcs`. Il est en effet possible d'extraire un objet de classe `Extent` à partir de ces données. Vérifions-le en utilisant la fonction `ext()`:
 
 ```{r}
-ext(parcs[1,])
+ext(parcs[1, ])
 ```
 <br>
 
@@ -343,19 +343,18 @@ mat <- matrix(c( -72.5, 45.8,
 
 # nous transformons mat en un data frame puis en un objet de class `sf`
 pol <- st_as_sf(
-    data.frame(
-      var = 1,
-      geom = st_sfc(st_polygon(x = list(mat)))
-      ),
-      crs = st_crs(dem) 
-  )
+         data.frame(
+                var = 1,
+               geom = st_sfc(st_polygon(x = list(mat)))),
+         crs = st_crs(dem))
+  
 ```
 <br>
 
 Notons que nous avons utilisé le même SCR que `dem`. Regardons ce à quoi ressemble le polygone que nous venons de créer.
 
 ```{r, warning=FALSE, message = FALSE, dev = "png"}
-mapview(dem)+mapview(pol)
+mapview(dem) + mapview(pol)
 ```
 <br>
 
@@ -677,7 +676,7 @@ Une fois isolées, les coordonnées `x` et `y` du pixel d'élévation maximale p
 
 ```{r}
 sf_point_max <- st_as_sf(df_max, coords = c("x", "y"), 
-  crs = st_crs(dem_parcs))
+                         crs = st_crs(dem_parcs))
 sf_point_max
 ```
 
@@ -1030,7 +1029,7 @@ Remarquez que nous avons également attribué un SCR au nouvel objet spatial `to
 Nous pouvons finalement utiliser la fonction `st_distance()` pour calculer les distances entre points successifs de `topo_pts`. La fonction `st_distance(x,y)` nécessite obligatoirement deux objets spatiaux (`x` et `y`) en argument. Elle calcule alors la distance entre chaque paire d'éléments de `x` et de `y`, qu'elle retourne sous forme de matrice. Par exemple, l'opération suivante calcule la distance entre toutes les paires de points compris dans `topo_pts`&nbsp;:
 
 ```{r}
-dist_tout <- st_distance(topo_pts,topo_pts)
+dist_tout <- st_distance(topo_pts, topo_pts)
 dist_tout[1:5,1:5]
 ```
 <br>
@@ -1040,7 +1039,7 @@ L'élément `dist_tout[1,1]` est la distance entre le premier point de `topo_pts
 La fonction `st_distance()` s'utilise aussi avec l'argument `by_element = TRUE`. Dans ce cas, la fonction retourne un vecteur dont le premier élément correspond à la distance entre le premier élément de `x` et le premier élément de `y`; le deuxième élément, à la distance entre le deuxième élément de `x` et le deuxième élément de `y`, et ainsi de suite. Par exemple, l'opération suivante&nbsp;:
 
 ```{r}
-dist0 <- st_distance(topo_pts,topo_pts,by_element = TRUE)
+dist0 <- st_distance(topo_pts,topo_pts, by_element = TRUE)
 dist0[1:5]
 ```
 <br>
@@ -1050,8 +1049,7 @@ Pour répondre à notre question, nous devons calculer la distance entre des poi
 
 
 ```{r}
-dist_pts <- st_distance(topo_pts[-1, ], topo_pts[-nrow(topo_pts),],
- by_element = TRUE)
+dist_pts <- st_distance(topo_pts[-1, ], topo_pts[-nrow(topo_pts),], by_element = TRUE)
 ```
 <br>
 
@@ -1069,8 +1067,8 @@ plot(c(0, dist_parcourue), topo_elv$elevation,
   xlab = "Distance depuis le sommet (en mètre)", 
   ylab = "Altitude (en mètre)", 
   type = "l", # pour utiliser une ligne
-  lwd = 2 # augmente le trait de la ligne 
-) 
+  lwd = 2 ) # augmente le trait de la ligne 
+
 ```
 <br>
 
@@ -1132,7 +1130,7 @@ imax_orford<-which.max(values(dem_orford))
 Trouver les coordonnées correspondant à cet indice en utilisant la fonction `xyFromCell`.
 
 ```{r}
-coordmax_orford <- xyFromCell(dem_orford,imax_orford)
+coordmax_orford <- xyFromCell(dem_orford, imax_orford)
 coordmax_orford
 ```
 <br>
@@ -1292,7 +1290,7 @@ dem_orford <- mask(dem_lcc, parc_orford)
 # Trouver l'indice de la cellule d'élévation maximale
 imax_orford<-which.max(values(dem_orford))
 # Trouver les coordonnées de cette cellule
-coordmax_orford <- xyFromCell(dem_orford,imax_orford)
+coordmax_orford <- xyFromCell(dem_orford, imax_orford)
 # Transformer en data.frame
 coordmax_orford_df <- as.data.frame(coordmax_orford)
 # Transformer en point
@@ -1307,9 +1305,9 @@ Pour le Parc national du Mont-Mégantic:
 
 ```{r}
 parc_megantic <- subset(parcs, TRQ_NM_== "Parc national du Mont-Mégantic")
-dem_megantic <- mask(dem_lcc, parc_megantic)
+dem_megantic <- mask(dem_lcc,  parc_megantic)
 imax_megantic <- which.max(values(dem_megantic))
-coordmax_megantic <- xyFromCell(dem_megantic,imax_megantic)
+coordmax_megantic <- xyFromCell(dem_megantic, imax_megantic)
 coordmax_megantic_df <- as.data.frame(coordmax_megantic)
 pt_max_megantic <- st_as_sf(coordmax_megantic_df,
                    coords = c("x", "y"),
@@ -1323,7 +1321,7 @@ Pour le Parc national de la Yamaska:
 parc_yamaska <- subset(parcs, TRQ_NM_== "Parc national de la Yamaska")
 dem_yamaska <- mask(dem_lcc, parc_yamaska)
 imax_yamaska <- which.max(values(dem_yamaska))
-coordmax_yamaska <- xyFromCell(dem_yamaska,imax_yamaska)
+coordmax_yamaska <- xyFromCell(dem_yamaska, imax_yamaska)
 coordmax_yamaska_df <- as.data.frame(coordmax_yamaska)
 pt_max_yamaska <- st_as_sf(coordmax_yamaska_df,
                    coords = c("x", "y"),
@@ -1337,7 +1335,7 @@ Pour le Parc national de Frontenac:
 parc_frontenac <- subset(parcs, TRQ_NM_== "Parc national de Frontenac")
 dem_frontenac <- mask(dem_lcc, parc_frontenac)
 imax_frontenac <- which.max(values(dem_frontenac))
-coordmax_frontenac <- xyFromCell(dem_frontenac,imax_frontenac)
+coordmax_frontenac <- xyFromCell(dem_frontenac, imax_frontenac)
 coordmax_frontenac_df <- as.data.frame(coordmax_frontenac)
 pt_max_frontenac <- st_as_sf(coordmax_frontenac_df,
                    coords = c("x", "y"),

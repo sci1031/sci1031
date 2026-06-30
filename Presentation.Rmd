@@ -72,7 +72,7 @@ Ce module se veut une introduction à la bibliothèque R `sf`. Il présente les 
 
 **Module 5 : Données matricielles**
 <br>
-Ce module se veut une introduction à la bibliothèque R `raster`. Il présente les fonctions de base pour lire, interpréter et visualiser des données matricielles.
+Ce module se veut une introduction à la bibliothèque R `terra`. Il présente les fonctions de base pour lire, interpréter et visualiser des données matricielles.
 
 
 **Module 6 : Cartographie**
@@ -91,7 +91,7 @@ Ce module présente les fonctions R pour filtrer les valeurs des données matric
 
 **Module 9 : Données spatiotemporelles**
 <br>
-Ce module explique comment manipuler des données spatiales qui possèdent une dimension temporelle. Il présente certaines fonctions des bibliothèques R `lubridate` et `animation`.
+Ce module explique comment manipuler des données spatiales qui possèdent une dimension temporelle. Il présente certaines fonctions des bibliothèques R `lubridate` et `magick`.
 <br>
 
 #### Fonctionnement du cours {-}
