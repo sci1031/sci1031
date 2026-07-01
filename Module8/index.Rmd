@@ -145,11 +145,12 @@ dem <- rast("Module8/Module8_donnees/DEM.tif")
 Nous visualisons ensuite les deux objets spatiaux afin de valider l'importation en utilisant la fonction `mapview()`.
 
 ```{r, warning = FALSE, message = FALSE, dev = "png"}
-mapview(dem) + mapview(parcs, zcol = "TRQ_NM_")
+mapview(dem) + mapview(parcs, zcol = "TRQ_NM_", label = "TRQ_NM_")
 ```
 <br>
 
-Notez que l'attribut `TRQ_NM_` correspond aux noms des parcs nationaux.
+Notez que l'attribut `TRQ_NM_` correspond aux noms des parcs nationaux. Notez également que l'argument `label` permet d'afficher la valeur de l'attribut associé (ici le nom des parcs) lorsque la souris survole le polygone de cette carte interactive.
+
 <br>
 
 
