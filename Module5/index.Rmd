@@ -46,6 +46,7 @@ module.
 - `global()`
 - `ncell()`
 - `res()`
+- `cellSize()`
 - `ext()`
 - `xFromCol()`, `yFromRow()`
 - `crs()`
@@ -571,6 +572,25 @@ hist(values(T_vdq),
 ```
 <br>
 
+#### Calculer la superficie des cellules {-}
+
+Une autre information pertinente à connaître à propos d'un *raster* est la superficie de ses cellules. La fonction `cellSize()` de la bibliothèque `terra` retourne un nouveau *raster*, de mêmes dimensions que le *raster* original, dont la valeur de chaque pixel correspond à la superficie (en m²) de la cellule correspondante.
+
+```{r}
+cellSize(T_vdq)
+```
+<br>
+
+Nous remarquons que la superficie des cellules varie légèrement autour de 1605 m², alors que la résolution du *raster* `T_vdq` est de 40 m par 40 m (donc une superficie nominale de 1600 m²). Cette légère différence provient de la déformation inhérente à toute projection cartographique.
+
+Il est aussi possible d'exprimer la superficie des cellules dans une autre unité de mesure, comme le kilomètre carré, en précisant l'argument `unit` de la fonction `cellSize()`.
+
+```{r}
+cellSize(T_vdq, unit = "km")
+```
+
+<br>
+
 ### Visualiser les données matricielles avec mapview()
 
 Nous allons visualiser la carte des températures de surface de la région de la ville de Québec en utilisant la fonction `mapview()`.
@@ -675,6 +695,16 @@ leafsync::latticeView(map_fact4_moy, map_fact4_max, map_fact8_moy, map_fact8_max
 
 Remarquez que nous avons utilisé la fonction `latticeView()` pour visualiser ces quatre cartes sur deux colonnes.
 
+Vérifions l'effet de l'agrégation sur la superficie des cellules. Puisque nous avons augmenté la résolution par un facteur `fact = 4` (une cellule 4 fois plus large et 4 fois plus haute), nous nous attendons à ce que la superficie des cellules soit 16 fois plus grande.
+
+```{r}
+cellSize(T_sec)
+cellSize(T_fact4_moy)
+```
+<br>
+Effectivement, `r round(global(cellSize(T_sec), "min")$min, 0)` × 4² = `r format(round(global(cellSize(T_sec), "min")$min * 16, 0), scientific = FALSE)`, ce qui correspond bien à la superficie obtenue pour `T_fact4_moy` (`r format(round(global(cellSize(T_fact4_moy), "min")$min, 0), scientific = FALSE)`).
+
+<br>
 
 ### Changer la projection d'un *raster*
 
@@ -781,6 +811,15 @@ T_mtm7[500,500]
 <br>
 Il faut donc toujours porter attention à la projection choisie pour des analyses. Si nous utilisons plus d'un raster, ceux-ci doivent avoir la même projection.
 
+Comparons maintenant la superficie des cellules avant et après la transformation de projection.
+
+```{r}
+cellSize(T_vdq)
+cellSize(T_mtm7)
+```
+<br>
+
+Nous remarquons que même si la résolution du *raster* `T_mtm7` n'est plus exactement 40 m par 40 m, la superficie des cellules demeure très similaire à celle du *raster* `T_vdq` d'origine.
 
 <br>
 
@@ -972,7 +1011,7 @@ C2016 <- rast("Module5/Module5_donnees/Couvert_2016.tif")
 
 <br>
 
-**b)** Trouver l'étendue, les dimensions, et la résolution du *raster* associé à l'année 2001.
+**b)** Trouver l'étendue, les dimensions, la résolution, et la superficie des cellules (valeurs minimale et maximale) du *raster* associé à l'année 2001.
 
 <details>
 <summary> Réponse</summary>
@@ -982,6 +1021,7 @@ C2016 <- rast("Module5/Module5_donnees/Couvert_2016.tif")
 ext(C2001)
 dim(C2001)
 res(C2001)
+global(cellSize(C2001), c("min", "max"))
 ```
 
 
