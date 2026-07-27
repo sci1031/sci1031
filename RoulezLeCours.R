@@ -1,4 +1,4 @@
 bookdown::preview_chapter('Module6/index.Rmd', 'bookdown::gitbook')
 
 bookdown::clean_book(TRUE)
-options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+options(bookdown.render.file_scope = FALSE); bookdown::render_book('index.Rmd', 'bookdown::gitbook')
