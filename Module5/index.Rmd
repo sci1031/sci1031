@@ -59,11 +59,6 @@ module.
 - `mapview()` et `latticeView()`, que vous connaissez déjà.
 - `freq()`
 
-</div>
-
-<div class="boite ico donnees gauche">
-###### Vous utiliserez les données suivantes: {-}
-
 Vous utiliserez aussi les fonctions suivantes, qui ne sont pas spécifiques aux données spatiales:
 
 - `dim()`
@@ -77,6 +72,12 @@ Vous utiliserez aussi les fonctions suivantes, qui ne sont pas spécifiques aux 
 - `which.max()`, `which.min()`
 - `summary()`
 - `names()`
+
+</div>
+
+<div class="boite ico donnees gauche">
+###### Vous utiliserez les données suivantes: {-}
+
 
 Dans la section [leçon](#lecon_mat), vous utiliserez deux ensembles de données matricielles. 
 
