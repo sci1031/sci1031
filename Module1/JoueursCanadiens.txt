@@ -1,8 +1,7 @@
-"nom"	"prenom"	"numero"	"age"	"position"	"buts"
-"Price"	"Carey"	"31"	34	"Gardien"	NA
-"Suzuki"	"Nick"	"14"	22	"Centre"	19
-"Gallagher"	"Brendan"	"11"	29	"Ailier droit"	6
-"Caufield"	"Cole"	"22"	21	"Ailier droit"	22
-"Hoffman"	"Mike"	"68"	32	"Centre"	11
-"Dvorak"	"Christian"	"28"	26	"Ailier gauche"	10
-"Romanov"	"Alexander"	"27"	22	"Défenseur droit"	3
+"nom"	"prenom"	"numero"	"position"	"n_matchs"	"n_buts"
+"Dobes"	"Jakub"	"75"	"Gardien"	43	NA
+"Suzuki"	"Nick"	"14"	"Centre"	82	29
+"Caufield"	"Cole"	"13"	"Ailier droit"	81	51
+"Hutson"	"Lane"	"48"	"Defenseur"	82	12
+"Slafkovsky"	"Juraj"	"20"	"Ailier gauche"	82	30
+"Matheson"	"Mike"	"8"	"DÃ©fenseur"	78	7

@@ -885,15 +885,15 @@ tab_ex1
 
 Ou encore:
 ```{r}
-nom <- c("Price", "Suzuki", "Gallagher", "Caufield", "Hoffman", "Dvorak", "Romanov")
-prenom <- c("Carey", "Nick", "Brendan", "Cole", "Mike", "Christian","Alexander")
-numero <- c("31","14","11","22","68","28","27")
-age <- c(34,22,29,21, 32, 26, 22)
+nom <- c("Dobes", "Suzuki", "Caufield", "Hutson", "Slafkovsky", "Matheson")
+prenom <- c("Jakub", "Nick",  "Cole", "Lane", "Juraj","Mike")
+numero <- c("75","14","13","48","20","8")
 position <- factor(c("Gardien", "Centre", "Ailier droit",
-                     "Ailier droit", "Centre","Ailier gauche", "Défenseur droit" ))
-buts <- c(NA, 19, 6,22, 11, 10, 3)
+                     "Defenseur", "Ailier gauche", "Défenseur" ))
+n_matchs <- c(43, 82, 81, 82, 82, 78)
+n_buts <- c(NA, 29, 51, 12, 30, 7)
 
-tab_ex2 <- data.frame(nom, prenom, numero, age, position, buts)
+tab_ex2 <- data.frame(nom, prenom, numero, position, n_matchs, n_buts)
 
 tab_ex2
 ```
