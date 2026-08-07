@@ -113,7 +113,7 @@ Nous finirons cette partie avec un exercice de visualisation du trajet le plus l
 
 #### Importer les données 
 
-Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/) mettent à disposition un jeu de données incluant près de [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application ["Mon RésoVélo"](https://apps.apple.com/ca/app/mon-r%C3%A9sov%C3%A9lo/id664766113) qui enregistre les positions de cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr). Les trajets ont notamment été anonymisés - reportez-vous au lien précédent pour plus d'informations relatives au traitement de ces données.
+Le site de la ville de Montréal et le site [Données Québec](https://www.donneesquebec.ca/) mettent à disposition un jeu de données incluant près de [5000 trajets individuels à vélo](https://www.donneesquebec.ca/recherche/dataset/vmtl-trajets-individuels-velo-enregistre-mon-resovelo#). Ces trajets ont été obtenus avec l'application "Mon RésoVélo"^[Cette application est malheureusement discontinuée.] qui enregistre les positions de cyclistes à intervalle régulier. Les données de trajets brutes ont ensuite été traitées avant d'être rendues disponibles en ligne sous licence [*creative common* (CC-BY)](https://creativecommons.org/licenses/by/4.0/deed.fr). Les trajets ont notamment été anonymisés - reportez-vous au lien précédent pour plus d'informations relatives au traitement de ces données.
 
 Ce jeu de données de 500 trajets est contenu dans un fichier zippé d'extension 
 [GeoJSON](https://fr.wikipedia.org/wiki/GeoJSON) `trip5000.json` que nous avons préalablement téléchargé. 
@@ -338,7 +338,7 @@ Penchons-nous maintenant sur la deuxième question.
 <br>
 
 <!-- Ajouter icone biblio  -->
-Pour répondre à cette deuxième question, nous allons utiliser certaines fonctions de la bibliothèque  [`lubridate`](https://CRAN.R-project.org/package=lubridate). Bien que `R` dispose, de base, de toutes les fonctionnalités nécessaires à la manipulation des dates et du temps, `lubridate` rend ces manipulations plus intuitives (l'aide mémoire (<https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf> fait un tour d'horizon complet des fonctionnalités de `lubridate`). 
+Pour répondre à cette deuxième question, nous allons utiliser certaines fonctions de la bibliothèque  [`lubridate`](https://CRAN.R-project.org/package=lubridate). Bien que `R` dispose, de base, de toutes les fonctionnalités nécessaires à la manipulation des dates et du temps, `lubridate` rend ces manipulations plus intuitives (l'aide mémoire (<https://rstudio.github.io/cheatsheets/lubridate.pdf > fait un tour d'horizon complet des fonctionnalités de `lubridate`). 
 
 Installons donc la bibliothèque `lubridate`&nbsp;:
 ```{r eval=FALSE}
