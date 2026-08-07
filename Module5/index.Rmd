@@ -957,7 +957,7 @@ plotRGB(S_mult, r = 1, g = 2, b = 3)
 ```
 <br>
 
-Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présent. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières^[Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://www.donneesquebec.ca/recherche/dataset/mosaique-landsat/resource/4e3cc78e-9448-400a-9d64-6ac05fd0b68d) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].].
+Les diverses teintes observées sur l'image Landsat peuvent être interprétées pour déduire le type de végétation ou d'utilisation du sol présent. Par exemple, les teintes de vert varient selon l'âge d'un peuplement forestier, sa densité, et s'il est composé de feuillus ou de conifères. Les teintes roses, brunes ou bourgognes sont associées à des perturbations, comme des épidémies d'insecte ou des feux de forêt. Ici, les pixels roses signalent la présence de coupes forestières^[Pour plus d'informations sur l'interprétation des images Landsat, consultez ce [guide](https://www.donneesquebec.ca/recherche/dataset/mosaique-satellites/resource/4e3cc78e-9448-400a-9d64-6ac05fd0b68d) produit par le Ministère des Forêts, de la Faune et des Parcs du Québec [@GuideLandsat2015].].
 
 
 Finalement, pour sauvegarder un *raster* multibande, nous pouvons encore utiliser la fonction `writeRaster()` de la bibliothèque `terra`.
