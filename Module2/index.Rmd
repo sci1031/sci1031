@@ -218,7 +218,7 @@ La localisation pour des données matricielles est définie par **l’étendue s
 La **résolution** définit la précision avec laquelle nous pouvons discerner les objets dans l’espace. Une grande résolution correspond à une matrice de données dont les cellules ont une petite taille (Figure \@ref(fig:resolution)). En conséquence, une telle matrice est plus lente à visualiser et à manipuler, et requiert un fichier plus volumineux. En contrepartie, une couche de données matricielles de faible résolution possède des cellules de plus grande taille, se visualise et se manipule plus rapidement, et est contenue dans un fichier moins volumineux.
 
 <br>
-```{r resolution, fig.align='left', echo=FALSE,fig.cap="Exemple du concept de résolution: plus la résolution est grande, plus la taille des cellules est petite. Dans cette figure, la résolution diminue de droite à gauche, et la taille des cellules augmente. Source de données: https://mern.gouv.qc.ca/nos-publications/spatiocarte-quebec/", out.width = '100%'}
+```{r resolution, fig.align='left', echo=FALSE,fig.cap="Exemple du concept de résolution: plus la résolution est grande, plus la taille des cellules est petite. Dans cette figure, la résolution diminue de droite à gauche, et la taille des cellules augmente. Source de données: https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/forets/recherche-connaissances/inventaire-forestier/donnees-cartes-resultats", out.width = '100%'}
 knitr::include_graphics('Module2/images/2_resolution.jpg')
 ```
 <br>
@@ -259,7 +259,7 @@ knitr::include_graphics('Module2/images/2_electromagnetic_spectrum.png')
 En combinant ces bandes, on peut recréer l’image (Figure \@ref(fig:3bands)). Attention : chaque bande doit posséder les mêmes informations spatiales pour être superposée aux autres.
 
 <br>
-```{r 3bands, fig.align='left', echo=FALSE,fig.cap="Image satellitaire de région de l’Estrie. Le raster multi-bande contient une bande de rouge, une bande de vert et une bande de bleu. L’image couleur s’obtient en combinant les trois bandes.  Source de données: https://mern.gouv.qc.ca/nos-publications/spatiocarte-quebec/", out.width = '100%'}
+```{r 3bands, fig.align='left', echo=FALSE,fig.cap="Image satellitaire de région de l’Estrie. Le raster multi-bande contient une bande de rouge, une bande de vert et une bande de bleu. L’image couleur s’obtient en combinant les trois bandes.  Source de données: https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/forets/recherche-connaissances/inventaire-forestier/donnees-cartes-resultats", out.width = '100%'}
 knitr::include_graphics('Module2/images/2_3bands.jpg')
 ```
 <br>
@@ -399,10 +399,10 @@ lever certaines limitations tout en préservant l'esprit d'origine. Ci-dessous,
 en voici une liste non exhaustive de différentes variantes Markdown:
 
  - [GitHub Flavored Markdown (GFM)](https://help.github.com/articles/github-flavored-markdown/)
- - [Kramdown](http://kramdown.gettalong.org/syntax.HTML#math-blocks)
+ - [Kramdown](https://kramdown.gettalong.org/index.html)
  - [Markdown Extra](https://michelf.ca/projects/php-markdown/extra/)
  - [Multi Markdow](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide#math-support)
- - [Pandoc Markdown](http://pandoc.org/README.HTML#pandocs-markdown)
+ - [Pandoc Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown)
 
 Depuis 2014, CommonMark (<https://commonmark.org/>) propose
 une spécification (norme technique) pour Markdown de plus en plus
@@ -770,7 +770,7 @@ Vous devriez obtenir un document semblable à [celui-ci](https://github.com/sci1
 [^wiki_swartz]: <https://fr.wikipedia.org/wiki/Aaron_Swartz>, consulté le 28 avril 2022.
 [^wiki_rst]: <https://fr.wikipedia.org/wiki/ReStructuredText>, consulté le 28 avril 2022.
 [^blog_badparent]: <https://blog.codinghorror.com/responsible-open-source-code-parenting/>, consulté le le 28 avril 2022.
-[^goldmark]: Par example Goldmark, <https://github.com/yuin/goldmard>, un parser Markdown écrit en Go et utilisé par Hugo (un générateur de site très populaire), est compatible avec Common Mark.
+[^goldmark]: Par example Goldmark, <https://github.com/yuin/goldmark>, un parser Markdown écrit en Go et utilisé par Hugo (un générateur de site très populaire), est compatible avec Common Mark.
 [^1]: La version 1 n'utilise pas Pandoc.
 [^2]: Pandoc est d'ailleurs capable de gérer différentes variantes de Markdown.
 [^pmd]: Voir <https://pandoc.org/MANUAL.html#pandocs-markdown>, consulté le 29 avril 2022.
