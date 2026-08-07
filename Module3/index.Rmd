@@ -41,7 +41,9 @@ knitr::include_graphics('Module3/images/3_evolution.png')
 <br>
 
 
-La Terre est un corps plastique qui est façonné par un ensemble de forces internes et externes lui donnant une forme irrégulière qui évolue continuellement dans le temps (Figure \@ref(fig:forces)). En particulier, le champ gravitationnel agit différemment sur les parties solides, semi-rigides et liquides de la Terre car celles-ci ont des densités différentes^[Source: [Le Québec géographique](https://quebecgeographique.gouv.qc.ca/education/positionnement.asp)].
+La Terre est un corps plastique qui est façonné par un ensemble de forces internes et externes lui donnant une forme irrégulière qui évolue continuellement dans le temps (Figure \@ref(fig:forces)). En particulier, le champ gravitationnel agit différemment sur les parties solides, semi-rigides et liquides de la Terre car celles-ci ont des densités différentes^[Source: [Ressources Naturelles Canada](
+https://ressources-naturelles.canada.ca/science-donnees/science-recherche/geomatique/systemes-reference-geodesiques/systeme-canadien-reference-spatiale-scrs
+)].
 
 <br>
 ```{r forces, fig.align='left', echo=FALSE,fig.cap="Les différentes forces internes et externes agissant continuellement sur la Terre. Source : Ressources naturelles Canada.", out.width = '50%'}
@@ -50,7 +52,7 @@ knitr::include_graphics('Module3/images/3_forces.jpg')
 <br>
 
 
-Le  **géoïde** est un modèle de la Terre qui tient compte de l’effet du champ gravitationnel. C’est une surface équipotentielle^["Une surface où le potentiel est constant et qui est en tous points perpendiculaire à la direction dans laquelle s'exerce la pesanteur. Une surface équipotentielle est de niveau, c.-à-d. que l'eau y reste au repos". Définition de [Ressources Naturelles Canada](https://www.rncan.gc.ca/modernisation-systeme-reference-altimetrique/9055#surface_equipotentielle)] du champ de gravité de la Terre qui coïncide avec le niveau moyen des océans (Figure \@ref(fig:geoide)). 
+Le  **géoïde** est un modèle de la Terre qui tient compte de l’effet du champ gravitationnel. C’est une surface équipotentielle^["Une surface où le potentiel est constant et qui est en tous points perpendiculaire à la direction dans laquelle s'exerce la pesanteur. Une surface équipotentielle est de niveau, c.-à-d. que l'eau y reste au repos". Définition de [Ressources Naturelles Canada](https://ressources-naturelles.canada.ca/science-donnees/science-recherche/geomatique/systemes-reference-geodesiques)] du champ de gravité de la Terre qui coïncide avec le niveau moyen des océans (Figure \@ref(fig:geoide)). 
 
 <br>
 ```{r geoide, fig.align='left', echo=FALSE,fig.cap="Le géoïde. a) La forme irrégulière du géoïde avec des bosses et des creux créés par le champ gravitationnel agissant de façon inégale sur la Terre (source : Bezdek et Sebera 2013). b) Le géoïde coïncide avec le niveau moyen des océans et se distingue de l’ellipsoïde (figure adaptée de [USGS](earthquake.usgs.gov)).", out.width = '100%'}
@@ -78,7 +80,7 @@ Les **datums géocentriques** sont associés à des ellipsoïdes globaux. Ce son
 
 La communauté internationale a adopté différents modèles d’ellipsoïdes globaux au fil du temps avec l’amélioration des techniques spatiales de télémétrie et de positionnement [@Theriault2010]. Ces ellipsoïdes diffèrent par les paramètres mathématiques utilisés pour les définir. 
 
-Les principaux systèmes de référence globaux utilisés présentement à travers de monde sont le Geodetic Reference System 1980 (**GRS80**), adopté par [l’Union Géodésique et Géophysique Internationale](http://fr.iugg.org/) et le World Geodetic System 1984 (**WGS84**), défini par le [National Geospatial-Intelligence Agency](https://www.nga.mil/) des États-Unis (Figure \@ref(fig:datum)). Le Global Positioning System (le GPS) utilise le WGS 84. 
+Les principaux systèmes de référence globaux utilisés présentement à travers de monde sont le Geodetic Reference System 1980 (**GRS80**), adopté par [l’Union Géodésique et Géophysique Internationale](https://www.iugg.org/) et le World Geodetic System 1984 (**WGS84**), défini par le [National Geospatial-Intelligence Agency](https://www.nga.mil/) des États-Unis (Figure \@ref(fig:datum)). Le Global Positioning System (le GPS) utilise le WGS 84. 
 
 <br>
 ```{r datum, fig.align='left', echo=FALSE,fig.cap="Datums globaux. L’origine de l’ellipsoïde WGS84 se trouve au centre de masse de la Terre. L’origine de l’ellipsoïde GRS80 se trouve à environ 2 m de l’origine de l’ellipsoïde WGS84. L’ellipsoïde Clarke 1866 se trouve à environ 236 m de celle du WGS84. Le datum local NAD27 qui a précédé le NAD83 (voir plus bas) était basé sur l’ellipsoïde Clarke 1866. Figure adaptée du National Oceanic and Atmospheric Administration, source : https://vdatum.noaa.gov/docs/datums.html", out.width = '50%'}
@@ -111,7 +113,7 @@ knitr::include_graphics('Module3/images/3_bornes.jpg')
 
 Le Système canadien de référence spatiale (**SCRS**) est un datum local créé par le gouvernement canadien spécifiquement pour ces besoins. La majorité des agences fédérales canadiennes qui ont recours à des données spatiales (Ressources naturelles Canada, Pêches et Océan Canada, Agence spatiale canadienne, etc.) utilise ce système de référence.
 
-Le SCRS est un quadrillage tridimensionnel (latitude, longitude et élévation) adapté du système NAD83 – il est d’ailleurs appelé le **NAD83 (SCRS)**. Il a été développé dans les années 1990 pour corriger des distorsions d’environ 2 m observées entre le NAD 83 et un réseau de points de contrôle (le Réseau de base canadien, RBC, Figure \@ref(fig:bornes) suivi par un système global de navigation par satellite (GNSS) (pour en savoir plus consulter cette description du SCRS donnée par [Ressources naturelles Canada](https://www.rncan.gc.ca/maps-tools-publications/maps/atlas-canada/le-systeme-canadien-reference-spatiale-scrs/9053)) (Figure \@ref(fig:SCRS)). 
+Le SCRS est un quadrillage tridimensionnel (latitude, longitude et élévation) adapté du système NAD83 – il est d’ailleurs appelé le **NAD83 (SCRS)**. Il a été développé dans les années 1990 pour corriger des distorsions d’environ 2 m observées entre le NAD 83 et un réseau de points de contrôle (le Réseau de base canadien, RBC, Figure \@ref(fig:bornes) suivi par un système global de navigation par satellite (GNSS) (pour en savoir plus consulter cette description du SCRS donnée par [Ressources naturelles Canada]https://ressources-naturelles.canada.ca/science-donnees/science-recherche/geomatique/systemes-reference-geodesiques) (Figure \@ref(fig:SCRS)). 
 
 <br>
 ```{r SCRS, fig.align='left', echo=FALSE,fig.cap="Comparaison entre le NAD83 et le SCRS. Les points rouges sont la localisation de repères selon le SCRS et les lignes bleues représentent les erreurs (décalages) produites par le NAD83 sur ces localisations. Figure tirée de @Craymer2006.", out.width = '80%'}
@@ -264,7 +266,7 @@ Les services de cartographie en ligne, comme Google Maps, OpenStreetMap, Bing Ma
 La **projection Transverse universelle de Mercator** (en anglais Universal Transverse Mercator, UTM) est une projection cylindrique transverse sécante (Figure \@ref(fig:UTM). Le globe est séparé en 60 zones au nord et au sud de l’équateur. Chaque zone couvre 6$^{\circ}$ et est défini en son centre par un méridien central. Les zones sont numérotées de 1 à 60 en suivant la convention selon laquelle la zone 1 couvre la région allant de 180$^{\circ}$ à 174$^{\circ}$ ouest (0$^{\circ}$ correspondant au méridien de Greenwich). Les zones ne couvrent pas les pôles, elles s’arrêtent à la latitude de 84$^{\circ}$ au nord et de 80$^{\circ}$ au sud.
 
 <br>
-```{r UTM, fig.align='left', echo=FALSE,fig.cap="Projection transverse universelle de Mercator. Gauche : le globe est découpé en tranches de 6$^{\\circ}$, 3$^{\\circ}$ de part et d’autre d’un méridien central (source : https://www.swisstopo.admin.ch/). Droite : La surface entière de la Terre est représentée par 60 zones (source : https://www.icsm.gov.au/). ", out.width = '90%'}
+```{r UTM, fig.align='left', echo=FALSE,fig.cap="Projection transverse universelle de Mercator. Gauche : le globe est découpé en tranches de 6$^{\\circ}$, 3$^{\\circ}$ de part et d’autre d’un méridien central (source : https://www.swisstopo.admin.ch/). Droite : La surface entière de la Terre est représentée par 60 zones (source : https://www.anzlic.gov.au/ICSM). ", out.width = '90%'}
 knitr::include_graphics('Module3/images/3_UTM.jpg')
 ```
 <br>
@@ -423,7 +425,7 @@ la syntaxe Pandoc de Markdown^[Vous pouvez également consulter le [site de
 référence de Pandoc](http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html) et le résumé à la première page du [guide de référence R Markdown](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
 Pour une source en français, le guide 
 "Élaboration et conversion de documents avec Markdown et Pandoc"
-(<http://enacit1.epfl.ch/markdown-pandoc/>) écrit par Jean-Daniel Bonjour fournit un excellent tour d'horizon.]
+(<https://www.jdbonjour.ch/cours/markdown-pandoc/>) écrit par Jean-Daniel Bonjour fournit un excellent tour d'horizon.]
 
 <br>
 
@@ -1035,7 +1037,7 @@ Voici quelques exemples&nbsp;:
 
 <br>
 
-Pour explorer d'autres exemples, regarder ce [site](http://www.suluclac.com/Wiki+MathJax+Syntax), ou [celui-ci](https://en.wikibooks.org/wiki/LaTeX/Mathematics) pour des informations plus complètes.
+Pour explorer d'autres exemples, regarder ce [site](https://en.wikibooks.org/wiki/LaTeX/Mathematics) pour des informations plus complètes.
 
 <br>
 
@@ -1075,7 +1077,7 @@ Ce qui produit:
 
 #### Les tableaux {-}
 
-La création facilitée de tableaux est l'une des extensions bien utile de Pandoc Markdown. Il existe plusieurs extensions pour faire des tableaux. Pour plus d'information, nous vous recommandons la [page écrite par Jean-Daniel Bonjour](http://enacit1.epfl.ch/markdown-pandoc/#tableaux) sur ce sujet. 
+La création facilitée de tableaux est l'une des extensions bien utile de Pandoc Markdown. Il existe plusieurs extensions pour faire des tableaux. Pour plus d'information, nous vous recommandons la [page écrite par Jean-Daniel Bonjour](https://www.jdbonjour.ch/cours/markdown-pandoc/) sur ce sujet. 
 
 Donnons l'exemple d'un tableau produit avec le style "pipe table":
 
@@ -1839,7 +1841,7 @@ référence RMarkdown](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdo
 Il est aussi possible de changer le format de sortie des figures peut être
 choisi avec le paramètre `dev` (la liste complète des formats est disponible à
 <https://yihui.org/knitr/options/>). Dans le bloc qui suit j'utilise le [format
-SVG](https://www.synbioz.com/blog/tech/le-svg-pour-quoi-faire)
+SVG](https://blog.ouidou.fr/articles-techniques/le-svg-pour-quoi-faire)
 
     `r ''```{r figdim4, out.width = "100%", dev = "svg"}
     plot(tab1$var1, tab1$var2)
