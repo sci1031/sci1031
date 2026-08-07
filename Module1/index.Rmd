@@ -57,7 +57,7 @@ knitr::include_graphics('Module1/images/1_Nippur.jpg')
 Les cartes reflètent la compréhension et la perception qu’ont le ou leurs auteurs du territoire. Le géographe et historien grec [Hécatée de Milet](https://fr.wikipedia.org/wiki/H%C3%A9cat%C3%A9e_de_Milet), qui a vécu au 5^ième^ siècle av. J.-C., aurait conçu une des premières cartes du monde. Cette dernière est circulaire et place la Méditerranée en son centre (Figure \@ref(fig:hecatee)).
 
 <br>
-```{r hecatee, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Hecatee.jpg', fig.cap="Une reconstitution de la carte du monde d’Hétacée. Source : [Arnaud, P. (2009). *Les cartes antiques*. L'archéotherma](http://www.archeothema.com/numero/les-cartes-antiques.htm).", out.width = '50%'}
+```{r hecatee, fig.align='left', echo=FALSE, fig.link='Module1/images/1_Hecatee.jpg', fig.cap="Une reconstitution de la carte du monde d’Hétacée. Source : [Arnaud, P. (2009). *Les cartes antiques*. L'archéotherma](https://archeothema.com/produit/at4-les-cartes-antiques/).", out.width = '50%'}
 knitr::include_graphics('Module1/images/1_Hecatee.jpg')
 ```
 
@@ -124,7 +124,7 @@ En effet, les géographes ou autres utilisateurs de données spatiales doivent m
 De nos jours, la cartographie a laissé place aux systèmes d’informations géographiques (SIG). Un SIG est un système informatique servant à acquérir, gérer, analyser, et visualiser des données géographiques numériques dans le but d’étudier un phénomène se produisant sur la Terre. Nous pouvons donc utiliser un SIG pour produire des cartes, mais également pour intégrer des données multisources (cartes, photos, images, …), pour réaliser des requêtes et visualiser des résultats, ou encore faire des analyses spatiales (Figure \@ref(fig:sigelements)).
 
 
-```{r sigelements, fig.align='left', echo=FALSE, fig.link='Module1/images/1_SIGelements.jpg', fig.cap="Les différents éléments qui composent un SIG. Source: image récupérée le 6 décembre 2021 à https://bookdown.org/tep/gisbooklet/introduction-to-gis.html.", out.width = '80%'}
+```{r sigelements, fig.align='left', echo=FALSE, fig.link='Module1/images/1_SIGelements.jpg', fig.cap="Les différents éléments qui composent un SIG. Source: image récupérée le 6 août 2026 à https://bookdown.org/tep/gis/introduction-to-gis.html", out.width = '80%'}
 knitr::include_graphics('Module1/images/1_SIGelements.jpg')
 ```
 <br>
@@ -146,7 +146,7 @@ knitr::include_graphics(rep(m3),1)
 Les SIG sont surtout de puissants outils pour visualiser et diffuser de l’information et sont de plus en plus utilisés pour faciliter la prise de décisions dans divers contextes. Nommons quelques exemples parmi les multiples domaines d’application des SIG :
 
 * Logistique des transports : connaître l’état du réseau routier, les chantiers de construction, les accidents et le trafic, pour planifier des trajets ou des travaux futurs.
-```{r sigexemplea, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleA.jpg", fig.cap='Suivi de l’état du réseau routier par Transport Québec. Source: https://www.quebec511.info/fr/Carte/.',echo=FALSE}
+```{r sigexemplea, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_SIGexempleA.jpg", fig.cap='Suivi de l’état du réseau routier par Transport Québec. Source: https://www.quebec511.info/fr/Carte/Default.aspx.',echo=FALSE}
 a1<-'Module1/images/1_SIGexempleA.jpg'
 knitr::include_graphics(a1)
 ```
@@ -208,27 +208,25 @@ L’augmentation fulgurante des données spatiales est associée à plusieurs av
 
 Ces avancées technologiques ont donc suscité (et continuent de susciter) l’émergence de nouvelles applications reposant sur l’utilisation de données spatiales.  Par exemple, les données de géolocalisation, et même les messages sur les médias sociaux peuvent faciliter le travail des gouvernements lorsqu’ils doivent fournir efficacement une aide appropriée suivant des évènements tels des accidents. Dans le contexte de la pandémie de COVID-19, les données sur la distribution des cas ont servi, entre autres, à prendre des décisions sur les règles de confinement à adopter selon le nombre de cas par régions.
 
-```{r datasciencecovid, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_CovidMap.jpg", fig.cap='Carte illustrant la distribution des cas au Canada. Ce portail SIG est fourni par la compagnie ESRI Canada et est disponible sur le site suivant : https://ressouces-fr-covid19canada.hub.arcgis.com/.',echo=FALSE}
+```{r datasciencecovid, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_CovidMap.jpg", fig.cap='Carte illustrant la distribution des cas au Canada, tirée du portail SIG de la compagnie ESRI Canada ( https://storymaps.arcgis.com/stories/168c9a3245b24ab99cc2217637de8cef).',echo=FALSE}
 a8<-'Module1/images/1_CovidMap.jpg'
 knitr::include_graphics(a8)
 ```
 <br>
 
-Dans un ordre d'idées similaires, l’application [Alerte COVID](https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html)  du gouvernement canadien, qui a pour objectif de limiter la propagation de la maladie, permet aux abonnés d’être informés si une tierce personne ayant reçu un résultat positif s’est trouvée dans leur proximité dans les 14 derniers jours.
-
 
 En environnement, les applications des données spatiales sont nombreuses. Par exemple, les colliers GPS portés par des mammifères permettent de mieux comprendre le déplacement des individus appartenant à une espèce menacée et ainsi de mieux protéger leur habitat^[Allez jeter un coup d’œil au projet [Voyageur Wolf Project](https://www.voyageurswolfproject.org/animations), qui suit le déplacement de loups dans le nord du Minnesota grâce à des colliers GPS. On peut y voir des animations démontrant le déplacement d’individus de différentes meutes.].  
 
-```{r datasciencecaribou, fig.align='left', out.width = "70%",fig.show='hold', fig.link="Module1/images/1_Caribou.jpg", fig.cap='Carte illustrant les migrations printanières et automnales de caribous de la sous-population de la Rivière-aux-Feuilles dans le Nord du Québec. Chaque ligne représente le déplacement d’un individu suivi par satellite. Ces données ont été acquises aux cours des années 2009-2011 dans le cadre du projet [Caribou Ungava](https://www.caribou-ungava.ulaval.ca/accueil/). Source : Caribou Ungava, Photo : Steeve Côté. Images récupérées le 10 décembre 2021 à https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html.',echo=FALSE}
+```{r datasciencecaribou, fig.align='left', out.width = "50%",fig.show='hold', fig.link="Module1/images/1_Caribou.jpg", fig.cap='Carte illustrant les migrations printanières et automnales de caribous de la sous-population de la Rivière-aux-Feuilles dans le Nord du Québec. Chaque ligne représente le déplacement d’un individu suivi par satellite. Ces données ont été acquises aux cours des années 2009-2011 dans le cadre du projet [Caribou Ungava](https://www.caribou-ungava.ca/). Source : Caribou Ungava, Photo : Steeve Côté. Images récupérées le 10 décembre 2021 à https://www.canada.ca/fr/environnement-changement-climatique/services/registre-public-especes-peril/evaluations-rapports-situations-cosepac/caribou-certaines-populations-2017.html.',echo=FALSE}
 a9<-'Module1/images/1_Caribou.jpg'
 knitr::include_graphics(a9)
 ```
 
 <br>
 
-Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme [ebird](https://ebird.org/)  développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde à laquelle tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de mai 2021, ebird contenait plus d’un milliard d’observations d’oiseaux soumises par environ 700 mille participants^[Source: https://ebird.org/news/global-big-day-2021-reaches-new-heights.].
+Les observations par des professionnels ou même par des citoyens peuvent aussi servir à cartographier la présence d’animaux et aider à déterminer leurs aires de répartition. Par exemple, le programme [ebird](https://ebird.org/home)  développé par le Cornell Lab of Ornithology et la National Aubudon Society consiste en une immense base de données d’observation d’oiseaux à travers le monde à laquelle tous peuvent contribuer en identifiant l’espèce, la localisation et le nombre d’individus repéré. En date de 2025, ebird contenait plus de deux milliards d’observations d’oiseaux soumises par environ 1,1 million de participants^[Source:https://ebird.org/news/ebird-passes-2-billion-bird-observations.].
 
-```{r datascienceebird, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_ebird.jpg", fig.cap='Carte illustrant la distribution du Roitelet à triple-bandeau produite à partir des données d’observation de ebird. Le mauve indique les lieux où l’espèce est présente à l’année, le rouge, durant la période de reproduction, le bleu, durant les périodes de non-reproduction, le jaune durant les saisons de pré- et post-reproduction, et le gris les lieux d’absence ou d’observations rares.  Source : https://ebird.org/science/status-and-trends/range-maps - Illustration © Hilary Burn/Lynx Edicions.',echo=FALSE}
+```{r datascienceebird, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_ebird.jpg", fig.cap='Carte illustrant la distribution du Roitelet à triple-bandeau produite à partir des données d’observation de ebird. Le mauve indique les lieux où l’espèce est présente à l’année, le rouge, durant la période de reproduction, le bleu, durant les périodes de non-reproduction, le jaune durant les saisons de pré- et post-reproduction, et le gris les lieux d’absence ou d’observations rares.  Source : https://science.ebird.org/fr/status-and-trends/range-maps - Illustration © Hilary Burn/Lynx Edicions.',echo=FALSE}
 a10<-'Module1/images/1_ebird.jpg'
 knitr::include_graphics(a10)
 ```
@@ -236,8 +234,8 @@ knitr::include_graphics(a10)
 
 Les services basés sur la géolocalisation aussi sont de plus en plus importants dans notre économie. L’industrie du commerce de détail, de la restauration, du tourisme, et du transport profite toute d’applications géodépendantes. Pensez par exemple à Uber, Dashdoor, Trip Advisor et même les applications de rencontre comme Tinder. De tels services permettent, entre autres, de signaler des offres aux consommateurs en fonction de leur position. De plus, les données spatiales peuvent servir à identifier des intérêts locaux pour certains produits et ainsi permettre aux entreprises d’améliorer l’efficacité de leur chaîne d’approvisionnement.
 
-```{r datascienceloghub, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_AppCommerciale.jpg", fig.cap='Carte illustrant la position des consommateurs et le nombre de ventes d’une entreprise commerciale en Espagne. Carte tirée du site web de la compagnie [Log-hub](log-hub.com)  offrant des services basés sur l’analyse de données spatiales pour améliorer les chaînes d’approvisionnement. Source : https://log-hub.com/my-maps-platform/.',echo=FALSE}
-a11<-'Module1/images/1_AppCommerciale.jpg'
+```{r datasciencebusiness, fig.align='left', out.width = "80%",fig.show='hold', fig.link="Module1/images/1_AppCommerciale_v2.png", fig.cap="Carte de segmentation des consommateurs (ArcGIS Tapestry Segmentation, Esri, 2025) - chaque couleur représente l'un des 67 segments démographiques et comportementaux utilisés en analyse commerciale géospatiale (business analytics). Source : https://www.esri.com/arcgis-blog/products/esri-demographics/announcements/enriching-maps-with-arcgis-tapestry-data-in-arcgis-pro-arcgis-online-and-arcgis-location-platform.",echo=FALSE}
+a11<-'Module1/images/1_AppCommerciale_v2.png'
 knitr::include_graphics(a11)
 ```
 
@@ -247,7 +245,7 @@ Les utilisateurs des données spatiales se limitaient historiquement aux organis
 
 ### Les outils et logiciels de visualisation et d'analyse géo-spatiale {#outils}
 
-Dans le cadre de ce cours, nous utiliserons le logiciel et langage de programmation R pour réaliser des tâches de visualisation et d’analyse de données spatiales. Or, il existe plusieurs autres logiciels et il est important de savoir où R se situe par rapport aux autres options disponibles dans ce paysage géo-spatial^[Le contenu de cette sous-section est adapté du cours [*Introduction to Geospatial Concepts : The Geospatial Landscape*](https://datacarpentry.org/organization-geospatial/04-geo-landscape/index.html) [@Data_Carpentry_IntroGeospatial] de l’organisme [Data Carpentry](https://datacarpentry.org/).  Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.].
+Dans le cadre de ce cours, nous utiliserons le logiciel et langage de programmation R pour réaliser des tâches de visualisation et d’analyse de données spatiales. Or, il existe plusieurs autres logiciels et il est important de savoir où R se situe par rapport aux autres options disponibles dans ce paysage géo-spatial^[Le contenu de cette sous-section est adapté du cours [*Introduction to Geospatial Concepts : The Geospatial Landscape*](https://datacarpentry.github.io/organization-geospatial/instructor/04-geo-landscape.html) [@Data_Carpentry_IntroGeospatial] de l’organisme [Data Carpentry](https://datacarpentry.org/).  Data Carpentry développe et offre des formations variées et spécialisées sur le traitement et l’analyse de données. Ses formations s’adressent surtout aux chercheuses et chercheurs scientifiques, mais peuvent être consultées par quiconque car leur matériel est libre d’accès. N’hésitez donc pas à y jeter un coup d’œil.].
 
 #### Les logiciels commerciaux {-}
 
@@ -271,11 +269,11 @@ Il existe une offre de plus en plus intéressante de logiciels libres d’accès
 
 Les services infonuagiques sont des services de stockage et de traitement de données externalisés sur des serveurs distants auxquels les utilisatrices et les utilisateurs peuvent accéder via internet.
 
-* [Google Earth Engine]( https://earthengine.google.com/): est une plateforme de calcul infonuagique de Google qui permet le traitement de données géo-spatiales. Celle-ci donne accès à un large catalogue d’images satellitaires (p. ex. de [Landsat]( https://landsat.gsfc.nasa.gov/) et [Sentinel-2]( https://sentinel.esa.int/web/sentinel/missions/sentinel-2)) et à la puissance de calcul requise pour les analyser. Google Earth Engine permet ainsi d’explorer les changements sur la surface de la Terre à l’échelle planétaire. Il a été utilisé pour visualiser l’évolution de diverses problématiques environnementales comme la perte de couvert forestier. Google Earth Engine est gratuit pour des utilisations académiques et de recherche et une version payante existe pour les utilisations commerciales. Une interface de programmation existe également pour les développeurs, [Earth Engine API]( https://developers.google.com/earth-engine/).
+* [Google Earth Engine]( https://earthengine.google.com/): est une plateforme de calcul infonuagique de Google qui permet le traitement de données géo-spatiales. Celle-ci donne accès à un large catalogue d’images satellitaires (p. ex. de [Landsat]( https://landsat.gsfc.nasa.gov/) et [Sentinel-2]( https://sentinels.copernicus.eu/web/sentinel/copernicus/sentinel-2)) et à la puissance de calcul requise pour les analyser. Google Earth Engine permet ainsi d’explorer les changements sur la surface de la Terre à l’échelle planétaire. Il a été utilisé pour visualiser l’évolution de diverses problématiques environnementales comme la perte de couvert forestier. Google Earth Engine est gratuit pour des utilisations académiques et de recherche et une version payante existe pour les utilisations commerciales. Une interface de programmation existe également pour les développeurs, [Earth Engine API]( https://developers.google.com/earth-engine/).
 * [ArcGIS Online]( https://www.esri.ca/fr-ca/products/gis-mapping-products/arcgis-online/overview): est la plateforme web d’ArcGIS, le logiciel commercial présenté plus haut. Cette plateforme donne accès à des milliers de cartes.
 * [PanGEO]( https://pangeo.io/): est une plateforme de source libre, et collaborative, pour le développement d’applications pour les analyses géo-spatiales à grande échelle.
 * [Sepal]( https://sepal.io/): est une plateforme gratuite pour l’analyse d’images satellitaires qui repose sur Google Earth Engine et des logiciels de source libre comme Python, R. Sepal est un outil qu’offre [OpenForis]( https://openforis.org/), un projet conçu par la [FAO]( https://www.fao.org/home/fr) (Organisation des Nations Unies pour l’alimentation et l’agriculture) pour permettre aux pays de faire le suivi de leurs ressources naturelles.
-* [Kepler]( https://kepler.gl/): est également une plateforme de source libre pour les analyse géo-spatiales à grande échelle. Elle est supportée par la compagnie [Uber]( https://eng.uber.com/keplergl/).
+* [Kepler](https://kepler.gl/): est également une plateforme de source libre pour les analyse géo-spatiales à grande échelle. Elle est supportée par la compagnie [Uber]( https://eng.uber.com/keplergl/).
 * [Planet]( https://www.planet.com/markets/mapping/): est une plateforme commerciale pour les analyses géo-spatiales.
 
 
@@ -310,7 +308,7 @@ Voici quelques bibliothèques importantes que nous utiliserons dans ce cours :
 *	[`raster`]( https://cran.r-project.org/web/packages/raster/index.html): bibliothèque offrant de nombreuses fonctions pour lire et manipuler des objets spatiaux matriciels.  Notez que la bibliothèque [`terra`](https://rspatial.github.io/terra/reference/terra-package.html) remplacera peut-être `raster` dans les années à venir.
 *	[`spacetime`]( https://cran.r-project.org/web/packages/spacetime/index.html): bibliothèque offrant des fonctions pour manipuler des objets spatio-temporels.
 *	[`mapview`]( https://r-spatial.github.io/mapview/): bibliothèque offrant des fonctions pour visualiser rapidement et de façon interactive des données spatiales.
-*	[`tmap`]( https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html) : bibliothèque offrant des fonctions plus flexibles pour visualiser des données spatiales. Elle utilise un style qui s’apparente à [`ggplot2`](https://ggplot2.tidyverse.org/).
+*	[`tmap`]( https://r-tmap.github.io/tmap/index.html) : bibliothèque offrant des fonctions plus flexibles pour visualiser des données spatiales. Elle utilise un style qui s’apparente à [`ggplot2`](https://ggplot2.tidyverse.org/).
 
 <br>
 
