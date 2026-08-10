@@ -6,6 +6,7 @@
 _publish.R
 _book/
 _bookdown_files/
+Cours_SpatialR_files/
 gh-pages*
 *.log
 .Rprofile
